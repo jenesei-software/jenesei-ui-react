@@ -1,8 +1,11 @@
 import { InputDefaultProps, StyledUIInputDefault } from '.'
-import React from 'react'
-import { FC } from 'react'
 
-export const InputDefault: FC<InputDefaultProps> = (props) => {
+/**
+ * String input
+ *
+ * *   prefixContent
+ */
+function InputDefault(props: InputDefaultProps): JSX.Element {
   return (
     <StyledUIInputDefault
       $prefixWidth={props.prefixContent && props.prefixContent.width}
@@ -21,3 +24,5 @@ export const InputDefault: FC<InputDefaultProps> = (props) => {
     />
   )
 }
+
+export default InputDefault

@@ -1,14 +1,15 @@
 import react from '@vitejs/plugin-react'
+import { resolve } from 'path'
 import { defineConfig } from 'vite'
-import ts from 'vite-plugin-ts'
+import dts from 'vite-plugin-dts'
 
 export default defineConfig({
-  plugins: [react(), ts()],
+  plugins: [react(), dts()],
   build: {
     lib: {
-      entry: 'src/main.ts',
+      entry: resolve(__dirname, 'src/main.ts'),
       name: 'jenesei-react-ui',
+      fileName: 'jenesei-react-ui',
     },
-    rollupOptions: {},
   },
 })
