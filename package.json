@@ -2,7 +2,7 @@
   "author": "Cyril Strone",
   "name": "jenesei-react-ui",
   "version": "0.1.4",
-  "main": "./dist/jenesei-react-ui.umd.js",
+  "main": "./dist/jenesei-react-ui.mjs",
   "types": "./dist/main.d.ts",
   "license": "MIT",
   "files": [
@@ -10,16 +10,21 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/jenesei-react-ui.umd.js",
+      "import": "./dist/jenesei-react-ui.mjs",
       "types": "./dist/main.d.ts"
     }
   },
   "scripts": {
     "build": "tsc && vite build"
   },
-  "dependencies": {
+  "resolutions": {
+    "styled-components": "6.1.8"
+  },
+  "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "@types/react": "^18.2.56",
+    "@types/react-dom": "^18.2.19",
     "react-hook-form": "^7.50.1",
     "styled-components": "^6.1.8"
   },

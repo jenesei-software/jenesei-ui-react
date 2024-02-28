@@ -1,3 +1,4 @@
 'use client'
 
-export { default as InputDefault } from './components/input-default/input-default'
+export * from './components/input-string'
+export * from './theme'
