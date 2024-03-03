@@ -1,16 +1,20 @@
+import { InputCodeProps } from '.'
 import {
-  InputStringProps,
-  StyledInputString,
-  StyledInputStringPostfixContent,
-  StyledInputStringPrefixContent,
   StyledInputStringWrapper,
-} from '.'
-import { FC } from 'react'
+  StyledInputStringPrefixContent,
+  StyledInputStringPostfixContent,
+} from '../input-string'
+import { StyledInputCode } from './input-string.styles'
 
-/**
- * String input.
- */
-export const InputString: FC<InputStringProps> = (props) => {
+export const InputCode = (props: InputCodeProps) => {
+  function createPattern(length: number, value: string) {
+    const realLength = length * 2 - 1
+    const patternArray: (string | number)[] = Array.from(
+      { length: realLength },
+      (_, index) => (index % 2 === 0 ? value : ' ')
+    )
+    return patternArray.join('')
+  }
   return (
     <StyledInputStringWrapper className={props.className}>
       {props.prefixContent && (
@@ -22,17 +26,12 @@ export const InputString: FC<InputStringProps> = (props) => {
           {props.prefixContent.content}
         </StyledInputStringPrefixContent>
       )}
-      <StyledInputString
-        $theme={props.theme}
-        $input={props.input}
-        $prefixContent={props.prefixContent}
-        $postfixContent={props.postfixContent}
-        disabled={props.disabled}
-        placeholder={props.placeholder}
-        type={props.type}
-        readOnly={props.readOnly}
+      <StyledInputCode
         value={props.value}
-        {...props.register}
+        onValueChange={({ value }) => props.onChange(value)}
+        format={createPattern(props.length, '#')}
+        placeholder={createPattern(props.length, '_')}
+        mask="_"
       />
       {props.postfixContent && (
         <StyledInputStringPostfixContent

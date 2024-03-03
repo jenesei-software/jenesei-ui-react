@@ -40,6 +40,7 @@ export interface IJeneseiTheme {
       484848: string
       737373: string
       d3d3d3: string
+      fafafa: string
     }
   }
   effects: {
@@ -57,6 +58,13 @@ export interface IJeneseiTheme {
     header: {
       wrapper: string
       menu: string
+    }
+  }
+  backgrounds: {
+    volumetric: {
+      wrapper: string
+      active: string
+      default: string
     }
   }
   sizes: {

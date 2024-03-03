@@ -1,24 +1,35 @@
 import { TJeneseiTheme } from '../../main'
 import { UseFormRegisterReturn } from 'react-hook-form'
-import { Styles } from 'styled-components/dist/types'
+import { RuleSet } from 'styled-components/dist/types'
 
 export interface InputStringProps {
   theme?: TJeneseiTheme
-  css?: Styles<object>
   register?: UseFormRegisterReturn
   value?: string
   onChange?: (value: string) => void
   className?: string
   prefixContent?: {
-    css?: Styles<object>
+    css?: RuleSet
     width: string
+    height: string
     content: React.ReactNode
     left: string
     right: string
+    onClick?: () => void
   }
   postfixContent?: {
-    css?: Styles<object>
+    css?: RuleSet
     width: string
+    height: string
+    content: React.ReactNode
+    left: string
+    right: string
+    onClick?: () => void
+  }
+  input?: {
+    css?: RuleSet
+    width: string
+    height: string
     content: React.ReactNode
     left: string
     right: string
@@ -27,4 +38,5 @@ export interface InputStringProps {
   readOnly?: boolean
   disabled?: boolean
   placeholder?: string
+  type?: 'email' | 'password' | 'text'
 }
