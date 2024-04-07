@@ -1,7 +1,7 @@
 {
   "author": "Cyril Strone",
   "name": "jenesei-react-ui",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "main": "./dist/jenesei-react-ui.umd.js",
   "module": "./dist/jenesei-react-ui.es.js",
   "types": "./dist/index.d.ts",
@@ -18,25 +18,45 @@
     }
   },
   "scripts": {
-    "build": "tsc && vite build"
+    "build": "tsc && vite build",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "vite-tsconfig-paths": "^4.2.0"
   },
   "peerDependencies": {
-    "react-ripple-click": "^0.2.1",
-    "react-number-format": "^5.3.3",
+    "@emotion/styled": "^11.11.5",
+    "@availity/mui-checkbox": "^0.1.35",
+    "@fontsource/inter": "^5.0.16",
     "react": "^18.2.0",
+    "react-currency-input-field": "^3.8.0",
     "react-dom": "^18.2.0",
-    "react-dropdown-select": "^4.11.0",
     "react-hook-form": "^7.49.3",
-    "styled-components": ">= 5"
+    "react-loading": "^2.0.3",
+    "react-loading-skeleton": "^3.4.0",
+    "react-number-format": "^5.3.4",
+    "react-ripple-click": "^0.2.1",
+    "react-select": "^5.8.0",
+    "styled-components": ">= 5",
+    "styled-reset": "^4.5.2"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^1.3.1",
+    "@storybook/addon-essentials": "^8.0.6",
+    "@storybook/addon-interactions": "^8.0.6",
+    "@storybook/addon-links": "^8.0.6",
+    "@storybook/addon-onboarding": "^8.0.6",
+    "@storybook/addon-themes": "^8.0.6",
+    "@storybook/blocks": "^8.0.6",
+    "@storybook/react": "^8.0.6",
+    "@storybook/react-vite": "^8.0.6",
+    "@storybook/test": "^8.0.6",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/node": "^20.11.20",
-    "@types/react": "^18.2.56",
+    "@types/react": "^18.2.74",
     "@types/react-dom": "^18.2.19",
+    "@types/styled-components": "^5.1.34",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
     "@vitejs/plugin-react": "^4.2.1",
@@ -44,7 +64,9 @@
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "eslint-plugin-storybook": "^0.8.0",
     "prettier": "^3.1.1",
+    "storybook": "^8.0.6",
     "stylelint": "^16.1.0",
     "stylelint-config-recommended": "^14.0.0",
     "stylelint-config-standard": "^36.0.0",

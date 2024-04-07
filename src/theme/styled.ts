@@ -11,6 +11,17 @@ export interface IJeneseiTheme {
       10: string
       5: string
     }
+    blue: {
+      100: string
+    }
+    green: {
+      100: string
+      10: string
+    }
+    red: {
+      100: string
+      10: string
+    }
     white: {
       100: string
       80: string
@@ -32,7 +43,13 @@ export interface IJeneseiTheme {
       100: string
       10: string
     }
+    button: {
+      success: string
+      danger: string
+      product: string
+    }
     gray: {
+      '8a8a8a': string
       f2f2f7: string
       e5e5ea: string
       c7c7cc: string

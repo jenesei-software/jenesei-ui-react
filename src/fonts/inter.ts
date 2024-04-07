@@ -2,6 +2,9 @@ import styled, { css } from 'styled-components'
 
 export interface SpanInterProps {
   color?: string
+  width?: string
+  textAlign?: 'center'
+  textWrap?: 'nowrap'
 }
 
 export const FontInter = css<SpanInterProps>`
@@ -10,6 +13,18 @@ export const FontInter = css<SpanInterProps>`
   line-height: normal;
   color: ${(props) =>
     props.color ? props.color : props.theme.colors.black['80']};
+  width: ${(props) => (props.width ? props.width : 'auto')};
+  text-align: ${(props) => props.textAlign};
+  text-wrap: ${(props) => props.textWrap};
+`
+
+export const FontInterSB10 = css`
+  ${FontInter};
+  font-size: 10px;
+  font-weight: 600;
+`
+export const SpanInterSB10 = styled.span<SpanInterProps>`
+  ${FontInterSB10};
 `
 
 export const FontInterSB14 = css`
@@ -30,7 +45,7 @@ export const SpanInterSB16 = styled.span<SpanInterProps>`
   ${FontInterSB16};
 `
 
-const FontInterSB18 = css`
+export const FontInterSB18 = css`
   ${FontInter};
   font-size: 18px;
   font-weight: 600;
@@ -39,7 +54,7 @@ export const SpanInterSB18 = styled.span<SpanInterProps>`
   ${FontInterSB18};
 `
 
-const FontInterSB20 = css`
+export const FontInterSB20 = css`
   ${FontInter};
   font-size: 20px;
   font-weight: 600;
@@ -72,20 +87,33 @@ export const FontInterM16 = css`
   font-weight: 500;
 `
 export const SpanInterM16 = styled.span<SpanInterProps>`
-  ${FontInterM14};
+  ${FontInterM16};
 `
 export const SpanInterM16Mobile = styled.span<SpanInterProps>`
-  ${FontInterM14};
+  ${FontInterM16};
 
   @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
     font-size: 12px;
   }
 `
 
+export const FontInterM18 = css`
+  ${FontInter};
+  font-size: 18px;
+  font-weight: 500;
+`
+
+export const SpanInterM18 = styled.span<SpanInterProps>`
+  ${FontInterM18};
+`
+
 export const FontInterM20 = css`
   ${FontInter};
   font-size: 20px;
   font-weight: 500;
+`
+export const SpanInterM20 = styled.span<SpanInterProps>`
+  ${FontInterM20};
 `
 
 export const FontInterB14 = css`
@@ -115,7 +143,7 @@ export const SpanInterB20 = styled.span<SpanInterProps>`
   ${FontInterB20};
 `
 
-const FontInterB32 = css`
+export const FontInterB32 = css`
   ${FontInter};
   font-size: 32px;
   font-weight: 700;
@@ -124,7 +152,7 @@ export const SpanInterB32 = styled.span<SpanInterProps>`
   ${FontInterB32};
 `
 
-const FontInterB36 = css`
+export const FontInterB36 = css`
   ${FontInter};
   font-size: 36px;
   font-weight: 700;
@@ -140,7 +168,16 @@ export const SpanInterB36Mobile = styled.span<SpanInterProps>`
   }
 `
 
-const FontInterR14 = css`
+export const FontInterR12 = css`
+  ${FontInter};
+  font-size: 12px;
+  font-weight: 400;
+`
+export const SpanInterR12 = styled.span<SpanInterProps>`
+  ${FontInterR12};
+`
+
+export const FontInterR14 = css`
   ${FontInter};
   font-size: 14px;
   font-weight: 400;
@@ -158,11 +195,38 @@ export const SpanInterR16 = styled.span<SpanInterProps>`
   ${FontInterR16};
 `
 
-const FontInterR24 = css`
+const FontInterR20 = css`
+  ${FontInter};
+  font-size: 20px;
+  font-weight: 400;
+`
+export const SpanInterR20 = styled.span<SpanInterProps>`
+  ${FontInterR20};
+`
+
+export const FontInterR24 = css`
   ${FontInter};
   font-size: 24px;
   font-weight: 400;
 `
 export const SpanInterR24 = styled.span<SpanInterProps>`
   ${FontInterR24};
+`
+
+export const FontInterR36 = css`
+  ${FontInter};
+  font-size: 36px;
+  font-weight: 400;
+`
+export const SpanInterR36 = styled.span<SpanInterProps>`
+  ${FontInterR36};
+`
+
+const FontInterT100 = css`
+  ${FontInter};
+  font-size: 100px;
+  font-weight: 100;
+`
+export const SpanInterT10 = styled.span<SpanInterProps>`
+  ${FontInterT100};
 `

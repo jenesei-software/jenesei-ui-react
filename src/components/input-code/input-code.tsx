@@ -1,12 +1,10 @@
-import { InputCodeProps } from '.'
-import {
-  StyledInputStringWrapper,
-  StyledInputStringPrefixContent,
-  StyledInputStringPostfixContent,
-} from '../input-string'
-import { StyledInputCode } from './input-string.styles'
+import { InputCodeProps, StyledSpanInterM12Error, StyledUIInputCode } from '.'
+import { UIFrameFlexCenter } from '../../main'
+import { useTheme } from 'styled-components'
 
 export const InputCode = (props: InputCodeProps) => {
+  const theme = useTheme()
+
   function createPattern(length: number, value: string) {
     const realLength = length * 2 - 1
     const patternArray: (string | number)[] = Array.from(
@@ -16,32 +14,30 @@ export const InputCode = (props: InputCodeProps) => {
     return patternArray.join('')
   }
   return (
-    <StyledInputStringWrapper className={props.className}>
-      {props.prefixContent && (
-        <StyledInputStringPrefixContent
-          $theme={props.theme}
-          $prefixContent={props.prefixContent}
-          onClick={props.prefixContent.onClick}
-        >
-          {props.prefixContent.content}
-        </StyledInputStringPrefixContent>
+    <UIFrameFlexCenter
+      className={props.className}
+      width="100%"
+      $position="relative"
+    >
+      {props.isError && (
+        <StyledSpanInterM12Error color={theme.colors.danger['100']}>
+          {props.errorMessage}
+        </StyledSpanInterM12Error>
       )}
-      <StyledInputCode
+      <StyledUIInputCode
+        $genre={props.genre}
         value={props.value}
-        onValueChange={({ value }) => props.onChange(value)}
+        onValueChange={({ value }) => props.onChange && props.onChange(value)}
         format={createPattern(props.length, '#')}
         placeholder={createPattern(props.length, '_')}
         mask="_"
+        required={props.isRequired}
+        readOnly={props.isReadOnly}
+        $isError={props.isError}
+        $isOnlyText={props.isOnlyText}
+        $isFocus={props.isFocus}
+        disabled={props.isDisabled}
       />
-      {props.postfixContent && (
-        <StyledInputStringPostfixContent
-          $theme={props.theme}
-          $postfixContent={props.postfixContent}
-          onClick={props.postfixContent.onClick}
-        >
-          {props.postfixContent.content}
-        </StyledInputStringPostfixContent>
-      )}
-    </StyledInputStringWrapper>
+    </UIFrameFlexCenter>
   )
 }

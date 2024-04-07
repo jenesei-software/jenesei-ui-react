@@ -20,6 +20,22 @@ export const JeneseiTheme: IJeneseiTheme = {
       10: '#0000001a',
       5: '#0000000d',
     },
+    green: {
+      100: '#34a853ff',
+      10: '#34a8531a',
+    },
+    red: {
+      100: '#ff4141ff',
+      10: '#ff41411a',
+    },
+    button: {
+      success: '#34a853ff',
+      danger: '#ff4141ff',
+      product: '#4195d2ff',
+    },
+    blue: {
+      100: '#81CFFA',
+    },
     product: {
       100: '#4195d2ff',
       20: '#4195d21a',
@@ -39,6 +55,7 @@ export const JeneseiTheme: IJeneseiTheme = {
       d1d1d6: '#d1d1d6ff',
       484848: '#484848ff',
       737373: '#737373ff',
+      '8a8a8a': '#8a8a8aff',
       d3d3d3: '#d3d3d3ff',
       fafafa: '#fafafaff',
     },
