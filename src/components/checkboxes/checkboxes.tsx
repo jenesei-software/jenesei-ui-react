@@ -7,8 +7,7 @@ import {
 import { Checkbox } from '../../main'
 import { useCallback } from 'react'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const Checkboxes = <T extends Record<string, any>>(
+export const Checkboxes = <T extends Record<string, unknown>>(
   props: CheckboxesProps<T>
 ) => {
   const createMarkup = (html: string) => ({ __html: html })
@@ -41,25 +40,34 @@ export const Checkboxes = <T extends Record<string, any>>(
         )
         return (
           <CheckboxesItem
-            $genre={props.genre}
             key={index}
             onClick={() => !props.isClickOnlyIcon && handleCheckboxChange(e)}
             $checked={isChecked}
           >
             <Checkbox
               genre={props.checkboxGenre}
-              onChange={() => handleCheckboxChange(e)}
+              color={props.checkboxColor}
+              size={props.checkboxSize}
+              width={props.checkboxWidth}
               checked={isChecked}
+              content={
+                props.checkboxLabelField &&
+                e?.[props.checkboxLabelField] !== undefined && (
+                  <>{e[props.checkboxLabelField]}</>
+                )
+              }
             />
             {props.contentField && e?.[props.contentField] !== undefined ? (
               <>{e[props.contentField]}</>
             ) : (
-              <CheckboxesLabel
-                $genre={props.genre}
-                dangerouslySetInnerHTML={createMarkup(
-                  e[props.labelField] as string
-                )}
-              />
+              props.labelField &&
+              e?.[props.labelField] !== undefined && (
+                <CheckboxesLabel
+                  dangerouslySetInnerHTML={createMarkup(
+                    e[props.labelField] as string
+                  )}
+                />
+              )
             )}
           </CheckboxesItem>
         )

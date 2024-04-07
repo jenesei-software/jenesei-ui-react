@@ -13,7 +13,6 @@ export const FontInter = css<SpanInterProps>`
   line-height: normal;
   color: ${(props) =>
     props.color ? props.color : props.theme.colors.black['80']};
-  width: ${(props) => (props.width ? props.width : 'auto')};
   text-align: ${(props) => props.textAlign};
   text-wrap: ${(props) => props.textWrap};
 `

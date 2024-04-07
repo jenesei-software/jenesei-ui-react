@@ -1,15 +1,15 @@
-import { ButtonLongProps, StyledButtonLong } from '.'
+import { ButtonProps, StyledButton } from '.'
 import { LibraryIcon, ModalLoading } from '../../main'
 import { FC, memo } from 'react'
 import { Ripple } from 'react-ripple-click'
 import { useTheme } from 'styled-components'
 
-export const ButtonLong: FC<ButtonLongProps> = memo(
+export const Button: FC<ButtonProps> = memo(
   (props = { color: 'product', size: 'large' }) => {
     const theme = useTheme()
     const IconComponent = props.icon && LibraryIcon[props.icon]
     return (
-      <StyledButtonLong
+      <StyledButton
         $isHidden={props.isHidden}
         $genre={props.genre}
         $width={props.width}
@@ -43,7 +43,7 @@ export const ButtonLong: FC<ButtonLongProps> = memo(
             {IconComponent && <IconComponent />}
           </>
         )}
-      </StyledButtonLong>
+      </StyledButton>
     )
   }
 )

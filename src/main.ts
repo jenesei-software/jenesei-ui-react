@@ -22,7 +22,6 @@ export * from './components/input-time'
 export * from './components/modal-loading'
 
 export * from './components/checkbox'
-export * from './components/checkbox-single'
 export * from './components/checkboxes'
 
-export * from './components/button-long'
+export * from './components/button'

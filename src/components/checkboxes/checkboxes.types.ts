@@ -1,17 +1,36 @@
-import { CheckboxGenreType } from '@components/checkbox'
+import {
+  CheckboxColorType,
+  CheckboxGenreType,
+  CheckboxProps,
+  CheckboxSizeType,
+} from '../../main'
 
 export interface CheckboxesProps<T extends Record<string, unknown>> {
-  value: T[]
-  onChange?: (props: T[]) => void
-  multiple?: boolean
-  options: T[]
-  labelField: keyof T
-  contentField?: keyof T
-  valueField: keyof T
-  className?: string
-  genre: CheckboxesGenreType
   checkboxGenre: CheckboxGenreType
-  isClickOnlyIcon?: boolean
-}
 
-export type CheckboxesGenreType = 'agreements' | 'auth' | 'objects-edit'
+  checkboxColor: CheckboxColorType
+
+  checkboxSize: CheckboxSizeType
+
+  checkboxWidth?: CheckboxProps['width']
+
+  className?: string
+
+  contentField?: keyof T
+
+  isClickOnlyIcon?: boolean
+
+  labelField?: keyof T
+
+  checkboxLabelField?: keyof T
+
+  multiple?: boolean
+
+  onChange?: (props: T[]) => void
+
+  options: T[]
+
+  value: T[]
+
+  valueField: keyof T
+}

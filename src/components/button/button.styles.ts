@@ -1,8 +1,8 @@
-import { StyledButtonLongProps } from '.'
+import { StyledButtonProps } from '.'
 import { FontInterSB10, FontInterSB16 } from '../../main'
 import styled, { css } from 'styled-components'
 
-const StyledButtonGenrePrimary = css<StyledButtonLongProps>`
+const StyledButtonGenrePrimary = css<StyledButtonProps>`
   background: ${(props) => props.$color};
   color: ${(props) => props.theme.colors.white['100']};
   border: 2px solid transparent;
@@ -13,7 +13,7 @@ const StyledButtonGenrePrimary = css<StyledButtonLongProps>`
     stroke: ${(props) => props.theme.colors.white['100']};
   }
 `
-const StyledButtonGenreSecondary = css<StyledButtonLongProps>`
+const StyledButtonGenreSecondary = css<StyledButtonProps>`
   background: transparent;
   color: ${(props) => props.$color};
   border: 2px solid ${(props) => props.$color};
@@ -32,7 +32,7 @@ const StyledButtonHiddenFalse = css`
   opacity: 1;
 `
 
-const StyledButtonSizeLarge = css<StyledButtonLongProps>`
+const StyledButtonSizeLarge = css<StyledButtonProps>`
   height: 56px;
   border-radius: 16px;
   ${FontInterSB16};
@@ -42,7 +42,7 @@ const StyledButtonSizeLarge = css<StyledButtonLongProps>`
   }
   padding: 0px 14px;
 `
-const StyledButtonSizeMedium = css<StyledButtonLongProps>`
+const StyledButtonSizeMedium = css<StyledButtonProps>`
   height: 36px;
   border-radius: 12px;
   ${FontInterSB10};
@@ -53,7 +53,7 @@ const StyledButtonSizeMedium = css<StyledButtonLongProps>`
   padding: 0px 8px;
 `
 
-export const StyledButtonLong = styled.button<StyledButtonLongProps>`
+export const StyledButton = styled.button<StyledButtonProps>`
   outline: none;
   position: relative;
   overflow: hidden;
@@ -67,6 +67,7 @@ export const StyledButtonLong = styled.button<StyledButtonLongProps>`
   cursor: pointer;
   transition: all 0.2s;
   box-sizing: border-box;
+  width: ${(props) => props.$width ?? '100%'};
   ${(props) =>
     props.$size === 'large' ? StyledButtonSizeLarge : StyledButtonSizeMedium};
   ${(props) =>
@@ -75,5 +76,4 @@ export const StyledButtonLong = styled.button<StyledButtonLongProps>`
       : StyledButtonGenreSecondary};
   ${(props) =>
     props.$isHidden ? StyledButtonHiddenTrue : StyledButtonHiddenFalse};
-  width: ${(props) => props.$width ?? '100%'};
 `

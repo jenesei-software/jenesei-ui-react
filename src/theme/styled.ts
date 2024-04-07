@@ -48,6 +48,10 @@ export interface IJeneseiTheme {
       danger: string
       product: string
     }
+    checkbox: {
+      gray: string
+      product: string
+    }
     gray: {
       '8a8a8a': string
       f2f2f7: string

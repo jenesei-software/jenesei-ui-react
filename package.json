@@ -27,7 +27,6 @@
   },
   "peerDependencies": {
     "@emotion/styled": "^11.11.5",
-    "@availity/mui-checkbox": "^0.1.35",
     "@fontsource/inter": "^5.0.16",
     "react": "^18.2.0",
     "react-currency-input-field": "^3.8.0",

@@ -1,5 +1,4 @@
 import { Checkboxes } from '.'
-import { LibraryIcon } from '../../main'
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
@@ -13,8 +12,9 @@ type Story = StoryObj<typeof Checkboxes>
 
 export const Default: Story = {
   args: {
-    genre: 'agreements',
     checkboxGenre: 'square',
+    checkboxColor: 'gray',
+    checkboxSize: 'large',
     value: [{ value: 0, label: 'First' }],
     options: [
       { value: 0, label: 'First' },
@@ -28,16 +28,38 @@ export const Default: Story = {
 
 export const Content: Story = {
   args: {
-    genre: 'agreements',
     checkboxGenre: 'square',
+    checkboxColor: 'product',
+    checkboxSize: 'large',
     value: [{ value: 0, label: 'First' }],
     options: [
       { value: 0, label: 'First' },
-      { value: 1, label: 'Second', content: <LibraryIcon.Coffee /> },
+      { value: 1, label: 'Second', content: '<LibraryIcon.Support />' },
     ],
     labelField: 'label',
     valueField: 'value',
     contentField: 'content',
+    multiple: true,
+  },
+}
+
+export const CheckboxLabel: Story = {
+  args: {
+    checkboxGenre: 'square',
+    checkboxColor: 'product',
+    checkboxSize: 'large',
+    checkboxWidth: '100%',
+    value: [{ value: 0, label: 'First', checkboxLabel: 'Popa' }],
+    options: [
+      { value: 0, label: 'First', checkboxLabel: 'Popa' },
+      {
+        value: 1,
+        label: 'Second',
+        checkboxLabel: 'Pisya Kaka',
+      },
+    ],
+    valueField: 'value',
+    checkboxLabelField: 'checkboxLabel',
     multiple: true,
   },
 }

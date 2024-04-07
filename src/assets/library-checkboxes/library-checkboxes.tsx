@@ -40,23 +40,13 @@ export const LibraryCheckboxes: LibraryCheckboxesProps = {
           width="16"
           height="16"
           rx="1"
-          stroke="#49454F"
           strokeWidth="2"
           id="not-center"
         />
-        <rect
-          id="center"
-          x="3"
-          y="3"
-          width="18"
-          height="18"
-          rx="2"
-          fill="#5555E4"
-        />
+        <rect id="center" x="3" y="3" width="18" height="18" rx="2" />
         <path
           id="center-white"
           d="M10 16.4L6 12.4L7.4 11L10 13.6L16.6 7L18 8.4L10 16.4Z"
-          fill="white"
         />
       </svg>
     )

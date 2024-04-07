@@ -33,6 +33,10 @@ export const JeneseiTheme: IJeneseiTheme = {
       danger: '#ff4141ff',
       product: '#4195d2ff',
     },
+    checkbox: {
+      gray: '#737373',
+      product: '#4195d2',
+    },
     blue: {
       100: '#81CFFA',
     },
