@@ -8,16 +8,17 @@ export * from './theme'
 export * from './fonts'
 export * from './hooks/use-cards'
 
+export * from './components/input-default'
+
 export * from './assets/library-icon'
 export * from './assets/library-checkboxes'
 
-export * from './components/input-code'
-export * from './components/input-default'
-export * from './components/input-inn'
-export * from './components/input-phone'
-export * from './components/input-price'
-export * from './components/input-select'
-export * from './components/input-time'
+// export * from './components/input-inn'
+// export * from './components/input-phone'
+// export * from './components/input-price'
+// export * from './components/input-select'
+// export * from './components/input-time'
+// export * from './components/input-code'
 
 export * from './components/modal-loading'
 

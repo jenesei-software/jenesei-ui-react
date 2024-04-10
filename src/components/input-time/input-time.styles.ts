@@ -1,16 +1,17 @@
-import { StyledUIInputDefaultCSS, StyledUIInputDefaultProps } from '../../main'
-import { UIInputPlaceholder } from '../../main'
-import { FontInterR16 } from '../../main'
 import styled, { css } from 'styled-components'
 
+import { StyledInputDefaultCSS, StyledInputDefaultProps } from '../../main'
+import { UIInputPlaceholder } from '../../main'
+import { FontInterR16 } from '../../main'
+
 export const InputTimeStyledInputDefault = styled.div<
-  StyledUIInputDefaultProps & {
+  StyledInputDefaultProps & {
     $isPlaceholder?: boolean
     $isDisabled?: boolean
   }
 >`
   width: 100%;
-  ${StyledUIInputDefaultCSS};
+  ${StyledInputDefaultCSS};
   ${(props) =>
     !props.$isDisabled &&
     css`
@@ -27,7 +28,7 @@ export const InputTimeStyledInputDefault = styled.div<
 `
 
 export const StyledInputTime = styled.div<
-  Pick<StyledUIInputDefaultProps, '$isError'>
+  Pick<StyledInputDefaultProps, '$isError'>
 >`
   display: none;
   width: 100%;

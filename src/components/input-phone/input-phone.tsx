@@ -1,6 +1,7 @@
-import { StyledUIInputPhone, InputPhoneProps } from '.'
-import { UIFrameFlexCenter } from '../../main'
 import { useEffect, useState } from 'react'
+
+import { InputPhoneProps, StyledInputPhone } from '.'
+import { UIFrameFlexCenter } from '../../main'
 
 export const InputPhone = (props: InputPhoneProps) => {
   const [format, setFormat] = useState<string>('+7 (900) 000-00-00')
@@ -15,7 +16,7 @@ export const InputPhone = (props: InputPhoneProps) => {
       width="100%"
       $position="relative"
     >
-      <StyledUIInputPhone
+      <StyledInputPhone
         $genre={props.genre}
         $isLeftContainer={props.isLeftContainer}
         value={props.value}

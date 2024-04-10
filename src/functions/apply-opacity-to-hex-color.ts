@@ -1,6 +1,6 @@
 export function applyOpacityToHexColor(
   hexColor: string | undefined,
-  opacity: number
+  opacity: number,
 ): string | null {
   if (!hexColor) {
     console.error('Invalid HEX color format')

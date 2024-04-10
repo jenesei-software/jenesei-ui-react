@@ -1,6 +1,7 @@
-import { InputCode } from '.'
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
+
+import { InputCode } from '.'
 
 const meta: Meta<typeof InputCode> = {
   component: InputCode,
@@ -12,7 +13,7 @@ type Story = StoryObj<typeof InputCode>
 
 export const Default: Story = {
   args: {
-    genre: 'auth',
+    genre: 'primary',
     value: '',
     length: 4,
     errorMessage: 'Error',

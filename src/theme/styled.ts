@@ -52,8 +52,15 @@ export interface IJeneseiTheme {
       gray: string
       product: string
     }
+    visible: {
+      button: {
+        primary: string
+        secondary: string
+      }
+    }
     gray: {
       '8a8a8a': string
+      e3e3e6: string
       f2f2f7: string
       e5e5ea: string
       c7c7cc: string

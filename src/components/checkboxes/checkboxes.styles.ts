@@ -1,6 +1,8 @@
-import { FontInterR16 } from '../../main'
 import styled from 'styled-components'
 
+import { FontInterR16 } from '../../main'
+
+/****************************************** Default *************************************************/
 export const CheckboxesWrapper = styled.div`
   display: flex;
   flex-direction: column;

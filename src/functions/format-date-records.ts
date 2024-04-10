@@ -1,5 +1,6 @@
-import { TLanguage } from '@assets/library-i18n'
 import { TRecordsView } from '@components/modal-period-toggle'
+
+import { TLanguage } from '@assets/library-i18n'
 
 const monthNames: Record<TLanguage, string[]> = {
   ru: [
@@ -66,7 +67,7 @@ const monthNamesGenitive: Record<TLanguage, string[]> = {
 export function formatDateRecords(
   view: TRecordsView = 'days',
   timestamp: number,
-  language: TLanguage
+  language: TLanguage,
 ): string {
   const date = new Date(timestamp)
   switch (view) {

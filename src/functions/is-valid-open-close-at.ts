@@ -1,7 +1,7 @@
 export const validateOpenCloseAt = (
   openAt?: string | null,
   closeAt?: string | null,
-  isAlwaysOpen?: boolean
+  isAlwaysOpen?: boolean,
 ): boolean => {
   if (isAlwaysOpen) return true
   if (openAt && closeAt) return true

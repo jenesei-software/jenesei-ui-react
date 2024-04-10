@@ -1,38 +1,48 @@
-import { StyledButtonProps } from '.'
-import { FontInterSB10, FontInterSB16 } from '../../main'
 import styled, { css } from 'styled-components'
 
-const StyledButtonGenrePrimary = css<StyledButtonProps>`
+import { StyledButtonProps } from '.'
+import { FontInterSB10, FontInterSB16, ModalLoading } from '../../main'
+
+/****************************************** Genre *************************************************/
+const ButtonGenrePrimary = css<StyledButtonProps>`
   background: ${(props) => props.$color};
   color: ${(props) => props.theme.colors.white['100']};
-  border: 2px solid transparent;
+  border-color: transparent;
   & span {
     color: ${(props) => props.theme.colors.white['100']};
   }
   & path {
     stroke: ${(props) => props.theme.colors.white['100']};
   }
+  &:focus-visible {
+    border-color: ${(props) => props.theme.colors.visible.button.primary};
+  }
 `
-const StyledButtonGenreSecondary = css<StyledButtonProps>`
+const ButtonGenreSecondary = css<StyledButtonProps>`
   background: transparent;
   color: ${(props) => props.$color};
-  border: 2px solid ${(props) => props.$color};
+  border-color: ${(props) => props.$color};
   & span {
     color: ${(props) => props.$color};
   }
   & path {
     stroke: ${(props) => props.$color};
   }
+  &:focus-visible {
+    border-color: ${(props) => props.theme.colors.visible.button.secondary};
+  }
 `
 
-const StyledButtonHiddenTrue = css`
+/****************************************** Hidden *************************************************/
+const ButtonHiddenTrue = css`
   opacity: 0.3;
 `
-const StyledButtonHiddenFalse = css`
+const ButtonHiddenFalse = css`
   opacity: 1;
 `
 
-const StyledButtonSizeLarge = css<StyledButtonProps>`
+/****************************************** Size *************************************************/
+const ButtonSizeLarge = css<StyledButtonProps>`
   height: 56px;
   border-radius: 16px;
   ${FontInterSB16};
@@ -42,7 +52,7 @@ const StyledButtonSizeLarge = css<StyledButtonProps>`
   }
   padding: 0px 14px;
 `
-const StyledButtonSizeMedium = css<StyledButtonProps>`
+const ButtonSizeMedium = css<StyledButtonProps>`
   height: 36px;
   border-radius: 12px;
   ${FontInterSB10};
@@ -53,8 +63,10 @@ const StyledButtonSizeMedium = css<StyledButtonProps>`
   padding: 0px 8px;
 `
 
+/****************************************** Styled *************************************************/
 export const StyledButton = styled.button<StyledButtonProps>`
   outline: none;
+  border: 2px solid;
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -68,12 +80,25 @@ export const StyledButton = styled.button<StyledButtonProps>`
   transition: all 0.2s;
   box-sizing: border-box;
   width: ${(props) => props.$width ?? '100%'};
+  ${(props) => (props.$size === 'large' ? ButtonSizeLarge : ButtonSizeMedium)};
   ${(props) =>
-    props.$size === 'large' ? StyledButtonSizeLarge : StyledButtonSizeMedium};
-  ${(props) =>
-    props.$genre === 'primary'
-      ? StyledButtonGenrePrimary
-      : StyledButtonGenreSecondary};
-  ${(props) =>
-    props.$isHidden ? StyledButtonHiddenTrue : StyledButtonHiddenFalse};
+    props.$genre === 'primary' ? ButtonGenrePrimary : ButtonGenreSecondary};
+  ${(props) => (props.$isHidden ? ButtonHiddenTrue : ButtonHiddenFalse)};
+`
+
+export const StyledButtonStyledModalLoading = styled(
+  ModalLoading,
+)<StyledButtonProps>`
+  & svg {
+    ${(props) =>
+      props.$size === 'large'
+        ? css`
+            height: 28px;
+            width: 28px;
+          `
+        : css`
+            height: 22px;
+            width: 22px;
+          `};
+  }
 `

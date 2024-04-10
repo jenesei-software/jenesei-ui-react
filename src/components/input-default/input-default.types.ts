@@ -1,40 +1,86 @@
-import { TInputGenre } from '../../main'
 import { FocusEventHandler, HTMLInputTypeAttribute } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
+import { IJeneseiTheme } from '../../main'
+
 export interface InputDefaultProps {
-  icon?: {
-    value: () => JSX.Element
-    onCLick: () => void
-  }
-  prefixContent?: {
-    content: React.ReactNode
-    left: string
-    right: string
-    width: string
-  }
-  anotherContent?: {
-    content: React.ReactNode
-  }
   className?: string
-  errorMessage?: string
+
   defaultValue?: string
-  id?: string
-  value?: string
-  placeholder?: string
-  step?: string | number
-  minLength?: number
-  maxLength?: number
+
+  errorMessage?: string
+
   genre: TInputGenre
-  register?: UseFormRegisterReturn
-  type?: HTMLInputTypeAttribute
-  onBlur?: FocusEventHandler<HTMLInputElement>
-  onFocus?: FocusEventHandler<HTMLInputElement>
-  onChange?: (value: string) => void
-  isFocus?: boolean
-  isOnlyText?: boolean
-  isError?: boolean
-  isReadOnly?: boolean
+
+  color: TInputColor
+
+  size: TInputSize
+
   isDisabled?: boolean
+
+  isError?: boolean
+
+  isFocus?: boolean
+
+  isOnlyText?: boolean
+
+  isReadOnly?: boolean
+
   isRequired?: boolean
+
+  maxLength?: number
+
+  minLength?: number
+
+  onBlur?: FocusEventHandler<HTMLInputElement>
+
+  onChange?: (value: string) => void
+
+  onFocus?: FocusEventHandler<HTMLInputElement>
+
+  placeholder?: string
+
+  postfixChildren?: InputDefaultChildrenProps
+
+  prefixChildren?: InputDefaultChildrenProps
+
+  register?: UseFormRegisterReturn
+
+  type?: HTMLInputTypeAttribute
+
+  value?: string
+}
+
+export interface InputDefaultChildrenProps {
+  children: React.ReactNode
+
+  left: string
+
+  right: string
+
+  width: string
+}
+
+export type TInputGenre = 'primary' | 'secondary'
+
+export type TInputSize = 'large' | 'medium'
+
+export type TInputColor = keyof IJeneseiTheme['colors']['button']
+
+export interface StyledInputDefaultProps {
+  $genre: InputDefaultProps['genre']
+
+  $size: InputDefaultProps['size']
+
+  $color: InputDefaultProps['color']
+
+  $isError?: InputDefaultProps['isError']
+
+  $isFocus?: InputDefaultProps['isFocus']
+
+  $isOnlyText?: InputDefaultProps['isOnlyText']
+
+  $postfixChildren?: InputDefaultChildrenProps
+
+  $prefixChildren?: InputDefaultChildrenProps
 }

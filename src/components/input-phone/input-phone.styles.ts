@@ -1,21 +1,22 @@
-import { StyledUIInputDefaultCSS, StyledUIInputDefaultProps } from '../../main'
+import { PatternFormat } from 'react-number-format'
+import styled, { css } from 'styled-components'
+
+import { StyledInputDefaultCSS, StyledInputDefaultProps } from '../../main'
 import {
   UIInputLeftContainer,
   UIInputPlaceholder,
   UIInputPlaceholderPhone,
 } from '../../main'
 import { FontInterM16 } from '../../main'
-import { PatternFormat } from 'react-number-format'
-import styled, { css } from 'styled-components'
 
-export const StyledUIInputPhone = styled(PatternFormat)<
-  StyledUIInputDefaultProps & {
+export const StyledInputPhone = styled(PatternFormat)<
+  StyledInputDefaultProps & {
     $isPhoneFocus: boolean
     $isLeftContainer?: boolean
     $isBold?: boolean
   }
 >`
-  ${StyledUIInputDefaultCSS};
+  ${StyledInputDefaultCSS};
   ${(props) =>
     props.$isLeftContainer &&
     css`
@@ -30,8 +31,8 @@ export const StyledUIInputPhone = styled(PatternFormat)<
       : ''}
 `
 
-export const UIInputPhoneStyledUIInputLeftContainer = styled(
-  UIInputLeftContainer
+export const UIInputPhoneStyledInputLeftContainer = styled(
+  UIInputLeftContainer,
 )`
   gap: 12px;
 `

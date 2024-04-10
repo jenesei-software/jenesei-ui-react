@@ -1,8 +1,9 @@
-import { ButtonProps, StyledButton } from '.'
-import { LibraryIcon, ModalLoading } from '../../main'
 import { FC, memo } from 'react'
 import { Ripple } from 'react-ripple-click'
 import { useTheme } from 'styled-components'
+
+import { ButtonProps, StyledButton, StyledButtonStyledModalLoading } from '.'
+import { LibraryIcon } from '../../main'
 
 export const Button: FC<ButtonProps> = memo(
   (props = { color: 'product', size: 'large' }) => {
@@ -10,6 +11,7 @@ export const Button: FC<ButtonProps> = memo(
     const IconComponent = props.icon && LibraryIcon[props.icon]
     return (
       <StyledButton
+        tabIndex={0}
         $isHidden={props.isHidden}
         $genre={props.genre}
         $width={props.width}
@@ -27,7 +29,8 @@ export const Button: FC<ButtonProps> = memo(
       >
         {!props.isDisabled && !props.isLoading && <Ripple />}
         {props.isLoading ? (
-          <ModalLoading
+          <StyledButtonStyledModalLoading
+            $size={props.size}
             size={'auto'}
             color={
               props.genre === 'secondary'
@@ -45,5 +48,5 @@ export const Button: FC<ButtonProps> = memo(
         )}
       </StyledButton>
     )
-  }
+  },
 )

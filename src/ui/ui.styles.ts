@@ -1,6 +1,7 @@
-import { JeneseiTheme } from '../main'
 import ReactLoading from 'react-loading'
 import styled from 'styled-components'
+
+import { JeneseiTheme } from '../main'
 
 export const UIReactLoading = styled(ReactLoading)``
 UIReactLoading.defaultProps = {

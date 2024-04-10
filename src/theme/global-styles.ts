@@ -13,11 +13,6 @@ export const GlobalStyles = createGlobalStyle`
   text-rendering: optimizeLegibility;
 }
 
-label[data-shrink='false']
-  + .MuiInputBase-formControl
-  .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input::-webkit-input-placeholder {
-  opacity: 1 !important;
-}
 body {
   margin: 0;
   max-width: 100dvw;

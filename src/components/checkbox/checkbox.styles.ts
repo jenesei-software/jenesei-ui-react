@@ -1,8 +1,10 @@
-import { StyledCheckboxProps } from '.'
-import { FontInterR12, FontInterR16, LibraryCheckboxes } from '../../main'
 import styled, { css } from 'styled-components'
 
-const StyledCheckboxSizeLarge = css<StyledCheckboxProps>`
+import { StyledCheckboxProps } from '.'
+import { FontInterR12, FontInterR16, LibraryCheckboxes } from '../../main'
+
+/****************************************** Size *************************************************/
+const CheckboxSizeLarge = css<StyledCheckboxProps>`
   padding: 10px;
   border-radius: 22px;
   ${FontInterR16};
@@ -11,7 +13,7 @@ const StyledCheckboxSizeLarge = css<StyledCheckboxProps>`
     width: 20px;
   }
 `
-const StyledCheckboxSizeMedium = css<StyledCheckboxProps>`
+const CheckboxSizeMedium = css<StyledCheckboxProps>`
   padding: 6px;
   border-radius: 16px;
   ${FontInterR12};
@@ -21,13 +23,14 @@ const StyledCheckboxSizeMedium = css<StyledCheckboxProps>`
   }
 `
 
-export const StyledCheckboxWrapper = styled.div<StyledCheckboxProps>`
+/****************************************** Default *************************************************/
+export const CheckboxWrapper = styled.div<StyledCheckboxProps>`
   display: flex;
   align-items: center;
   justify-content: flex-start;
   width: ${(props) => props.$width ?? 'max-content'};
   color: ${(props) => props.$color};
-  gap: 5px;
+  gap: 10px;
   cursor: pointer;
   border: none;
   outline: none;
@@ -45,13 +48,12 @@ export const StyledCheckboxWrapper = styled.div<StyledCheckboxProps>`
     background-color: ${(props) => `${props.$color}4a`};
   }
   ${(props) =>
-    props.$size === 'large'
-      ? StyledCheckboxSizeLarge
-      : StyledCheckboxSizeMedium};
+    props.$size === 'large' ? CheckboxSizeLarge : CheckboxSizeMedium};
 `
 
+/****************************************** Styled *************************************************/
 export const StyledIconCircle = styled(
-  LibraryCheckboxes.Radio
+  LibraryCheckboxes.Radio,
 )<StyledCheckboxProps>`
   & #check {
     fill: transparent;
@@ -61,7 +63,7 @@ export const StyledIconCircle = styled(
   }
 `
 export const StyledCheckedIconCircle = styled(
-  LibraryCheckboxes.Radio
+  LibraryCheckboxes.Radio,
 )<StyledCheckboxProps>`
   & #check {
     fill: ${(props) => props.$color};
@@ -72,7 +74,7 @@ export const StyledCheckedIconCircle = styled(
 `
 
 export const StyledIconSquare = styled(
-  LibraryCheckboxes.Square
+  LibraryCheckboxes.Square,
 )<StyledCheckboxProps>`
   & #center {
     fill: transparent;
@@ -85,7 +87,7 @@ export const StyledIconSquare = styled(
   }
 `
 export const StyledCheckedIconSquare = styled(
-  LibraryCheckboxes.Square
+  LibraryCheckboxes.Square,
 )<StyledCheckboxProps>`
   & #center {
     fill: ${(props) => props.$color};

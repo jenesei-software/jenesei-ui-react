@@ -1,6 +1,7 @@
-import { InputCodeProps, StyledSpanInterM12Error, StyledUIInputCode } from '.'
-import { UIFrameFlexCenter } from '../../main'
 import { useTheme } from 'styled-components'
+
+import { InputCodeProps, StyledInputCode, StyledSpanInterM12Error } from '.'
+import { UIFrameFlexCenter } from '../../main'
 
 export const InputCode = (props: InputCodeProps) => {
   const theme = useTheme()
@@ -9,7 +10,7 @@ export const InputCode = (props: InputCodeProps) => {
     const realLength = length * 2 - 1
     const patternArray: (string | number)[] = Array.from(
       { length: realLength },
-      (_, index) => (index % 2 === 0 ? value : ' ')
+      (_, index) => (index % 2 === 0 ? value : ' '),
     )
     return patternArray.join('')
   }
@@ -24,8 +25,9 @@ export const InputCode = (props: InputCodeProps) => {
           {props.errorMessage}
         </StyledSpanInterM12Error>
       )}
-      <StyledUIInputCode
+      <StyledInputCode
         $genre={props.genre}
+        $size={props.size}
         value={props.value}
         onValueChange={({ value }) => props.onChange && props.onChange(value)}
         format={createPattern(props.length, '#')}

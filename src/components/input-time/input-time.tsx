@@ -1,14 +1,15 @@
+import { memo, useEffect, useState } from 'react'
+
 import {
   InputTimeProps,
+  InputTimeStyledInputDefault,
   StyledInputItem,
   StyledInputItems,
   StyledInputTime,
-  InputTimeStyledInputDefault,
 } from '.'
-import { InputDefaultPrefixContent } from '../../main'
+import { InputDefaultPrefixChildren } from '../../main'
 import { UIFrameFlexCenter } from '../../main'
 import { getTimeToMinutes } from '../../main'
-import { memo, useEffect, useState } from 'react'
 
 function getAllHours() {
   const hours = []
@@ -40,24 +41,24 @@ export const InputTime = memo((props: InputTimeProps) => {
   const [hour, setHour] = useState<string | undefined>(
     props.input.value
       ? getFormatMinutesToHour(String(props.input.value))
-      : undefined
+      : undefined,
   )
   const [minute, setMinute] = useState<string | undefined>(
     props.input.value
       ? getFormatMinutesToMinutes(String(props.input.value))
-      : undefined
+      : undefined,
   )
 
   useEffect(() => {
     setHour(
       props.input.value
         ? getFormatMinutesToHour(String(props.input.value))
-        : undefined
+        : undefined,
     )
     setMinute(
       props.input.value
         ? getFormatMinutesToMinutes(String(props.input.value))
-        : undefined
+        : undefined,
     )
   }, [props.input.value])
   const isError =
@@ -72,9 +73,9 @@ export const InputTime = memo((props: InputTimeProps) => {
       width="100%"
     >
       <InputTimeStyledInputDefault
-        $prefixLeft={props.input.prefixContent?.left}
-        $prefixRight={props.input.prefixContent?.left}
-        $prefixWidth={props.input.prefixContent?.width}
+        $prefixLeft={props.input.PrefixChildren?.left}
+        $prefixRight={props.input.PrefixChildren?.left}
+        $prefixWidth={props.input.PrefixChildren?.width}
         tabIndex={1}
         $genre={props.input.genre}
         $isError={isError}
@@ -84,13 +85,13 @@ export const InputTime = memo((props: InputTimeProps) => {
           !props.input.value && hour == undefined && minute == undefined
         }
       >
-        {props.input.prefixContent && (
-          <InputDefaultPrefixContent
-            $width={props.input.prefixContent.width}
-            $left={props.input.prefixContent.left}
+        {props.input.PrefixChildren && (
+          <InputDefaultPrefixChildren
+            $width={props.input.PrefixChildren.width}
+            $left={props.input.PrefixChildren.left}
           >
-            {props.input.prefixContent.content}
-          </InputDefaultPrefixContent>
+            {props.input.PrefixChildren.content}
+          </InputDefaultPrefixChildren>
         )}
         {hour || minute
           ? props.isShowMinutes

@@ -3,7 +3,7 @@ import { TRecordsView } from '@components/modal-period-toggle'
 export function getTimestampRecords(
   view: TRecordsView = 'days',
   timestamp: number,
-  direction: '+' | '-' | 'start'
+  direction: '+' | '-' | 'start',
 ): number {
   const date = new Date(timestamp)
   switch (view) {
@@ -15,7 +15,7 @@ export function getTimestampRecords(
             date.getDate() + 1,
             0,
             0,
-            0
+            0,
           ).getTime()
         : new Date(
             date.getFullYear(),
@@ -23,7 +23,7 @@ export function getTimestampRecords(
             date.getDate() - 1,
             0,
             0,
-            0
+            0,
           ).getTime()
     }
     case 'weeks': {
@@ -37,12 +37,12 @@ export function getTimestampRecords(
           ? new Date(mondayTimestamp + 7 * 24 * 60 * 60 * 1000).setHours(
               0,
               0,
-              0
+              0,
             )
           : new Date(mondayTimestamp - 7 * 24 * 60 * 60 * 1000).setHours(
               0,
               0,
-              0
+              0,
             )
       }
     }

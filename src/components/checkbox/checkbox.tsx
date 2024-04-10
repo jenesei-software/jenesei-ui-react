@@ -1,20 +1,21 @@
+import { FC, useCallback } from 'react'
+import { useTheme } from 'styled-components'
+
 import {
   CheckboxProps,
-  StyledCheckboxWrapper,
+  CheckboxWrapper,
   StyledCheckedIconCircle,
   StyledCheckedIconSquare,
   StyledIconCircle,
   StyledIconSquare,
 } from '.'
-import { FC, useCallback } from 'react'
-import { useTheme } from 'styled-components'
 
 export const Checkbox: FC<CheckboxProps> = (
   props = {
     genre: 'circle',
     width: 'max-content',
     size: 'large',
-  }
+  },
 ) => {
   const theme = useTheme()
   const color = theme.colors.checkbox[props.color ?? 'gray']
@@ -22,10 +23,10 @@ export const Checkbox: FC<CheckboxProps> = (
     (checked: boolean) => {
       props.onChange && props.onChange(checked)
     },
-    [props]
+    [props],
   )
   return (
-    <StyledCheckboxWrapper
+    <CheckboxWrapper
       $color={color}
       $checked={props.checked}
       $width={props.width}
@@ -55,6 +56,6 @@ export const Checkbox: FC<CheckboxProps> = (
         </>
       )}
       {props.content && props.content}
-    </StyledCheckboxWrapper>
+    </CheckboxWrapper>
   )
 }

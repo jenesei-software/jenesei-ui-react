@@ -1,15 +1,15 @@
-import { FontInterM16, SpanInterM12 } from '../../fonts'
-import {
-  StyledUIInputDefaultProps,
-  StyledUIInputDefaultCSS,
-} from '../input-default'
 import { PatternFormat } from 'react-number-format'
 import styled from 'styled-components'
 
-export const StyledUIInputCode = styled(
-  PatternFormat
-)<StyledUIInputDefaultProps>`
-  ${StyledUIInputDefaultCSS}
+import {
+  FontInterM16,
+  SpanInterM12,
+  StyledInputDefaultCSS,
+  StyledInputDefaultProps,
+} from '../../main'
+
+export const StyledInputCode = styled(PatternFormat)<StyledInputDefaultProps>`
+  ${StyledInputDefaultCSS};
   ${FontInterM16};
 `
 

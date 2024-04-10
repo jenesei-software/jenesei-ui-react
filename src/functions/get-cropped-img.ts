@@ -19,7 +19,7 @@ interface Size {
 export function rotateSize(
   width: number,
   height: number,
-  rotation: number
+  rotation: number,
 ): Size {
   const rotRad = getRadianAngle(rotation)
 
@@ -36,7 +36,7 @@ export default async function getCroppedImg(
   imageName: string,
   pixelCrop: { x: number; y: number; width: number; height: number },
   rotation = 0,
-  flip = { horizontal: false, vertical: false }
+  flip = { horizontal: false, vertical: false },
 ): Promise<File | null> {
   const image = await createImage(imageSrc)
   const canvas = document.createElement('canvas')
@@ -51,7 +51,7 @@ export default async function getCroppedImg(
   const { width: bBoxWidth, height: bBoxHeight } = rotateSize(
     image.width,
     image.height,
-    rotation
+    rotation,
   )
 
   canvas.width = bBoxWidth
@@ -83,7 +83,7 @@ export default async function getCroppedImg(
     0,
     0,
     pixelCrop.width,
-    pixelCrop.height
+    pixelCrop.height,
   )
 
   return new Promise<File | null>((resolve, reject) => {

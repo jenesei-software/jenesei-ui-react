@@ -1,6 +1,7 @@
-import { InputDefault } from '.'
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
+
+import { InputDefault } from '.'
 
 const meta: Meta<typeof InputDefault> = {
   component: InputDefault,
@@ -12,7 +13,9 @@ type Story = StoryObj<typeof InputDefault>
 
 export const Default: Story = {
   args: {
-    genre: 'auth',
+    genre: 'primary',
+    size: 'large',
+    color: 'product',
     value: '',
     isError: false,
     isDisabled: false,

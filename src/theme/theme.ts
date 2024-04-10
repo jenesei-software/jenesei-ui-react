@@ -3,7 +3,7 @@ import { IJeneseiTheme } from '.'
 export const JeneseiTheme: IJeneseiTheme = {
   colors: {
     white: {
-      100: '#ffffffff',
+      100: '#ffffff',
       80: '#ffffffcc',
       60: '#ffffff99',
       50: '#ffffff80',
@@ -33,6 +33,12 @@ export const JeneseiTheme: IJeneseiTheme = {
       danger: '#ff4141ff',
       product: '#4195d2ff',
     },
+    visible: {
+      button: {
+        primary: '#173a53ff',
+        secondary: '#173a53ff',
+      },
+    },
     checkbox: {
       gray: '#737373',
       product: '#4195d2',
@@ -59,6 +65,7 @@ export const JeneseiTheme: IJeneseiTheme = {
       d1d1d6: '#d1d1d6ff',
       484848: '#484848ff',
       737373: '#737373ff',
+      e3e3e6: '#e3e3e6ff',
       '8a8a8a': '#8a8a8aff',
       d3d3d3: '#d3d3d3ff',
       fafafa: '#fafafaff',

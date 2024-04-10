@@ -1,4 +1,4 @@
-import { InputINNProps, StyledUIInputINN } from '.'
+import { InputINNProps, StyledInputINN } from '.'
 import { UIFrameFlexCenter } from '../../main'
 
 export const InputINN = (props: InputINNProps) => {
@@ -8,7 +8,7 @@ export const InputINN = (props: InputINNProps) => {
       width="100%"
       $position="relative"
     >
-      <StyledUIInputINN
+      <StyledInputINN
         $genre={props.genre}
         value={props.value}
         onValueChange={({ value }) => props.onChange && props.onChange(value)}
