@@ -55,7 +55,7 @@ export const Checkbox: FC<CheckboxProps> = (
           )}
         </>
       )}
-      {props.content && props.content}
+      {props.children && props.children}
     </CheckboxWrapper>
   )
 }

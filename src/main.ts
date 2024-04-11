@@ -2,11 +2,12 @@
 
 export * from './fonts/inter'
 
+export * from './components/modal-loading'
+
 export * from './ui'
 export * from './functions'
 export * from './theme'
 export * from './fonts'
-export * from './hooks/use-cards'
 
 export * from './components/input-default'
 
@@ -19,8 +20,6 @@ export * from './assets/library-checkboxes'
 // export * from './components/input-select'
 // export * from './components/input-time'
 // export * from './components/input-code'
-
-export * from './components/modal-loading'
 
 export * from './components/checkbox'
 export * from './components/checkboxes'

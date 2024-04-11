@@ -6,18 +6,19 @@ import {
   InputDefaultPostfixChildren,
   InputDefaultPrefixChildren,
   InputDefaultProps,
+  InputDefaultStyledModalLoading,
   StyledInputDefault,
+  StyledInputDefaultWrapper,
 } from '.'
-import { UIFrameFlexCenter } from '../../main'
 
 export const InputDefault = memo((props: InputDefaultProps) => {
   const theme = useTheme()
 
   return (
-    <UIFrameFlexCenter
+    <StyledInputDefaultWrapper
       className={props.className}
-      width="100%"
-      $position="relative"
+      $isHidden={props.isHidden}
+      $width={props.width}
     >
       {props.prefixChildren && (
         <InputDefaultPrefixChildren {...props.prefixChildren} />
@@ -26,15 +27,15 @@ export const InputDefault = memo((props: InputDefaultProps) => {
         {...props.register}
         minLength={props.minLength}
         maxLength={props.maxLength}
-        $isOnlyText={props.isOnlyText}
         $isFocus={props.isFocus}
         $isError={props.isError}
+        $isLoading={props.isLoading}
         $postfixChildren={props?.postfixChildren}
         $prefixChildren={props?.prefixChildren}
         $genre={props.genre}
         $size={props.size}
-        $color={props.color ? theme.colors.button[props.color] : '#fff'}
-        disabled={props.isDisabled}
+        $color={props.color ? theme.colors.input[props.color] : '#fff'}
+        disabled={props.isDisabled || props.isReadOnly}
         readOnly={props.isReadOnly}
         required={props.isRequired}
         defaultValue={props.defaultValue}
@@ -55,6 +56,18 @@ export const InputDefault = memo((props: InputDefaultProps) => {
       {props.postfixChildren && (
         <InputDefaultPostfixChildren {...props.postfixChildren} />
       )}
-    </UIFrameFlexCenter>
+      {props.isLoading && (
+        <InputDefaultStyledModalLoading
+          size={props.size}
+          color={
+            props.genre === 'secondary'
+              ? props.color
+                ? theme.colors.input[props.color]
+                : '#fff'
+              : '#fff'
+          }
+        />
+      )}
+    </StyledInputDefaultWrapper>
   )
 })

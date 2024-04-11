@@ -5,7 +5,7 @@ export interface CheckboxProps {
 
   color?: CheckboxColorType
 
-  content?: React.ReactNode
+  children?: React.ReactNode
 
   genre?: CheckboxGenreType
 

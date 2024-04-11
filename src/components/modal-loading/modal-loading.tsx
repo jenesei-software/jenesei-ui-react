@@ -7,18 +7,19 @@ export const ModalLoading: FC<ModalLoadingProps> = (props) => {
     <StyledReactLoading
       className={props.className}
       color={props.color}
+      size={props.size}
       height={
         props.size === 'medium'
-          ? '24px'
+          ? '22px'
           : props.size === 'large'
-            ? '34px'
+            ? '28px'
             : 'auto'
       }
       width={
         props.size === 'medium'
-          ? '24px'
+          ? '22px'
           : props.size === 'large'
-            ? '34px'
+            ? '28px'
             : 'auto'
       }
     />

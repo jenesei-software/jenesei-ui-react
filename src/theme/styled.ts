@@ -48,6 +48,10 @@ export interface IJeneseiTheme {
       danger: string
       product: string
     }
+    input: {
+      gray: string
+      product: string
+    }
     checkbox: {
       gray: string
       product: string
@@ -69,30 +73,6 @@ export interface IJeneseiTheme {
       737373: string
       d3d3d3: string
       fafafa: string
-    }
-  }
-  effects: {
-    playstation: {
-      default: string
-    }
-    volumetric: {
-      wrapper: string
-      active: string
-      default: string
-    }
-    input: {
-      default: string
-    }
-    header: {
-      wrapper: string
-      menu: string
-    }
-  }
-  backgrounds: {
-    volumetric: {
-      wrapper: string
-      active: string
-      default: string
     }
   }
   sizes: {

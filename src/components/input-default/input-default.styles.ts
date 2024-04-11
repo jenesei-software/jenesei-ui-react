@@ -1,15 +1,31 @@
 import styled, { css } from 'styled-components'
 
 import {
-  FontInterR12,
-  FontInterR16,
   InputDefaultChildrenProps,
+  ModalLoading,
   StyledInputDefaultProps,
+  StyledInputDefaultWrapperProps,
+  fontInterWithSizeAndWeight,
 } from '../../main'
 
+/****************************************** Hidden *************************************************/
+const InputDefaultWrapperHidden = css<StyledInputDefaultWrapperProps>`
+  opacity: ${(props) => (props.$isHidden ? 0.3 : 1)};
+`
+
+/****************************************** Wrapper *************************************************/
+export const StyledInputDefaultWrapper = styled.div<StyledInputDefaultWrapperProps>`
+  width: max-content;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: ${(props) => props.$width ?? '100%'};
+  ${InputDefaultWrapperHidden};
+`
 /****************************************** Error *************************************************/
 export const InputDefaultErrorMessage = styled.div`
-  ${FontInterR12};
+  ${fontInterWithSizeAndWeight(12, 400)};
   position: absolute;
   bottom: -15px;
   left: 10px;
@@ -28,10 +44,32 @@ export const InputDefaultIsErrorBorder = css<StyledInputDefaultProps>`
       }
     `}
 `
+/****************************************** Placeholder *************************************************/
+const InputDefaultPlaceholder = css<StyledInputDefaultProps>`
+  ${(props) =>
+    props.$genre === 'primary'
+      ? css`
+          &::placeholder,
+          &::-ms-input-placeholder {
+            ${fontInterWithSizeAndWeight(16, 400)};
+            color: ${props.theme.colors.white['100']} !important;
+            opacity: 1;
+            line-height: 24px;
+          }
+        `
+      : css`
+          &::placeholder,
+          &::-ms-input-placeholder {
+            ${fontInterWithSizeAndWeight(16, 400)};
+            color: ${props.theme.colors.gray['8a8a8a']} !important;
+            opacity: 1;
+          }
+        `}
+`
 
 /****************************************** Default *************************************************/
 export const StyledInputDefaultCSS = css<StyledInputDefaultProps>`
-  ${FontInterR16};
+  ${fontInterWithSizeAndWeight(16, 400)};
   resize: none;
   overflow: hidden;
   box-sizing: border-box;
@@ -73,7 +111,8 @@ export const StyledInputDefaultCSS = css<StyledInputDefaultProps>`
 `
 
 export const StyledInputDefault = styled.input<StyledInputDefaultProps>`
-  ${StyledInputDefaultCSS}
+  ${StyledInputDefaultCSS};
+  ${InputDefaultPlaceholder};
 `
 
 /****************************************** Children *************************************************/
@@ -111,14 +150,6 @@ const InputDefaultGenrePrimary = css<StyledInputDefaultProps>`
   border-color: transparent;
   background: ${(props) => props.$color};
   color: ${(props) => props.theme.colors.white['100']};
-
-  &::placeholder,
-  &::-ms-input-placeholder {
-    ${FontInterR16};
-    color: ${(props) => props.theme.colors.white['100']} !important;
-    opacity: 1 !important;
-    line-height: 24px !important;
-  }
   &:focus,
   &:focus-visible {
     border-color: ${(props) => props.theme.colors.product[100]};
@@ -147,11 +178,10 @@ const InputDefaultGenreSecondary = css<StyledInputDefaultProps>`
   color: ${(props) => props.theme.colors.gray[484848]};
   background: transparent;
   border-color: ${(props) => props.$color};
+`
 
-  &::placeholder,
-  &::-ms-input-placeholder {
-    ${FontInterR16};
-    color: ${(props) => props.theme.colors.gray['8a8a8a']};
-    opacity: 1;
-  }
+/****************************************** ModalLoading *************************************************/
+export const InputDefaultStyledModalLoading = styled(ModalLoading)`
+  position: absolute;
+  right: 12px;
 `

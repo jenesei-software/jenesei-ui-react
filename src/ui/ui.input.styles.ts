@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { FontInterM16, FontInterR16 } from '../main'
+import { fontInterWithSizeAndWeight } from '../main'
 
 export const UIInputLeftContainer = styled.div`
   position: absolute;
@@ -10,14 +10,14 @@ export const UIInputLeftContainer = styled.div`
 `
 
 export const UIInputPlaceholder = css`
-  ${FontInterR16};
+  ${fontInterWithSizeAndWeight(16, 400)};
   color: ${(props) => props.theme.colors.gray['8a8a8a']};
   opacity: 1;
   line-height: 24px;
 `
 
 export const UIInputPlaceholderPhone = css`
-  ${FontInterM16};
+  ${fontInterWithSizeAndWeight(16, 500)};
   color: ${(props) => props.theme.colors.gray['cccccc']};
   opacity: 1;
   line-height: 24px;

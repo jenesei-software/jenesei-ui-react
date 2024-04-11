@@ -1,3 +1,5 @@
+import { useCallback } from 'react'
+
 import {
   CheckboxesItem,
   CheckboxesLabel,
@@ -5,10 +7,9 @@ import {
   CheckboxesWrapper,
 } from '.'
 import { Checkbox } from '../../main'
-import { useCallback } from 'react'
 
 export const Checkboxes = <T extends Record<string, unknown>>(
-  props: CheckboxesProps<T>
+  props: CheckboxesProps<T>,
 ) => {
   const createMarkup = (html: string) => ({ __html: html })
 
@@ -16,33 +17,32 @@ export const Checkboxes = <T extends Record<string, unknown>>(
     (item: T) => {
       const isSelected = props.value.some(
         (selectedItem) =>
-          selectedItem[props.valueField] === item[props.valueField]
+          selectedItem[props.valueField] === item[props.valueField],
       )
 
       const updatedSelectedItems = isSelected
         ? props.value.filter(
             (selectedItem) =>
-              selectedItem[props.valueField] !== item[props.valueField]
+              selectedItem[props.valueField] !== item[props.valueField],
           )
         : props.multiple
           ? [...props.value, item]
           : [item]
       if (props.onChange) props.onChange(updatedSelectedItems)
     },
-    [props]
+    [props],
   )
   return (
-    <CheckboxesWrapper className={props.className}>
+    <CheckboxesWrapper className={props.className} $width={props.width}>
       {props.options.map((e, index) => {
         const isChecked = props.value.some(
           (selectedItem) =>
-            selectedItem[props.valueField] === e[props.valueField]
+            selectedItem[props.valueField] === e[props.valueField],
         )
         return (
           <CheckboxesItem
             key={index}
             onClick={() => !props.isClickOnlyIcon && handleCheckboxChange(e)}
-            $checked={isChecked}
           >
             <Checkbox
               genre={props.checkboxGenre}
@@ -50,24 +50,19 @@ export const Checkboxes = <T extends Record<string, unknown>>(
               size={props.checkboxSize}
               width={props.checkboxWidth}
               checked={isChecked}
-              content={
-                props.checkboxLabelField &&
-                e?.[props.checkboxLabelField] !== undefined && (
-                  <>{e[props.checkboxLabelField]}</>
+              children={
+                props.labelField &&
+                e?.[props.labelField] !== undefined && (
+                  <CheckboxesLabel
+                    dangerouslySetInnerHTML={createMarkup(
+                      e[props.labelField] as string,
+                    )}
+                  />
                 )
               }
             />
-            {props.contentField && e?.[props.contentField] !== undefined ? (
-              <>{e[props.contentField]}</>
-            ) : (
-              props.labelField &&
-              e?.[props.labelField] !== undefined && (
-                <CheckboxesLabel
-                  dangerouslySetInnerHTML={createMarkup(
-                    e[props.labelField] as string
-                  )}
-                />
-              )
+            {props.childrenField && e?.[props.childrenField] !== undefined && (
+              <>{e[props.childrenField]}</>
             )}
           </CheckboxesItem>
         )

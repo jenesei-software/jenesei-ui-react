@@ -16,13 +16,11 @@ export interface CheckboxesProps<T extends Record<string, unknown>> {
 
   className?: string
 
-  contentField?: keyof T
+  childrenField?: keyof T
 
   isClickOnlyIcon?: boolean
 
   labelField?: keyof T
-
-  checkboxLabelField?: keyof T
 
   multiple?: boolean
 
@@ -33,4 +31,10 @@ export interface CheckboxesProps<T extends Record<string, unknown>> {
   value: T[]
 
   valueField: keyof T
+
+  width?: string
+}
+
+export interface CheckboxesWrapperProps {
+  $width?: string
 }

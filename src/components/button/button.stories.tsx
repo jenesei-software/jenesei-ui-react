@@ -1,6 +1,7 @@
-import { Button } from '.'
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
+
+import { Button } from '.'
 
 const meta: Meta<typeof Button> = {
   component: Button,
@@ -10,9 +11,9 @@ const meta: Meta<typeof Button> = {
 export default meta
 type Story = StoryObj<typeof Button>
 
-export const Product: Story = {
+export const ProductLabel: Story = {
   args: {
-    content: 'Click',
+    children: 'Click',
     width: '200px',
     isHidden: false,
     isLoading: false,
@@ -24,9 +25,9 @@ export const Product: Story = {
   },
 }
 
-export const ProductWithIcon: Story = {
+export const ProductLabelWithIcon: Story = {
   args: {
-    content: 'Click',
+    children: 'Click',
     width: '200px',
     isHidden: false,
     isLoading: false,
@@ -39,7 +40,7 @@ export const ProductWithIcon: Story = {
   },
 }
 
-export const Icon: Story = {
+export const ProductIcon: Story = {
   args: {
     width: 'auto',
     isHidden: false,
@@ -53,9 +54,9 @@ export const Icon: Story = {
   },
 }
 
-export const Success: Story = {
+export const SuccessLabel: Story = {
   args: {
-    content: 'Click',
+    children: 'Click',
     width: '200px',
     isHidden: false,
     isLoading: false,
@@ -67,9 +68,9 @@ export const Success: Story = {
   },
 }
 
-export const Danger: Story = {
+export const DangerLabel: Story = {
   args: {
-    content: 'Click',
+    children: 'Click',
     width: '200px',
     isHidden: false,
     isLoading: false,

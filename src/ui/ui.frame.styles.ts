@@ -6,7 +6,7 @@ export interface FrameProps {
 }
 
 export const UIFrameFlexCenter = styled.div<FrameProps>`
-  width: ${(props) => (props.width ? props.width : '100%')};
+  width: ${(props) => (props.width ? props.width : 'max-content')};
   position: ${(props) => (props.$position ? props.$position : 'static')};
   display: flex;
   align-items: center;

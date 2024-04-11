@@ -11,17 +11,74 @@ const meta: Meta<typeof InputDefault> = {
 export default meta
 type Story = StoryObj<typeof InputDefault>
 
-export const Default: Story = {
+export const ProductPrimary: Story = {
   args: {
     genre: 'primary',
     size: 'large',
     color: 'product',
-    value: '',
+    value: 'Example Value',
     isError: false,
     isDisabled: false,
     isFocus: undefined,
-    isOnlyText: false,
+    isRequired: false,
     isReadOnly: false,
-    placeholder: 'Placeholder',
+    isHidden: false,
+    isLoading: false,
+    placeholder: 'White placeholder?',
+    width: '300px',
+  },
+}
+
+export const ProductSecondary: Story = {
+  args: {
+    genre: 'secondary',
+    size: 'large',
+    color: 'product',
+    value: 'Example Value',
+    isError: false,
+    isDisabled: false,
+    isFocus: undefined,
+    isRequired: false,
+    isReadOnly: false,
+    isHidden: false,
+    isLoading: false,
+    placeholder: 'White placeholder?',
+    width: '300px',
+  },
+}
+
+export const GrayPrimary: Story = {
+  args: {
+    genre: 'primary',
+    size: 'large',
+    color: 'gray',
+    value: 'Example Value',
+    isError: false,
+    isDisabled: false,
+    isFocus: undefined,
+    isRequired: false,
+    isReadOnly: false,
+    isHidden: false,
+    isLoading: false,
+    placeholder: 'White placeholder?',
+    width: '300px',
+  },
+}
+
+export const GraySecondary: Story = {
+  args: {
+    genre: 'secondary',
+    size: 'large',
+    color: 'gray',
+    value: 'Example Value',
+    isError: false,
+    isDisabled: false,
+    isFocus: undefined,
+    isRequired: false,
+    isReadOnly: false,
+    isHidden: false,
+    isLoading: false,
+    placeholder: 'White placeholder?',
+    width: '300px',
   },
 }

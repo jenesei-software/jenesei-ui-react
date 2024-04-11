@@ -16,17 +16,21 @@ export interface InputDefaultProps {
 
   size: TInputSize
 
+  width?: string
+
   isDisabled?: boolean
 
   isError?: boolean
 
-  isFocus?: boolean
+  isLoading?: boolean
 
-  isOnlyText?: boolean
+  isFocus?: boolean
 
   isReadOnly?: boolean
 
   isRequired?: boolean
+
+  isHidden?: boolean
 
   maxLength?: number
 
@@ -65,7 +69,7 @@ export type TInputGenre = 'primary' | 'secondary'
 
 export type TInputSize = 'large' | 'medium'
 
-export type TInputColor = keyof IJeneseiTheme['colors']['button']
+export type TInputColor = keyof IJeneseiTheme['colors']['input']
 
 export interface StyledInputDefaultProps {
   $genre: InputDefaultProps['genre']
@@ -76,11 +80,17 @@ export interface StyledInputDefaultProps {
 
   $isError?: InputDefaultProps['isError']
 
-  $isFocus?: InputDefaultProps['isFocus']
+  $isLoading?: InputDefaultProps['isLoading']
 
-  $isOnlyText?: InputDefaultProps['isOnlyText']
+  $isFocus?: InputDefaultProps['isFocus']
 
   $postfixChildren?: InputDefaultChildrenProps
 
   $prefixChildren?: InputDefaultChildrenProps
+}
+
+export interface StyledInputDefaultWrapperProps {
+  $isHidden?: InputDefaultProps['isHidden']
+
+  $width?: InputDefaultProps['width']
 }

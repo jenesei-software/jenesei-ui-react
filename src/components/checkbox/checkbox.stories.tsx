@@ -1,5 +1,6 @@
-import { Checkbox } from '.'
 import type { Meta, StoryObj } from '@storybook/react'
+
+import { Checkbox } from '.'
 
 const meta: Meta<typeof Checkbox> = {
   component: Checkbox,
@@ -9,22 +10,22 @@ const meta: Meta<typeof Checkbox> = {
 export default meta
 type Story = StoryObj<typeof Checkbox>
 
-export const Gray: Story = {
-  args: {
-    genre: 'circle',
-    checked: true,
-    color: 'gray',
-    content: 'Zhopa',
-    size: 'large',
-  },
-}
-
 export const Product: Story = {
   args: {
     genre: 'circle',
     checked: true,
     color: 'product',
-    content: 'Zhopa',
+    children: 'Zhopa',
+    size: 'large',
+  },
+}
+
+export const Gray: Story = {
+  args: {
+    genre: 'circle',
+    checked: true,
+    color: 'gray',
+    children: 'Zhopa',
     size: 'large',
   },
 }

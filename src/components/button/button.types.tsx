@@ -5,7 +5,7 @@ export interface ButtonProps {
 
   color?: ButtonColorType
 
-  content?: React.ReactNode
+  children?: React.ReactNode
 
   genre?: ButtonGenreType
 

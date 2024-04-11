@@ -2,8 +2,8 @@ import { FC, memo } from 'react'
 import { Ripple } from 'react-ripple-click'
 import { useTheme } from 'styled-components'
 
-import { ButtonProps, StyledButton, StyledButtonStyledModalLoading } from '.'
-import { LibraryIcon } from '../../main'
+import { ButtonProps, StyledButton } from '.'
+import { LibraryIcon, ModalLoading } from '../../main'
 
 export const Button: FC<ButtonProps> = memo(
   (props = { color: 'product', size: 'large' }) => {
@@ -29,9 +29,8 @@ export const Button: FC<ButtonProps> = memo(
       >
         {!props.isDisabled && !props.isLoading && <Ripple />}
         {props.isLoading ? (
-          <StyledButtonStyledModalLoading
-            $size={props.size}
-            size={'auto'}
+          <ModalLoading
+            size={props.size}
             color={
               props.genre === 'secondary'
                 ? props.color
@@ -42,7 +41,7 @@ export const Button: FC<ButtonProps> = memo(
           />
         ) : (
           <>
-            {props.content && props.content}
+            {props.children && props.children}
             {IconComponent && <IconComponent />}
           </>
         )}

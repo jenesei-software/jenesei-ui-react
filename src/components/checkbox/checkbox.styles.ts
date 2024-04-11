@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components'
 
 import { StyledCheckboxProps } from '.'
-import { FontInterR12, FontInterR16, LibraryCheckboxes } from '../../main'
+import { LibraryCheckboxes, fontInterWithSizeAndWeight } from '../../main'
 
 /****************************************** Size *************************************************/
 const CheckboxSizeLarge = css<StyledCheckboxProps>`
   padding: 10px;
   border-radius: 22px;
-  ${FontInterR16};
+  ${fontInterWithSizeAndWeight(16, 400)};
   & svg {
     height: 20px;
     width: 20px;
@@ -16,7 +16,7 @@ const CheckboxSizeLarge = css<StyledCheckboxProps>`
 const CheckboxSizeMedium = css<StyledCheckboxProps>`
   padding: 6px;
   border-radius: 16px;
-  ${FontInterR12};
+  ${fontInterWithSizeAndWeight(12, 400)};
   & svg {
     height: 14px;
     width: 14px;
