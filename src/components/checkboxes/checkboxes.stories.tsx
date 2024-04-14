@@ -11,10 +11,11 @@ const meta: Meta<typeof Checkboxes> = {
 export default meta
 type Story = StoryObj<typeof Checkboxes>
 
-export const Product: Story = {
+export const CircleProductSecondary: Story = {
   args: {
-    checkboxGenre: 'square',
-    checkboxColor: 'product',
+    checkboxGenre: 'product',
+    checkboxGenreType: 'secondary',
+    checkBoxView: 'circle',
     checkboxSize: 'large',
     checkboxWidth: '100%',
     value: [{ value: 0, label: 'First' }],
@@ -26,50 +27,38 @@ export const Product: Story = {
     valueField: 'value',
     multiple: true,
     width: '300px',
+    checkboxIsHiddenBorder: false,
   },
 }
 
-export const ProductChildren: Story = {
+export const CircleProductSecondaryChildren: Story = {
   args: {
-    checkboxGenre: 'square',
-    checkboxColor: 'product',
+    checkboxGenre: 'product',
+    checkboxGenreType: 'secondary',
+    checkBoxView: 'circle',
     checkboxSize: 'large',
     value: [{ value: 0, children: 'First' }],
     options: [
       { value: 0, children: 'First' },
       { value: 1, children: 'Second' },
-    ],
-    valueField: 'value',
-    childrenField: 'children',
-    multiple: true,
-    width: '100%',
-  },
-}
-
-export const ProductLabelWithChildren: Story = {
-  args: {
-    checkboxGenre: 'square',
-    checkboxColor: 'product',
-    checkboxSize: 'large',
-    checkboxWidth: '140px',
-    value: [{ value: 0, label: 'First' }],
-    options: [
-      { value: 0, label: 'First' },
-      { value: 1, label: 'Second', children: '<LibraryIcon.Support />' },
+      { value: 3, label: 'Thirst', children: '<LibraryIcon.Support />' },
     ],
     labelField: 'label',
     valueField: 'value',
     childrenField: 'children',
     multiple: true,
     width: '100%',
+    checkboxIsHiddenBorder: true,
   },
 }
 
-export const Gray: Story = {
+export const CircleProductPrimary: Story = {
   args: {
-    checkboxGenre: 'square',
-    checkboxColor: 'gray',
+    checkboxGenre: 'product',
+    checkboxGenreType: 'primary',
+    checkBoxView: 'circle',
     checkboxSize: 'large',
+    checkboxWidth: '100%',
     value: [{ value: 0, label: 'First' }],
     options: [
       { value: 0, label: 'First' },
@@ -79,5 +68,27 @@ export const Gray: Story = {
     valueField: 'value',
     multiple: true,
     width: '300px',
+    checkboxIsHiddenBorder: true,
+  },
+}
+
+export const CircleProductPrimaryChildren: Story = {
+  args: {
+    checkboxGenre: 'product',
+    checkboxGenreType: 'primary',
+    checkBoxView: 'circle',
+    checkboxSize: 'large',
+    value: [{ value: 0, children: 'First' }],
+    options: [
+      { value: 0, children: 'First' },
+      { value: 1, children: 'Second' },
+      { value: 3, label: 'Thirst', children: '<LibraryIcon.Support />' },
+    ],
+    labelField: 'label',
+    valueField: 'value',
+    childrenField: 'children',
+    multiple: true,
+    width: '100%',
+    checkboxIsHiddenBorder: true,
   },
 }

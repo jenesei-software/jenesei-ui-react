@@ -46,7 +46,9 @@ export const Checkboxes = <T extends Record<string, unknown>>(
           >
             <Checkbox
               genre={props.checkboxGenre}
-              color={props.checkboxColor}
+              genreType={props.checkboxGenreType}
+              isHiddenBorder={props.checkboxIsHiddenBorder}
+              view={props.checkBoxView}
               size={props.checkboxSize}
               width={props.checkboxWidth}
               checked={isChecked}

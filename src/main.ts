@@ -9,7 +9,7 @@ export * from './functions'
 export * from './theme'
 export * from './fonts'
 
-export * from './components/input-default'
+// export * from './components/input-default'
 
 export * from './assets/library-icon'
 export * from './assets/library-checkboxes'

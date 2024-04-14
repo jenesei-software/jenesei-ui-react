@@ -1,18 +1,17 @@
-import {
-  CheckboxColorType,
-  CheckboxGenreType,
-  CheckboxProps,
-  CheckboxSizeType,
-} from '../../main'
+import { CheckboxProps } from '../../main'
 
 export interface CheckboxesProps<T extends Record<string, unknown>> {
-  checkboxGenre: CheckboxGenreType
+  checkboxGenre: CheckboxProps['genre']
 
-  checkboxColor: CheckboxColorType
+  checkboxGenreType: CheckboxProps['genreType']
 
-  checkboxSize: CheckboxSizeType
+  checkBoxView: CheckboxProps['view']
+
+  checkboxSize: CheckboxProps['size']
 
   checkboxWidth?: CheckboxProps['width']
+
+  checkboxIsHiddenBorder?: CheckboxProps['isHiddenBorder']
 
   className?: string
 

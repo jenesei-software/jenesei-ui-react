@@ -13,7 +13,7 @@ UIReactLoading.defaultProps = {
 
 export const UIReactLoadingMin = styled(ReactLoading)``
 UIReactLoadingMin.defaultProps = {
-  color: JeneseiTheme.colors.product[100],
+  color: JeneseiTheme.colors.white,
   type: 'spinningBubbles',
   height: '24px',
   width: '24px',
