@@ -1,22 +1,22 @@
 import {
-  LibraryIconNameString,
   TJeneseiThemeGenre,
   TJeneseiThemeGenreType,
   TJeneseiThemeSize,
+  TLibraryIconNameString,
 } from '../../main'
 
 export interface ButtonProps {
   className?: string
 
-  genre: ButtonGenre
+  genre: TButtonGenre
 
-  genreType: ButtonGenreType
+  genreType: TButtonGenreType
 
   children?: React.ReactNode
 
   size?: TJeneseiThemeSize
 
-  icon?: LibraryIconNameString
+  icon?: TLibraryIconNameString
 
   isDisabled?: boolean
 
@@ -31,9 +31,9 @@ export interface ButtonProps {
   width?: string
 }
 
-export type ButtonGenre = keyof TJeneseiThemeGenre
+export type TButtonGenre = keyof TJeneseiThemeGenre
 
-export type ButtonGenreType = keyof TJeneseiThemeGenreType
+export type TButtonGenreType = keyof TJeneseiThemeGenreType
 
 export interface StyledButtonProps {
   $genreType: ButtonProps['genreType']

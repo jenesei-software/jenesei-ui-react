@@ -5,7 +5,6 @@ export * from './fonts/inter'
 export * from './components/modal-loading'
 
 export * from './ui'
-export * from './functions'
 export * from './theme'
 export * from './fonts'
 

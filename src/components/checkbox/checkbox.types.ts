@@ -7,13 +7,13 @@ import {
 export interface CheckboxProps {
   checked?: boolean
 
-  genre: CheckboxGenre
+  genre: TCheckboxGenre
 
   children?: React.ReactNode
 
-  view: CheckboxGenreView
+  view: TCheckboxGenreView
 
-  genreType: CheckboxGenreType
+  genreType: TCheckboxGenreType
 
   isDisabled?: boolean
 
@@ -48,8 +48,8 @@ export interface StyledCheckboxProps {
   $isHiddenBorder?: CheckboxProps['isHiddenBorder']
 }
 
-export type CheckboxGenreView = 'square' | 'circle'
+export type TCheckboxGenreView = 'square' | 'circle'
 
-export type CheckboxGenre = keyof TJeneseiThemeGenre
+export type TCheckboxGenre = keyof TJeneseiThemeGenre
 
-export type CheckboxGenreType = keyof TJeneseiThemeGenreType
+export type TCheckboxGenreType = keyof TJeneseiThemeGenreType

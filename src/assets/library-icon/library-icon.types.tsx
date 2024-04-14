@@ -1,5 +1,5 @@
 export type LibraryIconProps = {
-  [icon in LibraryIconNameString]: (props: LibraryIconItemProps) => JSX.Element
+  [icon in TLibraryIconNameString]: (props: LibraryIconItemProps) => JSX.Element
 }
 
 export interface LibraryIconItemProps {
@@ -31,4 +31,4 @@ export enum LibraryIconName {
   Trash,
 }
 
-export type LibraryIconNameString = keyof typeof LibraryIconName
+export type TLibraryIconNameString = keyof typeof LibraryIconName
