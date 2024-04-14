@@ -10,22 +10,64 @@ const meta: Meta<typeof Checkbox> = {
 export default meta
 type Story = StoryObj<typeof Checkbox>
 
-export const Product: Story = {
+export const CircleProductPrimary: Story = {
+  tags: ['Product'],
   args: {
-    genre: 'circle',
+    genre: 'product',
+    genreType: 'primary',
+    view: 'circle',
     checked: true,
-    color: 'product',
     children: 'Zhopa',
     size: 'large',
+    isLoading: false,
+    isDisabled: false,
+    isOnlyLoading: false,
+    isHiddenBorder: false,
   },
 }
 
-export const Gray: Story = {
+export const SquareProductPrimary: Story = {
+  tags: ['Product'],
   args: {
-    genre: 'circle',
+    genre: 'product',
+    genreType: 'primary',
+    view: 'square',
     checked: true,
-    color: 'gray',
     children: 'Zhopa',
     size: 'large',
+    isLoading: false,
+    isDisabled: false,
+    isOnlyLoading: false,
+    isHiddenBorder: false,
+  },
+}
+
+export const CircleProductSecondary: Story = {
+  args: {
+    genre: 'product',
+    genreType: 'secondary',
+    view: 'circle',
+    checked: true,
+    children: 'Zhopa',
+    size: 'large',
+    isLoading: false,
+    isDisabled: false,
+    isOnlyLoading: false,
+    isHiddenBorder: false,
+  },
+}
+
+export const SquareProductSecondary: Story = {
+  args: {
+    genre: 'product',
+    genreType: 'secondary',
+    view: 'square',
+    checked: true,
+    children: 'Zhopa',
+    size: 'large',
+    isLoading: false,
+    isDisabled: false,
+    isOnlyLoading: false,
+    isHiddenBorder: false,
   },
 }

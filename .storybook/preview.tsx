@@ -28,6 +28,9 @@ export const decorators = [
   withThemeFromJSXProvider({
     GlobalStyles: StyledGlobalStyles,
     Provider: StyledThemeProvider,
-    themes: { JeneseiTheme },
+    themes: {
+      light: JeneseiTheme,
+      dark: JeneseiTheme,
+    },
   }),
 ]

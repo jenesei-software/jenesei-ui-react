@@ -1,33 +1,55 @@
-import { IJeneseiTheme } from '../../main'
+import {
+  TJeneseiThemeGenre,
+  TJeneseiThemeGenreType,
+  TJeneseiThemeSize,
+} from '../../main'
 
 export interface CheckboxProps {
   checked?: boolean
 
-  color?: CheckboxColorType
+  genre: CheckboxGenre
 
   children?: React.ReactNode
 
-  genre?: CheckboxGenreType
+  view: CheckboxGenreView
+
+  genreType: CheckboxGenreType
+
+  isDisabled?: boolean
+
+  isOnlyLoading?: boolean
+
+  isLoading?: boolean
+
+  isHiddenBorder?: boolean
 
   onChange?: (checked: boolean) => void
 
   width?: string
 
-  size?: CheckboxSizeType
+  size?: TJeneseiThemeSize
 }
 
 export interface StyledCheckboxProps {
   $checked?: CheckboxProps['checked']
 
-  $color?: CheckboxProps['color']
+  $genre: CheckboxProps['genre']
+
+  $view?: CheckboxProps['view']
+
+  $genreType: CheckboxProps['genreType']
 
   $width?: CheckboxProps['width']
 
   $size?: CheckboxProps['size']
+
+  $isDisabled?: CheckboxProps['isDisabled']
+
+  $isHiddenBorder?: CheckboxProps['isHiddenBorder']
 }
 
-export type CheckboxSizeType = 'large' | 'medium'
+export type CheckboxGenreView = 'square' | 'circle'
 
-export type CheckboxGenreType = 'square' | 'circle'
+export type CheckboxGenre = keyof TJeneseiThemeGenre
 
-export type CheckboxColorType = keyof IJeneseiTheme['colors']['checkbox']
+export type CheckboxGenreType = keyof TJeneseiThemeGenreType

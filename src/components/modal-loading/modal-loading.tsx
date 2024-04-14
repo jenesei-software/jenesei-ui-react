@@ -13,14 +13,14 @@ export const ModalLoading: FC<ModalLoadingProps> = (props) => {
           ? '22px'
           : props.size === 'large'
             ? '28px'
-            : 'auto'
+            : '14px'
       }
       width={
         props.size === 'medium'
           ? '22px'
           : props.size === 'large'
             ? '28px'
-            : 'auto'
+            : '14px'
       }
     />
   )

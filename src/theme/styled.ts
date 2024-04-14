@@ -1,93 +1,47 @@
 export type TJeneseiTheme = 'cloud'
 
+export interface TJeneseiThemeGenreTypeState {
+  background: {
+    rest: string
+    hover: string
+    focus: string
+    active: string
+  }
+  border: {
+    rest: string
+    hover: string
+    focus: string
+    active: string
+  }
+  color: {
+    rest: string
+    hover: string
+    focus: string
+    active: string
+  }
+}
+
+export interface TJeneseiThemeGenreType {
+  primary: TJeneseiThemeGenreTypeState
+  secondary: TJeneseiThemeGenreTypeState
+}
+
+export interface TJeneseiThemeGenre {
+  product: TJeneseiThemeGenreType
+}
+
+export interface IJeneseiThemeColorVariant {
+  100: string
+  10: string
+}
+
+export type TJeneseiThemeSize = 'large' | 'medium' | 'small'
+
 export interface IJeneseiTheme {
   colors: {
-    black: {
-      100: string
-      80: string
-      60: string
-      50: string
-      40: string
-      10: string
-      5: string
-    }
-    blue: {
-      100: string
-    }
-    green: {
-      100: string
-      10: string
-    }
-    red: {
-      100: string
-      10: string
-    }
-    white: {
-      100: string
-      80: string
-      60: string
-      50: string
-      40: string
-      10: string
-      5: string
-    }
-    product: {
-      100: string
-      20: string
-    }
-    success: {
-      100: string
-      10: string
-    }
-    danger: {
-      100: string
-      10: string
-    }
-    button: {
-      success: string
-      danger: string
-      product: string
-    }
-    input: {
-      gray: string
-      product: string
-    }
-    checkbox: {
-      gray: string
-      product: string
-    }
-    visible: {
-      button: {
-        primary: string
-        secondary: string
-      }
-    }
-    gray: {
-      '8a8a8a': string
-      e3e3e6: string
-      f2f2f7: string
-      e5e5ea: string
-      c7c7cc: string
-      d1d1d6: string
-      484848: string
-      737373: string
-      d3d3d3: string
-      fafafa: string
-    }
-  }
-  sizes: {
-    header: { width: string }
-    container: { width: string }
-    footer: { width: string }
-    modal: { width: string }
-    menu: { width: string }
-  }
-
-  screens: {
-    mobile: { width: string }
-    tablet: { width: string }
-    menu: { width: string }
-    modal: { width: string }
-    desktop: { width: string }
+    focus: string
+    white: string
+    button: TJeneseiThemeGenre
+    checkbox: TJeneseiThemeGenre
   }
 }

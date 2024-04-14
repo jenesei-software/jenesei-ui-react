@@ -5,47 +5,54 @@ import { useTheme } from 'styled-components'
 import { ButtonProps, StyledButton } from '.'
 import { LibraryIcon, ModalLoading } from '../../main'
 
-export const Button: FC<ButtonProps> = memo(
-  (props = { color: 'product', size: 'large' }) => {
-    const theme = useTheme()
-    const IconComponent = props.icon && LibraryIcon[props.icon]
-    return (
-      <StyledButton
-        tabIndex={0}
-        $isHidden={props.isHidden}
-        $genre={props.genre}
-        $width={props.width}
-        $color={props.color ? theme.colors.button[props.color] : '#fff'}
-        $size={props.size}
-        type={props.type}
-        disabled={props.isDisabled}
-        className={props.className}
-        onClick={() =>
-          !props.isLoading &&
-          !props.isDisabled &&
-          props.onClick &&
-          props.onClick()
-        }
-      >
-        {!props.isDisabled && !props.isLoading && <Ripple />}
-        {props.isLoading ? (
+export const Button: FC<ButtonProps> = memo((props) => {
+  const theme = useTheme()
+  const IconComponent = props.icon && LibraryIcon[props.icon]
+  return (
+    <StyledButton
+      tabIndex={0}
+      $genre={props.genre}
+      $genreType={props.genreType}
+      $width={props.width}
+      $size={props.size}
+      $isDisabled={props.isDisabled}
+      disabled={props.isDisabled}
+      type={props.type}
+      className={props.className}
+      onClick={() =>
+        !props.isLoading &&
+        !props.isDisabled &&
+        props.onClick &&
+        props.onClick()
+      }
+    >
+      {!props.isDisabled && !props.isLoading && <Ripple />}
+      {props.isOnlyLoading ? (
+        props.isLoading ? (
           <ModalLoading
             size={props.size}
-            color={
-              props.genre === 'secondary'
-                ? props.color
-                  ? theme.colors.button[props.color]
-                  : '#fff'
-                : '#fff'
-            }
+            color={theme.colors.button[props.genre][props.genreType].color.rest}
           />
         ) : (
           <>
             {props.children && props.children}
             {IconComponent && <IconComponent />}
           </>
-        )}
-      </StyledButton>
-    )
-  },
-)
+        )
+      ) : (
+        <>
+          {props.children && props.children}
+          {IconComponent && <IconComponent />}
+          {props.isLoading && (
+            <ModalLoading
+              size={props.size}
+              color={
+                theme.colors.button[props.genre][props.genreType].color.rest
+              }
+            />
+          )}
+        </>
+      )}
+    </StyledButton>
+  )
+})

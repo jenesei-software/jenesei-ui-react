@@ -4,4 +4,4 @@ export interface ModalLoadingProps {
   className?: string
 }
 
-export type ModalLoadingSizeType = 'large' | 'medium' | 'auto'
+export type ModalLoadingSizeType = 'large' | 'medium' | 'small'

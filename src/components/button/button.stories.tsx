@@ -9,75 +9,63 @@ const meta: Meta<typeof Button> = {
 }
 
 export default meta
+
 type Story = StoryObj<typeof Button>
 
-export const ProductLabel: Story = {
+export const ProductPrimary: Story = {
   args: {
     children: 'Click',
-    width: '200px',
-    isHidden: false,
-    isLoading: false,
-    isDisabled: false,
-    type: 'button',
-    color: 'product',
-    genre: 'primary',
-    size: 'large',
-  },
-}
-
-export const ProductLabelWithIcon: Story = {
-  args: {
-    children: 'Click',
-    width: '200px',
-    isHidden: false,
-    isLoading: false,
-    isDisabled: false,
-    type: 'button',
-    color: 'product',
-    genre: 'primary',
-    size: 'large',
-    icon: 'Copy',
-  },
-}
-
-export const ProductIcon: Story = {
-  args: {
     width: 'auto',
-    isHidden: false,
+    type: 'button',
+    genreType: 'primary',
+    genre: 'product',
+    size: 'large',
     isLoading: false,
     isDisabled: false,
+    isOnlyLoading: false,
+  },
+}
+
+export const ProductPrimaryIcon: Story = {
+  args: {
+    children: 'Click',
+    width: 'auto',
     type: 'button',
-    color: 'product',
-    genre: 'primary',
+    genreType: 'primary',
+    genre: 'product',
     size: 'large',
     icon: 'Copy',
+    isLoading: false,
+    isDisabled: false,
+    isOnlyLoading: false,
   },
 }
 
-export const SuccessLabel: Story = {
+export const ProductSecondary: Story = {
   args: {
     children: 'Click',
-    width: '200px',
-    isHidden: false,
+    width: 'auto',
+    type: 'button',
+    genreType: 'secondary',
+    genre: 'product',
+    size: 'large',
     isLoading: false,
     isDisabled: false,
-    type: 'button',
-    color: 'success',
-    genre: 'primary',
-    size: 'large',
+    isOnlyLoading: false,
   },
 }
 
-export const DangerLabel: Story = {
+export const ProductSecondaryIcon: Story = {
   args: {
     children: 'Click',
-    width: '200px',
-    isHidden: false,
+    width: 'auto',
+    type: 'button',
+    genreType: 'secondary',
+    genre: 'product',
+    size: 'large',
+    icon: 'Copy',
     isLoading: false,
     isDisabled: false,
-    type: 'button',
-    color: 'danger',
-    genre: 'primary',
-    size: 'large',
+    isOnlyLoading: false,
   },
 }
