@@ -20,7 +20,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "storybookbuild": "storybook build",
     "format": "prettier --write 'src/*/*.{ts,tsx}'"
   },
   "dependencies": {
