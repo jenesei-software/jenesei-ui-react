@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 
 import {
+  CheckboxChildren,
   CheckboxesItem,
   CheckboxesLabel,
   CheckboxesProps,
@@ -33,7 +34,11 @@ export const Checkboxes = <T extends Record<string, unknown>>(
     [props],
   )
   return (
-    <CheckboxesWrapper className={props.className} $width={props.width}>
+    <CheckboxesWrapper
+      className={props.className}
+      $width={props.width}
+      $size={props.size}
+    >
       {props.options.map((e, index) => {
         const isChecked = props.value.some(
           (selectedItem) =>
@@ -49,7 +54,7 @@ export const Checkboxes = <T extends Record<string, unknown>>(
               genreType={props.checkboxGenreType}
               isHiddenBorder={props.checkboxIsHiddenBorder}
               view={props.checkBoxView}
-              size={props.checkboxSize}
+              size={props.size}
               width={props.checkboxWidth}
               checked={isChecked}
               children={
@@ -64,7 +69,9 @@ export const Checkboxes = <T extends Record<string, unknown>>(
               }
             />
             {props.childrenField && e?.[props.childrenField] !== undefined && (
-              <>{e[props.childrenField]}</>
+              <CheckboxChildren>
+                {e[props.childrenField] as React.ReactNode}
+              </CheckboxChildren>
             )}
           </CheckboxesItem>
         )

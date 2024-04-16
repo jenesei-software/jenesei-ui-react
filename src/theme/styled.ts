@@ -28,6 +28,7 @@ export interface TJeneseiThemeGenreType {
 
 export interface TJeneseiThemeGenre {
   product: TJeneseiThemeGenreType
+  gray: TJeneseiThemeGenreType
 }
 
 export interface IJeneseiThemeColorVariant {

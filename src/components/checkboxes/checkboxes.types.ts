@@ -1,4 +1,4 @@
-import { CheckboxProps } from '../../main'
+import { CheckboxProps, TJeneseiThemeSize } from '../../main'
 
 export interface CheckboxesProps<T extends Record<string, unknown>> {
   checkboxGenre: CheckboxProps['genre']
@@ -7,17 +7,19 @@ export interface CheckboxesProps<T extends Record<string, unknown>> {
 
   checkBoxView: CheckboxProps['view']
 
-  checkboxSize: CheckboxProps['size']
-
   checkboxWidth?: CheckboxProps['width']
 
   checkboxIsHiddenBorder?: CheckboxProps['isHiddenBorder']
+
+  checkboxIsActive?: CheckboxProps['isActive']
 
   className?: string
 
   childrenField?: keyof T
 
   isClickOnlyIcon?: boolean
+
+  size: CheckboxProps['size']
 
   labelField?: keyof T
 
@@ -36,4 +38,6 @@ export interface CheckboxesProps<T extends Record<string, unknown>> {
 
 export interface CheckboxesWrapperProps {
   $width?: string
+
+  $size?: TJeneseiThemeSize
 }

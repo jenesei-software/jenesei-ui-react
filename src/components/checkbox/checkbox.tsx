@@ -26,18 +26,24 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
         <>
           {props.view == 'square' ? (
             <StyledCheckedIconSquare
+              $size={props.size}
               $genre={props.genre}
               $genreType={props.genreType}
+              $isActive={props.isActive}
             />
           ) : props.view == 'circle' ? (
             <StyledCheckedIconCircle
+              $size={props.size}
               $genre={props.genre}
               $genreType={props.genreType}
+              $isActive={props.isActive}
             />
           ) : (
             <StyledCheckedIconCircle
+              $size={props.size}
               $genre={props.genre}
               $genreType={props.genreType}
+              $isActive={props.isActive}
             />
           )}
         </>
@@ -45,18 +51,24 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
         <>
           {props.view == 'square' ? (
             <StyledIconSquare
+              $size={props.size}
               $genre={props.genre}
               $genreType={props.genreType}
+              $isActive={props.isActive}
             />
           ) : props.view == 'circle' ? (
             <StyledIconCircle
+              $size={props.size}
               $genre={props.genre}
               $genreType={props.genreType}
+              $isActive={props.isActive}
             />
           ) : (
             <StyledIconCircle
+              $size={props.size}
               $genre={props.genre}
               $genreType={props.genreType}
+              $isActive={props.isActive}
             />
           )}
         </>
@@ -74,6 +86,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
       $size={props.size}
       $isDisabled={props.isDisabled}
       $isHiddenBorder={props.isHiddenBorder}
+      $isActive={props.isActive}
       disabled={props.isDisabled}
       tabIndex={0}
       onClick={() => !props.isDisabled && handleOnClick(!props.checked)}
@@ -83,7 +96,9 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
         props.isLoading ? (
           <ModalLoading
             size={props.size}
-            color={theme.colors.button[props.genre][props.genreType].color.rest}
+            color={
+              theme.colors.checkbox[props.genre][props.genreType].color.rest
+            }
           />
         ) : (
           children
@@ -95,7 +110,11 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
             <ModalLoading
               size={props.size}
               color={
-                theme.colors.button[props.genre][props.genreType].color.rest
+                props.isActive
+                  ? theme.colors.checkbox[props.genre][props.genreType].color
+                      .active
+                  : theme.colors.checkbox[props.genre][props.genreType].color
+                      .rest
               }
             />
           )}
