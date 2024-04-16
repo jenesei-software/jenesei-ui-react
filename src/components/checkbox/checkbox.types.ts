@@ -23,11 +23,13 @@ export interface CheckboxProps {
 
   isHiddenBorder?: boolean
 
+  isActive?: boolean
+
   onChange?: (checked: boolean) => void
 
   width?: string
 
-  size?: TJeneseiThemeSize
+  size: TJeneseiThemeSize
 }
 
 export interface StyledCheckboxProps {
@@ -41,9 +43,11 @@ export interface StyledCheckboxProps {
 
   $width?: CheckboxProps['width']
 
-  $size?: CheckboxProps['size']
+  $size: CheckboxProps['size']
 
   $isDisabled?: CheckboxProps['isDisabled']
+
+  $isActive?: CheckboxProps['isActive']
 
   $isHiddenBorder?: CheckboxProps['isHiddenBorder']
 }

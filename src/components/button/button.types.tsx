@@ -14,7 +14,7 @@ export interface ButtonProps {
 
   children?: React.ReactNode
 
-  size?: TJeneseiThemeSize
+  size: TJeneseiThemeSize
 
   icon?: TLibraryIconNameString
 
@@ -23,6 +23,8 @@ export interface ButtonProps {
   isOnlyLoading?: boolean
 
   isLoading?: boolean
+
+  isActive?: boolean
 
   onClick?: () => void
 
@@ -42,7 +44,9 @@ export interface StyledButtonProps {
 
   $isDisabled?: ButtonProps['isDisabled']
 
+  $isActive?: ButtonProps['isActive']
+
   $width?: ButtonProps['width']
 
-  $size?: ButtonProps['size']
+  $size: ButtonProps['size']
 }

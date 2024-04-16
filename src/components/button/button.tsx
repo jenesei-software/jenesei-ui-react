@@ -16,6 +16,7 @@ export const Button: FC<ButtonProps> = memo((props) => {
       $width={props.width}
       $size={props.size}
       $isDisabled={props.isDisabled}
+      $isActive={props.isActive}
       disabled={props.isDisabled}
       type={props.type}
       className={props.className}
@@ -47,7 +48,10 @@ export const Button: FC<ButtonProps> = memo((props) => {
             <ModalLoading
               size={props.size}
               color={
-                theme.colors.button[props.genre][props.genreType].color.rest
+                props.isActive
+                  ? theme.colors.button[props.genre][props.genreType].color
+                      .active
+                  : theme.colors.button[props.genre][props.genreType].color.rest
               }
             />
           )}

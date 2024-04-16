@@ -55,7 +55,8 @@ const ButtonGenre = css<StyledButtonProps>`
           .color.hover};
       }
     }
-    &:active {
+    ${props.$isActive &&
+    css`
       background: ${props.theme.colors.button[props.$genre][props.$genreType]
         .background.active};
       border-color: ${props.theme.colors.button[props.$genre][props.$genreType]
@@ -70,7 +71,7 @@ const ButtonGenre = css<StyledButtonProps>`
         stroke: ${props.theme.colors.button[props.$genre][props.$genreType]
           .color.active};
       }
-    }
+    `}
   `};
 `
 
@@ -136,6 +137,7 @@ const ButtonSizeSmall = css<StyledButtonProps>`
   }
   padding: 0px 8px;
 `
+
 /****************************************** Styled *************************************************/
 export const StyledButton = styled.button<StyledButtonProps>`
   outline: 1px solid transparent;
