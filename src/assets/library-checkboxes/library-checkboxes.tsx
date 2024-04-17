@@ -1,9 +1,10 @@
-import { LibraryCheckboxesProps } from '.'
+import { LibraryCheckboxesProps, StyledSVG } from '.'
 
 export const LibraryCheckboxes: LibraryCheckboxesProps = {
   Radio: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -21,12 +22,13 @@ export const LibraryCheckboxes: LibraryCheckboxesProps = {
           fill="#5555E4"
           id="uncheck"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   Square: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         width="24"
         height="24"
         viewBox="0 0 24 24"
@@ -48,7 +50,7 @@ export const LibraryCheckboxes: LibraryCheckboxesProps = {
           id="center-white"
           d="M10 16.4L6 12.4L7.4 11L10 13.6L16.6 7L18 8.4L10 16.4Z"
         />
-      </svg>
+      </StyledSVG>
     )
   },
 }

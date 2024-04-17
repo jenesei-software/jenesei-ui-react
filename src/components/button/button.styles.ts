@@ -107,10 +107,6 @@ const ButtonSizeLarge = css<StyledButtonProps>`
   border-radius: 16px;
   gap: 8px;
   ${fontInterWithSizeAndWeight(16, 600)};
-  & svg {
-    height: 20px;
-    width: 20px;
-  }
   padding: 0px 14px;
 `
 
@@ -119,10 +115,6 @@ const ButtonSizeMedium = css<StyledButtonProps>`
   border-radius: 12px;
   gap: 6px;
   ${fontInterWithSizeAndWeight(14, 600)};
-  & svg {
-    height: 14px;
-    width: 14px;
-  }
   padding: 0px 10px;
 `
 
@@ -131,10 +123,6 @@ const ButtonSizeSmall = css<StyledButtonProps>`
   border-radius: 8px;
   gap: 4px;
   ${fontInterWithSizeAndWeight(12, 600)};
-  & svg {
-    height: 10px;
-    width: 10px;
-  }
   padding: 0px 8px;
 `
 

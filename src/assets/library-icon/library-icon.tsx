@@ -1,12 +1,11 @@
-import { LibraryIconProps } from '.'
+import { LibraryIconProps, StyledSVG } from '.'
 
 export const LibraryIcon: LibraryIconProps = {
   ChevronLeft: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
         viewBox="0 0 16 16"
         fill="none"
         className={props.className}
@@ -18,16 +17,15 @@ export const LibraryIcon: LibraryIconProps = {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   AlertCircle: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
         xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
         viewBox="0 0 24 24"
         fill="none"
       >
@@ -52,16 +50,15 @@ export const LibraryIcon: LibraryIconProps = {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   Trash: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
         xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
         viewBox="0 0 24 24"
         fill="none"
       >
@@ -93,12 +90,13 @@ export const LibraryIcon: LibraryIconProps = {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   Menu: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
         width="22"
         height="22"
@@ -127,16 +125,15 @@ export const LibraryIcon: LibraryIconProps = {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   MinPlus: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
         xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
         viewBox="0 0 16 16"
         fill="none"
       >
@@ -154,12 +151,13 @@ export const LibraryIcon: LibraryIconProps = {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   Plus: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
         xmlns="http://www.w3.org/2000/svg"
         width="25"
@@ -181,15 +179,14 @@ export const LibraryIcon: LibraryIconProps = {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   Copy: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
         viewBox="0 0 24 24"
         fill="none"
         className={props.className}
@@ -208,12 +205,13 @@ export const LibraryIcon: LibraryIconProps = {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   FileText: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
         xmlns="http://www.w3.org/2000/svg"
         width="25"
@@ -256,16 +254,15 @@ export const LibraryIcon: LibraryIconProps = {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   HelpCircle: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
         xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
         viewBox="0 0 16 16"
         fill="none"
       >
@@ -297,16 +294,15 @@ export const LibraryIcon: LibraryIconProps = {
             <rect width="16" height="16" fill="white" />
           </clipPath>
         </defs>
-      </svg>
+      </StyledSVG>
     )
   },
   ArrowLeft: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
         xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
         viewBox="0 0 16 16"
         fill="none"
       >
@@ -314,12 +310,13 @@ export const LibraryIcon: LibraryIconProps = {
           d="M16 7H3.83L9.42 1.41L8 0L0 8L8 16L9.41 14.59L3.83 9H16V7Z"
           fill="#5555E4"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   Person: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
         width="32"
         height="32"
@@ -342,15 +339,14 @@ export const LibraryIcon: LibraryIconProps = {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   Support: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
-        width="16"
-        height="16"
         viewBox="0 0 16 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -362,16 +358,15 @@ export const LibraryIcon: LibraryIconProps = {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   GridCross: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
         xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
         viewBox="0 0 16 16"
         fill="none"
       >
@@ -389,15 +384,14 @@ export const LibraryIcon: LibraryIconProps = {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   Download: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
         viewBox="0 0 24 24"
         fill="none"
         className={props.className}
@@ -423,15 +417,14 @@ export const LibraryIcon: LibraryIconProps = {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   Delete: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
         viewBox="0 0 16 16"
         fill="none"
         className={props.className}
@@ -450,17 +443,16 @@ export const LibraryIcon: LibraryIconProps = {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   Edit: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         onClick={props.onClick}
         className={props.className}
         xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
         viewBox="0 0 24 24"
         fill="none"
       >
@@ -478,15 +470,14 @@ export const LibraryIcon: LibraryIconProps = {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   Globe: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
-        width="16"
-        height="16"
         viewBox="0 0 16 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -519,15 +510,14 @@ export const LibraryIcon: LibraryIconProps = {
             <rect width="16" height="16" fill="white" />
           </clipPath>
         </defs>
-      </svg>
+      </StyledSVG>
     )
   },
   Phone: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
-        width="16"
-        height="16"
         viewBox="0 0 16 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -546,15 +536,14 @@ export const LibraryIcon: LibraryIconProps = {
             <rect width="16" height="16" fill="white" />
           </clipPath>
         </defs>
-      </svg>
+      </StyledSVG>
     )
   },
   WiFi: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
-        width="16"
-        height="16"
         viewBox="0 0 16 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -587,15 +576,14 @@ export const LibraryIcon: LibraryIconProps = {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-      </svg>
+      </StyledSVG>
     )
   },
   Coffee: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
-        width="16"
-        height="16"
         viewBox="0 0 16 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -642,15 +630,14 @@ export const LibraryIcon: LibraryIconProps = {
             <rect width="16" height="16" fill="white" />
           </clipPath>
         </defs>
-      </svg>
+      </StyledSVG>
     )
   },
   CreditCard: function (props) {
     return (
-      <svg
+      <StyledSVG
+        $size={props.size}
         className={props.className}
-        width="16"
-        height="16"
         viewBox="0 0 16 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -676,7 +663,7 @@ export const LibraryIcon: LibraryIconProps = {
             <rect width="16" height="16" fill="white" />
           </clipPath>
         </defs>
-      </svg>
+      </StyledSVG>
     )
   },
 }

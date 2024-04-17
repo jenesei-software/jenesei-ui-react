@@ -9,30 +9,18 @@ const CheckboxSizeLarge = css<StyledCheckboxProps>`
   border-radius: 22px;
   max-height: 42px;
   ${fontInterWithSizeAndWeight(16, 600)};
-  & svg {
-    height: 20px;
-    width: 20px;
-  }
 `
 const CheckboxSizeMedium = css<StyledCheckboxProps>`
   padding: 6px;
   border-radius: 18px;
   max-height: 31px;
   ${fontInterWithSizeAndWeight(14, 600)};
-  & svg {
-    height: 16px;
-    width: 16px;
-  }
 `
 const CheckboxSizeSmall = css<StyledCheckboxProps>`
   padding: 6px;
   border-radius: 16px;
   max-height: 29px;
   ${fontInterWithSizeAndWeight(12, 600)};
-  & svg {
-    height: 14px;
-    width: 14px;
-  }
 `
 /****************************************** Genre *************************************************/
 export const CheckboxGenre = css<StyledCheckboxProps>`

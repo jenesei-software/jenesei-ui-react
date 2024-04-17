@@ -26,6 +26,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
         <>
           {props.view == 'square' ? (
             <StyledCheckedIconSquare
+              size={props.size}
               $size={props.size}
               $genre={props.genre}
               $genreType={props.genreType}
@@ -33,6 +34,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
             />
           ) : props.view == 'circle' ? (
             <StyledCheckedIconCircle
+              size={props.size}
               $size={props.size}
               $genre={props.genre}
               $genreType={props.genreType}
@@ -40,6 +42,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
             />
           ) : (
             <StyledCheckedIconCircle
+              size={props.size}
               $size={props.size}
               $genre={props.genre}
               $genreType={props.genreType}
@@ -51,6 +54,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
         <>
           {props.view == 'square' ? (
             <StyledIconSquare
+              size={props.size}
               $size={props.size}
               $genre={props.genre}
               $genreType={props.genreType}
@@ -58,6 +62,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
             />
           ) : props.view == 'circle' ? (
             <StyledIconCircle
+              size={props.size}
               $size={props.size}
               $genre={props.genre}
               $genreType={props.genreType}
@@ -65,6 +70,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
             />
           ) : (
             <StyledIconCircle
+              size={props.size}
               $size={props.size}
               $genre={props.genre}
               $genreType={props.genreType}

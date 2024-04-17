@@ -37,13 +37,13 @@ export const Button: FC<ButtonProps> = memo((props) => {
         ) : (
           <>
             {props.children && props.children}
-            {IconComponent && <IconComponent />}
+            {IconComponent && <IconComponent size={props.size} />}
           </>
         )
       ) : (
         <>
           {props.children && props.children}
-          {IconComponent && <IconComponent />}
+          {IconComponent && <IconComponent size={props.size} />}
           {props.isLoading && (
             <ModalLoading
               size={props.size}
