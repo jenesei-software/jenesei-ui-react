@@ -14,9 +14,9 @@ export interface InputDefaultProps {
 
   errorMessage?: string
 
-  genreType: TButtonGenreType
+  genreType: TInputDefaultGenreType
 
-  genre: TButtonGenre
+  genre: TInputDefaultGenre
 
   size: TJeneseiThemeSize
 
@@ -63,9 +63,9 @@ export interface InputDefaultChildrenProps {
   width: string
 }
 
-export type TButtonGenre = keyof TJeneseiThemeGenre
+export type TInputDefaultGenre = keyof TJeneseiThemeGenre
 
-export type TButtonGenreType = keyof TJeneseiThemeGenreType
+export type TInputDefaultGenreType = keyof TJeneseiThemeGenreType
 
 export interface StyledInputDefaultProps {
   $genre: InputDefaultProps['genre']

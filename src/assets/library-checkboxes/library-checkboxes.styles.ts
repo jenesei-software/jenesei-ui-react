@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { StyledLibraryCheckboxesItemProps } from '.'
 
-export const StyledSVG = styled.svg<StyledLibraryCheckboxesItemProps>`
+export const StyledCheckboxSVG = styled.svg<StyledLibraryCheckboxesItemProps>`
   ${(props) =>
     props.$size === 'large'
       ? css`
