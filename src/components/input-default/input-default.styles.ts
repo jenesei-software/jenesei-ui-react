@@ -47,16 +47,19 @@ export const InputDefaultIsErrorBorder = css<StyledInputDefaultProps>`
 `
 
 /****************************************** Placeholder *************************************************/
-const InputDefaultPlaceholder = css<StyledInputDefaultProps>`
-  &::placeholder,
-  &::-ms-input-placeholder {
-    ${fontInterWithSizeAndWeight(16, 400)};
-    color: ${(props) =>
-      props.theme.colors.input[props.$genre][props.$genreType].color
-        .placeholder};
-    opacity: 1;
-    line-height: 24px;
-  }
+export const InputDefaultPlaceholder = css<StyledInputDefaultProps>`
+  ${fontInterWithSizeAndWeight(16, 400)};
+  color: ${(props) =>
+    props.theme.colors.input[props.$genre][props.$genreType].color.placeholder};
+  opacity: 1;
+  line-height: 24px;
+`
+
+export const InputPhonePlaceholder = css`
+  ${fontInterWithSizeAndWeight(16, 500)};
+  color: ${(props) => props.theme.colors.other['cccccc']};
+  opacity: 1;
+  line-height: 24px;
 `
 
 /****************************************** Genre *************************************************/
@@ -169,11 +172,15 @@ export const StyledInputDefaultCSS = css<StyledInputDefaultProps>`
     `};
 
   ${InputDefaultIsErrorBorder};
+
+  &::placeholder,
+  &::-ms-input-placeholder {
+    ${InputDefaultPlaceholder};
+  }
 `
 
 export const StyledInputDefault = styled.input<StyledInputDefaultProps>`
   ${StyledInputDefaultCSS};
-  ${InputDefaultPlaceholder};
 `
 
 /****************************************** Children *************************************************/

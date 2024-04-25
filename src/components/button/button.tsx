@@ -15,7 +15,7 @@ export const Button: FC<ButtonProps> = memo((props) => {
       $genreType={props.genreType}
       $width={props.width}
       $size={props.size}
-      $isDisabled={props.isDisabled}
+      $isDisabled={props.isDisabled || props.isHidden}
       $isActive={props.isActive}
       disabled={props.isDisabled}
       type={props.type}

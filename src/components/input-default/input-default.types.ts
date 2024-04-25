@@ -50,7 +50,7 @@ export interface InputDefaultProps {
 
   type?: HTMLInputTypeAttribute
 
-  value?: string
+  value?: string | null
 }
 
 export interface InputDefaultChildrenProps {

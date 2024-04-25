@@ -1,19 +1,26 @@
-import { memo } from 'react'
+import { useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
 
+import { InputPhoneProps, StyledInputPhone } from '.'
 import {
   InputDefaultErrorMessage,
   InputDefaultPostfixChildren,
   InputDefaultPrefixChildren,
-  InputDefaultProps,
   InputDefaultStyledModalLoading,
-  StyledInputDefault,
   StyledInputDefaultWrapper,
-} from '.'
+} from '../input-default'
 
-export const InputDefault = memo((props: InputDefaultProps) => {
+export const InputPhone = (props: InputPhoneProps) => {
   const theme = useTheme()
 
+  const [format, setFormat] = useState<string>('+7 (900) 000-00-00')
+  useEffect(() => {
+    if (props.value) {
+      setFormat('+7 (9##) ###-##-##')
+    } else {
+      setFormat('+7 (900) 000-00-00')
+    }
+  }, [props.value])
   return (
     <StyledInputDefaultWrapper
       className={props.className}
@@ -23,8 +30,7 @@ export const InputDefault = memo((props: InputDefaultProps) => {
       {props.prefixChildren && (
         <InputDefaultPrefixChildren {...props.prefixChildren} />
       )}
-      <StyledInputDefault
-        {...props.register}
+      <StyledInputPhone
         $isFocus={props.isFocus}
         $isError={props.isError}
         $isLoading={props.isLoading}
@@ -37,15 +43,24 @@ export const InputDefault = memo((props: InputDefaultProps) => {
         readOnly={props.isReadOnly}
         required={props.isRequired}
         defaultValue={props.defaultValue}
-        value={props.value ?? ''}
-        placeholder={props.placeholder}
-        type={props.type}
-        onChange={(event) =>
-          props.onChange && props.onChange(event.target.value)
-        }
-        onBlur={props.onBlur}
-        onFocus={props.onFocus}
-      ></StyledInputDefault>
+        value={props.value}
+        $isPhoneFocus={format === '+7 (9##) ###-##-##'}
+        onValueChange={({ value }) => props.onChange && props.onChange(value)}
+        placeholder="+7 (900) 000-00-00"
+        format={format}
+        mask="_"
+        displayType="input"
+        allowEmptyFormatting
+        inputMode="tel"
+        onFocus={() => {
+          setFormat('+7 (9##) ###-##-##')
+        }}
+        onBlur={() => {
+          if (!props.value) {
+            setFormat('+7 (900) 000-00-00')
+          }
+        }}
+      />
       {props.isError && props.errorMessage && (
         <InputDefaultErrorMessage>
           {props.errorMessage}
@@ -62,4 +77,4 @@ export const InputDefault = memo((props: InputDefaultProps) => {
       )}
     </StyledInputDefaultWrapper>
   )
-})
+}

@@ -20,6 +20,8 @@ export interface ButtonProps {
 
   isDisabled?: boolean
 
+  isHidden?: boolean
+
   isOnlyLoading?: boolean
 
   isLoading?: boolean

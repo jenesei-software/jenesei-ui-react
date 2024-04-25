@@ -1,17 +1,15 @@
-import { memo } from 'react'
 import { useTheme } from 'styled-components'
 
+import { InputINNProps, StyledInputINN } from '.'
 import {
   InputDefaultErrorMessage,
   InputDefaultPostfixChildren,
   InputDefaultPrefixChildren,
-  InputDefaultProps,
   InputDefaultStyledModalLoading,
-  StyledInputDefault,
   StyledInputDefaultWrapper,
-} from '.'
+} from '../input-default'
 
-export const InputDefault = memo((props: InputDefaultProps) => {
+export const InputINN = (props: InputINNProps) => {
   const theme = useTheme()
 
   return (
@@ -23,8 +21,7 @@ export const InputDefault = memo((props: InputDefaultProps) => {
       {props.prefixChildren && (
         <InputDefaultPrefixChildren {...props.prefixChildren} />
       )}
-      <StyledInputDefault
-        {...props.register}
+      <StyledInputINN
         $isFocus={props.isFocus}
         $isError={props.isError}
         $isLoading={props.isLoading}
@@ -37,15 +34,14 @@ export const InputDefault = memo((props: InputDefaultProps) => {
         readOnly={props.isReadOnly}
         required={props.isRequired}
         defaultValue={props.defaultValue}
-        value={props.value ?? ''}
-        placeholder={props.placeholder}
-        type={props.type}
-        onChange={(event) =>
-          props.onChange && props.onChange(event.target.value)
-        }
+        value={props.value}
         onBlur={props.onBlur}
         onFocus={props.onFocus}
-      ></StyledInputDefault>
+        onValueChange={({ value }) => props.onChange && props.onChange(value)}
+        format="### ### ### ###"
+        placeholder="000 000 000 000"
+        mask=""
+      />
       {props.isError && props.errorMessage && (
         <InputDefaultErrorMessage>
           {props.errorMessage}
@@ -62,4 +58,4 @@ export const InputDefault = memo((props: InputDefaultProps) => {
       )}
     </StyledInputDefaultWrapper>
   )
-})
+}

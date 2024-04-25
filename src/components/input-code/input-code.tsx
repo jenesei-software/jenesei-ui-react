@@ -1,19 +1,25 @@
-import { memo } from 'react'
 import { useTheme } from 'styled-components'
 
+import { InputCodeProps, StyledInputCode } from '.'
 import {
   InputDefaultErrorMessage,
   InputDefaultPostfixChildren,
   InputDefaultPrefixChildren,
-  InputDefaultProps,
   InputDefaultStyledModalLoading,
-  StyledInputDefault,
   StyledInputDefaultWrapper,
-} from '.'
+} from '../input-default'
 
-export const InputDefault = memo((props: InputDefaultProps) => {
+export const InputCode = (props: InputCodeProps) => {
   const theme = useTheme()
 
+  function createPattern(length: number, value: string) {
+    const realLength = length * 2 - 1
+    const patternArray: (string | number)[] = Array.from(
+      { length: realLength },
+      (_, index) => (index % 2 === 0 ? value : ' '),
+    )
+    return patternArray.join('')
+  }
   return (
     <StyledInputDefaultWrapper
       className={props.className}
@@ -23,8 +29,7 @@ export const InputDefault = memo((props: InputDefaultProps) => {
       {props.prefixChildren && (
         <InputDefaultPrefixChildren {...props.prefixChildren} />
       )}
-      <StyledInputDefault
-        {...props.register}
+      <StyledInputCode
         $isFocus={props.isFocus}
         $isError={props.isError}
         $isLoading={props.isLoading}
@@ -37,15 +42,14 @@ export const InputDefault = memo((props: InputDefaultProps) => {
         readOnly={props.isReadOnly}
         required={props.isRequired}
         defaultValue={props.defaultValue}
-        value={props.value ?? ''}
-        placeholder={props.placeholder}
-        type={props.type}
-        onChange={(event) =>
-          props.onChange && props.onChange(event.target.value)
-        }
+        value={props.value}
         onBlur={props.onBlur}
         onFocus={props.onFocus}
-      ></StyledInputDefault>
+        onValueChange={({ value }) => props.onChange && props.onChange(value)}
+        format={createPattern(props.length, '#')}
+        placeholder={createPattern(props.length, '_')}
+        mask="_"
+      />
       {props.isError && props.errorMessage && (
         <InputDefaultErrorMessage>
           {props.errorMessage}
@@ -62,4 +66,4 @@ export const InputDefault = memo((props: InputDefaultProps) => {
       )}
     </StyledInputDefaultWrapper>
   )
-})
+}
