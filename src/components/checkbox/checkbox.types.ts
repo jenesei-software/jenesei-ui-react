@@ -1,4 +1,5 @@
 import {
+  TJeneseiFontFamily,
   TJeneseiThemeGenre,
   TJeneseiThemeGenreType,
   TJeneseiThemeSize,
@@ -30,6 +31,12 @@ export interface CheckboxProps {
   width?: string
 
   size: TJeneseiThemeSize
+
+  customFontFamily?: TJeneseiFontFamily
+
+  customFontSize?: number
+
+  customFontWeight?: number
 }
 
 export interface StyledCheckboxProps {
@@ -50,6 +57,12 @@ export interface StyledCheckboxProps {
   $isActive?: CheckboxProps['isActive']
 
   $isHiddenBorder?: CheckboxProps['isHiddenBorder']
+
+  $customFontFamily?: CheckboxProps['customFontFamily']
+
+  $customFontSize?: CheckboxProps['customFontSize']
+
+  $customFontWeight?: CheckboxProps['customFontWeight']
 }
 
 export type TCheckboxGenreView = 'square' | 'circle'

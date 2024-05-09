@@ -93,6 +93,9 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
       $isDisabled={props.isDisabled}
       $isHiddenBorder={props.isHiddenBorder}
       $isActive={props.isActive}
+      $customFontFamily={props.customFontFamily}
+      $customFontSize={props.customFontSize}
+      $customFontWeight={props.customFontWeight}
       disabled={props.isDisabled}
       tabIndex={0}
       onClick={() => !props.isDisabled && handleOnClick(!props.checked)}

@@ -1,19 +1,19 @@
 import styled, { css } from 'styled-components'
 
-import { CheckboxesWrapperProps, fontInterWithSizeAndWeight } from '../../main'
+import { CheckboxesWrapperProps, getFontStyles } from '../../main'
 
 /****************************************** Size *************************************************/
 const CheckboxesSizeLarge = css<CheckboxesWrapperProps>`
   gap: 16px;
-  ${fontInterWithSizeAndWeight(16, 600)};
+  ${getFontStyles(16, 600, 'Inter')};
 `
 const CheckboxesSizeMedium = css<CheckboxesWrapperProps>`
   gap: 12px;
-  ${fontInterWithSizeAndWeight(14, 600)};
+  ${getFontStyles(14, 600, 'Inter')};
 `
 const CheckboxesSizeSmall = css<CheckboxesWrapperProps>`
   gap: 8px;
-  ${fontInterWithSizeAndWeight(12, 600)};
+  ${getFontStyles(12, 600, 'Inter')};
 `
 
 /****************************************** Default *************************************************/

@@ -1,112 +1,95 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
-export interface SpanInterProps {
-  color?: string
-  width?: string
-  textAlign?: 'center'
-  textWrap?: 'nowrap'
-}
-
-const fontInterBase = css<SpanInterProps>`
-  font-family: Inter;
-  font-style: normal;
-  line-height: normal;
-`
-
-export const fontInterWithSizeAndWeight = (size: number, weight: number) => css`
-  ${fontInterBase};
-  font-size: ${size}px;
-  font-weight: ${weight};
-`
+import { SpanInterProps, fontInterBase, getFontStyles } from '.'
 
 export const SpanInter = styled.span<SpanInterProps>`
   ${fontInterBase};
 `
 
 export const SpanInterSB10 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(10, 600)};
+  ${getFontStyles(10, 600, 'Inter')};
 `
 
 export const SpanInterSB14 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(14, 600)};
+  ${getFontStyles(14, 600, 'Inter')};
 `
 
 export const SpanInterSB16 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(16, 600)};
+  ${getFontStyles(16, 600, 'Inter')};
 `
 
 export const SpanInterSB18 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(18, 600)};
+  ${getFontStyles(18, 600, 'Inter')};
 `
 
 export const SpanInterSB20 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(20, 600)};
+  ${getFontStyles(20, 600, 'Inter')};
 `
 
 export const SpanInterM12 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(12, 500)};
+  ${getFontStyles(12, 500, 'Inter')};
 `
 
 export const SpanInterM14 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(14, 500)};
+  ${getFontStyles(14, 500, 'Inter')};
 `
 
 export const SpanInterM16 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(16, 500)};
+  ${getFontStyles(16, 500, 'Inter')};
 `
 
 export const SpanInterM18 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(18, 500)};
+  ${getFontStyles(18, 500, 'Inter')};
 `
 
 export const SpanInterM20 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(20, 500)};
+  ${getFontStyles(20, 500, 'Inter')};
 `
 
 export const SpanInterB14 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(14, 700)};
+  ${getFontStyles(14, 700, 'Inter')};
 `
 
 export const SpanInterB16 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(16, 700)};
+  ${getFontStyles(16, 700, 'Inter')};
 `
 
 export const SpanInterB20 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(20, 700)};
+  ${getFontStyles(20, 700, 'Inter')};
 `
 
 export const SpanInterB32 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(32, 700)};
+  ${getFontStyles(32, 700, 'Inter')};
 `
 
 export const SpanInterB36 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(36, 700)};
+  ${getFontStyles(36, 700, 'Inter')};
 `
 
 export const SpanInterR12 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(12, 400)};
+  ${getFontStyles(12, 400, 'Inter')};
 `
 
 export const SpanInterR14 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(14, 400)};
+  ${getFontStyles(14, 400, 'Inter')};
 `
 
 export const SpanInterR16 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(16, 400)};
+  ${getFontStyles(16, 400, 'Inter')};
 `
 
 export const SpanInterR20 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(20, 400)};
+  ${getFontStyles(20, 400, 'Inter')};
 `
 
 export const SpanInterR24 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(24, 400)};
+  ${getFontStyles(24, 400, 'Inter')};
 `
 
 export const SpanInterR36 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(36, 400)};
+  ${getFontStyles(36, 400, 'Inter')};
 `
 
 export const SpanInterT10 = styled(SpanInter)<SpanInterProps>`
-  ${fontInterWithSizeAndWeight(100, 100)};
+  ${getFontStyles(100, 100, 'Inter')};
 `

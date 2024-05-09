@@ -9,18 +9,30 @@ export const ModalLoading: FC<ModalLoadingProps> = (props) => {
       color={props.color}
       size={props.size}
       height={
-        props.size === 'medium'
-          ? '22px'
-          : props.size === 'large'
-            ? '28px'
-            : '14px'
+        props.size === 'large'
+          ? 22
+          : props.size === 'largeMedium'
+            ? 19
+            : props.size === 'medium'
+              ? 16
+              : props.size === 'mediumSmall'
+                ? 13
+                : props.size === 'small'
+                  ? 10
+                  : 22
       }
       width={
-        props.size === 'medium'
-          ? '22px'
-          : props.size === 'large'
-            ? '28px'
-            : '14px'
+        props.size === 'large'
+          ? 22
+          : props.size === 'largeMedium'
+            ? 19
+            : props.size === 'medium'
+              ? 16
+              : props.size === 'mediumSmall'
+                ? 13
+                : props.size === 'small'
+                  ? 10
+                  : 22
       }
     />
   )

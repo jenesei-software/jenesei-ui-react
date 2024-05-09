@@ -24,5 +24,6 @@ export const Default: Story = {
     isDisabled: false,
     isOnlyLoading: false,
     isActive: false,
+    isRipple: true,
   },
 }

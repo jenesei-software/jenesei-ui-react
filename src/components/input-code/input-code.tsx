@@ -9,17 +9,18 @@ import {
   StyledInputDefaultWrapper,
 } from '../input-default'
 
+function createPattern(length: number, value: string) {
+  const realLength = length * 2 - 1
+  const patternArray: (string | number)[] = Array.from(
+    { length: realLength },
+    (_, index) => (index % 2 === 0 ? value : ' '),
+  )
+  return patternArray.join('')
+}
+
 export const InputCode = (props: InputCodeProps) => {
   const theme = useTheme()
 
-  function createPattern(length: number, value: string) {
-    const realLength = length * 2 - 1
-    const patternArray: (string | number)[] = Array.from(
-      { length: realLength },
-      (_, index) => (index % 2 === 0 ? value : ' '),
-    )
-    return patternArray.join('')
-  }
   return (
     <StyledInputDefaultWrapper
       className={props.className}

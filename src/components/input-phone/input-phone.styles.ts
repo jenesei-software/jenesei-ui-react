@@ -6,7 +6,7 @@ import {
   InputPhonePlaceholder,
   StyledInputDefaultCSS,
   StyledInputDefaultProps,
-  fontInterWithSizeAndWeight,
+  getFontStyles,
 } from '../../main'
 
 export const StyledInputPhone = styled(PatternFormat)<
@@ -16,7 +16,7 @@ export const StyledInputPhone = styled(PatternFormat)<
   }
 >`
   ${StyledInputDefaultCSS};
-  ${(props) => props.$isBold && fontInterWithSizeAndWeight(16, 500)};
+  ${(props) => props.$isBold && getFontStyles(16, 500, 'Inter')};
   ${(props) =>
     !props.$isPhoneFocus
       ? props.$isBold

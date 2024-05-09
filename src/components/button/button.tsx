@@ -15,8 +15,12 @@ export const Button: FC<ButtonProps> = memo((props) => {
       $genreType={props.genreType}
       $width={props.width}
       $size={props.size}
-      $isDisabled={props.isDisabled || props.isHidden}
+      $isDisabled={props.isDisabled}
+      $isHidden={props.isHidden}
       $isActive={props.isActive}
+      $customFontFamily={props.customFontFamily}
+      $customFontSize={props.customFontSize}
+      $customFontWeight={props.customFontWeight}
       disabled={props.isDisabled}
       type={props.type}
       className={props.className}
@@ -27,7 +31,7 @@ export const Button: FC<ButtonProps> = memo((props) => {
         props.onClick()
       }
     >
-      {!props.isDisabled && !props.isLoading && <Ripple />}
+      {!props.isDisabled && !props.isLoading && props.isRipple && <Ripple />}
       {props.isOnlyLoading ? (
         props.isLoading ? (
           <ModalLoading

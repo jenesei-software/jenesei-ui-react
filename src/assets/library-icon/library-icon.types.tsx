@@ -8,6 +8,7 @@ export interface LibraryIconItemProps {
   className?: string
   onClick?: () => void
   size: TJeneseiThemeSize
+  color?: string
 }
 
 export interface StyledLibraryIconItemProps {

@@ -1,5 +1,3 @@
-export type TJeneseiTheme = 'cloud'
-
 export interface TJeneseiThemeGenreTypeState {
   background: {
     rest: string
@@ -68,10 +66,25 @@ export interface IJeneseiThemeColorVariant {
   10: string
 }
 
-export type TJeneseiThemeSize = 'large' | 'medium' | 'small'
+export type TJeneseiThemeSize =
+  | 'large'
+  | 'largeMedium'
+  | 'medium'
+  | 'mediumSmall'
+  | 'small'
+
+export interface IJeneseiIconColor {
+  product: string
+  gray: string
+  white: string
+}
+
+export type TJeneseiFontFamily = 'Inter'
 
 export interface IJeneseiTheme {
+  fontFamily: TJeneseiFontFamily
   colors: {
+    icon: IJeneseiIconColor
     focus: string
     white: string
     danger: string

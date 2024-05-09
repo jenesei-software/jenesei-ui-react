@@ -1,26 +1,47 @@
 import styled, { css } from 'styled-components'
 
 import { StyledCheckboxProps } from '.'
-import { LibraryCheckboxes, fontInterWithSizeAndWeight } from '../../main'
+import { LibraryCheckboxes, getFontStyles } from '../../main'
 
 /****************************************** Size *************************************************/
 const CheckboxSizeLarge = css<StyledCheckboxProps>`
-  padding: 10px;
-  border-radius: 22px;
-  max-height: 42px;
-  ${fontInterWithSizeAndWeight(16, 600)};
+  height: 56px;
+  border-radius: 26px;
+  gap: 12px;
+  ${getFontStyles(16, 600, 'Inter')};
+  padding: 0px 14px;
 `
+
+const CheckboxSizeLargeMedium = css<StyledCheckboxProps>`
+  height: 49px;
+  border-radius: 24px;
+  gap: 10px;
+  ${getFontStyles(14, 600, 'Inter')};
+  padding: 0px 12px;
+`
+
 const CheckboxSizeMedium = css<StyledCheckboxProps>`
-  padding: 6px;
-  border-radius: 18px;
-  max-height: 31px;
-  ${fontInterWithSizeAndWeight(14, 600)};
+  height: 42px;
+  border-radius: 22px;
+  gap: 8px;
+  ${getFontStyles(12, 600, 'Inter')};
+  padding: 0px 10px;
 `
+
+const CheckboxSizeMediumSmall = css<StyledCheckboxProps>`
+  height: 35px;
+  border-radius: 20px;
+  gap: 6px;
+  ${getFontStyles(10, 600, 'Inter')};
+  padding: 0px 8px;
+`
+
 const CheckboxSizeSmall = css<StyledCheckboxProps>`
-  padding: 6px;
-  border-radius: 16px;
-  max-height: 29px;
-  ${fontInterWithSizeAndWeight(12, 600)};
+  height: 28px;
+  border-radius: 18px;
+  gap: 4px;
+  ${getFontStyles(8, 600, 'Inter')};
+  padding: 0px 6px;
 `
 /****************************************** Genre *************************************************/
 export const CheckboxGenre = css<StyledCheckboxProps>`
@@ -115,9 +136,6 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  width: ${(props) => props.$width ?? 'max-content'};
-  gap: 10px;
-  cursor: pointer;
   outline: 1px solid transparent;
   border: 1px solid transparent;
   position: relative;
@@ -125,16 +143,33 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   isolation: isolate;
   user-select: none;
   transition: all 0.2s;
+
   & {
     user-select: none;
   }
+  cursor: pointer;
+
   ${CheckboxGenre};
+
   ${(props) =>
     props.$size === 'large'
       ? CheckboxSizeLarge
       : props.$size === 'medium'
         ? CheckboxSizeMedium
-        : CheckboxSizeSmall};
+        : props.$size === 'largeMedium'
+          ? CheckboxSizeLargeMedium
+          : props.$size === 'mediumSmall'
+            ? CheckboxSizeMediumSmall
+            : props.$size === 'small'
+              ? CheckboxSizeSmall
+              : CheckboxSizeLarge};
+
+  font-family: ${(props) => props.$customFontFamily};
+  font-size: ${(props) => props.$customFontSize};
+  font-weight: ${(props) => props.$customFontWeight};
+  width: ${(props) => props.$width ?? 'max-content'};
+  min-width: ${(props) => props.$width ?? 'max-content'};
+
   ${CheckboxDisabled}
   ${CheckboxHiddenBorder};
 `

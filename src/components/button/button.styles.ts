@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { StyledButtonProps } from '.'
-import { fontInterWithSizeAndWeight } from '../../main'
+import { getFontStyles } from '../../main'
 
 /****************************************** Genre *************************************************/
 const ButtonGenre = css<StyledButtonProps>`
@@ -78,7 +78,7 @@ const ButtonGenre = css<StyledButtonProps>`
 /****************************************** Disabled *************************************************/
 const ButtonDisabled = css<StyledButtonProps>`
   ${(props) =>
-    props.$isDisabled
+    props.$isDisabled || props.$isHidden
       ? css`
           opacity: 0.5;
           background: ${props.theme.colors.button[props.$genre][
@@ -105,25 +105,41 @@ const ButtonDisabled = css<StyledButtonProps>`
 const ButtonSizeLarge = css<StyledButtonProps>`
   height: 56px;
   border-radius: 16px;
-  gap: 8px;
-  ${fontInterWithSizeAndWeight(16, 600)};
+  gap: 12px;
+  ${getFontStyles(16, 600, 'Inter')};
   padding: 0px 14px;
 `
 
+const ButtonSizeLargeMedium = css<StyledButtonProps>`
+  height: 49px;
+  border-radius: 14px;
+  gap: 10px;
+  ${getFontStyles(14, 600, 'Inter')};
+  padding: 0px 12px;
+`
+
 const ButtonSizeMedium = css<StyledButtonProps>`
-  height: 38px;
+  height: 42px;
   border-radius: 12px;
-  gap: 6px;
-  ${fontInterWithSizeAndWeight(14, 600)};
+  gap: 8px;
+  ${getFontStyles(12, 600, 'Inter')};
   padding: 0px 10px;
 `
 
+const ButtonSizeMediumSmall = css<StyledButtonProps>`
+  height: 35px;
+  border-radius: 10px;
+  gap: 6px;
+  ${getFontStyles(10, 600, 'Inter')};
+  padding: 0px 8px;
+`
+
 const ButtonSizeSmall = css<StyledButtonProps>`
-  height: 30px;
+  height: 28px;
   border-radius: 8px;
   gap: 4px;
-  ${fontInterWithSizeAndWeight(12, 600)};
-  padding: 0px 8px;
+  ${getFontStyles(8, 600, 'Inter')};
+  padding: 0px 6px;
 `
 
 /****************************************** Styled *************************************************/
@@ -134,20 +150,36 @@ export const StyledButton = styled.button<StyledButtonProps>`
   overflow: hidden;
   isolation: isolate;
   user-select: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-  cursor: pointer;
   transition: all 0.3s;
   box-sizing: border-box;
-  width: ${(props) => props.$width ?? '100%'};
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
   ${(props) =>
     props.$size === 'large'
       ? ButtonSizeLarge
       : props.$size === 'medium'
         ? ButtonSizeMedium
-        : ButtonSizeSmall};
+        : props.$size === 'largeMedium'
+          ? ButtonSizeLargeMedium
+          : props.$size === 'mediumSmall'
+            ? ButtonSizeMediumSmall
+            : props.$size === 'small'
+              ? ButtonSizeSmall
+              : ButtonSizeLarge};
+
+  font-family: ${(props) => props.$customFontFamily};
+  font-size: ${(props) => props.$customFontSize};
+  font-weight: ${(props) => props.$customFontWeight};
+  width: ${(props) => props.$width ?? 'max-content'};
+  min-width: ${(props) => props.$width ?? 'max-content'};
+
   ${ButtonGenre};
   ${ButtonDisabled};
 `

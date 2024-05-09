@@ -196,6 +196,7 @@ const DefaultJeneseiThemeInputGenre = {
   },
 }
 export const JeneseiTheme: IJeneseiTheme = {
+  fontFamily: 'Inter',
   colors: {
     white: JeneseiThemeVariables.white,
     focus: JeneseiThemeVariables.focus,

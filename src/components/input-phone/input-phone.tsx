@@ -13,14 +13,16 @@ import {
 export const InputPhone = (props: InputPhoneProps) => {
   const theme = useTheme()
 
-  const [format, setFormat] = useState<string>('+7 (900) 000-00-00')
+  const [format, setFormat] = useState<string>(props.format)
+
   useEffect(() => {
     if (props.value) {
-      setFormat('+7 (9##) ###-##-##')
+      setFormat(props.placeholderFormat)
     } else {
-      setFormat('+7 (900) 000-00-00')
+      setFormat(props.format)
     }
-  }, [props.value])
+  }, [props.format, props.placeholderFormat, props.value])
+
   return (
     <StyledInputDefaultWrapper
       className={props.className}
@@ -44,7 +46,7 @@ export const InputPhone = (props: InputPhoneProps) => {
         required={props.isRequired}
         defaultValue={props.defaultValue}
         value={props.value}
-        $isPhoneFocus={format === '+7 (9##) ###-##-##'}
+        $isPhoneFocus={format === props.placeholderFormat}
         onValueChange={({ value }) => props.onChange && props.onChange(value)}
         placeholder="+7 (900) 000-00-00"
         format={format}
@@ -53,11 +55,11 @@ export const InputPhone = (props: InputPhoneProps) => {
         allowEmptyFormatting
         inputMode="tel"
         onFocus={() => {
-          setFormat('+7 (9##) ###-##-##')
+          setFormat(props.placeholderFormat)
         }}
         onBlur={() => {
           if (!props.value) {
-            setFormat('+7 (900) 000-00-00')
+            setFormat(props.format)
           }
         }}
       />

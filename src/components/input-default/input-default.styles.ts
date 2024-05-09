@@ -5,7 +5,7 @@ import {
   ModalLoading,
   StyledInputDefaultProps,
   StyledInputDefaultWrapperProps,
-  fontInterWithSizeAndWeight,
+  getFontStyles,
 } from '../../main'
 
 /****************************************** Hidden *************************************************/
@@ -26,7 +26,7 @@ export const StyledInputDefaultWrapper = styled.div<StyledInputDefaultWrapperPro
 
 /****************************************** Error *************************************************/
 export const InputDefaultErrorMessage = styled.div`
-  ${fontInterWithSizeAndWeight(12, 400)};
+  ${getFontStyles(12, 400, 'Inter')};
   position: absolute;
   bottom: -15px;
   left: 10px;
@@ -48,7 +48,7 @@ export const InputDefaultIsErrorBorder = css<StyledInputDefaultProps>`
 
 /****************************************** Placeholder *************************************************/
 export const InputDefaultPlaceholder = css<StyledInputDefaultProps>`
-  ${fontInterWithSizeAndWeight(16, 400)};
+  ${getFontStyles(16, 400, 'Inter')};
   color: ${(props) =>
     props.theme.colors.input[props.$genre][props.$genreType].color.placeholder};
   opacity: 1;
@@ -56,7 +56,7 @@ export const InputDefaultPlaceholder = css<StyledInputDefaultProps>`
 `
 
 export const InputPhonePlaceholder = css`
-  ${fontInterWithSizeAndWeight(16, 500)};
+  ${getFontStyles(16, 500, 'Inter')};
   color: ${(props) => props.theme.colors.other['cccccc']};
   opacity: 1;
   line-height: 24px;
@@ -136,7 +136,7 @@ const InputDefaultGenre = css<StyledInputDefaultProps>`
 
 /****************************************** Default *************************************************/
 export const StyledInputDefaultCSS = css<StyledInputDefaultProps>`
-  ${fontInterWithSizeAndWeight(16, 400)};
+  ${getFontStyles(16, 400, 'Inter')};
   resize: none;
   overflow: hidden;
   box-sizing: border-box;
@@ -153,9 +153,13 @@ export const StyledInputDefaultCSS = css<StyledInputDefaultProps>`
       ? InputDefaultSizeLarge
       : props.$size === 'medium'
         ? InputDefaultSizeMedium
-        : props.$size === 'small'
-          ? InputDefaultSizeSmall
-          : null};
+        : props.$size === 'largeMedium'
+          ? InputDefaultSizeLargeMedium
+          : props.$size === 'mediumSmall'
+            ? InputDefaultSizeMediumSmall
+            : props.$size === 'small'
+              ? InputDefaultSizeSmall
+              : InputDefaultSizeLarge};
 
   ${InputDefaultGenre};
 
@@ -198,26 +202,42 @@ export const InputDefaultPostfixChildren = styled.div<InputDefaultChildrenProps>
 
 /****************************************** Size *************************************************/
 const InputDefaultSizeLarge = css<StyledInputDefaultProps>`
-  padding: 0px 12px 0px 12px;
+  padding: 0px 14px;
   height: 56px;
   min-height: 56px;
   max-height: 56px;
   border-radius: 16px;
 `
 
+const InputDefaultSizeLargeMedium = css<StyledInputDefaultProps>`
+  padding: 0px 12px;
+  height: 49px;
+  min-height: 49px;
+  max-height: 49px;
+  border-radius: 14px;
+`
+
 const InputDefaultSizeMedium = css<StyledInputDefaultProps>`
-  padding: 0px 10px 0px 10px;
-  height: 38px;
-  min-height: 38px;
-  max-height: 38px;
+  padding: 0px 10px;
+  height: 42px;
+  min-height: 42px;
+  max-height: 42px;
   border-radius: 12px;
 `
 
+const InputDefaultSizeMediumSmall = css<StyledInputDefaultProps>`
+  padding: 0px 8px;
+  height: 35px;
+  min-height: 35px;
+  max-height: 35px;
+  border-radius: 10px;
+`
+
 const InputDefaultSizeSmall = css<StyledInputDefaultProps>`
-  padding: 0px 8px 0px 8px;
-  height: 30px;
-  min-height: 30px;
-  max-height: 30px;
+  padding: 0px 6px;
+  height: 28px;
+  min-height: 28px;
+  max-height: 28px;
   border-radius: 8px;
 `
 

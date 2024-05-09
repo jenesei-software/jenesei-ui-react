@@ -6,18 +6,32 @@ export const StyledSVG = styled.svg<StyledLibraryIconItemProps>`
   ${(props) =>
     props.$size === 'large'
       ? css`
-          height: 20px;
-          width: 20px;
+          height: 22px;
+          width: 22px;
         `
-      : props.$size === 'medium'
+      : props.$size === 'largeMedium'
         ? css`
-            height: 14px;
-            width: 14px;
+            height: 19px;
+            width: 19px;
           `
-        : props.$size === 'small'
+        : props.$size === 'medium'
           ? css`
-              height: 10px;
-              width: 10px;
+              height: 16px;
+              width: 16px;
             `
-          : null}
+          : props.$size === 'mediumSmall'
+            ? css`
+                height: 13px;
+                width: 13px;
+              `
+            : props.$size === 'small'
+              ? css`
+                  height: 10px;
+                  width: 10px;
+                `
+              : null};
+  transition: all 0.3s;
+  & > {
+    transition: all 0.3s;
+  }
 `
