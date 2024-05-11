@@ -1,5 +1,4 @@
 import { FocusEventHandler, HTMLInputTypeAttribute } from 'react'
-import { UseFormRegisterReturn } from 'react-hook-form'
 
 import {
   TJeneseiThemeGenre,
@@ -46,11 +45,11 @@ export interface InputDefaultProps {
 
   prefixChildren?: InputDefaultChildrenProps
 
-  register?: UseFormRegisterReturn
-
   type?: HTMLInputTypeAttribute
 
   value?: string | null
+
+  viewValue?: string | null
 }
 
 export interface InputDefaultChildrenProps {

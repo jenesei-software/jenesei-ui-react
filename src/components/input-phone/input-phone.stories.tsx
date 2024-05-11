@@ -25,7 +25,7 @@ export const Default: Story = {
     placeholder: 'White placeholder?',
     width: '300px',
     isBold: true,
-    format: '+7 (900) 000-00-00',
-    placeholderFormat: '+7 (9##) ###-##-##',
+    format: '+7 (9__) ___-__-__',
+    placeholderFormat: '+7 (900) 000-00-00',
   },
 }

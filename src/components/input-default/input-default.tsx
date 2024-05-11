@@ -24,7 +24,6 @@ export const InputDefault = memo((props: InputDefaultProps) => {
         <InputDefaultPrefixChildren {...props.prefixChildren} />
       )}
       <StyledInputDefault
-        {...props.register}
         $isFocus={props.isFocus}
         $isError={props.isError}
         $isLoading={props.isLoading}
