@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
 import { Checkboxes } from '.'
+import { LibraryIcon } from '../../main'
 
 const meta: Meta<typeof Checkboxes> = {
   component: Checkboxes,
@@ -41,7 +42,11 @@ export const Children: Story = {
     options: [
       { value: 0, children: 'First' },
       { value: 1, children: 'Second' },
-      { value: 3, label: 'Thirst', children: '<LibraryIcon.Support />' },
+      {
+        value: 3,
+        label: 'Thirst',
+        children: <LibraryIcon.Support size="large" color="#4195D2FF" />,
+      },
     ],
     labelField: 'label',
     valueField: 'value',

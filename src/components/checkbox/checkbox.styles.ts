@@ -1,48 +1,25 @@
 import styled, { css } from 'styled-components'
 
 import { StyledCheckboxProps } from '.'
-import { LibraryCheckboxes, getFontStyles } from '../../main'
+import {
+  IJeneseiThemeSizeData,
+  KEY_SIZE_DATA,
+  LibraryCheckboxes,
+  getFontStyles,
+} from '../../main'
 
 /****************************************** Size *************************************************/
-const CheckboxSizeLarge = css<StyledCheckboxProps>`
-  height: 56px;
-  border-radius: 26px;
-  gap: 12px;
-  ${getFontStyles(16, 600, 'Inter')};
-  padding: 0px 14px;
+export const CheckboxSize = css<StyledCheckboxProps>`
+  ${(props) => CheckboxSizeConstructor(KEY_SIZE_DATA[props.$size])};
+`
+export const CheckboxSizeConstructor = (props: IJeneseiThemeSizeData) => css`
+  height: ${props.height}px;
+  border-radius: ${props.radius + 12}px;
+  gap: ${props.padding - 2}px;
+  ${getFontStyles(props.font, 600, 'Inter')};
+  padding: 0px ${props.padding}px;
 `
 
-const CheckboxSizeLargeMedium = css<StyledCheckboxProps>`
-  height: 49px;
-  border-radius: 24px;
-  gap: 10px;
-  ${getFontStyles(14, 600, 'Inter')};
-  padding: 0px 12px;
-`
-
-const CheckboxSizeMedium = css<StyledCheckboxProps>`
-  height: 42px;
-  border-radius: 22px;
-  gap: 8px;
-  ${getFontStyles(12, 600, 'Inter')};
-  padding: 0px 10px;
-`
-
-const CheckboxSizeMediumSmall = css<StyledCheckboxProps>`
-  height: 35px;
-  border-radius: 20px;
-  gap: 6px;
-  ${getFontStyles(10, 600, 'Inter')};
-  padding: 0px 8px;
-`
-
-const CheckboxSizeSmall = css<StyledCheckboxProps>`
-  height: 28px;
-  border-radius: 18px;
-  gap: 4px;
-  ${getFontStyles(8, 600, 'Inter')};
-  padding: 0px 6px;
-`
 /****************************************** Genre *************************************************/
 export const CheckboxGenre = css<StyledCheckboxProps>`
   ${(props) => css`
@@ -99,6 +76,7 @@ export const CheckboxGenre = css<StyledCheckboxProps>`
     `}
   `};
 `
+
 /****************************************** Disabled *************************************************/
 const CheckboxDisabled = css<StyledCheckboxProps>`
   ${(props) =>
@@ -131,6 +109,7 @@ const CheckboxHiddenBorder = css<StyledCheckboxProps>`
       border-color: transparent !important;
     `}
 `
+
 /****************************************** Default *************************************************/
 export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   display: flex;
@@ -150,28 +129,15 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   cursor: pointer;
 
   ${CheckboxGenre};
-
-  ${(props) =>
-    props.$size === 'large'
-      ? CheckboxSizeLarge
-      : props.$size === 'medium'
-        ? CheckboxSizeMedium
-        : props.$size === 'largeMedium'
-          ? CheckboxSizeLargeMedium
-          : props.$size === 'mediumSmall'
-            ? CheckboxSizeMediumSmall
-            : props.$size === 'small'
-              ? CheckboxSizeSmall
-              : CheckboxSizeLarge};
+  ${CheckboxDisabled}
+  ${CheckboxHiddenBorder};
+  ${CheckboxSize};
 
   font-family: ${(props) => props.$customFontFamily};
   font-size: ${(props) => props.$customFontSize};
   font-weight: ${(props) => props.$customFontWeight};
   width: ${(props) => props.$width ?? 'max-content'};
   min-width: ${(props) => props.$width ?? 'max-content'};
-
-  ${CheckboxDisabled}
-  ${CheckboxHiddenBorder};
 `
 
 /****************************************** Styled *************************************************/
@@ -205,7 +171,6 @@ export const StyledCheckedIconCircle = styled(
     fill: transparent;
   }
 `
-
 export const StyledIconSquare = styled(
   LibraryCheckboxes.Square,
 )<StyledCheckboxProps>`

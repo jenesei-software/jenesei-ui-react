@@ -1,37 +1,19 @@
 import styled, { css } from 'styled-components'
 
 import { StyledLibraryIconItemProps } from '.'
+import { KEY_SIZE_DATA } from '../../main'
 
 export const StyledSVG = styled.svg<StyledLibraryIconItemProps>`
-  ${(props) =>
-    props.$size === 'large'
-      ? css`
-          height: 22px;
-          width: 22px;
-        `
-      : props.$size === 'largeMedium'
-        ? css`
-            height: 19px;
-            width: 19px;
-          `
-        : props.$size === 'medium'
-          ? css`
-              height: 16px;
-              width: 16px;
-            `
-          : props.$size === 'mediumSmall'
-            ? css`
-                height: 13px;
-                width: 13px;
-              `
-            : props.$size === 'small'
-              ? css`
-                  height: 10px;
-                  width: 10px;
-                `
-              : null};
+  ${(props) => css`
+    height: ${KEY_SIZE_DATA[props.$size].height -
+    KEY_SIZE_DATA[props.$size].padding * 2 -
+    6}px;
+    width: ${KEY_SIZE_DATA[props.$size].height -
+    KEY_SIZE_DATA[props.$size].padding * 2 -
+    6}px;
+  `}
   transition: all 0.3s;
-  & > {
+  & path {
     transition: all 0.3s;
   }
 `

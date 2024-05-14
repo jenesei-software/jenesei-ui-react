@@ -39,5 +39,5 @@ export interface CheckboxesProps<T extends Record<string, unknown>> {
 export interface CheckboxesWrapperProps {
   $width?: string
 
-  $size?: TJeneseiThemeSize
+  $size: TJeneseiThemeSize
 }

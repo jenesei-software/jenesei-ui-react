@@ -27,7 +27,7 @@ export interface InputDefaultProps {
 
   isLoading?: boolean
 
-  isFocus?: boolean
+  isActive?: boolean
 
   isReadOnly?: boolean
 
@@ -41,6 +41,8 @@ export interface InputDefaultProps {
 
   placeholder?: string
 
+  isBold?: boolean
+
   postfixChildren?: InputDefaultChildrenProps
 
   prefixChildren?: InputDefaultChildrenProps
@@ -49,7 +51,11 @@ export interface InputDefaultProps {
 
   value?: string | null
 
-  viewValue?: string | null
+  format?: string
+
+  formatType?: 'text' | 'tel' | 'password'
+
+  mask?: string | string[]
 }
 
 export interface InputDefaultChildrenProps {
@@ -77,11 +83,13 @@ export interface StyledInputDefaultProps {
 
   $isLoading?: InputDefaultProps['isLoading']
 
-  $isFocus?: InputDefaultProps['isFocus']
+  $isActive?: InputDefaultProps['isActive']
 
   $postfixChildren?: InputDefaultChildrenProps
 
   $prefixChildren?: InputDefaultChildrenProps
+
+  $isBold?: InputDefaultProps['isBold']
 }
 
 export interface StyledInputDefaultWrapperProps {

@@ -2,6 +2,6 @@ import { TJeneseiThemeSize } from '../../main'
 
 export interface ModalLoadingProps {
   color?: string
-  size?: TJeneseiThemeSize
+  size: TJeneseiThemeSize
   className?: string
 }

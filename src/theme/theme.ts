@@ -1,4 +1,4 @@
-import { IJeneseiTheme } from '.'
+import { IJeneseiTheme, IJeneseiThemeSizeData, TJeneseiThemeSize } from '.'
 
 const JeneseiThemeVariables = {
   white: '#fff',
@@ -204,5 +204,38 @@ export const JeneseiTheme: IJeneseiTheme = {
     button: DefaultJeneseiThemeGenre,
     checkbox: DefaultJeneseiThemeGenre,
     input: DefaultJeneseiThemeInputGenre,
+  },
+}
+
+export const KEY_SIZE_DATA: Record<TJeneseiThemeSize, IJeneseiThemeSizeData> = {
+  large: {
+    height: 56,
+    radius: 16,
+    padding: 14,
+    font: 16,
+  },
+  largeMedium: {
+    height: 49,
+    radius: 14,
+    padding: 12,
+    font: 16,
+  },
+  medium: {
+    height: 42,
+    radius: 12,
+    padding: 10,
+    font: 14,
+  },
+  mediumSmall: {
+    height: 35,
+    radius: 10,
+    padding: 8,
+    font: 12,
+  },
+  small: {
+    height: 28,
+    radius: 8,
+    padding: 6,
+    font: 12,
   },
 }

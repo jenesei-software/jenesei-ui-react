@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { StyledButtonProps } from '.'
-import { getFontStyles } from '../../main'
+import { IJeneseiThemeSizeData, KEY_SIZE_DATA, getFontStyles } from '../../main'
 
 /****************************************** Genre *************************************************/
 const ButtonGenre = css<StyledButtonProps>`
@@ -102,44 +102,15 @@ const ButtonDisabled = css<StyledButtonProps>`
 `
 
 /****************************************** Size *************************************************/
-const ButtonSizeLarge = css<StyledButtonProps>`
-  height: 56px;
-  border-radius: 16px;
-  gap: 12px;
-  ${getFontStyles(16, 600, 'Inter')};
-  padding: 0px 14px;
+export const ButtonSize = css<StyledButtonProps>`
+  ${(props) => ButtonSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
-
-const ButtonSizeLargeMedium = css<StyledButtonProps>`
-  height: 49px;
-  border-radius: 14px;
-  gap: 10px;
-  ${getFontStyles(14, 600, 'Inter')};
-  padding: 0px 12px;
-`
-
-const ButtonSizeMedium = css<StyledButtonProps>`
-  height: 42px;
-  border-radius: 12px;
-  gap: 8px;
-  ${getFontStyles(12, 600, 'Inter')};
-  padding: 0px 10px;
-`
-
-const ButtonSizeMediumSmall = css<StyledButtonProps>`
-  height: 35px;
-  border-radius: 10px;
-  gap: 6px;
-  ${getFontStyles(10, 600, 'Inter')};
-  padding: 0px 8px;
-`
-
-const ButtonSizeSmall = css<StyledButtonProps>`
-  height: 28px;
-  border-radius: 8px;
-  gap: 4px;
-  ${getFontStyles(8, 600, 'Inter')};
-  padding: 0px 6px;
+export const ButtonSizeConstructor = (props: IJeneseiThemeSizeData) => css`
+  height: ${props.height}px;
+  border-radius: ${props.radius}px;
+  gap: ${props.padding - 2}px;
+  ${getFontStyles(props.font, 600, 'Inter')};
+  padding: 0px ${props.padding}px;
 `
 
 /****************************************** Styled *************************************************/
@@ -161,25 +132,13 @@ export const StyledButton = styled.button<StyledButtonProps>`
 
   cursor: pointer;
 
-  ${(props) =>
-    props.$size === 'large'
-      ? ButtonSizeLarge
-      : props.$size === 'medium'
-        ? ButtonSizeMedium
-        : props.$size === 'largeMedium'
-          ? ButtonSizeLargeMedium
-          : props.$size === 'mediumSmall'
-            ? ButtonSizeMediumSmall
-            : props.$size === 'small'
-              ? ButtonSizeSmall
-              : ButtonSizeLarge};
+  ${ButtonSize};
+  ${ButtonGenre};
+  ${ButtonDisabled};
 
   font-family: ${(props) => props.$customFontFamily};
   font-size: ${(props) => props.$customFontSize};
   font-weight: ${(props) => props.$customFontWeight};
   width: ${(props) => props.$width ?? 'max-content'};
   min-width: ${(props) => props.$width ?? 'max-content'};
-
-  ${ButtonGenre};
-  ${ButtonDisabled};
 `
