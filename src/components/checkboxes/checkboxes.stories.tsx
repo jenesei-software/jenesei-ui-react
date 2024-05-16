@@ -19,6 +19,7 @@ export const Default: Story = {
     checkBoxView: 'circle',
     checkboxWidth: '100%',
     checkboxIsHiddenBorder: false,
+    checkboxIsActive: false,
     multiple: true,
     size: 'large',
     value: [{ value: 0, label: 'First' }],
@@ -37,6 +38,7 @@ export const Children: Story = {
     checkboxGenre: 'product',
     checkboxGenreType: 'secondary',
     checkBoxView: 'circle',
+    checkboxIsActive: false,
     size: 'large',
     value: [{ value: 0, children: 'First' }],
     options: [

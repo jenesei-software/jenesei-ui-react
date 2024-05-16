@@ -68,6 +68,7 @@ export interface IJeneseiThemeColorVariant {
 
 export interface IJeneseiThemeSizeData {
   height: number
+  heightIcon: number
   radius: number
   padding: number
   font: number
@@ -89,6 +90,7 @@ export interface IJeneseiTheme {
     white: string
     danger: string
     button: TJeneseiThemeGenre
+    toggle: TJeneseiThemeGenre
     checkbox: TJeneseiThemeGenre
     input: TJeneseiThemeInputGenre
   }

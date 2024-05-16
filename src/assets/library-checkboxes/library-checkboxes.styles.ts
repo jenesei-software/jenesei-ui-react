@@ -5,12 +5,8 @@ import { KEY_SIZE_DATA } from '../../main'
 
 export const StyledCheckboxSVG = styled.svg<StyledLibraryCheckboxesItemProps>`
   ${(props) => css`
-    height: ${KEY_SIZE_DATA[props.$size].height -
-    KEY_SIZE_DATA[props.$size].padding * 2 -
-    6}px;
-    width: ${KEY_SIZE_DATA[props.$size].height -
-    KEY_SIZE_DATA[props.$size].padding * 2 -
-    6}px;
+    height: ${KEY_SIZE_DATA[props.$size].heightIcon}px;
+    width: ${KEY_SIZE_DATA[props.$size].heightIcon}px;
   `}
   transition: all 0.3s;
   & path {
