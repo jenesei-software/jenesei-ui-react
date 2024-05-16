@@ -21,7 +21,7 @@ export const ToggleSizeConstructor = (props: IJeneseiThemeSizeData) => css`
   }
 
   &.react-toggle--checked .react-toggle-thumb {
-    left: calc(100% - ${props.height - 2 - 1}px);
+    left: calc(100% - ${props.height}px);
   }
 `
 

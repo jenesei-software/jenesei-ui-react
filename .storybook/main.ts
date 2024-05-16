@@ -25,7 +25,7 @@ const config: StorybookConfig = {
   },
   managerHead: (head) => `
     ${head}
-    <link rel="icon" href="/browser/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="The best UI for React." />
     <title>Jenesei UI React</title>
@@ -33,22 +33,22 @@ const config: StorybookConfig = {
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="/browser/apple-touch-icon.png"
+      href="/apple-touch-icon.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="/browser/favicon-32x32.png"
+      href="/favicon-32x32.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="/browser/favicon-16x16.png"
+      href="/favicon-16x16.png"
     />
-    <link rel="manifest" href="/browser/site.webmanifest" />
-    <link rel="mask-icon" href="/browser/safari-pinned-tab.svg" color="#4195d2" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4195d2" />
     <meta name="msapplication-TileColor" content="#4195d2" />
     <meta name="theme-color" content="#4195d2" />
   `,
