@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { StyledLibraryIconItemProps } from '.'
-import { KEY_SIZE_DATA } from '../../main'
+import { KEY_SIZE_DATA } from '../../theme'
 
 export const StyledSVG = styled.svg<StyledLibraryIconItemProps>`
   ${(props) => css`

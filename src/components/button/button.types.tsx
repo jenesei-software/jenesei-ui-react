@@ -1,10 +1,10 @@
+import { TLibraryIconNameString } from '../../main'
 import {
   TJeneseiFontFamily,
   TJeneseiThemeGenre,
   TJeneseiThemeGenreType,
   TJeneseiThemeSize,
-  TLibraryIconNameString,
-} from '../../main'
+} from '../../theme'
 
 export interface ButtonProps {
   className?: string

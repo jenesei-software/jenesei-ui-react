@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
 import { Checkboxes } from '.'
-import { LibraryIcon } from '../../main'
+import { LibraryIcon } from '../../assets/library-icon'
 
 const meta: Meta<typeof Checkboxes> = {
   component: Checkboxes,

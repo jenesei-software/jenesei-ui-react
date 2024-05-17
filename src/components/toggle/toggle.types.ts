@@ -2,7 +2,7 @@ import {
   TJeneseiThemeGenre,
   TJeneseiThemeGenreType,
   TJeneseiThemeSize,
-} from '../../main'
+} from '../../theme'
 
 export interface ToggleProps {
   value: boolean

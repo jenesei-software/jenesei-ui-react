@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import { ModalLoadingProps, StyledReactLoading } from '.'
-import { KEY_SIZE_DATA } from '../../main'
+import { KEY_SIZE_DATA } from '../../theme'
 
 export const ModalLoading: FC<ModalLoadingProps> = (props) => {
   return (

@@ -1,15 +1,14 @@
 import { PatternFormat } from 'react-number-format'
 import styled, { css } from 'styled-components'
 
+import { getFontStyles } from '../../fonts'
+import { IJeneseiThemeSizeData, KEY_SIZE_DATA } from '../../theme'
+import { ModalLoading } from '../modal-loading'
 import {
-  IJeneseiThemeSizeData,
   InputDefaultChildrenProps,
-  KEY_SIZE_DATA,
-  ModalLoading,
   StyledInputDefaultProps,
   StyledInputDefaultWrapperProps,
-  getFontStyles,
-} from '../../main'
+} from './input-default.types'
 
 /****************************************** Hidden *************************************************/
 const InputDefaultWrapperHidden = css<StyledInputDefaultWrapperProps>`
