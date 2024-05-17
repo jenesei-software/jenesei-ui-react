@@ -211,14 +211,14 @@ export const JeneseiTheme: IJeneseiTheme = {
 export const KEY_SIZE_DATA: Record<TJeneseiThemeSize, IJeneseiThemeSizeData> = {
   large: {
     height: 56,
-    heightIcon: 16,
+    heightIcon: 18,
     radius: 16,
     padding: 18,
-    font: 16,
+    font: 18,
   },
   largeMedium: {
     height: 49,
-    heightIcon: 14,
+    heightIcon: 16,
     radius: 14,
     padding: 16,
     font: 16,
@@ -239,9 +239,9 @@ export const KEY_SIZE_DATA: Record<TJeneseiThemeSize, IJeneseiThemeSizeData> = {
   },
   small: {
     height: 28,
-    heightIcon: 12,
+    heightIcon: 10,
     radius: 8,
     padding: 6,
-    font: 12,
+    font: 10,
   },
 }

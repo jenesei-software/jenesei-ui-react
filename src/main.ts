@@ -7,10 +7,9 @@ export * from './theme'
 export * from './fonts'
 export * from './functions'
 
-export * from './components/modal-loading'
-
 export * from './assets/library-icon'
 export * from './assets/library-checkboxes'
+export * from './components/modal-loading'
 
 export * from './components/input-default'
 export * from './components/checkbox'

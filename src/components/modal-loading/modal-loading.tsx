@@ -10,16 +10,8 @@ export const ModalLoading: FC<ModalLoadingProps> = (props) => {
       className={props.className}
       color={props.color}
       size={props.size}
-      height={
-        KEY_SIZE_DATA[props.size].height -
-        KEY_SIZE_DATA[props.size].padding * 2 -
-        6
-      }
-      width={
-        KEY_SIZE_DATA[props.size].height -
-        KEY_SIZE_DATA[props.size].padding * 2 -
-        6
-      }
+      height={KEY_SIZE_DATA[props.size].heightIcon + 4}
+      width={KEY_SIZE_DATA[props.size].heightIcon + 4}
     />
   )
 }

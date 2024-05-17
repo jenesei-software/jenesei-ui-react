@@ -13,7 +13,7 @@ type Story = StoryObj<typeof InputDefault>
 
 const defaultArgs: Partial<InputDefaultProps> = {
   genre: 'product',
-  genreType: 'primary',
+  genreType: 'secondary',
   size: 'large',
   isError: false,
   isDisabled: false,
@@ -28,7 +28,6 @@ const defaultArgs: Partial<InputDefaultProps> = {
 export const String: Story = {
   args: {
     ...defaultArgs,
-    value: 'Value',
   },
 }
 

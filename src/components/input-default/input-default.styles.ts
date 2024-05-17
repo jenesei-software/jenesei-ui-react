@@ -51,11 +51,23 @@ export const InputDefaultIsErrorBorder = css<StyledInputDefaultProps>`
 
 /****************************************** Placeholder *************************************************/
 export const InputDefaultPlaceholder = css<StyledInputDefaultProps>`
-  ${(props) => getFontStyles(16, props.$isBold ? 500 : 400, 'Inter')};
-  color: ${(props) =>
-    props.theme.colors.input[props.$genre][props.$genreType].color.placeholder};
-  opacity: 1;
-  line-height: 24px;
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    ${(props) => getFontStyles(16, props.$isBold ? 500 : 400, 'Inter')};
+    color: ${(props) =>
+      props.theme.colors.input[props.$genre][props.$genreType].color
+        .placeholder};
+    opacity: 1;
+    line-height: 24px;
+  }
+  :-ms-input-placeholder {
+    ${(props) => getFontStyles(16, props.$isBold ? 500 : 400, 'Inter')};
+    color: ${(props) =>
+      props.theme.colors.input[props.$genre][props.$genreType].color
+        .placeholder};
+    opacity: 1;
+    line-height: 24px;
+  }
 `
 
 /****************************************** Genre *************************************************/
@@ -161,7 +173,7 @@ export const StyledInputDefaultCSS = css<StyledInputDefaultProps>`
   ${InputDefaultSize};
   ${InputDefaultGenre};
   ${InputDefaultIsErrorBorder};
-
+  ${InputDefaultPlaceholder};
   ${(props) =>
     props.$prefixChildren &&
     css`
@@ -173,11 +185,6 @@ export const StyledInputDefaultCSS = css<StyledInputDefaultProps>`
     css`
       padding-left: ${`calc(${props.$postfixChildren.width} + ${props.$postfixChildren.right} + ${props.$postfixChildren.left})`};
     `};
-
-  &::placeholder,
-  &::-ms-input-placeholder {
-    ${InputDefaultPlaceholder};
-  }
 `
 
 export const StyledInputDefault = styled.input<StyledInputDefaultProps>`
