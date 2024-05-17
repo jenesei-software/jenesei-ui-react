@@ -7,7 +7,7 @@ import {
   CheckboxesProps,
   CheckboxesWrapper,
 } from '.'
-import { Checkbox } from '../../main'
+import { Checkbox } from '../checkbox/checkbox'
 
 export const Checkboxes = <T extends Record<string, unknown>>(
   props: CheckboxesProps<T>,

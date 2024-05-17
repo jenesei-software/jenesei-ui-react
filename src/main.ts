@@ -1,11 +1,9 @@
 'use client'
 
-export * from './fonts/inter'
-
-export * from './ui'
 export * from './theme'
 export * from './fonts'
 export * from './functions'
+export * from './ui'
 
 export * from './assets/library-icon'
 export * from './assets/library-checkboxes'

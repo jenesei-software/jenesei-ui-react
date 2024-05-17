@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components'
 
 import { StyledButtonProps } from '.'
-import { IJeneseiThemeSizeData, KEY_SIZE_DATA, getFontStyles } from '../../main'
+import { getFontStyles } from '../../fonts'
+import { IJeneseiThemeSizeData, KEY_SIZE_DATA } from '../../theme'
 
 /****************************************** Genre *************************************************/
 const ButtonGenre = css<StyledButtonProps>`

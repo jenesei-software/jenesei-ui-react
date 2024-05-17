@@ -1,4 +1,4 @@
-import { TJeneseiThemeSize } from '../../main'
+import { TJeneseiThemeSize } from '../../theme'
 
 export type LibraryIconProps = {
   [icon in TLibraryIconNameString]: (props: LibraryIconItemProps) => JSX.Element

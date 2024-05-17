@@ -3,7 +3,8 @@ import { Ripple } from 'react-ripple-click'
 import { useTheme } from 'styled-components'
 
 import { ButtonProps, StyledButton } from '.'
-import { LibraryIcon, ModalLoading } from '../../main'
+import { LibraryIcon } from '../../assets/library-icon'
+import { ModalLoading } from '../modal-loading'
 
 export const Button: FC<ButtonProps> = memo((props) => {
   const theme = useTheme()
