@@ -29,6 +29,7 @@ export default defineConfig({
       include: ['src/'],
     }),
   ],
+  publicDir: false,
   build: {
     lib: {
       entry: resolve(__dirname, 'src/main.ts'),

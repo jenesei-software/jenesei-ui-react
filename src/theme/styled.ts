@@ -1,5 +1,3 @@
-export type TJeneseiTheme = 'cloud'
-
 export interface TJeneseiThemeGenreTypeState {
   background: {
     rest: string
@@ -21,9 +19,36 @@ export interface TJeneseiThemeGenreTypeState {
   }
 }
 
+export interface TJeneseiThemeGenreTypeInputState {
+  background: {
+    rest: string
+    hover: string
+    focus: string
+    active: string
+  }
+  border: {
+    rest: string
+    hover: string
+    focus: string
+    active: string
+  }
+  color: {
+    rest: string
+    hover: string
+    focus: string
+    active: string
+    placeholder: string
+  }
+}
+
 export interface TJeneseiThemeGenreType {
   primary: TJeneseiThemeGenreTypeState
   secondary: TJeneseiThemeGenreTypeState
+}
+
+export interface TJeneseiThemeGenreInputType {
+  primary: TJeneseiThemeGenreTypeInputState
+  secondary: TJeneseiThemeGenreTypeInputState
 }
 
 export interface TJeneseiThemeGenre {
@@ -31,18 +56,42 @@ export interface TJeneseiThemeGenre {
   gray: TJeneseiThemeGenreType
 }
 
+export interface TJeneseiThemeInputGenre {
+  product: TJeneseiThemeGenreInputType
+  gray: TJeneseiThemeGenreInputType
+}
+
 export interface IJeneseiThemeColorVariant {
   100: string
   10: string
 }
 
-export type TJeneseiThemeSize = 'large' | 'medium' | 'small'
+export interface IJeneseiThemeSizeData {
+  height: number
+  heightIcon: number
+  radius: number
+  padding: number
+  font: number
+}
+
+export type TJeneseiThemeSize =
+  | 'large'
+  | 'largeMedium'
+  | 'medium'
+  | 'mediumSmall'
+  | 'small'
+
+export type TJeneseiFontFamily = 'Inter'
 
 export interface IJeneseiTheme {
+  fontFamily: TJeneseiFontFamily
   colors: {
     focus: string
     white: string
+    danger: string
     button: TJeneseiThemeGenre
+    toggle: TJeneseiThemeGenre
     checkbox: TJeneseiThemeGenre
+    input: TJeneseiThemeInputGenre
   }
 }

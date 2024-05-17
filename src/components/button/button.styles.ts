@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { StyledButtonProps } from '.'
-import { fontInterWithSizeAndWeight } from '../../main'
+import { IJeneseiThemeSizeData, KEY_SIZE_DATA, getFontStyles } from '../../main'
 
 /****************************************** Genre *************************************************/
 const ButtonGenre = css<StyledButtonProps>`
@@ -78,7 +78,7 @@ const ButtonGenre = css<StyledButtonProps>`
 /****************************************** Disabled *************************************************/
 const ButtonDisabled = css<StyledButtonProps>`
   ${(props) =>
-    props.$isDisabled
+    props.$isDisabled || props.$isHidden
       ? css`
           opacity: 0.5;
           background: ${props.theme.colors.button[props.$genre][
@@ -102,40 +102,15 @@ const ButtonDisabled = css<StyledButtonProps>`
 `
 
 /****************************************** Size *************************************************/
-const ButtonSizeLarge = css<StyledButtonProps>`
-  height: 56px;
-  border-radius: 16px;
-  gap: 8px;
-  ${fontInterWithSizeAndWeight(16, 600)};
-  & svg {
-    height: 20px;
-    width: 20px;
-  }
-  padding: 0px 14px;
+export const ButtonSize = css<StyledButtonProps>`
+  ${(props) => ButtonSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
-
-const ButtonSizeMedium = css<StyledButtonProps>`
-  height: 38px;
-  border-radius: 12px;
-  gap: 6px;
-  ${fontInterWithSizeAndWeight(14, 600)};
-  & svg {
-    height: 14px;
-    width: 14px;
-  }
-  padding: 0px 10px;
-`
-
-const ButtonSizeSmall = css<StyledButtonProps>`
-  height: 30px;
-  border-radius: 8px;
-  gap: 4px;
-  ${fontInterWithSizeAndWeight(12, 600)};
-  & svg {
-    height: 10px;
-    width: 10px;
-  }
-  padding: 0px 8px;
+export const ButtonSizeConstructor = (props: IJeneseiThemeSizeData) => css`
+  height: ${props.height}px;
+  border-radius: ${props.radius}px;
+  gap: ${props.padding - 2}px;
+  ${getFontStyles(props.font, 600, 'Inter')};
+  padding: 0px ${props.padding}px;
 `
 
 /****************************************** Styled *************************************************/
@@ -146,20 +121,24 @@ export const StyledButton = styled.button<StyledButtonProps>`
   overflow: hidden;
   isolation: isolate;
   user-select: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-  cursor: pointer;
   transition: all 0.3s;
   box-sizing: border-box;
-  width: ${(props) => props.$width ?? '100%'};
-  ${(props) =>
-    props.$size === 'large'
-      ? ButtonSizeLarge
-      : props.$size === 'medium'
-        ? ButtonSizeMedium
-        : ButtonSizeSmall};
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  ${ButtonSize};
   ${ButtonGenre};
   ${ButtonDisabled};
+
+  font-family: ${(props) => props.$customFontFamily};
+  font-size: ${(props) => props.$customFontSize};
+  font-weight: ${(props) => props.$customFontWeight};
+  width: ${(props) => props.$width ?? 'max-content'};
+  min-width: ${(props) => props.$width ?? 'max-content'};
 `

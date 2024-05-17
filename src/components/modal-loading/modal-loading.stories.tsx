@@ -1,6 +1,7 @@
-import { ModalLoading } from '.'
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
+
+import { ModalLoading } from '.'
 
 const meta: Meta<typeof ModalLoading> = {
   component: ModalLoading,
@@ -10,4 +11,9 @@ const meta: Meta<typeof ModalLoading> = {
 export default meta
 type Story = StoryObj<typeof ModalLoading>
 
-export const Default: Story = {}
+export const Default: Story = {
+  args: {
+    size: 'large',
+    color: '#4195D2FF',
+  },
+}

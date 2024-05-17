@@ -1,27 +1,17 @@
 import { FC } from 'react'
 
 import { ModalLoadingProps, StyledReactLoading } from '.'
+import { KEY_SIZE_DATA } from '../../main'
 
 export const ModalLoading: FC<ModalLoadingProps> = (props) => {
   return (
     <StyledReactLoading
+      type="spinningBubbles"
       className={props.className}
       color={props.color}
       size={props.size}
-      height={
-        props.size === 'medium'
-          ? '22px'
-          : props.size === 'large'
-            ? '28px'
-            : '14px'
-      }
-      width={
-        props.size === 'medium'
-          ? '22px'
-          : props.size === 'large'
-            ? '28px'
-            : '14px'
-      }
+      height={KEY_SIZE_DATA[props.size].heightIcon + 4}
+      width={KEY_SIZE_DATA[props.size].heightIcon + 4}
     />
   )
 }

@@ -1,3 +1,5 @@
+import { TJeneseiThemeSize } from '../../main'
+
 export type LibraryIconProps = {
   [icon in TLibraryIconNameString]: (props: LibraryIconItemProps) => JSX.Element
 }
@@ -5,6 +7,12 @@ export type LibraryIconProps = {
 export interface LibraryIconItemProps {
   className?: string
   onClick?: () => void
+  size: TJeneseiThemeSize
+  color?: string
+}
+
+export interface StyledLibraryIconItemProps {
+  $size: LibraryIconItemProps['size']
 }
 
 export enum LibraryIconName {
