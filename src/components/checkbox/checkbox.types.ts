@@ -1,7 +1,6 @@
 import {
   TJeneseiFontFamily,
   TJeneseiThemeGenre,
-  TJeneseiThemeGenreType,
   TJeneseiThemeSize,
 } from '../../theme'
 
@@ -13,8 +12,6 @@ export interface CheckboxProps {
   children?: React.ReactNode
 
   view: TCheckboxGenreView
-
-  genreType: TCheckboxGenreType
 
   isDisabled?: boolean
 
@@ -46,8 +43,6 @@ export interface StyledCheckboxProps {
 
   $view?: CheckboxProps['view']
 
-  $genreType: CheckboxProps['genreType']
-
   $width?: CheckboxProps['width']
 
   $size: CheckboxProps['size']
@@ -68,5 +63,3 @@ export interface StyledCheckboxProps {
 export type TCheckboxGenreView = 'square' | 'circle'
 
 export type TCheckboxGenre = keyof TJeneseiThemeGenre
-
-export type TCheckboxGenreType = keyof TJeneseiThemeGenreType

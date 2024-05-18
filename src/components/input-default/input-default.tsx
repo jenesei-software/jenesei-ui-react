@@ -33,7 +33,6 @@ export const InputDefault = memo((props: InputDefaultProps) => {
           $prefixChildren={props?.prefixChildren}
           $genre={props.genre}
           $size={props.size}
-          $genreType={props.genreType}
           $isBold={props.isBold}
           disabled={props.isDisabled}
           readOnly={props.isReadOnly}
@@ -57,7 +56,6 @@ export const InputDefault = memo((props: InputDefaultProps) => {
           $prefixChildren={props?.prefixChildren}
           $genre={props.genre}
           $size={props.size}
-          $genreType={props.genreType}
           $isBold={props.isBold}
           disabled={props.isDisabled}
           readOnly={props.isReadOnly}
@@ -85,10 +83,9 @@ export const InputDefault = memo((props: InputDefaultProps) => {
       {props.isLoading && (
         <InputDefaultStyledModalLoading
           $genre={props.genre}
-          $genreType={props.genreType}
           $size={props.size}
           size={props.size}
-          color={theme.colors.input[props.genre][props.genreType].color.rest}
+          color={theme.colors.input[props.genre].color.rest}
         />
       )}
     </StyledInputDefaultWrapper>

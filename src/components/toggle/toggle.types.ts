@@ -1,8 +1,4 @@
-import {
-  TJeneseiThemeGenre,
-  TJeneseiThemeGenreType,
-  TJeneseiThemeSize,
-} from '../../theme'
+import { TJeneseiThemeGenre, TJeneseiThemeSize } from '../../theme'
 
 export interface ToggleProps {
   value: boolean
@@ -10,18 +6,13 @@ export interface ToggleProps {
   isError?: boolean
   isDisabled?: boolean
   genre: TToggleGenre
-  genreType: TToggleGenreType
   size: TJeneseiThemeSize
 }
 
 export type TToggleGenre = keyof TJeneseiThemeGenre
 
-export type TToggleGenreType = keyof TJeneseiThemeGenreType
-
 export interface StyledToggleProps {
   $genre: ToggleProps['genre']
-
-  $genreType: ToggleProps['genreType']
 
   $isDisabled?: ToggleProps['isDisabled']
 

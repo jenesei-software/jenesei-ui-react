@@ -54,16 +54,14 @@ export const InputDefaultPlaceholder = css<StyledInputDefaultProps>`
   ::-webkit-input-placeholder {
     ${(props) => getFontStyles(16, props.$isBold ? 500 : 400, 'Inter')};
     color: ${(props) =>
-      props.theme.colors.input[props.$genre][props.$genreType].color
-        .placeholder};
+      props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
     line-height: 24px;
   }
   :-ms-input-placeholder {
     ${(props) => getFontStyles(16, props.$isBold ? 500 : 400, 'Inter')};
     color: ${(props) =>
-      props.theme.colors.input[props.$genre][props.$genreType].color
-        .placeholder};
+      props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
     line-height: 24px;
   }
@@ -72,70 +70,61 @@ export const InputDefaultPlaceholder = css<StyledInputDefaultProps>`
 /****************************************** Genre *************************************************/
 const InputDefaultGenre = css<StyledInputDefaultProps>`
   ${(props) => css`
-    background: ${props.theme.colors.input[props.$genre][props.$genreType]
-      .background.rest};
-    border-color: ${props.theme.colors.input[props.$genre][props.$genreType]
-      .border.rest};
-    color: ${props.theme.colors.input[props.$genre][props.$genreType].color
-      .rest};
+    background: ${props.theme.colors.input[props.$genre].background.rest};
+    border-color: ${props.theme.colors.input[props.$genre].border.rest};
+    color: ${props.theme.colors.input[props.$genre].color.rest};
     & span {
-      color: ${props.theme.colors.input[props.$genre][props.$genreType].color
-        .rest};
+      color: ${props.theme.colors.input[props.$genre].color.rest};
     }
     & path {
-      stroke: ${props.theme.colors.input[props.$genre][props.$genreType].color
-        .rest};
+      stroke: ${props.theme.colors.input[props.$genre].color.rest};
     }
 
     &:focus-visible {
       outline: 2px solid ${props.theme.colors.focus};
-      border-color: ${props.theme.colors.input[props.$genre][props.$genreType]
-        .border.focus};
-      background: ${props.theme.colors.input[props.$genre][props.$genreType]
-        .background.focus};
+      border-color: ${props.theme.colors.input[props.$genre].border.focus};
+      background: ${props.theme.colors.input[props.$genre].background.focus};
 
-      color: ${props.theme.colors.input[props.$genre][props.$genreType].color
-        .focus};
+      color: ${props.theme.colors.input[props.$genre].color.focus};
       & span {
-        color: ${props.theme.colors.input[props.$genre][props.$genreType].color
-          .focus};
+        color: ${props.theme.colors.input[props.$genre].color.focus};
       }
       & path {
-        stroke: ${props.theme.colors.input[props.$genre][props.$genreType].color
-          .focus};
+        stroke: ${props.theme.colors.input[props.$genre].color.focus};
       }
     }
     &:hover {
-      background: ${props.theme.colors.input[props.$genre][props.$genreType]
-        .background.hover};
-      border-color: ${props.theme.colors.input[props.$genre][props.$genreType]
-        .border.hover};
-      color: ${props.theme.colors.input[props.$genre][props.$genreType].color
-        .hover};
+      background: ${props.theme.colors.input[props.$genre].background.hover};
+      border-color: ${props.theme.colors.input[props.$genre].border.hover};
+      color: ${props.theme.colors.input[props.$genre].color.hover};
       & span {
-        color: ${props.theme.colors.input[props.$genre][props.$genreType].color
-          .hover};
+        color: ${props.theme.colors.input[props.$genre].color.hover};
       }
       & path {
-        stroke: ${props.theme.colors.input[props.$genre][props.$genreType].color
-          .hover};
+        stroke: ${props.theme.colors.input[props.$genre].color.hover};
+      }
+    }
+    &:active {
+      background: ${props.theme.colors.input[props.$genre].background.active};
+      border-color: ${props.theme.colors.input[props.$genre].border.active};
+      color: ${props.theme.colors.input[props.$genre].color.active};
+      & span {
+        color: ${props.theme.colors.input[props.$genre].color.active};
+      }
+      & path {
+        stroke: ${props.theme.colors.input[props.$genre].color.active};
       }
     }
     ${props.$isActive &&
     css`
-      background: ${props.theme.colors.input[props.$genre][props.$genreType]
-        .background.active};
-      border-color: ${props.theme.colors.input[props.$genre][props.$genreType]
-        .border.active};
-      color: ${props.theme.colors.input[props.$genre][props.$genreType].color
-        .active};
+      background: ${props.theme.colors.input[props.$genre].background.active};
+      border-color: ${props.theme.colors.input[props.$genre].border.active};
+      color: ${props.theme.colors.input[props.$genre].color.active};
       & span {
-        color: ${props.theme.colors.input[props.$genre][props.$genreType].color
-          .active};
+        color: ${props.theme.colors.input[props.$genre].color.active};
       }
       & path {
-        stroke: ${props.theme.colors.input[props.$genre][props.$genreType].color
-          .active};
+        stroke: ${props.theme.colors.input[props.$genre].color.active};
       }
     `}
   `};
@@ -162,7 +151,9 @@ export const StyledInputDefaultCSS = css<StyledInputDefaultProps>`
   box-sizing: border-box;
   width: 100%;
   border: 2px solid;
-  transition: all 0.2s;
+  transition:
+    all 0.2s,
+    outline 0s;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;

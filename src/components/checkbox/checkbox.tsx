@@ -1,5 +1,4 @@
 import { FC, useCallback } from 'react'
-import { Ripple } from 'react-ripple-click'
 import { useTheme } from 'styled-components'
 
 import {
@@ -29,7 +28,6 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
               size={props.size}
               $size={props.size}
               $genre={props.genre}
-              $genreType={props.genreType}
               $isActive={props.isActive}
             />
           ) : props.view == 'circle' ? (
@@ -37,7 +35,6 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
               size={props.size}
               $size={props.size}
               $genre={props.genre}
-              $genreType={props.genreType}
               $isActive={props.isActive}
             />
           ) : (
@@ -45,7 +42,6 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
               size={props.size}
               $size={props.size}
               $genre={props.genre}
-              $genreType={props.genreType}
               $isActive={props.isActive}
             />
           )}
@@ -57,7 +53,6 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
               size={props.size}
               $size={props.size}
               $genre={props.genre}
-              $genreType={props.genreType}
               $isActive={props.isActive}
             />
           ) : props.view == 'circle' ? (
@@ -65,7 +60,6 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
               size={props.size}
               $size={props.size}
               $genre={props.genre}
-              $genreType={props.genreType}
               $isActive={props.isActive}
             />
           ) : (
@@ -73,7 +67,6 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
               size={props.size}
               $size={props.size}
               $genre={props.genre}
-              $genreType={props.genreType}
               $isActive={props.isActive}
             />
           )}
@@ -85,7 +78,6 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
   return (
     <CheckboxWrapper
       $genre={props.genre}
-      $genreType={props.genreType}
       $view={props.view}
       $checked={props.checked}
       $width={props.width}
@@ -100,14 +92,11 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
       tabIndex={0}
       onClick={() => !props.isDisabled && handleOnClick(!props.checked)}
     >
-      {!props.isDisabled && !props.isLoading && <Ripple />}
       {props.isOnlyLoading ? (
         props.isLoading ? (
           <ModalLoading
             size={props.size}
-            color={
-              theme.colors.checkbox[props.genre][props.genreType].color.rest
-            }
+            color={theme.colors.checkbox[props.genre].color.rest}
           />
         ) : (
           children
@@ -120,10 +109,8 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
               size={props.size}
               color={
                 props.isActive
-                  ? theme.colors.checkbox[props.genre][props.genreType].color
-                      .active
-                  : theme.colors.checkbox[props.genre][props.genreType].color
-                      .rest
+                  ? theme.colors.checkbox[props.genre].color.active
+                  : theme.colors.checkbox[props.genre].color.rest
               }
             />
           )}

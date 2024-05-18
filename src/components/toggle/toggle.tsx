@@ -10,7 +10,6 @@ export const Toggle = memo((props: ToggleProps) => {
       onChange={() => props.onChange && props.onChange(!props.value)}
       disabled={props.isDisabled}
       $genre={props.genre}
-      $genreType={props.genreType}
       $isDisabled={props.isDisabled}
       $value={props.value}
       $size={props.size}

@@ -4,8 +4,6 @@ import { CheckboxProps } from '../checkbox/checkbox.types'
 export interface CheckboxesProps<T extends Record<string, unknown>> {
   checkboxGenre: CheckboxProps['genre']
 
-  checkboxGenreType: CheckboxProps['genreType']
-
   checkBoxView: CheckboxProps['view']
 
   checkboxWidth?: CheckboxProps['width']

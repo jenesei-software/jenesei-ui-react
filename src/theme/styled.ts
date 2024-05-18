@@ -1,25 +1,4 @@
-export interface TJeneseiThemeGenreTypeState {
-  background: {
-    rest: string
-    hover: string
-    focus: string
-    active: string
-  }
-  border: {
-    rest: string
-    hover: string
-    focus: string
-    active: string
-  }
-  color: {
-    rest: string
-    hover: string
-    focus: string
-    active: string
-  }
-}
-
-export interface TJeneseiThemeGenreTypeInputState {
+export interface TJeneseiThemeGenreType {
   background: {
     rest: string
     hover: string
@@ -41,24 +20,9 @@ export interface TJeneseiThemeGenreTypeInputState {
   }
 }
 
-export interface TJeneseiThemeGenreType {
-  primary: TJeneseiThemeGenreTypeState
-  secondary: TJeneseiThemeGenreTypeState
-}
-
-export interface TJeneseiThemeGenreInputType {
-  primary: TJeneseiThemeGenreTypeInputState
-  secondary: TJeneseiThemeGenreTypeInputState
-}
-
 export interface TJeneseiThemeGenre {
   product: TJeneseiThemeGenreType
   gray: TJeneseiThemeGenreType
-}
-
-export interface TJeneseiThemeInputGenre {
-  product: TJeneseiThemeGenreInputType
-  gray: TJeneseiThemeGenreInputType
 }
 
 export interface IJeneseiThemeColorVariant {
@@ -92,6 +56,6 @@ export interface IJeneseiTheme {
     button: TJeneseiThemeGenre
     toggle: TJeneseiThemeGenre
     checkbox: TJeneseiThemeGenre
-    input: TJeneseiThemeInputGenre
+    input: TJeneseiThemeGenre
   }
 }

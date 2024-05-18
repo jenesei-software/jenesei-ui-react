@@ -12,8 +12,7 @@ export default meta
 type Story = StoryObj<typeof InputDefault>
 
 const defaultArgs: Partial<InputDefaultProps> = {
-  genre: 'product',
-  genreType: 'secondary',
+  genre: 'gray',
   size: 'large',
   isError: false,
   isDisabled: false,

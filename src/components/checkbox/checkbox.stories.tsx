@@ -13,7 +13,6 @@ type Story = StoryObj<typeof Checkbox>
 export const Default: Story = {
   args: {
     genre: 'product',
-    genreType: 'primary',
     view: 'circle',
     checked: true,
     children: 'Zhopa',

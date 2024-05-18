@@ -7,70 +7,61 @@ import { IJeneseiThemeSizeData, KEY_SIZE_DATA } from '../../theme'
 /****************************************** Genre *************************************************/
 const ButtonGenre = css<StyledButtonProps>`
   ${(props) => css`
-    background: ${props.theme.colors.button[props.$genre][props.$genreType]
-      .background.rest};
-    border-color: ${props.theme.colors.button[props.$genre][props.$genreType]
-      .border.rest};
-    color: ${props.theme.colors.button[props.$genre][props.$genreType].color
-      .rest};
+    background: ${props.theme.colors.button[props.$genre].background.rest};
+    border-color: ${props.theme.colors.button[props.$genre].border.rest};
+    color: ${props.theme.colors.button[props.$genre].color.rest};
     & span {
-      color: ${props.theme.colors.button[props.$genre][props.$genreType].color
-        .rest};
+      color: ${props.theme.colors.button[props.$genre].color.rest};
     }
     & path {
-      stroke: ${props.theme.colors.button[props.$genre][props.$genreType].color
-        .rest};
+      stroke: ${props.theme.colors.button[props.$genre].color.rest};
     }
 
     &:focus-visible {
       outline: 2px solid ${props.theme.colors.focus};
-      border-color: ${props.theme.colors.button[props.$genre][props.$genreType]
-        .border.focus};
-      background: ${props.theme.colors.button[props.$genre][props.$genreType]
-        .background.focus};
+      border-color: ${props.theme.colors.button[props.$genre].border.focus};
+      background: ${props.theme.colors.button[props.$genre].background.focus};
 
-      color: ${props.theme.colors.button[props.$genre][props.$genreType].color
-        .focus};
+      color: ${props.theme.colors.button[props.$genre].color.focus};
       & span {
-        color: ${props.theme.colors.button[props.$genre][props.$genreType].color
-          .focus};
+        color: ${props.theme.colors.button[props.$genre].color.focus};
       }
       & path {
-        stroke: ${props.theme.colors.button[props.$genre][props.$genreType]
-          .color.focus};
+        stroke: ${props.theme.colors.button[props.$genre].color.focus};
       }
     }
     &:hover {
-      background: ${props.theme.colors.button[props.$genre][props.$genreType]
-        .background.hover};
-      border-color: ${props.theme.colors.button[props.$genre][props.$genreType]
-        .border.hover};
-      color: ${props.theme.colors.button[props.$genre][props.$genreType].color
-        .hover};
+      background: ${props.theme.colors.button[props.$genre].background.hover};
+      border-color: ${props.theme.colors.button[props.$genre].border.hover};
+      color: ${props.theme.colors.button[props.$genre].color.hover};
       & span {
-        color: ${props.theme.colors.button[props.$genre][props.$genreType].color
-          .hover};
+        color: ${props.theme.colors.button[props.$genre].color.hover};
       }
       & path {
-        stroke: ${props.theme.colors.button[props.$genre][props.$genreType]
-          .color.hover};
+        stroke: ${props.theme.colors.button[props.$genre].color.hover};
+      }
+    }
+    &:active {
+      background: ${props.theme.colors.button[props.$genre].background.active};
+      border-color: ${props.theme.colors.button[props.$genre].border.active};
+      color: ${props.theme.colors.button[props.$genre].color.active};
+      & span {
+        color: ${props.theme.colors.button[props.$genre].color.active};
+      }
+      & path {
+        stroke: ${props.theme.colors.button[props.$genre].color.active};
       }
     }
     ${props.$isActive &&
     css`
-      background: ${props.theme.colors.button[props.$genre][props.$genreType]
-        .background.active};
-      border-color: ${props.theme.colors.button[props.$genre][props.$genreType]
-        .border.active};
-      color: ${props.theme.colors.button[props.$genre][props.$genreType].color
-        .active};
+      background: ${props.theme.colors.button[props.$genre].background.active};
+      border-color: ${props.theme.colors.button[props.$genre].border.active};
+      color: ${props.theme.colors.button[props.$genre].color.active};
       & span {
-        color: ${props.theme.colors.button[props.$genre][props.$genreType].color
-          .active};
+        color: ${props.theme.colors.button[props.$genre].color.active};
       }
       & path {
-        stroke: ${props.theme.colors.button[props.$genre][props.$genreType]
-          .color.active};
+        stroke: ${props.theme.colors.button[props.$genre].color.active};
       }
     `}
   `};
@@ -82,19 +73,18 @@ const ButtonDisabled = css<StyledButtonProps>`
     props.$isDisabled || props.$isHidden
       ? css`
           opacity: 0.5;
-          background: ${props.theme.colors.button[props.$genre][
-            props.$genreType
-          ].background.rest} !important;
+          background: ${props.theme.colors.button[props.$genre].background
+            .rest} !important;
 
-          color: ${props.theme.colors.button[props.$genre][props.$genreType]
-            .color.rest} !important;
+          color: ${props.theme.colors.button[props.$genre].color
+            .rest} !important;
           & span {
-            color: ${props.theme.colors.button[props.$genre][props.$genreType]
-              .color.rest} !important;
+            color: ${props.theme.colors.button[props.$genre].color
+              .rest} !important;
           }
           & path {
-            stroke: ${props.theme.colors.button[props.$genre][props.$genreType]
-              .color.rest} !important;
+            stroke: ${props.theme.colors.button[props.$genre].color
+              .rest} !important;
           }
         `
       : css`
@@ -122,7 +112,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
   overflow: hidden;
   isolation: isolate;
   user-select: none;
-  transition: all 0.3s;
+  transition:
+    all 0.2s,
+    outline 0s;
   box-sizing: border-box;
   overflow: hidden;
   text-overflow: ellipsis;

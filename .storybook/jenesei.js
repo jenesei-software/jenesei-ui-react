@@ -2,7 +2,7 @@ import { create } from '@storybook/theming/create'
 
 export default create({
   base: 'light',
-  brandTitle: 'Jenesei UI React',
+  brandTitle: 'Jenesei',
   brandUrl: 'https://jenesei.ru/',
   brandImage: 'https://id.jenesei.ru/logo/logo-sticker-min-jenesei.png',
   brandTarget: '_blank',

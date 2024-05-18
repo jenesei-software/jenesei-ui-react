@@ -2,7 +2,6 @@ import { TLibraryIconNameString } from '../../main'
 import {
   TJeneseiFontFamily,
   TJeneseiThemeGenre,
-  TJeneseiThemeGenreType,
   TJeneseiThemeSize,
 } from '../../theme'
 
@@ -10,8 +9,6 @@ export interface ButtonProps {
   className?: string
 
   genre: TButtonGenre
-
-  genreType: TButtonGenreType
 
   children?: React.ReactNode
 
@@ -29,8 +26,6 @@ export interface ButtonProps {
 
   isActive?: boolean
 
-  isRipple?: boolean
-
   onClick?: () => void
 
   type?: 'button' | 'submit' | 'reset'
@@ -46,11 +41,7 @@ export interface ButtonProps {
 
 export type TButtonGenre = keyof TJeneseiThemeGenre
 
-export type TButtonGenreType = keyof TJeneseiThemeGenreType
-
 export interface StyledButtonProps {
-  $genreType: ButtonProps['genreType']
-
   $genre: ButtonProps['genre']
 
   $isDisabled?: ButtonProps['isDisabled']

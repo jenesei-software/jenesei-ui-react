@@ -1,5 +1,4 @@
 import { FC, memo } from 'react'
-import { Ripple } from 'react-ripple-click'
 import { useTheme } from 'styled-components'
 
 import { ButtonProps, StyledButton } from '.'
@@ -13,7 +12,6 @@ export const Button: FC<ButtonProps> = memo((props) => {
     <StyledButton
       tabIndex={0}
       $genre={props.genre}
-      $genreType={props.genreType}
       $width={props.width}
       $size={props.size}
       $isDisabled={props.isDisabled}
@@ -32,12 +30,11 @@ export const Button: FC<ButtonProps> = memo((props) => {
         props.onClick()
       }
     >
-      {!props.isDisabled && !props.isLoading && props.isRipple && <Ripple />}
       {props.isOnlyLoading ? (
         props.isLoading ? (
           <ModalLoading
             size={props.size}
-            color={theme.colors.button[props.genre][props.genreType].color.rest}
+            color={theme.colors.button[props.genre].color.rest}
           />
         ) : (
           <>
@@ -54,9 +51,8 @@ export const Button: FC<ButtonProps> = memo((props) => {
               size={props.size}
               color={
                 props.isActive
-                  ? theme.colors.button[props.genre][props.genreType].color
-                      .active
-                  : theme.colors.button[props.genre][props.genreType].color.rest
+                  ? theme.colors.button[props.genre].color.active
+                  : theme.colors.button[props.genre].color.rest
               }
             />
           )}

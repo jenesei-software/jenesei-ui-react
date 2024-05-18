@@ -15,7 +15,6 @@ type Story = StoryObj<typeof Checkboxes>
 export const Default: Story = {
   args: {
     checkboxGenre: 'product',
-    checkboxGenreType: 'secondary',
     checkBoxView: 'circle',
     checkboxWidth: '100%',
     checkboxIsHiddenBorder: false,
@@ -36,7 +35,6 @@ export const Default: Story = {
 export const Children: Story = {
   args: {
     checkboxGenre: 'product',
-    checkboxGenreType: 'secondary',
     checkBoxView: 'circle',
     checkboxIsActive: false,
     size: 'large',

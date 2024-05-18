@@ -15,7 +15,6 @@ type Story = StoryObj<typeof Toggle>
 export const Default: Story = {
   args: {
     genre: 'product',
-    genreType: 'primary',
     isDisabled: false,
     isError: false,
     value: true,

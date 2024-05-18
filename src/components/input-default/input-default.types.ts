@@ -1,10 +1,6 @@
 import { FocusEventHandler, HTMLInputTypeAttribute } from 'react'
 
-import {
-  TJeneseiThemeGenre,
-  TJeneseiThemeGenreType,
-  TJeneseiThemeSize,
-} from '../../theme'
+import { TJeneseiThemeGenre, TJeneseiThemeSize } from '../../theme'
 
 export interface InputDefaultProps {
   className?: string
@@ -12,8 +8,6 @@ export interface InputDefaultProps {
   defaultValue?: string
 
   errorMessage?: string
-
-  genreType: TInputDefaultGenreType
 
   genre: TInputDefaultGenre
 
@@ -70,12 +64,8 @@ export interface InputDefaultChildrenProps {
 
 export type TInputDefaultGenre = keyof TJeneseiThemeGenre
 
-export type TInputDefaultGenreType = keyof TJeneseiThemeGenreType
-
 export interface StyledInputDefaultProps {
   $genre: InputDefaultProps['genre']
-
-  $genreType: InputDefaultProps['genreType']
 
   $size: InputDefaultProps['size']
 
