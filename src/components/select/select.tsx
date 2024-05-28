@@ -11,25 +11,6 @@ import {
 } from '.'
 import { KEY_SIZE_DATA } from '../../theme'
 
-const options: Item[] = [
-  { label: 'Partnership', value: 'Partnership', id: 0 },
-  { label: 'Service request', value: 'Service request', id: 1 },
-  { label: 'Career', value: 'Career', id: 2 },
-  { label: 'Other', value: 'Other', id: 3 },
-  { label: 'Partnership', value: 'Partnership', id: 4 },
-  { label: 'Service request', value: 'Service request', id: 5 },
-  { label: 'Career', value: 'Career', id: 6 },
-  { label: 'Other', value: 'Other', id: 7 },
-  { label: 'Partnership', value: 'Partnership', id: 8 },
-  { label: 'Service request', value: 'Service request', id: 9 },
-  { label: 'Career', value: 'Career', id: 10 },
-  { label: 'Other', value: 'Other', id: 11 },
-]
-export interface Item {
-  label: string
-  value: string
-  id: number
-}
 export const Select = memo((props: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
@@ -41,7 +22,10 @@ export const Select = memo((props: SelectProps) => {
 
   const maxViewLength = useMemo(() => 5, [])
 
-  const optionsLength = useMemo(() => options.length, [])
+  const optionsLength = useMemo(
+    () => props.option.length,
+    [props.option.length],
+  )
 
   const height = useMemo(
     () =>
@@ -240,7 +224,7 @@ export const Select = memo((props: SelectProps) => {
         $genre={props.inputProps.genre}
         $isShowScroll={optionsLength > maxViewLength}
       >
-        {options.map((option) => (
+        {props.option.map((option) => (
           <DropdownOption
             $isActive={props.inputProps.isActive}
             $isError={props.inputProps.isError}
