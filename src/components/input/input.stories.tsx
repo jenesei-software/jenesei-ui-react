@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
-import { InputDefault, InputDefaultProps } from '.'
+import { Input, InputProps } from '.'
 
-const meta: Meta<typeof InputDefault> = {
-  component: InputDefault,
+const meta: Meta<typeof Input> = {
+  component: Input,
   title: 'Input',
 }
 
 export default meta
-type Story = StoryObj<typeof InputDefault>
+type Story = StoryObj<typeof Input>
 
-const defaultArgs: Partial<InputDefaultProps> = {
+const defaultArgs: Partial<InputProps> = {
   genre: 'gray',
   size: 'large',
   isError: false,

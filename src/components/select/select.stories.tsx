@@ -1,46 +1,33 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
-import { CustomSelect } from '.'
+import { Select, SelectProps } from '.'
 
-const meta: Meta<typeof CustomSelect> = {
-  component: CustomSelect,
+const meta: Meta<typeof Select> = {
+  component: Select,
   title: 'Select',
 }
 
 export default meta
+type Story = StoryObj<typeof Select>
 
-type Story = StoryObj<typeof CustomSelect>
-
-export const Default: Story = {
-  args: {
-    options: [
-      {
-        value: 'Zhopa',
-        label: 'hui',
-        iconGenre: 'gray',
-        iconView: 'square',
-        iconSize: 'medium',
-      },
-      {
-        value: 'Zhopa2',
-        label: 'hui',
-        iconGenre: 'gray',
-        iconView: 'square',
-        iconSize: 'medium',
-      },
-    ],
-    value: [
-      {
-        value: 'Zhopa',
-        label: 'hui',
-        iconGenre: 'product',
-        iconView: 'square',
-        iconSize: 'medium',
-      },
-    ],
+const defaultArgs: Partial<SelectProps> = {
+  inputProps: {
     genre: 'gray',
     size: 'large',
-    isCloseMenuOnSelect: false,
+    isError: false,
+    isDisabled: false,
+    isActive: undefined,
+    isRequired: false,
+    isReadOnly: false,
+    isLoading: false,
+    placeholder: 'White placeholder?',
+    width: '300px',
+  },
+}
+
+export const String: Story = {
+  args: {
+    ...defaultArgs,
   },
 }

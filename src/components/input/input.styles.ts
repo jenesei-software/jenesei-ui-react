@@ -5,29 +5,29 @@ import { getFontStyles } from '../../fonts'
 import { IJeneseiThemeSizeData, KEY_SIZE_DATA } from '../../theme'
 import { ModalLoading } from '../modal-loading'
 import {
-  InputDefaultChildrenProps,
-  StyledInputDefaultProps,
-  StyledInputDefaultWrapperProps,
-} from './input-default.types'
+  InputChildrenProps,
+  StyledInputProps,
+  StyledInputWrapperProps,
+} from './input.types'
 
 /****************************************** Hidden *************************************************/
-const InputDefaultWrapperHidden = css<StyledInputDefaultWrapperProps>`
+const InputWrapperHidden = css<StyledInputWrapperProps>`
   opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
 `
 
 /****************************************** Wrapper *************************************************/
-export const StyledInputDefaultWrapper = styled.div<StyledInputDefaultWrapperProps>`
+export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
   width: max-content;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: ${(props) => props.$width ?? '100%'};
-  ${InputDefaultWrapperHidden};
+  ${InputWrapperHidden};
 `
 
 /****************************************** Error *************************************************/
-export const InputDefaultErrorMessage = styled.div`
+export const InputErrorMessage = styled.div`
   ${getFontStyles(12, 400, 'Inter')};
   position: absolute;
   bottom: -15px;
@@ -35,7 +35,7 @@ export const InputDefaultErrorMessage = styled.div`
   color: ${(props) => props.theme.colors.danger};
 `
 
-export const InputDefaultIsErrorBorder = css<StyledInputDefaultProps>`
+export const InputIsErrorBorder = css<StyledInputProps>`
   ${(props) =>
     props.$isError &&
     css`
@@ -49,7 +49,7 @@ export const InputDefaultIsErrorBorder = css<StyledInputDefaultProps>`
 `
 
 /****************************************** Placeholder *************************************************/
-export const InputDefaultPlaceholder = css<StyledInputDefaultProps>`
+export const InputPlaceholder = css<StyledInputProps>`
   ::placeholder,
   ::-webkit-input-placeholder {
     ${(props) => getFontStyles(16, props.$isBold ? 500 : 400, 'Inter')};
@@ -68,7 +68,7 @@ export const InputDefaultPlaceholder = css<StyledInputDefaultProps>`
 `
 
 /****************************************** Genre *************************************************/
-const InputDefaultGenre = css<StyledInputDefaultProps>`
+const InputGenre = css<StyledInputProps>`
   ${(props) => css`
     background: ${props.theme.colors.input[props.$genre].background.rest};
     border-color: ${props.theme.colors.input[props.$genre].border.rest};
@@ -131,12 +131,10 @@ const InputDefaultGenre = css<StyledInputDefaultProps>`
 `
 
 /****************************************** Size *************************************************/
-export const InputDefaultSize = css<StyledInputDefaultProps>`
-  ${(props) => InputDefaultSizeConstructor(KEY_SIZE_DATA[props.$size])};
+export const InputSize = css<StyledInputProps>`
+  ${(props) => InputSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
-export const InputDefaultSizeConstructor = (
-  props: IJeneseiThemeSizeData,
-) => css`
+export const InputSizeConstructor = (props: IJeneseiThemeSizeData) => css`
   padding: 0px ${props.padding}px;
   height: ${props.height}px;
   min-height: ${props.height}px;
@@ -145,7 +143,7 @@ export const InputDefaultSizeConstructor = (
 `
 
 /****************************************** Default *************************************************/
-export const StyledInputDefaultCSS = css<StyledInputDefaultProps>`
+export const StyledInputCSS = css<StyledInputProps>`
   resize: none;
   overflow: hidden;
   box-sizing: border-box;
@@ -160,10 +158,10 @@ export const StyledInputDefaultCSS = css<StyledInputDefaultProps>`
   outline: none;
 
   ${(props) => getFontStyles(16, props.$isBold ? 500 : 400, 'Inter')};
-  ${InputDefaultSize};
-  ${InputDefaultGenre};
-  ${InputDefaultIsErrorBorder};
-  ${InputDefaultPlaceholder};
+  ${InputSize};
+  ${InputGenre};
+  ${InputIsErrorBorder};
+  ${InputPlaceholder};
   ${(props) =>
     props.$prefixChildren &&
     css`
@@ -177,33 +175,29 @@ export const StyledInputDefaultCSS = css<StyledInputDefaultProps>`
     `};
 `
 
-export const StyledInputDefault = styled.input<StyledInputDefaultProps>`
-  ${StyledInputDefaultCSS};
+export const StyledInput = styled.input<StyledInputProps>`
+  ${StyledInputCSS};
 `
 
-export const StyledInputDefaultFormat = styled(
-  PatternFormat,
-)<StyledInputDefaultProps>`
-  ${StyledInputDefaultCSS};
+export const StyledInputFormat = styled(PatternFormat)<StyledInputProps>`
+  ${StyledInputCSS};
 `
 
 /****************************************** Children *************************************************/
-export const InputDefaultPrefixChildren = styled.div<InputDefaultChildrenProps>`
+export const InputPrefixChildren = styled.div<InputChildrenProps>`
   position: absolute;
   left: ${(props) => props.left};
   width: ${(props) => props.width};
 `
 
-export const InputDefaultPostfixChildren = styled.div<InputDefaultChildrenProps>`
+export const InputPostfixChildren = styled.div<InputChildrenProps>`
   position: absolute;
   right: ${(props) => props.left};
   width: ${(props) => props.width};
 `
 
 /****************************************** ModalLoading *************************************************/
-export const InputDefaultStyledModalLoading = styled(
-  ModalLoading,
-)<StyledInputDefaultProps>`
+export const InputStyledModalLoading = styled(ModalLoading)<StyledInputProps>`
   position: absolute;
   display: flex;
   align-items: center;

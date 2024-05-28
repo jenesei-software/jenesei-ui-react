@@ -2,14 +2,14 @@ import { FocusEventHandler, HTMLInputTypeAttribute } from 'react'
 
 import { TJeneseiThemeGenre, TJeneseiThemeSize } from '../../theme'
 
-export interface InputDefaultProps {
+export interface InputProps {
   className?: string
 
   defaultValue?: string
 
   errorMessage?: string
 
-  genre: TInputDefaultGenre
+  genre: TInputGenre
 
   size: TJeneseiThemeSize
 
@@ -37,9 +37,9 @@ export interface InputDefaultProps {
 
   isBold?: boolean
 
-  postfixChildren?: InputDefaultChildrenProps
+  postfixChildren?: InputChildrenProps
 
-  prefixChildren?: InputDefaultChildrenProps
+  prefixChildren?: InputChildrenProps
 
   type?: HTMLInputTypeAttribute
 
@@ -52,7 +52,7 @@ export interface InputDefaultProps {
   mask?: string | string[]
 }
 
-export interface InputDefaultChildrenProps {
+export interface InputChildrenProps {
   children: React.ReactNode
 
   left: string
@@ -62,28 +62,28 @@ export interface InputDefaultChildrenProps {
   width: string
 }
 
-export type TInputDefaultGenre = keyof TJeneseiThemeGenre
+export type TInputGenre = keyof TJeneseiThemeGenre
 
-export interface StyledInputDefaultProps {
-  $genre: InputDefaultProps['genre']
+export interface StyledInputProps {
+  $genre: InputProps['genre']
 
-  $size: InputDefaultProps['size']
+  $size: InputProps['size']
 
-  $isError?: InputDefaultProps['isError']
+  $isError?: InputProps['isError']
 
-  $isLoading?: InputDefaultProps['isLoading']
+  $isLoading?: InputProps['isLoading']
 
-  $isActive?: InputDefaultProps['isActive']
+  $isActive?: InputProps['isActive']
 
-  $postfixChildren?: InputDefaultChildrenProps
+  $postfixChildren?: InputChildrenProps
 
-  $prefixChildren?: InputDefaultChildrenProps
+  $prefixChildren?: InputChildrenProps
 
-  $isBold?: InputDefaultProps['isBold']
+  $isBold?: InputProps['isBold']
 }
 
-export interface StyledInputDefaultWrapperProps {
-  $isDisabled?: InputDefaultProps['isDisabled']
+export interface StyledInputWrapperProps {
+  $isDisabled?: InputProps['isDisabled']
 
-  $width?: InputDefaultProps['width']
+  $width?: InputProps['width']
 }
