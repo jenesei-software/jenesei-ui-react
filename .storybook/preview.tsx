@@ -11,8 +11,6 @@ import '@fontsource/inter/500.css'
 import '@fontsource/inter/600.css'
 import '@fontsource/inter/700.css'
 
-import 'react-ripple-click/dist/index.css'
-
 export const preview: Preview = {
   parameters: {
     controls: {

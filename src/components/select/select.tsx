@@ -1,17 +1,18 @@
 import gsap from 'gsap'
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTheme } from 'styled-components'
 
 import {
   DropdownList,
   DropdownOption,
+  ISelectItem,
   SelectProps,
   SelectStyledInput,
   SelectWrapper,
 } from '.'
 import { KEY_SIZE_DATA } from '../../theme'
 
-export const Select = memo((props: SelectProps) => {
+export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
 
@@ -39,7 +40,7 @@ export const Select = memo((props: SelectProps) => {
     [props.inputProps.size],
   )
 
-  const onFocus = useCallback(() => {
+  const handleOnFocus = useCallback(() => {
     if (isAnimating) return
     if (isOpen) return
 
@@ -96,7 +97,7 @@ export const Select = memo((props: SelectProps) => {
     })
   }, [height, isAnimating, isOpen, props.inputProps.size, theme.colors.focus])
 
-  const onBlur = useCallback(() => {
+  const handleOnBlur = useCallback(() => {
     if (isAnimating) return
     if (!isOpen) return
 
@@ -177,7 +178,7 @@ export const Select = memo((props: SelectProps) => {
         !listRef.current.contains(event.target as Node) &&
         !inputRef.current.contains(event.target as Node)
       ) {
-        onBlur()
+        handleOnBlur()
       }
     }
 
@@ -186,13 +187,13 @@ export const Select = memo((props: SelectProps) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [onBlur])
+  }, [handleOnBlur])
   return (
     <SelectWrapper
       tabIndex={0}
       $width={props.inputProps.width}
-      onFocus={onFocus}
-      onBlur={onBlur}
+      onFocus={handleOnFocus}
+      onBlur={handleOnBlur}
     >
       <SelectStyledInput
         $isActive={props.inputProps.isActive}
@@ -217,7 +218,7 @@ export const Select = memo((props: SelectProps) => {
         onBlur={props.inputProps.onBlur}
         onFocus={props.inputProps.onFocus}
         ref={inputRef}
-        onClick={onFocus}
+        onClick={handleOnFocus}
       />
       <DropdownList
         ref={listRef}
@@ -242,4 +243,4 @@ export const Select = memo((props: SelectProps) => {
       </DropdownList>
     </SelectWrapper>
   )
-})
+}

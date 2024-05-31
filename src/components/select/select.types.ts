@@ -1,14 +1,16 @@
 import { InputProps, StyledInputProps, StyledInputWrapperProps } from '../input'
 
 export interface ISelectItem {
-  label: string
-  value: string
+  label: string | number
+  value: string | number
   id: number
 }
 
-export interface SelectProps {
+export interface SelectProps<T extends ISelectItem> {
   inputProps: InputProps
-  option: ISelectItem[]
+  option: T[]
+  value: T[]
+  onChange: (option: T[]) => void
 }
 
 export interface SelectWrapperProps extends StyledInputWrapperProps {}

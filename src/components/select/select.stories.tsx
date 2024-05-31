@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { useState } from 'react'
 import 'styled-components'
 
-import { Select, SelectProps } from '.'
+import { ISelectItem, Select, SelectProps } from '.'
 
 const meta: Meta<typeof Select> = {
   component: Select,
@@ -11,7 +12,7 @@ const meta: Meta<typeof Select> = {
 export default meta
 type Story = StoryObj<typeof Select>
 
-const defaultArgs: Partial<SelectProps> = {
+const defaultArgs: Partial<SelectProps<IOption>> = {
   inputProps: {
     genre: 'gray',
     size: 'large',
@@ -24,7 +25,11 @@ const defaultArgs: Partial<SelectProps> = {
     placeholder: 'White placeholder?',
     width: '300px',
   },
-  option: [
+}
+
+interface IOption extends ISelectItem {}
+const SelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
+  const [option] = useState([
     { label: 'Partnership', value: 'Partnership', id: 0 },
     { label: 'Service request', value: 'Service request', id: 1 },
     { label: 'Career', value: 'Career', id: 2 },
@@ -37,10 +42,25 @@ const defaultArgs: Partial<SelectProps> = {
     { label: 'Service request', value: 'Service request', id: 9 },
     { label: 'Career', value: 'Career', id: 10 },
     { label: 'Other', value: 'Other', id: 11 },
-  ],
+  ])
+  const [value, setValue] = useState<IOption[]>([option[0]])
+
+  const handleChange = (option: IOption[]) => {
+    setValue(option)
+  }
+
+  return (
+    <Select<IOption>
+      {...props}
+      option={option}
+      value={value}
+      onChange={handleChange}
+    />
+  )
 }
 
 export const String: Story = {
+  render: (args) => <SelectWrapper {...args} />,
   args: {
     ...defaultArgs,
   },
