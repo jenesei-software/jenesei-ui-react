@@ -27,6 +27,8 @@ export interface InputProps {
 
   isRequired?: boolean
 
+  isCustomIcon?: boolean
+
   onBlur?: FocusEventHandler<HTMLInputElement>
 
   onChange?: (value: string) => void
@@ -80,6 +82,8 @@ export interface StyledInputProps {
   $prefixChildren?: InputChildrenProps
 
   $isBold?: InputProps['isBold']
+
+  $isCustomIcon?: InputProps['isCustomIcon']
 }
 
 export interface StyledInputWrapperProps {

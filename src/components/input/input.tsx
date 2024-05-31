@@ -34,6 +34,7 @@ export const Input = memo((props: InputProps) => {
           $genre={props.genre}
           $size={props.size}
           $isBold={props.isBold}
+          $isCustomIcon={props.isCustomIcon}
           disabled={props.isDisabled}
           readOnly={props.isReadOnly}
           required={props.isRequired}

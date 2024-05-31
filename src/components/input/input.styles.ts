@@ -77,7 +77,10 @@ const InputGenre = css<StyledInputProps>`
       color: ${props.theme.colors.input[props.$genre].color.rest};
     }
     & path {
-      stroke: ${props.theme.colors.input[props.$genre].color.rest};
+      ${!props.$isCustomIcon &&
+      css`
+        stroke: ${props.theme.colors.input[props.$genre].color.rest};
+      `}
     }
 
     &:focus-visible {
@@ -90,7 +93,10 @@ const InputGenre = css<StyledInputProps>`
         color: ${props.theme.colors.input[props.$genre].color.focus};
       }
       & path {
-        stroke: ${props.theme.colors.input[props.$genre].color.focus};
+        ${!props.$isCustomIcon &&
+        css`
+          stroke: ${props.theme.colors.input[props.$genre].color.focus};
+        `}
       }
     }
     &:hover {
@@ -101,7 +107,10 @@ const InputGenre = css<StyledInputProps>`
         color: ${props.theme.colors.input[props.$genre].color.hover};
       }
       & path {
-        stroke: ${props.theme.colors.input[props.$genre].color.hover};
+        ${!props.$isCustomIcon &&
+        css`
+          stroke: ${props.theme.colors.input[props.$genre].color.hover};
+        `}
       }
     }
     &:active {
@@ -112,7 +121,10 @@ const InputGenre = css<StyledInputProps>`
         color: ${props.theme.colors.input[props.$genre].color.active};
       }
       & path {
-        stroke: ${props.theme.colors.input[props.$genre].color.active};
+        ${!props.$isCustomIcon &&
+        css`
+          stroke: ${props.theme.colors.input[props.$genre].color.active};
+        `}
       }
     }
     ${props.$isActive &&
@@ -124,7 +136,10 @@ const InputGenre = css<StyledInputProps>`
         color: ${props.theme.colors.input[props.$genre].color.active};
       }
       & path {
-        stroke: ${props.theme.colors.input[props.$genre].color.active};
+        ${!props.$isCustomIcon &&
+        css`
+          stroke: ${props.theme.colors.input[props.$genre].color.active};
+        `}
       }
     `}
   `};

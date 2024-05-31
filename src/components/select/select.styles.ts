@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components'
 
-import { SelectStyledInputProps, SelectWrapperProps } from '.'
+import {
+  SelectStyledInputProps,
+  SelectStyledOptionProps,
+  SelectWrapperProps,
+} from '.'
 import { StyledInput, StyledInputCSS } from '../input'
 
 export const SelectWrapper = styled.div<SelectWrapperProps>`
@@ -53,7 +57,7 @@ export const DropdownList = styled.ul<{
     `}
 `
 
-export const DropdownOption = styled.li<SelectStyledInputProps>`
+export const DropdownOption = styled.li<SelectStyledOptionProps>`
   ${StyledInputCSS};
   display: flex;
   align-items: center;
@@ -61,6 +65,8 @@ export const DropdownOption = styled.li<SelectStyledInputProps>`
   opacity: 0;
   border: 0px;
   cursor: pointer;
+  background-color: ${(props) => props.$isSelectedItem && `#fff`};
+  padding-left: ${(props) => props.$isCheckboxProps && `0px`};
 `
 
 export const SelectStyledInput = styled(StyledInput)<SelectStyledInputProps>``

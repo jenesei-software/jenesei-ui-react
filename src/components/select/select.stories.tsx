@@ -14,38 +14,50 @@ type Story = StoryObj<typeof Select>
 
 const defaultArgs: Partial<SelectProps<IOption>> = {
   inputProps: {
-    genre: 'gray',
     size: 'large',
-    isError: false,
-    isDisabled: false,
-    isActive: undefined,
-    isRequired: false,
-    isReadOnly: false,
-    isLoading: false,
+    genre: 'gray',
     placeholder: 'White placeholder?',
     width: '300px',
+  },
+  size: 'large',
+  checkboxProps: {
+    genre: 'gray',
+    view: 'circle',
+    size: 'medium',
+    isHiddenBorder: true,
+  },
+  optionProps: {
+    size: 'large',
+    genre: 'gray',
+    isCustomIcon: true,
+  },
+  listProps: {
+    size: 'large',
+    genre: 'gray',
   },
 }
 
 interface IOption extends ISelectItem {}
+
 const SelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
-  const [option] = useState([
-    { label: 'Partnership', value: 'Partnership', id: 0 },
-    { label: 'Service request', value: 'Service request', id: 1 },
-    { label: 'Career', value: 'Career', id: 2 },
-    { label: 'Other', value: 'Other', id: 3 },
-    { label: 'Partnership', value: 'Partnership', id: 4 },
-    { label: 'Service request', value: 'Service request', id: 5 },
-    { label: 'Career', value: 'Career', id: 6 },
-    { label: 'Other', value: 'Other', id: 7 },
-    { label: 'Partnership', value: 'Partnership', id: 8 },
-    { label: 'Service request', value: 'Service request', id: 9 },
-    { label: 'Career', value: 'Career', id: 10 },
-    { label: 'Other', value: 'Other', id: 11 },
+  const [option] = useState<IOption[]>([
+    { label: 'Partnership', value: 0 },
+    { label: 'Service request', value: 1 },
+    { label: 'Career', value: 2 },
+    { label: 'Other', value: 3 },
+    { label: 'Partnership', value: 4 },
+    { label: 'Service request', value: 5 },
+    { label: 'Career', value: 6 },
+    { label: 'Other', value: 7 },
+    { label: 'Partnership', value: 8 },
+    { label: 'Service request', value: 9 },
+    { label: 'Career', value: 10 },
+    { label: 'Other', value: 11 },
   ])
   const [value, setValue] = useState<IOption[]>([option[0]])
 
   const handleChange = (option: IOption[]) => {
+    console.log(option)
     setValue(option)
   }
 

@@ -11,6 +11,9 @@ import {
   SelectWrapper,
 } from '.'
 import { KEY_SIZE_DATA } from '../../theme'
+import { Checkbox } from '../checkbox'
+
+const DEFAULT_MAX_VIEW = 5
 
 export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -21,7 +24,10 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
 
   const theme = useTheme()
 
-  const maxViewLength = useMemo(() => 5, [])
+  const maxViewLength = useMemo(
+    () => props.maxView ?? DEFAULT_MAX_VIEW,
+    [props.maxView],
+  )
 
   const optionsLength = useMemo(
     () => props.option.length,
@@ -30,14 +36,40 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
 
   const height = useMemo(
     () =>
-      KEY_SIZE_DATA[props.inputProps.size].height *
+      KEY_SIZE_DATA[props.size].height *
       (optionsLength < maxViewLength ? optionsLength : maxViewLength),
-    [optionsLength, maxViewLength, props.inputProps.size],
+    [optionsLength, maxViewLength, props.size],
   )
 
-  const radius = useMemo(
-    () => KEY_SIZE_DATA[props.inputProps.size].radius,
-    [props.inputProps.size],
+  const radius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size])
+
+  const isSelectedItem = useCallback(
+    (option: T): boolean => {
+      return (props.value ?? []).includes(option)
+    },
+    [props.value],
+  )
+
+  const handleOptionOnClick = useCallback(
+    (option: T) => {
+      const index = props.value.findIndex(
+        (selectedItems) => selectedItems.value === option.value,
+      )
+
+      if (
+        index === -1 &&
+        (!props.maxView || props.value.length < props.maxView)
+      ) {
+        props.onChange([...(props.value ?? []), option])
+      } else if (index !== -1) {
+        const newValue = [
+          ...props.value.slice(0, index),
+          ...props.value.slice(index + 1),
+        ]
+        props.onChange(newValue)
+      }
+    },
+    [props],
   )
 
   const handleOnFocus = useCallback(() => {
@@ -67,10 +99,9 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
               const childRect = child.getBoundingClientRect()
               return (
                 childRect.top <
-                  listRect.bottom +
-                    KEY_SIZE_DATA[props.inputProps.size].height &&
+                  listRect.bottom + KEY_SIZE_DATA[props.size].height &&
                 childRect.bottom >
-                  listRect.top - KEY_SIZE_DATA[props.inputProps.size].height
+                  listRect.top - KEY_SIZE_DATA[props.size].height
               )
             })
 
@@ -95,7 +126,7 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
         })
       },
     })
-  }, [height, isAnimating, isOpen, props.inputProps.size, theme.colors.focus])
+  }, [height, isAnimating, isOpen, props.size, theme.colors.focus])
 
   const handleOnBlur = useCallback(() => {
     if (isAnimating) return
@@ -111,10 +142,8 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
     const visibleChildren = children.filter((child) => {
       const childRect = child.getBoundingClientRect()
       return (
-        childRect.top <
-          listRect.bottom + KEY_SIZE_DATA[props.inputProps.size].height &&
-        childRect.bottom >
-          listRect.top - KEY_SIZE_DATA[props.inputProps.size].height
+        childRect.top < listRect.bottom + KEY_SIZE_DATA[props.size].height &&
+        childRect.bottom > listRect.top - KEY_SIZE_DATA[props.size].height
       )
     })
 
@@ -155,7 +184,7 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
         })
       },
     })
-  }, [isAnimating, isOpen, props.inputProps.size, radius])
+  }, [isAnimating, isOpen, props.size, radius])
 
   const handleMouseDown = useCallback((event: MouseEvent) => {
     if (listRef.current && listRef.current.contains(event.target as Node)) {
@@ -188,6 +217,7 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [handleOnBlur])
+
   return (
     <SelectWrapper
       tabIndex={0}
@@ -202,7 +232,7 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
         $postfixChildren={props.inputProps?.postfixChildren}
         $prefixChildren={props.inputProps?.prefixChildren}
         $genre={props.inputProps.genre}
-        $size={props.inputProps.size}
+        $size={props.size}
         $isBold={props.inputProps.isBold}
         disabled={props.inputProps.isDisabled}
         readOnly={props.inputProps.isReadOnly}
@@ -222,22 +252,32 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
       />
       <DropdownList
         ref={listRef}
-        $genre={props.inputProps.genre}
+        $genre={props.listProps.genre}
         $isShowScroll={optionsLength > maxViewLength}
       >
-        {props.option.map((option) => (
+        {props.option.map((option, id) => (
           <DropdownOption
-            $isActive={props.inputProps.isActive}
-            $isError={props.inputProps.isError}
-            $isLoading={props.inputProps.isLoading}
-            $postfixChildren={props.inputProps?.postfixChildren}
-            $prefixChildren={props.inputProps?.prefixChildren}
-            $genre={props.inputProps.genre}
-            $size={props.inputProps.size}
-            $isBold={props.inputProps.isBold}
-            key={option.id}
+            $isSelectedItem={isSelectedItem(option)}
+            $isCheckboxProps={!!props.checkboxProps}
+            $isActive={props.optionProps.isActive}
+            $isError={props.optionProps.isError}
+            $isLoading={props.optionProps.isLoading}
+            $isCustomIcon={props.optionProps.isCustomIcon}
+            $postfixChildren={props.optionProps?.postfixChildren}
+            $prefixChildren={props.optionProps?.prefixChildren}
+            $genre={props.optionProps.genre}
+            $size={props.size}
+            $isBold={props.optionProps.isBold}
+            key={id}
+            onClick={() => handleOptionOnClick(option)}
           >
-            {option.value}
+            {!!props.checkboxProps && (
+              <Checkbox
+                {...props.checkboxProps}
+                checked={isSelectedItem(option)}
+              />
+            )}
+            {option.label}
           </DropdownOption>
         ))}
       </DropdownList>
