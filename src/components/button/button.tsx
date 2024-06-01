@@ -20,14 +20,15 @@ export const Button: FC<ButtonProps> = memo((props) => {
       $customFontFamily={props.customFontFamily}
       $customFontSize={props.customFontSize}
       $customFontWeight={props.customFontWeight}
+      $isHiddenBorder={props.isHiddenBorder}
       disabled={props.isDisabled}
       type={props.type}
       className={props.className}
-      onClick={() =>
+      onClick={(event) =>
         !props.isLoading &&
         !props.isDisabled &&
         props.onClick &&
-        props.onClick()
+        props.onClick(event)
       }
     >
       {props.isOnlyLoading ? (

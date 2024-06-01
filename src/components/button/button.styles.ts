@@ -91,7 +91,14 @@ const ButtonDisabled = css<StyledButtonProps>`
           opacity: 1;
         `}
 `
-
+/****************************************** HiddenBorder *************************************************/
+const ButtonHiddenBorder = css<StyledButtonProps>`
+  ${(props) =>
+    props.$isHiddenBorder &&
+    css`
+      border-color: transparent !important;
+    `}
+`
 /****************************************** Size *************************************************/
 export const ButtonSize = css<StyledButtonProps>`
   ${(props) => ButtonSizeConstructor(KEY_SIZE_DATA[props.$size])};
@@ -128,7 +135,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   ${ButtonSize};
   ${ButtonGenre};
   ${ButtonDisabled};
-
+  ${ButtonHiddenBorder};
   font-family: ${(props) => props.$customFontFamily};
   font-size: ${(props) => props.$customFontSize};
   font-weight: ${(props) => props.$customFontWeight};

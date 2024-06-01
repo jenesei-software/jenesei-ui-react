@@ -124,6 +124,7 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   font-weight: ${(props) => props.$customFontWeight};
   width: ${(props) => props.$width ?? 'max-content'};
   min-width: ${(props) => props.$width ?? 'max-content'};
+  background-color: ${(props) => props.$isNotBackground && 'transparent'};
 `
 
 /****************************************** Styled *************************************************/

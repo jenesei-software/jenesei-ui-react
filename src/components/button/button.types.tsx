@@ -26,7 +26,9 @@ export interface ButtonProps {
 
   isActive?: boolean
 
-  onClick?: () => void
+  isHiddenBorder?: boolean
+
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 
   type?: 'button' | 'submit' | 'reset'
 
@@ -49,6 +51,8 @@ export interface StyledButtonProps {
   $isHidden?: ButtonProps['isHidden']
 
   $isActive?: ButtonProps['isActive']
+
+  $isHiddenBorder?: ButtonProps['isHiddenBorder']
 
   $width?: ButtonProps['width']
 

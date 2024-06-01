@@ -16,24 +16,30 @@ const defaultArgs: Partial<SelectProps<IOption>> = {
   inputProps: {
     size: 'large',
     genre: 'gray',
-    placeholder: 'White placeholder?',
-    width: '300px',
+    placeholder: 'Search...',
   },
   size: 'large',
+  genre: 'gray',
+  width: '300px',
   checkboxProps: {
     genre: 'gray',
-    view: 'circle',
+    view: 'square',
     size: 'medium',
     isHiddenBorder: true,
+    isNotBackground: true,
   },
   optionProps: {
     size: 'large',
     genre: 'gray',
     isCustomIcon: true,
   },
-  listProps: {
-    size: 'large',
-    genre: 'gray',
+  footer: {
+    erase: {
+      label: 'Erase',
+    },
+    selectAll: {
+      label: 'Select All',
+    },
   },
 }
 
@@ -54,24 +60,42 @@ const SelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
     { label: 'Career', value: 10 },
     { label: 'Other', value: 11 },
   ])
+  const [viewOption, setViewOption] = useState<IOption[]>(option)
   const [value, setValue] = useState<IOption[]>([option[0]])
-
-  const handleChange = (option: IOption[]) => {
-    console.log(option)
+  const [query, setQuery] = useState<string>('')
+  const handleSelectChange = (option: IOption[]) => {
     setValue(option)
   }
+  const handleQueryChange = (value: string) => {
+    setQuery(value)
+    if (value === '') return setViewOption(option)
+    const filteredOptions = option.filter((option) =>
+      Object.values(option).some((field) =>
+        field?.toString().toLowerCase().includes(value.toLowerCase()),
+      ),
+    )
+    setViewOption(filteredOptions)
+  }
+  console.log(viewOption)
 
   return (
     <Select<IOption>
       {...props}
-      option={option}
+      option={viewOption}
       value={value}
-      onChange={handleChange}
+      onChange={handleSelectChange}
+      inputProps={{
+        size: 'large',
+        genre: 'gray',
+        placeholder: 'Search...',
+        value: query,
+        onChange: handleQueryChange,
+      }}
     />
   )
 }
 
-export const String: Story = {
+export const Default: Story = {
   render: (args) => <SelectWrapper {...args} />,
   args: {
     ...defaultArgs,
