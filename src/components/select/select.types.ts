@@ -25,8 +25,11 @@ export interface SelectProps<T extends ISelectItem> {
   value: T[]
   onChange: (option: T[]) => void
   maxView?: number
+  minView?: number
   maxValueLength?: number
-
+  fetchNextPage?: () => void
+  getEstimateSize?: (index: number) => number
+  isFetching?: boolean
   footer?: {
     erase?: {
       label: string

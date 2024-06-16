@@ -59,6 +59,18 @@ const SelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
     { label: 'Service request', value: 9 },
     { label: 'Career', value: 10 },
     { label: 'Other', value: 11 },
+    { label: 'Partnership', value: 12 },
+    { label: 'Service request', value: 13 },
+    { label: 'Career', value: 14 },
+    { label: 'Other', value: 15 },
+    { label: 'Partnership', value: 16 },
+    { label: 'Service request', value: 17 },
+    { label: 'Career', value: 18 },
+    { label: 'Other', value: 19 },
+    { label: 'Partnership', value: 20 },
+    { label: 'Service request', value: 21 },
+    { label: 'Career', value: 22 },
+    { label: 'Other', value: 23 },
   ])
   const [viewOption, setViewOption] = useState<IOption[]>(option)
   const [value, setValue] = useState<IOption[]>([option[0]])
@@ -76,7 +88,6 @@ const SelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
     )
     setViewOption(filteredOptions)
   }
-  console.log(viewOption)
 
   return (
     <Select<IOption>

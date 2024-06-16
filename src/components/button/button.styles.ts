@@ -101,14 +101,27 @@ const ButtonHiddenBorder = css<StyledButtonProps>`
 `
 /****************************************** Size *************************************************/
 export const ButtonSize = css<StyledButtonProps>`
-  ${(props) => ButtonSizeConstructor(KEY_SIZE_DATA[props.$size])};
+  ${(props) =>
+    ButtonSizeConstructor({
+      ...KEY_SIZE_DATA[props.$size],
+      isFullSize: props.$isFullSize,
+    })};
 `
-export const ButtonSizeConstructor = (props: IJeneseiThemeSizeData) => css`
+export const ButtonSizeConstructor = (
+  props: IJeneseiThemeSizeData & { isFullSize?: boolean },
+) => css`
   height: ${props.height}px;
   border-radius: ${props.radius}px;
   gap: ${props.padding - 2}px;
   ${getFontStyles(props.font, 600, 'Inter')};
   padding: 0px ${props.padding}px;
+
+  ${() =>
+    props.isFullSize &&
+    css`
+      height: 100%;
+      border-radius: 0px;
+    `}
 `
 
 /****************************************** Styled *************************************************/

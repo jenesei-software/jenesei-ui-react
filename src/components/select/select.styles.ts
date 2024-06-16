@@ -14,28 +14,29 @@ export const SelectWrapper = styled.div<SelectWrapperProps>`
   position: relative;
 `
 
-export const DropdownList = styled.ul<SelectStyledListProps>`
+export const DropdownListParent = styled.div<SelectStyledListProps>`
   outline: none;
   display: none;
+
   height: 0px;
+  width: 100%;
 
   position: absolute;
-  width: 100%;
+
+  overflow: hidden;
+  overflow-y: auto;
+
   margin: 0;
   padding: 0;
-  list-style: none;
-  z-index: 1000;
+  z-index: 1;
+
   box-sizing: border-box;
+
   background: ${(props) =>
     props.theme.colors.input[props.$genre].background.rest};
   border: 2px solid
     ${(props) => props.theme.colors.input[props.$genre].border.rest};
   border-top: 0px !important;
-  width: 100%;
-  overflow: hidden;
-  overflow-y: auto;
-  flex-direction: column;
-  flex: 1 1 auto;
 
   ${(props) =>
     !props.$isShowScroll &&
@@ -58,12 +59,23 @@ export const DropdownList = styled.ul<SelectStyledListProps>`
     `}
 `
 
+export const DropdownList = styled.ul`
+  list-style: none;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+`
+
 export const DropdownOption = styled.li<SelectStyledOptionProps>`
   ${StyledInputCSS};
   display: flex;
   align-items: center;
   border-radius: 0;
-  opacity: 0;
+  opacity: 1;
   border: 0px;
   cursor: pointer;
   background-color: ${(props) =>
@@ -77,7 +89,7 @@ export const DropdownFooter = styled.li<SelectStyledFooterProps>`
   display: flex;
   align-items: center;
   border-radius: 0;
-  opacity: 1 !important;
+  opacity: 1;
   border: 0px;
   cursor: pointer;
   position: sticky;
@@ -93,10 +105,12 @@ export const DropdownFooter = styled.li<SelectStyledFooterProps>`
 
 export const DropdownErase = styled.div`
   margin-left: auto;
+  height: 100%;
 `
 
 export const DropdownSelectAll = styled.div`
   margin-right: auto;
+  height: 100%;
 `
 
 export const SelectStyledInput = styled(StyledInput)<SelectStyledInputProps>``

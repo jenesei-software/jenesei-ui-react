@@ -11,6 +11,7 @@ export const Button: FC<ButtonProps> = memo((props) => {
   return (
     <StyledButton
       tabIndex={0}
+      $isFullSize={props.isFullSize}
       $genre={props.genre}
       $width={props.width}
       $size={props.size}

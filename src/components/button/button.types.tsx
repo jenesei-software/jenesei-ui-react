@@ -39,6 +39,8 @@ export interface ButtonProps {
   customFontSize?: number
 
   customFontWeight?: number
+
+  isFullSize?: boolean
 }
 
 export type TButtonGenre = keyof TJeneseiThemeGenre
@@ -63,4 +65,6 @@ export interface StyledButtonProps {
   $customFontSize?: ButtonProps['customFontSize']
 
   $customFontWeight?: ButtonProps['customFontWeight']
+
+  $isFullSize?: ButtonProps['isFullSize']
 }

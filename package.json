@@ -27,6 +27,7 @@
     "vite-tsconfig-paths": "^4.2.0"
   },
   "peerDependencies": {
+    "@tanstack/react-virtual": "^3.5.1",
     "@emotion/styled": "^11.11.5",
     "@fontsource/inter": "^5.0.16",
     "gsap": "^3.12.5",
