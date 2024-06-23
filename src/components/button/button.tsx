@@ -6,10 +6,13 @@ import { LibraryIcon } from '../../assets/library-icon'
 import { ModalLoading } from '../modal-loading'
 
 export const Button: FC<ButtonProps> = memo((props) => {
+  const iconPosition = props.iconPosition || 'right'
+  const loadingPosition = props.loadingPosition || 'right'
   const theme = useTheme()
   const IconComponent = props.icon && LibraryIcon[props.icon]
   return (
     <StyledButton
+      id="jenesei-button"
       tabIndex={0}
       $isFullSize={props.isFullSize}
       $genre={props.genre}
@@ -40,15 +43,35 @@ export const Button: FC<ButtonProps> = memo((props) => {
           />
         ) : (
           <>
+            {IconComponent && iconPosition === 'left' && (
+              <IconComponent size={props.size} />
+            )}
             {props.children && props.children}
-            {IconComponent && <IconComponent size={props.size} />}
+            {IconComponent && iconPosition === 'right' && (
+              <IconComponent size={props.size} />
+            )}
           </>
         )
       ) : (
         <>
+          {props.isLoading && loadingPosition === 'left' && (
+            <ModalLoading
+              size={props.size}
+              color={
+                props.isActive
+                  ? theme.colors.button[props.genre].color.active
+                  : theme.colors.button[props.genre].color.rest
+              }
+            />
+          )}
+          {IconComponent && iconPosition === 'left' && (
+            <IconComponent size={props.size} />
+          )}
           {props.children && props.children}
-          {IconComponent && <IconComponent size={props.size} />}
-          {props.isLoading && (
+          {IconComponent && iconPosition === 'right' && (
+            <IconComponent size={props.size} />
+          )}
+          {props.isLoading && loadingPosition === 'right' && (
             <ModalLoading
               size={props.size}
               color={

@@ -13,7 +13,7 @@ type Story = StoryObj<typeof Input>
 
 const defaultArgs: Partial<InputProps> = {
   genre: 'gray',
-  size: 'large',
+  size: 'medium',
   isError: false,
   isDisabled: false,
   isActive: undefined,

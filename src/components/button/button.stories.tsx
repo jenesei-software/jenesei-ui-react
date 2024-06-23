@@ -18,7 +18,21 @@ export const Default: Story = {
     width: 'auto',
     type: 'button',
     genre: 'gray',
-    size: 'large',
+    size: 'medium',
+    isLoading: false,
+    isDisabled: false,
+    isOnlyLoading: false,
+    isActive: false,
+  },
+}
+
+export const Icon: Story = {
+  args: {
+    width: 'asHeight',
+    type: 'button',
+    icon: 'WiFi',
+    genre: 'gray',
+    size: 'medium',
     isLoading: false,
     isDisabled: false,
     isOnlyLoading: false,

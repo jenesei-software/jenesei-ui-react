@@ -16,6 +16,8 @@ export interface ButtonProps {
 
   icon?: TLibraryIconNameString
 
+  iconPosition?: TButtonIconPosition
+
   isDisabled?: boolean
 
   isHidden?: boolean
@@ -23,6 +25,8 @@ export interface ButtonProps {
   isOnlyLoading?: boolean
 
   isLoading?: boolean
+
+  loadingPosition?: TButtonIconPosition
 
   isActive?: boolean
 
@@ -32,7 +36,7 @@ export interface ButtonProps {
 
   type?: 'button' | 'submit' | 'reset'
 
-  width?: string
+  width?: string | 'asHeight'
 
   customFontFamily?: TJeneseiFontFamily
 
@@ -44,6 +48,7 @@ export interface ButtonProps {
 }
 
 export type TButtonGenre = keyof TJeneseiThemeGenre
+export type TButtonIconPosition = 'right' | 'left'
 
 export interface StyledButtonProps {
   $genre: ButtonProps['genre']

@@ -124,6 +124,51 @@ const DefaultJeneseiThemeGenre = {
     },
   },
 }
+
+const DefaultJeneseiThemeGenreToggle = {
+  product: {
+    background: {
+      rest: JeneseiThemeVariables.product.rest,
+      hover: JeneseiThemeVariables.product.hover,
+      active: JeneseiThemeVariables.product.active,
+      focus: JeneseiThemeVariables.product.focus,
+    },
+    color: {
+      rest: JeneseiThemeVariables.white,
+      hover: JeneseiThemeVariables.white,
+      active: JeneseiThemeVariables.white,
+      focus: JeneseiThemeVariables.white,
+      placeholder: JeneseiThemeVariables.white,
+    },
+    border: {
+      rest: JeneseiThemeVariables.transparent,
+      hover: JeneseiThemeVariables.transparent,
+      active: JeneseiThemeVariables.transparent,
+      focus: JeneseiThemeVariables.white,
+    },
+  },
+  gray: {
+    background: {
+      rest: JeneseiThemeVariables.gray.focus,
+      hover: JeneseiThemeVariables.gray.hover,
+      active: JeneseiThemeVariables.gray.active,
+      focus: JeneseiThemeVariables.gray.focus,
+    },
+    color: {
+      rest: JeneseiThemeVariables.white,
+      hover: JeneseiThemeVariables.white,
+      active: JeneseiThemeVariables.black,
+      focus: JeneseiThemeVariables.white,
+      placeholder: JeneseiThemeVariables.gray.active,
+    },
+    border: {
+      rest: JeneseiThemeVariables.black01,
+      hover: JeneseiThemeVariables.black01,
+      active: JeneseiThemeVariables.black01,
+      focus: JeneseiThemeVariables.black01,
+    },
+  },
+}
 export const JeneseiTheme: IJeneseiTheme = {
   fontFamily: 'Inter',
   colors: {
@@ -131,7 +176,7 @@ export const JeneseiTheme: IJeneseiTheme = {
     focus: JeneseiThemeVariables.focus,
     danger: JeneseiThemeVariables.danger,
     button: DefaultJeneseiThemeGenre,
-    toggle: DefaultJeneseiThemeGenre,
+    toggle: DefaultJeneseiThemeGenreToggle,
     checkbox: DefaultJeneseiThemeGenre,
     input: DefaultJeneseiThemeGenre,
   },

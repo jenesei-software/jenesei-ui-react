@@ -14,11 +14,11 @@ type Story = StoryObj<typeof Select>
 
 const defaultArgs: Partial<SelectProps<IOption>> = {
   inputProps: {
-    size: 'large',
+    size: 'medium',
     genre: 'gray',
     placeholder: 'Search...',
   },
-  size: 'large',
+  size: 'medium',
   genre: 'gray',
   width: '300px',
   checkboxProps: {
@@ -96,7 +96,7 @@ const SelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
       value={value}
       onChange={handleSelectChange}
       inputProps={{
-        size: 'large',
+        size: 'medium',
         genre: 'gray',
         placeholder: 'Search...',
         value: query,

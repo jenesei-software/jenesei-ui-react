@@ -105,10 +105,11 @@ export const ButtonSize = css<StyledButtonProps>`
     ButtonSizeConstructor({
       ...KEY_SIZE_DATA[props.$size],
       isFullSize: props.$isFullSize,
+      $width: props.$width,
     })};
 `
 export const ButtonSizeConstructor = (
-  props: IJeneseiThemeSizeData & { isFullSize?: boolean },
+  props: IJeneseiThemeSizeData & { isFullSize?: boolean; $width?: string },
 ) => css`
   height: ${props.height}px;
   border-radius: ${props.radius}px;
@@ -122,8 +123,22 @@ export const ButtonSizeConstructor = (
       height: 100%;
       border-radius: 0px;
     `}
-`
 
+  ${props.$width === 'asHeight'
+    ? css`
+        width: ${props.height}px;
+        min-width: ${props.height}px;
+      `
+    : css`
+        width: ${props.$width ?? 'max-content'};
+        min-width: ${props.$width ?? 'max-content'};
+      `}
+`
+/****************************************** Border *************************************************/
+const ButtonBorder = css`
+  outline: 1px solid transparent;
+  border: 1px solid transparent;
+`
 /****************************************** Styled *************************************************/
 export const StyledButton = styled.button<StyledButtonProps>`
   outline: 1px solid transparent;
@@ -145,6 +160,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
 
   cursor: pointer;
 
+  ${ButtonBorder};
   ${ButtonSize};
   ${ButtonGenre};
   ${ButtonDisabled};
@@ -152,6 +168,4 @@ export const StyledButton = styled.button<StyledButtonProps>`
   font-family: ${(props) => props.$customFontFamily};
   font-size: ${(props) => props.$customFontSize};
   font-weight: ${(props) => props.$customFontWeight};
-  width: ${(props) => props.$width ?? 'max-content'};
-  min-width: ${(props) => props.$width ?? 'max-content'};
 `

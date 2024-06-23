@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { useState } from 'react'
 import 'styled-components'
 
-import { Checkboxes } from '.'
-import { LibraryIcon } from '../../assets/library-icon'
+import { Checkboxes, CheckboxesProps, ICheckboxValue } from '.'
 
 const meta: Meta<typeof Checkboxes> = {
   component: Checkboxes,
@@ -12,47 +12,41 @@ const meta: Meta<typeof Checkboxes> = {
 export default meta
 type Story = StoryObj<typeof Checkboxes>
 
-export const Default: Story = {
-  args: {
-    checkboxGenre: 'product',
-    checkBoxView: 'circle',
-    checkboxWidth: '100%',
-    checkboxIsHiddenBorder: false,
-    checkboxIsActive: false,
-    multiple: true,
-    size: 'large',
-    value: [{ value: 0, label: 'First' }],
-    options: [
-      { value: 0, label: 'First' },
-      { value: 1, label: 'Second' },
-    ],
-    labelField: 'label',
-    valueField: 'value',
-    width: '300px',
-  },
+const defaultArgs: Partial<CheckboxesProps<ICheckboxValue>> = {
+  checkboxGenre: 'gray',
+  checkBoxView: 'circle',
+  checkboxWidth: '100%',
+  checkboxIsHiddenBorder: false,
+  checkboxIsActive: false,
+  multiple: true,
+  size: 'medium',
+  labelField: 'label',
+  valueField: 'value',
+  width: '300px',
 }
 
-export const Children: Story = {
+const CheckboxesWrapper: React.FC<CheckboxesProps<ICheckboxValue>> = (
+  props,
+) => {
+  const [value, setValue] = useState<ICheckboxValue[]>([])
+  const [options] = useState<ICheckboxValue[]>([
+    { value: 0, label: 'First' },
+    { value: 1, label: 'Second' },
+  ])
+
+  return (
+    <Checkboxes
+      {...props}
+      value={value}
+      options={options}
+      onChange={(value) => setValue(value)}
+    />
+  )
+}
+
+export const Default: Story = {
+  render: (args) => <CheckboxesWrapper {...args} />,
   args: {
-    checkboxGenre: 'product',
-    checkBoxView: 'circle',
-    checkboxIsActive: false,
-    size: 'large',
-    value: [{ value: 0, children: 'First' }],
-    options: [
-      { value: 0, children: 'First' },
-      { value: 1, children: 'Second' },
-      {
-        value: 3,
-        label: 'Thirst',
-        children: <LibraryIcon.Support size="large" color="#4195D2FF" />,
-      },
-    ],
-    labelField: 'label',
-    valueField: 'value',
-    childrenField: 'children',
-    multiple: true,
-    width: '100%',
-    checkboxIsHiddenBorder: true,
+    ...defaultArgs,
   },
 }

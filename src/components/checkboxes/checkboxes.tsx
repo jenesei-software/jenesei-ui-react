@@ -6,10 +6,11 @@ import {
   CheckboxesLabel,
   CheckboxesProps,
   CheckboxesWrapper,
+  ICheckboxValue,
 } from '.'
 import { Checkbox } from '../checkbox/checkbox'
 
-export const Checkboxes = <T extends Record<string, unknown>>(
+export const Checkboxes = <T extends ICheckboxValue>(
   props: CheckboxesProps<T>,
 ) => {
   const createMarkup = (html: string) => ({ __html: html })
