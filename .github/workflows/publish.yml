@@ -39,16 +39,13 @@ jobs:
           NEW_VERSION=$(node -p "require('./package.json').version")
           echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
 
-      - name: Clean npm cache
-        run: npm cache clean --force
+      - name: Commit and push changes
+        run: |
+          git add package.json package-lock.json
+          git commit -m "Bump version to $NEW_VERSION"
+          git push origin HEAD:publish --tags
 
       - name: Publish to npm
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Commit and push changes
-        run: |
-          git add package.json
-          git commit -m "Bump version to ${{ env.NEW_VERSION }}"
-          git push origin HEAD:publish
