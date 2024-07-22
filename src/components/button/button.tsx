@@ -34,6 +34,7 @@ export const Button: FC<ButtonProps> = memo((props) => {
         props.onClick &&
         props.onClick(event)
       }
+      {...props}
     >
       {props.isOnlyLoading ? (
         props.isLoading ? (

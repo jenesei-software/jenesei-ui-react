@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { StyledButtonProps } from '.'
 import { getFontStyles } from '../../fonts'
+import { FlexStyles } from '../../main'
 import { IJeneseiThemeSizeData, KEY_SIZE_DATA } from '../../theme'
 
 /****************************************** Genre *************************************************/
@@ -139,6 +140,14 @@ const ButtonBorder = css`
   outline: 1px solid transparent;
   border: 1px solid transparent;
 `
+
+/****************************************** Flex *************************************************/
+const ButtonFlex = css<StyledButtonProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ${FlexStyles};
+`
 /****************************************** Styled *************************************************/
 export const StyledButton = styled.button<StyledButtonProps>`
   outline: 1px solid transparent;
@@ -154,12 +163,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
   cursor: pointer;
 
+  ${ButtonFlex};
   ${ButtonBorder};
   ${ButtonSize};
   ${ButtonGenre};

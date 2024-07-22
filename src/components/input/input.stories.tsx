@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { useState } from 'react'
 import 'styled-components'
 
 import { Input, InputProps } from '.'
@@ -24,7 +25,20 @@ const defaultArgs: Partial<InputProps> = {
   width: '300px',
 }
 
+const InputStringWrapper: React.FC<InputProps> = (props) => {
+  const [value, setValue] = useState<string>('')
+
+  return (
+    <Input
+      {...props}
+      value={value}
+      onChange={(newValue) => setValue(newValue)}
+    />
+  )
+}
+
 export const String: Story = {
+  render: (args) => <InputStringWrapper {...args} />,
   args: {
     ...defaultArgs,
   },

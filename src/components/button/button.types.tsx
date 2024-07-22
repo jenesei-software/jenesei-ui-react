@@ -1,11 +1,11 @@
-import { TLibraryIconNameString } from '../../main'
+import { FlexStylesProps, TLibraryIconNameString } from '../../main'
 import {
   TJeneseiFontFamily,
   TJeneseiThemeGenre,
   TJeneseiThemeSize,
 } from '../../theme'
 
-export interface ButtonProps {
+export interface ButtonProps extends FlexStylesProps{
   className?: string
 
   genre: TButtonGenre
@@ -50,7 +50,7 @@ export interface ButtonProps {
 export type TButtonGenre = keyof TJeneseiThemeGenre
 export type TButtonIconPosition = 'right' | 'left'
 
-export interface StyledButtonProps {
+export interface StyledButtonProps extends FlexStylesProps{
   $genre: ButtonProps['genre']
 
   $isDisabled?: ButtonProps['isDisabled']

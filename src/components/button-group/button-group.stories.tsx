@@ -36,6 +36,7 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           isDisabled: false,
           isOnlyLoading: false,
           isActive: value.first,
+          justifyContent:'flex-start',
           onClick: () => {
             setValue((prevState) => ({ ...prevState, first: !prevState.first }))
           },
@@ -51,6 +52,7 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           isDisabled: false,
           isOnlyLoading: false,
           isActive: value.second,
+          justifyContent:'space-between',
           onClick: () => {
             setValue((prevState) => ({
               ...prevState,
@@ -69,6 +71,7 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           isDisabled: false,
           isOnlyLoading: false,
           isActive: value.third,
+          justifyContent:'space-between',
           onClick: () => {
             setValue((prevState) => ({ ...prevState, third: !prevState.third }))
           },
@@ -78,6 +81,17 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
   )
 }
 
-export const Default: Story = {
+export const Horizontal: Story = {
   render: (args) => <ButtonGroupWrapper {...args} />,
+  args: {
+    position: 'horizontal',
+  },
+}
+
+export const Vertical: Story = {
+  render: (args) => <ButtonGroupWrapper {...args} />,
+  args: {
+    position: 'vertical',
+    width:"200px"
+  },
 }
