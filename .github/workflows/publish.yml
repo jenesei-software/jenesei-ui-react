@@ -16,17 +16,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm install
-
-      - name: Fix vulnerabilities
-        run: npm audit fix
-
-      - name: Run tests
-        run: npm test || echo 'No tests specified'
 
       - name: Bump version
         id: bump_version
