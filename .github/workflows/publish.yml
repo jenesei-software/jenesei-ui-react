@@ -22,10 +22,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Clean git working directory
+        run: |
+          git reset --hard || echo "No changes to reset"
+          git clean -fd || echo "No files to clean"
+
       - name: Bump version
         id: bump_version
         run: |
-          npm version patch
+          npm version patch -m "Bump version to %s"
           NEW_VERSION=$(node -p "require('./package.json').version")
           echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
 
