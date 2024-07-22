@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '14'
           registry-url: 'https://registry.npmjs.org'
@@ -25,27 +25,19 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: Bump version and push tag
+      - name: Bump version
         id: bump_version
-        uses: anothrnick/github-tag-action@v1.35.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          default_bump: patch
-          tag_prefix: ''
-
-      - name: Get new version
-        id: get_version
-        run: echo "NEW_VERSION=$(npm pkg get version | sed 's/"//g')" >> $GITHUB_ENV
-
-      - name: Update version in package.json
-        run: npm version ${{ env.NEW_VERSION }} --allow-same-version
+        run: |
+          npm run bump-version:patch
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
 
       - name: Publish to npm
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Push changes back to repo
+      - name: Commit and push changes
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
