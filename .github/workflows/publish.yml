@@ -41,9 +41,11 @@ jobs:
 
       - name: Commit and push changes
         run: |
+          git status
           git add package.json package-lock.json
-          git commit -m "Bump version to $NEW_VERSION"
-          git push origin HEAD:publish --tags
+          git status
+          git commit -m "Bump version to $NEW_VERSION" || echo "Nothing to commit"
+          git push origin publish --tags || echo "Push failed"
 
       - name: Publish to npm
         run: npm publish
