@@ -39,6 +39,9 @@ jobs:
           NEW_VERSION=$(node -p "require('./package.json').version")
           echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
 
+      - name: Clean npm cache
+        run: npm cache clean --force
+
       - name: Publish to npm
         run: npm publish
         env:
