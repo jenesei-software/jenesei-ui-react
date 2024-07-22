@@ -14,7 +14,12 @@
     ".": {
       "import": "./dist/jenesei-react-ui.es.js",
       "require": "./dist/jenesei-react-ui.umd.js",
-      "types": "./dist/main.d.ts"
+      "types": "./dist/main.d.ts",
+      "bump-version": "node bump-version.js",
+      "bump-version:major": "node bump-version.js major",
+      "bump-version:minor": "node bump-version.js minor",
+      "bump-version:patch": "node bump-version.js patch",
+      "publish": "npm publish"
     }
   },
   "scripts": {
