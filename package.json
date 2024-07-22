@@ -14,19 +14,19 @@
     ".": {
       "import": "./dist/jenesei-react-ui.es.js",
       "require": "./dist/jenesei-react-ui.umd.js",
-      "types": "./dist/main.d.ts",
-      "bump-version": "node bump-version.js",
-      "bump-version:major": "node bump-version.js major",
-      "bump-version:minor": "node bump-version.js minor",
-      "bump-version:patch": "node bump-version.js patch",
-      "publish": "npm publish"
+      "types": "./dist/main.d.ts"
     }
   },
   "scripts": {
     "build": "tsc && vite build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build --quiet --disable-telemetry",
-    "format": "prettier --write 'src/*/*.{ts,tsx}'"
+    "format": "prettier --write 'src/*/*.{ts,tsx}'",
+    "bump-version": "node bump-version.js",
+    "bump-version:major": "node bump-version.js major",
+    "bump-version:minor": "node bump-version.js minor",
+    "bump-version:patch": "node bump-version.js patch",
+    "publish": "npm publish"
   },
   "dependencies": {
     "vite-tsconfig-paths": "^4.2.0"
