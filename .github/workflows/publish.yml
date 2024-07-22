@@ -27,6 +27,11 @@ jobs:
           git reset --hard || echo "No changes to reset"
           git clean -fd || echo "No files to clean"
 
+      - name: Configure Git
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+
       - name: Bump version
         id: bump_version
         run: |
@@ -41,8 +46,6 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
           git add package.json
           git commit -m "Bump version to ${{ env.NEW_VERSION }}"
           git push origin HEAD:publish
