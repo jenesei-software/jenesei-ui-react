@@ -60,11 +60,19 @@ jobs:
       - name: Clear npm cache
         run: npm cache clean --force
 
-      - name: Check existing versions
+      - name: Check if version exists
+        id: check_version
         run: |
-          npm view jenesei-react-ui versions --json
+          EXISTING_VERSION=$(npm view jenesei-react-ui versions --json | grep ${NEW_VERSION} || true)
+          if [ -n "$EXISTING_VERSION" ]; then
+            echo "Version ${NEW_VERSION} already exists. Skipping publish."
+            echo "publish=false" >> $GITHUB_ENV
+          else
+            echo "publish=true" >> $GITHUB_ENV
+          fi
 
       - name: Publish to npm
+        if: env.publish == 'true'
         run: |
           npm cache verify
           npm publish --access public
