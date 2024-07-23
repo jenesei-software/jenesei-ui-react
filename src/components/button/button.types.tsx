@@ -1,23 +1,22 @@
-import { TLibraryIconNameString } from '../../main'
+import { FlexStylesProps, TLibraryIconNameString } from '../../main'
 import {
   TJeneseiFontFamily,
   TJeneseiThemeGenre,
-  TJeneseiThemeGenreType,
   TJeneseiThemeSize,
 } from '../../theme'
 
-export interface ButtonProps {
+export interface ButtonProps extends FlexStylesProps{
   className?: string
 
   genre: TButtonGenre
-
-  genreType: TButtonGenreType
 
   children?: React.ReactNode
 
   size: TJeneseiThemeSize
 
   icon?: TLibraryIconNameString
+
+  iconPosition?: TButtonIconPosition
 
   isDisabled?: boolean
 
@@ -27,30 +26,31 @@ export interface ButtonProps {
 
   isLoading?: boolean
 
+  loadingPosition?: TButtonIconPosition
+
   isActive?: boolean
 
-  isRipple?: boolean
+  isHiddenBorder?: boolean
 
-  onClick?: () => void
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 
   type?: 'button' | 'submit' | 'reset'
 
-  width?: string
+  width?: string | 'asHeight'
 
   customFontFamily?: TJeneseiFontFamily
 
   customFontSize?: number
 
   customFontWeight?: number
+
+  isFullSize?: boolean
 }
 
 export type TButtonGenre = keyof TJeneseiThemeGenre
+export type TButtonIconPosition = 'right' | 'left'
 
-export type TButtonGenreType = keyof TJeneseiThemeGenreType
-
-export interface StyledButtonProps {
-  $genreType: ButtonProps['genreType']
-
+export interface StyledButtonProps extends FlexStylesProps{
   $genre: ButtonProps['genre']
 
   $isDisabled?: ButtonProps['isDisabled']
@@ -58,6 +58,8 @@ export interface StyledButtonProps {
   $isHidden?: ButtonProps['isHidden']
 
   $isActive?: ButtonProps['isActive']
+
+  $isHiddenBorder?: ButtonProps['isHiddenBorder']
 
   $width?: ButtonProps['width']
 
@@ -68,4 +70,6 @@ export interface StyledButtonProps {
   $customFontSize?: ButtonProps['customFontSize']
 
   $customFontWeight?: ButtonProps['customFontWeight']
+
+  $isFullSize?: ButtonProps['isFullSize']
 }

@@ -1,0 +1,80 @@
+name: Publish npm package
+
+on:
+  push:
+    branches:
+      - publish
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Clean git working directory
+        run: |
+          git reset --hard || echo "No changes to reset"
+          git clean -fd || echo "No files to clean"
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+      - name: Bump version
+        id: bump_version
+        run: |
+          # Uncomment the desired version bump type
+          npm version patch
+          # npm version minor
+          # npm version major
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
+
+      - name: Commit changes
+        run: |
+          git add package.json package-lock.json
+          git commit -m "Bump version to $NEW_VERSION" || echo "Nothing to commit"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
+          branch: publish
+          tags: true
+
+      - name: Check if version exists
+        id: check_version
+        run: |
+          EXISTING_VERSION=$(npm view jenesei-react-ui versions --json | grep ${NEW_VERSION} || true)
+          if [ -n "$EXISTING_VERSION" ]; then
+            echo "Version ${NEW_VERSION} already exists. Skipping publish."
+            echo "publish=false" >> $GITHUB_ENV
+          else
+            echo "publish=true" >> $GITHUB_ENV
+          fi
+
+      - name: Install dependencies
+        if: env.publish == 'true'
+        run: |
+          npm install
+
+      - name: Build
+        if: env.publish == 'true'
+        run: |
+          npm run build
+
+      - name: Publish to npm
+        if: env.publish == 'true'
+        run: |
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_CYRILSTRONE_TOKEN }}

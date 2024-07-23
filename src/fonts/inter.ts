@@ -2,125 +2,58 @@ import styled, { css } from 'styled-components'
 
 import { TJeneseiFontFamily } from '../theme'
 
-export interface SpanInterProps {
-  color?: string
-  width?: string
-  textAlign?: 'center'
-  textWrap?: 'nowrap'
+export interface FontProps {
+  $color?: string
+  $size: number
+  $textAlign?: 'center'
+  $textWrap?: 'nowrap'
+  $height?: number
+  $weight: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+  $family: TJeneseiFontFamily
 }
 
-export const fontInterBase = css<SpanInterProps>`
+export const getFontStyles = (
+  size: FontProps['$size'],
+  weight: FontProps['$weight'],
+  family: FontProps['$family'],
+  height?: FontProps['$height'],
+) => css`
+  font-family: ${family};
   font-style: normal;
   line-height: normal;
-  text-align: ${(props) => props.textAlign};
-  text-wrap: ${(props) => props.textWrap};
-  color: ${(props) => props.color};
-  width: ${(props) => props.width};
-`
-
-export const getFontStyles = (
-  size: number,
-  weight: number,
-  family: TJeneseiFontFamily,
-) => css`
-  ${fontInterBase};
-  font-family: ${family};
   font-size: ${size}px;
   font-weight: ${weight};
+  ${height &&
+  css`
+    line-height: ${height}px;
+  `}
 `
 
-export const SpanFont = styled.span<SpanInterProps>`
-  ${fontInterBase};
-`
+export const SpanFont = styled.span<FontProps>`
+  font-family: ${(props) => props.$family};
+  font-style: normal;
+  line-height: normal;
+  font-size: ${(props) => props.$size}px;
+  font-weight: ${(props) => props.$weight};
 
-export const SpanInter = styled.span<SpanInterProps>`
-  ${fontInterBase};
-`
-
-export const SpanInterSB10 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(10, 600, 'Inter')};
-`
-
-export const SpanInterSB14 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(14, 600, 'Inter')};
-`
-
-export const SpanInterSB16 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(16, 600, 'Inter')};
-`
-
-export const SpanInterSB18 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(18, 600, 'Inter')};
-`
-
-export const SpanInterSB20 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(20, 600, 'Inter')};
-`
-
-export const SpanInterM12 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(12, 500, 'Inter')};
-`
-
-export const SpanInterM14 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(14, 500, 'Inter')};
-`
-
-export const SpanInterM16 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(16, 500, 'Inter')};
-`
-
-export const SpanInterM18 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(18, 500, 'Inter')};
-`
-
-export const SpanInterM20 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(20, 500, 'Inter')};
-`
-
-export const SpanInterB14 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(14, 700, 'Inter')};
-`
-
-export const SpanInterB16 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(16, 700, 'Inter')};
-`
-
-export const SpanInterB20 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(20, 700, 'Inter')};
-`
-
-export const SpanInterB32 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(32, 700, 'Inter')};
-`
-
-export const SpanInterB36 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(36, 700, 'Inter')};
-`
-
-export const SpanInterR12 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(12, 400, 'Inter')};
-`
-
-export const SpanInterR14 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(14, 400, 'Inter')};
-`
-
-export const SpanInterR16 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(16, 400, 'Inter')};
-`
-
-export const SpanInterR20 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(20, 400, 'Inter')};
-`
-
-export const SpanInterR24 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(24, 400, 'Inter')};
-`
-
-export const SpanInterR36 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(36, 400, 'Inter')};
-`
-
-export const SpanInterT10 = styled(SpanInter)<SpanInterProps>`
-  ${getFontStyles(100, 100, 'Inter')};
+  ${(props) =>
+    props.$height &&
+    css`
+      line-height: ${props.$height}px;
+    `};
+  ${(props) =>
+    props.color &&
+    css`
+      color: ${props.color};
+    `};
+  ${(props) =>
+    props.$textAlign &&
+    css`
+      text-align: ${props.$textAlign};
+    `};
+  ${(props) =>
+    props.$textWrap &&
+    css`
+      text-wrap: ${props.$textWrap};
+    `}
 `

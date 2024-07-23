@@ -1,20 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { useState } from 'react'
 import 'styled-components'
 
-import { InputDefault, InputDefaultProps } from '.'
+import { Input, InputProps } from '.'
 
-const meta: Meta<typeof InputDefault> = {
-  component: InputDefault,
+const meta: Meta<typeof Input> = {
+  component: Input,
   title: 'Input',
 }
 
 export default meta
-type Story = StoryObj<typeof InputDefault>
+type Story = StoryObj<typeof Input>
 
-const defaultArgs: Partial<InputDefaultProps> = {
-  genre: 'product',
-  genreType: 'secondary',
-  size: 'large',
+const defaultArgs: Partial<InputProps> = {
+  genre: 'gray',
+  size: 'medium',
   isError: false,
   isDisabled: false,
   isActive: undefined,
@@ -25,7 +25,20 @@ const defaultArgs: Partial<InputDefaultProps> = {
   width: '300px',
 }
 
+const InputStringWrapper: React.FC<InputProps> = (props) => {
+  const [value, setValue] = useState<string>('')
+
+  return (
+    <Input
+      {...props}
+      value={value}
+      onChange={(newValue) => setValue(newValue)}
+    />
+  )
+}
+
 export const String: Story = {
+  render: (args) => <InputStringWrapper {...args} />,
   args: {
     ...defaultArgs,
   },

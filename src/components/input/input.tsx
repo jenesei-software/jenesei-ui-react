@@ -2,30 +2,30 @@ import { memo } from 'react'
 import { useTheme } from 'styled-components'
 
 import {
-  InputDefaultErrorMessage,
-  InputDefaultPostfixChildren,
-  InputDefaultPrefixChildren,
-  InputDefaultProps,
-  InputDefaultStyledModalLoading,
-  StyledInputDefault,
-  StyledInputDefaultFormat,
-  StyledInputDefaultWrapper,
+  InputErrorMessage,
+  InputPostfixChildren,
+  InputPrefixChildren,
+  InputProps,
+  InputStyledModalLoading,
+  StyledInput,
+  StyledInputFormat,
+  StyledInputWrapper,
 } from '.'
 
-export const InputDefault = memo((props: InputDefaultProps) => {
+export const Input = memo((props: InputProps) => {
   const theme = useTheme()
 
   return (
-    <StyledInputDefaultWrapper
+    <StyledInputWrapper
       className={props.className}
       $isDisabled={props.isDisabled}
       $width={props.width}
     >
       {props.prefixChildren && (
-        <InputDefaultPrefixChildren {...props.prefixChildren} />
+        <InputPrefixChildren {...props.prefixChildren} />
       )}
       {props.format ? (
-        <StyledInputDefaultFormat
+        <StyledInputFormat
           $isActive={props.isActive}
           $isError={props.isError}
           $isLoading={props.isLoading}
@@ -33,8 +33,8 @@ export const InputDefault = memo((props: InputDefaultProps) => {
           $prefixChildren={props?.prefixChildren}
           $genre={props.genre}
           $size={props.size}
-          $genreType={props.genreType}
           $isBold={props.isBold}
+          $isCustomIcon={props.isCustomIcon}
           disabled={props.isDisabled}
           readOnly={props.isReadOnly}
           required={props.isRequired}
@@ -49,7 +49,7 @@ export const InputDefault = memo((props: InputDefaultProps) => {
           type={props.formatType}
         />
       ) : (
-        <StyledInputDefault
+        <StyledInput
           $isActive={props.isActive}
           $isError={props.isError}
           $isLoading={props.isLoading}
@@ -57,7 +57,6 @@ export const InputDefault = memo((props: InputDefaultProps) => {
           $prefixChildren={props?.prefixChildren}
           $genre={props.genre}
           $size={props.size}
-          $genreType={props.genreType}
           $isBold={props.isBold}
           disabled={props.isDisabled}
           readOnly={props.isReadOnly}
@@ -75,22 +74,19 @@ export const InputDefault = memo((props: InputDefaultProps) => {
       )}
 
       {props.isError && props.errorMessage && (
-        <InputDefaultErrorMessage>
-          {props.errorMessage}
-        </InputDefaultErrorMessage>
+        <InputErrorMessage>{props.errorMessage}</InputErrorMessage>
       )}
       {props.postfixChildren && (
-        <InputDefaultPostfixChildren {...props.postfixChildren} />
+        <InputPostfixChildren {...props.postfixChildren} />
       )}
       {props.isLoading && (
-        <InputDefaultStyledModalLoading
+        <InputStyledModalLoading
           $genre={props.genre}
-          $genreType={props.genreType}
           $size={props.size}
           size={props.size}
-          color={theme.colors.input[props.genre][props.genreType].color.rest}
+          color={theme.colors.input[props.genre].color.rest}
         />
       )}
-    </StyledInputDefaultWrapper>
+    </StyledInputWrapper>
   )
 })

@@ -1,10 +1,13 @@
 import { TJeneseiThemeSize } from '../../theme'
 import { CheckboxProps } from '../checkbox/checkbox.types'
 
-export interface CheckboxesProps<T extends Record<string, unknown>> {
-  checkboxGenre: CheckboxProps['genre']
+export interface ICheckboxValue {
+  label: string | number
+  value: string | number
+}
 
-  checkboxGenreType: CheckboxProps['genreType']
+export interface CheckboxesProps<T extends ICheckboxValue> {
+  checkboxGenre: CheckboxProps['genre']
 
   checkBoxView: CheckboxProps['view']
 

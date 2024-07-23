@@ -17,13 +17,25 @@ export const Default: Story = {
     children: 'Click',
     width: 'auto',
     type: 'button',
-    genreType: 'primary',
-    genre: 'product',
-    size: 'large',
+    genre: 'gray',
+    size: 'medium',
     isLoading: false,
     isDisabled: false,
     isOnlyLoading: false,
     isActive: false,
-    isRipple: true,
+  },
+}
+
+export const Icon: Story = {
+  args: {
+    width: 'asHeight',
+    type: 'button',
+    icon: 'WiFi',
+    genre: 'gray',
+    size: 'medium',
+    isLoading: false,
+    isDisabled: false,
+    isOnlyLoading: false,
+    isActive: false,
   },
 }
