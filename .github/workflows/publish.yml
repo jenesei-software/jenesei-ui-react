@@ -39,9 +39,9 @@ jobs:
         id: bump_version
         run: |
           # Uncomment the desired version bump type
-          npm version patch -m "Bump version to %s"
-          # npm version minor -m "Bump version to %s"
-          # npm version major -m "Bump version to %s"
+          npm version patch
+          # npm version minor
+          # npm version major
           NEW_VERSION=$(node -p "require('./package.json').version")
           echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
 
@@ -66,6 +66,7 @@ jobs:
 
       - name: Publish to npm
         run: |
+          npm cache verify
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_CYRILSTRONE_TOKEN }}
