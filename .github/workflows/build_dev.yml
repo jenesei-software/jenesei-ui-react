@@ -1,4 +1,4 @@
-name: Build dev
+name: Build Storybook dev
 
 on:
   push:
@@ -36,11 +36,6 @@ jobs:
       - name: Build
         run: |
           npm run build-storybook
-
-      - name: Commit changes
-        run: |
-          git add storybook-static
-          git commit -m "Add Storybook build"
 
       - name: Push changes
         uses: peaceiris/actions-gh-pages@v3
