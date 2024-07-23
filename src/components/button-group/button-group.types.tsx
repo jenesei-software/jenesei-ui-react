@@ -8,5 +8,5 @@ export interface ButtonGroupProps {
 }
 
 export interface StyledButtonGroupProps {
-  position: ButtonGroupProps['position']
+  $position: ButtonGroupProps['position']
 }

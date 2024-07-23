@@ -25,7 +25,9 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
       {...props}
       value={[
         {
-          $justifyContent: 'flex-start',  // Ensure this prop is being set here
+          $styles:{
+            $justifyContent: 'flex-start',
+          },
           children: 'First',
           icon: 'Copy',
           iconPosition: 'left',
@@ -42,6 +44,9 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           },
         },
         {
+          $styles:{
+            $justifyContent: 'space-between',
+          },
           children: 'Second',
           icon: 'ChevronLeft',
           width: 'auto',
@@ -52,7 +57,6 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           isDisabled: false,
           isOnlyLoading: false,
           isActive: value.second,
-          $justifyContent: 'flex-start',  // Ensure this prop is being set here
           onClick: () => {
             setValue((prevState) => ({
               ...prevState,
@@ -61,6 +65,9 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           },
         },
         {
+          $styles:{
+            $justifyContent: 'space-between',
+          },
           children: 'Third',
           icon: 'Coffee',
           width: 'auto',
@@ -71,7 +78,6 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           isDisabled: false,
           isOnlyLoading: false,
           isActive: value.third,
-          $justifyContent: 'flex-start',
           onClick: () => {
             setValue((prevState) => ({ ...prevState, third: !prevState.third }))
           },
