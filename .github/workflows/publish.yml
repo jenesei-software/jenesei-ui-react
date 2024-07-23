@@ -57,9 +57,15 @@ jobs:
           branch: publish
           tags: true
 
+      - name: Clear npm cache
+        run: npm cache clean --force
+
+      - name: Check existing versions
+        run: |
+          npm view jenesei-react-ui versions --json
+
       - name: Publish to npm
         run: |
-          npm info jenesei-react-ui
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_CYRILSTRONE_TOKEN }}
