@@ -22,16 +22,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Clean git working directory
-        run: |
-          git reset --hard || echo "No changes to reset"
-          git clean -fd || echo "No files to clean"
-
-      - name: Configure Git
-        run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-
       - name: Bump version
         id: bump_version
         run: |
@@ -39,13 +29,18 @@ jobs:
           NEW_VERSION=$(node -p "require('./package.json').version")
           echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
 
+      - name: Configure Git
+        run: |
+          git config --local  user.name 'github-actions'
+          git config --local  user.email 'github-actions@github.com'
+
       - name: Commit changes
         run: |
           git add package.json package-lock.json
           git commit -m "Bump version to $NEW_VERSION" || echo "Nothing to commit"
 
       - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
+        uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
           branch: publish
