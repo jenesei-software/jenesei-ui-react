@@ -43,11 +43,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
         run: |
+          git remote set-url origin https://<USERNAME>:${{ secrets.PAT_CYRILSTRONE_ACTION }}@github.com/<OWNER>/<REPO>.git
           git status
           git add package.json package-lock.json
-          git status
           git commit -m "Bump version to $NEW_VERSION" || echo "Nothing to commit"
-          git push origin publish --tags || echo "Push failed"
+          git push origin publish --tags
 
       - name: Publish to npm
         run: npm publish
