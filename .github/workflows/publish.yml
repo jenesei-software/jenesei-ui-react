@@ -43,12 +43,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
         run: |
-          git remote set-url origin https://CyrilStrone:${{ secrets.PAT_CYRILSTRONE_ACTION }}@github.com/Jenesei-Software/jenesei-ui-react.git
           git status
           git add package.json package-lock.json
           git status
           git commit -m "Bump version to $NEW_VERSION" || echo "Nothing to commit"
-          git push origin publish --tags
+          git push origin publish --tags || echo "Push failed"
 
       - name: Publish to npm
         run: npm publish
