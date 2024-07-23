@@ -1,4 +1,4 @@
-name: Build Storybook prod
+name: Publish Storybook - production
 
 on:
   push:
