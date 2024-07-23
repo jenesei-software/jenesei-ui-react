@@ -48,8 +48,6 @@ jobs:
           git commit -m "Bump version to $NEW_VERSION" || echo "Nothing to commit"
 
       - name: Push changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
@@ -57,6 +55,8 @@ jobs:
           tags: true
 
       - name: Publish to npm
-        run: npm publish
+        run: |
+          npm info jenesei-react-ui
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_CYRILSTRONE_TOKEN }}
