@@ -19,9 +19,6 @@ jobs:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Install dependencies
-        run: npm install
-
       - name: Clean git working directory
         run: |
           git reset --hard || echo "No changes to reset"
@@ -54,9 +51,6 @@ jobs:
           branch: publish
           tags: true
 
-      - name: Clear npm cache
-        run: npm cache clean --force
-
       - name: Check if version exists
         id: check_version
         run: |
@@ -71,7 +65,7 @@ jobs:
       - name: Publish to npm
         if: env.publish == 'true'
         run: |
-          npm ci
+          npm install
           npm run build
           npm publish --access public
         env:
