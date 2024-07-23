@@ -1,5 +1,3 @@
 # jenesei-react-ui
 
-Test 7
-
-This is a package created to practice building a TypeScript package with Vite.
+This is a frontend library for React from Jenesei Software.
