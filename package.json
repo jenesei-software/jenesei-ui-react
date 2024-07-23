@@ -21,8 +21,7 @@
     "build": "tsc && vite build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build --quiet --disable-telemetry",
-    "format": "prettier --write 'src/*/*.{ts,tsx}'",
-    "publish": "npm publish"
+    "format": "prettier --write 'src/*/*.{ts,tsx}'"
   },
   "dependencies": {
     "vite-tsconfig-paths": "^4.2.0"
