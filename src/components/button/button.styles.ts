@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { StyledButtonProps } from '.'
 import { getFontStyles } from '../../fonts'
 import { FlexStyles } from '../../main'
-import { IJeneseiThemeSizeData, KEY_SIZE_DATA } from '../../theme'
+import { IJeneseiThemeSize, KEY_SIZE_DATA } from '../../theme'
 
 /****************************************** Genre *************************************************/
 const ButtonGenre = css<StyledButtonProps>`
@@ -110,7 +110,7 @@ export const ButtonSize = css<StyledButtonProps>`
     })};
 `
 export const ButtonSizeConstructor = (
-  props: IJeneseiThemeSizeData & { isFullSize?: boolean; $width?: string },
+  props: IJeneseiThemeSize & { isFullSize?: boolean; $width?: string },
 ) => css`
   height: ${props.height}px;
   border-radius: ${props.radius}px;

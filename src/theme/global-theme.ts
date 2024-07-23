@@ -25,20 +25,7 @@ export interface TJeneseiThemeGenre {
   gray: TJeneseiThemeGenreType
 }
 
-export interface IJeneseiThemeColorVariant {
-  100: string
-  10: string
-}
-
-export interface IJeneseiThemeSizeData {
-  height: number
-  heightIcon: number
-  radius: number
-  padding: number
-  font: number
-}
-
-export interface IJeneseiThemeSizeData {
+export interface IJeneseiThemeSize {
   height: number
   heightIcon: number
   radius: number
@@ -189,7 +176,7 @@ export const JeneseiTheme: IJeneseiTheme = {
   },
 }
 
-export const KEY_SIZE_DATA: Record<TJeneseiThemeSize, IJeneseiThemeSizeData> = {
+export const KEY_SIZE_DATA: Record<TJeneseiThemeSize, IJeneseiThemeSize> = {
   large: {
     height: 56,
     heightIcon: 18,
@@ -226,3 +213,49 @@ export const KEY_SIZE_DATA: Record<TJeneseiThemeSize, IJeneseiThemeSizeData> = {
     font: 10,
   },
 }
+
+const propsToExclude = [
+  'flexDirection',
+  'flexWrap',
+  'justifyContent',
+  'alignItems',
+  'alignContent',
+  'gap',
+  'order',
+  'flexGrow',
+  'flexShrink',
+  'flexBasis',
+  'alignSelf',
+  'm',
+  'mt',
+  'mr',
+  'mb',
+  'ml',
+  'mx',
+  'my',
+  'p',
+  'pt',
+  'pr',
+  'pb',
+  'pl',
+  'px',
+  'py',
+  'w',
+  'h',
+  'minW',
+  'maxW',
+  'minH',
+  'maxH',
+  'bg',
+  'color',
+  'iconPosition',
+  'isLoading',
+  'isDisabled',
+  'isOnlyLoading',
+  'isActive',
+  'isFullSize',
+  'isHiddenBorder',
+]
+
+export const shouldForwardProp = (prop: string) =>
+  !propsToExclude.includes(prop)

@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { StyledLibraryIconItemProps } from '.'
+import { FlexShortStyles } from '../../main'
 import { KEY_SIZE_DATA } from '../../theme'
 
 export const StyledSVG = styled.svg<StyledLibraryIconItemProps>`
@@ -12,4 +13,5 @@ export const StyledSVG = styled.svg<StyledLibraryIconItemProps>`
   & path {
     transition: all 0.3s;
   }
+  ${FlexShortStyles};
 `

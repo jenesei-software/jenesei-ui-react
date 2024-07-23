@@ -11,180 +11,180 @@ import {
 
 const FlexContainer = css<FlexContainerProps>`
   display: flex;
-  ${({ flexDirection }) =>
-    flexDirection &&
+  ${({ $flexDirection }) =>
+    $flexDirection &&
     css`
-      flex-direction: ${flexDirection};
+      flex-direction: ${$flexDirection};
     `}
-  ${({ flexWrap }) =>
-    flexWrap &&
+  ${({ $flexWrap }) =>
+    $flexWrap &&
     css`
-      flex-wrap: ${flexWrap};
+      flex-wrap: ${$flexWrap};
     `}
-  ${({ justifyContent }) =>
-    justifyContent &&
+  ${({ $justifyContent }) =>
+    $justifyContent &&
     css`
-      justify-content: ${justifyContent};
+      justify-content: ${$justifyContent};
     `}
-  ${({ alignItems }) =>
-    alignItems &&
+  ${({ $alignItems }) =>
+    $alignItems &&
     css`
-      align-items: ${alignItems};
+      align-items: ${$alignItems};
     `}
-  ${({ alignContent }) =>
-    alignContent &&
+  ${({ $alignContent }) =>
+    $alignContent &&
     css`
-      align-content: ${alignContent};
+      align-content: ${$alignContent};
     `}
-  ${({ gap }) =>
-    gap &&
+  ${({ $gap }) =>
+    $gap &&
     css`
-      gap: ${gap};
+      gap: ${$gap};
     `}
 `
 
 const FlexItem = css<FlexItemProps>`
-  ${({ order }) =>
-    order &&
+  ${({ $order }) =>
+    $order &&
     css`
-      order: ${order};
+      order: ${$order};
     `}
-  ${({ flexGrow }) =>
-    flexGrow &&
+  ${({ $flexGrow }) =>
+    $flexGrow &&
     css`
-      flex-grow: ${flexGrow};
+      flex-grow: ${$flexGrow};
     `}
-  ${({ flexShrink }) =>
-    flexShrink &&
+  ${({ $flexShrink }) =>
+    $flexShrink &&
     css`
-      flex-shrink: ${flexShrink};
+      flex-shrink: ${$flexShrink};
     `}
-  ${({ flexBasis }) =>
-    flexBasis &&
+  ${({ $flexBasis }) =>
+    $flexBasis &&
     css`
-      flex-basis: ${flexBasis};
+      flex-basis: ${$flexBasis};
     `}
-  ${({ alignSelf }) =>
-    alignSelf &&
+  ${({ $alignSelf }) =>
+    $alignSelf &&
     css`
-      align-self: ${alignSelf};
+      align-self: ${$alignSelf};
     `}
 `
 
 const FlexShort = css<FlexShortStylesProps>`
-  ${({ m }) =>
-    m &&
+  ${({ $m }) =>
+    $m &&
     css`
-      margin: ${m};
+      margin: ${$m};
     `}
-  ${({ mt }) =>
-    mt &&
+  ${({ $mt }) =>
+    $mt &&
     css`
-      margin-top: ${mt};
+      margin-top: ${$mt};
     `}
-  ${({ mr }) =>
-    mr &&
+  ${({ $mr }) =>
+    $mr &&
     css`
-      margin-right: ${mr};
+      margin-right: ${$mr};
     `}
-  ${({ mb }) =>
-    mb &&
+  ${({ $mb }) =>
+    $mb &&
     css`
-      margin-bottom: ${mb};
+      margin-bottom: ${$mb};
     `}
-  ${({ ml }) =>
-    ml &&
+  ${({ $ml }) =>
+    $ml &&
     css`
-      margin-left: ${ml};
+      margin-left: ${$ml};
     `}
-  ${({ mx }) =>
-    mx &&
+  ${({ $mx }) =>
+    $mx &&
     css`
-      margin-left: ${mx};
-      margin-right: ${mx};
+      margin-left: ${$mx};
+      margin-right: ${$mx};
     `}
-  ${({ my }) =>
-    my &&
+  ${({ $my }) =>
+    $my &&
     css`
-      margin-top: ${my};
-      margin-bottom: ${my};
+      margin-top: ${$my};
+      margin-bottom: ${$my};
     `}
-  ${({ p }) =>
-    p &&
+  ${({ $p }) =>
+    $p &&
     css`
-      padding: ${p};
+      padding: ${$p};
     `}
-  ${({ pt }) =>
-    pt &&
+  ${({ $pt }) =>
+    $pt &&
     css`
-      padding-top: ${pt};
+      padding-top: ${$pt};
     `}
-  ${({ pr }) =>
-    pr &&
+  ${({ $pr }) =>
+    $pr &&
     css`
-      padding-right: ${pr};
+      padding-right: ${$pr};
     `}
-  ${({ pb }) =>
-    pb &&
+  ${({ $pb }) =>
+    $pb &&
     css`
-      padding-bottom: ${pb};
+      padding-bottom: ${$pb};
     `}
-  ${({ pl }) =>
-    pl &&
+  ${({ $pl }) =>
+    $pl &&
     css`
-      padding-left: ${pl};
+      padding-left: ${$pl};
     `}
-  ${({ px }) =>
-    px &&
+  ${({ $px }) =>
+    $px &&
     css`
-      padding-left: ${px};
-      padding-right: ${px};
+      padding-left: ${$px};
+      padding-right: ${$px};
     `}
-  ${({ py }) =>
-    py &&
+  ${({ $py }) =>
+    $py &&
     css`
-      padding-top: ${py};
-      padding-bottom: ${py};
+      padding-top: ${$py};
+      padding-bottom: ${$py};
     `}
-  ${({ w }) =>
-    w &&
+  ${({ $w }) =>
+    $w &&
     css`
-      width: ${w};
+      width: ${$w};
     `}
-  ${({ h }) =>
-    h &&
+  ${({ $h }) =>
+    $h &&
     css`
-      height: ${h};
+      height: ${$h};
     `}
-  ${({ minW }) =>
-    minW &&
+  ${({ $minW }) =>
+    $minW &&
     css`
-      min-width: ${minW};
+      min-width: ${$minW};
     `}
-  ${({ maxW }) =>
-    maxW &&
+  ${({ $maxW }) =>
+    $maxW &&
     css`
-      max-width: ${maxW};
+      max-width: ${$maxW};
     `}
-  ${({ minH }) =>
-    minH &&
+  ${({ $minH }) =>
+    $minH &&
     css`
-      min-height: ${minH};
+      min-height: ${$minH};
     `}
-  ${({ maxH }) =>
-    maxH &&
+  ${({ $maxH }) =>
+    $maxH &&
     css`
-      max-height: ${maxH};
+      max-height: ${$maxH};
     `}
-  ${({ bg }) =>
-    bg &&
+  ${({ $bg }) =>
+    $bg &&
     css`
-      background: ${JeneseiThemeVariables[bg]};
+      background: ${JeneseiThemeVariables[$bg]};
     `}
-  ${({ color }) =>
-    color &&
+  ${({ $color }) =>
+    $color &&
     css`
-      color: ${JeneseiThemeVariables[color]};
+      color: ${JeneseiThemeVariables[$color]};
     `}
 `
 
@@ -193,11 +193,11 @@ export const FlexStyles = css<FlexStylesProps>`
   ${FlexItem}
 `
 
-export const FlexShortStyles = css<FlexStylesProps>`
+export const FlexShortStyles = css<FlexShortStylesProps>`
   ${FlexStyles}
   ${FlexShort}
 `
 
-export const JeneseiStack = styled.div<FlexStylesProps>`
+export const JeneseiStack = styled.div<FlexShortStylesProps>`
   ${FlexShortStyles}
 `

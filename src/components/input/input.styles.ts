@@ -2,7 +2,7 @@ import { PatternFormat } from 'react-number-format'
 import styled, { css } from 'styled-components'
 
 import { getFontStyles } from '../../fonts'
-import { IJeneseiThemeSizeData, KEY_SIZE_DATA } from '../../theme'
+import { IJeneseiThemeSize, KEY_SIZE_DATA } from '../../theme'
 import { ModalLoading } from '../modal-loading'
 import {
   InputChildrenProps,
@@ -149,7 +149,7 @@ const InputGenre = css<StyledInputProps>`
 export const InputSize = css<StyledInputProps>`
   ${(props) => InputSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
-export const InputSizeConstructor = (props: IJeneseiThemeSizeData) => css`
+export const InputSizeConstructor = (props: IJeneseiThemeSize) => css`
   padding: 0px ${props.padding}px;
   height: ${props.height}px;
   min-height: ${props.height}px;
