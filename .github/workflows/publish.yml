@@ -62,11 +62,19 @@ jobs:
             echo "publish=true" >> $GITHUB_ENV
           fi
 
-      - name: Publish to npm
+      - name: Install dependencies
         if: env.publish == 'true'
         run: |
           npm install
+
+      - name: Build
+        if: env.publish == 'true'
+        run: |
           npm run build
+
+      - name: Publish to npm
+        if: env.publish == 'true'
+        run: |
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_CYRILSTRONE_TOKEN }}
