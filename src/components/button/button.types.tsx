@@ -5,7 +5,7 @@ import {
   TJeneseiThemeSize,
 } from '../../theme'
 
-export interface ButtonProps extends FlexStylesProps{
+export interface ButtonProps{
   className?: string
 
   genre: TButtonGenre
@@ -45,6 +45,8 @@ export interface ButtonProps extends FlexStylesProps{
   customFontWeight?: number
 
   isFullSize?: boolean
+
+  $styles?:FlexStylesProps
 }
 
 export type TButtonGenre = keyof TJeneseiThemeGenre

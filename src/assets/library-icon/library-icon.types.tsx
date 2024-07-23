@@ -1,3 +1,4 @@
+import { FlexShortStylesProps } from '../../main'
 import { TJeneseiThemeSize } from '../../theme'
 
 export type LibraryIconProps = {
@@ -9,9 +10,11 @@ export interface LibraryIconItemProps {
   onClick?: () => void
   size: TJeneseiThemeSize
   color?: string
+  id?: string
+  styles?: FlexShortStylesProps
 }
 
-export interface StyledLibraryIconItemProps {
+export interface StyledLibraryIconItemProps extends FlexShortStylesProps {
   $size: LibraryIconItemProps['size']
 }
 

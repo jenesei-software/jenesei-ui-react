@@ -2,7 +2,7 @@ import ReactToggle from 'react-toggle'
 import styled, { css } from 'styled-components'
 
 import { StyledToggleProps } from '.'
-import { IJeneseiThemeSizeData, KEY_SIZE_DATA } from '../../theme'
+import { IJeneseiThemeSize, KEY_SIZE_DATA } from '../../theme'
 
 import 'react-toggle/style.css'
 
@@ -10,7 +10,7 @@ import 'react-toggle/style.css'
 export const StyledReactToggleSize = css<StyledToggleProps>`
   ${(props) => ToggleSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
-export const ToggleSizeConstructor = (props: IJeneseiThemeSizeData) => css`
+export const ToggleSizeConstructor = (props: IJeneseiThemeSize) => css`
   & .react-toggle-track {
     height: ${props.height}px;
     width: ${props.height * 2 + 2}px;

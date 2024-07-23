@@ -3,13 +3,13 @@ import styled, { css } from 'styled-components'
 import { StyledCheckboxProps } from '.'
 import { LibraryCheckboxes } from '../../assets/library-checkboxes'
 import { getFontStyles } from '../../fonts'
-import { IJeneseiThemeSizeData, KEY_SIZE_DATA } from '../../theme'
+import { IJeneseiThemeSize, KEY_SIZE_DATA } from '../../theme'
 
 /****************************************** Size *************************************************/
 export const CheckboxSize = css<StyledCheckboxProps>`
   ${(props) => CheckboxSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
-export const CheckboxSizeConstructor = (props: IJeneseiThemeSizeData) => css`
+export const CheckboxSizeConstructor = (props: IJeneseiThemeSize) => css`
   height: ${props.height}px;
   border-radius: ${props.radius + 12}px;
   gap: ${props.padding - 2}px;
