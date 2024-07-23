@@ -35,7 +35,10 @@ jobs:
       - name: Bump version
         id: bump_version
         run: |
+          # Uncomment the desired version bump type
           npm version patch -m "Bump version to %s"
+          # npm version minor -m "Bump version to %s"
+          # npm version major -m "Bump version to %s"
           NEW_VERSION=$(node -p "require('./package.json').version")
           echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
 

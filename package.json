@@ -22,10 +22,6 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build --quiet --disable-telemetry",
     "format": "prettier --write 'src/*/*.{ts,tsx}'",
-    "bump-version": "node bump-version.js",
-    "bump-version:major": "node bump-version.js major",
-    "bump-version:minor": "node bump-version.js minor",
-    "bump-version:patch": "node bump-version.js patch",
     "publish": "npm publish"
   },
   "dependencies": {
