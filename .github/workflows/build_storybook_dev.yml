@@ -1,4 +1,4 @@
-name: Publish Storybook - development
+name: Build Storybook - development
 
 on:
   push:
