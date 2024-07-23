@@ -1,7 +1,7 @@
 import { css, styled } from 'styled-components'
 
 import { StyledButtonGroupProps } from '.'
-import { Button } from '../../main'
+import { Button } from '../button'
 
 /****************************************** Position *************************************************/
 const ButtonGroupWrapperPositionHorizontal = css`
@@ -50,7 +50,7 @@ const StyledButtonPositionVertical = css`
 
 export const ButtonGroupWrapper = styled.div<StyledButtonGroupProps>`
   ${(props) =>
-    props.$position === 'horizontal'
+    props.position === 'horizontal'
       ? ButtonGroupWrapperPositionHorizontal
       : ButtonGroupWrapperPositionVertical}
 `
@@ -59,7 +59,7 @@ export const StyledButtonForButtonGroup = styled(
   Button,
 )<StyledButtonGroupProps>`
   ${(props) =>
-    props.$position === 'horizontal'
+    props.position === 'horizontal'
       ? StyledButtonPositionHorizontal
       : StyledButtonPositionVertical}
 `

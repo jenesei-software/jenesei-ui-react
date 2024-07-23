@@ -1,4 +1,4 @@
-import { FC, memo } from 'react'
+import { FC } from 'react'
 
 import {
   ButtonGroupProps,
@@ -6,20 +6,23 @@ import {
   StyledButtonForButtonGroup,
 } from '.'
 
-export const ButtonGroup: FC<ButtonGroupProps> = memo((props) => {
+export const ButtonGroup: FC<ButtonGroupProps> = (props) => {
   return (
     <ButtonGroupWrapper
-      $position={props.position}
+      position={props.position}
       className={props.className}
       id="jenesei-button-group"
     >
-      {props.value?.map((e) => (
-        <StyledButtonForButtonGroup
-          {...e}
-          width={props.width ?? 'auto'}
-          $position={props.position}
-        />
-      ))}
+      {props.value?.map((button, id) => {
+        return (
+          <StyledButtonForButtonGroup
+            key={id}
+            {...button}
+            width={props.width ?? 'auto'}
+            position={props.position}
+          />
+        )
+      })}
     </ButtonGroupWrapper>
   )
-})
+}
