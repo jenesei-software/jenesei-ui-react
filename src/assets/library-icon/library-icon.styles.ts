@@ -9,9 +9,9 @@ export const StyledSVG = styled.svg<StyledLibraryIconItemProps>`
     height: ${KEY_SIZE_DATA[props.$size].heightIcon}px;
     width: ${KEY_SIZE_DATA[props.$size].heightIcon}px;
   `}
-  transition: all 0.3s;
+  transition: all ${(props) => props.theme.transition};
   & path {
-    transition: all 0.3s;
+    transition: all ${(props) => props.theme.transition};
   }
   ${FlexShortStyles};
 `

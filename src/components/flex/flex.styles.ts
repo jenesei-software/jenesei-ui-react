@@ -198,6 +198,6 @@ export const FlexShortStyles = css<FlexShortStylesProps>`
   ${FlexShort}
 `
 
-export const JeneseiStack = styled.div<FlexShortStylesProps>`
+export const Stack = styled.div<FlexShortStylesProps>`
   ${FlexShortStyles}
 `

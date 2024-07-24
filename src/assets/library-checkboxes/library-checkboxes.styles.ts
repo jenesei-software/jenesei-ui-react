@@ -8,8 +8,8 @@ export const StyledCheckboxSVG = styled.svg<StyledLibraryCheckboxesItemProps>`
     height: ${KEY_SIZE_DATA[props.$size].heightIcon + 4}px;
     width: ${KEY_SIZE_DATA[props.$size].heightIcon + 4}px;
   `}
-  transition: all 0.3s;
+  transition: all ${(props) => props.theme.transition};
   & path {
-    transition: all 0.3s;
+    transition: all ${(props) => props.theme.transition};
   }
 `
