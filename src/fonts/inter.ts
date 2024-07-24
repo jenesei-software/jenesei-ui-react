@@ -1,10 +1,14 @@
 import styled, { css } from 'styled-components'
 
-import { TJeneseiFontFamily } from '../theme'
+import {
+  JeneseiThemeVariables,
+  JeneseiThemeVariablesKeys,
+  TJeneseiFontFamily,
+} from '../theme'
 
-export interface FontProps {
-  $color?: string
+export type FontProps = {
   $size: number
+  $color?: JeneseiThemeVariablesKeys
   $textAlign?: 'center'
   $textWrap?: 'nowrap'
   $height?: number
@@ -12,7 +16,9 @@ export interface FontProps {
   $family: TJeneseiFontFamily
 }
 
-export const getFontStyles = (
+export type PartialFontProps = Partial<FontProps>
+
+export const getFontSizeStyles = (
   size: FontProps['$size'],
   weight: FontProps['$weight'],
   family: FontProps['$family'],
@@ -29,22 +35,33 @@ export const getFontStyles = (
   `}
 `
 
-export const SpanFont = styled.span<FontProps>`
-  font-family: ${(props) => props.$family};
+export const SpanFontCSS = css<PartialFontProps>`
   font-style: normal;
-  line-height: normal;
-  font-size: ${(props) => props.$size}px;
-  font-weight: ${(props) => props.$weight};
 
+  ${(props) =>
+    props.$family &&
+    css`
+      font-family: ${props.$family};
+    `};
+  ${(props) =>
+    props.$size &&
+    css`
+      font-size: ${props.$size}px;
+    `};
+  ${(props) =>
+    props.$weight &&
+    css`
+      font-weight: ${props.$weight};
+    `};
   ${(props) =>
     props.$height &&
     css`
       line-height: ${props.$height}px;
     `};
   ${(props) =>
-    props.color &&
+    props.$color &&
     css`
-      color: ${props.color};
+      color: ${JeneseiThemeVariables[props.$color]};
     `};
   ${(props) =>
     props.$textAlign &&
@@ -56,4 +73,32 @@ export const SpanFont = styled.span<FontProps>`
     css`
       text-wrap: ${props.$textWrap};
     `}
+`
+
+export const SpanFont = styled.span<FontProps>`
+  ${SpanFontCSS}
+`
+
+export const TitleH1 = styled.h1<PartialFontProps>`
+  ${SpanFontCSS}
+`
+
+export const TitleH2 = styled.h2<PartialFontProps>`
+  ${SpanFontCSS}
+`
+
+export const TitleH3 = styled.h3<PartialFontProps>`
+  ${SpanFontCSS}
+`
+
+export const TitleH4 = styled.h4<PartialFontProps>`
+  ${SpanFontCSS}
+`
+
+export const TitleH5 = styled.h5<PartialFontProps>`
+  ${SpanFontCSS}
+`
+
+export const TitleH6 = styled.h6<PartialFontProps>`
+  ${SpanFontCSS}
 `

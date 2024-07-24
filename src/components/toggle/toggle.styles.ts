@@ -29,7 +29,7 @@ export const ToggleSizeConstructor = (props: IJeneseiThemeSize) => css`
 const StyledReactToggleGenre = css<StyledToggleProps>`
   & div {
     transition:
-      all 0.2s,
+      all ${(props) => props.theme.transition},
       outline 0s;
   }
   &.react-toggle {

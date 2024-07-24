@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { getFontStyles } from '../../fonts'
+import { getFontSizeStyles } from '../../fonts'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '../../theme'
 import { CheckboxesWrapperProps } from './checkboxes.types'
 
@@ -10,7 +10,7 @@ export const CheckboxesSize = css<CheckboxesWrapperProps>`
 `
 export const CheckboxesSizeConstructor = (props: IJeneseiThemeSize) => css`
   gap: ${props.padding - 2}px;
-  ${getFontStyles(props.font, 600, 'Inter')};
+  ${getFontSizeStyles(props.font, 600, 'Inter')};
 `
 
 /****************************************** Default *************************************************/
