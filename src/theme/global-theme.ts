@@ -33,6 +33,12 @@ export interface IJeneseiThemeSize {
   font: number
 }
 
+export interface IJeneseiThemeScreens {
+  mobile: { width: string }
+  tablet: { width: string }
+  other: boolean
+}
+
 export type TJeneseiThemeSize =
   | 'large'
   | 'largeMedium'
@@ -43,6 +49,10 @@ export type TJeneseiThemeSize =
 export type TJeneseiFontFamily = 'Inter'
 
 export interface IJeneseiTheme {
+  transitionDuration: string
+  transitionTimingFunction: string
+  transition: string
+  screens: IJeneseiThemeScreens
   fontFamily: TJeneseiFontFamily
   colors: {
     focus: string
@@ -164,6 +174,14 @@ const DefaultJeneseiThemeGenreToggle = {
   },
 }
 export const JeneseiTheme: IJeneseiTheme = {
+  transition: '0.3s ease',
+  transitionDuration: '0.3s',
+  transitionTimingFunction: 'ease',
+  screens: {
+    mobile: { width: '850px' },
+    tablet: { width: '1290px' },
+    other: true,
+  },
   fontFamily: 'Inter',
   colors: {
     white: JeneseiThemeVariables.white,

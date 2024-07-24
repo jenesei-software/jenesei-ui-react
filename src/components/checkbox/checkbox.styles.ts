@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { StyledCheckboxProps } from '.'
 import { LibraryCheckboxes } from '../../assets/library-checkboxes'
-import { getFontStyles } from '../../fonts'
+import { getFontSizeStyles } from '../../fonts'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '../../theme'
 
 /****************************************** Size *************************************************/
@@ -13,7 +13,7 @@ export const CheckboxSizeConstructor = (props: IJeneseiThemeSize) => css`
   height: ${props.height}px;
   border-radius: ${props.radius + 12}px;
   gap: ${props.padding - 2}px;
-  ${getFontStyles(props.font, 600, 'Inter')};
+  ${getFontSizeStyles(props.font, 600, 'Inter')};
   padding: 0px ${props.padding}px;
 `
 
@@ -107,7 +107,7 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   overflow: hidden;
   isolation: isolate;
   user-select: none;
-  transition: all 0.2s;
+  transition: all ${(props) => props.theme.transition};
 
   & {
     user-select: none;

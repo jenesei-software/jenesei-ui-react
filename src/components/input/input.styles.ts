@@ -1,7 +1,7 @@
 import { PatternFormat } from 'react-number-format'
 import styled, { css } from 'styled-components'
 
-import { getFontStyles } from '../../fonts'
+import { getFontSizeStyles } from '../../fonts'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '../../theme'
 import { ModalLoading } from '../modal-loading'
 import {
@@ -28,7 +28,7 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
 
 /****************************************** Error *************************************************/
 export const InputErrorMessage = styled.div`
-  ${getFontStyles(12, 400, 'Inter')};
+  ${getFontSizeStyles(12, 400, 'Inter')};
   position: absolute;
   bottom: -15px;
   left: 10px;
@@ -52,14 +52,14 @@ export const InputIsErrorBorder = css<StyledInputProps>`
 export const InputPlaceholder = css<StyledInputProps>`
   ::placeholder,
   ::-webkit-input-placeholder {
-    ${(props) => getFontStyles(16, props.$isBold ? 500 : 400, 'Inter')};
+    ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
     color: ${(props) =>
       props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
     line-height: 24px;
   }
   :-ms-input-placeholder {
-    ${(props) => getFontStyles(16, props.$isBold ? 500 : 400, 'Inter')};
+    ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
     color: ${(props) =>
       props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
@@ -165,14 +165,14 @@ export const StyledInputCSS = css<StyledInputProps>`
   width: 100%;
   border: 2px solid;
   transition:
-    all 0.2s,
+    all ${(props) => props.theme.transition},
     outline 0s;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   outline: none;
 
-  ${(props) => getFontStyles(16, props.$isBold ? 500 : 400, 'Inter')};
+  ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
   ${InputSize};
   ${InputGenre};
   ${InputIsErrorBorder};

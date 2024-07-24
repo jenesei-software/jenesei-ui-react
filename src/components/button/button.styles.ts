@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { StyledButtonProps } from '.'
-import { getFontStyles } from '../../fonts'
+import { getFontSizeStyles } from '../../fonts'
 import { FlexStyles } from '../../main'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '../../theme'
 
@@ -115,7 +115,7 @@ export const ButtonSizeConstructor = (
   height: ${props.height}px;
   border-radius: ${props.radius}px;
   gap: ${props.padding - 2}px;
-  ${getFontStyles(props.font, 600, 'Inter')};
+  ${getFontSizeStyles(props.font, 600, 'Inter')};
   padding: 0px ${props.padding}px;
 
   ${() =>
@@ -157,7 +157,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   isolation: isolate;
   user-select: none;
   transition:
-    all 0.2s,
+    all ${(props) => props.theme.transition},
     outline 0s;
   box-sizing: border-box;
   overflow: hidden;
