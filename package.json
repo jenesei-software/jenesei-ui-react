@@ -1,9 +1,10 @@
 {
   "author": "Cyril Strone",
   "name": "@jenesei-software/jenesei-ui-react",
-  "version": "0.3.33",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+  "version": "0.4.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jenesei-Software/jenesei-ui-react.git"
   },
   "main": "./dist/jenesei-react-ui.umd.js",
   "module": "./dist/jenesei-react-ui.es.js",

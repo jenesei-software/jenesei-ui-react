@@ -17,7 +17,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
-          registry-url: 'https://npm.pkg.github.com/jenesei-software'
 
       - name: Clean git working directory
         run: |
@@ -51,31 +50,48 @@ jobs:
           branch: publish
           tags: true
 
-      - name: Check if version exists
-        id: check_version
+      - name: Check if version exists in GitHub Packages
+        id: check_version_github
         run: |
           EXISTING_VERSION=$(npm view @jenesei-software/jenesei-ui-react versions --registry https://npm.pkg.github.com --json | grep ${NEW_VERSION} || true)
           if [ -n "$EXISTING_VERSION" ]; then
             echo "Version ${NEW_VERSION} already exists. Skipping publish."
-            echo "publish=false" >> $GITHUB_ENV
+            echo "publishGH=false" >> $GITHUB_ENV
           else
-            echo "publish=true" >> $GITHUB_ENV
+            echo "publishGH=true" >> $GITHUB_ENV
+          fi
+
+      - name: Check if version exists in NPM
+        id: check_version_npm
+        run: |
+          EXISTING_VERSION=$(npm view @jenesei-software/jenesei-ui-react versions --json | grep ${NEW_VERSION} || true)
+          if [ -n "$EXISTING_VERSION" ]; then
+            echo "Version ${NEW_VERSION} already exists. Skipping publish."
+            echo "publishNPM=false" >> $GITHUB_ENV
+          else
+            echo "publishNPM=true" >> $GITHUB_ENV
           fi
 
       - name: Install dependencies
-        if: env.publish == 'true'
+        if: env.publishGH == 'true' && env.publishNPM == 'true'
         run: |
           npm install
 
       - name: Build
-        if: env.publish == 'true'
+        if: env.publishGH == 'true' && env.publishNPM == 'true'
         run: |
           npm run build
 
-      - name: Publish to npm
-        if: env.publish == 'true'
+      - name: Publish to GitHub Packages
+        if: env.publishGH == 'true' && env.publishNPM == 'true'
         run: |
-          npm ci
-          npm publish
+          npm publish --registry=https://npm.pkg.github.com/
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
+
+      - name: Publish to NPM
+        if: env.publishGH == 'true' && env.publishNPM == 'true'
+        run: |
+          npm publish --registry=https://registry.npmjs.org/
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_CYRILSTRONE_TOKEN }}
