@@ -1,11 +1,12 @@
-import { TJeneseiThemeSize } from '../../theme'
-import { CheckboxProps } from '../checkbox'
+import { CheckboxProps } from '@components/checkbox'
 import {
   InputProps,
   StyledInputProps,
   StyledInputWrapperProps,
   TInputGenre,
-} from '../input'
+} from '@components/input'
+
+import { TJeneseiThemeSize } from '@theme/index'
 
 export interface ISelectItem {
   label: string | number

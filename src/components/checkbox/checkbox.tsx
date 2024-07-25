@@ -1,6 +1,8 @@
 import { FC, useCallback } from 'react'
 import { useTheme } from 'styled-components'
 
+import { ModalLoading } from '@components/modal-loading'
+
 import {
   CheckboxProps,
   CheckboxWrapper,
@@ -9,7 +11,6 @@ import {
   StyledIconCircle,
   StyledIconSquare,
 } from '.'
-import { ModalLoading } from '../modal-loading'
 
 export const Checkbox: FC<CheckboxProps> = (props) => {
   const handleOnClick = useCallback(

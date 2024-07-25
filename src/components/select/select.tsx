@@ -3,6 +3,11 @@ import gsap from 'gsap'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTheme } from 'styled-components'
 
+import { Button } from '@components/button'
+import { Checkbox } from '@components/checkbox'
+
+import { KEY_SIZE_DATA } from '@theme/index'
+
 import {
   DropdownErase,
   DropdownFooter,
@@ -15,9 +20,6 @@ import {
   SelectStyledInput,
   SelectWrapper,
 } from '.'
-import { KEY_SIZE_DATA } from '../../theme'
-import { Button } from '../button'
-import { Checkbox } from '../checkbox'
 
 const DEFAULT_MAX_VIEW = 5
 const DEFAULT_MIN_VIEW = 5

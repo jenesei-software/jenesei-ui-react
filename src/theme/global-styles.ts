@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 
-export const GlobalStyles = createGlobalStyle`
+export const JeneseiGlobalStyles = createGlobalStyle`
   ${reset};
   
   .sb-show-main.sb-main-padded {

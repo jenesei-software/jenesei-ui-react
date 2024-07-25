@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components'
 
+import { FlexShortStyles } from '@components/flex'
+
+import { KEY_SIZE_DATA } from '@theme/index'
+
 import { StyledLibraryIconItemProps } from '.'
-import { FlexShortStyles } from '../../main'
-import { KEY_SIZE_DATA } from '../../theme'
 
 export const StyledSVG = styled.svg<StyledLibraryIconItemProps>`
   ${(props) => css`

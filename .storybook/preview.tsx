@@ -1,9 +1,9 @@
 import { withThemeFromJSXProvider } from '@storybook/addon-themes'
 import type { Preview } from '@storybook/react'
 import React from 'react'
-import { StyleSheetManager, ThemeProvider } from 'styled-components'
+import { ThemeProvider } from 'styled-components'
 
-import { GlobalStyles } from '../src/theme/global-styles'
+import { JeneseiGlobalStyles } from '../src/theme/global-styles'
 import { JeneseiTheme } from '../src/theme/index'
 
 import '@fontsource/inter/300.css'
@@ -16,7 +16,7 @@ export const preview: Preview = {
   decorators: [
     (Story) => (
       <ThemeProvider theme={JeneseiTheme}>
-        <GlobalStyles />
+        <JeneseiGlobalStyles />
         <Story />
       </ThemeProvider>
     ),
@@ -33,7 +33,7 @@ export const preview: Preview = {
 
 export const decorators = [
   withThemeFromJSXProvider({
-    GlobalStyles: GlobalStyles,
+    GlobalStyles: JeneseiGlobalStyles,
     Provider: ThemeProvider,
     themes: {
       light: JeneseiTheme,

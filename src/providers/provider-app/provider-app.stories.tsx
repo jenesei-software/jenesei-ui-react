@@ -1,15 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
-import { ProviderApp } from '.'
-import { TitleH1 } from '../../fonts'
 import {
+  TitleH1,
   TitleH2,
   TitleH3,
   TitleH4,
   TitleH5,
   TitleH6,
-} from './../../fonts/inter'
+} from '@fonts/index'
+
+import { ProviderApp } from '.'
 
 const meta: Meta<typeof ProviderApp> = {
   component: ProviderApp,

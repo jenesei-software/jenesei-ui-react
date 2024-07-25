@@ -1,4 +1,4 @@
-import { JeneseiThemeVariablesKeys } from '../../main'
+import { JeneseiThemeVariablesKeys } from '@theme/index'
 
 export interface FlexContainerProps {
   $flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse'

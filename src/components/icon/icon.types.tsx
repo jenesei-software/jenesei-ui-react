@@ -1,9 +1,11 @@
-import { LibraryIconItemProps, TLibraryIconNameString } from '../../main'
 import {
-  JeneseiThemeVariablesKeys
-} from '../../theme'
+  LibraryIconItemProps,
+  TLibraryIconNameString,
+} from '@assets/library-icon'
 
-export interface IconProps extends LibraryIconItemProps{
+import { JeneseiThemeVariablesKeys } from '@theme/index'
+
+export interface IconProps extends LibraryIconItemProps {
   icon: TLibraryIconNameString
   color: JeneseiThemeVariablesKeys
 }

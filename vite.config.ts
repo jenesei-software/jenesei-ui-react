@@ -2,6 +2,9 @@ import react from '@vitejs/plugin-react'
 import path, { resolve } from 'path'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
+import tsconfigPaths from 'vite-tsconfig-paths'
+
+import { peerDependencies } from './package.json'
 
 export default defineConfig({
   resolve: {
@@ -23,24 +26,20 @@ export default defineConfig({
         },
       },
     }),
+    tsconfigPaths(),
     dts({
       include: ['src/'],
+      exclude: ['src/theme/styled.d.ts'],
     }),
   ],
   publicDir: false,
   build: {
     sourcemap: true,
-    rollupOptions: {
-      onLog(level, log, handler) {
-        if (
-          log.cause &&
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (log.cause as any)?.message ==
-            `Can't resolve original location of error.`
-        ) {
-          return
-        }
-        handler(level, log)
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
       },
     },
     lib: {
@@ -48,6 +47,9 @@ export default defineConfig({
       name: 'jenesei-react-ui',
       formats: ['es', 'umd'],
       fileName: (format) => `jenesei-react-ui.${format}.js`,
+    },
+    rollupOptions: {
+      external: Object.keys(peerDependencies),
     },
   },
 })

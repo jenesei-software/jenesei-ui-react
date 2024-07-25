@@ -1,7 +1,8 @@
 import { css, styled } from 'styled-components'
 
+import { JeneseiThemeVariables } from '@theme/index'
+
 import { ProviderAppOutletProps, ProviderAppWrapperProps } from '.'
-import { JeneseiThemeVariables } from '../../main'
 
 export const ProviderAppWrapper = styled.div<ProviderAppWrapperProps>`
   display: flex;

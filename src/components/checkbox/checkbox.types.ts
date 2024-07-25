@@ -2,7 +2,7 @@ import {
   TJeneseiFontFamily,
   TJeneseiThemeGenre,
   TJeneseiThemeSize,
-} from '../../theme'
+} from '@theme/index'
 
 export interface CheckboxProps {
   checked?: boolean

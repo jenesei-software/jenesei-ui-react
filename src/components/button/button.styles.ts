@@ -1,9 +1,12 @@
 import styled, { css } from 'styled-components'
 
+import { FlexStyles } from '@components/flex'
+
+import { getFontSizeStyles } from '@fonts/index'
+
+import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
+
 import { StyledButtonProps } from '.'
-import { getFontSizeStyles } from '../../fonts'
-import { FlexStyles } from '../../main'
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '../../theme'
 
 /****************************************** Genre *************************************************/
 const ButtonGenre = css<StyledButtonProps>`

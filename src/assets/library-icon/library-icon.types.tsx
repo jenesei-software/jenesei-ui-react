@@ -1,5 +1,6 @@
-import { FlexShortStylesProps } from '../../main'
-import { TJeneseiThemeSize } from '../../theme'
+import { FlexShortStylesProps } from '@components/flex'
+
+import { TJeneseiThemeSize } from '@theme/index'
 
 export type LibraryIconProps = {
   [icon in TLibraryIconNameString]: (props: LibraryIconItemProps) => JSX.Element
@@ -7,7 +8,7 @@ export type LibraryIconProps = {
 
 export interface LibraryIconItemProps {
   className?: string
-  onClick?: (event:React.MouseEvent<SVGSVGElement>) => void
+  onClick?: (event: React.MouseEvent<SVGSVGElement>) => void
   size: TJeneseiThemeSize
   color?: string
   id?: string
@@ -40,7 +41,7 @@ export enum LibraryIconName {
   MinPlus,
   Menu,
   Trash,
-  ArrowDown
+  ArrowDown,
 }
 
 export type TLibraryIconNameString = keyof typeof LibraryIconName

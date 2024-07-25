@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 
-import { JeneseiThemeVariablesKeys } from '../../main'
+import { JeneseiThemeVariablesKeys } from '@theme/index'
 
 export interface ProviderAppProps {
   children: React.ReactNode
