@@ -1,7 +1,7 @@
 {
   "author": "Cyril Strone",
-  "name": "@Jenesei-Software/jenesei-ui-react",
-  "version": "0.0.2",
+  "name": "@jenesei-software/jenesei-ui-react",
+  "version": "0.0.0",
   "main": "./dist/jenesei-react-ui.umd.js",
   "module": "./dist/jenesei-react-ui.es.js",
   "types": "./dist/index.d.ts",
