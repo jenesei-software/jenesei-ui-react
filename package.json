@@ -2,6 +2,9 @@
   "author": "Cyril Strone",
   "name": "@jenesei-software/jenesei-ui-react",
   "version": "0.0.0",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "main": "./dist/jenesei-react-ui.umd.js",
   "module": "./dist/jenesei-react-ui.es.js",
   "types": "./dist/index.d.ts",

@@ -75,6 +75,7 @@ jobs:
       - name: Publish to npm
         if: env.publish == 'true'
         run: |
-          npm publish --access public
+          npm ci
+          npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_CYRILSTRONE_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
