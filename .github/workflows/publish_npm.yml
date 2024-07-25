@@ -50,6 +50,10 @@ jobs:
           branch: publish
           tags: true
 
+      - name: Configure npm for GitHub Packages
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.PAT_CYRILSTRONE_ACTION }}" >> ~/.npmrc
+
       - name: Check if version exists in GitHub Packages
         id: check_version_github
         run: |
@@ -60,8 +64,6 @@ jobs:
           else
             echo "publishGH=true" >> $GITHUB_ENV
           fi
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
 
       - name: Check if version exists in NPM
         id: check_version_npm
