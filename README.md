@@ -33,7 +33,7 @@ function App() {
     ...
       <ThemeProvider theme={JeneseiTheme}>
         <JeneseiGlobalStyles />
-          {/* Your components */}
+        {/* Your components */}
       </ThemeProvider>
     ...
   )
