@@ -78,4 +78,4 @@ jobs:
           npm ci
           npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_CYRILSTRONE_TOKEN }}
