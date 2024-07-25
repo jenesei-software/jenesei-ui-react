@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
-          registry-url: 'https://npm.pkg.github.com/Jenesei-Software'
+          registry-url: 'https://npm.pkg.github.com/jenesei-software'
 
       - name: Clean git working directory
         run: |
@@ -54,7 +54,7 @@ jobs:
       - name: Check if version exists
         id: check_version
         run: |
-          EXISTING_VERSION=$(npm view @Jenesei-Software/jenesei-ui-react versions --registry https://npm.pkg.github.com --json | grep ${NEW_VERSION} || true)
+          EXISTING_VERSION=$(npm view @jenesei-software/jenesei-ui-react versions --registry https://npm.pkg.github.com --json | grep ${NEW_VERSION} || true)
           if [ -n "$EXISTING_VERSION" ]; then
             echo "Version ${NEW_VERSION} already exists. Skipping publish."
             echo "publish=false" >> $GITHUB_ENV
