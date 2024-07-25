@@ -1,12 +1,17 @@
 import { promises as fs } from 'fs'
-import path from 'path'
+import { dirname, resolve } from 'path'
+import { fileURLToPath } from 'url'
 
-// Определение асинхронной функции
+// Определение текущего каталога
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+// Путь к файлам
+const packageJsonPath = resolve(__dirname, 'package.json')
+const readmePath = resolve(__dirname, 'README.md')
+
+// Асинхронная функция для обновления README
 async function updateReadme() {
-  // Путь к файлам
-  const packageJsonPath = path.resolve(__dirname, 'package.json')
-  const readmePath = path.resolve(__dirname, 'README.md')
-
   // Загрузка package.json
   const packageJson = JSON.parse(await fs.readFile(packageJsonPath, 'utf8'))
 
@@ -33,18 +38,24 @@ ${commands}
   let readmeContent = await fs.readFile(readmePath, 'utf8')
 
   // Определение места для вставки
-  const insertionPoint = '## Дополнительная информация' // Название секции, перед которой нужно вставить новый текст
+  const insertionPoint = '## Дополнительная информация' // Название секции, после которой нужно вставить новый текст
 
   if (readmeContent.includes(insertionPoint)) {
     // Найти позицию вставки
-    const insertionIndex = readmeContent.indexOf(insertionPoint)
+    const insertionIndex =
+      readmeContent.indexOf(insertionPoint) + insertionPoint.length
 
-    // Вставить секцию установки перед найденной секцией
+    // Найти конец секции "Дополнительная информация" или конец файла, если секция не завершена
+    const nextSectionIndex = readmeContent.indexOf('\n\n', insertionIndex)
+    const contentAfterInsertionPoint =
+      nextSectionIndex === -1 ? '' : readmeContent.slice(nextSectionIndex)
+
+    // Сформировать обновлённое содержание
     readmeContent =
       readmeContent.slice(0, insertionIndex) +
-      installSection +
       '\n' +
-      readmeContent.slice(insertionIndex)
+      installSection +
+      contentAfterInsertionPoint
 
     // Записать изменённое содержимое обратно в файл
     await fs.writeFile(readmePath, readmeContent, 'utf8')
