@@ -2,8 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useCallback, useState } from 'react'
 import 'styled-components'
 
+import { Stack } from '@components/flex'
+
+import { TitleH4 } from '@fonts/index'
+
 import { Accordion, AccordionProps } from '.'
-import { Stack, TitleH4 } from '../../main'
 
 const meta: Meta<typeof Accordion> = {
   component: Accordion,

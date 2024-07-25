@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components'
 
-import { getFontSizeStyles } from '../../fonts'
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '../../theme'
-import { CheckboxesWrapperProps } from './checkboxes.types'
+import { getFontSizeStyles } from '@fonts/index'
+
+import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
+
+import { CheckboxesWrapperProps } from '.'
 
 /****************************************** Size *************************************************/
 export const CheckboxesSize = css<CheckboxesWrapperProps>`

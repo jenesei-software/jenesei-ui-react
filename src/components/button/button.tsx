@@ -1,9 +1,11 @@
 import { FC, memo } from 'react'
 import { useTheme } from 'styled-components'
 
+import { LibraryIcon } from '@assets/library-icon'
+
+import { ModalLoading } from '@components/modal-loading'
+
 import { ButtonProps, StyledButton } from '.'
-import { LibraryIcon } from '../../assets/library-icon'
-import { ModalLoading } from '../modal-loading'
 
 export const Button: FC<ButtonProps> = memo((props) => {
   const iconPosition = props.iconPosition || 'right'

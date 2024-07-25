@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTheme } from 'styled-components'
 
-import { IJeneseiThemeScreens } from '../../theme'
+import { IJeneseiThemeScreens } from '@theme/index'
 
 type Screens = keyof IJeneseiThemeScreens
 

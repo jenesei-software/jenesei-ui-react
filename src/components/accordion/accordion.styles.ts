@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components'
 
+import { Icon } from '@components/icon'
+
 import {
   AccordionDetailsProps,
   AccordionStyledIconProps,
   AccordionSummaryContentProps,
 } from '.'
-import { Icon } from '../../main'
 
 export const AccordionWrapper = styled.div`
   display: flex;

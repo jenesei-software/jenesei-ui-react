@@ -4,7 +4,7 @@ import {
   JeneseiThemeVariables,
   JeneseiThemeVariablesKeys,
   TJeneseiFontFamily,
-} from '../theme'
+} from '@theme/index'
 
 export type FontProps = {
   $size: number

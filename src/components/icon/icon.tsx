@@ -1,8 +1,10 @@
 import { FC, memo } from 'react'
 
+import { LibraryIcon } from '@assets/library-icon'
+
+import { JeneseiThemeVariables } from '@theme/index'
+
 import { IconProps } from '.'
-import { LibraryIcon } from '../../assets/library-icon'
-import { JeneseiThemeVariables } from '../../main'
 
 export const Icon: FC<IconProps> = memo((props) => {
   const IconComponent = props.icon && LibraryIcon[props.icon]

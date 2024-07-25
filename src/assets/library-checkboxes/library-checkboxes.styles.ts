@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components'
 
+import { KEY_SIZE_DATA } from '@theme/index'
+
 import { StyledLibraryCheckboxesItemProps } from '.'
-import { KEY_SIZE_DATA } from '../../theme'
 
 export const StyledCheckboxSVG = styled.svg<StyledLibraryCheckboxesItemProps>`
   ${(props) => css`

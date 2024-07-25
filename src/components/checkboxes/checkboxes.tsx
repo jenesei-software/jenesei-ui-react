@@ -1,5 +1,7 @@
 import { useCallback } from 'react'
 
+import { Checkbox } from '@components/checkbox'
+
 import {
   CheckboxChildren,
   CheckboxesItem,
@@ -8,7 +10,6 @@ import {
   CheckboxesWrapper,
   ICheckboxValue,
 } from '.'
-import { Checkbox } from '../checkbox/checkbox'
 
 export const Checkboxes = <T extends ICheckboxValue>(
   props: CheckboxesProps<T>,

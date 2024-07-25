@@ -1,8 +1,9 @@
 import ReactToggle from 'react-toggle'
 import styled, { css } from 'styled-components'
 
+import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
+
 import { StyledToggleProps } from '.'
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '../../theme'
 
 import 'react-toggle/style.css'
 
