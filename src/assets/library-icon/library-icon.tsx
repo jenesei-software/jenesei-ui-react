@@ -1,14 +1,34 @@
 import { LibraryIconProps, StyledSVG } from '.'
 
 export const LibraryIcon: LibraryIconProps = {
+  ArrowDown: function (props) {
+    return (
+      <StyledSVG
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        $size={props.size}
+        {...props.styles}
+        className={props.className}
+        onClick={props.onClick}
+      >
+        <path
+          d="M8 10.273L4 6.27301L4.94 5.33301L8 8.38634L11.06 5.33301L12 6.27301L8 10.273Z"
+          fill={props.color ?? '#ffffff'}
+        />
+      </StyledSVG>
+    )
+  },
   ChevronLeft: function (props) {
     return (
       <StyledSVG
-        $size={props.size}
-        {...props.styles}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 16 16"
         fill="none"
+        $size={props.size}
+        {...props.styles}
         className={props.className}
         onClick={props.onClick}
       >

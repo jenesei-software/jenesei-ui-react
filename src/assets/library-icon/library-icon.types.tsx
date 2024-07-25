@@ -7,7 +7,7 @@ export type LibraryIconProps = {
 
 export interface LibraryIconItemProps {
   className?: string
-  onClick?: () => void
+  onClick?: (event:React.MouseEvent<SVGSVGElement>) => void
   size: TJeneseiThemeSize
   color?: string
   id?: string
@@ -40,6 +40,7 @@ export enum LibraryIconName {
   MinPlus,
   Menu,
   Trash,
+  ArrowDown
 }
 
 export type TLibraryIconNameString = keyof typeof LibraryIconName
