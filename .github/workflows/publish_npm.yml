@@ -32,7 +32,7 @@ jobs:
         id: bump_version
         run: |
           # Uncomment the desired version bump type
-          npm version patch
+          npm version patch --no-git-tag-version
           # npm version minor
           # npm version major
           NEW_VERSION=$(node -p "require('./package.json').version")
@@ -47,7 +47,8 @@ jobs:
       - name: Commit and push changes
         run: |
           git add package.json package-lock.json README.md
-          git commit -m "$NEW_VERSION"
+          git commit -m "Bump version to $NEW_VERSION"
+          git tag "v$NEW_VERSION"
           git push origin publish --tags
 
       - name: Configure npm for GitHub Packages
