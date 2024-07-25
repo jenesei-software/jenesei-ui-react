@@ -25,9 +25,9 @@ async function updateReadme() {
 
   // Формирование секции установки
   const installSection = `
-## Установка зависимостей
+## Installing dependencies
 
-Для корректной работы вам необходимо установить следующие зависимости:
+To work correctly you need to install the following dependencies:
 
 \`\`\`bash
 ${commands}
