@@ -42,75 +42,10 @@ function App() {
 
 # IMPORTANT
 
-## Installing dependencies
-
-To work correctly you need to install the following dependencies:
-
-```bash
-npm install @emotion/styled --save
-npm install @fontsource/inter --save
-npm install @tanstack/react-virtual --save
-npm install gsap --save
-npm install react --save
-npm install react-currency-input-field --save
-npm install react-dom --save
-npm install react-hook-form --save
-npm install react-loading --save
-npm install react-loading-skeleton --save
-npm install react-number-format --save
-npm install react-toggle --save
-npm install styled-components --save
-npm install styled-reset --save
-```
-
 
 ## Installing dependencies
 
 To work correctly you need to install the following dependencies:
-
-```bash
-npm install @emotion/styled --save
-npm install @fontsource/inter --save
-npm install @tanstack/react-virtual --save
-npm install gsap --save
-npm install react --save
-npm install react-currency-input-field --save
-npm install react-dom --save
-npm install react-hook-form --save
-npm install react-loading --save
-npm install react-loading-skeleton --save
-npm install react-number-format --save
-npm install react-toggle --save
-npm install styled-components --save
-npm install styled-reset --save
-```
-
-
-## Installing dependencies
-
-To work correctly you need to install the following dependencies:
-
-```bash
-npm install @emotion/styled --save
-npm install @fontsource/inter --save
-npm install @tanstack/react-virtual --save
-npm install gsap --save
-npm install react --save
-npm install react-currency-input-field --save
-npm install react-dom --save
-npm install react-hook-form --save
-npm install react-loading --save
-npm install react-loading-skeleton --save
-npm install react-number-format --save
-npm install react-toggle --save
-npm install styled-components --save
-npm install styled-reset --save
-```
-
-
-## Установка зависимостей
-
-Для корректной работы вам необходимо установить следующие зависимости:
 
 ```bash
 npm install @emotion/styled --save
