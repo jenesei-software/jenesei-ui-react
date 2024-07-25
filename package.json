@@ -1,7 +1,7 @@
 {
   "author": "Cyril Strone",
   "name": "@jenesei-software/jenesei-ui-react",
-  "version": "0.3.30",
+  "version": "0.3.31",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
