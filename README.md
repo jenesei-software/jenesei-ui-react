@@ -1,4 +1,4 @@
-# jenesei-react-ui
+# jenesei-ui-react
 
 This is a frontend library for React from Jenesei Software.
 
