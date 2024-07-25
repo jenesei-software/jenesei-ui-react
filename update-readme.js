@@ -45,12 +45,12 @@ ${commands}
     const insertionIndex =
       readmeContent.indexOf(insertionPoint) + insertionPoint.length
 
-    // Найти конец секции "Дополнительная информация" или конец файла, если секция не завершена
+    // Найти конец секции или конец файла
     const nextSectionIndex = readmeContent.indexOf('\n\n', insertionIndex)
     const contentAfterInsertionPoint =
       nextSectionIndex === -1 ? '' : readmeContent.slice(nextSectionIndex)
 
-    // Сформировать обновлённое содержание
+    // Сформировать обновлённое содержание, удаляя всё после секции
     readmeContent =
       readmeContent.slice(0, insertionIndex) +
       '\n' +
