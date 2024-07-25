@@ -5,6 +5,10 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jenesei-Software/jenesei-ui-react.git"
+  },
   "main": "./dist/jenesei-react-ui.umd.js",
   "module": "./dist/jenesei-react-ui.es.js",
   "types": "./dist/index.d.ts",

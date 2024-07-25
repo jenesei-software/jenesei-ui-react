@@ -17,7 +17,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
-          registry-url: 'https://npm.pkg.github.com/jenesei-software'
 
       - name: Clean git working directory
         run: |
@@ -72,10 +71,14 @@ jobs:
         run: |
           npm run build
 
-      - name: Publish to npm
-        if: env.publish == 'true'
+      - name: Publish to GitHub Packages
         run: |
-          npm ci
-          npm publish
+          npm publish --registry=https://npm.pkg.github.com/
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
+
+      - name: Publish to NPM
+        run: |
+          npm publish --registry=https://registry.npmjs.org/
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_CYRILSTRONE_TOKEN }}
