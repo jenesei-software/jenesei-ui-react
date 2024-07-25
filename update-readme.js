@@ -38,7 +38,7 @@ ${commands}
   let readmeContent = await fs.readFile(readmePath, 'utf8')
 
   // Определение места для вставки
-  const insertionPoint = '## Дополнительная информация' // Название секции, после которой нужно вставить новый текст
+  const insertionPoint = '# IMPORTANT' // Название секции, после которой нужно вставить новый текст
 
   if (readmeContent.includes(insertionPoint)) {
     // Найти позицию вставки

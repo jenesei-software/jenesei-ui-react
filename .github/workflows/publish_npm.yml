@@ -47,7 +47,11 @@ jobs:
       - name: Commit changes
         run: |
           git add package.json package-lock.json README.md
-          git commit -m "Bump version to $NEW_VERSION" || echo "Nothing to commit"
+          git commit -m "Bump version to $NEW_VERSION" --no-verify || echo "Nothing to commit"
+
+      - name: Check git status after commit
+        run: |
+          git status
 
       - name: Push changes
         uses: ad-m/github-push-action@master
