@@ -60,6 +60,8 @@ jobs:
           else
             echo "publishGH=true" >> $GITHUB_ENV
           fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
 
       - name: Check if version exists in NPM
         id: check_version_npm
