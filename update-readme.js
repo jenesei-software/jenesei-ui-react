@@ -45,20 +45,12 @@ ${commands}
     const insertionIndex =
       readmeContent.indexOf(insertionPoint) + insertionPoint.length
 
-    // Найти конец секции или конец файла
-    const nextSectionIndex = readmeContent.indexOf('\n\n', insertionIndex)
-    const contentAfterInsertionPoint =
-      nextSectionIndex === -1 ? '' : readmeContent.slice(nextSectionIndex)
-
-    // Сформировать обновлённое содержание, удаляя всё после секции
-    readmeContent =
-      readmeContent.slice(0, insertionIndex) +
-      '\n' +
-      installSection +
-      contentAfterInsertionPoint
+    // Сформировать обновлённое содержание
+    const beforeInsertion = readmeContent.slice(0, insertionIndex).trim()
+    const newContent = beforeInsertion + '\n\n' + installSection
 
     // Записать изменённое содержимое обратно в файл
-    await fs.writeFile(readmePath, readmeContent, 'utf8')
+    await fs.writeFile(readmePath, newContent, 'utf8')
     console.log('README обновлён с командой установки зависимостей.')
   } else {
     console.log('Не удалось найти секцию для вставки в README.')
