@@ -65,6 +65,10 @@ jobs:
             echo "publishGH=true" >> $GITHUB_ENV
           fi
 
+      - name: Configure npm for NPM Registry
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_CYRILSTRONE_TOKEN }}" >> ~/.npmrc
+
       - name: Check if version exists in NPM
         id: check_version_npm
         run: |
