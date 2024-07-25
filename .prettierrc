@@ -2,11 +2,12 @@
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
     "^@assets/(.*)$",
+    "^@components/(.*)$",
     "^@fonts/(.*)$",
     "^@functions/(.*)$",
     "^@hooks/(.*)$",
+    "^@providers/(.*)$",
     "^@theme/(.*)$",
-    "^@ui/(.*)$",
     "^[./]",
     "^@fontsource/(.*)$",
     ".css"

@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import styled, { css } from 'styled-components'
 
+import { JeneseiThemeVariables } from '@theme/index'
+
 import {
   FlexContainerProps,
   FlexItemProps,
   FlexShortStylesProps,
   FlexStylesProps,
-  JeneseiThemeVariables,
-} from '../../main'
+} from '.'
 
 const FlexContainer = css<FlexContainerProps>`
   display: flex;

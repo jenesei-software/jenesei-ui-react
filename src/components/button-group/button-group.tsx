@@ -1,7 +1,8 @@
 import { FC } from 'react'
 
+import { Button } from '@components/button'
+
 import { ButtonGroupProps, ButtonGroupWrapper } from '.'
-import { Button } from '../../main'
 
 export const ButtonGroup: FC<ButtonGroupProps> = (props) => {
   return (

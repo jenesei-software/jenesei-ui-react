@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 
-import { FlexShortStylesProps } from '../../main'
+import { FlexShortStylesProps } from '@components/flex'
 
 export interface AccordionProps {
   wrapperProps: FlexShortStylesProps

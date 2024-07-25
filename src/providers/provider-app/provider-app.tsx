@@ -6,6 +6,8 @@ import {
   useState,
 } from 'react'
 
+import { JeneseiThemeVariablesKeys } from '@theme/index'
+
 import {
   AppContextProps,
   ProviderAppOutlet,
@@ -17,7 +19,6 @@ import {
   ProviderAppProps,
   ProviderAppWrapper,
 } from '.'
-import { JeneseiThemeVariablesKeys } from '../../main'
 
 const AppContext = createContext<AppContextProps | null>(null)
 

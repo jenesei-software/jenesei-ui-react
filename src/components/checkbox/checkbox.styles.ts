@@ -1,9 +1,12 @@
 import styled, { css } from 'styled-components'
 
+import { LibraryCheckboxes } from '@assets/library-checkboxes'
+
+import { getFontSizeStyles } from '@fonts/index'
+
+import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
+
 import { StyledCheckboxProps } from '.'
-import { LibraryCheckboxes } from '../../assets/library-checkboxes'
-import { getFontSizeStyles } from '../../fonts'
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '../../theme'
 
 /****************************************** Size *************************************************/
 export const CheckboxSize = css<StyledCheckboxProps>`

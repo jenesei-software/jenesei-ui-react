@@ -1,5 +1,7 @@
 import { useCallback, useRef } from 'react'
 
+import { Stack } from '@components/flex'
+
 import {
   AccordionDetails,
   AccordionProps,
@@ -8,7 +10,6 @@ import {
   AccordionSummaryContent,
   AccordionWrapper,
 } from '.'
-import { Stack } from '../../main'
 
 export const Accordion = (props: AccordionProps) => {
   const accordionDetailsRef = useRef<HTMLDivElement>(null)

@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components'
 
+import { StyledInput, StyledInputCSS } from '@components/input'
+
 import {
   SelectStyledFooterProps,
   SelectStyledInputProps,
@@ -7,7 +9,6 @@ import {
   SelectStyledOptionProps,
   SelectWrapperProps,
 } from '.'
-import { StyledInput, StyledInputCSS } from '../input'
 
 export const SelectWrapper = styled.div<SelectWrapperProps>`
   width: ${(props) => props.$width ?? '100%'};
