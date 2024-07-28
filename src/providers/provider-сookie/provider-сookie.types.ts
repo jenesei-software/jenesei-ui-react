@@ -8,7 +8,7 @@ export interface ProviderCookieProps {
 
 export type ValidCookieValue = string | number | boolean | ValidCookieObject
 
-export interface ValidCookieObject {}
+export interface ValidCookieObject extends Record<string, ValidCookieValue> {}
 
 export interface CookieContextProps {
   getCookie: (
@@ -16,7 +16,7 @@ export interface CookieContextProps {
   ) => ValidCookieObject[keyof ValidCookieObject] | undefined
   setCookie: (
     name: keyof ValidCookieObject,
-    value: ValidCookieObject[keyof ValidCookieObject] | ValidCookieValue,
+    value: ValidCookieObject[keyof ValidCookieObject],
     options?: CookieAttributes,
   ) => void
   removeCookie: (

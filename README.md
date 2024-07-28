@@ -40,6 +40,19 @@ function App() {
 }
 ```
 
+## Customize the cookie
+
+```typescript
+//cookie.d.ts
+import '@jenesei-software/jenesei-ui-react'
+
+declare module '@jenesei-software/jenesei-ui-react' {
+  export interface ValidCookieObject {
+    token: string
+  }
+}
+```
+
 # IMPORTANT
 
 
