@@ -51,10 +51,12 @@ To work correctly you need to install the following dependencies:
 npm install @emotion/styled --save
 npm install @tanstack/react-virtual --save
 npm install gsap --save
+npm install js-cookie --save
 npm install react --save
 npm install react-currency-input-field --save
 npm install react-dom --save
 npm install react-hook-form --save
+npm install react-i18next --save
 npm install react-loading --save
 npm install react-loading-skeleton --save
 npm install react-number-format --save
