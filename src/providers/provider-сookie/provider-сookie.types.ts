@@ -6,21 +6,26 @@ export interface ProviderCookieProps {
   children: React.ReactNode
 }
 
-export type ValidCookieValue = string | number | boolean | ValidCookieObject
+export type ValidCookieValue =
+  | string
+  | number
+  | boolean
+  | ValidCookieObject
+  | undefined
+type ValidCookieKey = string
 
-export interface ValidCookieObject extends Record<string, ValidCookieValue> {}
+export interface ValidCookieObject
+  extends Record<ValidCookieKey, ValidCookieValue> {}
 
 export interface CookieContextProps {
   getCookie: (
-    name: keyof ValidCookieObject,
-  ) => ValidCookieObject[keyof ValidCookieObject] | undefined
+    name: ValidCookieKey,
+  ) => ValidCookieObject[ValidCookieKey] | undefined
   setCookie: (
-    name: keyof ValidCookieObject,
-    value: ValidCookieObject[keyof ValidCookieObject],
+    name: ValidCookieKey,
+    value: ValidCookieObject[ValidCookieKey],
     options?: CookieAttributes,
   ) => void
-  removeCookie: (
-    name: keyof ValidCookieObject,
-    options?: CookieAttributes,
-  ) => void
+  removeCookie: (name: ValidCookieKey, options?: CookieAttributes) => void
+  cookie: ValidCookieObject | undefined
 }
