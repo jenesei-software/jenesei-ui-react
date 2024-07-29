@@ -18,16 +18,16 @@ export interface ValidCookieObject {
 }
 
 export interface CookieContextProps {
-  getCookie: <K extends keyof ValidCookieObject>(
-    name: K,
-  ) => ValidCookieObject[K] | undefined
-  setCookie: <K extends keyof ValidCookieObject>(
-    name: K,
-    value: ValidCookieObject[K],
+  getCookie: (
+    name: keyof ValidCookieObject,
+  ) => ValidCookieObject[keyof ValidCookieObject] | undefined
+  setCookie: (
+    name: keyof ValidCookieObject,
+    value: ValidCookieObject[keyof ValidCookieObject],
     options?: CookieAttributes,
   ) => void
-  removeCookie: <K extends keyof ValidCookieObject>(
-    name: K,
+  removeCookie: (
+    name: keyof ValidCookieObject,
     options?: CookieAttributes,
   ) => void
   cookie: ValidCookieObject | undefined
