@@ -13,10 +13,9 @@ type ValidCookieValue =
   | ValidCookieObject
   | undefined
 
-type ValidCookieKey = string
-
-export interface ValidCookieObject
-  extends Record<ValidCookieKey, ValidCookieValue> {}
+export interface ValidCookieObject {
+  [key: string]: ValidCookieValue
+}
 
 export interface CookieContextProps {
   getCookie: <K extends keyof ValidCookieObject>(
