@@ -75,7 +75,7 @@ export const ProviderCookie: FC<ProviderCookieProps> = ({ children }) => {
           const parsedValue = JSON.parse(cookieValue)
           setCookie((prevState) => ({ ...prevState, [key]: parsedValue }))
         } catch {
-          removeCookie(String(key))
+          if (String(key)) removeCookie(String(key))
         }
       } else {
         removeCookie(String(key))
