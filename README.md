@@ -65,6 +65,7 @@ npm install @emotion/styled --save
 npm install @tanstack/react-virtual --save
 npm install gsap --save
 npm install js-cookie --save
+npm install @types/js-cookie --save
 npm install react --save
 npm install react-currency-input-field --save
 npm install react-dom --save
