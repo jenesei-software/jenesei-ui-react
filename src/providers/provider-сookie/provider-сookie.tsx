@@ -13,32 +13,32 @@ export const ProviderCookie: FC<ProviderCookieProps> = ({ children }) => {
     return cookie ? JSON.parse(cookie) : undefined
   }, [])
 
-  const isValidCookieValue = useCallback(
-    <K extends keyof ValidCookieObject>(
-      key: K,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      value: any,
-    ): value is ValidCookieObject[K] => {
-      const expectedType = typeof ({} as ValidCookieObject)[key]
-      switch (expectedType) {
-        case 'string':
-          return typeof value === 'string'
-        case 'number':
-          return typeof value === 'number'
-        case 'boolean':
-          return typeof value === 'boolean'
-        case 'object':
-          if (value === null || Array.isArray(value)) return false
-          return Object.entries(value).every(([subKey, subValue]) => {
-            if (typeof subKey !== 'string') return false
-            return isValidCookieValue(subKey, subValue)
-          })
-        default:
-          return false
-      }
-    },
-    [],
-  )
+  // const isValidCookieValue = useCallback(
+  //   <K extends keyof ValidCookieObject>(
+  //     key: K,
+  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //     value: any,
+  //   ): value is ValidCookieObject[K] => {
+  //     const expectedType = typeof ({} as ValidCookieObject)[key]
+  //     switch (expectedType) {
+  //       case 'string':
+  //         return typeof value === 'string'
+  //       case 'number':
+  //         return typeof value === 'number'
+  //       case 'boolean':
+  //         return typeof value === 'boolean'
+  //       case 'object':
+  //         if (value === null || Array.isArray(value)) return false
+  //         return Object.entries(value).every(([subKey, subValue]) => {
+  //           if (typeof subKey !== 'string') return false
+  //           return isValidCookieValue(subKey, subValue)
+  //         })
+  //       default:
+  //         return false
+  //     }
+  //   },
+  //   [],
+  // )
 
   const changeCookie: CookieContextProps['setCookie'] = (
     name,
@@ -73,9 +73,7 @@ export const ProviderCookie: FC<ProviderCookieProps> = ({ children }) => {
       if (cookieValue) {
         try {
           const parsedValue = JSON.parse(cookieValue)
-          if (!isValidCookieValue(key, parsedValue)) {
-            removeCookie(String(key))
-          }
+          setCookie((prevState) => ({ ...prevState, [key]: parsedValue }))
         } catch {
           removeCookie(String(key))
         }
@@ -83,8 +81,8 @@ export const ProviderCookie: FC<ProviderCookieProps> = ({ children }) => {
         removeCookie(String(key))
       }
     })
-  }, [isValidCookieValue, removeCookie])
-  
+  }, [removeCookie])
+
   return (
     <CookieContext.Provider
       value={{
