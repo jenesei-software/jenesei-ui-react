@@ -10,41 +10,8 @@ import {
 
 export const CookieContext = createContext<CookieContextProps | null>(null)
 
-export const ProviderCookie: FC<ProviderCookieProps> = ({
-  children,
-  validKeys,
-}) => {
+export const ProviderCookie: FC<ProviderCookieProps> = (props) => {
   const [cookie, setCookie] = useState<ValidCookieObject>()
-
-
-  const isValidCookieValue = useCallback(
-    <K extends keyof ValidCookieObject>(
-      key: K,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      value: any,
-    ): value is ValidCookieObject[K] => {
-      const checkValue = value as (ValidCookieObject)[typeof key]
-      switch (typeof checkValue) {
-        case 'string':
-          return typeof value === 'string'
-        case 'number':
-          return typeof value === 'number'
-        case 'boolean':
-          return typeof value === 'boolean'
-        case 'object':
-          if (value === null || Array.isArray(value)) return false
-          return Object.entries(value).every(([subKey, subValue]) => {
-            return (
-              typeof subKey === 'string' &&
-              isValidCookieValue(subKey as keyof ValidCookieObject, subValue)
-            )
-          })
-        default:
-          return false
-      }
-    },
-    [],
-  )
 
   const getCookie = useCallback(
     <K extends keyof ValidCookieObject>(
@@ -88,24 +55,37 @@ export const ProviderCookie: FC<ProviderCookieProps> = ({
   )
 
   const checkCookie = useCallback(() => {
-    (validKeys ?? []).forEach((key) => {
-      const cookieValue = Cookies.get(String(key))
-      if (cookieValue) {
-        try {
-          const parsedValue = JSON.parse(cookieValue)
-          if (!isValidCookieValue(key, parsedValue)) {
+    if (
+      props.validate &&
+      props.validate.validateKeys &&
+      props.validate.getValidateLocalStorageValue
+    ) {
+      props.validate?.validateKeys.forEach((key) => {
+        const cookieValue = Cookies.get(String(key))
+        if (cookieValue) {
+          try {
+            const parsedValue = JSON.parse(cookieValue)
+            if (
+              !props.validate?.getValidateLocalStorageValue(
+                String(key) as never,
+                parsedValue as never,
+              )
+            ) {
+              removeCookie(String(key) as never)
+            } else {
+              setCookie((prevState) => ({ ...prevState, [key]: parsedValue }))
+            }
+          } catch {
             removeCookie(String(key) as never)
-          } else {
-            setCookie((prevState) => ({ ...prevState, [key]: parsedValue }))
           }
-        } catch {
+        } else {
           removeCookie(String(key) as never)
         }
-      } else {
-        removeCookie(String(key) as never)
-      }
-    })
-  }, [isValidCookieValue, removeCookie, validKeys])
+      })
+    } else {
+      console.info('Provider Cookie: validate is not defined.')
+    }
+  }, [props.validate, removeCookie])
 
   useEffect(() => {
     checkCookie()
@@ -121,7 +101,7 @@ export const ProviderCookie: FC<ProviderCookieProps> = ({
         cookie,
       }}
     >
-      {children}
+      {props.children}
     </CookieContext.Provider>
   )
 }

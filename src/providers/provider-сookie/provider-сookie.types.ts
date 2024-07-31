@@ -4,7 +4,13 @@ export type CookieAttributes = Cookies.CookieAttributes
 
 export interface ProviderCookieProps {
   children: React.ReactNode
-  validKeys: (keyof ValidCookieObject)[]
+  validate?: {
+    validateKeys: (keyof ValidCookieObject)[]
+    getValidateLocalStorageValue: <K extends keyof ValidCookieObject>(
+      key: K,
+      value: ValidCookieObject[K],
+    ) => value is ValidCookieObject[K]
+  }
 }
 
 export interface ValidCookieObject {}
