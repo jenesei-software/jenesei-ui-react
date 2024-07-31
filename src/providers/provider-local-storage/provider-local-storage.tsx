@@ -10,15 +10,19 @@ export const LocalStorageContext =
   createContext<LocalStorageContextProps | null>(null)
 
 export const ProviderLocalStorage: FC<ProviderLocalStorageProps> = (props) => {
-  const [LocalStorage, setLocalStorage] = useState<ValidLocalStorageObject>()
+  const [localStorageValues, setLocalStorageValues] =
+    useState<ValidLocalStorageObject>()
 
   const getLocalStorage = useCallback(
     <K extends keyof ValidLocalStorageObject>(
       name: K,
     ): ValidLocalStorageObject[K] | undefined => {
-      const LocalStorage = localStorage.getItem(name)
-
-      return LocalStorage ? JSON.parse(LocalStorage) : undefined
+      const localStorageValue = localStorage.getItem(name)
+      setLocalStorageValues((prevState) => ({
+        ...prevState,
+        [name]: localStorageValue ? JSON.parse(localStorageValue) : undefined,
+      }))
+      return localStorageValue ? JSON.parse(localStorageValue) : undefined
     },
     [],
   )
@@ -30,27 +34,44 @@ export const ProviderLocalStorage: FC<ProviderLocalStorageProps> = (props) => {
     ) => {
       try {
         localStorage.setItem(String(name), JSON.stringify(value))
-        setLocalStorage((prevState) => ({ ...prevState, [name]: value }))
+        setLocalStorageValues((prevState) => ({ ...prevState, [name]: value }))
       } catch {
-        console.error(`Error. setLocalStorage - key:${name}, value:${value}`)
-      }
-    },
-    [],
-  )
-
-  const removeLocalStorage = useCallback(
-    <K extends keyof ValidLocalStorageObject>(name: K) => {
-      try {
-        localStorage.removeItem(String(name))
-        setLocalStorage((prevState) => ({ ...prevState, [name]: undefined }))
-      } catch {
-        console.error(
-          `Error. setLocalStorage - key:${name}, value:${undefined}`,
+        console.info(
+          `Provider LocalStorage. ChangeLocalStorage error - key:${name}, value:${value}.`,
         )
       }
     },
     [],
   )
+
+  const removeLocalStorageValue = useCallback(
+    <K extends keyof ValidLocalStorageObject>(name: K) => {
+      try {
+        localStorage.removeItem(String(name))
+        setLocalStorageValues((prevState) => ({
+          ...prevState,
+          [name]: undefined,
+        }))
+      } catch {
+        console.info(
+          `Provider LocalStorage. RemoveLocalStorageValue error - key:${name}.`,
+        )
+      }
+    },
+    [],
+  )
+
+  const removeLocalStorageValues = useCallback(() => {
+    if (props.validate && props.validate.validateKeys) {
+      props.validate?.validateKeys.forEach((key) => {
+        removeLocalStorageValue(String(key) as never)
+      })
+    } else {
+      console.info(
+        'Provider LocalStorage. RemoveLocalStorageValues - validate is not defined.',
+      )
+    }
+  }, [props.validate, removeLocalStorageValue])
 
   const checkLocalStorage = useCallback(() => {
     if (
@@ -59,34 +80,36 @@ export const ProviderLocalStorage: FC<ProviderLocalStorageProps> = (props) => {
       props.validate.getValidateLocalStorageValue
     ) {
       props.validate?.validateKeys.forEach((key) => {
-        const LocalStorageValue = localStorage.getItem(key)
-        if (LocalStorageValue) {
+        const localStorageValue = localStorage.getItem(key)
+        if (localStorageValue) {
           try {
-            const parsedValue = JSON.parse(LocalStorageValue)
+            const parsedValue = JSON.parse(localStorageValue)
             if (
               !props.validate?.getValidateLocalStorageValue(
                 String(key) as never,
                 parsedValue as never,
               )
             ) {
-              removeLocalStorage(String(key) as never)
+              removeLocalStorageValue(String(key) as never)
             } else {
-              setLocalStorage((prevState) => ({
+              setLocalStorageValues((prevState) => ({
                 ...prevState,
                 [key]: parsedValue,
               }))
             }
           } catch {
-            removeLocalStorage(String(key) as never)
+            removeLocalStorageValue(String(key) as never)
           }
         } else {
-          removeLocalStorage(String(key) as never)
+          removeLocalStorageValue(String(key) as never)
         }
       })
     } else {
-      console.info('Provider LocalStorage: validate is not defined.')
+      console.info(
+        'Provider LocalStorage. CheckLocalStorage - validate is not defined.',
+      )
     }
-  }, [props.validate, removeLocalStorage])
+  }, [props.validate, removeLocalStorageValue])
 
   useEffect(() => {
     checkLocalStorage()
@@ -97,9 +120,10 @@ export const ProviderLocalStorage: FC<ProviderLocalStorageProps> = (props) => {
       value={{
         getLocalStorage,
         setLocalStorage: changeLocalStorage,
-        removeLocalStorage,
+        removeLocalStorageValue,
+        removeLocalStorageValues,
         checkLocalStorage,
-        LocalStorage,
+        localStorageValues,
       }}
     >
       {props.children}

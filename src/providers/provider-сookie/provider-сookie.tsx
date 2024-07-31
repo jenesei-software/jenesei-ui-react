@@ -11,13 +11,17 @@ import {
 export const CookieContext = createContext<CookieContextProps | null>(null)
 
 export const ProviderCookie: FC<ProviderCookieProps> = (props) => {
-  const [cookie, setCookie] = useState<ValidCookieObject>()
+  const [cookieValues, setCookieValues] = useState<ValidCookieObject>()
 
   const getCookie = useCallback(
     <K extends keyof ValidCookieObject>(
       name: K,
     ): ValidCookieObject[K] | undefined => {
       const cookie = Cookies.get(String(name))
+      setCookieValues((prevState) => ({
+        ...prevState,
+        [name]: cookie ? JSON.parse(cookie) : undefined,
+      }))
       return cookie ? JSON.parse(cookie) : undefined
     },
     [],
@@ -31,34 +35,46 @@ export const ProviderCookie: FC<ProviderCookieProps> = (props) => {
     ) => {
       try {
         Cookies.set(String(name), JSON.stringify(value), options)
-        setCookie((prevState) => ({ ...prevState, [name]: value }))
+        setCookieValues((prevState) => ({ ...prevState, [name]: value }))
       } catch {
-        console.error(`Error. setCookie - key:${name}, value:${value}`)
+        console.info(
+          `Provider Cookie. ChangeCookie error - key:${name}, value:${value}.`,
+        )
       }
     },
     [],
   )
 
-  const removeCookie = useCallback(
+  const removeCookieValue = useCallback(
     <K extends keyof ValidCookieObject>(
       name: K,
       options?: CookieAttributes,
     ) => {
       try {
         Cookies.remove(String(name), options)
-        setCookie((prevState) => ({ ...prevState, [name]: undefined }))
+        setCookieValues((prevState) => ({ ...prevState, [name]: undefined }))
       } catch {
-        console.error(`Error. setCookie - key:${name}, value:${undefined}`)
+        console.info(`Provider Cookie. RemoveCookieValue error - key:${name}.`)
       }
     },
     [],
   )
 
+  const removeCookieValues = useCallback(() => {
+    if (props.validate && props.validate.validateKeys) {
+      props.validate?.validateKeys.forEach((key) => {
+        removeCookieValue(String(key) as never)
+      })
+    } else {
+      console.info('Provider Cookie. Validate is not defined.')
+    }
+  }, [props.validate, removeCookieValue])
+
   const checkCookie = useCallback(() => {
     if (
       props.validate &&
       props.validate.validateKeys &&
-      props.validate.getValidateLocalStorageValue
+      props.validate.getValidateCookieValue
     ) {
       props.validate?.validateKeys.forEach((key) => {
         const cookieValue = Cookies.get(String(key))
@@ -66,26 +82,29 @@ export const ProviderCookie: FC<ProviderCookieProps> = (props) => {
           try {
             const parsedValue = JSON.parse(cookieValue)
             if (
-              !props.validate?.getValidateLocalStorageValue(
+              !props.validate?.getValidateCookieValue(
                 String(key) as never,
                 parsedValue as never,
               )
             ) {
-              removeCookie(String(key) as never)
+              removeCookieValue(String(key) as never)
             } else {
-              setCookie((prevState) => ({ ...prevState, [key]: parsedValue }))
+              setCookieValues((prevState) => ({
+                ...prevState,
+                [key]: parsedValue,
+              }))
             }
           } catch {
-            removeCookie(String(key) as never)
+            removeCookieValue(String(key) as never)
           }
         } else {
-          removeCookie(String(key) as never)
+          removeCookieValue(String(key) as never)
         }
       })
     } else {
-      console.info('Provider Cookie: validate is not defined.')
+      console.info('Provider Cookie. Validate is not defined.')
     }
-  }, [props.validate, removeCookie])
+  }, [props.validate, removeCookieValue])
 
   useEffect(() => {
     checkCookie()
@@ -96,9 +115,10 @@ export const ProviderCookie: FC<ProviderCookieProps> = (props) => {
       value={{
         getCookie,
         setCookie: changeCookie,
-        removeCookie,
+        removeCookieValue,
+        removeCookieValues,
         checkCookie,
-        cookie,
+        cookieValues,
       }}
     >
       {props.children}

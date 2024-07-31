@@ -7,7 +7,20 @@ export interface ProviderAppProps {
   defaultBgColor: JeneseiThemeVariablesKeys
   defaultBgImage?: string
   isScrollOutlet?: boolean
+  notification?: {
+    component: ReactElement
+    height?: string
+    heightMobile?: string
+    heightTablet?: string
+    isFixed?: boolean
+  }
   header?: {
+    component: ReactElement
+    height?: string
+    heightMobile?: string
+    heightTablet?: string
+  }
+  nav?: {
     component: ReactElement
     height?: string
     heightMobile?: string
@@ -19,21 +32,23 @@ export interface ProviderAppProps {
     heightMobile?: string
     heightTablet?: string
   }
-  leftSection?: {
+  leftAside?: {
     component: ReactElement
     width?: string
     widthMobile?: string
     widthTablet?: string
     isTopHeader?: boolean
     isTopFooter?: boolean
+    isTopNav?: boolean
   }
-  rightSection?: {
+  rightAside?: {
     component: ReactElement
     width?: string
     widthMobile?: string
     widthTablet?: string
     isTopHeader?: boolean
     isTopFooter?: boolean
+    isTopNav?: boolean
   }
 }
 
@@ -49,8 +64,10 @@ export interface ProviderAppWrapperProps {
 
 export interface ProviderAppOutletProps {
   $isScrollOutlet?: boolean
+  $notification?: ProviderAppProps['notification']
   $header?: ProviderAppProps['header']
+  $nav?: ProviderAppProps['nav']
   $footer?: ProviderAppProps['footer']
-  $leftSection?: ProviderAppProps['leftSection']
-  $rightSection?: ProviderAppProps['rightSection']
+  $leftAside?: ProviderAppProps['leftAside']
+  $rightAside?: ProviderAppProps['rightAside']
 }

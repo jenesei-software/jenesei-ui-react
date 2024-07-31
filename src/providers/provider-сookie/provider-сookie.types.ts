@@ -6,7 +6,7 @@ export interface ProviderCookieProps {
   children: React.ReactNode
   validate?: {
     validateKeys: (keyof ValidCookieObject)[]
-    getValidateLocalStorageValue: <K extends keyof ValidCookieObject>(
+    getValidateCookieValue: <K extends keyof ValidCookieObject>(
       key: K,
       value: ValidCookieObject[K],
     ) => value is ValidCookieObject[K]
@@ -24,10 +24,11 @@ export interface CookieContextProps {
     value: ValidCookieObject[K],
     options?: CookieAttributes,
   ) => void
-  removeCookie: <K extends keyof ValidCookieObject>(
+  removeCookieValue: <K extends keyof ValidCookieObject>(
     name: K,
     options?: CookieAttributes,
   ) => void
+  removeCookieValues: () => void
   checkCookie: () => void
-  cookie: ValidCookieObject | undefined
+  cookieValues: ValidCookieObject | undefined
 }

@@ -19,7 +19,10 @@ export interface LocalStorageContextProps {
     name: K,
     value: ValidLocalStorageObject[K],
   ) => void
-  removeLocalStorage: <K extends keyof ValidLocalStorageObject>(name: K) => void
+  removeLocalStorageValue: <K extends keyof ValidLocalStorageObject>(
+    name: K,
+  ) => void
+  removeLocalStorageValues: () => void
   checkLocalStorage: () => void
-  LocalStorage: ValidLocalStorageObject | undefined
+  localStorageValues: ValidLocalStorageObject | undefined
 }
