@@ -20,7 +20,19 @@ const meta: Meta<typeof ProviderApp> = {
 export default meta
 
 type Story = StoryObj<typeof ProviderApp>
-// Создаем макеты для различных состояний
+
+const defaultNotification = (
+  <div
+    style={{
+      backgroundColor: 'darkgoldenrod',
+      padding: '2px',
+      height: '100%',
+      width: '100%',
+    }}
+  >
+    <TitleH5>Notification</TitleH5>
+  </div>
+)
 const defaultHeader = (
   <div
     style={{
@@ -45,7 +57,7 @@ const defaultFooter = (
     <TitleH1>Footer</TitleH1>
   </div>
 )
-const defaultLeftSection = (
+const defaultLeftAside = (
   <div
     style={{
       backgroundColor: 'lightgreen',
@@ -54,10 +66,10 @@ const defaultLeftSection = (
       width: '100%',
     }}
   >
-    <TitleH6>Left Section</TitleH6>
+    <TitleH6>Left Aside</TitleH6>
   </div>
 )
-const defaultRightSection = (
+const defaultRightAside = (
   <div
     style={{
       backgroundColor: 'lightyellow',
@@ -66,7 +78,20 @@ const defaultRightSection = (
       width: '100%',
     }}
   >
-    <TitleH6>Right Section</TitleH6>
+    <TitleH6>Right Aside</TitleH6>
+  </div>
+)
+
+const defaultNav = (
+  <div
+    style={{
+      backgroundColor: 'beige',
+      padding: '10px',
+      height: '100%',
+      width: '100%',
+    }}
+  >
+    <TitleH6>Nav</TitleH6>
   </div>
 )
 
@@ -93,19 +118,32 @@ export const Default: Story = {
   args: {
     defaultBgColor: 'grayFocus',
     isScrollOutlet: false,
+    notification: {
+      component: defaultNotification,
+      height: '30px',
+      heightTablet: '20px',
+      heightMobile: '20px',
+      isFixed:false
+    },
     header: {
       component: defaultHeader,
       height: '80px',
       heightTablet: '60px',
       heightMobile: '40px',
     },
-    leftSection: {
-      component: defaultLeftSection,
+    leftAside: {
+      component: defaultLeftAside,
       width: '80px',
       widthTablet: '60px',
     },
-    rightSection: {
-      component: defaultRightSection,
+    nav: {
+      component: defaultNav,
+      height: '80px',
+      heightTablet: '60px',
+      heightMobile: '40px',
+    },
+    rightAside: {
+      component: defaultRightAside,
       width: '80px',
       widthTablet: '60px',
     },
@@ -119,7 +157,7 @@ export const Default: Story = {
   },
 }
 
-export const SectionDifferentTop: Story = {
+export const AsideDifferentTop: Story = {
   render: (args) => <ProviderApp {...args} />,
   args: {
     defaultBgColor: 'grayFocus',
@@ -130,17 +168,24 @@ export const SectionDifferentTop: Story = {
       heightTablet: '60px',
       heightMobile: '40px',
     },
-    leftSection: {
-      component: defaultLeftSection,
+    nav: {
+      component: defaultNav,
+      height: '80px',
+      heightTablet: '60px',
+      heightMobile: '40px',
+    },
+    leftAside: {
+      component: defaultLeftAside,
       width: '80px',
       widthTablet: '60px',
-      isTopHeader: true,
+      isTopNav: true,
     },
-    rightSection: {
-      component: defaultRightSection,
+    rightAside: {
+      component: defaultRightAside,
       width: '80px',
       widthTablet: '60px',
       isTopFooter: true,
+      isTopHeader: true,
     },
     footer: {
       component: defaultFooter,
@@ -152,7 +197,7 @@ export const SectionDifferentTop: Story = {
   },
 }
 
-export const WithoutSections: Story = {
+export const WithoutAsides: Story = {
   render: (args) => <ProviderApp {...args} />,
   args: {
     defaultBgColor: 'grayFocus',

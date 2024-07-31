@@ -1,4 +1,4 @@
-# jenesei-react-ui
+# jenesei-ui-react
 
 This is a frontend library for React from Jenesei Software.
 
@@ -33,10 +33,23 @@ function App() {
     ...
       <ThemeProvider theme={JeneseiTheme}>
         <JeneseiGlobalStyles />
-          {/* Your components */}
+        {/* Your components */}
       </ThemeProvider>
     ...
   )
+}
+```
+
+## Customize the cookie
+
+```typescript
+//cookie.d.ts
+import '@jenesei-software/jenesei-ui-react'
+
+declare module '@jenesei-software/jenesei-ui-react' {
+  export interface ValidCookieObject {
+    token: string
+  }
 }
 ```
 
@@ -51,10 +64,13 @@ To work correctly you need to install the following dependencies:
 npm install @emotion/styled --save
 npm install @tanstack/react-virtual --save
 npm install gsap --save
+npm install js-cookie --save
+npm install @types/js-cookie --save
 npm install react --save
 npm install react-currency-input-field --save
 npm install react-dom --save
 npm install react-hook-form --save
+npm install react-i18next --save
 npm install react-loading --save
 npm install react-loading-skeleton --save
 npm install react-number-format --save

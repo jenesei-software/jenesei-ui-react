@@ -14,8 +14,10 @@ import {
   ProviderAppOutletChildren,
   ProviderAppOutletFooter,
   ProviderAppOutletHeader,
-  ProviderAppOutletLeftSection,
-  ProviderAppOutletRightSection,
+  ProviderAppOutletLeftAside,
+  ProviderAppOutletNav,
+  ProviderAppOutletNotification,
+  ProviderAppOutletRightAside,
   ProviderAppProps,
   ProviderAppWrapper,
 } from '.'
@@ -64,22 +66,30 @@ export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
         <ProviderAppOutlet
           $isScrollOutlet={props.isScrollOutlet}
           $footer={props.footer}
+          $notification={props.notification}
           $header={props.header}
-          $leftSection={props.leftSection}
-          $rightSection={props.rightSection}
+          $nav={props.nav}
+          $leftAside={props.leftAside}
+          $rightAside={props.rightAside}
         >
+          <ProviderAppOutletNotification $notification={props.notification}>
+            {props.notification?.component || null}
+          </ProviderAppOutletNotification>
           <ProviderAppOutletHeader $header={props.header}>
             {props.header?.component || null}
           </ProviderAppOutletHeader>
-          <ProviderAppOutletLeftSection $leftSection={props.leftSection}>
-            {props.leftSection?.component || null}
-          </ProviderAppOutletLeftSection>
+          <ProviderAppOutletNav $nav={props.nav}>
+            {props.nav?.component || null}
+          </ProviderAppOutletNav>
+          <ProviderAppOutletLeftAside $leftAside={props.leftAside}>
+            {props.leftAside?.component || null}
+          </ProviderAppOutletLeftAside>
           <ProviderAppOutletChildren>
             {props.children}
           </ProviderAppOutletChildren>
-          <ProviderAppOutletRightSection $rightSection={props.rightSection}>
-            {props.rightSection?.component || null}
-          </ProviderAppOutletRightSection>
+          <ProviderAppOutletRightAside $rightAside={props.rightAside}>
+            {props.rightAside?.component || null}
+          </ProviderAppOutletRightAside>
           <ProviderAppOutletFooter $footer={props.footer}>
             {props.footer?.component || null}
           </ProviderAppOutletFooter>
