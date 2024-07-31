@@ -25,6 +25,9 @@ export * from './components/accordion'
 
 // Export of hooks and providers
 export * from './hooks/use-screen-width'
+export * from './hooks/use-geolocation'
 export * from './providers/provider-app'
 export * from './providers/provider-сookie'
 export * from './providers/provider-language'
+export * from './providers/provider-local-storage'
+export * from './providers/provider-permission'

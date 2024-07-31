@@ -19,15 +19,19 @@ export const ProviderAppWrapper = styled.div<ProviderAppWrapperProps>`
 
 const generateGridTemplateAreas = (props: ProviderAppOutletProps) => {
   let templateAreas = `
+    "notification notification notification"
     "header header header"
-    "leftSection children rightSection"
+    "nav nav nav"
+    "leftAside children rightAside"
     "footer footer footer"
   `
 
   templateAreas = `
-      "${props.$leftSection?.isTopHeader ? 'leftSection' : 'header'} header ${props.$rightSection?.isTopHeader ? 'rightSection' : 'header'}"
-      "leftSection children rightSection"
-      "${props.$leftSection?.isTopFooter ? 'leftSection' : 'footer'} footer ${props.$rightSection?.isTopFooter ? 'rightSection' : 'footer'}"
+      "notification notification notification"
+      "${props.$leftAside?.isTopHeader ? 'leftAside' : 'header'} header ${props.$rightAside?.isTopHeader ? 'rightAside' : 'header'}"
+      "${props.$leftAside?.isTopHeader ? 'leftAside' : props.$leftAside?.isTopNav ? 'leftAside' : 'nav'} nav ${props.$rightAside?.isTopHeader ? 'rightAside' : props.$rightAside?.isTopNav ? 'rightAside' : 'nav'}"
+      "leftAside children rightAside"
+      "${props.$leftAside?.isTopFooter ? 'leftAside' : 'footer'} footer ${props.$rightAside?.isTopFooter ? 'rightAside' : 'footer'}"
     `
 
   return templateAreas
@@ -51,49 +55,31 @@ export const ProviderAppOutlet = styled.div<ProviderAppOutletProps>`
   `}
 
   ${(props) =>
-    props.$leftSection?.isTopFooter &&
-    css`
-      grid-template-areas:
-        'header header header'
-        'leftSection children rightSection'
-        'leftSection footer footer';
-    `};
-
-  ${(props) =>
-    props.$rightSection?.isTopHeader &&
-    css`
-      grid-template-areas:
-        'header rightSection header'
-        'leftSection children rightSection'
-        'footer footer footer';
-    `};
-
-  ${(props) =>
     props.$isScrollOutlet &&
     css`
       max-height: 100dvh;
     `}
 
-  grid-template-rows:  ${(props) =>
-    `${props.$header ? props.$header.height : '0px'} 1fr ${props.$footer ? props.$footer.height : '0px'}`};
+    grid-template-columns: ${(props) =>
+    `${props.$leftAside ? props.$leftAside.width : '0px'} 1fr ${props.$rightAside ? props.$rightAside.width : '0px'}`};
 
-  grid-template-columns: ${(props) =>
-    `${props.$leftSection ? props.$leftSection.width : '0px'} 1fr ${props.$rightSection ? props.$rightSection.width : '0px'}`};
+  grid-template-rows: ${(props) =>
+    `${props.$notification ? props.$notification.height : '0px'} ${props.$header ? props.$header.height : '0px'} ${props.$nav ? props.$nav.height : '0px'} 1fr ${props.$footer ? props.$footer.height : '0px'}`};
 
   @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
     grid-template-columns: ${(props) =>
-      `${props.$leftSection && props.$leftSection.widthTablet ? props.$leftSection.widthTablet : '0px'} 1fr ${props.$rightSection && props.$rightSection.widthTablet ? props.$rightSection.widthTablet : '0px'}`};
+      `${props.$leftAside && props.$leftAside.widthTablet ? props.$leftAside.widthTablet : '0px'} 1fr ${props.$rightAside && props.$rightAside.widthTablet ? props.$rightAside.widthTablet : '0px'}`};
 
     grid-template-rows: ${(props) =>
-      `${props.$header && props.$header.heightTablet ? props.$header.heightTablet : '0px'} 1fr ${props.$footer && props.$footer.heightTablet ? props.$footer.heightTablet : '0px'}`};
+      `${props.$notification && props.$notification.heightTablet ? props.$notification.heightTablet : '0px'} ${props.$header && props.$header.heightTablet ? props.$header.heightTablet : '0px'} ${props.$nav && props.$nav.heightTablet ? props.$nav.heightTablet : '0px'} 1fr ${props.$footer && props.$footer.heightTablet ? props.$footer.heightTablet : '0px'}`};
   }
 
   @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
     grid-template-columns: ${(props) =>
-      `${props.$leftSection && props.$leftSection.widthMobile ? props.$leftSection.widthMobile : '0px'} 1fr ${props.$rightSection && props.$rightSection.widthMobile ? props.$rightSection.widthMobile : '0px'}`};
+      `${props.$leftAside && props.$leftAside.widthMobile ? props.$leftAside.widthMobile : '0px'} 1fr ${props.$rightAside && props.$rightAside.widthMobile ? props.$rightAside.widthMobile : '0px'}`};
 
     grid-template-rows: ${(props) =>
-      `${props.$header && props.$header.heightMobile ? props.$header.heightMobile : '0px'} 1fr ${props.$footer && props.$footer.heightMobile ? props.$footer.heightMobile : '0px'}`};
+      `${props.$notification && props.$notification.heightMobile ? props.$notification.heightMobile : '0px'} ${props.$header && props.$header.heightMobile ? props.$header.heightMobile : '0px'} ${props.$nav && props.$nav.heightMobile ? props.$nav.heightMobile : '0px'} 1fr ${props.$footer && props.$footer.heightMobile ? props.$footer.heightMobile : '0px'}`};
   }
 `
 
@@ -109,16 +95,52 @@ const visibleStyles = css`
   opacity: 1;
   visibility: visible;
   transition:
+    height ${(props) => props.theme.transition},
     opacity ${(props) => props.theme.transition},
     visibility ${(props) => props.theme.transition};
 `
 
-export const ProviderAppOutletChildren = styled.section`
+export const ProviderAppOutletChildren = styled.main`
   grid-area: children;
-  max-width: 100%; // Prevent children from exceeding grid width
-  max-height: 100%; // Prevent children from exceeding grid height
-  overflow: auto; // Ensure content is scrollable if it overflows
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
 `
+
+export const ProviderAppOutletNotification = styled.section<ProviderAppOutletProps>`
+  grid-area: notification;
+  ${(props) =>
+    props.$notification?.isFixed &&
+    css`
+      position: fixed;
+      width: 100%;
+      height: ${props.$notification.height};
+      @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
+        height: ${props.$notification.heightTablet
+          ? props.$notification.heightTablet
+          : '0px'};
+      }
+
+      @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
+        height: ${props.$notification && props.$notification.heightMobile
+          ? props.$notification.heightMobile
+          : '0px'};
+      }
+    `}
+
+  ${(props) => (props.$notification?.height ? visibleStyles : hiddenStyles)}
+
+  @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
+    ${(props) =>
+      props.$notification?.heightTablet ? visibleStyles : hiddenStyles}
+  }
+
+  @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
+    ${(props) =>
+      props.$notification?.heightMobile ? visibleStyles : hiddenStyles}
+  }
+`
+
 export const ProviderAppOutletHeader = styled.header<ProviderAppOutletProps>`
   grid-area: header;
 
@@ -147,34 +169,46 @@ export const ProviderAppOutletFooter = styled.footer<ProviderAppOutletProps>`
   }
 `
 
-export const ProviderAppOutletLeftSection = styled.section<ProviderAppOutletProps>`
-  grid-area: leftSection;
+export const ProviderAppOutletNav = styled.nav<ProviderAppOutletProps>`
+  grid-area: nav;
 
-  ${(props) => (props.$leftSection?.width ? visibleStyles : hiddenStyles)}
+  ${(props) => (props.$nav?.height ? visibleStyles : hiddenStyles)}
 
   @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
-    ${(props) =>
-      props.$leftSection?.widthTablet ? visibleStyles : hiddenStyles}
+    ${(props) => (props.$nav?.heightTablet ? visibleStyles : hiddenStyles)}
   }
 
   @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
-    ${(props) =>
-      props.$leftSection?.widthMobile ? visibleStyles : hiddenStyles}
+    ${(props) => (props.$nav?.heightMobile ? visibleStyles : hiddenStyles)}
   }
 `
 
-export const ProviderAppOutletRightSection = styled.section<ProviderAppOutletProps>`
-  grid-area: rightSection;
+export const ProviderAppOutletLeftAside = styled.aside<ProviderAppOutletProps>`
+  grid-area: leftAside;
 
-  ${(props) => (props.$rightSection?.width ? visibleStyles : hiddenStyles)}
+  ${(props) => (props.$leftAside?.width ? visibleStyles : hiddenStyles)}
+
+  @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
+    ${(props) => (props.$leftAside?.widthTablet ? visibleStyles : hiddenStyles)}
+  }
+
+  @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
+    ${(props) => (props.$leftAside?.widthMobile ? visibleStyles : hiddenStyles)}
+  }
+`
+
+export const ProviderAppOutletRightAside = styled.aside<ProviderAppOutletProps>`
+  grid-area: rightAside;
+
+  ${(props) => (props.$rightAside?.width ? visibleStyles : hiddenStyles)}
 
   @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
     ${(props) =>
-      props.$rightSection?.widthTablet ? visibleStyles : hiddenStyles}
+      props.$rightAside?.widthTablet ? visibleStyles : hiddenStyles}
   }
 
   @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
     ${(props) =>
-      props.$rightSection?.widthMobile ? visibleStyles : hiddenStyles}
+      props.$rightAside?.widthMobile ? visibleStyles : hiddenStyles}
   }
 `

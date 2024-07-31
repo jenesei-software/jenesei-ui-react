@@ -4,31 +4,31 @@ export type CookieAttributes = Cookies.CookieAttributes
 
 export interface ProviderCookieProps {
   children: React.ReactNode
+  validate?: {
+    validateKeys: (keyof ValidCookieObject)[]
+    getValidateCookieValue: <K extends keyof ValidCookieObject>(
+      key: K,
+      value: ValidCookieObject[K],
+    ) => value is ValidCookieObject[K]
+  }
 }
 
-type ValidCookieValue =
-  | string
-  | number
-  | boolean
-  | ValidCookieObject
-  | undefined
-
-export interface ValidCookieObject {
-  [key: string]: ValidCookieValue
-}
+export interface ValidCookieObject {}
 
 export interface CookieContextProps {
-  getCookie: (
-    name: keyof ValidCookieObject,
-  ) => ValidCookieObject[keyof ValidCookieObject] | undefined
-  setCookie: (
-    name: keyof ValidCookieObject,
-    value: ValidCookieObject[keyof ValidCookieObject],
+  getCookie: <K extends keyof ValidCookieObject>(
+    name: K,
+  ) => ValidCookieObject[K] | undefined
+  setCookie: <K extends keyof ValidCookieObject>(
+    name: K,
+    value: ValidCookieObject[K],
     options?: CookieAttributes,
   ) => void
-  removeCookie: (
-    name: keyof ValidCookieObject,
+  removeCookieValue: <K extends keyof ValidCookieObject>(
+    name: K,
     options?: CookieAttributes,
   ) => void
-  cookie: ValidCookieObject | undefined
+  removeCookieValues: () => void
+  checkCookie: () => void
+  cookieValues: ValidCookieObject | undefined
 }
