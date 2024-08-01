@@ -46,15 +46,25 @@ export const JeneseiGlobalStyles = createGlobalStyle`
   }
 
   body {
-    margin: 0;
-    padding: 0;
+    overflow: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-synthesis: none;
-    overflow: hidden;
-    overflow-y: auto;
-    max-width: 100vw;
+    max-width: 100dvw;
+    height: 100%;
   }
+
+  html, body {
+    touch-action: manipulation; 
+    -ms-touch-action: manipulation; 
+    overscroll-behavior: none; 
+    margin: 0;
+    padding: 0;
+  } 
+
+  html, body, #root {
+  -webkit-overflow-scrolling: auto;
+}
 
   @media screen and (max-width: 1024px) {
     body:has(.LayoutModal) {
