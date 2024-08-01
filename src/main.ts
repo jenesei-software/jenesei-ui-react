@@ -1,10 +1,8 @@
 'use client'
 
 // Export styles and themes
-export * from './theme/global-interface'
-export * from './theme/global-styles'
-export * from './theme/global-theme'
-export * from './fonts/index'
+export * from './theme'
+export * from './fonts'
 
 // Exporting assets
 export * from './assets/library-icon'
