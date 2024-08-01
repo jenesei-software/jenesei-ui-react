@@ -24,10 +24,12 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
     useState<PushSubscription | null>(null)
 
   useEffect(() => {
-    setNotificationPermission(Notification.permission)
-
-    if (navigator.permissions) {
-      navigator.permissions
+    if ('Notification' in window) {
+      setNotificationPermission(window.Notification.permission)
+    }
+    
+    if ('permissions' in window.navigator) {
+      window.navigator.permissions
         .query({ name: 'geolocation' })
         .then((permissionStatus) => {
           setGeolocationPermission(permissionStatus.state)
@@ -36,17 +38,15 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
           }
         })
     }
-  }, [])
 
-  useEffect(() => {
     if ('PushManager' in window) {
       setPushNotificationSupported(true)
     }
+
     if ('serviceWorker' in navigator && 'PushManager' in window) {
       navigator.serviceWorker.ready
         .then((registration) => {
           setServiceWorkerRegistered(true)
-          // console.log('Provider Permission. registration:', registration)
           registration.pushManager.getSubscription().then((subscription) => {
             if (subscription) {
               setPushSubscription(subscription)
@@ -67,18 +67,28 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
   }, [])
 
   const requestNotificationPermission = useCallback(async () => {
-    const permission = await Notification.requestPermission()
-    setNotificationPermission(permission)
-  }, [])
-
-  const requestGeolocationPermission = useCallback(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        () => setGeolocationPermission('granted'),
-        () => setGeolocationPermission('denied'),
-      )
+    if ('Notification' in window) {
+      try {
+        const permission = await window.Notification.requestPermission();
+        setNotificationPermission(permission);
+      } catch (error) {
+        console.error('Provider Permission. Failed to request notification permission:', error);
+      }
+    } else {
+      console.warn('Provider Permission. Notifications are not supported in this browser.');
     }
-  }, [])
+  }, []);
+  
+  const requestGeolocationPermission = useCallback(() => {
+    if ('geolocation' in window.navigator) {
+      window.navigator.geolocation.getCurrentPosition(
+        () => setGeolocationPermission('granted'), 
+        () => setGeolocationPermission('denied'),  
+      );
+    } else {
+      console.warn('Provider Permission. Geolocation is not supported in this browser.');
+    }
+  }, []);
 
   const registerServiceWorker = useCallback(async () => {
     if ('serviceWorker' in navigator) {
