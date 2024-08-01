@@ -55,6 +55,8 @@ export interface ProviderAppProps {
 export interface AppContextProps {
   changeBgColor: (color: JeneseiThemeVariablesKeys) => void
   changeBgImage: (image: string) => void
+  historyBgColor: (step: number) => void
+  historyBgImage: (step: number) => void
 }
 
 export interface ProviderAppWrapperProps {

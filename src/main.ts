@@ -1,8 +1,10 @@
 'use client'
 
 // Export styles and themes
-export * from './theme'
-export * from './fonts'
+export * from './theme/global-interface'
+export * from './theme/global-styles'
+export * from './theme/global-theme'
+export * from './fonts/index'
 
 // Exporting assets
 export * from './assets/library-icon'
@@ -26,7 +28,6 @@ export * from './components/accordion'
 // Export of hooks and providers
 export * from './hooks/use-screen-width'
 export * from './hooks/use-geolocation'
-export * from './hooks/use-prevent-overscroll'
 export * from './providers/provider-app'
 export * from './providers/provider-сookie'
 export * from './providers/provider-language'
