@@ -27,7 +27,7 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
     if ('Notification' in window) {
       setNotificationPermission(window.Notification.permission)
     }
-    
+
     if ('permissions' in window.navigator) {
       window.navigator.permissions
         .query({ name: 'geolocation' })
@@ -173,7 +173,7 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
     async (vapidKey: string) => {
       if (notificationPermission !== 'granted') {
         await requestNotificationPermission()
-        if (Notification.permission !== 'granted') {
+        if (window.Notification.permission !== 'granted') {
           console.warn('Provider Permission. Notification permission denied.')
           return
         }
