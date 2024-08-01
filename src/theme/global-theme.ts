@@ -1,88 +1,27 @@
-export interface TJeneseiThemeGenreType {
-  background: {
-    rest: string
-    hover: string
-    focus: string
-    active: string
+import {
+  IJeneseiTheme,
+  IJeneseiThemeSize,
+  JeneseiThemeVariablesKeys,
+  TJeneseiThemeSize,
+} from '.'
+
+export const JeneseiThemeVariables: Record<JeneseiThemeVariablesKeys, string> =
+  {
+    white: '#fff',
+    black: '#000',
+    black01: '#0000001A',
+    transparent: 'transparent',
+    danger: 'red',
+    focus: '#1565C01A',
+    productRest: '#4195D2FF',
+    productHover: '#3585bfFF',
+    productActive: '#1769A5FF',
+    productFocus: '#4195D2FF',
+    grayRest: '#f6f8fa',
+    grayHover: '#f3f4f6',
+    grayActive: '#ebecf0',
+    grayFocus: '#f6f8fa',
   }
-  border: {
-    rest: string
-    hover: string
-    focus: string
-    active: string
-  }
-  color: {
-    rest: string
-    hover: string
-    focus: string
-    active: string
-    placeholder: string
-  }
-}
-
-export interface TJeneseiThemeGenre {
-  product: TJeneseiThemeGenreType
-  gray: TJeneseiThemeGenreType
-}
-
-export interface IJeneseiThemeSize {
-  height: number
-  heightIcon: number
-  radius: number
-  padding: number
-  font: number
-}
-
-export interface IJeneseiThemeScreens {
-  mobile: { width: string }
-  tablet: { width: string }
-  other: boolean
-}
-
-export type TJeneseiThemeSize =
-  | 'large'
-  | 'largeMedium'
-  | 'medium'
-  | 'mediumSmall'
-  | 'small'
-
-export type TJeneseiFontFamily = 'Inter'
-
-export interface IJeneseiTheme {
-  transitionDuration: string
-  transitionTimingFunction: string
-  transition: string
-  screens: IJeneseiThemeScreens
-  fontFamily: TJeneseiFontFamily
-  colors: {
-    focus: string
-    white: string
-    danger: string
-    button: TJeneseiThemeGenre
-    toggle: TJeneseiThemeGenre
-    checkbox: TJeneseiThemeGenre
-    input: TJeneseiThemeGenre
-  }
-}
-
-export const JeneseiThemeVariables = {
-  white: '#fff',
-  black: '#000',
-  black01: '#0000001A',
-  transparent: 'transparent',
-  danger: 'red',
-  focus: '#1565C01A',
-  productRest: '#4195D2FF',
-  productHover: '#3585bfFF',
-  productActive: '#1769A5FF',
-  productFocus: '#4195D2FF',
-  grayRest: '#f6f8fa',
-  grayHover: '#f3f4f6',
-  grayActive: '#ebecf0',
-  grayFocus: '#f6f8fa',
-}
-
-export type JeneseiThemeVariablesKeys = keyof typeof JeneseiThemeVariables
 
 const DefaultJeneseiThemeGenre = {
   product: {
@@ -231,49 +170,3 @@ export const KEY_SIZE_DATA: Record<TJeneseiThemeSize, IJeneseiThemeSize> = {
     font: 10,
   },
 }
-
-const propsToExclude = [
-  'flexDirection',
-  'flexWrap',
-  'justifyContent',
-  'alignItems',
-  'alignContent',
-  'gap',
-  'order',
-  'flexGrow',
-  'flexShrink',
-  'flexBasis',
-  'alignSelf',
-  'm',
-  'mt',
-  'mr',
-  'mb',
-  'ml',
-  'mx',
-  'my',
-  'p',
-  'pt',
-  'pr',
-  'pb',
-  'pl',
-  'px',
-  'py',
-  'w',
-  'h',
-  'minW',
-  'maxW',
-  'minH',
-  'maxH',
-  'bg',
-  'color',
-  'iconPosition',
-  'isLoading',
-  'isDisabled',
-  'isOnlyLoading',
-  'isActive',
-  'isFullSize',
-  'isHiddenBorder',
-]
-
-export const shouldForwardProp = (prop: string) =>
-  !propsToExclude.includes(prop)

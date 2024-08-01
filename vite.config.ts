@@ -35,6 +35,7 @@ export default defineConfig({
   publicDir: false,
   build: {
     sourcemap: true,
+    outDir: 'dist',
     minify: 'terser',
     terserOptions: {
       compress: {
@@ -44,12 +45,25 @@ export default defineConfig({
     },
     lib: {
       entry: resolve(__dirname, 'src/main.ts'),
-      name: 'jenesei-react-ui',
+      name: 'jenesei-ui-react',
       formats: ['es', 'umd'],
-      fileName: (format) => `jenesei-react-ui.${format}.js`,
+      fileName: (format) => `jenesei-ui-react.${format}.js`,
     },
     rollupOptions: {
       external: Object.keys(peerDependencies),
+      output: {
+        globals: {
+          'styled-components': 'styled',
+          'styled-reset': 'reset',
+          react: 'React',
+          'react-loading': 'ReactLoading',
+          'react-number-format': 'reactNumberFormat',
+          '@tanstack/react-virtual': 'reactVirtual',
+          gsap: 'gsap',
+          'js-cookie': 'Cookies',
+          'react-i18next': 'reactI18next',
+        },
+      },
     },
   },
 })

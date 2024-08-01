@@ -63,8 +63,8 @@ export const JeneseiGlobalStyles = createGlobalStyle`
   } 
 
   html, body, #root {
-  -webkit-overflow-scrolling: auto;
-}
+    -webkit-overflow-scrolling: auto;
+  }
 
   @media screen and (max-width: 1024px) {
     body:has(.LayoutModal) {
