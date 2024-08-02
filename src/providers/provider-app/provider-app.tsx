@@ -37,21 +37,63 @@ export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
   const [bgColor, setBgColor] = useState<JeneseiThemeVariablesKeys>(
     props.defaultBgColor,
   )
+  const [bgColorHistory, setBgColorHistory] = useState<
+    JeneseiThemeVariablesKeys[]
+  >([props.defaultBgColor])
+  const [bgColorIndex, setBgColorIndex] = useState<number>(0)
+
   const [bgImage, setBgImage] = useState<string | null>(
     props.defaultBgImage || null,
   )
+  const [bgImageHistory, setBgImageHistory] = useState<(string | null)[]>([
+    props.defaultBgImage || null,
+  ])
+  const [bgImageIndex, setBgImageIndex] = useState<number>(0)
 
   const changeBgColor: AppContextProps['changeBgColor'] = useCallback(
     (color) => {
       setBgColor(color)
+      setBgColorHistory((prev) => {
+        const newHistory = [...prev.slice(0, bgColorIndex + 1), color]
+        setBgColorIndex(newHistory.length - 1)
+        return newHistory
+      })
     },
-    [],
+    [bgColorIndex],
   )
+
   const changeBgImage: AppContextProps['changeBgImage'] = useCallback(
     (image) => {
       setBgImage(image)
+      setBgImageHistory((prev) => {
+        const newHistory = [...prev.slice(0, bgImageIndex + 1), image]
+        setBgImageIndex(newHistory.length - 1)
+        return newHistory
+      })
     },
-    [],
+    [bgImageIndex],
+  )
+
+  const historyBgColor: AppContextProps['historyBgColor'] = useCallback(
+    (steps) => {
+      const newIndex = bgColorIndex + steps
+      if (newIndex >= 0 && newIndex < bgColorHistory.length) {
+        setBgColor(bgColorHistory[newIndex])
+        setBgColorIndex(newIndex)
+      }
+    },
+    [bgColorHistory, bgColorIndex],
+  )
+
+  const historyBgImage: AppContextProps['historyBgImage'] = useCallback(
+    (steps) => {
+      const newIndex = bgImageIndex + steps
+      if (newIndex >= 0 && newIndex < bgImageHistory.length) {
+        setBgImage(bgImageHistory[newIndex])
+        setBgImageIndex(newIndex)
+      }
+    },
+    [bgImageHistory, bgImageIndex],
   )
 
   useEffect(() => {
@@ -61,7 +103,9 @@ export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
     if (props.defaultBgImage) setBgImage(props.defaultBgImage)
   }, [props.defaultBgImage])
   return (
-    <AppContext.Provider value={{ changeBgColor, changeBgImage }}>
+    <AppContext.Provider
+      value={{ changeBgColor, changeBgImage, historyBgColor, historyBgImage }}
+    >
       <ProviderAppWrapper $bgColor={bgColor} $bgImage={bgImage}>
         <ProviderAppOutlet
           $isScrollOutlet={props.isScrollOutlet}
