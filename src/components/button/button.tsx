@@ -1,17 +1,18 @@
 import { FC, memo } from 'react'
 import { useTheme } from 'styled-components'
 
-import { LibraryIcon } from '@assets/library-icon'
+import { LibraryIconCurved } from '@assets/library-icon-curved'
 
 import { ModalLoading } from '@components/modal-loading'
 
 import { ButtonProps, StyledButton } from '.'
+import { Ripple } from 'react-ripple-click'
 
 export const Button: FC<ButtonProps> = memo((props) => {
   const iconPosition = props.iconPosition || 'right'
   const loadingPosition = props.loadingPosition || 'right'
   const theme = useTheme()
-  const IconComponent = props.icon && LibraryIcon[props.icon]
+  const IconComponent = props.icon && LibraryIconCurved[props.icon]
   return (
     <StyledButton
       id="jenesei-button"
@@ -21,8 +22,9 @@ export const Button: FC<ButtonProps> = memo((props) => {
       $width={props.width}
       $size={props.size}
       $isDisabled={props.isDisabled}
+      $isRadius={props.isRadius}
       $isHidden={props.isHidden}
-      $isActive={props.isActive}
+      $isPlaystationEffect={props.isPlaystationEffect}
       $customFontFamily={props.customFontFamily}
       $customFontSize={props.customFontSize}
       $customFontWeight={props.customFontWeight}
@@ -38,6 +40,7 @@ export const Button: FC<ButtonProps> = memo((props) => {
       }
       {...props.$styles}
     >
+      {!props.isHidden && <Ripple />}
       {props.isOnlyLoading ? (
         props.isLoading ? (
           <ModalLoading
@@ -60,11 +63,7 @@ export const Button: FC<ButtonProps> = memo((props) => {
           {props.isLoading && loadingPosition === 'left' && (
             <ModalLoading
               size={props.size}
-              color={
-                props.isActive
-                  ? theme.colors.button[props.genre].color.active
-                  : theme.colors.button[props.genre].color.rest
-              }
+              color={theme.colors.button[props.genre].color.rest}
             />
           )}
           {IconComponent && iconPosition === 'left' && (
@@ -77,11 +76,7 @@ export const Button: FC<ButtonProps> = memo((props) => {
           {props.isLoading && loadingPosition === 'right' && (
             <ModalLoading
               size={props.size}
-              color={
-                props.isActive
-                  ? theme.colors.button[props.genre].color.active
-                  : theme.colors.button[props.genre].color.rest
-              }
+              color={theme.colors.button[props.genre].color.rest}
             />
           )}
         </>

@@ -1,9 +1,7 @@
 import ReactLoading from 'react-loading'
 import { styled } from 'styled-components'
 
-import { ModalLoadingProps } from '.'
-
-export const StyledReactLoading = styled(ReactLoading)<ModalLoadingProps>`
+export const StyledReactLoading = styled(ReactLoading)`
   display: flex;
   align-items: center;
   justify-content: center;

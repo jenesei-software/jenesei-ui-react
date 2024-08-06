@@ -46,10 +46,8 @@ const StyledReactToggleGenre = css<StyledToggleProps>`
   }
   &.react-toggle:active:not(.react-toggle--disabled) {
     & .react-toggle-track {
-      background: ${(props) =>
-        props.theme.colors.toggle[props.$genre].background.active};
       border-color: ${(props) =>
-        props.theme.colors.toggle[props.$genre].border.active};
+        props.theme.colors.toggle[props.$genre].border.hover};
     }
     & .react-toggle-thumb {
       box-shadow: none !important;
@@ -57,10 +55,6 @@ const StyledReactToggleGenre = css<StyledToggleProps>`
   }
   &.react-toggle--focus {
     & .react-toggle-track {
-      border-color: ${(props) =>
-        props.theme.colors.toggle[props.$genre].border.focus};
-      background: ${(props) =>
-        props.theme.colors.toggle[props.$genre].background.focus};
     }
     & .react-toggle-thumb {
       box-shadow: none !important;
@@ -83,21 +77,19 @@ const StyledReactToggleGenre = css<StyledToggleProps>`
     ${(props) => css`
       & .react-toggle-track {
         outline: 2px solid ${props.theme.colors.focus};
-        border-color: ${props.theme.colors.toggle[props.$genre].border.focus};
-        background: ${props.theme.colors.toggle[props.$genre].background.focus};
       }
     `};
   }
   &.react-toggle--checked {
     & .react-toggle-track {
       background: ${(props) =>
-        props.theme.colors.toggle[props.$genre].background.active};
+        props.theme.colors.toggle[props.$genre].background.hover};
     }
     & .react-toggle-thumb {
       background: ${(props) =>
-        props.theme.colors.toggle[props.$genre].color.active};
+        props.theme.colors.toggle[props.$genre].color.hover};
       border-color: ${(props) =>
-        props.theme.colors.toggle[props.$genre].background.active};
+        props.theme.colors.toggle[props.$genre].background.hover};
     }
   }
   & .react-toggle-track {

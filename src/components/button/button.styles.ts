@@ -18,56 +18,26 @@ const ButtonGenre = css<StyledButtonProps>`
       color: ${props.theme.colors.button[props.$genre].color.rest};
     }
     & path {
-      stroke: ${props.theme.colors.button[props.$genre].color.rest};
+      fill: ${props.theme.colors.button[props.$genre].color.rest};
     }
 
     &:focus-visible {
       outline: 2px solid ${props.theme.colors.focus};
-      border-color: ${props.theme.colors.button[props.$genre].border.focus};
-      background: ${props.theme.colors.button[props.$genre].background.focus};
-
-      color: ${props.theme.colors.button[props.$genre].color.focus};
-      & span {
-        color: ${props.theme.colors.button[props.$genre].color.focus};
-      }
-      & path {
-        stroke: ${props.theme.colors.button[props.$genre].color.focus};
-      }
     }
     &:hover {
-      background: ${props.theme.colors.button[props.$genre].background.hover};
-      border-color: ${props.theme.colors.button[props.$genre].border.hover};
-      color: ${props.theme.colors.button[props.$genre].color.hover};
-      & span {
+      ${!props.$isHidden &&
+      css`
+        background: ${props.theme.colors.button[props.$genre].background.hover};
+        border-color: ${props.theme.colors.button[props.$genre].border.hover};
         color: ${props.theme.colors.button[props.$genre].color.hover};
-      }
-      & path {
-        stroke: ${props.theme.colors.button[props.$genre].color.hover};
-      }
+        & span {
+          color: ${props.theme.colors.button[props.$genre].color.hover};
+        }
+        & path {
+          fill: ${props.theme.colors.button[props.$genre].color.hover};
+        }
+      `}
     }
-    &:active {
-      background: ${props.theme.colors.button[props.$genre].background.active};
-      border-color: ${props.theme.colors.button[props.$genre].border.active};
-      color: ${props.theme.colors.button[props.$genre].color.active};
-      & span {
-        color: ${props.theme.colors.button[props.$genre].color.active};
-      }
-      & path {
-        stroke: ${props.theme.colors.button[props.$genre].color.active};
-      }
-    }
-    ${props.$isActive &&
-    css`
-      background: ${props.theme.colors.button[props.$genre].background.active};
-      border-color: ${props.theme.colors.button[props.$genre].border.active};
-      color: ${props.theme.colors.button[props.$genre].color.active};
-      & span {
-        color: ${props.theme.colors.button[props.$genre].color.active};
-      }
-      & path {
-        stroke: ${props.theme.colors.button[props.$genre].color.active};
-      }
-    `}
   `};
 `
 
@@ -87,7 +57,7 @@ const ButtonDisabled = css<StyledButtonProps>`
               .rest} !important;
           }
           & path {
-            stroke: ${props.theme.colors.button[props.$genre].color
+            fill: ${props.theme.colors.button[props.$genre].color
               .rest} !important;
           }
         `
@@ -95,12 +65,28 @@ const ButtonDisabled = css<StyledButtonProps>`
           opacity: 1;
         `}
 `
-/****************************************** HiddenBorder *************************************************/
-const ButtonHiddenBorder = css<StyledButtonProps>`
+/****************************************** is HiddenBorder *************************************************/
+const ButtonIsHiddenBorder = css<StyledButtonProps>`
   ${(props) =>
     props.$isHiddenBorder &&
     css`
-      border-color: transparent !important;
+      border: 0px transparent !important;
+    `}
+`
+/****************************************** is Radius *************************************************/
+const ButtonIsRadius = css<StyledButtonProps>`
+  ${(props) =>
+    props.$isRadius &&
+    css`
+      border-radius: 100px;
+    `}
+`
+/****************************************** is PlaystationEffect *************************************************/
+const ButtonIsPlaystationEffect = css<StyledButtonProps>`
+  ${(props) =>
+    props.$isPlaystationEffect &&
+    css`
+      box-shadow: ${props.theme.effects.button.playstation};
     `}
 `
 /****************************************** Size *************************************************/
@@ -132,6 +118,7 @@ export const ButtonSizeConstructor = (
     ? css`
         width: ${props.height}px;
         min-width: ${props.height}px;
+        padding: 0px;
       `
     : css`
         width: ${props.$width ?? 'max-content'};
@@ -173,7 +160,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
   ${ButtonSize};
   ${ButtonGenre};
   ${ButtonDisabled};
-  ${ButtonHiddenBorder};
+  ${ButtonIsHiddenBorder};
+  ${ButtonIsRadius};
+  ${ButtonIsPlaystationEffect};
   font-family: ${(props) => props.$customFontFamily};
   font-size: ${(props) => props.$customFontSize};
   font-weight: ${(props) => props.$customFontWeight};

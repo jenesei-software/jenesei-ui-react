@@ -54,7 +54,6 @@ export const Checkboxes = <T extends ICheckboxValue>(
             <Checkbox
               genre={props.checkboxGenre}
               isHiddenBorder={props.checkboxIsHiddenBorder}
-              isActive={props.checkboxIsActive}
               view={props.checkBoxView}
               size={props.size}
               width={props.checkboxWidth}

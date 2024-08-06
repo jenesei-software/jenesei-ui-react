@@ -14,7 +14,7 @@ export default meta
 type Story = StoryObj<typeof ButtonGroup>
 
 const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
-  const [value, setValue] = useState({
+  const [, setValue] = useState({
     first: false,
     second: false,
     third: true,
@@ -25,11 +25,11 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
       {...props}
       value={[
         {
-          $styles:{
+          $styles: {
             $justifyContent: 'flex-start',
           },
           children: 'First',
-          icon: 'Copy',
+          icon: 'AddUser',
           iconPosition: 'left',
           width: 'auto',
           type: 'button',
@@ -38,17 +38,16 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           isLoading: false,
           isDisabled: false,
           isOnlyLoading: false,
-          isActive: value.first,
           onClick: () => {
             setValue((prevState) => ({ ...prevState, first: !prevState.first }))
           },
         },
         {
-          $styles:{
+          $styles: {
             $justifyContent: 'space-between',
           },
           children: 'Second',
-          icon: 'ChevronLeft',
+          icon: 'Delete',
           width: 'auto',
           type: 'button',
           genre: 'product',
@@ -56,7 +55,6 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           isLoading: false,
           isDisabled: false,
           isOnlyLoading: false,
-          isActive: value.second,
           onClick: () => {
             setValue((prevState) => ({
               ...prevState,
@@ -65,11 +63,11 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           },
         },
         {
-          $styles:{
+          $styles: {
             $justifyContent: 'space-between',
           },
           children: 'Third',
-          icon: 'Coffee',
+          icon: 'Image',
           width: 'auto',
           type: 'button',
           genre: 'gray',
@@ -77,7 +75,6 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           isLoading: false,
           isDisabled: false,
           isOnlyLoading: false,
-          isActive: value.third,
           onClick: () => {
             setValue((prevState) => ({ ...prevState, third: !prevState.third }))
           },
