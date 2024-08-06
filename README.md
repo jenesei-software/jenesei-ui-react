@@ -63,6 +63,7 @@ declare module '@jenesei-software/jenesei-ui-react' {
 To work correctly you need to install the following dependencies:
 
 ```bash
+npm install react-ripple-click --save
 npm install @emotion/styled --save
 npm install @tanstack/react-virtual --save
 npm install @types/js-cookie --save
