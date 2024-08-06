@@ -22,6 +22,8 @@ export interface TJeneseiThemeGenre {
   product: TJeneseiThemeGenreType
   productBorder: TJeneseiThemeGenreType
   white: TJeneseiThemeGenreType
+  greenTransparent: TJeneseiThemeGenreType
+  redTransparent: TJeneseiThemeGenreType
 }
 
 export interface IJeneseiThemeSize {
@@ -86,11 +88,13 @@ export type JeneseiThemeVariablesKeys =
   | 'graySarah'
   | 'greenGoogle'
   | 'green100'
+  | 'green25'
   | 'green10'
   | 'whiteStandard'
   | 'yellowGoogle'
   | 'redGoogle'
   | 'red100'
+  | 'red25'
   | 'red10'
   | 'blueGoogle'
   | 'blueRest'

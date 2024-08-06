@@ -17,6 +17,7 @@ export const AccordionSummary = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  user-select: none;
 `
 export const AccordionSummaryContent = styled.div<AccordionSummaryContentProps>`
   width: 100%;

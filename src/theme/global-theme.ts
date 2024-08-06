@@ -23,11 +23,13 @@ export const JeneseiThemeVariables: Record<JeneseiThemeVariablesKeys, string> =
     graySarah: '#737373',
     greenGoogle: '#34a853',
     green100: '#34a853',
+    green25: 'rgba(52 168 83 / 0.25)',
     green10: 'rgba(52 168 83 / 0.1)',
     whiteStandard: '#ffffff',
     yellowGoogle: '#fbbc04',
     redGoogle: '#ea4335',
     red100: '#ff4141',
+    red25: 'rgba(255 65 65 / 0.25)',
     red10: 'rgba(255 65 65 / 0.1)',
     blueGoogle: '#4285f4',
     blueRest: '#4195d2',
@@ -141,6 +143,36 @@ const DefaultJeneseiThemeGenre = {
     border: {
       rest: JeneseiThemeVariables.black100,
       hover: JeneseiThemeVariables.black60,
+    },
+  },
+  greenTransparent: {
+    background: {
+      rest: JeneseiThemeVariables.green10,
+      hover: JeneseiThemeVariables.green25,
+    },
+    color: {
+      rest: JeneseiThemeVariables.green100,
+      hover: JeneseiThemeVariables.green100,
+      placeholder: JeneseiThemeVariables.green100,
+    },
+    border: {
+      rest: JeneseiThemeVariables.transparent,
+      hover: JeneseiThemeVariables.transparent,
+    },
+  },
+  redTransparent: {
+    background: {
+      rest: JeneseiThemeVariables.red10,
+      hover: JeneseiThemeVariables.red25,
+    },
+    color: {
+      rest: JeneseiThemeVariables.red100,
+      hover: JeneseiThemeVariables.red100,
+      placeholder: JeneseiThemeVariables.red100,
+    },
+    border: {
+      rest: JeneseiThemeVariables.transparent,
+      hover: JeneseiThemeVariables.transparent,
     },
   },
 }

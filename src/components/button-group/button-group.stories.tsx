@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { useState } from 'react'
 import 'styled-components'
 
 import { ButtonGroup, ButtonGroupProps } from '.'
@@ -14,12 +13,6 @@ export default meta
 type Story = StoryObj<typeof ButtonGroup>
 
 const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
-  const [, setValue] = useState({
-    first: false,
-    second: false,
-    third: true,
-  })
-
   return (
     <ButtonGroup
       {...props}
@@ -33,34 +26,8 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           iconPosition: 'left',
           width: 'auto',
           type: 'button',
-          genre: 'gray',
+          genre: 'black',
           size: 'medium',
-          isLoading: false,
-          isDisabled: false,
-          isOnlyLoading: false,
-          onClick: () => {
-            setValue((prevState) => ({ ...prevState, first: !prevState.first }))
-          },
-        },
-        {
-          $styles: {
-            $justifyContent: 'space-between',
-          },
-          children: 'Second',
-          icon: 'Delete',
-          width: 'auto',
-          type: 'button',
-          genre: 'product',
-          size: 'medium',
-          isLoading: false,
-          isDisabled: false,
-          isOnlyLoading: false,
-          onClick: () => {
-            setValue((prevState) => ({
-              ...prevState,
-              second: !prevState.second,
-            }))
-          },
         },
         {
           $styles: {
@@ -72,12 +39,85 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           type: 'button',
           genre: 'gray',
           size: 'medium',
-          isLoading: false,
-          isDisabled: false,
-          isOnlyLoading: false,
-          onClick: () => {
-            setValue((prevState) => ({ ...prevState, third: !prevState.third }))
+        },
+        {
+          $styles: {
+            $justifyContent: 'space-between',
           },
+          children: 'Second',
+          icon: 'Delete',
+          width: 'auto',
+          type: 'button',
+          genre: 'blackBorder',
+          size: 'medium',
+        },
+
+        {
+          $styles: {
+            $justifyContent: 'space-between',
+          },
+          children: 'Third',
+          icon: 'Image',
+          width: 'auto',
+          type: 'button',
+          genre: 'greenTransparent',
+          size: 'medium',
+        },
+        {
+          $styles: {
+            $justifyContent: 'space-between',
+          },
+          children: 'Third',
+          icon: 'Image',
+          width: 'auto',
+          type: 'button',
+          genre: 'grayBorder',
+          size: 'medium',
+        },
+        {
+          $styles: {
+            $justifyContent: 'space-between',
+          },
+          children: 'Third',
+          icon: 'Image',
+          width: 'auto',
+          type: 'button',
+          genre: 'product',
+          size: 'medium',
+        },
+
+        {
+          $styles: {
+            $justifyContent: 'space-between',
+          },
+          children: 'Third',
+          icon: 'Image',
+          width: 'auto',
+          type: 'button',
+          genre: 'white',
+          size: 'medium',
+        },
+        {
+          $styles: {
+            $justifyContent: 'space-between',
+          },
+          children: 'Third',
+          icon: 'Image',
+          width: 'auto',
+          type: 'button',
+          genre: 'productBorder',
+          size: 'medium',
+        },
+        {
+          $styles: {
+            $justifyContent: 'space-between',
+          },
+          children: 'Third',
+          icon: 'Image',
+          width: 'auto',
+          type: 'button',
+          genre: 'redTransparent',
+          size: 'medium',
         },
       ]}
     />
