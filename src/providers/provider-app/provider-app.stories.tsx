@@ -116,7 +116,7 @@ const defaultChildren = (
 export const Default: Story = {
   render: (args) => <ProviderApp {...args} />,
   args: {
-    defaultBgColor: 'grayFocus',
+    defaultBgColor: 'black40',
     isScrollOutlet: false,
     notification: {
       component: defaultNotification,
@@ -160,7 +160,7 @@ export const Default: Story = {
 export const AsideDifferentTop: Story = {
   render: (args) => <ProviderApp {...args} />,
   args: {
-    defaultBgColor: 'grayFocus',
+    defaultBgColor: 'black40',
     isScrollOutlet: true,
     header: {
       component: defaultHeader,
@@ -200,7 +200,7 @@ export const AsideDifferentTop: Story = {
 export const WithoutAsides: Story = {
   render: (args) => <ProviderApp {...args} />,
   args: {
-    defaultBgColor: 'grayFocus',
+    defaultBgColor: 'black50',
     isScrollOutlet: false,
     header: {
       component: defaultHeader,
