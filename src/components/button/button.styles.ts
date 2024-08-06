@@ -44,7 +44,7 @@ const ButtonGenre = css<StyledButtonProps>`
 /****************************************** Disabled *************************************************/
 const ButtonDisabled = css<StyledButtonProps>`
   ${(props) =>
-    props.$isDisabled || props.$isHidden
+    props.$isHidden
       ? css`
           opacity: 0.5;
           background: ${props.theme.colors.button[props.$genre].background

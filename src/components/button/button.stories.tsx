@@ -22,7 +22,11 @@ export const Default: Story = {
     isLoading: false,
     isDisabled: false,
     isOnlyLoading: false,
-    isRadius:false
+    isRadius:false,
+    isHidden:false,
+    isFullSize:false,
+    isHiddenBorder:false,
+    isPlaystationEffect:false
   },
 }
 

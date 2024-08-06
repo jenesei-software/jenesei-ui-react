@@ -28,7 +28,7 @@ export const Button: FC<ButtonProps> = memo((props) => {
       $customFontFamily={props.customFontFamily}
       $customFontSize={props.customFontSize}
       $customFontWeight={props.customFontWeight}
-      $isHiddenBorder={props.isHiddenBorder}
+      $isHiddenBorder={props.isHiddenBorder || props.isPlaystationEffect}
       disabled={props.isDisabled}
       type={props.type}
       className={props.className}
