@@ -44,9 +44,9 @@ const DefaultJeneseiThemeGenre = {
       hover: JeneseiThemeVariables.whiteStandard,
     },
     color: {
-      rest: JeneseiThemeVariables.black100,
+      rest: JeneseiThemeVariables.black80,
       hover: JeneseiThemeVariables.black60,
-      placeholder: JeneseiThemeVariables.black100,
+      placeholder: JeneseiThemeVariables.black80,
     },
     border: {
       rest: JeneseiThemeVariables.transparent,
