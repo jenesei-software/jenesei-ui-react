@@ -7,111 +7,176 @@ import {
 
 export const JeneseiThemeVariables: Record<JeneseiThemeVariablesKeys, string> =
   {
-    white: '#fff',
-    black: '#000',
-    black01: '#0000001A',
     transparent: 'transparent',
-    danger: 'red',
-    focus: '#1565C01A',
-    productRest: '#4195D2FF',
-    productHover: '#3585bfFF',
-    productActive: '#1769A5FF',
-    productFocus: '#4195D2FF',
-    grayRest: '#f6f8fa',
-    grayHover: '#f3f4f6',
-    grayActive: '#ebecf0',
-    grayFocus: '#f6f8fa',
+    black100: '#000000;',
+    black80: 'rgba(0 0 0 / 0.8)',
+    black60: 'rgba(0 0 0 / 0.6)',
+    black50: 'rgba(0 0 0 / 0.5)',
+    black40: 'rgba(0 0 0 / 0.4)',
+    black10: 'rgba(0 0 0 / 0.1)',
+    black05: 'rgba(0 0 0 / 0.05)',
+    grayJanice: '#f2f2f7',
+    grayKaren: '#e5e5ea',
+    grayMonica: '#c7c7cc',
+    graySandra: '#d1d1d6',
+    grayPatricia: '#484848',
+    graySarah: '#737373',
+    greenGoogle: '#34a853',
+    green100: '#34a853',
+    green25: 'rgba(52 168 83 / 0.25)',
+    green10: 'rgba(52 168 83 / 0.1)',
+    whiteStandard: '#ffffff',
+    yellowGoogle: '#fbbc04',
+    redGoogle: '#ea4335',
+    red100: '#ff4141',
+    red25: 'rgba(255 65 65 / 0.25)',
+    red10: 'rgba(255 65 65 / 0.1)',
+    blueGoogle: '#4285f4',
+    blueRest: '#4195d2',
+    blueActive: 'rgba(65 149 210 / 0.1)',
+    blueHover: 'rgba(23 105 165 / 0.8)',
+    blueFocus: '#1769a5',
+    blueBr: '#0975a6',
   }
 
 const DefaultJeneseiThemeGenre = {
-  product: {
+  white: {
     background: {
-      rest: JeneseiThemeVariables.productRest,
-      hover: JeneseiThemeVariables.productHover,
-      active: JeneseiThemeVariables.productActive,
-      focus: JeneseiThemeVariables.productFocus,
+      rest: JeneseiThemeVariables.whiteStandard,
+      hover: JeneseiThemeVariables.whiteStandard,
     },
     color: {
-      rest: JeneseiThemeVariables.white,
-      hover: JeneseiThemeVariables.white,
-      active: JeneseiThemeVariables.white,
-      focus: JeneseiThemeVariables.white,
-      placeholder: JeneseiThemeVariables.white,
+      rest: JeneseiThemeVariables.black80,
+      hover: JeneseiThemeVariables.black60,
+      placeholder: JeneseiThemeVariables.black80,
     },
     border: {
       rest: JeneseiThemeVariables.transparent,
       hover: JeneseiThemeVariables.transparent,
-      active: JeneseiThemeVariables.transparent,
-      focus: JeneseiThemeVariables.white,
+    },
+  },
+  product: {
+    background: {
+      rest: JeneseiThemeVariables.blueRest,
+      hover: JeneseiThemeVariables.blueHover,
+    },
+    color: {
+      rest: JeneseiThemeVariables.whiteStandard,
+      hover: JeneseiThemeVariables.whiteStandard,
+      placeholder: JeneseiThemeVariables.whiteStandard,
+    },
+    border: {
+      rest: JeneseiThemeVariables.transparent,
+      hover: JeneseiThemeVariables.transparent,
+    },
+  },
+  productBorder: {
+    background: {
+      rest: JeneseiThemeVariables.whiteStandard,
+      hover: JeneseiThemeVariables.whiteStandard,
+    },
+    color: {
+      rest: JeneseiThemeVariables.blueRest,
+      hover: JeneseiThemeVariables.blueHover,
+      placeholder: JeneseiThemeVariables.blueRest,
+    },
+    border: {
+      rest: JeneseiThemeVariables.blueRest,
+      hover: JeneseiThemeVariables.blueHover,
     },
   },
   gray: {
     background: {
-      rest: JeneseiThemeVariables.grayRest,
-      hover: JeneseiThemeVariables.grayHover,
-      active: JeneseiThemeVariables.grayActive,
-      focus: JeneseiThemeVariables.grayFocus,
+      rest: JeneseiThemeVariables.black10,
+      hover: JeneseiThemeVariables.graySandra,
     },
     color: {
-      rest: JeneseiThemeVariables.black,
-      hover: JeneseiThemeVariables.black,
-      active: JeneseiThemeVariables.black,
-      focus: JeneseiThemeVariables.black,
-      placeholder: JeneseiThemeVariables.grayActive,
+      rest: JeneseiThemeVariables.black60,
+      hover: JeneseiThemeVariables.black60,
+      placeholder: JeneseiThemeVariables.black80,
     },
     border: {
-      rest: JeneseiThemeVariables.black01,
-      hover: JeneseiThemeVariables.black01,
-      active: JeneseiThemeVariables.black01,
-      focus: JeneseiThemeVariables.black01,
+      rest: JeneseiThemeVariables.transparent,
+      hover: JeneseiThemeVariables.transparent,
+    },
+  },
+  grayBorder: {
+    background: {
+      rest: JeneseiThemeVariables.whiteStandard,
+      hover: JeneseiThemeVariables.whiteStandard,
+    },
+    color: {
+      rest: JeneseiThemeVariables.black60,
+      hover: JeneseiThemeVariables.black60,
+      placeholder: JeneseiThemeVariables.black80,
+    },
+    border: {
+      rest: JeneseiThemeVariables.black10,
+      hover: JeneseiThemeVariables.graySandra,
+    },
+  },
+  black: {
+    background: {
+      rest: JeneseiThemeVariables.black100,
+      hover: JeneseiThemeVariables.black60,
+    },
+    color: {
+      rest: JeneseiThemeVariables.whiteStandard,
+      hover: JeneseiThemeVariables.whiteStandard,
+      placeholder: JeneseiThemeVariables.whiteStandard,
+    },
+    border: {
+      rest: JeneseiThemeVariables.transparent,
+      hover: JeneseiThemeVariables.transparent,
+    },
+  },
+  blackBorder: {
+    background: {
+      rest: JeneseiThemeVariables.whiteStandard,
+      hover: JeneseiThemeVariables.whiteStandard,
+    },
+    color: {
+      rest: JeneseiThemeVariables.black100,
+      hover: JeneseiThemeVariables.black60,
+      placeholder: JeneseiThemeVariables.black100,
+    },
+    border: {
+      rest: JeneseiThemeVariables.black100,
+      hover: JeneseiThemeVariables.black60,
+    },
+  },
+  greenTransparent: {
+    background: {
+      rest: JeneseiThemeVariables.green10,
+      hover: JeneseiThemeVariables.green25,
+    },
+    color: {
+      rest: JeneseiThemeVariables.green100,
+      hover: JeneseiThemeVariables.green100,
+      placeholder: JeneseiThemeVariables.green100,
+    },
+    border: {
+      rest: JeneseiThemeVariables.transparent,
+      hover: JeneseiThemeVariables.transparent,
+    },
+  },
+  redTransparent: {
+    background: {
+      rest: JeneseiThemeVariables.red10,
+      hover: JeneseiThemeVariables.red25,
+    },
+    color: {
+      rest: JeneseiThemeVariables.red100,
+      hover: JeneseiThemeVariables.red100,
+      placeholder: JeneseiThemeVariables.red100,
+    },
+    border: {
+      rest: JeneseiThemeVariables.transparent,
+      hover: JeneseiThemeVariables.transparent,
     },
   },
 }
 
-const DefaultJeneseiThemeGenreToggle = {
-  product: {
-    background: {
-      rest: JeneseiThemeVariables.productRest,
-      hover: JeneseiThemeVariables.productHover,
-      active: JeneseiThemeVariables.productActive,
-      focus: JeneseiThemeVariables.productFocus,
-    },
-    color: {
-      rest: JeneseiThemeVariables.white,
-      hover: JeneseiThemeVariables.white,
-      active: JeneseiThemeVariables.white,
-      focus: JeneseiThemeVariables.white,
-      placeholder: JeneseiThemeVariables.white,
-    },
-    border: {
-      rest: JeneseiThemeVariables.transparent,
-      hover: JeneseiThemeVariables.transparent,
-      active: JeneseiThemeVariables.transparent,
-      focus: JeneseiThemeVariables.white,
-    },
-  },
-  gray: {
-    background: {
-      rest: JeneseiThemeVariables.grayFocus,
-      hover: JeneseiThemeVariables.grayHover,
-      active: JeneseiThemeVariables.grayActive,
-      focus: JeneseiThemeVariables.grayFocus,
-    },
-    color: {
-      rest: JeneseiThemeVariables.white,
-      hover: JeneseiThemeVariables.white,
-      active: JeneseiThemeVariables.black,
-      focus: JeneseiThemeVariables.white,
-      placeholder: JeneseiThemeVariables.grayActive,
-    },
-    border: {
-      rest: JeneseiThemeVariables.black01,
-      hover: JeneseiThemeVariables.black01,
-      active: JeneseiThemeVariables.black01,
-      focus: JeneseiThemeVariables.black01,
-    },
-  },
-}
 export const JeneseiTheme: IJeneseiTheme = {
   transition: '0.3s ease',
   transitionDuration: '0.3s',
@@ -122,12 +187,18 @@ export const JeneseiTheme: IJeneseiTheme = {
     other: true,
   },
   fontFamily: 'Inter',
+  effects: {
+    button: {
+      playstation:
+        '0px 0px 4px 0px rgba(0, 0, 0, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+    },
+  },
   colors: {
-    white: JeneseiThemeVariables.white,
-    focus: JeneseiThemeVariables.focus,
-    danger: JeneseiThemeVariables.danger,
+    white: JeneseiThemeVariables.whiteStandard,
+    focus: JeneseiThemeVariables.black60,
+    danger: JeneseiThemeVariables.redGoogle,
     button: DefaultJeneseiThemeGenre,
-    toggle: DefaultJeneseiThemeGenreToggle,
+    toggle: DefaultJeneseiThemeGenre,
     checkbox: DefaultJeneseiThemeGenre,
     input: DefaultJeneseiThemeGenre,
   },
@@ -135,38 +206,38 @@ export const JeneseiTheme: IJeneseiTheme = {
 
 export const KEY_SIZE_DATA: Record<TJeneseiThemeSize, IJeneseiThemeSize> = {
   large: {
-    height: 56,
-    heightIcon: 18,
-    radius: 16,
-    padding: 18,
-    font: 18,
+    height: 46,
+    heightIcon: 20,
+    radius: 6,
+    padding: 16,
+    font: 20,
   },
   largeMedium: {
-    height: 49,
-    heightIcon: 16,
-    radius: 14,
-    padding: 16,
-    font: 16,
+    height: 42,
+    heightIcon: 18,
+    radius: 6,
+    padding: 14,
+    font: 18,
   },
   medium: {
-    height: 42,
-    heightIcon: 14,
-    radius: 12,
+    height: 38,
+    heightIcon: 16,
+    radius: 6,
     padding: 12,
-    font: 14,
+    font: 16,
   },
   mediumSmall: {
-    height: 35,
-    heightIcon: 12,
-    radius: 10,
+    height: 34,
+    heightIcon: 14,
+    radius: 6,
     padding: 10,
-    font: 12,
+    font: 14,
   },
   small: {
-    height: 28,
-    heightIcon: 10,
+    height: 30,
+    heightIcon: 12,
     radius: 8,
-    padding: 6,
-    font: 10,
+    padding: 8,
+    font: 12,
   },
 }

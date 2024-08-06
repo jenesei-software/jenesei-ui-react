@@ -22,7 +22,11 @@ export const Default: Story = {
     isLoading: false,
     isDisabled: false,
     isOnlyLoading: false,
-    isActive: false,
+    isRadius:false,
+    isHidden:false,
+    isFullSize:false,
+    isHiddenBorder:false,
+    isPlaystationEffect:false
   },
 }
 
@@ -30,12 +34,12 @@ export const Icon: Story = {
   args: {
     width: 'asHeight',
     type: 'button',
-    icon: 'WiFi',
+    icon: 'Graph',
     genre: 'gray',
     size: 'medium',
     isLoading: false,
     isDisabled: false,
     isOnlyLoading: false,
-    isActive: false,
+    isRadius:false
   },
 }

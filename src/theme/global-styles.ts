@@ -5,14 +5,14 @@ export const JeneseiGlobalStyles = createGlobalStyle`
   ${reset};
   
   .sb-show-main.sb-main-padded {
-    padding:0;
+    /* padding:0; */
   }
 
   :root {
-    --font-family:  ${(props) => props.theme.fontFamily}, Roboto, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    --font-family:  ${(props) => props.theme.fontFamily}, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     --font-weight: 400;
     --font-size: 16px;
-    --font-line-height: 1.125;
+    --font-line-height: 1;
     --scrollbar-width: 24px;
     --scrollbar-background: #f3f5f7;
     --scrollbar-thumb-background: #b7cbd7;
@@ -26,11 +26,16 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     --heading-6-font-size: 1rem; 
 
     --heading-1-line-height: 1;
-    --heading-2-line-height: 1.067 ;
-    --heading-3-line-height: 1.083 ;
-    --heading-4-line-height: 1.1 ;
-    --heading-5-line-height: 1.111;
-    --heading-6-line-height: 1.125 ;
+    --heading-2-line-height: 1;
+    --heading-3-line-height: 1;
+    --heading-4-line-height: 1;
+    --heading-5-line-height: 1;
+    --heading-6-line-height: 1;
+
+    --Ripple-custom-opacity: 0.2;
+	  --Ripple-custom-duration: 0.6s;
+	  --Ripple-custom-timing-function: ease-in;
+	  --Ripple-custom-color: currentColor;
   }
 
   * {

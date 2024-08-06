@@ -21,8 +21,6 @@ export interface InputProps {
 
   isLoading?: boolean
 
-  isActive?: boolean
-
   isReadOnly?: boolean
 
   isRequired?: boolean
@@ -74,8 +72,6 @@ export interface StyledInputProps {
   $isError?: InputProps['isError']
 
   $isLoading?: InputProps['isLoading']
-
-  $isActive?: InputProps['isActive']
 
   $postfixChildren?: InputChildrenProps
 

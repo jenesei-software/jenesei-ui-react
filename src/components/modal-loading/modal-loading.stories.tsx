@@ -13,7 +13,8 @@ type Story = StoryObj<typeof ModalLoading>
 
 export const Default: Story = {
   args: {
+    type:'cubes',
     size: 'large',
-    color: '#4195D2FF',
+    colorKey: 'productRest',
   },
 }

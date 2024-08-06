@@ -17,7 +17,6 @@ const defaultArgs: Partial<CheckboxesProps<ICheckboxValue>> = {
   checkBoxView: 'circle',
   checkboxWidth: '100%',
   checkboxIsHiddenBorder: false,
-  checkboxIsActive: false,
   multiple: true,
   size: 'medium',
   labelField: 'label',

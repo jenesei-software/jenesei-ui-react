@@ -26,7 +26,6 @@ export const Input = memo((props: InputProps) => {
       )}
       {props.format ? (
         <StyledInputFormat
-          $isActive={props.isActive}
           $isError={props.isError}
           $isLoading={props.isLoading}
           $postfixChildren={props?.postfixChildren}
@@ -50,7 +49,6 @@ export const Input = memo((props: InputProps) => {
         />
       ) : (
         <StyledInput
-          $isActive={props.isActive}
           $isError={props.isError}
           $isLoading={props.isLoading}
           $postfixChildren={props?.postfixChildren}

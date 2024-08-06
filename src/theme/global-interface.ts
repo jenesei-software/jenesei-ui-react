@@ -2,27 +2,28 @@ export interface TJeneseiThemeGenreType {
   background: {
     rest: string
     hover: string
-    focus: string
-    active: string
   }
   border: {
     rest: string
     hover: string
-    focus: string
-    active: string
   }
   color: {
     rest: string
     hover: string
-    focus: string
-    active: string
     placeholder: string
   }
 }
 
 export interface TJeneseiThemeGenre {
-  product: TJeneseiThemeGenreType
   gray: TJeneseiThemeGenreType
+  grayBorder: TJeneseiThemeGenreType
+  black: TJeneseiThemeGenreType
+  blackBorder: TJeneseiThemeGenreType
+  product: TJeneseiThemeGenreType
+  productBorder: TJeneseiThemeGenreType
+  white: TJeneseiThemeGenreType
+  greenTransparent: TJeneseiThemeGenreType
+  redTransparent: TJeneseiThemeGenreType
 }
 
 export interface IJeneseiThemeSize {
@@ -54,6 +55,11 @@ export interface IJeneseiTheme {
   transition: string
   screens: IJeneseiThemeScreens
   fontFamily: TJeneseiFontFamily
+  effects: {
+    button: {
+      playstation: string
+    }
+  }
   colors: {
     focus: string
     white: string
@@ -66,17 +72,33 @@ export interface IJeneseiTheme {
 }
 
 export type JeneseiThemeVariablesKeys =
-  | 'black'
   | 'transparent'
-  | 'white'
-  | 'black01'
-  | 'danger'
-  | 'focus'
-  | 'productRest'
-  | 'productHover'
-  | 'productActive'
-  | 'productFocus'
-  | 'grayRest'
-  | 'grayHover'
-  | 'grayActive'
-  | 'grayFocus'
+  | 'black100'
+  | 'black80'
+  | 'black60'
+  | 'black50'
+  | 'black40'
+  | 'black10'
+  | 'black05'
+  | 'grayJanice'
+  | 'grayKaren'
+  | 'grayMonica'
+  | 'graySandra'
+  | 'grayPatricia'
+  | 'graySarah'
+  | 'greenGoogle'
+  | 'green100'
+  | 'green25'
+  | 'green10'
+  | 'whiteStandard'
+  | 'yellowGoogle'
+  | 'redGoogle'
+  | 'red100'
+  | 'red25'
+  | 'red10'
+  | 'blueGoogle'
+  | 'blueRest'
+  | 'blueActive'
+  | 'blueHover'
+  | 'blueFocus'
+  | 'blueBr'

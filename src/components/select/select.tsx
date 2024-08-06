@@ -296,7 +296,6 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
       onBlur={handleOnBlur}
     >
       <SelectStyledInput
-        $isActive={props.inputProps.isActive}
         $isError={props.inputProps.isError}
         $isLoading={props.inputProps.isLoading}
         $postfixChildren={props.inputProps?.postfixChildren}
@@ -343,7 +342,6 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
                 onClick={() => handleOptionOnClick(item)}
                 $isSelectedItem={checked}
                 $isCheckboxProps={!!props.checkboxProps}
-                $isActive={props.optionProps.isActive}
                 $isError={props.optionProps.isError}
                 $isLoading={props.optionProps.isLoading}
                 $isCustomIcon={props.optionProps.isCustomIcon}
@@ -381,7 +379,6 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
                   <Button
                     isFullSize
                     genre={props.genre}
-                    isActive={isAll}
                     onClick={handleSelectAllOnClick}
                     size={'medium'}
                     isHiddenBorder

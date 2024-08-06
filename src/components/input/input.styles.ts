@@ -53,15 +53,15 @@ export const InputIsErrorBorder = css<StyledInputProps>`
 
 /****************************************** Placeholder *************************************************/
 export const InputPlaceholder = css<StyledInputProps>`
-  ::placeholder,
-  ::-webkit-input-placeholder {
+  &::placeholder,
+  &::-webkit-input-placeholder {
     ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
     color: ${(props) =>
       props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
     line-height: 24px;
   }
-  :-ms-input-placeholder {
+  &:-ms-input-placeholder {
     ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
     color: ${(props) =>
       props.theme.colors.input[props.$genre].color.placeholder};
@@ -82,23 +82,36 @@ const InputGenre = css<StyledInputProps>`
     & path {
       ${!props.$isCustomIcon &&
       css`
-        stroke: ${props.theme.colors.input[props.$genre].color.rest};
+        fill: ${props.theme.colors.input[props.$genre].color.rest};
       `}
     }
 
     &:focus-visible {
-      outline: 2px solid ${props.theme.colors.focus};
-      border-color: ${props.theme.colors.input[props.$genre].border.focus};
-      background: ${props.theme.colors.input[props.$genre].background.focus};
+      border-color: ${props.theme.colors.input[props.$genre].border.rest};
+      background: ${props.theme.colors.input[props.$genre].background.rest};
 
-      color: ${props.theme.colors.input[props.$genre].color.focus};
+      color: ${props.theme.colors.input[props.$genre].color.rest};
       & span {
-        color: ${props.theme.colors.input[props.$genre].color.focus};
+        color: ${props.theme.colors.input[props.$genre].color.rest};
       }
       & path {
         ${!props.$isCustomIcon &&
         css`
-          stroke: ${props.theme.colors.input[props.$genre].color.focus};
+          fill: ${props.theme.colors.input[props.$genre].color.rest};
+        `}
+      }
+    }
+    &:active {
+      background: ${props.theme.colors.input[props.$genre].background.rest};
+      border-color: ${props.theme.colors.input[props.$genre].border.rest};
+      color: ${props.theme.colors.input[props.$genre].color.rest};
+      & span {
+        color: ${props.theme.colors.input[props.$genre].color.rest};
+      }
+      & path {
+        ${!props.$isCustomIcon &&
+        css`
+          fill: ${props.theme.colors.input[props.$genre].color.rest};
         `}
       }
     }
@@ -112,39 +125,10 @@ const InputGenre = css<StyledInputProps>`
       & path {
         ${!props.$isCustomIcon &&
         css`
-          stroke: ${props.theme.colors.input[props.$genre].color.hover};
+          fill: ${props.theme.colors.input[props.$genre].color.rest};
         `}
       }
     }
-    &:active {
-      background: ${props.theme.colors.input[props.$genre].background.active};
-      border-color: ${props.theme.colors.input[props.$genre].border.active};
-      color: ${props.theme.colors.input[props.$genre].color.active};
-      & span {
-        color: ${props.theme.colors.input[props.$genre].color.active};
-      }
-      & path {
-        ${!props.$isCustomIcon &&
-        css`
-          stroke: ${props.theme.colors.input[props.$genre].color.active};
-        `}
-      }
-    }
-    ${props.$isActive &&
-    css`
-      background: ${props.theme.colors.input[props.$genre].background.active};
-      border-color: ${props.theme.colors.input[props.$genre].border.active};
-      color: ${props.theme.colors.input[props.$genre].color.active};
-      & span {
-        color: ${props.theme.colors.input[props.$genre].color.active};
-      }
-      & path {
-        ${!props.$isCustomIcon &&
-        css`
-          stroke: ${props.theme.colors.input[props.$genre].color.active};
-        `}
-      }
-    `}
   `};
 `
 

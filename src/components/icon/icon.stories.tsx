@@ -14,8 +14,8 @@ type Story = StoryObj<typeof Icon>
 
 export const Default: Story = {
   args: {
-    color: 'black',
-    icon: 'Coffee',
+    color: 'black100',
+    icon: 'Activity',
     size: 'large'
   },
 }

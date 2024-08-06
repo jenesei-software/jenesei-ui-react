@@ -1,4 +1,4 @@
-import { TLibraryIconNameString } from '@assets/library-icon'
+import { TLibraryIconCurvedNameString } from '@assets/library-icon-curved'
 
 import { FlexStylesProps } from '@components/flex'
 
@@ -17,7 +17,7 @@ export interface ButtonProps {
 
   size: TJeneseiThemeSize
 
-  icon?: TLibraryIconNameString
+  icon?: TLibraryIconCurvedNameString
 
   iconPosition?: TButtonIconPosition
 
@@ -27,13 +27,15 @@ export interface ButtonProps {
 
   isOnlyLoading?: boolean
 
+  isRadius?:boolean
+
   isLoading?: boolean
 
   loadingPosition?: TButtonIconPosition
 
-  isActive?: boolean
-
   isHiddenBorder?: boolean
+
+  isPlaystationEffect?:boolean
 
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 
@@ -62,10 +64,12 @@ export interface StyledButtonProps extends FlexStylesProps {
 
   $isHidden?: ButtonProps['isHidden']
 
-  $isActive?: ButtonProps['isActive']
+  $isRadius?: ButtonProps['isRadius']
 
   $isHiddenBorder?: ButtonProps['isHiddenBorder']
-
+  
+  $isPlaystationEffect?:ButtonProps['isPlaystationEffect']
+  
   $width?: ButtonProps['width']
 
   $size: ButtonProps['size']
