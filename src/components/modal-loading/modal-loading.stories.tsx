@@ -15,6 +15,6 @@ export const Default: Story = {
   args: {
     type:'cubes',
     size: 'large',
-    colorKey: 'productRest',
+    colorKey: 'blueRest',
   },
 }
