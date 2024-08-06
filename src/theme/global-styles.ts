@@ -51,7 +51,7 @@ export const JeneseiGlobalStyles = createGlobalStyle`
   }
 
   body {
-    overflow: hidden;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-synthesis: none;
