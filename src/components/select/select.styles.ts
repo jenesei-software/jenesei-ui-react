@@ -79,9 +79,6 @@ export const DropdownOption = styled.li<SelectStyledOptionProps>`
   opacity: 1;
   border: 0px;
   cursor: pointer;
-  background-color: ${(props) =>
-    props.$isSelectedItem &&
-    props.theme.colors.input[props.$genre]?.background.active};
   padding-left: ${(props) => props.$isCheckboxProps && `0px`};
 `
 
@@ -95,10 +92,6 @@ export const DropdownFooter = styled.li<SelectStyledFooterProps>`
   cursor: pointer;
   position: sticky;
   bottom: 0;
-  &:active {
-    background: ${(props) =>
-      props.theme.colors.input[props.$genre].background.rest};
-  }
   padding: 0px;
   flex-shrink: 0;
   margin-top: auto;

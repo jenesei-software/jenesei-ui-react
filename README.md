@@ -28,6 +28,8 @@ import {
   JeneseiTheme,
 } from '@jenesei-software/jenesei-ui-react'
 
+import 'react-ripple-click/dist/index.css'
+
 function App() {
   return (
     ...

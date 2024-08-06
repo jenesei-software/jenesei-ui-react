@@ -29,21 +29,18 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
               size={props.size}
               $size={props.size}
               $genre={props.genre}
-              $isActive={props.isActive}
             />
           ) : props.view == 'circle' ? (
             <StyledCheckedIconCircle
               size={props.size}
               $size={props.size}
               $genre={props.genre}
-              $isActive={props.isActive}
             />
           ) : (
             <StyledCheckedIconCircle
               size={props.size}
               $size={props.size}
               $genre={props.genre}
-              $isActive={props.isActive}
             />
           )}
         </>
@@ -54,21 +51,18 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
               size={props.size}
               $size={props.size}
               $genre={props.genre}
-              $isActive={props.isActive}
             />
           ) : props.view == 'circle' ? (
             <StyledIconCircle
               size={props.size}
               $size={props.size}
               $genre={props.genre}
-              $isActive={props.isActive}
             />
           ) : (
             <StyledIconCircle
               size={props.size}
               $size={props.size}
               $genre={props.genre}
-              $isActive={props.isActive}
             />
           )}
         </>
@@ -85,7 +79,6 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
       $size={props.size}
       $isDisabled={props.isDisabled}
       $isHiddenBorder={props.isHiddenBorder}
-      $isActive={props.isActive}
       $isNotBackground={props.isNotBackground}
       $customFontFamily={props.customFontFamily}
       $customFontSize={props.customFontSize}
@@ -109,11 +102,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
           {props.isLoading && (
             <ModalLoading
               size={props.size}
-              color={
-                props.isActive
-                  ? theme.colors.checkbox[props.genre].color.active
-                  : theme.colors.checkbox[props.genre].color.rest
-              }
+              color={theme.colors.checkbox[props.genre].color.rest}
             />
           )}
         </>

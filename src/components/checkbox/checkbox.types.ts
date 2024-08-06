@@ -23,8 +23,6 @@ export interface CheckboxProps {
 
   isNotBackground?: boolean
 
-  isActive?: boolean
-
   onChange?: (checked: boolean) => void
 
   width?: string
@@ -51,9 +49,7 @@ export interface StyledCheckboxProps {
 
   $isDisabled?: CheckboxProps['isDisabled']
 
-  $isActive?: CheckboxProps['isActive']
-
-  $isNotBackground?: CheckboxProps['isActive']
+  $isNotBackground?: CheckboxProps['isNotBackground']
 
   $isHiddenBorder?: CheckboxProps['isHiddenBorder']
 

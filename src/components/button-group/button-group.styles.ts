@@ -48,6 +48,11 @@ const ButtonGroupWrapperPositionVertical = css`
 `
 
 export const ButtonGroupWrapper = styled.div<StyledButtonGroupProps>`
+  & #jenesei-button {
+    &:focus-visible {
+      z-index: 1;
+    }
+  }
   ${(props) =>
     props.$position === 'horizontal'
       ? ButtonGroupWrapperPositionHorizontal

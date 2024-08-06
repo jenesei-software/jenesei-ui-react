@@ -17,7 +17,6 @@ const defaultArgs: Partial<InputProps> = {
   size: 'medium',
   isError: false,
   isDisabled: false,
-  isActive: undefined,
   isRequired: false,
   isReadOnly: false,
   isLoading: false,

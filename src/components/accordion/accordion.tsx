@@ -40,7 +40,7 @@ export const Accordion = (props: AccordionProps) => {
               $expanded={props.expanded}
               onClick={onClickIcon}
               icon="ArrowDown"
-              color="black"
+              color="black100"
               size="large"
             />
           )}

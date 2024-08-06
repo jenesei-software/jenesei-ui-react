@@ -1,11 +1,11 @@
 import {
-  LibraryIconItemProps,
-  TLibraryIconNameString,
-} from '@assets/library-icon'
+  LibraryIconCurvedItemProps,
+  TLibraryIconCurvedNameString,
+} from '@assets/library-icon-curved'
 
 import { JeneseiThemeVariablesKeys } from '@theme/index'
 
-export interface IconProps extends LibraryIconItemProps {
-  icon: TLibraryIconNameString
+export interface IconProps extends LibraryIconCurvedItemProps {
+  icon: TLibraryIconCurvedNameString
   color: JeneseiThemeVariablesKeys
 }

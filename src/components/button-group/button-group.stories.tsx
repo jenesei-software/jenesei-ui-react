@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { useState } from 'react'
 import 'styled-components'
 
 import { ButtonGroup, ButtonGroupProps } from '.'
@@ -14,73 +13,111 @@ export default meta
 type Story = StoryObj<typeof ButtonGroup>
 
 const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
-  const [value, setValue] = useState({
-    first: false,
-    second: false,
-    third: true,
-  })
-
   return (
     <ButtonGroup
       {...props}
       value={[
         {
-          $styles:{
+          $styles: {
             $justifyContent: 'flex-start',
           },
           children: 'First',
-          icon: 'Copy',
+          icon: 'AddUser',
           iconPosition: 'left',
+          width: 'auto',
+          type: 'button',
+          genre: 'black',
+          size: 'medium',
+        },
+        {
+          $styles: {
+            $justifyContent: 'space-between',
+          },
+          children: 'Third',
+          icon: 'Image',
           width: 'auto',
           type: 'button',
           genre: 'gray',
           size: 'medium',
-          isLoading: false,
-          isDisabled: false,
-          isOnlyLoading: false,
-          isActive: value.first,
-          onClick: () => {
-            setValue((prevState) => ({ ...prevState, first: !prevState.first }))
-          },
         },
         {
-          $styles:{
+          $styles: {
             $justifyContent: 'space-between',
           },
           children: 'Second',
-          icon: 'ChevronLeft',
+          icon: 'Delete',
+          width: 'auto',
+          type: 'button',
+          genre: 'blackBorder',
+          size: 'medium',
+        },
+
+        {
+          $styles: {
+            $justifyContent: 'space-between',
+          },
+          children: 'Third',
+          icon: 'Image',
+          width: 'auto',
+          type: 'button',
+          genre: 'greenTransparent',
+          size: 'medium',
+        },
+        {
+          $styles: {
+            $justifyContent: 'space-between',
+          },
+          children: 'Third',
+          icon: 'Image',
+          width: 'auto',
+          type: 'button',
+          genre: 'grayBorder',
+          size: 'medium',
+        },
+        {
+          $styles: {
+            $justifyContent: 'space-between',
+          },
+          children: 'Third',
+          icon: 'Image',
           width: 'auto',
           type: 'button',
           genre: 'product',
           size: 'medium',
-          isLoading: false,
-          isDisabled: false,
-          isOnlyLoading: false,
-          isActive: value.second,
-          onClick: () => {
-            setValue((prevState) => ({
-              ...prevState,
-              second: !prevState.second,
-            }))
-          },
         },
+
         {
-          $styles:{
+          $styles: {
             $justifyContent: 'space-between',
           },
           children: 'Third',
-          icon: 'Coffee',
+          icon: 'Image',
           width: 'auto',
           type: 'button',
-          genre: 'gray',
+          genre: 'white',
           size: 'medium',
-          isLoading: false,
-          isDisabled: false,
-          isOnlyLoading: false,
-          isActive: value.third,
-          onClick: () => {
-            setValue((prevState) => ({ ...prevState, third: !prevState.third }))
+        },
+        {
+          $styles: {
+            $justifyContent: 'space-between',
           },
+          children: 'Third',
+          icon: 'Image',
+          width: 'auto',
+          type: 'button',
+          genre: 'productBorder',
+          size: 'medium',
+        },
+        {
+          $styles: {
+            $justifyContent: 'space-between',
+          },
+          children: 'Third',
+          icon: 'Image',
+          width: 'auto',
+          type: 'button',
+          genre: 'redTransparent',
+          size: 'medium',
         },
       ]}
     />

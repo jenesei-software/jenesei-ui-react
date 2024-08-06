@@ -35,6 +35,5 @@ export const Default: Story = {
     isDisabled: false,
     isOnlyLoading: false,
     isHiddenBorder: false,
-    isActive: false,
   },
 }

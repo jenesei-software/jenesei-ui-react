@@ -16,8 +16,6 @@ export interface CheckboxesProps<T extends ICheckboxValue> {
 
   checkboxIsHiddenBorder?: CheckboxProps['isHiddenBorder']
 
-  checkboxIsActive?: CheckboxProps['isActive']
-
   className?: string
 
   childrenField?: keyof T
