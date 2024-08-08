@@ -84,7 +84,7 @@ jobs:
       - name: Install dependencies
         if: env.publishGH == 'true' && env.publishNPM == 'true'
         run: |
-          npm install
+          npm ci
 
       - name: Build
         if: env.publishGH == 'true' && env.publishNPM == 'true'
