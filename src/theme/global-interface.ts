@@ -14,6 +14,39 @@ export interface TJeneseiThemeGenreType {
   }
 }
 
+export interface TJeneseiThemeGenreTypeToggle {
+  track: {
+    rest: {
+      active: string
+      unActive: string
+    }
+    hover: {
+      active: string
+      unActive: string
+    }
+  }
+  thumb: {
+    rest: {
+      active: string
+      unActive: string
+    }
+    hover: {
+      active: string
+      unActive: string
+    }
+  }
+  border: {
+    rest: {
+      active: string
+      unActive: string
+    }
+    hover: {
+      active: string
+      unActive: string
+    }
+  }
+}
+
 export interface TJeneseiThemeGenre {
   gray: TJeneseiThemeGenreType
   grayBorder: TJeneseiThemeGenreType
@@ -26,12 +59,23 @@ export interface TJeneseiThemeGenre {
   redTransparent: TJeneseiThemeGenreType
 }
 
+export interface TJeneseiThemeGenreToggle {
+  product: TJeneseiThemeGenreTypeToggle
+}
+
 export interface IJeneseiThemeSize {
   height: number
   heightIcon: number
   radius: number
   padding: number
   font: number
+}
+
+export interface IJeneseiThemeSizeToggle {
+  height: number
+  width: number
+  padding: number
+  thumb: number
 }
 
 export interface IJeneseiThemeScreens {
@@ -59,13 +103,18 @@ export interface IJeneseiTheme {
     button: {
       playstation: string
     }
+    toggle: {
+      rest: string
+      hover: string
+      active: string
+    }
   }
   colors: {
     focus: string
     white: string
     danger: string
     button: TJeneseiThemeGenre
-    toggle: TJeneseiThemeGenre
+    toggle: TJeneseiThemeGenreToggle
     checkbox: TJeneseiThemeGenre
     input: TJeneseiThemeGenre
   }
