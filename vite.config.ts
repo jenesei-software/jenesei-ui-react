@@ -30,6 +30,9 @@ export default defineConfig({
     dts({
       include: ['src/'],
       exclude: ['src/theme/styled.d.ts'],
+      rollupTypes: true,
+      insertTypesEntry: true,
+      tsConfigFilePath: './tsconfig.json',
     }),
   ],
   publicDir: false,
@@ -54,6 +57,7 @@ export default defineConfig({
       output: {
         globals: {
           'styled-components': 'styled',
+          'react-ripple-click': 'reactRippleClick',
           'styled-reset': 'reset',
           react: 'React',
           'react-loading': 'ReactLoading',

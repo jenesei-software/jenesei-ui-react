@@ -30,7 +30,6 @@ export const Default: Story = {
   args: {
     genre: 'product',
     isDisabled: false,
-    isError: false,
     value: true,
     size: 'small',
   },
