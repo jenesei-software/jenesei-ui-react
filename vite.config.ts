@@ -30,6 +30,7 @@ export default defineConfig({
     dts({
       include: ['src/'],
       exclude: ['src/theme/styled.d.ts'],
+      outputDir: 'dist',
       rollupTypes: true,
       insertTypesEntry: true,
       tsConfigFilePath: './tsconfig.json',
