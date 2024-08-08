@@ -1,6 +1,7 @@
 import {
   IJeneseiTheme,
   IJeneseiThemeSize,
+  IJeneseiThemeSizeToggle,
   JeneseiThemeVariablesKeys,
   TJeneseiThemeSize,
 } from '.'
@@ -177,6 +178,40 @@ const DefaultJeneseiThemeGenre = {
   },
 }
 
+const DefaultJeneseiThemeGenreToggle = {
+  product: {
+    track: {
+      rest: {
+        active: JeneseiThemeVariables.blueRest,
+        unActive: JeneseiThemeVariables.black10,
+      },
+      hover: {
+        active: JeneseiThemeVariables.blueHover,
+        unActive: JeneseiThemeVariables.graySandra,
+      },
+    },
+    thumb: {
+      rest: {
+        active: JeneseiThemeVariables.whiteStandard,
+        unActive: JeneseiThemeVariables.whiteStandard,
+      },
+      hover: {
+        active: JeneseiThemeVariables.whiteStandard,
+        unActive: JeneseiThemeVariables.whiteStandard,
+      },
+    },
+    border: {
+      rest: {
+        active: JeneseiThemeVariables.transparent,
+        unActive: JeneseiThemeVariables.transparent,
+      },
+      hover: {
+        active: JeneseiThemeVariables.transparent,
+        unActive: JeneseiThemeVariables.transparent,
+      },
+    },
+  },
+}
 export const JeneseiTheme: IJeneseiTheme = {
   transition: '0.3s ease',
   transitionDuration: '0.3s',
@@ -188,6 +223,11 @@ export const JeneseiTheme: IJeneseiTheme = {
   },
   fontFamily: 'Inter',
   effects: {
+    toggle: {
+      active: '0 0 10px 0 rgba(0 0 0 / 0.4)',
+      hover: '0 0 2px 0 rgba(0 0 0 / 0.2)',
+      rest: ' 0 0 2px 1px rgba(0 0 0 / 0.1)',
+    },
     button: {
       playstation:
         '0px 0px 4px 0px rgba(0, 0, 0, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
@@ -198,7 +238,7 @@ export const JeneseiTheme: IJeneseiTheme = {
     focus: JeneseiThemeVariables.black60,
     danger: JeneseiThemeVariables.redGoogle,
     button: DefaultJeneseiThemeGenre,
-    toggle: DefaultJeneseiThemeGenre,
+    toggle: DefaultJeneseiThemeGenreToggle,
     checkbox: DefaultJeneseiThemeGenre,
     input: DefaultJeneseiThemeGenre,
   },
@@ -239,5 +279,41 @@ export const KEY_SIZE_DATA: Record<TJeneseiThemeSize, IJeneseiThemeSize> = {
     radius: 8,
     padding: 8,
     font: 12,
+  },
+}
+
+export const KEY_SIZE_DATA_TOGGLE: Record<
+  TJeneseiThemeSize,
+  IJeneseiThemeSizeToggle
+> = {
+  large: {
+    height: 46,
+    width: 92,
+    padding: 3,
+    thumb: 40,
+  },
+  largeMedium: {
+    height: 42,
+    width: 84,
+    padding: 2,
+    thumb: 38,
+  },
+  medium: {
+    height: 38,
+    width: 76,
+    padding: 2,
+    thumb: 34,
+  },
+  mediumSmall: {
+    height: 34,
+    width: 68,
+    padding: 2,
+    thumb: 30,
+  },
+  small: {
+    height: 30,
+    width: 60,
+    padding: 2,
+    thumb: 26,
   },
 }
