@@ -6,6 +6,8 @@ export interface ProviderAppProps {
   children: React.ReactNode
   defaultBgColor: JeneseiThemeVariablesKeys
   defaultBgImage?: string
+  defaultTitle: string
+  defaultDescription: string
   isScrollOutlet?: boolean
   notification?: {
     component: ReactElement
@@ -55,8 +57,16 @@ export interface ProviderAppProps {
 export interface AppContextProps {
   changeBgColor: (color: JeneseiThemeVariablesKeys) => void
   changeBgImage: (image: string) => void
+  changeTitle: (title: string) => void
+  changeDescription: (description: string) => void
+  setDefaultBgColor: () => void
+  setDefaultBgImage: () => void
+  setDefaultTitle: () => void
+  setDefaultDescription: () => void
   historyBgColor: (step: number) => void
+  historyTitle: (title: number) => void
   historyBgImage: (step: number) => void
+  historyDescription: (description: number) => void
 }
 
 export interface ProviderAppWrapperProps {

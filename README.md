@@ -42,7 +42,7 @@ function App() {
 }
 ```
 
-## Customize the cookie
+## Customize the cookie and local storage
 
 ```typescript
 //cookie.d.ts
@@ -51,6 +51,9 @@ import '@jenesei-software/jenesei-ui-react'
 declare module '@jenesei-software/jenesei-ui-react' {
   export interface ValidCookieObject {
     token: string
+  }
+  export interface ValidLocalStorageObject {
+    token: number
   }
 }
 ```
@@ -63,7 +66,6 @@ declare module '@jenesei-software/jenesei-ui-react' {
 To work correctly you need to install the following dependencies:
 
 ```bash
-npm install react-ripple-click --save
 npm install @emotion/styled --save
 npm install @tanstack/react-virtual --save
 npm install @types/js-cookie --save
@@ -77,6 +79,7 @@ npm install react-i18next --save
 npm install react-loading --save
 npm install react-loading-skeleton --save
 npm install react-number-format --save
+npm install react-ripple-click --save
 npm install react-toggle --save
 npm install styled-components --save
 npm install styled-reset --save

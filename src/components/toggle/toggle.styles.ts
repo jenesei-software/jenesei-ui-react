@@ -74,6 +74,13 @@ const StyledReactToggleGenre = css<StyledToggleProps>`
     }
   }
 
+  &.react-toggle:focus-visible {
+    & .react-toggle-track {
+    }
+    & .react-toggle-thumb {
+    }
+  }
+
   & .react-toggle-thumb {
     ${(props) => css`
       background: ${props.theme.colors.toggle[props.$genre].thumb.rest
