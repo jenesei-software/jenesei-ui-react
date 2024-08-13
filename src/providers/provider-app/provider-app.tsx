@@ -232,6 +232,8 @@ export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
           content={JeneseiThemeVariables[bgColor]}
         />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+
       </Helmet>
       <ProviderAppWrapper $bgColor={bgColor} $bgImage={bgImage}>
         <ProviderAppOutlet
