@@ -118,12 +118,14 @@ export const Default: Story = {
   args: {
     defaultBgColor: 'black40',
     isScrollOutlet: false,
+    defaultTitle: 'Storybook?',
+    defaultDescription: 'Description from Storybook?',
     notification: {
       component: defaultNotification,
       height: '30px',
       heightTablet: '20px',
       heightMobile: '20px',
-      isFixed:false
+      isFixed: false,
     },
     header: {
       component: defaultHeader,

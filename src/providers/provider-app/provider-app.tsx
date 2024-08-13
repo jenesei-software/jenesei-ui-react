@@ -5,8 +5,9 @@ import {
   useEffect,
   useState,
 } from 'react'
+import { Helmet } from 'react-helmet'
 
-import { JeneseiThemeVariablesKeys } from '@theme/index'
+import { JeneseiThemeVariables, JeneseiThemeVariablesKeys } from '@theme/index'
 
 import {
   AppContextProps,
@@ -34,6 +35,7 @@ export const useAppContext = () => {
 }
 
 export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
+  /****************************************** bgColor *************************************************/
   const [bgColor, setBgColor] = useState<JeneseiThemeVariablesKeys>(
     props.defaultBgColor,
   )
@@ -41,14 +43,6 @@ export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
     JeneseiThemeVariablesKeys[]
   >([props.defaultBgColor])
   const [bgColorIndex, setBgColorIndex] = useState<number>(0)
-
-  const [bgImage, setBgImage] = useState<string | null>(
-    props.defaultBgImage || null,
-  )
-  const [bgImageHistory, setBgImageHistory] = useState<(string | null)[]>([
-    props.defaultBgImage || null,
-  ])
-  const [bgImageIndex, setBgImageIndex] = useState<number>(0)
 
   const changeBgColor: AppContextProps['changeBgColor'] = useCallback(
     (color) => {
@@ -62,6 +56,37 @@ export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
     [bgColorIndex],
   )
 
+  const historyBgColor: AppContextProps['historyBgColor'] = useCallback(
+    (steps) => {
+      const newIndex = bgColorIndex + steps
+      if (newIndex >= 0 && newIndex < bgColorHistory.length) {
+        setBgColor(bgColorHistory[newIndex])
+        setBgColorIndex(newIndex)
+      }
+    },
+    [bgColorHistory, bgColorIndex],
+  )
+
+  const setDefaultBgColor: AppContextProps['setDefaultBgColor'] =
+    useCallback(() => {
+      setBgColor(props.defaultBgColor)
+      setBgColorHistory([props.defaultBgColor])
+      setBgColorIndex(0)
+    }, [props.defaultBgColor])
+
+  useEffect(() => {
+    setBgColor(props.defaultBgColor)
+  }, [props.defaultBgColor])
+
+  /****************************************** bgImage *************************************************/
+  const [bgImage, setBgImage] = useState<string | null>(
+    props.defaultBgImage || null,
+  )
+  const [bgImageHistory, setBgImageHistory] = useState<(string | null)[]>([
+    props.defaultBgImage || null,
+  ])
+  const [bgImageIndex, setBgImageIndex] = useState<number>(0)
+
   const changeBgImage: AppContextProps['changeBgImage'] = useCallback(
     (image) => {
       setBgImage(image)
@@ -72,17 +97,6 @@ export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
       })
     },
     [bgImageIndex],
-  )
-
-  const historyBgColor: AppContextProps['historyBgColor'] = useCallback(
-    (steps) => {
-      const newIndex = bgColorIndex + steps
-      if (newIndex >= 0 && newIndex < bgColorHistory.length) {
-        setBgColor(bgColorHistory[newIndex])
-        setBgColorIndex(newIndex)
-      }
-    },
-    [bgColorHistory, bgColorIndex],
   )
 
   const historyBgImage: AppContextProps['historyBgImage'] = useCallback(
@@ -96,16 +110,129 @@ export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
     [bgImageHistory, bgImageIndex],
   )
 
-  useEffect(() => {
-    setBgColor(props.defaultBgColor)
-  }, [props.defaultBgColor])
+  const setDefaultBgImage: AppContextProps['setDefaultBgImage'] =
+    useCallback(() => {
+      setBgImage(props.defaultBgImage || null)
+      setBgImageHistory([props.defaultBgImage || null])
+      setBgImageIndex(0)
+    }, [props.defaultBgImage])
+
   useEffect(() => {
     if (props.defaultBgImage) setBgImage(props.defaultBgImage)
   }, [props.defaultBgImage])
+
+  /****************************************** title *************************************************/
+  const [title, setTitle] = useState<string | null>(props.defaultTitle || null)
+  const [titleHistory, setTitleHistory] = useState<(string | null)[]>([
+    props.defaultTitle || null,
+  ])
+  const [titleIndex, setTitleIndex] = useState<number>(0)
+
+  const changeTitle: AppContextProps['changeTitle'] = useCallback(
+    (image) => {
+      setTitle(image)
+      setTitleHistory((prev) => {
+        const newHistory = [...prev.slice(0, titleIndex + 1), image]
+        setTitleIndex(newHistory.length - 1)
+        return newHistory
+      })
+    },
+    [titleIndex],
+  )
+
+  const historyTitle: AppContextProps['historyTitle'] = useCallback(
+    (steps) => {
+      const newIndex = titleIndex + steps
+      if (newIndex >= 0 && newIndex < titleHistory.length) {
+        setTitle(titleHistory[newIndex])
+        setTitleIndex(newIndex)
+      }
+    },
+    [titleHistory, titleIndex],
+  )
+
+  const setDefaultTitle: AppContextProps['setDefaultTitle'] =
+    useCallback(() => {
+      setTitle(props.defaultTitle || null)
+      setTitleHistory([props.defaultTitle || null])
+      setTitleIndex(0)
+    }, [props.defaultTitle])
+
+  useEffect(() => {
+    if (props.defaultTitle) setTitle(props.defaultTitle)
+  }, [props.defaultTitle])
+
+  /****************************************** description *************************************************/
+  const [description, setDescription] = useState<string>(
+    props.defaultDescription,
+  )
+  const [descriptionHistory, setDescriptionHistory] = useState<string[]>([
+    props.defaultDescription,
+  ])
+  const [descriptionIndex, setDescriptionIndex] = useState<number>(0)
+
+  const changeDescription: AppContextProps['changeDescription'] = useCallback(
+    (image) => {
+      setDescription(image)
+      setDescriptionHistory((prev) => {
+        const newHistory = [...prev.slice(0, descriptionIndex + 1), image]
+        setDescriptionIndex(newHistory.length - 1)
+        return newHistory
+      })
+    },
+    [descriptionIndex],
+  )
+
+  const historyDescription: AppContextProps['historyDescription'] = useCallback(
+    (steps) => {
+      const newIndex = descriptionIndex + steps
+      if (newIndex >= 0 && newIndex < descriptionHistory.length) {
+        setDescription(descriptionHistory[newIndex])
+        setDescriptionIndex(newIndex)
+      }
+    },
+    [descriptionHistory, descriptionIndex],
+  )
+
+  const setDefaultDescription: AppContextProps['setDefaultDescription'] =
+    useCallback(() => {
+      setDescription(props.defaultDescription)
+      setDescriptionHistory([props.defaultDescription])
+      setDescriptionIndex(0)
+    }, [props.defaultDescription])
+
+  useEffect(() => {
+    if (props.defaultDescription) setDescription(props.defaultDescription)
+  }, [props.defaultDescription])
+
+  /****************************************** return *************************************************/
   return (
     <AppContext.Provider
-      value={{ changeBgColor, changeBgImage, historyBgColor, historyBgImage }}
+      value={{
+        changeBgColor,
+        changeBgImage,
+        changeTitle,
+        changeDescription,
+        historyBgColor,
+        historyBgImage,
+        historyTitle,
+        historyDescription,
+        setDefaultBgColor,
+        setDefaultBgImage,
+        setDefaultTitle,
+        setDefaultDescription,
+      }}
     >
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="theme-color" content={JeneseiThemeVariables[bgColor]} />
+        <meta
+          name="msapplication-navbutton-color"
+          content={JeneseiThemeVariables[bgColor]}
+        />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      </Helmet>
       <ProviderAppWrapper $bgColor={bgColor} $bgImage={bgImage}>
         <ProviderAppOutlet
           $isScrollOutlet={props.isScrollOutlet}
