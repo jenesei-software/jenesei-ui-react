@@ -42,7 +42,7 @@ function App() {
 }
 ```
 
-## Customize the cookie
+## Customize the cookie and local storage
 
 ```typescript
 //cookie.d.ts
@@ -51,6 +51,9 @@ import '@jenesei-software/jenesei-ui-react'
 declare module '@jenesei-software/jenesei-ui-react' {
   export interface ValidCookieObject {
     token: string
+  }
+  export interface ValidLocalStorageObject {
+    token: number
   }
 }
 ```
