@@ -1,9 +1,8 @@
 import {
   createContext,
   useCallback,
-  useContext,
   useEffect,
-  useState,
+  useState
 } from 'react'
 import { Helmet } from 'react-helmet'
 
@@ -23,16 +22,7 @@ import {
   ProviderAppWrapper,
 } from '.'
 
-const AppContext = createContext<AppContextProps | null>(null)
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const useAppContext = () => {
-  const context = useContext(AppContext)
-  if (!context) {
-    throw new Error('useToast must be used within an ProviderToast')
-  }
-  return context
-}
+export const AppContext = createContext<AppContextProps | null>(null)
 
 export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
   /****************************************** bgColor *************************************************/
@@ -77,6 +67,49 @@ export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
   useEffect(() => {
     setBgColor(props.defaultBgColor)
   }, [props.defaultBgColor])
+
+  /****************************************** StatusBarColor *************************************************/
+  const [statusBarColor, setStatusBarColor] = useState<JeneseiThemeVariablesKeys>(
+    props.defaultStatusBarColor,
+  )
+  const [statusBarColorHistory, setStatusBarColorHistory] = useState<
+    JeneseiThemeVariablesKeys[]
+  >([props.defaultStatusBarColor])
+  const [statusBarColorIndex, setStatusBarColorIndex] = useState<number>(0)
+
+  const changeStatusBarColor: AppContextProps['changeStatusBarColor'] = useCallback(
+    (color) => {
+      setStatusBarColor(color)
+      setStatusBarColorHistory((prev) => {
+        const newHistory = [...prev.slice(0, statusBarColorIndex + 1), color]
+        setStatusBarColorIndex(newHistory.length - 1)
+        return newHistory
+      })
+    },
+    [statusBarColorIndex],
+  )
+
+  const historyStatusBarColor: AppContextProps['historyStatusBarColor'] = useCallback(
+    (steps) => {
+      const newIndex = statusBarColorIndex + steps
+      if (newIndex >= 0 && newIndex < statusBarColorHistory.length) {
+        setStatusBarColor(statusBarColorHistory[newIndex])
+        setStatusBarColorIndex(newIndex)
+      }
+    },
+    [statusBarColorHistory, statusBarColorIndex],
+  )
+
+  const setDefaultStatusBarColor: AppContextProps['setDefaultStatusBarColor'] =
+    useCallback(() => {
+      setStatusBarColor(props.defaultStatusBarColor)
+      setStatusBarColorHistory([props.defaultStatusBarColor])
+      setStatusBarColorIndex(0)
+    }, [props.defaultStatusBarColor])
+
+  useEffect(() => {
+    setStatusBarColor(props.defaultStatusBarColor)
+  }, [props.defaultStatusBarColor])
 
   /****************************************** bgImage *************************************************/
   const [bgImage, setBgImage] = useState<string | null>(
@@ -209,14 +242,17 @@ export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
   return (
     <AppContext.Provider
       value={{
+        changeStatusBarColor,
         changeBgColor,
         changeBgImage,
         changeTitle,
         changeDescription,
+        historyStatusBarColor,
         historyBgColor,
         historyBgImage,
         historyTitle,
         historyDescription,
+        setDefaultStatusBarColor,
         setDefaultBgColor,
         setDefaultBgImage,
         setDefaultTitle,
@@ -226,11 +262,7 @@ export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
       <Helmet>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="theme-color" content={JeneseiThemeVariables[bgColor]} />
-        <meta
-          name="msapplication-navbutton-color"
-          content={JeneseiThemeVariables[bgColor]}
-        />
+        <meta name="theme-color" content={JeneseiThemeVariables[statusBarColor]} />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
 
