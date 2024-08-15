@@ -5,6 +5,7 @@ import { JeneseiThemeVariablesKeys } from '@theme/index'
 export interface ProviderAppProps {
   children: React.ReactNode
   defaultBgColor: JeneseiThemeVariablesKeys
+  defaultStatusBarColor: JeneseiThemeVariablesKeys
   defaultBgImage?: string
   defaultTitle: string
   defaultDescription: string
@@ -55,18 +56,21 @@ export interface ProviderAppProps {
 }
 
 export interface AppContextProps {
+  changeStatusBarColor: (color: JeneseiThemeVariablesKeys) => void
   changeBgColor: (color: JeneseiThemeVariablesKeys) => void
   changeBgImage: (image: string) => void
   changeTitle: (title: string) => void
   changeDescription: (description: string) => void
+  setDefaultStatusBarColor: () => void
   setDefaultBgColor: () => void
   setDefaultBgImage: () => void
   setDefaultTitle: () => void
   setDefaultDescription: () => void
+  historyStatusBarColor: (step: number) => void
   historyBgColor: (step: number) => void
-  historyTitle: (title: number) => void
+  historyTitle: (step: number) => void
   historyBgImage: (step: number) => void
-  historyDescription: (description: number) => void
+  historyDescription: (step: number) => void
 }
 
 export interface ProviderAppWrapperProps {
