@@ -65,6 +65,7 @@
     "@storybook/addon-onboarding": "^8.0.6",
     "@storybook/addon-themes": "^8.0.6",
     "@storybook/blocks": "^8.0.6",
+    "@storybook/eslint-config-storybook": "^4.0.0",
     "@storybook/react": "^8.0.6",
     "@storybook/react-vite": "^8.0.6",
     "@storybook/test": "^8.0.6",

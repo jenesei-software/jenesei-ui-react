@@ -1,6 +1,6 @@
 import { FlexShortStylesProps } from '@components/flex'
 
-import { TJeneseiThemeSize } from '@theme/index'
+import { TJeneseiThemeSize } from '@theme/index' 
 
 export type LibraryIconCurvedProps = {
   [icon in TLibraryIconCurvedNameString]: (props: LibraryIconCurvedItemProps) => JSX.Element

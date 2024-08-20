@@ -6,7 +6,7 @@ import {
   TJeneseiFontFamily,
   TJeneseiThemeGenre,
   TJeneseiThemeSize,
-} from '@theme/index'
+} from '@theme/index' 
 
 export interface ButtonProps {
   className?: string

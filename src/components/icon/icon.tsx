@@ -2,7 +2,7 @@ import { FC, memo } from 'react'
 
 import { LibraryIconCurved } from '@assets/library-icon-curved'
 
-import { JeneseiThemeVariables } from '@theme/index'
+import { JeneseiThemeVariables } from '@theme/index' 
 
 import { IconProps } from '.'
 

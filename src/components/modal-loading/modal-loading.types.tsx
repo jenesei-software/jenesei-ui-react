@@ -1,6 +1,6 @@
 import { LoadingType } from 'react-loading'
 
-import { JeneseiThemeVariablesKeys, TJeneseiThemeSize } from '@theme/index'
+import { JeneseiThemeVariablesKeys, TJeneseiThemeSize } from '@theme/index' 
 
 export interface ModalLoadingProps {
   type?: LoadingType

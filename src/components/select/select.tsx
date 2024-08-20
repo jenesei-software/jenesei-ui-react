@@ -6,7 +6,7 @@ import { useTheme } from 'styled-components'
 import { Button } from '@components/button'
 import { Checkbox } from '@components/checkbox'
 
-import { KEY_SIZE_DATA } from '@theme/index'
+import { KEY_SIZE_DATA } from '@theme/index' 
 
 import {
   DropdownErase,

@@ -15,7 +15,9 @@
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
-  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports"
+  ],
   "printWidth": 80,
   "semi": false,
   "singleQuote": true,
