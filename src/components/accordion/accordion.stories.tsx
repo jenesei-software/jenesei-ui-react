@@ -62,114 +62,123 @@ const AccordionWrapper: React.FC<AccordionProps> = (props) => {
     <Accordion
       {...props}
       expanded={expanded}
+      triggerUpdate={[expanded, expandedTwo, expandedThree]}
       onClickSummary={onClickSummary}
       onClickIcon={onClickIcon}
       accordionDetails={
-        <Stack $gap="10px" $flexDirection="column" $pt="6px">
-          <Accordion
-            accordionSummary={
-              <Button
-                $styles={{
-                  $justifyContent: 'flex-start',
-                }}
-                genre={'productBorder'}
-                size={'medium'}
-                width="100%"
-              >
-                Show more
-              </Button>
-            }
-            accordionDetails={
-              <Stack $gap="10px" $flexDirection="column" $pt="6px">
+        <Stack gap="10px" flexDirection="column" pt="6px">
+          <>
+            <Accordion
+              accordionSummary={
                 <Button
-                  $styles={{
-                    $justifyContent: 'flex-start',
+                  customStyles={{
+                    justifyContent: 'space-between',
                   }}
-                  genre={'gray'}
+                  iconTurn={expandedTwo ? 180 : 0}
+                  genre={'productBorder'}
+                  size={'medium'}
+                  width="100%"
+                  icon="ArrowDown2"
+                >
+                  Show more
+                </Button>
+              }
+              accordionDetails={
+                <Stack gap="10px" flexDirection="column" pt="6px">
+                  <>
+                    <Button
+                      customStyles={{
+                        justifyContent: 'flex-start',
+                      }}
+                      genre={'gray'}
+                      size={'medium'}
+                      width="100%"
+                    >
+                      First
+                    </Button>
+                    <Button
+                      customStyles={{
+                        justifyContent: 'flex-start',
+                      }}
+                      genre={'black'}
+                      size={'medium'}
+                      width="100%"
+                    >
+                      Second
+                    </Button>
+                    <Button
+                      customStyles={{
+                        justifyContent: 'flex-start',
+                      }}
+                      genre={'greenTransparent'}
+                      size={'medium'}
+                      width="100%"
+                    >
+                      Third
+                    </Button>
+                  </>
+                </Stack>
+              }
+              expanded={expandedTwo}
+              onClickSummary={onClickSummaryTwo}
+              onClickIcon={onClickIconTwo}
+              wrapperProps={{ p: '0px', w: '100%' }}
+            />
+            <Accordion
+              accordionSummary={
+                <Button
+                  customStyles={{
+                    justifyContent: 'flex-start',
+                  }}
+                  genre={'grayBorder'}
                   size={'medium'}
                   width="100%"
                 >
-                  First
+                  Show more more
                 </Button>
-                <Button
-                  $styles={{
-                    $justifyContent: 'flex-start',
-                  }}
-                  genre={'black'}
-                  size={'medium'}
-                  width="100%"
-                >
-                  Second
-                </Button>
-                <Button
-                  $styles={{
-                    $justifyContent: 'flex-start',
-                  }}
-                  genre={'greenTransparent'}
-                  size={'medium'}
-                  width="100%"
-                >
-                  Third
-                </Button>
-              </Stack>
-            }
-            expanded={expandedTwo}
-            onClickSummary={onClickSummaryTwo}
-            onClickIcon={onClickIconTwo}
-            wrapperProps={{ $p: '0px', $w: '100%' }}
-          />
-          <Accordion
-            accordionSummary={
-              <Button
-                $styles={{
-                  $justifyContent: 'flex-start',
-                }}
-                genre={'grayBorder'}
-                size={'medium'}
-                width="100%"
-              >
-                Show more more
-              </Button>
-            }
-            accordionDetails={
-              <Stack $gap="10px" $flexDirection="column" $pt="6px">
-                <Button
-                  $styles={{
-                    $justifyContent: 'flex-start',
-                  }}
-                  genre={'gray'}
-                  size={'medium'}
-                  width="100%"
-                >
-                  First
-                </Button>
-                <Button
-                  $styles={{
-                    $justifyContent: 'flex-start',
-                  }}
-                  genre={'black'}
-                  size={'medium'}
-                  width="100%"
-                >
-                  Second
-                </Button>
-                <Button
-                  $styles={{
-                    $justifyContent: 'flex-start',
-                  }}
-                  genre={'greenTransparent'}
-                  size={'medium'}
-                  width="100%"
-                >
-                  Third
-                </Button>
-              </Stack>
-            }
-            expanded={expandedThree}
-            onClickSummary={onClickSummaryThree}
-            onClickIcon={onClickIconThree}
-            wrapperProps={{ $p: '0px', $w: '100%' }}
-          />
+              }
+              accordionDetails={
+                <Stack gap="10px" flexDirection="column" pt="6px">
+                  <>
+                    <Button
+                      customStyles={{
+                        justifyContent: 'flex-start',
+                      }}
+                      genre={'gray'}
+                      size={'medium'}
+                      width="100%"
+                    >
+                      First
+                    </Button>
+                    <Button
+                      customStyles={{
+                        justifyContent: 'flex-start',
+                      }}
+                      genre={'black'}
+                      size={'medium'}
+                      width="100%"
+                    >
+                      Second
+                    </Button>
+                    <Button
+                      customStyles={{
+                        justifyContent: 'flex-start',
+                      }}
+                      genre={'greenTransparent'}
+                      size={'medium'}
+                      width="100%"
+                    >
+                      Third
+                    </Button>
+                  </>
+                </Stack>
+              }
+              expanded={expandedThree}
+              onClickSummary={onClickSummaryThree}
+              onClickIcon={onClickIconThree}
+              wrapperProps={{ p: '0px', w: '100%' }}
+            />
+          </>
         </Stack>
       }
     />
@@ -181,13 +190,13 @@ export const Default: Story = {
   args: {
     isAccordionIcon: true,
     accordionSummary: (
-      <Stack $p="10px" $w="200px" style={{ cursor: 'pointer' }}>
+      <Stack p="10px" w="200px" style={{ cursor: 'pointer' }}>
         <TitleH4>Show</TitleH4>
       </Stack>
     ),
     wrapperProps: {
-      $p: '10px',
-      $w: '200px',
+      p: '10px',
+      w: '200px',
     },
   },
 }

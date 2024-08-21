@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react'
 import styled, { css } from 'styled-components'
 
 import {
@@ -9,11 +10,21 @@ import {
 export type FontProps = {
   $size: number
   $color?: JeneseiThemeVariablesKeys
-  $textAlign?: 'center'
-  $textWrap?: 'nowrap'
+  $textAlign?: CSSProperties['textAlign']
+  $textWrap?: CSSProperties['textWrap']
   $height?: number
   $weight: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
   $family: TJeneseiFontFamily
+}
+
+export type FontNormalizedProps = {
+  size: number
+  color?: JeneseiThemeVariablesKeys
+  textAlign?: CSSProperties['textAlign']
+  textWrap?: CSSProperties['textWrap']
+  height?: number
+  weight: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+  family: TJeneseiFontFamily
 }
 
 export type PartialFontProps = Partial<FontProps>

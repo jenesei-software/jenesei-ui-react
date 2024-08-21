@@ -8,4 +8,9 @@ export interface ModalLoadingProps {
   color?: string
   size: TJeneseiThemeSize
   className?: string
+  order?:number
+}
+
+export interface StyledReactLoadingProps {
+  $order?:ModalLoadingProps['order']
 }

@@ -22,11 +22,15 @@ export const Default: Story = {
     isLoading: false,
     isDisabled: false,
     isOnlyLoading: false,
-    isRadius:false,
-    isHidden:false,
-    isFullSize:false,
-    isHiddenBorder:false,
-    isPlaystationEffect:false
+    isRadius: false,
+    isHidden: false,
+    isFullSize: false,
+    isHiddenBorder: false,
+    isPlaystationEffect: false,
+    customStyles: {
+      justifyContent: 'space-between',
+    },
+    isIconGroup: true,
   },
 }
 
@@ -40,6 +44,6 @@ export const Icon: Story = {
     isLoading: false,
     isDisabled: false,
     isOnlyLoading: false,
-    isRadius:false
+    isRadius: false,
   },
 }

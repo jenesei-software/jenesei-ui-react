@@ -13,10 +13,14 @@ export interface LibraryIconCurvedItemProps {
   color?: string
   id?: string
   styles?: FlexShortStylesProps
+  turn?:number
+  order?:number
 }
 
 export interface StyledLibraryIconCurvedItemProps extends FlexShortStylesProps {
   $size: LibraryIconCurvedItemProps['size']
+  $turn?:LibraryIconCurvedItemProps['turn']
+  $order?:LibraryIconCurvedItemProps['order']
 }
 
 export enum LibraryIconCurvedName {

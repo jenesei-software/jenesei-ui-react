@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react'
+import React, { useCallback } from 'react'
 
 import { Stack } from '@components/flex'
 
@@ -11,12 +11,10 @@ import {
   AccordionWrapper,
 } from '.'
 
-export const Accordion = (props: AccordionProps) => {
-  const accordionDetailsRef = useRef<HTMLDivElement>(null)
-
+export const Accordion: React.FC<AccordionProps> = (props) => {
   const onClickSummary = useCallback(() => {
     if (props.onClickSummary) props.onClickSummary()
-  }, [props])
+  }, [props.onClickSummary])
 
   const onClickIcon = useCallback(
     (event: React.MouseEvent<SVGSVGElement>) => {
@@ -25,7 +23,7 @@ export const Accordion = (props: AccordionProps) => {
         props.onClickIcon()
       }
     },
-    [props],
+    [props.onClickIcon],
   )
 
   return (
@@ -45,7 +43,7 @@ export const Accordion = (props: AccordionProps) => {
             />
           )}
         </AccordionSummary>
-        <AccordionDetails $expanded={props.expanded} ref={accordionDetailsRef}>
+        <AccordionDetails $expanded={props.expanded}>
           {props.accordionDetails}
         </AccordionDetails>
       </AccordionWrapper>

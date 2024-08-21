@@ -47,7 +47,7 @@ interface IOption extends ISelectItem {}
 
 const SelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
   const [option] = useState<IOption[]>([
-    { label: 'Partnership', value: 0 },
+    { label: 'Partnership Partnership Partnership Partnership Partnership Partnership Partnership', value: 0 },
     { label: 'Service request', value: 1 },
     { label: 'Career', value: 2 },
     { label: 'Other', value: 3 },

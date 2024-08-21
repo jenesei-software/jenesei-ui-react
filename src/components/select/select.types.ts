@@ -45,7 +45,11 @@ export interface SelectProps<T extends ISelectItem> {
   }
 }
 
-export interface SelectWrapperProps extends StyledInputWrapperProps {}
+export interface SelectWrapperProps extends StyledInputWrapperProps {
+  $parentListHeight: number
+  $radius: number
+  $genre: SelectStyledInputProps['$genre']
+}
 
 export interface SelectStyledInputProps extends StyledInputProps {}
 

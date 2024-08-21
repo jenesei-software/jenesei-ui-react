@@ -62,7 +62,10 @@ export interface TJeneseiThemeGenre {
 export interface TJeneseiThemeGenreToggle {
   product: TJeneseiThemeGenreTypeToggle
 }
-
+export interface TJeneseiThemeGenreInput {
+  gray: TJeneseiThemeGenreType
+  grayBorder: TJeneseiThemeGenreType
+}
 export interface IJeneseiThemeSize {
   height: number
   heightIcon: number
@@ -91,7 +94,7 @@ export type TJeneseiThemeSize =
   | 'mediumSmall'
   | 'small'
 
-export type TJeneseiFontFamily = 'Inter'
+export type TJeneseiFontFamily = 'Inter' | 'Roboto'
 
 export interface IJeneseiTheme {
   transitionDuration: string
@@ -116,7 +119,7 @@ export interface IJeneseiTheme {
     button: TJeneseiThemeGenre
     toggle: TJeneseiThemeGenreToggle
     checkbox: TJeneseiThemeGenre
-    input: TJeneseiThemeGenre
+    input: TJeneseiThemeGenreInput
   }
 }
 

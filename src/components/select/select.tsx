@@ -6,7 +6,7 @@ import { useTheme } from 'styled-components'
 import { Button } from '@components/button'
 import { Checkbox } from '@components/checkbox'
 
-import { KEY_SIZE_DATA } from '@theme/index' 
+import { KEY_SIZE_DATA } from '@theme/index'
 
 import {
   DropdownErase,
@@ -190,7 +190,6 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
         gsap.to(parentListRef.current, {
           height: `${height}px`,
           display: 'flex',
-          outline: `2px solid ${theme.colors.focus}`,
           duration: 0.1,
           onComplete: () => {
             handleListOptionOpenEffect()
@@ -213,7 +212,6 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
     setIsAnimating(true)
 
     gsap.to(parentListRef.current, {
-      outline: 'none',
       duration: 0.2,
       onComplete: () => {
         handleListOptionCloseEffect()
@@ -291,7 +289,10 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
   return (
     <SelectWrapper
       tabIndex={0}
+      $genre={props.genre}
+      $radius={radius}
       $width={props.width ?? props.inputProps.width}
+      $parentListHeight={height}
       onFocus={handleOnFocus}
       onBlur={handleOnBlur}
     >

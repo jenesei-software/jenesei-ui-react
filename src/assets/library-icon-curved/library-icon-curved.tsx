@@ -9,6 +9,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -36,6 +38,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -57,6 +61,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -94,6 +100,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -135,6 +143,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -162,6 +172,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -201,6 +213,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -228,6 +242,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -255,6 +271,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -294,6 +312,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -321,6 +341,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -358,6 +380,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -397,6 +421,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -432,6 +458,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -477,6 +505,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -514,6 +544,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -551,6 +583,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -584,6 +618,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -605,6 +641,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -650,6 +688,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -697,6 +737,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -724,6 +766,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -755,6 +799,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -780,6 +826,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -801,6 +849,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -826,6 +876,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -869,6 +921,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -902,6 +956,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -985,6 +1041,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1012,6 +1070,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1053,6 +1113,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1092,6 +1154,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1149,6 +1213,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1198,6 +1264,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1241,6 +1309,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1268,6 +1338,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1307,6 +1379,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1346,6 +1420,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1385,6 +1461,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1430,6 +1508,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1463,6 +1543,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1496,6 +1578,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1535,6 +1619,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1576,6 +1662,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1603,6 +1691,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1630,6 +1720,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1665,6 +1757,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1694,6 +1788,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1715,6 +1811,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1740,6 +1838,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1769,6 +1869,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1796,6 +1898,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1823,6 +1927,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -1862,6 +1968,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2015,6 +2123,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2036,6 +2146,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2063,6 +2175,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2084,6 +2198,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2105,6 +2221,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2126,6 +2244,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2147,6 +2267,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2188,6 +2310,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2221,6 +2345,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2248,6 +2374,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2289,6 +2417,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2338,6 +2468,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2389,6 +2521,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2420,6 +2554,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2451,6 +2587,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2482,6 +2620,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2513,6 +2653,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2540,6 +2682,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2575,6 +2719,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2596,6 +2742,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2617,6 +2765,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2638,6 +2788,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2675,6 +2827,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2742,6 +2896,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2763,6 +2919,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2812,6 +2970,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2847,6 +3007,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2876,6 +3038,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2903,6 +3067,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2938,6 +3104,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2965,6 +3133,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -2994,6 +3164,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -3033,6 +3205,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -3054,6 +3228,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -3087,6 +3263,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -3128,6 +3306,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -3165,6 +3345,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -3200,6 +3382,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -3235,6 +3419,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -3272,6 +3458,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -3319,6 +3507,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -3354,6 +3544,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -3381,6 +3573,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -3416,6 +3610,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -3449,6 +3645,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}
@@ -3470,6 +3668,8 @@ export const LibraryIconCurved: LibraryIconCurvedProps = {
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         $size={props.size}
+        $turn={props.turn}
+        $order={props.order}
         {...props.styles}
         className={props.className}
         onClick={props.onClick}

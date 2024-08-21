@@ -16,6 +16,7 @@ export const ModalLoading: FC<ModalLoadingProps> = (props) => {
       }
       height={KEY_SIZE_DATA[props.size].heightIcon + 4}
       width={KEY_SIZE_DATA[props.size].heightIcon + 4}
+      $order={props.order}
     />
   )
 }

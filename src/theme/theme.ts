@@ -177,7 +177,38 @@ const DefaultJeneseiThemeGenre = {
     },
   },
 }
-
+const DefaultJeneseiThemeGenreInput = {
+  gray: {
+    background: {
+      rest: JeneseiThemeVariables.grayJanice,
+      hover: JeneseiThemeVariables.graySandra,
+    },
+    color: {
+      rest: JeneseiThemeVariables.black60,
+      hover: JeneseiThemeVariables.black60,
+      placeholder: JeneseiThemeVariables.black80,
+    },
+    border: {
+      rest: JeneseiThemeVariables.transparent,
+      hover: JeneseiThemeVariables.transparent,
+    },
+  },
+  grayBorder: {
+    background: {
+      rest: JeneseiThemeVariables.whiteStandard,
+      hover: JeneseiThemeVariables.whiteStandard,
+    },
+    color: {
+      rest: JeneseiThemeVariables.black60,
+      hover: JeneseiThemeVariables.black60,
+      placeholder: JeneseiThemeVariables.black80,
+    },
+    border: {
+      rest: JeneseiThemeVariables.black10,
+      hover: JeneseiThemeVariables.graySandra,
+    },
+  },
+}
 const DefaultJeneseiThemeGenreToggle = {
   product: {
     track: {
@@ -240,7 +271,7 @@ export const JeneseiTheme: IJeneseiTheme = {
     button: DefaultJeneseiThemeGenre,
     toggle: DefaultJeneseiThemeGenreToggle,
     checkbox: DefaultJeneseiThemeGenre,
-    input: DefaultJeneseiThemeGenre,
+    input: DefaultJeneseiThemeGenreInput,
   },
 }
 

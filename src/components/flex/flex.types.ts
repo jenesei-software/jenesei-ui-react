@@ -1,3 +1,5 @@
+import { CSSProperties, ReactElement } from 'react'
+
 import { JeneseiThemeVariablesKeys } from '@theme/index'
 
 export interface FlexContainerProps {
@@ -60,4 +62,91 @@ export interface FlexShortStylesProps extends FlexStylesProps {
   $maxH?: string
   $bg?: JeneseiThemeVariablesKeys
   $color?: JeneseiThemeVariablesKeys
+}
+
+export interface FlexShortStylesNormalizedProps {
+  children?: ReactElement
+  style?: CSSProperties
+  flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse'
+  flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse'
+  justifyContent?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly'
+  alignItems?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'baseline'
+  alignContent?:
+    | 'stretch'
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around'
+  order?: number
+  flexGrow?: number
+  flexShrink?: number
+  flexBasis?: string | number
+  alignSelf?:
+    | 'auto'
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'baseline'
+    | 'stretch'
+  gap?: string
+  m?: string
+  mt?: string
+  mr?: string
+  mb?: string
+  ml?: string
+  mx?: string
+  my?: string
+  p?: string
+  pt?: string
+  pr?: string
+  pb?: string
+  pl?: string
+  px?: string
+  py?: string
+  w?: string
+  h?: string
+  minW?: string
+  maxW?: string
+  minH?: string
+  maxH?: string
+  bg?: JeneseiThemeVariablesKeys
+  color?: JeneseiThemeVariablesKeys
+}
+
+export interface FlexStylesNormalizedProps {
+  flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse'
+  flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse'
+  justifyContent?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly'
+  alignItems?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'baseline'
+  alignContent?:
+    | 'stretch'
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around'
+  order?: number
+  flexGrow?: number
+  flexShrink?: number
+  flexBasis?: string | number
+  alignSelf?:
+    | 'auto'
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'baseline'
+    | 'stretch'
 }
