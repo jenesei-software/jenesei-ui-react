@@ -16,7 +16,12 @@ type Story = StoryObj<typeof Tooltip>
 
 const TooltipWrapper: React.FC<TooltipProps> = (props) => {
   return (
-    <Tooltip {...props} content={'Piska Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska? Piska? Piska? Piska? Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?'}>
+    <Tooltip
+      {...props}
+      content={
+        'Piska Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska? Piska? Piska? Piska? Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?'
+      }
+    >
       <Button genre={'black'} size={'medium'}>
         Piska?
       </Button>
@@ -26,5 +31,5 @@ const TooltipWrapper: React.FC<TooltipProps> = (props) => {
 
 export const Default: Story = {
   render: (args) => <TooltipWrapper {...args} />,
-  args: { placement: 'bottom' },
+  args: { placement: 'bottom' }
 }

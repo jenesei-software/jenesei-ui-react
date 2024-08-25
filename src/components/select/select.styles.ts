@@ -111,6 +111,10 @@ export const DropdownOption = styled.li<SelectStyledOptionProps>`
   border: 0px;
   cursor: pointer;
   padding-left: ${(props) => props.$isCheckboxProps && `0px`};
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 `
 
 export const DropdownFooter = styled.li<SelectStyledFooterProps>`

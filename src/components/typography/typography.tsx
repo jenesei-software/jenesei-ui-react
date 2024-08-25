@@ -67,7 +67,7 @@ export const Typography = forwardRef<
     }
   }
 
-  if ('height' in props) {
+  if ('size' in props) {
     return (
       <SpanFont
         ref={ref}

@@ -1,6 +1,7 @@
 import {
   FC,
   MouseEventHandler,
+  memo,
   useCallback,
   useMemo,
   useRef,
@@ -13,11 +14,10 @@ import { Typography } from '@components/typography'
 
 import { TooltipArrow, TooltipBox, TooltipContainer, TooltipProps } from '.'
 
-export const Tooltip: FC<TooltipProps> = (props) => {
-  const isDisabled = useMemo(() => props.isDisabled, [props.isDisabled])
-  if (isDisabled) return props.children
+export const Tooltip: FC<TooltipProps> = memo((props) => {
+  if (props.isDisabled) return props.children
   return <TooltipContent {...props} />
-}
+})
 
 export const TooltipContent: FC<TooltipProps> = (props) => {
   const theme = useTheme()
@@ -52,7 +52,7 @@ export const TooltipContent: FC<TooltipProps> = (props) => {
   )
 
   const styleTooltip = useMemo(() => {
-    if (!refTooltip.current || !refContainer.current && !visible) return {}
+    if (!refTooltip.current || (!refContainer.current && !visible)) return {}
 
     const tooltip = refTooltip.current
     const container = refContainer.current
@@ -240,7 +240,7 @@ export const TooltipContent: FC<TooltipProps> = (props) => {
       </TooltipContainer>
       {ReactDOM.createPortal(
         <>
-          <TooltipArrow $visible={visible} style={styleArrow} />,
+          <TooltipArrow $visible={visible} style={styleArrow} />
           <TooltipBox
             ref={refTooltip}
             $maxHeight={props.maxHeight}
@@ -251,7 +251,7 @@ export const TooltipContent: FC<TooltipProps> = (props) => {
             onMouseLeave={handleMouseLeave}
             style={styleTooltip}
           >
-            <Typography variant="h5">{props.content}</Typography>
+            {<Typography size={props.size ?? 14}>{props.content}</Typography>}
           </TooltipBox>
         </>,
         document.body,

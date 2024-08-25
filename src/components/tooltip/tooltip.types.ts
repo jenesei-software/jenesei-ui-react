@@ -22,6 +22,7 @@ export interface TooltipProps {
   maxWidth?: number
   maxHeight?: number
   isDisabled?: boolean
+  size?: number
 }
 
 export interface TooltipBoxProps {

@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import 'styled-components'
 
-import { Tooltip } from '@components/tooltip'
 
 import { ISelectItem, Select, SelectProps } from '.'
 
@@ -87,7 +86,7 @@ const SelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
   const handleSelectChange = (option: IOption[]) => {
     setValue(option)
   }
-  const handleQueryChange = (value: string) => {
+  const handleQueryChange = useCallback((value: string) => {
     setQuery(value)
     if (value === '') return setViewOption(option)
     const filteredOptions = option.filter((option) =>
@@ -96,7 +95,7 @@ const SelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
       ),
     )
     setViewOption(filteredOptions)
-  }
+  },[])
 
   return (
     <Select<IOption>
