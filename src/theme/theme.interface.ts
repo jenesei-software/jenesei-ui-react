@@ -112,6 +112,7 @@ export interface IJeneseiTheme {
       active: string
     }
   }
+  palette: Record<JeneseiThemeVariablesKeys, string>
   colors: {
     focus: string
     white: string

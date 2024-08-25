@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import 'styled-components'
 
+import { Tooltip } from '@components/tooltip'
+
 import { ISelectItem, Select, SelectProps } from '.'
 
 const meta: Meta<typeof Select> = {
@@ -47,8 +49,15 @@ interface IOption extends ISelectItem {}
 
 const SelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
   const [option] = useState<IOption[]>([
-    { label: 'Partnership Partnership Partnership Partnership Partnership Partnership Partnership', value: 0 },
-    { label: 'Service request', value: 1 },
+    {
+      label:
+        'Partnership Partnership Partnership Partnership Partnership Partnership Partnership',
+      value: 0,
+    },
+    {
+      label: 'Partnership Partnership Partnership Partnership Partnership Partnership Partnership, Partnership Partnership Partnership Partnership Partnership Partnership Partnership, Partnership Partnership Partnership Partnership Partnership Partnership Partnership, Partnership Partnership Partnership Partnership Partnership Partnership Partnership',
+      value: 1,
+    },
     { label: 'Career', value: 2 },
     { label: 'Other', value: 3 },
     { label: 'Partnership', value: 4 },

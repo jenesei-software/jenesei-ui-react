@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { FlexShortStyles } from '@components/flex'
+import { FlexContainerAndItemAndBasic } from '@components/flex'
 
 import { KEY_SIZE_DATA } from '@theme/index'
 
@@ -21,5 +21,5 @@ export const StyledSVG = styled.svg<StyledLibraryIconCurvedItemProps>`
   & path {
     transition: all ${(props) => props.theme.transition};
   }
-  ${FlexShortStyles};
+  ${FlexContainerAndItemAndBasic};
 `

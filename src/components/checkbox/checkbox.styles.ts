@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { LibraryCheckboxes } from '@assets/library-checkboxes'
 
-import { getFontSizeStyles } from '@fonts/index'
+import { getFontSizeStyles } from '@components/typography'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
 

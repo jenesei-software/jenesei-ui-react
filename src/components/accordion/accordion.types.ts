@@ -1,9 +1,9 @@
 import { ReactElement } from 'react'
 
-import { FlexShortStylesNormalizedProps } from '@components/flex'
+import { FlexShortStylesNormalizedPropsNormalized } from '@components/flex'
 
 export interface AccordionProps {
-  wrapperProps: FlexShortStylesNormalizedProps
+  wrapperProps: FlexShortStylesNormalizedPropsNormalized
   accordionSummary: ReactElement
   accordionDetails: ReactElement
   expanded: boolean

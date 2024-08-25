@@ -6,9 +6,10 @@ import { JeneseiThemeVariables } from '@theme/index'
 import {
   FlexContainerProps,
   FlexItemProps,
-  FlexShortStylesNormalizedProps,
-  FlexShortStylesProps,
-  FlexStylesProps,
+  FlexShortStylesNormalizedPropsNormalized,
+  FlexContainerAndItemAndBasicProps,
+  FlexContainerAndItemProps,
+  FlexBasicProps,
 } from '.'
 
 const FlexContainer = css<FlexContainerProps>`
@@ -73,7 +74,7 @@ const FlexItem = css<FlexItemProps>`
     `}
 `
 
-const FlexShort = css<FlexShortStylesProps>`
+const FlexBasic = css<FlexBasicProps>`
   ${({ $m }) =>
     $m &&
     css`
@@ -190,21 +191,21 @@ const FlexShort = css<FlexShortStylesProps>`
     `}
 `
 
-export const FlexStyles = css<FlexStylesProps>`
+export const FlexContainerAndItem = css<FlexContainerAndItemProps>`
   ${FlexContainer}
   ${FlexItem}
 `
 
-export const FlexShortStyles = css<FlexShortStylesProps>`
-  ${FlexStyles}
-  ${FlexShort}
+export const FlexContainerAndItemAndBasic = css<FlexContainerAndItemAndBasicProps>`
+  ${FlexContainerAndItem}
+  ${FlexBasic}
 `
 
-export const StyledStack = styled.div<FlexShortStylesProps>`
-  ${FlexShortStyles}
+const StyledStack = styled.div<FlexContainerAndItemAndBasicProps>`
+  ${FlexContainerAndItemAndBasic}
 `
 
-export const Stack: React.FC<FlexShortStylesNormalizedProps> = (props) => {
+export const Stack: React.FC<FlexShortStylesNormalizedPropsNormalized> = (props) => {
   return (
     <StyledStack
       $flexDirection={props.flexDirection}
@@ -212,13 +213,14 @@ export const Stack: React.FC<FlexShortStylesNormalizedProps> = (props) => {
       $justifyContent={props.justifyContent}
       $alignItems={props.alignItems}
       $alignContent={props.alignContent}
+      
       $order={props.order}
       $flexGrow={props.flexGrow}
       $flexShrink={props.flexShrink}
       $flexBasis={props.flexBasis}
       $alignSelf={props.alignSelf}
-      
       $gap={props.gap}
+
       $m={props.m}
       $mt={props.mt}
       $mr={props.mr}

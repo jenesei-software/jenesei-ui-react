@@ -4,8 +4,8 @@ import 'styled-components'
 
 import { Button } from '@components/button'
 import { Stack } from '@components/flex'
+import { Typography } from '@components/typography'
 
-import { TitleH4 } from '@fonts/index'
 
 import { Accordion, AccordionProps } from '.'
 
@@ -78,7 +78,7 @@ const AccordionWrapper: React.FC<AccordionProps> = (props) => {
                   genre={'productBorder'}
                   size={'medium'}
                   width="100%"
-                  icon="ArrowDown2"
+                  iconName="Folder"
                 >
                   Show more
                 </Button>
@@ -191,7 +191,7 @@ export const Default: Story = {
     isAccordionIcon: true,
     accordionSummary: (
       <Stack p="10px" w="200px" style={{ cursor: 'pointer' }}>
-        <TitleH4>Show</TitleH4>
+        <Typography variant="h4">Show</Typography>
       </Stack>
     ),
     wrapperProps: {

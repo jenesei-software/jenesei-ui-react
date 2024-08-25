@@ -264,6 +264,7 @@ export const JeneseiTheme: IJeneseiTheme = {
         '0px 0px 4px 0px rgba(0, 0, 0, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
     },
   },
+  palette: JeneseiThemeVariables,
   colors: {
     white: JeneseiThemeVariables.whiteStandard,
     focus: JeneseiThemeVariables.black60,

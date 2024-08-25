@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { getFontSizeStyles } from '@fonts/index'
+import { getFontSizeStyles } from '@components/typography'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
 

@@ -14,8 +14,9 @@ type Story = StoryObj<typeof Icon>
 
 export const Default: Story = {
   args: {
-    color: 'black100',
-    icon: 'Activity',
-    size: 'large'
+    primaryColor: 'blueGoogle',
+    name: 'Folder',
+    size: 'large',
+    type:'curved'
   },
 }

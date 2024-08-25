@@ -100,5 +100,8 @@
     "vite-plugin-bundle-analyzer": "^0.0.1",
     "vite-plugin-dts": "^2.3.0",
     "vite-tsconfig-paths": "^4.2.0"
+  },
+  "dependencies": {
+    "uuid": "^10.0.0"
   }
 }

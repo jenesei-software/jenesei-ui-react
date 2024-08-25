@@ -1,9 +1,9 @@
 import {
   LibraryIconCurvedItemProps,
   TLibraryIconCurvedNameString,
-} from '@assets/library-icon-curved'
+} from '@assets/library-icon'
 
-import { FlexStylesNormalizedProps, FlexStylesProps } from '@components/flex'
+import { FlexContainerAndItemPropsNormalized, FlexContainerAndItemProps } from '@components/flex'
 import { ModalLoadingProps } from '@components/modal-loading'
 
 import {
@@ -21,7 +21,7 @@ export interface ButtonProps {
 
   size: TJeneseiThemeSize
 
-  icon?: TLibraryIconCurvedNameString
+  iconName?: TLibraryIconCurvedNameString
 
   iconOrder?: LibraryIconCurvedItemProps['order']
 
@@ -63,12 +63,12 @@ export interface ButtonProps {
 
   isFullSize?: boolean
 
-  customStyles?: FlexStylesNormalizedProps
+  customStyles?: FlexContainerAndItemPropsNormalized
 }
 
 export type TButtonGenre = keyof TJeneseiThemeGenre
 
-export interface StyledButtonProps extends FlexStylesProps {
+export interface StyledButtonProps extends FlexContainerAndItemProps {
   $genre: ButtonProps['genre']
 
   $isDisabled?: ButtonProps['isDisabled']

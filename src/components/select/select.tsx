@@ -1,12 +1,19 @@
-import { useVirtualizer } from '@tanstack/react-virtual'
+import { VirtualItem, useVirtualizer } from '@tanstack/react-virtual'
 import gsap from 'gsap'
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { memo, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTheme } from 'styled-components'
 
 import { Button } from '@components/button'
-import { Checkbox } from '@components/checkbox'
+import { Checkbox, CheckboxProps } from '@components/checkbox'
+import { InputProps } from '@components/input'
+import { Tooltip } from '@components/tooltip'
+import { Typography } from '@components/typography'
 
-import { KEY_SIZE_DATA } from '@theme/index'
+import {
+  KEY_SIZE_DATA,
+  TJeneseiThemeGenreInput,
+  TJeneseiThemeSize,
+} from '@theme/index'
 
 import {
   DropdownErase,
@@ -16,6 +23,7 @@ import {
   DropdownOption,
   DropdownSelectAll,
   ISelectItem,
+  SelectItemProps,
   SelectProps,
   SelectStyledInput,
   SelectWrapper,
@@ -338,35 +346,64 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
           {listVirtualizer.getVirtualItems().map((virtualRow) => {
             const item = props.option[virtualRow.index]
             const checked = isSelectedItem(item)
-            const MemoizedDropdownOption = memo(() => (
-              <DropdownOption
-                onClick={() => handleOptionOnClick(item)}
-                $isSelectedItem={checked}
-                $isCheckboxProps={!!props.checkboxProps}
-                $isError={props.optionProps.isError}
-                $isLoading={props.optionProps.isLoading}
-                $isCustomIcon={props.optionProps.isCustomIcon}
-                $postfixChildren={props.optionProps?.postfixChildren}
-                $prefixChildren={props.optionProps?.prefixChildren}
-                $genre={props.genre ?? props.optionProps.genre}
-                $size={props.size}
-                $isBold={props.optionProps.isBold}
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: `${virtualRow.size}px`,
-                  transform: `translateY(${virtualRow.start}px)`,
-                }}
-              >
-                {!!props.checkboxProps && (
-                  <Checkbox {...props.checkboxProps} checked={checked} />
-                )}
-                {item.label}
-              </DropdownOption>
-            ))
-            return <MemoizedDropdownOption key={virtualRow.index} />
+            const MemoizedDropdownOption = memo(
+              (params: {
+                optionProps: InputProps
+                genre: keyof TJeneseiThemeGenreInput
+                size: TJeneseiThemeSize
+                checkboxProps: CheckboxProps
+                item: T
+                checked: boolean
+                virtualRow: VirtualItem<Element>
+                optionItemClamp: number
+              }) => (
+                <DropdownOption
+                  onClick={() => handleOptionOnClick(params.item)}
+                  $isSelectedItem={params.checked}
+                  $isCheckboxProps={!!params.checkboxProps}
+                  $isError={params.optionProps.isError}
+                  $isLoading={params.optionProps.isLoading}
+                  $isCustomIcon={params.optionProps.isCustomIcon}
+                  $postfixChildren={params.optionProps?.postfixChildren}
+                  $prefixChildren={params.optionProps?.prefixChildren}
+                  $genre={params.genre ?? params.optionProps.genre}
+                  $size={params.size}
+                  $isBold={params.optionProps.isBold}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: `${params.virtualRow.size}px`,
+                    transform: `translateY(${params.virtualRow.start}px)`,
+                  }}
+                >
+                  {!!params.checkboxProps && (
+                    <Checkbox
+                      {...params.checkboxProps}
+                      checked={params.checked}
+                    />
+                  )}
+                  <SelectItem
+                    label={params.item.label}
+                    optionItemClamp={params.optionItemClamp}
+                  />
+                </DropdownOption>
+              ),
+            )
+            return (
+              <MemoizedDropdownOption
+                key={virtualRow.index}
+                optionProps={props.optionProps}
+                genre={props.genre}
+                size={props.size}
+                checkboxProps={props.checkboxProps}
+                item={item}
+                checked={checked}
+                virtualRow={virtualRow}
+                optionItemClamp={props.optionItemClamp}
+              />
+            )
           })}
           {isFooter && (
             <DropdownFooter
@@ -406,5 +443,42 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
         </DropdownList>
       </DropdownListParent>
     </SelectWrapper>
+  )
+}
+
+export const SelectItem = (
+  props:{label: ReactNode,optionItemClamp:number },
+) => {
+  const [isOverflowing, setIsOverflowing] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const checkOverflow = () => {
+      if (contentRef.current) {
+        setIsOverflowing(
+          contentRef.current.scrollHeight > contentRef.current.clientHeight,
+        )
+      }
+    }
+    checkOverflow()
+    window.addEventListener('resize', checkOverflow)
+    return () => window.removeEventListener('resize', checkOverflow)
+  }, [props.label])
+
+  return (
+    <Tooltip
+      isDisabled={!isOverflowing}
+      placement="bottom"
+      content={props.label}
+    >
+      <Typography
+        ref={contentRef}
+        clamp={props.optionItemClamp ?? 1}
+        clampOrient="vertical"
+        textWrap="wrap"
+      >
+        {props.label}
+      </Typography>
+    </Tooltip>
   )
 }

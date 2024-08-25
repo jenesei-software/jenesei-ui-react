@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components'
 
-import { FlexStyles } from '@components/flex'
-
-import { getFontSizeStyles } from '@fonts/index'
+import { FlexContainerAndItem } from '@components/flex'
+import { getFontSizeStyles } from '@components/typography'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
 
@@ -151,7 +150,7 @@ const ButtonFlex = css<StyledButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${FlexStyles};
+  ${FlexContainerAndItem};
 `
 /****************************************** Styled *************************************************/
 export const StyledButton = styled.button<StyledButtonProps>`

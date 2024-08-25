@@ -34,11 +34,11 @@ export const Default: Story = {
   },
 }
 
-export const Icon: Story = {
+export const iconName: Story = {
   args: {
     width: 'asHeight',
     type: 'button',
-    icon: 'Graph',
+    iconName: 'Search',
     genre: 'gray',
     size: 'medium',
     isLoading: false,

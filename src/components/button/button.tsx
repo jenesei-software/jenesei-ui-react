@@ -2,7 +2,7 @@ import { FC, memo } from 'react'
 import { Ripple } from 'react-ripple-click'
 import { useTheme } from 'styled-components'
 
-import { LibraryIconCurved } from '@assets/library-icon-curved'
+import { Icon } from '@assets/library-icon'
 
 import { ModalLoading } from '@components/modal-loading'
 
@@ -10,7 +10,6 @@ import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.'
 
 export const Button: FC<ButtonProps> = memo((props) => {
   const theme = useTheme()
-  const IconComponent = props.icon && LibraryIconCurved[props.icon]
   return (
     <StyledButton
       id="jenesei-button"
@@ -46,6 +45,7 @@ export const Button: FC<ButtonProps> = memo((props) => {
       $flexShrink={props.customStyles?.flexShrink}
       $flexBasis={props.customStyles?.flexBasis}
       $alignSelf={props.customStyles?.alignSelf}
+      $gap={props.customStyles?.gap}
     >
       {!props.isHidden && <Ripple />}
       {props.isOnlyLoading ? (
@@ -60,8 +60,10 @@ export const Button: FC<ButtonProps> = memo((props) => {
             <div style={{ order: 0, display: 'contents' }}>
               {props.children && props.children}
             </div>
-            {IconComponent && (
-              <IconComponent
+            {props.iconName && (
+              <Icon
+                name={props.iconName}
+                type="curved"
                 size={props.size}
                 turn={props.iconTurn}
                 order={props.iconOrder}
@@ -98,8 +100,10 @@ export const Button: FC<ButtonProps> = memo((props) => {
                     order={props.loadingOrder}
                   />
                 )}
-                {IconComponent && (
-                  <IconComponent
+                {props.iconName && (
+                  <Icon
+                    name={props.iconName}
+                    type="curved"
                     size={props.size}
                     turn={props.iconTurn}
                     order={props.iconOrder}
