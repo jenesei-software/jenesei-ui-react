@@ -1,6 +1,10 @@
-import { TLibraryIconCurvedNameString } from '@assets/library-icon-curved'
+import {
+  LibraryIconCurvedItemProps,
+  TLibraryIconCurvedNameString,
+} from '@assets/library-icon'
 
-import { FlexStylesProps } from '@components/flex'
+import { FlexContainerAndItemPropsNormalized, FlexContainerAndItemProps } from '@components/flex'
+import { ModalLoadingProps } from '@components/modal-loading'
 
 import {
   TJeneseiFontFamily,
@@ -17,9 +21,15 @@ export interface ButtonProps {
 
   size: TJeneseiThemeSize
 
-  icon?: TLibraryIconCurvedNameString
+  iconName?: TLibraryIconCurvedNameString
 
-  iconPosition?: TButtonIconPosition
+  iconOrder?: LibraryIconCurvedItemProps['order']
+
+  iconTurn?: LibraryIconCurvedItemProps['turn']
+
+  iconGroupOrder?: number
+
+  isIconGroup?: boolean
 
   isDisabled?: boolean
 
@@ -27,15 +37,17 @@ export interface ButtonProps {
 
   isOnlyLoading?: boolean
 
-  isRadius?:boolean
+  isOnlyLoadingWithGroup?: boolean
+
+  isRadius?: boolean
 
   isLoading?: boolean
 
-  loadingPosition?: TButtonIconPosition
+  loadingOrder?: ModalLoadingProps['order']
 
   isHiddenBorder?: boolean
 
-  isPlaystationEffect?:boolean
+  isPlaystationEffect?: boolean
 
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 
@@ -51,13 +63,12 @@ export interface ButtonProps {
 
   isFullSize?: boolean
 
-  $styles?: FlexStylesProps
+  customStyles?: FlexContainerAndItemPropsNormalized
 }
 
 export type TButtonGenre = keyof TJeneseiThemeGenre
-export type TButtonIconPosition = 'right' | 'left'
 
-export interface StyledButtonProps extends FlexStylesProps {
+export interface StyledButtonProps extends FlexContainerAndItemProps {
   $genre: ButtonProps['genre']
 
   $isDisabled?: ButtonProps['isDisabled']
@@ -67,9 +78,9 @@ export interface StyledButtonProps extends FlexStylesProps {
   $isRadius?: ButtonProps['isRadius']
 
   $isHiddenBorder?: ButtonProps['isHiddenBorder']
-  
-  $isPlaystationEffect?:ButtonProps['isPlaystationEffect']
-  
+
+  $isPlaystationEffect?: ButtonProps['isPlaystationEffect']
+
   $width?: ButtonProps['width']
 
   $size: ButtonProps['size']
@@ -81,4 +92,10 @@ export interface StyledButtonProps extends FlexStylesProps {
   $customFontWeight?: ButtonProps['customFontWeight']
 
   $isFullSize?: ButtonProps['isFullSize']
+}
+
+export interface StyledButtonIconsWrapperProps {
+  $isIconGroup?: ButtonProps['isIconGroup']
+  $size: ButtonProps['size']
+  $iconGroupOrder?: ButtonProps['iconGroupOrder']
 }

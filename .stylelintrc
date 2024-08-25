@@ -3,9 +3,7 @@
     "stylelint-config-recommended",
     "stylelint-config-styled-components"
   ],
-  "plugins": [
-    "stylelint-order"
-  ],
+  "plugins": ["stylelint-order"],
   "rules": {
     "at-rule-no-unknown": [
       true,
@@ -30,10 +28,7 @@
       }
     ],
     "color-hex-length": "long",
-    "order/order": [
-      "custom-properties",
-      "declarations"
-    ],
+    "order/order": ["custom-properties", "declarations"],
     "order/properties-alphabetical-order": true
   }
 }

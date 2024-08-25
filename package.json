@@ -65,6 +65,7 @@
     "@storybook/addon-onboarding": "^8.0.6",
     "@storybook/addon-themes": "^8.0.6",
     "@storybook/blocks": "^8.0.6",
+    "@storybook/eslint-config-storybook": "^4.0.0",
     "@storybook/react": "^8.0.6",
     "@storybook/react-vite": "^8.0.6",
     "@storybook/test": "^8.0.6",
@@ -99,5 +100,8 @@
     "vite-plugin-bundle-analyzer": "^0.0.1",
     "vite-plugin-dts": "^2.3.0",
     "vite-tsconfig-paths": "^4.2.0"
+  },
+  "dependencies": {
+    "uuid": "^10.0.0"
   }
 }

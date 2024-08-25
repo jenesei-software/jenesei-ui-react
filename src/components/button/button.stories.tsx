@@ -22,24 +22,28 @@ export const Default: Story = {
     isLoading: false,
     isDisabled: false,
     isOnlyLoading: false,
-    isRadius:false,
-    isHidden:false,
-    isFullSize:false,
-    isHiddenBorder:false,
-    isPlaystationEffect:false
+    isRadius: false,
+    isHidden: false,
+    isFullSize: false,
+    isHiddenBorder: false,
+    isPlaystationEffect: false,
+    customStyles: {
+      justifyContent: 'space-between',
+    },
+    isIconGroup: true,
   },
 }
 
-export const Icon: Story = {
+export const iconName: Story = {
   args: {
     width: 'asHeight',
     type: 'button',
-    icon: 'Graph',
+    iconName: 'Search',
     genre: 'gray',
     size: 'medium',
     isLoading: false,
     isDisabled: false,
     isOnlyLoading: false,
-    isRadius:false
+    isRadius: false,
   },
 }

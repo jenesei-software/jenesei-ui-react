@@ -18,68 +18,79 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
       {...props}
       value={[
         {
-          $styles: {
-            $justifyContent: 'flex-start',
+          customStyles: {
+            justifyContent: 'flex-start',
           },
           children: 'First',
-          icon: 'AddUser',
-          iconPosition: 'left',
+          iconName: 'Folder',
+          iconOrder: -1,
+          loadingOrder:-2,
           width: 'auto',
           type: 'button',
           genre: 'black',
           size: 'medium',
+          isLoading:true
         },
         {
-          $styles: {
-            $justifyContent: 'space-between',
+          customStyles: {
+            justifyContent: 'space-between',
+            
           },
           children: 'Third',
-          icon: 'Image',
+          iconOrder: -1,
+          loadingOrder:1,
+          iconName: 'Folder',
           width: 'auto',
           type: 'button',
           genre: 'gray',
           size: 'medium',
+          isLoading:true
         },
         {
-          $styles: {
-            $justifyContent: 'space-between',
+          customStyles: {
+            justifyContent: 'space-between',
           },
           children: 'Second',
-          icon: 'Delete',
+          iconOrder: 2,
+          loadingOrder:1,
+          iconName: 'Folder',
           width: 'auto',
           type: 'button',
           genre: 'blackBorder',
           size: 'medium',
+          isLoading:true,
+          isIconGroup:true,
+          isOnlyLoadingWithGroup:false
         },
 
         {
-          $styles: {
-            $justifyContent: 'space-between',
+          customStyles: {
+            justifyContent: 'space-between',
           },
           children: 'Third',
-          icon: 'Image',
+          iconName: 'Folder',
           width: 'auto',
           type: 'button',
           genre: 'greenTransparent',
           size: 'medium',
         },
         {
-          $styles: {
-            $justifyContent: 'space-between',
+          customStyles: {
+            justifyContent: 'space-between',
           },
           children: 'Third',
-          icon: 'Image',
+          iconName: 'Folder',
           width: 'auto',
           type: 'button',
           genre: 'grayBorder',
           size: 'medium',
         },
         {
-          $styles: {
-            $justifyContent: 'space-between',
+          customStyles: {
+            justifyContent: 'space-between',
           },
           children: 'Third',
-          icon: 'Image',
+          iconName: 'Folder',
           width: 'auto',
           type: 'button',
           genre: 'product',
@@ -87,33 +98,33 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
         },
 
         {
-          $styles: {
-            $justifyContent: 'space-between',
+          customStyles: {
+            justifyContent: 'space-between',
           },
           children: 'Third',
-          icon: 'Image',
+          iconName: 'Folder',
           width: 'auto',
           type: 'button',
           genre: 'white',
           size: 'medium',
         },
         {
-          $styles: {
-            $justifyContent: 'space-between',
+          customStyles: {
+            justifyContent: 'space-between',
           },
           children: 'Third',
-          icon: 'Image',
+          iconName: 'Folder',
           width: 'auto',
           type: 'button',
           genre: 'productBorder',
           size: 'medium',
         },
         {
-          $styles: {
-            $justifyContent: 'space-between',
+          customStyles: {
+            justifyContent: 'space-between',
           },
           children: 'Third',
-          icon: 'Image',
+          iconName: 'Folder',
           width: 'auto',
           type: 'button',
           genre: 'redTransparent',

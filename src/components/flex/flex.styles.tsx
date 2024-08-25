@@ -6,8 +6,10 @@ import { JeneseiThemeVariables } from '@theme/index'
 import {
   FlexContainerProps,
   FlexItemProps,
-  FlexShortStylesProps,
-  FlexStylesProps,
+  FlexShortStylesNormalizedPropsNormalized,
+  FlexContainerAndItemAndBasicProps,
+  FlexContainerAndItemProps,
+  FlexBasicProps,
 } from '.'
 
 const FlexContainer = css<FlexContainerProps>`
@@ -72,7 +74,7 @@ const FlexItem = css<FlexItemProps>`
     `}
 `
 
-const FlexShort = css<FlexShortStylesProps>`
+const FlexBasic = css<FlexBasicProps>`
   ${({ $m }) =>
     $m &&
     css`
@@ -189,16 +191,61 @@ const FlexShort = css<FlexShortStylesProps>`
     `}
 `
 
-export const FlexStyles = css<FlexStylesProps>`
+export const FlexContainerAndItem = css<FlexContainerAndItemProps>`
   ${FlexContainer}
   ${FlexItem}
 `
 
-export const FlexShortStyles = css<FlexShortStylesProps>`
-  ${FlexStyles}
-  ${FlexShort}
+export const FlexContainerAndItemAndBasic = css<FlexContainerAndItemAndBasicProps>`
+  ${FlexContainerAndItem}
+  ${FlexBasic}
 `
 
-export const Stack = styled.div<FlexShortStylesProps>`
-  ${FlexShortStyles}
+const StyledStack = styled.div<FlexContainerAndItemAndBasicProps>`
+  ${FlexContainerAndItemAndBasic}
 `
+
+export const Stack: React.FC<FlexShortStylesNormalizedPropsNormalized> = (props) => {
+  return (
+    <StyledStack
+      $flexDirection={props.flexDirection}
+      $flexWrap={props.flexWrap}
+      $justifyContent={props.justifyContent}
+      $alignItems={props.alignItems}
+      $alignContent={props.alignContent}
+      
+      $order={props.order}
+      $flexGrow={props.flexGrow}
+      $flexShrink={props.flexShrink}
+      $flexBasis={props.flexBasis}
+      $alignSelf={props.alignSelf}
+      $gap={props.gap}
+
+      $m={props.m}
+      $mt={props.mt}
+      $mr={props.mr}
+      $mb={props.mb}
+      $ml={props.ml}
+      $mx={props.mx}
+      $my={props.my}
+      $p={props.p}
+      $pt={props.pt}
+      $pr={props.pr}
+      $pb={props.pb}
+      $pl={props.pl}
+      $px={props.px}
+      $py={props.py}
+      $w={props.w}
+      $h={props.h}
+      $minW={props.minW}
+      $maxW={props.maxW}
+      $minH={props.minH}
+      $maxH={props.maxH}
+      $bg={props.bg}
+      $color={props.color}
+      style={props.style}
+    >
+      {props.children}
+    </StyledStack>
+  )
+}

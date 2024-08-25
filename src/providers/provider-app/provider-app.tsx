@@ -6,7 +6,7 @@ import {
 } from 'react'
 import { Helmet } from 'react-helmet'
 
-import { JeneseiThemeVariables, JeneseiThemeVariablesKeys } from '@theme/index'
+import { JeneseiThemeVariables, JeneseiThemeVariablesKeys } from '@theme/index' 
 
 import {
   AppContextProps,

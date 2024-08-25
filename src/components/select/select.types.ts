@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 import { CheckboxProps } from '@components/checkbox'
 import {
   InputProps,
@@ -9,7 +11,7 @@ import {
 import { TJeneseiThemeSize } from '@theme/index'
 
 export interface ISelectItem {
-  label: string | number
+  label: string | number | ReactNode
   value: string | number
 }
 
@@ -22,6 +24,7 @@ export interface SelectProps<T extends ISelectItem> {
   checkboxProps: CheckboxProps
   optionProps: InputProps
 
+  optionItemClamp: number
   option: T[]
   value: T[]
   onChange: (option: T[]) => void
@@ -45,7 +48,16 @@ export interface SelectProps<T extends ISelectItem> {
   }
 }
 
-export interface SelectWrapperProps extends StyledInputWrapperProps {}
+export interface SelectItemProps<T extends ISelectItem> {
+  item: T
+  optionItemClamp: SelectProps<T>['optionItemClamp']
+}
+
+export interface SelectWrapperProps extends StyledInputWrapperProps {
+  $parentListHeight: number
+  $radius: number
+  $genre: SelectStyledInputProps['$genre']
+}
 
 export interface SelectStyledInputProps extends StyledInputProps {}
 

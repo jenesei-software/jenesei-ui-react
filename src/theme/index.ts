@@ -1,3 +1,3 @@
-export * from './global-theme'
-export * from './global-styles'
-export * from './global-interface'
+export * from './theme'
+export * from './theme.global'
+export * from './theme.interface'

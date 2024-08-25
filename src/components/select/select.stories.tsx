@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import 'styled-components'
+
 
 import { ISelectItem, Select, SelectProps } from '.'
 
@@ -47,8 +48,15 @@ interface IOption extends ISelectItem {}
 
 const SelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
   const [option] = useState<IOption[]>([
-    { label: 'Partnership', value: 0 },
-    { label: 'Service request', value: 1 },
+    {
+      label:
+        'Partnership Partnership Partnership Partnership Partnership Partnership Partnership',
+      value: 0,
+    },
+    {
+      label: 'Partnership Partnership Partnership Partnership Partnership Partnership Partnership, Partnership Partnership Partnership Partnership Partnership Partnership Partnership, Partnership Partnership Partnership Partnership Partnership Partnership Partnership, Partnership Partnership Partnership Partnership Partnership Partnership Partnership',
+      value: 1,
+    },
     { label: 'Career', value: 2 },
     { label: 'Other', value: 3 },
     { label: 'Partnership', value: 4 },
@@ -78,7 +86,7 @@ const SelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
   const handleSelectChange = (option: IOption[]) => {
     setValue(option)
   }
-  const handleQueryChange = (value: string) => {
+  const handleQueryChange = useCallback((value: string) => {
     setQuery(value)
     if (value === '') return setViewOption(option)
     const filteredOptions = option.filter((option) =>
@@ -87,7 +95,7 @@ const SelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
       ),
     )
     setViewOption(filteredOptions)
-  }
+  },[])
 
   return (
     <Select<IOption>
