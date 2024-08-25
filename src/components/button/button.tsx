@@ -1,18 +1,15 @@
 import { FC, memo } from 'react'
+import { Ripple } from 'react-ripple-click'
 import { useTheme } from 'styled-components'
 
-import { LibraryIconCurved } from '@assets/library-icon-curved'
+import { Icon } from '@assets/library-icon'
 
 import { ModalLoading } from '@components/modal-loading'
 
-import { ButtonProps, StyledButton } from '.'
-import { Ripple } from 'react-ripple-click'
+import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.'
 
 export const Button: FC<ButtonProps> = memo((props) => {
-  const iconPosition = props.iconPosition || 'right'
-  const loadingPosition = props.loadingPosition || 'right'
   const theme = useTheme()
-  const IconComponent = props.icon && LibraryIconCurved[props.icon]
   return (
     <StyledButton
       id="jenesei-button"
@@ -38,7 +35,17 @@ export const Button: FC<ButtonProps> = memo((props) => {
         props.onClick &&
         props.onClick(event)
       }
-      {...props.$styles}
+      $flexDirection={props.customStyles?.flexDirection}
+      $flexWrap={props.customStyles?.flexWrap}
+      $justifyContent={props.customStyles?.justifyContent}
+      $alignItems={props.customStyles?.alignItems}
+      $alignContent={props.customStyles?.alignContent}
+      $order={props.customStyles?.order}
+      $flexGrow={props.customStyles?.flexGrow}
+      $flexShrink={props.customStyles?.flexShrink}
+      $flexBasis={props.customStyles?.flexBasis}
+      $alignSelf={props.customStyles?.alignSelf}
+      $gap={props.customStyles?.gap}
     >
       {!props.isHidden && <Ripple />}
       {props.isOnlyLoading ? (
@@ -46,39 +53,65 @@ export const Button: FC<ButtonProps> = memo((props) => {
           <ModalLoading
             size={props.size}
             color={theme.colors.button[props.genre].color.rest}
+            order={props.loadingOrder}
           />
         ) : (
           <>
-            {IconComponent && iconPosition === 'left' && (
-              <IconComponent size={props.size} />
-            )}
-            {props.children && props.children}
-            {IconComponent && iconPosition === 'right' && (
-              <IconComponent size={props.size} />
+            <div style={{ order: 0, display: 'contents' }}>
+              {props.children && props.children}
+            </div>
+            {props.iconName && (
+              <Icon
+                name={props.iconName}
+                type="curved"
+                size={props.size}
+                turn={props.iconTurn}
+                order={props.iconOrder}
+              />
             )}
           </>
         )
       ) : (
         <>
-          {props.isLoading && loadingPosition === 'left' && (
-            <ModalLoading
-              size={props.size}
-              color={theme.colors.button[props.genre].color.rest}
-            />
-          )}
-          {IconComponent && iconPosition === 'left' && (
-            <IconComponent size={props.size} />
-          )}
-          {props.children && props.children}
-          {IconComponent && iconPosition === 'right' && (
-            <IconComponent size={props.size} />
-          )}
-          {props.isLoading && loadingPosition === 'right' && (
-            <ModalLoading
-              size={props.size}
-              color={theme.colors.button[props.genre].color.rest}
-            />
-          )}
+          <div style={{ order: 0, display: 'contents' }}>
+            {props.children && props.children}
+          </div>
+          <StyledButtonIconsWrapper
+            $size={props.size}
+            $isIconGroup={props.isIconGroup}
+            $iconGroupOrder={props.iconGroupOrder}
+          >
+            {props.isOnlyLoadingWithGroup ? (
+              <>
+                {props.isLoading && (
+                  <ModalLoading
+                    size={props.size}
+                    color={theme.colors.button[props.genre].color.rest}
+                    order={props.loadingOrder}
+                  />
+                )}
+              </>
+            ) : (
+              <>
+                {props.isLoading && (
+                  <ModalLoading
+                    size={props.size}
+                    color={theme.colors.button[props.genre].color.rest}
+                    order={props.loadingOrder}
+                  />
+                )}
+                {props.iconName && (
+                  <Icon
+                    name={props.iconName}
+                    type="curved"
+                    size={props.size}
+                    turn={props.iconTurn}
+                    order={props.iconOrder}
+                  />
+                )}
+              </>
+            )}
+          </StyledButtonIconsWrapper>
         </>
       )}
     </StyledButton>

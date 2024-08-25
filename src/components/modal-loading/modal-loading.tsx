@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { JeneseiThemeVariables, KEY_SIZE_DATA } from '@theme/index'
+import { JeneseiThemeVariables, KEY_SIZE_DATA } from '@theme/index' 
 
 import { ModalLoadingProps, StyledReactLoading } from '.'
 
@@ -16,6 +16,7 @@ export const ModalLoading: FC<ModalLoadingProps> = (props) => {
       }
       height={KEY_SIZE_DATA[props.size].heightIcon + 4}
       width={KEY_SIZE_DATA[props.size].heightIcon + 4}
+      $order={props.order}
     />
   )
 }

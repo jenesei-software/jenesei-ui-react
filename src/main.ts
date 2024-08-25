@@ -5,7 +5,7 @@ export * from './theme'
 export * from './fonts'
 
 // Exporting assets
-export * from './assets/library-icon-curved'
+export * from './assets/library-icon'
 export * from './assets/library-checkboxes'
 
 // Exporting utilities and functions

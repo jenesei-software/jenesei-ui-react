@@ -3,8 +3,7 @@ import type { Preview } from '@storybook/react'
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 
-import { JeneseiGlobalStyles } from '../src/theme/global-styles'
-import { JeneseiTheme } from '../src/theme/index'
+import { JeneseiTheme, JeneseiGlobalStyles } from '../src/theme/index'
 
 import '@fontsource/inter/300.css'
 import '@fontsource/inter/400.css'

@@ -1,14 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
-import {
-  TitleH1,
-  TitleH2,
-  TitleH3,
-  TitleH4,
-  TitleH5,
-  TitleH6,
-} from '@fonts/index'
+import { Typography } from '@components/typography'
 
 import { ProviderApp } from '.'
 
@@ -30,7 +23,7 @@ const defaultNotification = (
       width: '100%',
     }}
   >
-    <TitleH5>Notification</TitleH5>
+    <Typography variant="h3" textWrap="nowrap">Notification</Typography>
   </div>
 )
 const defaultHeader = (
@@ -42,7 +35,9 @@ const defaultHeader = (
       width: '100%',
     }}
   >
-    <TitleH1>Header</TitleH1>
+    <Typography variant="h1" textWrap="nowrap">
+      Header
+    </Typography>
   </div>
 )
 const defaultFooter = (
@@ -54,7 +49,7 @@ const defaultFooter = (
       width: '100%',
     }}
   >
-    <TitleH1>Footer</TitleH1>
+    <Typography variant="h1">Footer</Typography>
   </div>
 )
 const defaultLeftAside = (
@@ -66,7 +61,7 @@ const defaultLeftAside = (
       width: '100%',
     }}
   >
-    <TitleH6>Left Aside</TitleH6>
+    <Typography variant="h6">Left Aside</Typography>
   </div>
 )
 const defaultRightAside = (
@@ -78,7 +73,7 @@ const defaultRightAside = (
       width: '100%',
     }}
   >
-    <TitleH6>Right Aside</TitleH6>
+    <Typography variant="h6">Right Aside</Typography>
   </div>
 )
 
@@ -91,7 +86,7 @@ const defaultNav = (
       width: '100%',
     }}
   >
-    <TitleH6>Nav</TitleH6>
+    <Typography>Nav</Typography>
   </div>
 )
 
@@ -104,12 +99,12 @@ const defaultChildren = (
       width: '100%',
     }}
   >
-    <TitleH1>Title H1</TitleH1>
-    <TitleH2>Title H2</TitleH2>
-    <TitleH3>Title H3</TitleH3>
-    <TitleH4>Title H4</TitleH4>
-    <TitleH5>Title H5</TitleH5>
-    <TitleH6>Title H6</TitleH6>
+    <Typography variant="h1">Title H1</Typography>
+    <Typography variant="h2">Title H2</Typography>
+    <Typography variant="h3">Title H3</Typography>
+    <Typography variant="h4">Title H4</Typography>
+    <Typography variant="h5">Title H5</Typography>
+    <Typography variant="h6">Title H6</Typography>
   </div>
 )
 

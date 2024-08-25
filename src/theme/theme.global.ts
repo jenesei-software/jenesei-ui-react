@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 
+import { JeneseiThemeVariables } from '.'
+
 export const JeneseiGlobalStyles = createGlobalStyle`
   ${reset};
   
@@ -13,10 +15,10 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     --font-weight: 400;
     --font-size: 16px;
     --font-line-height: 1;
-    --scrollbar-width: 24px;
-    --scrollbar-background: #f3f5f7;
-    --scrollbar-thumb-background: #b7cbd7;
-    --scrollbar-thumb-border: 8px solid #f3f5f7;
+    --scrollbar-width: 16px;
+    --scrollbar-background: ${JeneseiThemeVariables.black05};
+    --scrollbar-thumb-background: ${JeneseiThemeVariables.blueHover};
+    --scrollbar-thumb-border: 4px solid ${JeneseiThemeVariables.black05};
 
     --heading-1-font-size: 2.5rem; 
     --heading-2-font-size: 2rem; 

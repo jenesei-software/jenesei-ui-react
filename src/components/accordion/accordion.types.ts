@@ -1,15 +1,16 @@
 import { ReactElement } from 'react'
 
-import { FlexShortStylesProps } from '@components/flex'
+import { FlexShortStylesNormalizedPropsNormalized } from '@components/flex'
 
 export interface AccordionProps {
-  wrapperProps: FlexShortStylesProps
+  wrapperProps: FlexShortStylesNormalizedPropsNormalized
   accordionSummary: ReactElement
   accordionDetails: ReactElement
   expanded: boolean
   isAccordionIcon?: boolean
   onClickSummary?: () => void
   onClickIcon?: () => void
+  triggerUpdate?: unknown[]
 }
 
 export interface AccordionStyledIconProps {

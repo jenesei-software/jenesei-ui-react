@@ -1,6 +1,6 @@
 import { LoadingType } from 'react-loading'
 
-import { JeneseiThemeVariablesKeys, TJeneseiThemeSize } from '@theme/index'
+import { JeneseiThemeVariablesKeys, TJeneseiThemeSize } from '@theme/index' 
 
 export interface ModalLoadingProps {
   type?: LoadingType
@@ -8,4 +8,9 @@ export interface ModalLoadingProps {
   color?: string
   size: TJeneseiThemeSize
   className?: string
+  order?:number
+}
+
+export interface StyledReactLoadingProps {
+  $order?:ModalLoadingProps['order']
 }

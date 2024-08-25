@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { LibraryCheckboxes } from '@assets/library-checkboxes'
 
-import { getFontSizeStyles } from '@fonts/index'
+import { getFontSizeStyles } from '@components/typography'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
 
@@ -17,7 +17,7 @@ export const CheckboxSizeConstructor = (props: IJeneseiThemeSize) => css`
   border-radius: ${props.radius + 12}px;
   gap: ${props.padding - 2}px;
   ${getFontSizeStyles(props.font, 600, 'Inter')};
-  padding: 0px ${props.padding}px;
+  padding: 0px ${props.padding - 4}px;
 `
 
 /****************************************** Genre *************************************************/
@@ -143,14 +143,13 @@ export const StyledCheckedIconSquare = styled(
   LibraryCheckboxes.Square,
 )<StyledCheckboxProps>`
   & #center {
-    fill: ${(props) => props.theme.colors.checkbox[props.$genre].color.rest};
+    fill: transparent;
   }
   & #not-center {
     fill: transparent;
     stroke: ${(props) => props.theme.colors.checkbox[props.$genre].color.rest};
   }
   & #center-white {
-    fill: ${(props) =>
-      props.theme.colors.checkbox[props.$genre].background.rest};
+    fill: ${(props) => props.theme.colors.checkbox[props.$genre].color.rest};
   }
 `

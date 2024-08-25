@@ -33,7 +33,7 @@ export default defineConfig(() => {
       !isStorybookBuild &&
         dts({
           include: ['src/'],
-          exclude: ['src/theme/styled.d.ts'],
+          exclude: ['src/declaration/styled.d.ts'],
           rollupTypes: true,
           insertTypesEntry: true,
           tsConfigFilePath: './tsconfig.json',
@@ -59,6 +59,7 @@ export default defineConfig(() => {
       rollupOptions: {
         external: Object.keys(peerDependencies),
         output: {
+          sourcemap: true,
           globals: {
             'styled-components': 'styled',
             'react-ripple-click': 'reactRippleClick',
@@ -70,6 +71,7 @@ export default defineConfig(() => {
             gsap: 'gsap',
             'js-cookie': 'Cookies',
             'react-i18next': 'reactI18next',
+            'react-helmet': 'reactHelmet',
           },
         },
       },

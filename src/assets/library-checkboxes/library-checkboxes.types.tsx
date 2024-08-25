@@ -1,4 +1,4 @@
-import { TJeneseiThemeSize } from '@theme/index'
+import { TJeneseiThemeSize } from "@theme/index"
 
 export type LibraryCheckboxesProps = {
   [icon in LibraryCheckboxesNameString]: (

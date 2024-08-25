@@ -1,6 +1,6 @@
 import { FocusEventHandler, HTMLInputTypeAttribute } from 'react'
 
-import { TJeneseiThemeGenre, TJeneseiThemeSize } from '@theme/index'
+import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@theme/index'
 
 export interface InputProps {
   className?: string
@@ -62,7 +62,7 @@ export interface InputChildrenProps {
   width: string
 }
 
-export type TInputGenre = keyof TJeneseiThemeGenre
+export type TInputGenre = keyof TJeneseiThemeGenreInput
 
 export interface StyledInputProps {
   $genre: InputProps['genre']
