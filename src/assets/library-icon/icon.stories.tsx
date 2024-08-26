@@ -12,11 +12,20 @@ export default meta
 
 type Story = StoryObj<typeof Icon>
 
-export const Default: Story = {
+export const Curved: Story = {
   args: {
     primaryColor: 'blueGoogle',
     name: 'Folder',
     size: 'large',
-    type:'curved'
+    type: 'curved',
+  },
+}
+
+export const Checkbox: Story = {
+  args: {
+    primaryColor: 'blueGoogle',
+    size: 'large',
+    type: 'checkbox',
+    name: 'Radio',
   },
 }

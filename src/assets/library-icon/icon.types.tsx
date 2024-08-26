@@ -2,9 +2,7 @@ import { FlexContainerAndItemAndBasicProps } from '@components/flex'
 
 import { JeneseiThemeVariablesKeys, TJeneseiThemeSize } from '@theme/index'
 
-export interface LibraryIconCurvedItemProps {
-  name: TLibraryIconCurvedNameString
-  type: 'curved'
+export interface BaseLibraryIconProps {
   className?: string
   onClick?: (event: React.MouseEvent<SVGSVGElement>) => void
   size: TJeneseiThemeSize
@@ -15,11 +13,25 @@ export interface LibraryIconCurvedItemProps {
   order?: number
 }
 
+export interface LibraryIconCurvedItemProps extends BaseLibraryIconProps {
+  type: 'curved'
+  name: TLibraryIconCurvedNameString
+}
+
+export interface LibraryIconCheckboxItemProps extends BaseLibraryIconProps {
+  type: 'checkbox'
+  name: TLibraryIconCheckboxNameString
+}
+
+export type LibraryIconItemProps =
+  | LibraryIconCurvedItemProps
+  | LibraryIconCheckboxItemProps
+
 export interface StyledLibraryIconCurvedItemProps
   extends FlexContainerAndItemAndBasicProps {
-  $size: LibraryIconCurvedItemProps['size']
-  $turn?: LibraryIconCurvedItemProps['turn']
-  $order?: LibraryIconCurvedItemProps['order']
+  $size: LibraryIconItemProps['size']
+  $turn?: LibraryIconItemProps['turn']
+  $order?: LibraryIconItemProps['order']
 }
 
 export enum LibraryIconCurvedName {
@@ -124,5 +136,10 @@ export enum LibraryIconCurvedName {
   ArrowLeft2,
   ArrowLeft3,
 }
-
+export enum LibraryIconCheckboxName {
+  Radio,
+  Square,
+}
 export type TLibraryIconCurvedNameString = keyof typeof LibraryIconCurvedName
+export type TLibraryIconCheckboxNameString =
+  keyof typeof LibraryIconCheckboxName

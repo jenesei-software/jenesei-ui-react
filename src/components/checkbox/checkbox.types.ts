@@ -1,3 +1,5 @@
+import { TLibraryIconCheckboxNameString } from '@assets/library-icon'
+
 import {
   TJeneseiFontFamily,
   TJeneseiThemeGenre,
@@ -11,7 +13,7 @@ export interface CheckboxProps {
 
   children?: React.ReactNode
 
-  view: TCheckboxGenreView
+  view: TLibraryIconCheckboxNameString
 
   isDisabled?: boolean
 
@@ -60,6 +62,9 @@ export interface StyledCheckboxProps {
   $customFontWeight?: CheckboxProps['customFontWeight']
 }
 
-export type TCheckboxGenreView = 'square' | 'circle'
-
 export type TCheckboxGenre = keyof TJeneseiThemeGenre
+
+export interface StyledIconProps {
+  $genre: CheckboxProps['genre']
+  $checked?: CheckboxProps['checked']
+}

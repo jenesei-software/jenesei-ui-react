@@ -16,8 +16,8 @@ export type Placement =
 
 export interface TooltipProps {
   content: ReactNode
-  placement?: Placement
   children: ReactNode
+  placement?: Placement
   whiteSpace?: CSSProperties['whiteSpace']
   maxWidth?: number
   maxHeight?: number
