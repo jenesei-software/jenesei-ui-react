@@ -1,4 +1,4 @@
-import React, { Ref, forwardRef } from 'react'
+import { Ref, forwardRef } from 'react'
 
 // Don't forget to import React from 'react'
 import {

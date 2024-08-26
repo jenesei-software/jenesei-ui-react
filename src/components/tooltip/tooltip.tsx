@@ -15,9 +15,11 @@ import { Typography } from '@components/typography'
 import { TooltipArrow, TooltipBox, TooltipContainer, TooltipProps } from '.'
 
 export const Tooltip: FC<TooltipProps> = memo((props) => {
-  if (props.isDisabled) return props.children
-  return <TooltipContent {...props} />
-})
+  if (props.isDisabled) {
+    return <>{props.children}</>;
+  }
+  return <TooltipContent {...props} />;
+});
 
 export const TooltipContent: FC<TooltipProps> = (props) => {
   const theme = useTheme()

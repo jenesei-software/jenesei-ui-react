@@ -6,10 +6,7 @@ import { ModalLoading } from '@components/modal-loading'
 import {
   CheckboxProps,
   CheckboxWrapper,
-  StyledCheckedIconCircle,
-  StyledCheckedIconSquare,
-  StyledIconCircle,
-  StyledIconSquare,
+  StyledIcon
 } from '.'
 
 export const Checkbox: FC<CheckboxProps> = (props) => {
@@ -22,51 +19,13 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
   const theme = useTheme()
   const children = (
     <>
-      {props.checked ? (
-        <>
-          {props.view == 'square' ? (
-            <StyledCheckedIconSquare
-              size={props.size}
-              $size={props.size}
-              $genre={props.genre}
-            />
-          ) : props.view == 'circle' ? (
-            <StyledCheckedIconCircle
-              size={props.size}
-              $size={props.size}
-              $genre={props.genre}
-            />
-          ) : (
-            <StyledCheckedIconCircle
-              size={props.size}
-              $size={props.size}
-              $genre={props.genre}
-            />
-          )}
-        </>
-      ) : (
-        <>
-          {props.view == 'square' ? (
-            <StyledIconSquare
-              size={props.size}
-              $size={props.size}
-              $genre={props.genre}
-            />
-          ) : props.view == 'circle' ? (
-            <StyledIconCircle
-              size={props.size}
-              $size={props.size}
-              $genre={props.genre}
-            />
-          ) : (
-            <StyledIconCircle
-              size={props.size}
-              $size={props.size}
-              $genre={props.genre}
-            />
-          )}
-        </>
-      )}
+      <StyledIcon
+        size={props.size}
+        name={props.view}
+        type="checkbox"
+        $genre={props.genre}
+        $checked={props.checked}
+      />
       {props.children && props.children}
     </>
   )

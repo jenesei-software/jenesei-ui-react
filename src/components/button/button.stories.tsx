@@ -38,7 +38,7 @@ export const iconName: Story = {
   args: {
     width: 'asHeight',
     type: 'button',
-    iconName: 'Search',
+    iconName: 'Heart',
     genre: 'gray',
     size: 'medium',
     isLoading: false,

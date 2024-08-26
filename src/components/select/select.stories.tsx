@@ -24,7 +24,7 @@ const defaultArgs: Partial<SelectProps<IOption>> = {
   width: '300px',
   checkboxProps: {
     genre: 'gray',
-    view: 'square',
+    view: 'Square',
     size: 'medium',
     isHiddenBorder: true,
     isNotBackground: true,

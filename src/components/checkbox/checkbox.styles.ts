@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components'
 
-import { LibraryCheckboxes } from '@assets/library-checkboxes'
+import { Icon } from '@assets/library-icon'
 
 import { getFontSizeStyles } from '@components/typography'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
 
-import { StyledCheckboxProps } from '.'
+import { StyledCheckboxProps, StyledIconProps } from '.'
 
 /****************************************** Size *************************************************/
 export const CheckboxSize = css<StyledCheckboxProps>`
@@ -106,50 +106,23 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
 `
 
 /****************************************** Styled *************************************************/
-export const StyledIconCircle = styled(
-  LibraryCheckboxes.Radio,
-)<StyledCheckboxProps>`
-  & #check {
-    fill: transparent;
-  }
-  & #uncheck {
-    fill: ${(props) => props.theme.colors.checkbox[props.$genre].color.rest};
-  }
-`
-export const StyledCheckedIconCircle = styled(
-  LibraryCheckboxes.Radio,
-)<StyledCheckboxProps>`
-  & #check {
-    fill: ${(props) => props.theme.colors.checkbox[props.$genre].color.rest};
-  }
-  & #uncheck {
-    fill: transparent;
-  }
-`
-export const StyledIconSquare = styled(
-  LibraryCheckboxes.Square,
-)<StyledCheckboxProps>`
-  & #center {
-    fill: transparent;
-  }
-  & #not-center {
-    stroke: ${(props) => props.theme.colors.checkbox[props.$genre].color.rest};
-  }
-  & #center-white {
-    fill: transparent;
-  }
-`
-export const StyledCheckedIconSquare = styled(
-  LibraryCheckboxes.Square,
-)<StyledCheckboxProps>`
-  & #center {
-    fill: transparent;
-  }
-  & #not-center {
-    fill: transparent;
-    stroke: ${(props) => props.theme.colors.checkbox[props.$genre].color.rest};
-  }
-  & #center-white {
-    fill: ${(props) => props.theme.colors.checkbox[props.$genre].color.rest};
-  }
+export const StyledIcon = styled(Icon)<StyledIconProps>`
+  ${(props) =>
+    props.$checked
+      ? css`
+          & #check {
+            fill: ${props.theme.colors.checkbox[props.$genre].color.rest};
+          }
+          & #uncheck {
+            fill: transparent;
+          }
+        `
+      : css`
+          & #check {
+            fill: transparent;
+          }
+          & #uncheck {
+            fill: ${props.theme.colors.checkbox[props.$genre].color.rest};
+          }
+        `}
 `
