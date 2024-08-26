@@ -72,6 +72,8 @@ export default defineConfig(() => {
             'js-cookie': 'Cookies',
             'react-i18next': 'reactI18next',
             'react-helmet': 'reactHelmet',
+            'react-toggle': 'ReactToggle',
+            'react-dom': 'ReactDOM',
           },
         },
       },

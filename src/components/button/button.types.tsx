@@ -1,5 +1,5 @@
 import {
-  LibraryIconCurvedItemProps,
+  LibraryIconItemProps ,
   TLibraryIconCurvedNameString,
 } from '@assets/library-icon'
 
@@ -23,9 +23,9 @@ export interface ButtonProps {
 
   iconName?: TLibraryIconCurvedNameString
 
-  iconOrder?: LibraryIconCurvedItemProps['order']
+  iconOrder?: LibraryIconItemProps ['order']
 
-  iconTurn?: LibraryIconCurvedItemProps['turn']
+  iconTurn?: LibraryIconItemProps ['turn']
 
   iconGroupOrder?: number
 
