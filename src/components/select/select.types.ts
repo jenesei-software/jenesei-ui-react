@@ -15,7 +15,7 @@ export interface ISelectItem {
   value: string | number
 }
 
-export interface SelectProps<T extends ISelectItem> {
+export interface SelectProps<T extends object> {
   size: TJeneseiThemeSize
   genre: TInputGenre
   width?: string
@@ -23,8 +23,8 @@ export interface SelectProps<T extends ISelectItem> {
   inputProps: InputProps
   checkboxProps: CheckboxProps
   optionProps: InputProps
+  isMultu?: boolean
 
-  optionItemClamp: number
   option: T[]
   value: T[]
   onChange: (option: T[]) => void
@@ -46,11 +46,6 @@ export interface SelectProps<T extends ISelectItem> {
       onCLick?: () => void
     }
   }
-}
-
-export interface SelectItemProps<T extends ISelectItem> {
-  item: T
-  optionItemClamp: SelectProps<T>['optionItemClamp']
 }
 
 export interface SelectWrapperProps extends StyledInputWrapperProps {

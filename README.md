@@ -45,7 +45,7 @@ function App() {
 ## Customize the cookie and local storage
 
 ```typescript
-//jenesei-ui-react.d.d.ts
+//jenesei-ui-react.d.ts
 import '@jenesei-software/jenesei-ui-react'
 
 declare module '@jenesei-software/jenesei-ui-react' {

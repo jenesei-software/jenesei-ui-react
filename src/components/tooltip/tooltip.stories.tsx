@@ -31,5 +31,5 @@ const TooltipWrapper: React.FC<TooltipProps> = (props) => {
 
 export const Default: Story = {
   render: (args) => <TooltipWrapper {...args} />,
-  args: { placement: 'bottom' }
+  args: { placement: 'bottom-start' },
 }

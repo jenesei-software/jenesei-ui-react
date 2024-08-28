@@ -1,4 +1,6 @@
-import { CSSProperties } from 'react'
+import { CSSProperties, ReactNode } from 'react'
+
+import { TooltipProps } from '@components/tooltip'
 
 import { JeneseiThemeVariablesKeys, TJeneseiFontFamily } from '@theme/index'
 
@@ -12,6 +14,7 @@ export interface TypographyDefaultProps {
   textWrap?: CSSProperties['textWrap']
   className?: string
   children: React.ReactNode
+  style?: CSSProperties
 }
 
 export interface TypographyDataProps extends TypographyDefaultProps {
@@ -42,4 +45,10 @@ export interface TypographyCSSProps {
   $size?: TypographyDataProps['size']
   $weight?: TypographyDataProps['weight']
   $height?: TypographyDataProps['height']
+}
+
+export interface TypographyTooltipProps {
+  typography: Omit<TypographyProps, 'children'>
+  tooltip: Omit<TooltipProps, 'children' | 'content'>
+  children: ReactNode
 }

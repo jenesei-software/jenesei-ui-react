@@ -32,7 +32,7 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
 export const InputErrorMessage = styled.div`
   ${getFontSizeStyles(12, 400, 'Inter')};
   position: absolute;
-  bottom: -15px;
+  top: calc(100% + 6px);
   left: 10px;
   color: ${(props) => props.theme.colors.danger};
 `
@@ -172,7 +172,7 @@ export const StyledInputCSS = css<StyledInputProps>`
   ${(props) =>
     props.$postfixChildren &&
     css`
-      padding-left: ${`calc(${props.$postfixChildren.width} + ${props.$postfixChildren.right} + ${props.$postfixChildren.left})`};
+      padding-right: ${`calc(${props.$postfixChildren.width} + ${props.$postfixChildren.right} + ${props.$postfixChildren.left})`};
     `};
 `
 
@@ -189,12 +189,14 @@ export const InputPrefixChildren = styled.div<InputChildrenProps>`
   position: absolute;
   left: ${(props) => props.left};
   width: ${(props) => props.width};
+  height: 100%;
 `
 
 export const InputPostfixChildren = styled.div<InputChildrenProps>`
   position: absolute;
-  right: ${(props) => props.left};
+  right: ${(props) => props.right};
   width: ${(props) => props.width};
+  height: 100%;
 `
 
 /****************************************** ModalLoading *************************************************/

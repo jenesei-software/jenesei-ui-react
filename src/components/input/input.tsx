@@ -32,7 +32,7 @@ export const Input = memo((props: InputProps) => {
           $prefixChildren={props?.prefixChildren}
           $genre={props.genre}
           $size={props.size}
-           $isBold={props.isBold}    
+          $isBold={props.isBold}
           $isCustomIcon={props.isCustomIcon}
           disabled={props.isDisabled}
           readOnly={props.isReadOnly}
@@ -46,6 +46,8 @@ export const Input = memo((props: InputProps) => {
           format={props.format}
           mask={props.mask}
           type={props.formatType}
+          name={props.name}
+          id={props.id}
         />
       ) : (
         <StyledInput
@@ -68,6 +70,8 @@ export const Input = memo((props: InputProps) => {
           }
           onBlur={props.onBlur}
           onFocus={props.onFocus}
+          name={props.name}
+          id={props.id}
         />
       )}
 
