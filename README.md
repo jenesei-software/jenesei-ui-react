@@ -70,6 +70,7 @@ npm install @emotion/styled --save
 npm install @tanstack/react-virtual --save
 npm install @types/js-cookie --save
 npm install @types/react-helmet --save
+npm install country-list-with-dial-code-and-flag --save
 npm install gsap --save
 npm install js-cookie --save
 npm install react --save
@@ -85,4 +86,7 @@ npm install react-ripple-click --save
 npm install react-toggle --save
 npm install styled-components --save
 npm install styled-reset --save
+npm install @tanstack/react-form --save
+npm install @tanstack/zod-form-adapter --save
+npm install zod --save
 ```
