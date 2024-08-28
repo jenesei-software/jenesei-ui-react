@@ -14,8 +14,6 @@ import { useTheme } from 'styled-components'
 import { Button } from '@components/button'
 import { Checkbox, CheckboxProps } from '@components/checkbox'
 import { InputChildrenProps } from '@components/input'
-import { Tooltip } from '@components/tooltip'
-import { Typography } from '@components/typography'
 
 import {
   KEY_SIZE_DATA,
@@ -40,7 +38,9 @@ const DEFAULT_MAX_VIEW = 5
 const DEFAULT_MIN_VIEW = 5
 const DEFAULT_OVERSCAN = 1
 
-export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
+export const Select = <T extends object & ISelectItem>(
+  props: SelectProps<T>,
+) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
   const [isAll, setIsAll] = useState(
@@ -125,38 +125,43 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
 
   const handleOptionOnClick = useCallback(
     (option: T) => {
-      if (isAll) {
-        const index = props.option.findIndex(
-          (selectedItems) => selectedItems.value === option.value,
-        )
-        const newValue = [
-          ...props.option.slice(0, index),
-          ...props.option.slice(index + 1),
-        ]
-        props.onChange(newValue)
-      } else {
-        const index = props.value.findIndex(
-          (selectedItems) => selectedItems.value === option.value,
-        )
-
-        if (
-          index === -1 &&
-          (!props.maxView || props.value.length < props.maxView)
-        ) {
-          const newValues = [...(props.value ?? []), option]
-          props.onChange(newValues)
-
-          if (newValues.length == props.option.length) {
-            return setIsAll(true)
-          }
-        } else if (index !== -1) {
+      if (props.isMultu) {
+        if (isAll) {
+          const index = props.option.findIndex(
+            (selectedItems) => selectedItems.value === option.value,
+          )
           const newValue = [
-            ...props.value.slice(0, index),
-            ...props.value.slice(index + 1),
+            ...props.option.slice(0, index),
+            ...props.option.slice(index + 1),
           ]
           props.onChange(newValue)
+        } else {
+          const index = props.value.findIndex(
+            (selectedItems) => selectedItems.value === option.value,
+          )
+
+          if (
+            index === -1 &&
+            (!props.maxView || props.value.length < props.maxView)
+          ) {
+            const newValues = [...(props.value ?? []), option]
+            props.onChange(newValues)
+
+            if (newValues.length == props.option.length) {
+              return setIsAll(true)
+            }
+          } else if (index !== -1) {
+            const newValue = [
+              ...props.value.slice(0, index),
+              ...props.value.slice(index + 1),
+            ]
+            props.onChange(newValue)
+          }
         }
+      } else {
+        props.onChange([option])
       }
+
       return setIsAll(false)
     },
     [isAll, props],
@@ -361,13 +366,12 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
                 size={props.size}
                 checkboxProps={props.checkboxProps}
                 checked={checked}
-                optionItemClamp={props.optionItemClamp}
-                isError={props.optionProps.isError}
-                isLoading={props.optionProps.isLoading}
-                isCustomIcon={props.optionProps.isCustomIcon}
-                isBold={props.optionProps.isBold}
-                postfixChildren={props.optionProps.postfixChildren}
-                prefixChildren={props.optionProps.prefixChildren}
+                isError={props.optionProps?.isError}
+                isLoading={props.optionProps?.isLoading}
+                isCustomIcon={props.optionProps?.isCustomIcon}
+                isBold={props.optionProps?.isBold}
+                postfixChildren={props.optionProps?.postfixChildren}
+                prefixChildren={props.optionProps?.prefixChildren}
                 virtualRowSize={virtualRow.size}
                 virtualRowStart={virtualRow.start}
                 label={item.label}
@@ -418,7 +422,6 @@ export const Select = <T extends ISelectItem>(props: SelectProps<T>) => {
 export const ContainerDropdownOption = memo(
   (params: {
     checkboxProps: CheckboxProps
-    optionItemClamp: number
     genre: keyof TJeneseiThemeGenreInput
     size: TJeneseiThemeSize
     onClick: () => void
@@ -453,49 +456,8 @@ export const ContainerDropdownOption = memo(
         {!!params.checkboxProps && (
           <Checkbox {...params.checkboxProps} checked={params.checked} />
         )}
-        <SelectItem
-          label={params.label}
-          optionItemClamp={params.optionItemClamp}
-        />
+        {params.label}
       </DropdownOption>
-    )
-  },
-)
-
-export const SelectItem = memo(
-  (props: { label: ReactNode; optionItemClamp: number }) => {
-    const [isOverflowing, setIsOverflowing] = useState(false)
-    const contentRef = useRef<HTMLDivElement>(null)
-
-    useEffect(() => {
-      const checkOverflow = () => {
-        if (contentRef.current) {
-          setIsOverflowing(
-            contentRef.current.scrollHeight > contentRef.current.clientHeight,
-          )
-        }
-      }
-      checkOverflow()
-      window.addEventListener('resize', checkOverflow)
-      return () => window.removeEventListener('resize', checkOverflow)
-    }, [props.label])
-
-    return (
-      <Tooltip
-        isDisabled={!isOverflowing}
-        placement="bottom"
-        content={props.label}
-        size={14}
-      >
-        <Typography
-          ref={contentRef}
-          clamp={props.optionItemClamp ?? 1}
-          clampOrient="vertical"
-          textWrap="wrap"
-        >
-          {props.label}
-        </Typography>
-      </Tooltip>
     )
   },
 )

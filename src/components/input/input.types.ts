@@ -3,6 +3,10 @@ import { FocusEventHandler, HTMLInputTypeAttribute } from 'react'
 import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@theme/index'
 
 export interface InputProps {
+  name?: string
+
+  id?: string
+
   className?: string
 
   defaultValue?: string

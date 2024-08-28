@@ -1,6 +1,7 @@
-import { Ref, forwardRef } from 'react'
+import { Ref, forwardRef, memo, useEffect, useRef, useState } from 'react'
 
-// Don't forget to import React from 'react'
+import { Tooltip } from '@components/tooltip'
+
 import {
   SpanFont,
   TitleH1,
@@ -10,6 +11,7 @@ import {
   TitleH5,
   TitleH6,
   TypographyProps,
+  TypographyTooltipProps,
 } from '.'
 
 export const Typography = forwardRef<
@@ -25,6 +27,7 @@ export const Typography = forwardRef<
     $textAlign: props.textAlign,
     $textWrap: props.textWrap,
     className: props.className,
+    style: props.style,
   }
 
   if ('variant' in props) {
@@ -85,5 +88,38 @@ export const Typography = forwardRef<
     <SpanFont ref={ref} {...commonProps}>
       {props.children}
     </SpanFont>
+  )
+})
+
+export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
+  const [isOverflowing, setIsOverflowing] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const checkOverflow = () => {
+      if (contentRef.current) {
+        setIsOverflowing(
+          contentRef.current.scrollWidth > contentRef.current.clientWidth,
+        )
+      }
+    }
+    checkOverflow()
+    window.addEventListener('resize', checkOverflow)
+    return () => window.removeEventListener('resize', checkOverflow)
+  }, [props.children])
+
+  return (
+    <Tooltip
+      isDisabled={!isOverflowing}
+      content={props.children}
+      {...props.tooltip}
+    >
+      <Typography
+        ref={contentRef}
+        {...props.typography}
+        style={{ position: 'relative' }}
+      >
+        {props.children}
+      </Typography>
+    </Tooltip>
   )
 })
