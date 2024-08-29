@@ -8,6 +8,7 @@ import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
 
 import {
   InputChildrenProps,
+  InputErrorMessageProps,
   StyledInputProps,
   StyledInputWrapperProps,
 } from '.'
@@ -24,17 +25,28 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   width: ${(props) => props.$width ?? '100%'};
   ${InputWrapperHidden};
 `
 
 /****************************************** Error *************************************************/
-export const InputErrorMessage = styled.div`
+export const InputErrorMessage = styled.div<InputErrorMessageProps>`
   ${getFontSizeStyles(12, 400, 'Inter')};
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 10px;
-  color: ${(props) => props.theme.colors.danger};
+  width: ${(props) => props.$width ?? '100%'};
+  ${(props) =>
+    props.$isErrorAbsolute
+      ? css`
+          position: absolute;
+          top: calc(100% + 6px);
+          left: 6px;
+          color: ${(props) => props.theme.colors.danger};
+        `
+      : css`
+          position: static;
+          padding: 6px;
+          color: ${(props) => props.theme.colors.danger};
+        `}
 `
 
 export const InputIsErrorBorder = css<StyledInputProps>`
