@@ -143,5 +143,9 @@ export const DropdownSelectAll = styled.div`
 `
 
 export const SelectStyledInput = styled(StyledInput)<SelectStyledInputProps>`
-  outline: none !important;
+  ${(props) =>
+    !props.$isError &&
+    css`
+      outline: none !important;
+    `}
 `

@@ -1,6 +1,8 @@
 import { useVirtualizer } from '@tanstack/react-virtual'
+import FullCountryList from 'country-list-with-dial-code-and-flag'
 import gsap from 'gsap'
 import {
+  FocusEventHandler,
   ReactNode,
   memo,
   useCallback,
@@ -9,11 +11,11 @@ import {
   useRef,
   useState,
 } from 'react'
-import { useTheme } from 'styled-components'
 
 import { Button } from '@components/button'
 import { Checkbox, CheckboxProps } from '@components/checkbox'
-import { InputChildrenProps } from '@components/input'
+import { InputChildrenProps, InputErrorMessage } from '@components/input'
+import { TypographyTooltip } from '@components/typography'
 
 import {
   KEY_SIZE_DATA,
@@ -28,7 +30,9 @@ import {
   DropdownListParent,
   DropdownOption,
   DropdownSelectAll,
+  ISelectCountryOption,
   ISelectItem,
+  SelectCountryProps,
   SelectProps,
   SelectStyledInput,
   SelectWrapper,
@@ -49,8 +53,6 @@ export const Select = <T extends object & ISelectItem>(
   const listRef = useRef<HTMLUListElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const parentListRef = useRef<HTMLDivElement>(null)
-
-  const theme = useTheme()
 
   const maxViewLength = useMemo(
     () => props.maxView ?? DEFAULT_MAX_VIEW,
@@ -77,10 +79,15 @@ export const Select = <T extends object & ISelectItem>(
   const height = useMemo(
     () =>
       sizeHeight *
-        (optionsLength < maxViewLength ? minViewLength : maxViewLength) +
+        (optionsLength < maxViewLength
+          ? optionsLength < minViewLength
+            ? minViewLength
+            : optionsLength
+          : maxViewLength) +
       (isFooter ? sizeHeight : 0),
     [sizeHeight, optionsLength, maxViewLength, minViewLength, isFooter],
   )
+
   const radius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size])
 
   const isSelectedItem = useCallback(
@@ -125,7 +132,7 @@ export const Select = <T extends object & ISelectItem>(
 
   const handleOptionOnClick = useCallback(
     (option: T) => {
-      if (props.isMultu) {
+      if (props.isMulti) {
         if (isAll) {
           const index = props.option.findIndex(
             (selectedItems) => selectedItems.value === option.value,
@@ -196,12 +203,7 @@ export const Select = <T extends object & ISelectItem>(
     })
   }, [radius])
 
-  const handleOnFocus = useCallback(() => {
-    if (isAnimating) return
-    if (isOpen) return
-
-    setIsAnimating(true)
-
+  const handleOnOpen = useCallback(() => {
     gsap.to(inputRef.current, {
       duration: 0.1,
       borderBottomLeftRadius: `0px`,
@@ -217,15 +219,31 @@ export const Select = <T extends object & ISelectItem>(
         })
       },
     })
-  }, [
-    handleListOptionOpenEffect,
-    height,
-    isAnimating,
-    isOpen,
-    theme.colors.focus,
-  ])
+  }, [handleListOptionOpenEffect, height])
 
-  const handleOnBlur = useCallback(() => {
+  const handleOnFocusEasy = useCallback(() => {
+    if (isAnimating) return
+    if (isOpen) return
+
+    setIsAnimating(true)
+
+    handleOnOpen()
+  }, [handleOnOpen, isAnimating, isOpen])
+
+  const handleOnFocus: FocusEventHandler<HTMLInputElement> = useCallback(
+    (event) => {
+      if (props.onFocus) props.onFocus(event)
+      handleOnFocusEasy()
+    },
+    [handleOnFocusEasy, props],
+  )
+
+  useEffect(() => {
+    if (isOpen) handleOnOpen()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [height])
+
+  const handleOnBlurEasy = useCallback(() => {
     if (isAnimating) return
     if (!isOpen) return
 
@@ -238,6 +256,14 @@ export const Select = <T extends object & ISelectItem>(
       },
     })
   }, [handleListOptionCloseEffect, isAnimating, isOpen])
+
+  const handleOnBlur: FocusEventHandler<HTMLInputElement> = useCallback(
+    (event) => {
+      if (props.onBlur && event) props.onBlur(event)
+      handleOnBlurEasy()
+    },
+    [handleOnBlurEasy, props],
+  )
 
   const handleMouseDown = useCallback((event: MouseEvent) => {
     if (
@@ -263,7 +289,7 @@ export const Select = <T extends object & ISelectItem>(
         !parentListRef.current.contains(event.target as Node) &&
         !inputRef.current.contains(event.target as Node)
       ) {
-        handleOnBlur()
+        handleOnBlurEasy()
       }
     }
 
@@ -272,7 +298,7 @@ export const Select = <T extends object & ISelectItem>(
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [handleOnBlur])
+  }, [handleOnBlurEasy])
 
   useEffect(() => {
     if (isOpen) {
@@ -307,157 +333,269 @@ export const Select = <T extends object & ISelectItem>(
   )
 
   return (
-    <SelectWrapper
-      tabIndex={0}
-      $genre={props.genre}
-      $radius={radius}
-      $width={props.width ?? props.inputProps.width}
-      $parentListHeight={height}
-      onFocus={handleOnFocus}
-      onBlur={handleOnBlur}
-    >
-      <SelectStyledInput
-        $isError={props.inputProps.isError}
-        $isLoading={props.inputProps.isLoading}
-        $postfixChildren={props.inputProps?.postfixChildren}
-        $prefixChildren={props.inputProps?.prefixChildren}
-        $genre={props.genre ?? props.inputProps.genre}
-        $size={props.size}
-        $isBold={props.inputProps.isBold}
-        disabled={props.inputProps.isDisabled}
-        readOnly={props.inputProps.isReadOnly}
-        required={props.inputProps.isRequired}
-        defaultValue={props.inputProps.defaultValue}
-        value={props.inputProps.value ?? ''}
-        placeholder={props.inputProps.placeholder}
-        type={props.inputProps.type}
-        onChange={(event) =>
-          props.inputProps.onChange &&
-          props.inputProps.onChange(event.target.value)
-        }
-        onBlur={props.inputProps.onBlur}
-        onFocus={props.inputProps.onFocus}
-        onClick={handleOnFocus}
-        ref={inputRef}
-      />
-      <DropdownListParent
-        ref={parentListRef}
+    <>
+      <SelectWrapper
         $genre={props.genre}
-        $isShowScroll={optionsLength > maxViewLength}
-        $isFooter={isFooter}
-        $size={props.size}
-        onScroll={(e) => handleFetchNextPage(e.target as HTMLDivElement)}
+        $width={props.width}
+        tabIndex={0}
+        $radius={radius}
+        $parentListHeight={height}
+        onFocus={handleOnFocus}
+        onBlur={handleOnBlur}
       >
-        <DropdownList
-          ref={listRef}
+        <SelectStyledInput
+          id={props.id}
+          name={props.name}
+          $genre={props.genre}
+          $size={props.size}
+          placeholder={props.placeholder}
+          $isError={props.inputProps.isError}
+          $isLoading={props.inputProps.isLoading}
+          $postfixChildren={props.inputProps?.postfixChildren}
+          $prefixChildren={props.inputProps?.prefixChildren}
+          $isBold={props.inputProps.isBold}
+          disabled={props.inputProps.isDisabled}
+          readOnly={props.inputProps.isReadOnly}
+          required={props.inputProps.isRequired}
+          defaultValue={props.inputProps.defaultValue}
+          value={props.inputProps.value ?? ''}
+          type={props.inputProps.type}
+          onChange={(event) =>
+            props.inputProps.onChange &&
+            props.inputProps.onChange(event.target.value)
+          }
+          onBlur={props.inputProps.onBlur}
+          onFocus={props.inputProps.onFocus}
+          onClick={handleOnFocusEasy}
+          ref={inputRef}
+        />
+
+        <DropdownListParent
+          ref={parentListRef}
+          $genre={props.genre}
+          $isShowScroll={optionsLength > maxViewLength}
+          $isFooter={isFooter}
+          $size={props.size}
+          onScroll={(e) => handleFetchNextPage(e.target as HTMLDivElement)}
           style={{
-            height: `${listVirtualizer.getTotalSize()}px`,
-            minHeight: `${height}px`,
+            maxHeight: `${height}px`,
           }}
         >
-          {listVirtualizer.getVirtualItems().map((virtualRow) => {
-            const item = props.option[virtualRow.index]
-            const checked = isSelectedItem(item)
-            return (
-              <ContainerDropdownOption
-                onClick={() => handleOptionOnClick(item)}
-                key={virtualRow.index}
-                genre={props.genre ?? props.optionProps.genre}
-                size={props.size}
-                checkboxProps={props.checkboxProps}
-                checked={checked}
-                isError={props.optionProps?.isError}
-                isLoading={props.optionProps?.isLoading}
-                isCustomIcon={props.optionProps?.isCustomIcon}
-                isBold={props.optionProps?.isBold}
-                postfixChildren={props.optionProps?.postfixChildren}
-                prefixChildren={props.optionProps?.prefixChildren}
-                virtualRowSize={virtualRow.size}
-                virtualRowStart={virtualRow.start}
-                label={item.label}
-              />
-            )
-          })}
-          {isFooter && (
-            <DropdownFooter
-              $isErase={isErase}
-              $isSelectAll={isSelectAll}
-              $genre={props.genre}
-              $size={props.size}
-            >
-              {props.footer!.selectAll && (
-                <DropdownSelectAll>
-                  <Button
-                    isFullSize
-                    genre={props.genre}
-                    onClick={handleSelectAllOnClick}
-                    size={'medium'}
-                    isHiddenBorder
-                  >
-                    {props.footer!.selectAll.label}
-                  </Button>
-                </DropdownSelectAll>
-              )}
-              {props.footer!.erase && (
-                <DropdownErase>
-                  <Button
-                    isFullSize
-                    genre={props.genre}
-                    onClick={handleEraseOnClick}
-                    size={'medium'}
-                    isHiddenBorder
-                  >
-                    {props.footer!.erase.label}
-                  </Button>
-                </DropdownErase>
-              )}
-            </DropdownFooter>
-          )}
-        </DropdownList>
-      </DropdownListParent>
-    </SelectWrapper>
+          <DropdownList
+            ref={listRef}
+            style={{
+              height: `${listVirtualizer.getTotalSize()}px`,
+              minHeight: `${height}px`,
+            }}
+          >
+            {listVirtualizer.getVirtualItems().map((virtualRow) => {
+              const item = props.option[virtualRow.index]
+              const checked = isSelectedItem(item)
+              return (
+                <ContainerDropdownOption
+                  checked={checked}
+                  onClick={() => handleOptionOnClick(item)}
+                  key={virtualRow.index}
+                  virtualRowSize={virtualRow.size}
+                  virtualRowStart={virtualRow.start}
+                  label={item.label}
+                  genre={props.genre}
+                  size={props.size}
+                  isBold={props.optionProps?.isBold}
+                  checkboxProps={
+                    props.isCheckbox && props.checkboxProps?.view
+                      ? {
+                          ...props.checkboxProps,
+                          genre: props.genre,
+                          size: props.size,
+                        }
+                      : undefined
+                  }
+                  isError={props.optionProps?.isError}
+                  isLoading={props.optionProps?.isLoading}
+                  isCustomIcon={props.optionProps?.isCustomIcon}
+                  prefixChildren={props.optionProps?.prefixChildren}
+                  postfixChildren={props.optionProps?.postfixChildren}
+                />
+              )
+            })}
+            {isFooter && (
+              <DropdownFooter
+                $isErase={isErase}
+                $isSelectAll={isSelectAll}
+                $genre={props.genre}
+                $size={props.size}
+              >
+                {props.footer!.selectAll && (
+                  <DropdownSelectAll>
+                    <Button
+                      isFullSize
+                      genre={props.genre}
+                      onClick={handleSelectAllOnClick}
+                      size={'medium'}
+                      isHiddenBorder
+                    >
+                      {props.footer!.selectAll.label}
+                    </Button>
+                  </DropdownSelectAll>
+                )}
+                {props.footer!.erase && (
+                  <DropdownErase>
+                    <Button
+                      isFullSize
+                      genre={props.genre}
+                      onClick={handleEraseOnClick}
+                      size={'medium'}
+                      isHiddenBorder
+                    >
+                      {props.footer!.erase.label}
+                    </Button>
+                  </DropdownErase>
+                )}
+              </DropdownFooter>
+            )}
+          </DropdownList>
+        </DropdownListParent>
+      </SelectWrapper>
+      {props.inputProps.isError && props.inputProps.errorMessage && (
+        <InputErrorMessage
+          $width={props.width}
+          $isErrorAbsolute={props.inputProps.isErrorAbsolute}
+        >
+          {props.inputProps.errorMessage}
+        </InputErrorMessage>
+      )}
+    </>
   )
 }
 
-export const ContainerDropdownOption = memo(
-  (params: {
-    checkboxProps: CheckboxProps
-    genre: keyof TJeneseiThemeGenreInput
-    size: TJeneseiThemeSize
-    onClick: () => void
-    isError?: boolean
-    isLoading?: boolean
-    isCustomIcon?: boolean
-    isBold?: boolean
-    postfixChildren?: InputChildrenProps
-    prefixChildren?: InputChildrenProps
-    checked: boolean
-    virtualRowSize: number
-    virtualRowStart: number
-    label: ReactNode
-  }) => {
-    return (
-      <DropdownOption
-        onClick={params.onClick}
-        $isCheckboxProps={!!params.checkboxProps}
-        $isError={params.isError}
-        $isLoading={params.isLoading}
-        $isCustomIcon={params.isCustomIcon}
-        $postfixChildren={params.postfixChildren}
-        $prefixChildren={params.prefixChildren}
-        $genre={params.genre}
-        $size={params.size}
-        $isBold={params.isBold}
-        style={{
-          height: `${params.virtualRowSize}px`,
-          transform: `translateY(${params.virtualRowStart}px)`,
-        }}
-      >
-        {!!params.checkboxProps && (
-          <Checkbox {...params.checkboxProps} checked={params.checked} />
-        )}
-        {params.label}
-      </DropdownOption>
-    )
-  },
-)
+export const ContainerDropdownOptionComponent = (params: {
+  checkboxProps?: CheckboxProps
+  genre: keyof TJeneseiThemeGenreInput
+  size: TJeneseiThemeSize
+  onClick: () => void
+  isError?: boolean
+  isLoading?: boolean
+  isCustomIcon?: boolean
+  isCheckbox?: boolean
+  isBold?: boolean
+  postfixChildren?: InputChildrenProps
+  prefixChildren?: InputChildrenProps
+  checked: boolean
+  virtualRowSize: number
+  virtualRowStart: number
+  label: ReactNode
+}) => {
+  return (
+    <DropdownOption
+      onClick={params.onClick}
+      $isCheckboxProps={params.isCheckbox}
+      $isError={params.isError}
+      $isLoading={params.isLoading}
+      $isCustomIcon={params.isCustomIcon}
+      $postfixChildren={params.postfixChildren}
+      $prefixChildren={params.prefixChildren}
+      $genre={params.genre}
+      $size={params.size}
+      $isBold={params.isBold}
+      style={{
+        height: `${params.virtualRowSize}px`,
+        transform: `translateY(${params.virtualRowStart}px)`,
+      }}
+    >
+      {!!params.isCheckbox && params.checkboxProps && (
+        <Checkbox {...params.checkboxProps} checked={params.checked} />
+      )}
+      {params.label}
+    </DropdownOption>
+  )
+}
+
+export const ContainerDropdownOption = memo(ContainerDropdownOptionComponent)
+
+export const SelectCountry: React.FC<SelectCountryProps> = (props) => {
+  const countryListOption = FullCountryList.getAll()
+
+  const option = useMemo<ISelectCountryOption[]>(
+    () =>
+      countryListOption.map((e) => ({
+        label: (
+          <>
+            <img
+              alt={e.name}
+              style={{
+                paddingRight: '6px',
+                width: '30px',
+                display: 'inline-flex',
+                objectFit: 'cover',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+              src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${e.code}.svg`}
+            />
+            <TypographyTooltip
+              typography={{
+                textWrap: 'nowrap',
+              }}
+              tooltip={{ size: 14, placement: 'bottom' }}
+            >
+              {e.name}
+              {', '}
+              {e.localName}
+            </TypographyTooltip>
+          </>
+        ),
+        value: e.code,
+        search: e.name + ', ' + e.localName + ', ' + e.dialCode + ', ' + e.code,
+        placeholder: e.name + ', ' + e.localName,
+        dialCode: e.dial_code,
+      })),
+    [countryListOption],
+  )
+  const [viewOption, setViewOption] = useState<ISelectCountryOption[]>(option)
+  const [query, setQuery] = useState<string>('')
+  const handleSelectChange = (option: ISelectCountryOption[]) => {
+    props.onChange(option[0].value.toString())
+    props.onChangeDialCode(option[0].dialCode.toString())
+  }
+  const handleQueryChange = useCallback(
+    (value: string) => {
+      setQuery(value)
+      props.onChange('')
+      props.onChangeDialCode('')
+      if (value === '') return setViewOption(option)
+      const filteredOptions = option.filter((option) =>
+        Object.values(option).some((field) =>
+          field?.toString().toLowerCase().includes(value.toLowerCase()),
+        ),
+      )
+      setViewOption(filteredOptions)
+    },
+    [option, props],
+  )
+
+  const [value, setValue] = useState<ISelectCountryOption | undefined>(
+    option.find((e) => e.value === props.value),
+  )
+  useEffect(() => {
+    if (value?.value !== props.value)
+      setValue(option.find((e) => e.value === props.value))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [option, props.value])
+
+  return (
+    <Select<ISelectCountryOption>
+      {...props}
+      option={viewOption}
+      minView={1}
+      maxView={8}
+      value={value ? [value] : []}
+      onChange={handleSelectChange}
+      inputProps={{
+        ...props.inputProps,
+        value: (value?.placeholder as string) ?? query,
+        onChange: handleQueryChange,
+      }}
+    />
+  )
+}
