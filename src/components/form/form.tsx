@@ -16,7 +16,7 @@ const validationSchema = z.object({
   dateOfBirthday: z
     .number()
     .int()
-    .min(
+    .max(
       moment().subtract(18, 'years').unix(),
       'Date of birthday must be at least 18 years ago',
     )
