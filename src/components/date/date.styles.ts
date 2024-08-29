@@ -1,11 +1,13 @@
 import styled, { css } from 'styled-components'
 
 import { StyledInput } from '@components/input'
+import { getFontSizeStyles } from '@components/typography'
 
 import { KEY_SIZE_DATA } from '@theme/theme'
 import { IJeneseiThemeSize } from '@theme/theme.interface'
 
 import {
+  DateDropdownDayProps,
   DateDropdownListProps,
   DateStyledInputProps,
   DateStyledListProps,
@@ -29,7 +31,7 @@ export const DateDropdownListParent = styled.div<DateStyledListProps>`
 
   height: 0px;
   width: 100%;
-  max-width: 360px;
+  max-width: 250px;
 
   position: absolute;
 
@@ -78,7 +80,7 @@ export const DateDropdownList = styled.div<DateDropdownListProps>`
 
   display: flex;
   flex-direction: column;
-
+  overflow: hidden;
   width: 100%;
   padding-top: 6px;
   transform: translateZ(0);
@@ -87,16 +89,67 @@ export const DateDropdownList = styled.div<DateDropdownListProps>`
   border: solid 2px
     ${(props) => props.theme.colors.input[props.$genre].border.rest};
   ${dateDropdownListSize}
+  justify-content: flex-start;
+  gap: 10px;
 `
 
 export const DateDropdownDays = styled.div`
   display: grid;
-  column-gap: auto;
-  row-gap: auto;
-`
-export const DateDropdownDay = styled.div<{ $row: number; $column: number }>`
-  grid-row: ${(props) => props.$row};
-  grid-column: ${(props) => props.$column};
+  column-gap: normal;
+  row-gap: normal;
+  gap: 2px;
+  grid-template-columns: repeat(7, 28px);
+  grid-template-rows: repeat(7, 28px);
+  justify-content: space-between;
 `
 
+export const DateDropdownDaySize = css<DateDropdownDayProps>`
+  ${(props) =>
+    props.$size &&
+    DateDropdownDaySizeConstructor({
+      ...KEY_SIZE_DATA[props.$size],
+    })};
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  user-select: none;
+  background: ${(props) =>
+    props.theme.colors.button[props.$genre].background.rest};
+  border-color: ${(props) =>
+    props.theme.colors.button[props.$genre].border.rest};
+  color: ${(props) => props.theme.colors.button[props.$genre].color.rest};
+  outline: 1px solid transparent;
+  border: 1px solid transparent;
+  grid-row: ${(props) => props.$row};
+  grid-column: ${(props) => props.$column};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  &:hover {
+    ${(props) => css`
+      background: ${props.theme.colors.button[props.$genre].background.hover};
+      border-color: ${props.theme.colors.button[props.$genre].border.hover};
+      color: ${props.theme.colors.button[props.$genre].color.hover};
+    `}
+  }
+  transition:
+    all ${(props) => props.theme.transition},
+    outline 0s;
+  ${getFontSizeStyles(12, 600, 'Inter')}
+`
+export const DateDropdownDaySizeConstructor = (props: IJeneseiThemeSize) => css`
+  border-radius: ${props.radius}px;
+  ${getFontSizeStyles(12, 600, 'Inter')};
+`
+
+export const DateDropdownDay = styled.button<DateDropdownDayProps>`
+  ${DateDropdownDaySize}
+`
+export const DateDropdownDayOfWeek = styled.button<DateDropdownDayProps>`
+  ${DateDropdownDaySize}
+  background-color: transparent;
+`
 export const DateStyledInput = styled(StyledInput)<DateStyledInputProps>``

@@ -1,4 +1,4 @@
-import { FC, memo } from 'react'
+import { FC } from 'react'
 import { Ripple } from 'react-ripple-click'
 import { useTheme } from 'styled-components'
 
@@ -8,7 +8,7 @@ import { ModalLoading } from '@components/modal-loading'
 
 import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.'
 
-export const Button: FC<ButtonProps> = memo((props) => {
+export const Button: FC<ButtonProps> = (props) => {
   const theme = useTheme()
   return (
     <StyledButton
@@ -116,4 +116,4 @@ export const Button: FC<ButtonProps> = memo((props) => {
       )}
     </StyledButton>
   )
-})
+}

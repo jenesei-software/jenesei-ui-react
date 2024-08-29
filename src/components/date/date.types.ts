@@ -9,6 +9,15 @@ import {
 
 import { TJeneseiThemeSize } from '@theme/index'
 
+export interface DateDayProps {
+  value: number
+  labelString: string
+  labelNumber: number
+  dayOfWeek: number
+  isWeekend: boolean
+  weekOfMonth: number
+  isToday: boolean
+}
 export interface DateProps {
   name?: string
   id?: string
@@ -20,7 +29,7 @@ export interface DateProps {
 
   inputProps: Omit<
     InputProps,
-    'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'
+    'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width' | 'value'
   >
   value?: number | null
   onChange: (timestamp: number) => void
@@ -47,6 +56,13 @@ export interface DateStyledListProps {
 }
 
 export interface DateDropdownListProps {
+  $genre: DateStyledInputProps['$genre']
+  $size?: DateStyledInputProps['$size']
+}
+
+export interface DateDropdownDayProps {
+  $row: number
+  $column: number
   $genre: DateStyledInputProps['$genre']
   $size?: DateStyledInputProps['$size']
 }
