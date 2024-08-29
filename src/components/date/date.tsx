@@ -29,7 +29,7 @@ export const DatePicker = (props: DateProps) => {
   const [currentMonth, setCurrentMonth] = useState(unixValue.clone().month())
   const [currentYear, setCurrentYear] = useState(unixValue.clone().year())
   const [currentDay, setCurrentDay] = useState(unixValue.clone().date())
-
+  console.log('currentDay', currentDay)
   const currentMonthLabel = useMemo(() => {
     return moment.utc().month(currentMonth).format('MMMM')
   }, [currentMonth])
@@ -48,13 +48,8 @@ export const DatePicker = (props: DateProps) => {
 
     const days = []
 
-    // Определяем начало недели первого дня месяца
-    const startOfFirstWeek = startOfMonth.clone().startOf('isoWeek')
-
-    // Определяем номер недели для первого дня месяца
     const startWeekNumber = startOfMonth.isoWeek()
 
-    // Добавляем дни перед началом месяца, чтобы заполнить первую неделю
     const daysToAddBefore = startOfMonth.isoWeekday() - 1 // isoWeekday: 1 = Пн, ..., 7 = Вс
     for (let i = daysToAddBefore; i > 0; i--) {
       const day = startOfMonth.clone().subtract(i, 'days')
@@ -68,7 +63,6 @@ export const DatePicker = (props: DateProps) => {
       })
     }
 
-    // Добавляем дни самого месяца
     const currentDate = startOfMonth.clone()
     while (currentDate <= endOfMonth) {
       days.push({
@@ -83,7 +77,6 @@ export const DatePicker = (props: DateProps) => {
       currentDate.add(1, 'day')
     }
 
-    // Добавляем дни после конца месяца, чтобы заполнить последнюю неделю
     const daysToAddAfter = 7 - endOfMonth.isoWeekday()
     for (let i = 1; i <= daysToAddAfter; i++) {
       const day = endOfMonth.clone().add(i, 'days')
@@ -100,90 +93,90 @@ export const DatePicker = (props: DateProps) => {
     return days
   }, [currentMonth, currentYear])
 
-  // Увеличение дня
-  const increaseDay = () => {
-    const newDate = moment
-      .utc()
-      .year(currentYear)
-      .month(currentMonth)
-      .date(currentDay)
-      .add(1, 'day')
-    setCurrentDay(newDate.date())
-    setCurrentMonth(newDate.month())
-    setCurrentYear(newDate.year())
-  }
+  // // Увеличение дня
+  // const increaseDay = () => {
+  //   const newDate = moment
+  //     .utc()
+  //     .year(currentYear)
+  //     .month(currentMonth)
+  //     .date(currentDay)
+  //     .add(1, 'day')
+  //   setCurrentDay(newDate.date())
+  //   setCurrentMonth(newDate.month())
+  //   setCurrentYear(newDate.year())
+  // }
 
-  // Уменьшение дня
-  const decreaseDay = () => {
-    const newDate = moment
-      .utc()
-      .year(currentYear)
-      .month(currentMonth)
-      .date(currentDay)
-      .subtract(1, 'day')
-    setCurrentDay(newDate.date())
-    setCurrentMonth(newDate.month())
-    setCurrentYear(newDate.year())
-  }
+  // // Уменьшение дня
+  // const decreaseDay = () => {
+  //   const newDate = moment
+  //     .utc()
+  //     .year(currentYear)
+  //     .month(currentMonth)
+  //     .date(currentDay)
+  //     .subtract(1, 'day')
+  //   setCurrentDay(newDate.date())
+  //   setCurrentMonth(newDate.month())
+  //   setCurrentYear(newDate.year())
+  // }
 
-  // Увеличение месяца
-  const increaseMonth = () => {
-    const newDate = moment
-      .utc()
-      .year(currentYear)
-      .month(currentMonth)
-      .date(currentDay)
-      .add(1, 'month')
-    setCurrentDay(newDate.date())
-    setCurrentMonth(newDate.month())
-    setCurrentYear(newDate.year())
-  }
+  // // Увеличение месяца
+  // const increaseMonth = () => {
+  //   const newDate = moment
+  //     .utc()
+  //     .year(currentYear)
+  //     .month(currentMonth)
+  //     .date(currentDay)
+  //     .add(1, 'month')
+  //   setCurrentDay(newDate.date())
+  //   setCurrentMonth(newDate.month())
+  //   setCurrentYear(newDate.year())
+  // }
 
-  // Уменьшение месяца
-  const decreaseMonth = () => {
-    const newDate = moment
-      .utc()
-      .year(currentYear)
-      .month(currentMonth)
-      .date(currentDay)
-      .subtract(1, 'month')
-    setCurrentDay(newDate.date())
-    setCurrentMonth(newDate.month())
-    setCurrentYear(newDate.year())
-  }
+  // // Уменьшение месяца
+  // const decreaseMonth = () => {
+  //   const newDate = moment
+  //     .utc()
+  //     .year(currentYear)
+  //     .month(currentMonth)
+  //     .date(currentDay)
+  //     .subtract(1, 'month')
+  //   setCurrentDay(newDate.date())
+  //   setCurrentMonth(newDate.month())
+  //   setCurrentYear(newDate.year())
+  // }
 
-  // Увеличение года
-  const increaseYear = () => {
-    const newDate = moment
-      .utc()
-      .year(currentYear)
-      .month(currentMonth)
-      .date(currentDay)
-      .add(1, 'year')
-    setCurrentDay(newDate.date())
-    setCurrentMonth(newDate.month())
-    setCurrentYear(newDate.year())
-  }
+  // // Увеличение года
+  // const increaseYear = () => {
+  //   const newDate = moment
+  //     .utc()
+  //     .year(currentYear)
+  //     .month(currentMonth)
+  //     .date(currentDay)
+  //     .add(1, 'year')
+  //   setCurrentDay(newDate.date())
+  //   setCurrentMonth(newDate.month())
+  //   setCurrentYear(newDate.year())
+  // }
 
-  // Уменьшение года
-  const decreaseYear = () => {
-    const newDate = moment
-      .utc()
-      .year(currentYear)
-      .month(currentMonth)
-      .date(currentDay)
-      .subtract(1, 'year')
-    setCurrentDay(newDate.date())
-    setCurrentMonth(newDate.month())
-    setCurrentYear(newDate.year())
-  }
-  const updateDateFromTimestamp = (timestamp: number) => {
-    const newDate = moment.unix(timestamp).utc()
-    props.onChange(timestamp)
-    setCurrentDay(newDate.date())
-    setCurrentMonth(newDate.month())
-    setCurrentYear(newDate.year())
-  }
+  // // Уменьшение года
+  // const decreaseYear = () => {
+  //   const newDate = moment
+  //     .utc()
+  //     .year(currentYear)
+  //     .month(currentMonth)
+  //     .date(currentDay)
+  //     .subtract(1, 'year')
+  //   setCurrentDay(newDate.date())
+  //   setCurrentMonth(newDate.month())
+  //   setCurrentYear(newDate.year())
+  // }
+  // const updateDateFromTimestamp = (timestamp: number) => {
+  //   const newDate = moment.unix(timestamp).utc()
+  //   props.onChange(timestamp)
+  //   setCurrentDay(newDate.date())
+  //   setCurrentMonth(newDate.month())
+  //   setCurrentYear(newDate.year())
+  // }
   useEffect(() => {
     if (props.value) {
       const newDate = moment.unix(props.value).utc()
