@@ -1,15 +1,30 @@
 import { useForm } from '@tanstack/react-form'
 import { zodValidator } from '@tanstack/zod-form-adapter'
+import moment from 'moment'
 import { z } from 'zod'
 
 import { Icon } from '@assets/library-icon'
 
 import { Button } from '@components/button'
+import { DatePicker } from '@components/date'
 import { Stack } from '@components/flex'
-import { Input } from '@components/input'
+import { Input, InputPhone } from '@components/input'
+import { SelectCountry } from '@components/select'
 import { Typography } from '@components/typography'
 
 const validationSchema = z.object({
+  dateOfBirthday: z
+    .number()
+    .int()
+    .min(
+      moment().subtract(18, 'years').unix(),
+      'Date of birthday must be at least 18 years ago',
+    )
+    .refine(
+      (value) => value <= moment().unix(),
+      'Date cannot be in the future',
+    ),
+  countryCode: z.string().trim().min(1, 'Country is required'),
   firstName: z
     .string()
     .trim()
@@ -78,6 +93,9 @@ export const Form = () => {
       currentPassword: '',
       confirmPassword: '',
       phone: '',
+      countryCode: '',
+      countryDialCode: '',
+      dateOfBirthday: 0,
     },
     onSubmit: async ({ value }) => {
       const result = {
@@ -88,6 +106,8 @@ export const Form = () => {
         currentPassword: value.currentPassword.trim(),
         confirmPassword: value.confirmPassword.trim(),
         phone: value.phone.trim(),
+        country: value.countryCode.trim(),
+        countryDialCode: value.countryDialCode.trim(),
       }
       console.log(result)
     },
@@ -105,6 +125,124 @@ export const Form = () => {
       <Stack gap="6px" flexDirection="column" w="100%" maxW="500px">
         <>
           <Typography color="black100" variant="h5">
+            Date of Birthday
+          </Typography>
+          <form.Field
+            name="dateOfBirthday"
+            validators={{
+              onBlur: validationSchema.shape.dateOfBirthday,
+            }}
+          >
+            {(field) => (
+              <>
+                <DatePicker
+                  placeholder="Choice your date of birthday"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={field.handleChange}
+                  genre={'grayBorder'}
+                  size={'medium'}
+                  inputProps={{
+                    isError: !!field.state.meta.errors.length,
+                    errorMessage: field.state.meta.errors?.[0]?.toString(),
+                  }}
+                />
+              </>
+            )}
+          </form.Field>
+          <Typography color="black100" variant="h5">
+            Country
+          </Typography>
+          <form.Field
+            name="countryCode"
+            validators={{
+              onBlur: validationSchema.shape.countryCode,
+            }}
+          >
+            {(field) => (
+              <>
+                <SelectCountry
+                  placeholder="Choice your country"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={field.handleChange}
+                  onChangeDialCode={(value) =>
+                    field.form.setFieldValue('countryDialCode', value)
+                  }
+                  genre={'grayBorder'}
+                  size={'medium'}
+                  inputProps={{
+                    isError: !!field.state.meta.errors.length,
+                    errorMessage: field.state.meta.errors?.[0]?.toString(),
+                  }}
+                />
+              </>
+            )}
+          </form.Field>
+          <Typography color="black100" variant="h5">
+            Phone
+          </Typography>
+          <form.Field
+            name="phone"
+            validators={{
+              onChangeListenTo: ['countryDialCode', 'countryCode'],
+              onBlurListenTo: ['countryDialCode', 'countryCode'],
+              onChange: validationSchema.shape.phone,
+            }}
+          >
+            {(field) => {
+              const countryCode = field.form.getFieldValue('countryCode')
+              const countryDialCode =
+                field.form.getFieldValue('countryDialCode')
+              return (
+                <InputPhone
+                  countryDialCode={countryDialCode}
+                  countryCode={countryCode}
+                  placeholder="Write the phone"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={field.handleChange}
+                  genre={'grayBorder'}
+                  size={'medium'}
+                  isError={
+                    !!field.state.meta.isTouched &&
+                    !!field.state.meta.errors.length
+                  }
+                  errorMessage={field.state.meta.errors?.[0]?.toString()}
+                  postfixChildren={{
+                    width: '32px',
+                    left: '4px',
+                    right: '0px',
+                    children: (
+                      <Stack
+                        alignItems={'center'}
+                        justifyContent={'center'}
+                        p={'2px'}
+                        style={{ borderRadius: '0px 6px 6px 0px' }}
+                        bg={'black60'}
+                        minH={'100%'}
+                        h={'100%'}
+                      >
+                        <Icon
+                          size={'largeMedium'}
+                          primaryColor={'grayJanice'}
+                          type={'curved'}
+                          name={'Call'}
+                        />
+                      </Stack>
+                    ),
+                  }}
+                />
+              )
+            }}
+          </form.Field>
+          <Typography color="black100" variant="h5">
             First name
           </Typography>
           <form.Field
@@ -112,28 +250,27 @@ export const Form = () => {
             validators={{
               onChange: validationSchema.shape.firstName,
             }}
-            children={(field) => {
-              return (
-                <>
-                  <Input
-                    placeholder="Write the first name"
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={field.handleChange}
-                    genre={'grayBorder'}
-                    size={'medium'}
-                    isError={
-                      !!field.state.meta.isTouched &&
-                      !!field.state.meta.errors.length
-                    }
-                    errorMessage={field.state.meta.errors?.[0]?.toString()}
-                  />
-                </>
-              )
-            }}
-          />
+          >
+            {(field) => (
+              <>
+                <Input
+                  placeholder="Write the first name"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={field.handleChange}
+                  genre={'grayBorder'}
+                  size={'medium'}
+                  isError={
+                    !!field.state.meta.isTouched &&
+                    !!field.state.meta.errors.length
+                  }
+                  errorMessage={field.state.meta.errors?.[0]?.toString()}
+                />
+              </>
+            )}
+          </form.Field>
           <Typography color="black100" variant="h5">
             Last name
           </Typography>
@@ -142,28 +279,27 @@ export const Form = () => {
             validators={{
               onChange: validationSchema.shape.lastName,
             }}
-            children={(field) => {
+          >
+            {(field) => {
               return (
-                <>
-                  <Input
-                    placeholder="Write the last name"
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={field.handleChange}
-                    genre={'grayBorder'}
-                    size={'medium'}
-                    isError={
-                      !!field.state.meta.isTouched &&
-                      !!field.state.meta.errors.length
-                    }
-                    errorMessage={field.state.meta.errors?.[0]?.toString()}
-                  />
-                </>
+                <Input
+                  placeholder="Write the last name"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={field.handleChange}
+                  genre={'grayBorder'}
+                  size={'medium'}
+                  isError={
+                    !!field.state.meta.isTouched &&
+                    !!field.state.meta.errors.length
+                  }
+                  errorMessage={field.state.meta.errors?.[0]?.toString()}
+                />
               )
             }}
-          />
+          </form.Field>
           <Typography color="black100" variant="h5">
             Email
           </Typography>
@@ -172,29 +308,26 @@ export const Form = () => {
             validators={{
               onChange: validationSchema.shape.email,
             }}
-            children={(field) => {
-              return (
-                <>
-                  <Input
-                    placeholder="Write the Email"
-                    type="email"
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={field.handleChange}
-                    genre={'grayBorder'}
-                    size={'medium'}
-                    isError={
-                      !!field.state.meta.isTouched &&
-                      !!field.state.meta.errors.length
-                    }
-                    errorMessage={field.state.meta.errors?.[0]?.toString()}
-                  />
-                </>
-              )
-            }}
-          />
+          >
+            {(field) => (
+              <Input
+                placeholder="Write the Email"
+                type="email"
+                id={field.name}
+                name={field.name}
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                onChange={field.handleChange}
+                genre={'grayBorder'}
+                size={'medium'}
+                isError={
+                  !!field.state.meta.isTouched &&
+                  !!field.state.meta.errors.length
+                }
+                errorMessage={field.state.meta.errors?.[0]?.toString()}
+              />
+            )}
+          </form.Field>
           <Typography color="black100" variant="h5">
             Login
           </Typography>
@@ -203,28 +336,25 @@ export const Form = () => {
             validators={{
               onChange: validationSchema.shape.login,
             }}
-            children={(field) => {
-              return (
-                <>
-                  <Input
-                    placeholder="Write the login"
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={field.handleChange}
-                    genre={'grayBorder'}
-                    size={'medium'}
-                    isError={
-                      !!field.state.meta.isTouched &&
-                      !!field.state.meta.errors.length
-                    }
-                    errorMessage={field.state.meta.errors?.[0]?.toString()}
-                  />
-                </>
-              )
-            }}
-          />
+          >
+            {(field) => (
+              <Input
+                placeholder="Write the login"
+                id={field.name}
+                name={field.name}
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                onChange={field.handleChange}
+                genre={'grayBorder'}
+                size={'medium'}
+                isError={
+                  !!field.state.meta.isTouched &&
+                  !!field.state.meta.errors.length
+                }
+                errorMessage={field.state.meta.errors?.[0]?.toString()}
+              />
+            )}
+          </form.Field>
           <Typography color="black100" variant="h5">
             Current password
           </Typography>
@@ -234,52 +364,49 @@ export const Form = () => {
               onChangeListenTo: ['confirmPassword'],
               onChange: validationSchema.shape.currentPassword,
             }}
-            children={(field) => {
-              return (
-                <>
-                  <Input
-                    type="password"
-                    placeholder="Write the current password"
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={field.handleChange}
-                    genre={'grayBorder'}
-                    size={'medium'}
-                    isError={
-                      !!field.state.meta.isTouched &&
-                      !!field.state.meta.errors.length
-                    }
-                    errorMessage={field.state.meta.errors?.[0]?.toString()}
-                    postfixChildren={{
-                      width: '32px',
-                      left: '4px',
-                      right: '0px',
-                      children: (
-                        <Stack
-                          alignItems={'center'}
-                          justifyContent={'center'}
-                          p={'2px'}
-                          style={{ borderRadius: '0px 6px 6px 0px' }}
-                          bg={'black60'}
-                          minH={'100%'}
-                          h={'100%'}
-                        >
-                          <Icon
-                            size={'largeMedium'}
-                            primaryColor={'grayJanice'}
-                            type={'curved'}
-                            name={'Password'}
-                          />
-                        </Stack>
-                      ),
-                    }}
-                  />
-                </>
-              )
-            }}
-          />
+          >
+            {(field) => (
+              <Input
+                type="password"
+                placeholder="Write the current password"
+                id={field.name}
+                name={field.name}
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                onChange={field.handleChange}
+                genre={'grayBorder'}
+                size={'medium'}
+                isError={
+                  !!field.state.meta.isTouched &&
+                  !!field.state.meta.errors.length
+                }
+                errorMessage={field.state.meta.errors?.[0]?.toString()}
+                postfixChildren={{
+                  width: '32px',
+                  left: '4px',
+                  right: '0px',
+                  children: (
+                    <Stack
+                      alignItems={'center'}
+                      justifyContent={'center'}
+                      p={'2px'}
+                      style={{ borderRadius: '0px 6px 6px 0px' }}
+                      bg={'black60'}
+                      minH={'100%'}
+                      h={'100%'}
+                    >
+                      <Icon
+                        size={'largeMedium'}
+                        primaryColor={'grayJanice'}
+                        type={'curved'}
+                        name={'Password'}
+                      />
+                    </Stack>
+                  ),
+                }}
+              />
+            )}
+          </form.Field>
           <Typography color="black100" variant="h5">
             Confirm password
           </Typography>
@@ -294,111 +421,53 @@ export const Form = () => {
                 return undefined
               },
             }}
-            children={(field) => {
-              return (
-                <>
-                  <Input
-                    type="password"
-                    placeholder="Write the confirm password"
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={field.handleChange}
-                    genre={'grayBorder'}
-                    size={'medium'}
-                    isError={
-                      !!field.state.meta.isTouched &&
-                      !!field.state.meta.errors.length
-                    }
-                    errorMessage={field.state.meta.errors?.[0]?.toString()}
-                    postfixChildren={{
-                      width: '32px',
-                      left: '4px',
-                      right: '0px',
-                      children: (
-                        <Stack
-                          alignItems={'center'}
-                          justifyContent={'center'}
-                          p={'2px'}
-                          style={{ borderRadius: '0px 6px 6px 0px' }}
-                          bg={'black60'}
-                          minH={'100%'}
-                          h={'100%'}
-                        >
-                          <Icon
-                            size={'largeMedium'}
-                            primaryColor={'grayJanice'}
-                            type={'curved'}
-                            name={'Password'}
-                          />
-                        </Stack>
-                      ),
-                    }}
-                  />
-                </>
-              )
-            }}
-          />
-          <Typography color="black100" variant="h5">
-            Phone
-          </Typography>
-          <form.Field
-            name="phone"
-            validators={{
-              onChange: validationSchema.shape.phone,
-            }}
-            children={(field) => {
-              return (
-                <>
-                  <Input
-                    format="+7 (9##) ###-##-##"
-                    mask="_"
-                    formatType="tel"
-                    placeholder="Write the phone"
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={field.handleChange}
-                    genre={'grayBorder'}
-                    size={'medium'}
-                    isError={
-                      !!field.state.meta.isTouched &&
-                      !!field.state.meta.errors.length
-                    }
-                    errorMessage={field.state.meta.errors?.[0]?.toString()}
-                    postfixChildren={{
-                      width: '32px',
-                      left: '4px',
-                      right: '0px',
-                      children: (
-                        <Stack
-                          alignItems={'center'}
-                          justifyContent={'center'}
-                          p={'2px'}
-                          style={{ borderRadius: '0px 6px 6px 0px' }}
-                          bg={'black60'}
-                          minH={'100%'}
-                          h={'100%'}
-                        >
-                          <Icon
-                            size={'largeMedium'}
-                            primaryColor={'grayJanice'}
-                            type={'curved'}
-                            name={'Call'}
-                          />
-                        </Stack>
-                      ),
-                    }}
-                  />
-                </>
-              )
-            }}
-          />
+          >
+            {(field) => (
+              <Input
+                type="password"
+                placeholder="Write the confirm password"
+                id={field.name}
+                name={field.name}
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                onChange={field.handleChange}
+                genre={'grayBorder'}
+                size={'medium'}
+                isError={
+                  !!field.state.meta.isTouched &&
+                  !!field.state.meta.errors.length
+                }
+                errorMessage={field.state.meta.errors?.[0]?.toString()}
+                postfixChildren={{
+                  width: '32px',
+                  left: '4px',
+                  right: '0px',
+                  children: (
+                    <Stack
+                      alignItems={'center'}
+                      justifyContent={'center'}
+                      p={'2px'}
+                      style={{ borderRadius: '0px 6px 6px 0px' }}
+                      bg={'black60'}
+                      minH={'100%'}
+                      h={'100%'}
+                    >
+                      <Icon
+                        size={'largeMedium'}
+                        primaryColor={'grayJanice'}
+                        type={'curved'}
+                        name={'Password'}
+                      />
+                    </Stack>
+                  ),
+                }}
+              />
+            )}
+          </form.Field>
           <form.Subscribe
             selector={(state) => [state.canSubmit, state.isSubmitting]}
-            children={([canSubmit, isSubmitting]) => (
+          >
+            {([canSubmit, isSubmitting]) => (
               <>
                 <Button
                   width="100%"
@@ -420,7 +489,7 @@ export const Form = () => {
                 </Button>
               </>
             )}
-          />
+          </form.Subscribe>
         </>
       </Stack>
     </form>

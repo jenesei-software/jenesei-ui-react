@@ -1,4 +1,5 @@
-import { memo } from 'react'
+import { getExample } from 'awesome-phonenumber'
+import FullCountryList from 'country-list-with-dial-code-and-flag'
 import { useTheme } from 'styled-components'
 
 import {
@@ -12,7 +13,7 @@ import {
   StyledInputWrapper,
 } from '.'
 
-export const Input = memo((props: InputProps) => {
+export const Input = (props: InputProps) => {
   const theme = useTheme()
 
   return (
@@ -27,7 +28,7 @@ export const Input = memo((props: InputProps) => {
         )}
         {props.format ? (
           <StyledInputFormat
-            $isError={props.isError}
+            $isError={props?.isError}
             $isLoading={props.isLoading}
             $postfixChildren={props?.postfixChildren}
             $prefixChildren={props?.prefixChildren}
@@ -44,6 +45,7 @@ export const Input = memo((props: InputProps) => {
             onValueChange={({ value }) =>
               props.onChange && props.onChange(value)
             }
+            allowEmptyFormatting={props.isAllowEmptyFormatting}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
             format={props.format}
@@ -100,4 +102,47 @@ export const Input = memo((props: InputProps) => {
       )}
     </>
   )
-})
+}
+
+function formatPhoneNumber(dialCode: string, international: string) {
+  const numberWithoutDialCode = international.replace(dialCode, '').trim()
+
+  const formattedNumber = numberWithoutDialCode.replace(/\d/g, '#')
+  const placeholderNumber = numberWithoutDialCode.replace(/\d/g, '_')
+  return {
+    format: `${dialCode} ${formattedNumber}`,
+    placeholder: `${dialCode} ${placeholderNumber}`,
+  }
+}
+
+export const InputPhone = (
+  props: Omit<InputProps, 'format' | 'mask' | 'formatType'> & {
+    countryCode?: string
+    countryDialCode?: string
+  },
+) => {
+  const countryCode = props?.countryCode ?? null
+  const country = countryCode
+    ? FullCountryList.findOneByCountryCode(countryCode)
+    : null
+  const dialCode = props?.countryDialCode ?? country?.dial_code
+  const data = dialCode && countryCode ? getExample(countryCode) : null
+  const formattedPhoneNumber =
+    data && data.number?.international && dialCode
+      ? formatPhoneNumber(dialCode, data.number?.international)
+      : null
+
+  return (
+    <Input
+      {...props}
+      placeholder={
+        formattedPhoneNumber?.placeholder ? undefined : props.placeholder
+      }
+      format={formattedPhoneNumber?.format}
+      isAllowEmptyFormatting
+      mask="_"
+      isDisabled={!formattedPhoneNumber || props.isDisabled}
+      formatType="tel"
+    />
+  )
+}
