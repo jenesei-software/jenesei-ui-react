@@ -1,0 +1,1 @@
+import{l as o}from"./theme.global-ac8e1350.js";const f=(e,n,l,t)=>o(["font-family:",";font-style:normal;line-height:normal;font-size:","px;font-weight:",";",""],l,e,n,t&&o(["line-height:","px;"],t));export{f as g};
