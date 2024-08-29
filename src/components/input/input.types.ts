@@ -1,13 +1,19 @@
 import { FocusEventHandler, HTMLInputTypeAttribute } from 'react'
 
-import { TJeneseiThemeGenre, TJeneseiThemeSize } from '../../theme'
+import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@theme/index'
 
 export interface InputProps {
+  name?: string
+
+  id?: string
+
   className?: string
 
   defaultValue?: string
 
   errorMessage?: string
+
+  isErrorAbsolute?: string
 
   genre: TInputGenre
 
@@ -20,8 +26,6 @@ export interface InputProps {
   isError?: boolean
 
   isLoading?: boolean
-
-  isActive?: boolean
 
   isReadOnly?: boolean
 
@@ -64,7 +68,7 @@ export interface InputChildrenProps {
   width: string
 }
 
-export type TInputGenre = keyof TJeneseiThemeGenre
+export type TInputGenre = keyof TJeneseiThemeGenreInput
 
 export interface StyledInputProps {
   $genre: InputProps['genre']
@@ -74,8 +78,6 @@ export interface StyledInputProps {
   $isError?: InputProps['isError']
 
   $isLoading?: InputProps['isLoading']
-
-  $isActive?: InputProps['isActive']
 
   $postfixChildren?: InputChildrenProps
 
@@ -89,5 +91,10 @@ export interface StyledInputProps {
 export interface StyledInputWrapperProps {
   $isDisabled?: InputProps['isDisabled']
 
+  $width?: InputProps['width']
+}
+
+export interface InputErrorMessageProps {
+  $isErrorAbsolute?: string
   $width?: InputProps['width']
 }

@@ -1,11 +1,18 @@
-import { FlexStylesProps, TLibraryIconNameString } from '../../main'
+import {
+  LibraryIconItemProps ,
+  TLibraryIconCurvedNameString,
+} from '@assets/library-icon'
+
+import { FlexContainerAndItemPropsNormalized, FlexContainerAndItemProps } from '@components/flex'
+import { ModalLoadingProps } from '@components/modal-loading'
+
 import {
   TJeneseiFontFamily,
   TJeneseiThemeGenre,
   TJeneseiThemeSize,
-} from '../../theme'
+} from '@theme/index'
 
-export interface ButtonProps extends FlexStylesProps{
+export interface ButtonProps {
   className?: string
 
   genre: TButtonGenre
@@ -14,9 +21,15 @@ export interface ButtonProps extends FlexStylesProps{
 
   size: TJeneseiThemeSize
 
-  icon?: TLibraryIconNameString
+  iconName?: TLibraryIconCurvedNameString
 
-  iconPosition?: TButtonIconPosition
+  iconOrder?: LibraryIconItemProps ['order']
+
+  iconTurn?: LibraryIconItemProps ['turn']
+
+  iconGroupOrder?: number
+
+  isIconGroup?: boolean
 
   isDisabled?: boolean
 
@@ -24,13 +37,17 @@ export interface ButtonProps extends FlexStylesProps{
 
   isOnlyLoading?: boolean
 
+  isOnlyLoadingWithGroup?: boolean
+
+  isRadius?: boolean
+
   isLoading?: boolean
 
-  loadingPosition?: TButtonIconPosition
-
-  isActive?: boolean
+  loadingOrder?: ModalLoadingProps['order']
 
   isHiddenBorder?: boolean
+
+  isPlaystationEffect?: boolean
 
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 
@@ -45,21 +62,24 @@ export interface ButtonProps extends FlexStylesProps{
   customFontWeight?: number
 
   isFullSize?: boolean
+
+  customStyles?: FlexContainerAndItemPropsNormalized
 }
 
 export type TButtonGenre = keyof TJeneseiThemeGenre
-export type TButtonIconPosition = 'right' | 'left'
 
-export interface StyledButtonProps extends FlexStylesProps{
+export interface StyledButtonProps extends FlexContainerAndItemProps {
   $genre: ButtonProps['genre']
 
   $isDisabled?: ButtonProps['isDisabled']
 
   $isHidden?: ButtonProps['isHidden']
 
-  $isActive?: ButtonProps['isActive']
+  $isRadius?: ButtonProps['isRadius']
 
   $isHiddenBorder?: ButtonProps['isHiddenBorder']
+
+  $isPlaystationEffect?: ButtonProps['isPlaystationEffect']
 
   $width?: ButtonProps['width']
 
@@ -72,4 +92,10 @@ export interface StyledButtonProps extends FlexStylesProps{
   $customFontWeight?: ButtonProps['customFontWeight']
 
   $isFullSize?: ButtonProps['isFullSize']
+}
+
+export interface StyledButtonIconsWrapperProps {
+  $isIconGroup?: ButtonProps['isIconGroup']
+  $size: ButtonProps['size']
+  $iconGroupOrder?: ButtonProps['iconGroupOrder']
 }

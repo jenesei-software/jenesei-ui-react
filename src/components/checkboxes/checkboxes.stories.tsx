@@ -14,10 +14,9 @@ type Story = StoryObj<typeof Checkboxes>
 
 const defaultArgs: Partial<CheckboxesProps<ICheckboxValue>> = {
   checkboxGenre: 'gray',
-  checkBoxView: 'circle',
+  checkBoxView: 'Radio',
   checkboxWidth: '100%',
   checkboxIsHiddenBorder: false,
-  checkboxIsActive: false,
   multiple: true,
   size: 'medium',
   labelField: 'label',

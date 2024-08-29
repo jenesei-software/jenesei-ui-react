@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components'
 
+import { StyledInput, StyledInputCSS } from '@components/input'
+
 import {
   SelectStyledFooterProps,
   SelectStyledInputProps,
@@ -7,11 +9,39 @@ import {
   SelectStyledOptionProps,
   SelectWrapperProps,
 } from '.'
-import { StyledInput, StyledInputCSS } from '../input'
 
 export const SelectWrapper = styled.div<SelectWrapperProps>`
+  --scrollbar-width: 16px;
+  --scrollbar-background: ${(props) =>
+    props.theme.colors.input[props.$genre].background.rest};
+  --scrollbar-thumb-background: ${(props) =>
+    props.theme.colors.input[props.$genre].color.rest};
+  --scrollbar-thumb-border: 4px solid
+    ${(props) => props.theme.colors.input[props.$genre].background.rest};
+
   width: ${(props) => props.$width ?? '100%'};
   position: relative;
+
+  &:focus-within {
+    &:after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      bottom: -2px;
+      right: -2px;
+      border: 2px ${(props) => props.theme.colors.focus} solid;
+      border-radius: ${(props) => `${props.$radius + 1}px`};
+      pointer-events: none;
+      z-index: 10;
+      height: calc(100% + ${(props) => `${props.$parentListHeight}px`});
+    }
+  }
+  outline: none !important;
+
+  &:focus-visible {
+    outline: none !important;
+  }
 `
 
 export const DropdownListParent = styled.div<SelectStyledListProps>`
@@ -34,7 +64,7 @@ export const DropdownListParent = styled.div<SelectStyledListProps>`
 
   background: ${(props) =>
     props.theme.colors.input[props.$genre].background.rest};
-  border: 2px solid
+  border: solid 2px
     ${(props) => props.theme.colors.input[props.$genre].border.rest};
   border-top: 0px !important;
 
@@ -56,7 +86,7 @@ export const DropdownListParent = styled.div<SelectStyledListProps>`
       &::-webkit-scrollbar-thumb {
         display: none;
       }
-    `}
+    `};
 `
 
 export const DropdownList = styled.ul`
@@ -68,6 +98,8 @@ export const DropdownList = styled.ul`
   flex-direction: column;
 
   width: 100%;
+
+  transform: translateZ(0);
 `
 
 export const DropdownOption = styled.li<SelectStyledOptionProps>`
@@ -78,10 +110,11 @@ export const DropdownOption = styled.li<SelectStyledOptionProps>`
   opacity: 1;
   border: 0px;
   cursor: pointer;
-  background-color: ${(props) =>
-    props.$isSelectedItem &&
-    props.theme.colors.input[props.$genre]?.background.active};
   padding-left: ${(props) => props.$isCheckboxProps && `0px`};
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 `
 
 export const DropdownFooter = styled.li<SelectStyledFooterProps>`
@@ -94,10 +127,6 @@ export const DropdownFooter = styled.li<SelectStyledFooterProps>`
   cursor: pointer;
   position: sticky;
   bottom: 0;
-  &:active {
-    background: ${(props) =>
-      props.theme.colors.input[props.$genre].background.rest};
-  }
   padding: 0px;
   flex-shrink: 0;
   margin-top: auto;
@@ -113,4 +142,6 @@ export const DropdownSelectAll = styled.div`
   height: 100%;
 `
 
-export const SelectStyledInput = styled(StyledInput)<SelectStyledInputProps>``
+export const SelectStyledInput = styled(StyledInput)<SelectStyledInputProps>`
+  outline: none !important;
+`

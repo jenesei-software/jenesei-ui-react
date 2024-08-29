@@ -1,4 +1,4 @@
-import { ButtonProps } from '../../main'
+import { ButtonProps } from "@components/button"
 
 export interface ButtonGroupProps {
   value: ButtonProps[]

@@ -27,7 +27,7 @@ export const Default: Story = {
   render: (args) => <CheckboxWrapper {...args} />,
   args: {
     genre: 'gray',
-    view: 'circle',
+    view: 'Radio',
     checked: true,
     children: 'Zhopa',
     size: 'medium',
@@ -35,6 +35,5 @@ export const Default: Story = {
     isDisabled: false,
     isOnlyLoading: false,
     isHiddenBorder: false,
-    isActive: false,
   },
 }

@@ -1,18 +1,21 @@
-import { TJeneseiThemeSize } from '../../theme'
-import { CheckboxProps } from '../checkbox'
+import { ReactNode } from 'react'
+
+import { CheckboxProps } from '@components/checkbox'
 import {
   InputProps,
   StyledInputProps,
   StyledInputWrapperProps,
   TInputGenre,
-} from '../input'
+} from '@components/input'
+
+import { TJeneseiThemeSize } from '@theme/index'
 
 export interface ISelectItem {
-  label: string | number
+  label: string | number | ReactNode
   value: string | number
 }
 
-export interface SelectProps<T extends ISelectItem> {
+export interface SelectProps<T extends object> {
   size: TJeneseiThemeSize
   genre: TInputGenre
   width?: string
@@ -20,6 +23,7 @@ export interface SelectProps<T extends ISelectItem> {
   inputProps: InputProps
   checkboxProps: CheckboxProps
   optionProps: InputProps
+  isMultu?: boolean
 
   option: T[]
   value: T[]
@@ -44,7 +48,11 @@ export interface SelectProps<T extends ISelectItem> {
   }
 }
 
-export interface SelectWrapperProps extends StyledInputWrapperProps {}
+export interface SelectWrapperProps extends StyledInputWrapperProps {
+  $parentListHeight: number
+  $radius: number
+  $genre: SelectStyledInputProps['$genre']
+}
 
 export interface SelectStyledInputProps extends StyledInputProps {}
 

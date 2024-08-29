@@ -1,5 +1,6 @@
-import { TJeneseiThemeSize } from '../../theme'
-import { CheckboxProps } from '../checkbox/checkbox.types'
+import { CheckboxProps } from '@components/checkbox'
+
+import { TJeneseiThemeSize } from '@theme/index'
 
 export interface ICheckboxValue {
   label: string | number
@@ -14,8 +15,6 @@ export interface CheckboxesProps<T extends ICheckboxValue> {
   checkboxWidth?: CheckboxProps['width']
 
   checkboxIsHiddenBorder?: CheckboxProps['isHiddenBorder']
-
-  checkboxIsActive?: CheckboxProps['isActive']
 
   className?: string
 

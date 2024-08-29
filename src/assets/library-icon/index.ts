@@ -1,3 +1,3 @@
-export * from './library-icon'
-export * from './library-icon.types'
-export * from './library-icon.styles'
+export * from './icon'
+export * from './icon.types'
+export * from './icon.styles'

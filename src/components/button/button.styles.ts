@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components'
 
-import { StyledButtonProps } from '.'
-import { getFontStyles } from '../../fonts'
-import { FlexStyles } from '../../main'
-import { IJeneseiThemeSizeData, KEY_SIZE_DATA } from '../../theme'
+import { FlexContainerAndItem } from '@components/flex'
+import { getFontSizeStyles } from '@components/typography'
+
+import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
+
+import { StyledButtonIconsWrapperProps, StyledButtonProps } from '.'
 
 /****************************************** Genre *************************************************/
 const ButtonGenre = css<StyledButtonProps>`
@@ -15,63 +17,33 @@ const ButtonGenre = css<StyledButtonProps>`
       color: ${props.theme.colors.button[props.$genre].color.rest};
     }
     & path {
-      stroke: ${props.theme.colors.button[props.$genre].color.rest};
+      fill: ${props.theme.colors.button[props.$genre].color.rest};
     }
 
     &:focus-visible {
       outline: 2px solid ${props.theme.colors.focus};
-      border-color: ${props.theme.colors.button[props.$genre].border.focus};
-      background: ${props.theme.colors.button[props.$genre].background.focus};
-
-      color: ${props.theme.colors.button[props.$genre].color.focus};
-      & span {
-        color: ${props.theme.colors.button[props.$genre].color.focus};
-      }
-      & path {
-        stroke: ${props.theme.colors.button[props.$genre].color.focus};
-      }
     }
     &:hover {
-      background: ${props.theme.colors.button[props.$genre].background.hover};
-      border-color: ${props.theme.colors.button[props.$genre].border.hover};
-      color: ${props.theme.colors.button[props.$genre].color.hover};
-      & span {
+      ${!props.$isHidden &&
+      css`
+        background: ${props.theme.colors.button[props.$genre].background.hover};
+        border-color: ${props.theme.colors.button[props.$genre].border.hover};
         color: ${props.theme.colors.button[props.$genre].color.hover};
-      }
-      & path {
-        stroke: ${props.theme.colors.button[props.$genre].color.hover};
-      }
+        & span {
+          color: ${props.theme.colors.button[props.$genre].color.hover};
+        }
+        & path {
+          fill: ${props.theme.colors.button[props.$genre].color.hover};
+        }
+      `}
     }
-    &:active {
-      background: ${props.theme.colors.button[props.$genre].background.active};
-      border-color: ${props.theme.colors.button[props.$genre].border.active};
-      color: ${props.theme.colors.button[props.$genre].color.active};
-      & span {
-        color: ${props.theme.colors.button[props.$genre].color.active};
-      }
-      & path {
-        stroke: ${props.theme.colors.button[props.$genre].color.active};
-      }
-    }
-    ${props.$isActive &&
-    css`
-      background: ${props.theme.colors.button[props.$genre].background.active};
-      border-color: ${props.theme.colors.button[props.$genre].border.active};
-      color: ${props.theme.colors.button[props.$genre].color.active};
-      & span {
-        color: ${props.theme.colors.button[props.$genre].color.active};
-      }
-      & path {
-        stroke: ${props.theme.colors.button[props.$genre].color.active};
-      }
-    `}
   `};
 `
 
 /****************************************** Disabled *************************************************/
 const ButtonDisabled = css<StyledButtonProps>`
   ${(props) =>
-    props.$isDisabled || props.$isHidden
+    props.$isHidden
       ? css`
           opacity: 0.5;
           background: ${props.theme.colors.button[props.$genre].background
@@ -84,7 +56,7 @@ const ButtonDisabled = css<StyledButtonProps>`
               .rest} !important;
           }
           & path {
-            stroke: ${props.theme.colors.button[props.$genre].color
+            fill: ${props.theme.colors.button[props.$genre].color
               .rest} !important;
           }
         `
@@ -92,14 +64,45 @@ const ButtonDisabled = css<StyledButtonProps>`
           opacity: 1;
         `}
 `
-/****************************************** HiddenBorder *************************************************/
-const ButtonHiddenBorder = css<StyledButtonProps>`
+/****************************************** is HiddenBorder *************************************************/
+const ButtonIsHiddenBorder = css<StyledButtonProps>`
   ${(props) =>
     props.$isHiddenBorder &&
     css`
-      border-color: transparent !important;
+      border: 0px transparent !important;
     `}
 `
+/****************************************** is Radius *************************************************/
+const ButtonIsRadius = css<StyledButtonProps>`
+  ${(props) =>
+    props.$isRadius &&
+    css`
+      border-radius: 100px;
+    `}
+`
+/****************************************** is PlaystationEffect *************************************************/
+const ButtonIsPlaystationEffect = css<StyledButtonProps>`
+  ${(props) =>
+    props.$isPlaystationEffect &&
+    css`
+      box-shadow: ${props.theme.effects.button.playstation};
+    `}
+`
+/****************************************** Icons Wrapper *************************************************/
+export const StyledButtonIconsWrapper = styled.div<StyledButtonIconsWrapperProps>`
+  ${(props) =>
+    props.$isIconGroup
+      ? css`
+          display: flex;
+          gap: ${KEY_SIZE_DATA[props.$size].padding - 2}px;
+          align-items: center;
+          order: ${props.$iconGroupOrder || 'initial'};
+        `
+      : css`
+          display: contents;
+        `}
+`
+
 /****************************************** Size *************************************************/
 export const ButtonSize = css<StyledButtonProps>`
   ${(props) =>
@@ -110,12 +113,12 @@ export const ButtonSize = css<StyledButtonProps>`
     })};
 `
 export const ButtonSizeConstructor = (
-  props: IJeneseiThemeSizeData & { isFullSize?: boolean; $width?: string },
+  props: IJeneseiThemeSize & { isFullSize?: boolean; $width?: string },
 ) => css`
   height: ${props.height}px;
   border-radius: ${props.radius}px;
   gap: ${props.padding - 2}px;
-  ${getFontStyles(props.font, 600, 'Inter')};
+  ${getFontSizeStyles(props.font, 600, 'Inter')};
   padding: 0px ${props.padding}px;
 
   ${() =>
@@ -129,6 +132,7 @@ export const ButtonSizeConstructor = (
     ? css`
         width: ${props.height}px;
         min-width: ${props.height}px;
+        padding: 0px;
       `
     : css`
         width: ${props.$width ?? 'max-content'};
@@ -146,7 +150,7 @@ const ButtonFlex = css<StyledButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${FlexStyles};
+  ${FlexContainerAndItem};
 `
 /****************************************** Styled *************************************************/
 export const StyledButton = styled.button<StyledButtonProps>`
@@ -157,7 +161,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   isolation: isolate;
   user-select: none;
   transition:
-    all 0.2s,
+    all ${(props) => props.theme.transition},
     outline 0s;
   box-sizing: border-box;
   overflow: hidden;
@@ -170,7 +174,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
   ${ButtonSize};
   ${ButtonGenre};
   ${ButtonDisabled};
-  ${ButtonHiddenBorder};
+  ${ButtonIsHiddenBorder};
+  ${ButtonIsRadius};
+  ${ButtonIsPlaystationEffect};
   font-family: ${(props) => props.$customFontFamily};
   font-size: ${(props) => props.$customFontSize};
   font-weight: ${(props) => props.$customFontWeight};

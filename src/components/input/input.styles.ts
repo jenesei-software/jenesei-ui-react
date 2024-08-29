@@ -1,14 +1,17 @@
 import { PatternFormat } from 'react-number-format'
 import styled, { css } from 'styled-components'
 
-import { getFontStyles } from '../../fonts'
-import { IJeneseiThemeSizeData, KEY_SIZE_DATA } from '../../theme'
-import { ModalLoading } from '../modal-loading'
+import { ModalLoading } from '@components/modal-loading'
+import { getFontSizeStyles } from '@components/typography'
+
+import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
+
 import {
   InputChildrenProps,
+  InputErrorMessageProps,
   StyledInputProps,
   StyledInputWrapperProps,
-} from './input.types'
+} from '.'
 
 /****************************************** Hidden *************************************************/
 const InputWrapperHidden = css<StyledInputWrapperProps>`
@@ -22,17 +25,28 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   width: ${(props) => props.$width ?? '100%'};
   ${InputWrapperHidden};
 `
 
 /****************************************** Error *************************************************/
-export const InputErrorMessage = styled.div`
-  ${getFontStyles(12, 400, 'Inter')};
-  position: absolute;
-  bottom: -15px;
-  left: 10px;
-  color: ${(props) => props.theme.colors.danger};
+export const InputErrorMessage = styled.div<InputErrorMessageProps>`
+  ${getFontSizeStyles(12, 400, 'Inter')};
+  width: ${(props) => props.$width ?? '100%'};
+  ${(props) =>
+    props.$isErrorAbsolute
+      ? css`
+          position: absolute;
+          top: calc(100% + 6px);
+          left: 6px;
+          color: ${(props) => props.theme.colors.danger};
+        `
+      : css`
+          position: static;
+          padding: 6px;
+          color: ${(props) => props.theme.colors.danger};
+        `}
 `
 
 export const InputIsErrorBorder = css<StyledInputProps>`
@@ -50,16 +64,16 @@ export const InputIsErrorBorder = css<StyledInputProps>`
 
 /****************************************** Placeholder *************************************************/
 export const InputPlaceholder = css<StyledInputProps>`
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    ${(props) => getFontStyles(16, props.$isBold ? 500 : 400, 'Inter')};
+  &::placeholder,
+  &::-webkit-input-placeholder {
+    ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
     color: ${(props) =>
       props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
     line-height: 24px;
   }
-  :-ms-input-placeholder {
-    ${(props) => getFontStyles(16, props.$isBold ? 500 : 400, 'Inter')};
+  &:-ms-input-placeholder {
+    ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
     color: ${(props) =>
       props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
@@ -79,23 +93,20 @@ const InputGenre = css<StyledInputProps>`
     & path {
       ${!props.$isCustomIcon &&
       css`
-        stroke: ${props.theme.colors.input[props.$genre].color.rest};
+        fill: ${props.theme.colors.input[props.$genre].color.rest};
       `}
     }
-
-    &:focus-visible {
-      outline: 2px solid ${props.theme.colors.focus};
-      border-color: ${props.theme.colors.input[props.$genre].border.focus};
-      background: ${props.theme.colors.input[props.$genre].background.focus};
-
-      color: ${props.theme.colors.input[props.$genre].color.focus};
+    &:active {
+      background: ${props.theme.colors.input[props.$genre].background.rest};
+      border-color: ${props.theme.colors.input[props.$genre].border.rest};
+      color: ${props.theme.colors.input[props.$genre].color.rest};
       & span {
-        color: ${props.theme.colors.input[props.$genre].color.focus};
+        color: ${props.theme.colors.input[props.$genre].color.rest};
       }
       & path {
         ${!props.$isCustomIcon &&
         css`
-          stroke: ${props.theme.colors.input[props.$genre].color.focus};
+          fill: ${props.theme.colors.input[props.$genre].color.rest};
         `}
       }
     }
@@ -109,39 +120,26 @@ const InputGenre = css<StyledInputProps>`
       & path {
         ${!props.$isCustomIcon &&
         css`
-          stroke: ${props.theme.colors.input[props.$genre].color.hover};
+          fill: ${props.theme.colors.input[props.$genre].color.rest};
         `}
       }
     }
-    &:active {
-      background: ${props.theme.colors.input[props.$genre].background.active};
-      border-color: ${props.theme.colors.input[props.$genre].border.active};
-      color: ${props.theme.colors.input[props.$genre].color.active};
+    &:focus-visible {
+      outline: 2px solid ${props.theme.colors.focus};
+      border-color: ${props.theme.colors.input[props.$genre].border.rest};
+      background: ${props.theme.colors.input[props.$genre].background.rest};
+
+      color: ${props.theme.colors.input[props.$genre].color.rest};
       & span {
-        color: ${props.theme.colors.input[props.$genre].color.active};
+        color: ${props.theme.colors.input[props.$genre].color.rest};
       }
       & path {
         ${!props.$isCustomIcon &&
         css`
-          stroke: ${props.theme.colors.input[props.$genre].color.active};
+          fill: ${props.theme.colors.input[props.$genre].color.rest};
         `}
       }
     }
-    ${props.$isActive &&
-    css`
-      background: ${props.theme.colors.input[props.$genre].background.active};
-      border-color: ${props.theme.colors.input[props.$genre].border.active};
-      color: ${props.theme.colors.input[props.$genre].color.active};
-      & span {
-        color: ${props.theme.colors.input[props.$genre].color.active};
-      }
-      & path {
-        ${!props.$isCustomIcon &&
-        css`
-          stroke: ${props.theme.colors.input[props.$genre].color.active};
-        `}
-      }
-    `}
   `};
 `
 
@@ -149,7 +147,7 @@ const InputGenre = css<StyledInputProps>`
 export const InputSize = css<StyledInputProps>`
   ${(props) => InputSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
-export const InputSizeConstructor = (props: IJeneseiThemeSizeData) => css`
+export const InputSizeConstructor = (props: IJeneseiThemeSize) => css`
   padding: 0px ${props.padding}px;
   height: ${props.height}px;
   min-height: ${props.height}px;
@@ -165,14 +163,14 @@ export const StyledInputCSS = css<StyledInputProps>`
   width: 100%;
   border: 2px solid;
   transition:
-    all 0.2s,
+    all ${(props) => props.theme.transition},
     outline 0s;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   outline: none;
 
-  ${(props) => getFontStyles(16, props.$isBold ? 500 : 400, 'Inter')};
+  ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
   ${InputSize};
   ${InputGenre};
   ${InputIsErrorBorder};
@@ -186,7 +184,7 @@ export const StyledInputCSS = css<StyledInputProps>`
   ${(props) =>
     props.$postfixChildren &&
     css`
-      padding-left: ${`calc(${props.$postfixChildren.width} + ${props.$postfixChildren.right} + ${props.$postfixChildren.left})`};
+      padding-right: ${`calc(${props.$postfixChildren.width} + ${props.$postfixChildren.right} + ${props.$postfixChildren.left})`};
     `};
 `
 
@@ -203,12 +201,14 @@ export const InputPrefixChildren = styled.div<InputChildrenProps>`
   position: absolute;
   left: ${(props) => props.left};
   width: ${(props) => props.width};
+  height: 100%;
 `
 
 export const InputPostfixChildren = styled.div<InputChildrenProps>`
   position: absolute;
-  right: ${(props) => props.left};
+  right: ${(props) => props.right};
   width: ${(props) => props.width};
+  height: 100%;
 `
 
 /****************************************** ModalLoading *************************************************/

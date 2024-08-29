@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { useState } from 'react'
 import 'styled-components'
 
 import { ButtonGroup, ButtonGroupProps } from '.'
@@ -14,67 +13,122 @@ export default meta
 type Story = StoryObj<typeof ButtonGroup>
 
 const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
-  const [value, setValue] = useState({
-    first: false,
-    second: false,
-    third: true,
-  })
-
   return (
     <ButtonGroup
       {...props}
       value={[
         {
+          customStyles: {
+            justifyContent: 'flex-start',
+          },
           children: 'First',
-          icon: 'Copy',
-          iconPosition: 'left',
+          iconName: 'CallMissed',
+          iconOrder: -1,
+          loadingOrder:-2,
           width: 'auto',
           type: 'button',
-          genre: 'gray',
+          genre: 'black',
           size: 'medium',
-          isLoading: false,
-          isDisabled: false,
-          isOnlyLoading: false,
-          isActive: value.first,
-          justifyContent:'flex-start',
-          onClick: () => {
-            setValue((prevState) => ({ ...prevState, first: !prevState.first }))
-          },
+          isLoading:true
         },
         {
-          children: 'Second',
-          icon: 'ChevronLeft',
-          width: 'auto',
-          type: 'button',
-          genre: 'gray',
-          size: 'medium',
-          isLoading: false,
-          isDisabled: false,
-          isOnlyLoading: false,
-          isActive: value.second,
-          justifyContent:'space-between',
-          onClick: () => {
-            setValue((prevState) => ({
-              ...prevState,
-              second: !prevState.second,
-            }))
+          customStyles: {
+            justifyContent: 'space-between',
+            
           },
-        },
-        {
           children: 'Third',
-          icon: 'Coffee',
+          iconOrder: -1,
+          loadingOrder:1,
+          iconName: 'Filter2',
           width: 'auto',
           type: 'button',
           genre: 'gray',
           size: 'medium',
-          isLoading: false,
-          isDisabled: false,
-          isOnlyLoading: false,
-          isActive: value.third,
-          justifyContent:'space-between',
-          onClick: () => {
-            setValue((prevState) => ({ ...prevState, third: !prevState.third }))
+          isLoading:true
+        },
+        {
+          customStyles: {
+            justifyContent: 'space-between',
           },
+          children: 'Second',
+          iconOrder: 2,
+          loadingOrder:1,
+          iconName: 'Graph',
+          width: 'auto',
+          type: 'button',
+          genre: 'blackBorder',
+          size: 'medium',
+          isLoading:true,
+          isIconGroup:true,
+          isOnlyLoadingWithGroup:false
+        },
+
+        {
+          customStyles: {
+            justifyContent: 'space-between',
+          },
+          children: 'Third',
+          iconName: 'Heart',
+          width: 'auto',
+          type: 'button',
+          genre: 'greenTransparent',
+          size: 'medium',
+        },
+        {
+          customStyles: {
+            justifyContent: 'space-between',
+          },
+          children: 'Third',
+          iconName: 'ArrowDown',
+          width: 'auto',
+          type: 'button',
+          genre: 'grayBorder',
+          size: 'medium',
+        },
+        {
+          customStyles: {
+            justifyContent: 'space-between',
+          },
+          children: 'Third',
+          iconName: 'Folder',
+          width: 'auto',
+          type: 'button',
+          genre: 'product',
+          size: 'medium',
+        },
+
+        {
+          customStyles: {
+            justifyContent: 'space-between',
+          },
+          children: 'Third',
+          iconName: 'Folder',
+          width: 'auto',
+          type: 'button',
+          genre: 'white',
+          size: 'medium',
+        },
+        {
+          customStyles: {
+            justifyContent: 'space-between',
+          },
+          children: 'Third',
+          iconName: 'Scan',
+          width: 'auto',
+          type: 'button',
+          genre: 'productBorder',
+          size: 'medium',
+        },
+        {
+          customStyles: {
+            justifyContent: 'space-between',
+          },
+          children: 'Third',
+          iconName: 'ArrowDownCircle',
+          width: 'auto',
+          type: 'button',
+          genre: 'redTransparent',
+          size: 'medium',
         },
       ]}
     />
@@ -92,6 +146,6 @@ export const Vertical: Story = {
   render: (args) => <ButtonGroupWrapper {...args} />,
   args: {
     position: 'vertical',
-    width:"200px"
+    width: '200px',
   },
 }

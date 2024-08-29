@@ -1,8 +1,10 @@
+import { TLibraryIconCheckboxNameString } from '@assets/library-icon'
+
 import {
   TJeneseiFontFamily,
   TJeneseiThemeGenre,
   TJeneseiThemeSize,
-} from '../../theme'
+} from '@theme/index'
 
 export interface CheckboxProps {
   checked?: boolean
@@ -11,7 +13,7 @@ export interface CheckboxProps {
 
   children?: React.ReactNode
 
-  view: TCheckboxGenreView
+  view: TLibraryIconCheckboxNameString
 
   isDisabled?: boolean
 
@@ -22,8 +24,6 @@ export interface CheckboxProps {
   isHiddenBorder?: boolean
 
   isNotBackground?: boolean
-
-  isActive?: boolean
 
   onChange?: (checked: boolean) => void
 
@@ -51,9 +51,7 @@ export interface StyledCheckboxProps {
 
   $isDisabled?: CheckboxProps['isDisabled']
 
-  $isActive?: CheckboxProps['isActive']
-
-  $isNotBackground?: CheckboxProps['isActive']
+  $isNotBackground?: CheckboxProps['isNotBackground']
 
   $isHiddenBorder?: CheckboxProps['isHiddenBorder']
 
@@ -64,6 +62,9 @@ export interface StyledCheckboxProps {
   $customFontWeight?: CheckboxProps['customFontWeight']
 }
 
-export type TCheckboxGenreView = 'square' | 'circle'
-
 export type TCheckboxGenre = keyof TJeneseiThemeGenre
+
+export interface StyledIconProps {
+  $genre: CheckboxProps['genre']
+  $checked?: CheckboxProps['checked']
+}

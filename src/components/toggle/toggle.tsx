@@ -1,7 +1,6 @@
 import { memo } from 'react'
 
-import { StyledReactToggle } from './toggle.styles'
-import { ToggleProps } from './toggle.types'
+import { StyledReactToggle, ToggleProps } from '.'
 
 export const Toggle = memo((props: ToggleProps) => {
   return (
