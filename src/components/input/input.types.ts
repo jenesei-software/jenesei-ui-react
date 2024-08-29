@@ -15,6 +15,8 @@ export interface InputProps {
 
   isErrorAbsolute?: string
 
+  isAllowEmptyFormatting?:boolean
+  
   genre: TInputGenre
 
   size: TJeneseiThemeSize
