@@ -13,6 +13,8 @@ export interface InputProps {
 
   errorMessage?: string
 
+  isErrorAbsolute?: string
+
   genre: TInputGenre
 
   size: TJeneseiThemeSize
@@ -89,5 +91,10 @@ export interface StyledInputProps {
 export interface StyledInputWrapperProps {
   $isDisabled?: InputProps['isDisabled']
 
+  $width?: InputProps['width']
+}
+
+export interface InputErrorMessageProps {
+  $isErrorAbsolute?: string
   $width?: InputProps['width']
 }
