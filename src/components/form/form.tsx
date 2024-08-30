@@ -219,7 +219,6 @@ export const Form = () => {
               const countryDialCode = field.form.getFieldValue('countryDialCode')
               return (
                 <>
-                  {field.state.value}
                   <InputPhone
                     countryDialCode={countryDialCode}
                     countryCode={countryCode}
