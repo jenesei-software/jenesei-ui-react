@@ -1,4 +1,4 @@
-import { FocusEventHandler, HTMLInputTypeAttribute } from 'react'
+import { FocusEventHandler, HTMLInputAutoCompleteAttribute, HTMLInputTypeAttribute } from 'react'
 
 import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@theme/index'
 
@@ -15,8 +15,10 @@ export interface InputProps {
 
   isErrorAbsolute?: string
 
-  isAllowEmptyFormatting?:boolean
-  
+  autocomplete?: HTMLInputAutoCompleteAttribute
+
+  isAllowEmptyFormatting?: boolean
+
   genre: TInputGenre
 
   size: TJeneseiThemeSize

@@ -3,17 +3,23 @@ import moment from 'moment'
 import { useState } from 'react'
 import 'styled-components'
 
-import { DatePicker, DateProps } from '.'
+import { SelectYear, SelectYearProps } from '.'
 
-const meta: Meta<typeof DatePicker> = {
-  component: DatePicker,
-  title: 'DatePicker',
+const meta: Meta<typeof SelectYear> = {
+  component: SelectYear,
+  title: 'Select/Year',
 }
 
 export default meta
-type Story = StoryObj<typeof DatePicker>
+type Story = StoryObj<typeof SelectYear>
 
-const DatePickerWrapper: React.FC<DateProps> = (props) => {
+const defaultArgs: Partial<SelectYearProps> = {
+  size: 'medium',
+  genre: 'gray',
+  width: '300px',
+}
+
+const SelectYearWrapper: React.FC<SelectYearProps> = (props) => {
   const startDate = moment.utc().subtract(100, 'years').startOf('year').valueOf()
   const endDate = moment.utc().startOf('year').valueOf()
 
@@ -23,9 +29,9 @@ const DatePickerWrapper: React.FC<DateProps> = (props) => {
   }
 
   return (
-    <DatePicker
+    <SelectYear
       {...props}
-      placeholder="Month"
+      placeholder="Year"
       value={value}
       onChange={handleSelectChange}
       startDate={startDate}
@@ -34,11 +40,9 @@ const DatePickerWrapper: React.FC<DateProps> = (props) => {
   )
 }
 
-export const Default: Story = {
-  render: (args) => <DatePickerWrapper {...args} />,
+export const Year: Story = {
+  render: (args) => <SelectYearWrapper {...args} />,
   args: {
-    size: 'medium',
-    genre: 'gray',
-    width: '300px',
+    ...defaultArgs,
   },
 }
