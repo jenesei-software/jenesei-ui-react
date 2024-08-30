@@ -6,12 +6,7 @@ import { getFontSizeStyles } from '@components/typography'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
 
-import {
-  InputChildrenProps,
-  InputErrorMessageProps,
-  StyledInputProps,
-  StyledInputWrapperProps,
-} from '.'
+import { InputChildrenProps, InputErrorMessageProps, StyledInputProps, StyledInputWrapperProps } from '.'
 
 /****************************************** Hidden *************************************************/
 const InputWrapperHidden = css<StyledInputWrapperProps>`
@@ -67,15 +62,13 @@ export const InputPlaceholder = css<StyledInputProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
     ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
-    color: ${(props) =>
-      props.theme.colors.input[props.$genre].color.placeholder};
+    color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
     line-height: 24px;
   }
   &:-ms-input-placeholder {
     ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
-    color: ${(props) =>
-      props.theme.colors.input[props.$genre].color.placeholder};
+    color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
     line-height: 24px;
   }

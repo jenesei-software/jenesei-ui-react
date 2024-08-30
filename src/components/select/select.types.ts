@@ -24,8 +24,8 @@ export interface SelectProps<T extends ISelectItem> {
   genre: TInputGenre
   width?: string
   placeholder?: string
-
-  inputProps: Omit<
+  isOnClickOptionClose?: boolean
+  inputProps?: Omit<
     InputProps,
     'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'
   >
@@ -35,7 +35,6 @@ export interface SelectProps<T extends ISelectItem> {
     'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'
   >
   isMulti?: boolean
-  isCheckbox?: boolean
   option: T[]
   value: T[]
   onChange: (option: T[]) => void
@@ -71,9 +70,37 @@ export type SelectCountryProps = Omit<
   'option' | 'value' | 'onChange'
 > & {
   value: string
-  onChange: (value: string) => void
-  onChangeDialCode: (value: string) => void
+  onChange: (countryCode: string, countryDialCode: string) => void
 }
+
+export interface ISelectLanguageOption extends ISelectItem {
+  search?: string
+  placeholder: string
+}
+
+export type SelectLanguageProps = Omit<
+  SelectProps<ISelectCountryOption>,
+  'option' | 'value' | 'onChange'
+> & {
+  value: string
+  onChange: (language: string) => void
+}
+
+export type SelectDateProps = Omit<
+  SelectProps<ISelectCountryOption>,
+  'option' | 'value' | 'onChange'
+> & {
+  value: number
+  onChange: (timestamp: number) => void
+  lang: 'ru' | 'en'
+}
+
+export type SelectYearProps = SelectDateProps & {
+  startDate?: number
+  endDate?: number
+  sortOrder?: 'asc' | 'desc'
+}
+
 export interface SelectWrapperProps extends StyledInputWrapperProps {
   $parentListHeight: number
   $radius: number

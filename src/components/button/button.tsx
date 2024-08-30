@@ -12,7 +12,6 @@ export const Button: FC<ButtonProps> = (props) => {
   const theme = useTheme()
   return (
     <StyledButton
-      id="jenesei-button"
       tabIndex={0}
       $isFullSize={props.isFullSize}
       $genre={props.genre}
@@ -29,12 +28,7 @@ export const Button: FC<ButtonProps> = (props) => {
       disabled={props.isDisabled}
       type={props.type}
       className={props.className}
-      onClick={(event) =>
-        !props.isLoading &&
-        !props.isDisabled &&
-        props.onClick &&
-        props.onClick(event)
-      }
+      onClick={(event) => !props.isLoading && !props.isDisabled && props.onClick && props.onClick(event)}
       $flexDirection={props.customStyles?.flexDirection}
       $flexWrap={props.customStyles?.flexWrap}
       $justifyContent={props.customStyles?.justifyContent}
@@ -57,9 +51,7 @@ export const Button: FC<ButtonProps> = (props) => {
           />
         ) : (
           <>
-            <div style={{ order: 0, display: 'contents' }}>
-              {props.children && props.children}
-            </div>
+            <div style={{ order: 0, display: 'contents' }}>{props.children && props.children}</div>
             {props.iconName && (
               <Icon
                 name={props.iconName}
@@ -73,9 +65,7 @@ export const Button: FC<ButtonProps> = (props) => {
         )
       ) : (
         <>
-          <div style={{ order: 0, display: 'contents' }}>
-            {props.children && props.children}
-          </div>
+          <div style={{ order: 0, display: 'contents' }}>{props.children && props.children}</div>
           <StyledButtonIconsWrapper
             $size={props.size}
             $isIconGroup={props.isIconGroup}

@@ -2,6 +2,9 @@ import styled, { css } from 'styled-components'
 
 import { StyledInput, StyledInputCSS } from '@components/input'
 
+import { IJeneseiThemeSize } from '@theme/index'
+import { KEY_SIZE_DATA } from '@theme/theme'
+
 import {
   SelectStyledFooterProps,
   SelectStyledInputProps,
@@ -33,8 +36,7 @@ export const SelectWrapper = styled.div<SelectWrapperProps>`
       border: 2px ${(props) => props.theme.colors.focus} solid;
       border-radius: ${(props) => `${props.$radius + 1}px`};
       pointer-events: none;
-      z-index: 10;
-      height: calc(100% + ${(props) => `${props.$parentListHeight}px`});
+      height: calc(100% + var(--after-height));
     }
   }
   outline: none !important;
@@ -42,6 +44,17 @@ export const SelectWrapper = styled.div<SelectWrapperProps>`
   &:focus-visible {
     outline: none !important;
   }
+`
+
+export const DropdownListParentSize = css<SelectStyledListProps>`
+  ${(props) =>
+    props.$size &&
+    DropdownListParentSizeConstructor(KEY_SIZE_DATA[props.$size])};
+`
+export const DropdownListParentSizeConstructor = (
+  props: IJeneseiThemeSize,
+) => css`
+  border-radius: 0px 0px ${props.radius}px ${props.radius}px;
 `
 
 export const DropdownListParent = styled.div<SelectStyledListProps>`
@@ -58,7 +71,6 @@ export const DropdownListParent = styled.div<SelectStyledListProps>`
 
   margin: 0;
   padding: 0;
-  z-index: 1;
 
   box-sizing: border-box;
 
@@ -67,7 +79,7 @@ export const DropdownListParent = styled.div<SelectStyledListProps>`
   border: solid 2px
     ${(props) => props.theme.colors.input[props.$genre].border.rest};
   border-top: 0px !important;
-
+  ${DropdownListParentSize};
   ${(props) =>
     !props.$isShowScroll &&
     css`

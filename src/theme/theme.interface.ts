@@ -47,6 +47,34 @@ export interface TJeneseiThemeGenreTypeToggle {
   }
 }
 
+export interface TJeneseiThemeGenreTypeDate {
+  background: {
+    rest: string
+    hover: string
+    today: string
+    weekend: string
+    choice: string
+    line: string
+  }
+  border: {
+    rest: string
+    hover: string
+    today: string
+    weekend: string
+    choice: string
+    line: string
+  }
+  color: {
+    rest: string
+    hover: string
+    placeholder: string
+    today: string
+    weekend: string
+    choice: string
+    line: string
+  }
+}
+
 export interface TJeneseiThemeGenre {
   gray: TJeneseiThemeGenreType
   grayBorder: TJeneseiThemeGenreType
@@ -65,6 +93,10 @@ export interface TJeneseiThemeGenreToggle {
 export interface TJeneseiThemeGenreInput {
   gray: TJeneseiThemeGenreType
   grayBorder: TJeneseiThemeGenreType
+}
+export interface TJeneseiThemeGenreDate {
+  gray: TJeneseiThemeGenreTypeDate
+  grayBorder: TJeneseiThemeGenreTypeDate
 }
 export interface IJeneseiThemeSize {
   height: number
@@ -87,12 +119,7 @@ export interface IJeneseiThemeScreens {
   other: boolean
 }
 
-export type TJeneseiThemeSize =
-  | 'large'
-  | 'largeMedium'
-  | 'medium'
-  | 'mediumSmall'
-  | 'small'
+export type TJeneseiThemeSize = 'large' | 'largeMedium' | 'medium' | 'mediumSmall' | 'small'
 
 export type TJeneseiFontFamily = 'Inter' | 'Roboto'
 
@@ -117,6 +144,7 @@ export interface IJeneseiTheme {
     focus: string
     white: string
     danger: string
+    date: TJeneseiThemeGenreDate
     button: TJeneseiThemeGenre
     toggle: TJeneseiThemeGenreToggle
     checkbox: TJeneseiThemeGenre

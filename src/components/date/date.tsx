@@ -1,19 +1,12 @@
 import gsap from 'gsap'
 import moment from 'moment'
-import {
-  FocusEventHandler,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { FocusEventHandler, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Ripple } from 'react-ripple-click'
 
 import { Button } from '@components/button'
 import { Stack } from '@components/flex'
 import { InputErrorMessage } from '@components/input'
-import { Typography } from '@components/typography'
+import { SelectMonth, SelectYear } from '@components/select'
 
 import { KEY_SIZE_DATA } from '@theme/index'
 
@@ -29,34 +22,29 @@ import {
   DateWrapper,
 } from '.'
 
+function countSevens(number: number) {
+  const divisor = 7
+  const count = Math.floor(number / divisor)
+  const remainder = number % divisor
+
+  return count + remainder
+}
+
 export const DatePicker = (props: DateProps) => {
-  const unixValue = props.value ? moment.unix(props.value).utc() : moment.utc()
+  const unixValue = props.value ? moment(props.value).utc() : moment.utc()
   const [currentMonth, setCurrentMonth] = useState(unixValue.clone().month())
   const [currentYear, setCurrentYear] = useState(unixValue.clone().year())
   const [currentDay, setCurrentDay] = useState(unixValue.clone().date())
 
-  const currentMonthLabel = useMemo(() => {
-    return moment.utc().month(currentMonth).format('MMMM')
-  }, [currentMonth])
   const currentDateLabel = useMemo(() => {
-    return props.value
-      ? moment.unix(props.value).utc().format('D MMMM YYYY')
-      : ''
+    return props.value ? moment(props.value).utc().format('D MMMM YYYY') : ''
   }, [props.value])
 
   const daysInMonth: DateDayProps[] = useMemo(() => {
     const today = moment.utc() // Get today's date in UTC
 
-    const startOfMonth = moment
-      .utc()
-      .year(currentYear)
-      .month(currentMonth)
-      .startOf('month')
-    const endOfMonth = moment
-      .utc()
-      .year(currentYear)
-      .month(currentMonth)
-      .endOf('month')
+    const startOfMonth = moment.utc().year(currentYear).month(currentMonth).startOf('month')
+    const endOfMonth = moment.utc().year(currentYear).month(currentMonth).endOf('month')
 
     const days = []
 
@@ -66,13 +54,14 @@ export const DatePicker = (props: DateProps) => {
       for (let i = daysToAddBefore; i > 0; i--) {
         const day = startOfMonth.clone().subtract(i, 'days')
         days.push({
-          value: day.unix(),
+          value: day.valueOf(),
           labelString: day.format('dd'),
           labelNumber: day.date(),
           dayOfWeek: day.isoWeekday(),
           isWeekend: day.isoWeekday() === 6 || day.isoWeekday() === 7,
           weekOfMonth: Math.ceil((days.length + 1) / 7), // Week of the month index
           isToday: day.isSame(today, 'day'),
+          isCurrentMonth: false,
         })
       }
     }
@@ -81,14 +70,14 @@ export const DatePicker = (props: DateProps) => {
     const currentDate = startOfMonth.clone()
     while (currentDate <= endOfMonth) {
       days.push({
-        value: currentDate.unix(),
+        value: currentDate.valueOf(),
         labelString: currentDate.format('dd'),
         labelNumber: currentDate.date(),
         dayOfWeek: currentDate.isoWeekday(),
-        isWeekend:
-          currentDate.isoWeekday() === 6 || currentDate.isoWeekday() === 7,
+        isWeekend: currentDate.isoWeekday() === 6 || currentDate.isoWeekday() === 7,
         weekOfMonth: Math.ceil((days.length + 1) / 7), // Week of the month index
         isToday: currentDate.isSame(today, 'day'),
+        isCurrentMonth: true,
       })
       currentDate.add(1, 'day')
     }
@@ -99,13 +88,14 @@ export const DatePicker = (props: DateProps) => {
       for (let i = 1; i <= daysToAddAfter; i++) {
         const day = endOfMonth.clone().add(i, 'days')
         days.push({
-          value: day.unix(),
+          value: day.valueOf(),
           labelString: day.format('dd'),
           labelNumber: day.date(),
           dayOfWeek: day.isoWeekday(),
           isWeekend: day.isoWeekday() === 6 || day.isoWeekday() === 7,
           weekOfMonth: Math.ceil((days.length + 1) / 7), // Week of the month index
           isToday: day.isSame(today, 'day'),
+          isCurrentMonth: false,
         })
       }
     }
@@ -144,12 +134,7 @@ export const DatePicker = (props: DateProps) => {
 
   // Увеличение месяца
   const increaseMonth = () => {
-    const newDate = moment
-      .utc()
-      .year(currentYear)
-      .month(currentMonth)
-      .date(currentDay)
-      .add(1, 'month')
+    const newDate = moment.utc().year(currentYear).month(currentMonth).date(currentDay).add(1, 'month')
     setCurrentDay(newDate.date())
     setCurrentMonth(newDate.month())
     setCurrentYear(newDate.year())
@@ -157,12 +142,7 @@ export const DatePicker = (props: DateProps) => {
 
   // Уменьшение месяца
   const decreaseMonth = () => {
-    const newDate = moment
-      .utc()
-      .year(currentYear)
-      .month(currentMonth)
-      .date(currentDay)
-      .subtract(1, 'month')
+    const newDate = moment.utc().year(currentYear).month(currentMonth).date(currentDay).subtract(1, 'month')
     setCurrentDay(newDate.date())
     setCurrentMonth(newDate.month())
     setCurrentYear(newDate.year())
@@ -194,15 +174,15 @@ export const DatePicker = (props: DateProps) => {
   //   setCurrentYear(newDate.year())
   // }
   const updateDateFromTimestamp = (timestamp: number) => {
-    const newDate = moment.unix(timestamp).utc()
-    props.onChange(timestamp)
+    const newDate = moment(timestamp).utc()
+    props.onChange(newDate.valueOf())
     setCurrentDay(newDate.date())
     setCurrentMonth(newDate.month())
     setCurrentYear(newDate.year())
   }
   useEffect(() => {
     if (props.value) {
-      const newDate = moment.unix(props.value).utc()
+      const newDate = moment(props.value).utc()
       setCurrentDay(newDate.date())
       setCurrentMonth(newDate.month())
       setCurrentYear(newDate.year())
@@ -215,11 +195,12 @@ export const DatePicker = (props: DateProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const parentListRef = useRef<HTMLDivElement>(null)
 
-  const sizeHeight = useMemo(
-    () => KEY_SIZE_DATA[props.size].height,
-    [props.size],
+  const rows = useMemo(() => countSevens(daysInMonth.length) + 1, [daysInMonth.length])
+
+  const height = useMemo(
+    () => 40 + rows * 28 + (rows - 1) * 6 + KEY_SIZE_DATA[props.size].padding * 2,
+    [props.size, rows],
   )
-  const height = useMemo(() => sizeHeight * 7, [sizeHeight])
 
   const radius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size])
 
@@ -311,10 +292,7 @@ export const DatePicker = (props: DateProps) => {
   )
 
   const handleMouseDown = useCallback((event: MouseEvent) => {
-    if (
-      parentListRef.current &&
-      parentListRef.current.contains(event.target as Node)
-    ) {
+    if (parentListRef.current && parentListRef.current.contains(event.target as Node)) {
       event.preventDefault()
     }
   }, [])
@@ -373,15 +351,12 @@ export const DatePicker = (props: DateProps) => {
           $prefixChildren={props?.inputProps?.prefixChildren}
           $isBold={props?.inputProps?.isBold}
           disabled={props?.inputProps?.isDisabled}
-          readOnly={props?.inputProps?.isReadOnly}
+          readOnly={true}
           required={props?.inputProps?.isRequired}
           defaultValue={props?.inputProps?.defaultValue}
           value={currentDateLabel}
           type={props?.inputProps?.type}
-          onChange={(event) =>
-            props.inputProps?.onChange &&
-            props.inputProps?.onChange(event.target.value)
-          }
+          onChange={(event) => props.inputProps?.onChange && props.inputProps?.onChange(event.target.value)}
           onBlur={props?.inputProps?.onBlur}
           onFocus={props?.inputProps?.onFocus}
           onClick={handleOnFocusEasy}
@@ -396,11 +371,7 @@ export const DatePicker = (props: DateProps) => {
             height: `${height}px`,
           }}
         >
-          <DateDropdownList
-            $genre={props.genre}
-            $size={props.size}
-            ref={listRef}
-          >
+          <DateDropdownList $genre={props.genre} $size={props.size} ref={listRef}>
             <Stack justifyContent="space-between" alignItems="center">
               <>
                 <Button
@@ -412,14 +383,27 @@ export const DatePicker = (props: DateProps) => {
                   size={'small'}
                   onClick={decreaseMonth}
                 />
-                <Stack gap="10px">
+                <Stack gap="8px">
                   <>
-                    <Button type="button" genre={props.genre} size={'small'}>
-                      <Typography size={12}>{currentMonthLabel}</Typography>
-                    </Button>
-                    <Button type="button" genre={props.genre} size={'small'}>
-                      <Typography size={12}>{currentYear}</Typography>
-                    </Button>
+                    <SelectMonth
+                      genre={props.genre}
+                      size={'small'}
+                      inputProps={undefined}
+                      value={unixValue.valueOf()}
+                      onChange={updateDateFromTimestamp}
+                      lang={'ru'}
+                      width="90px"
+                    />
+                    <SelectYear
+                      genre={props.genre}
+                      size={'small'}
+                      value={unixValue.valueOf()}
+                      onChange={updateDateFromTimestamp}
+                      startDate={props.startDate}
+                      endDate={props.endDate}
+                      lang={'ru'}
+                      width="70px"
+                    />
                   </>
                 </Stack>
                 <Button
@@ -433,7 +417,7 @@ export const DatePicker = (props: DateProps) => {
                 />
               </>
             </Stack>
-            <DateDropdownDays>
+            <DateDropdownDays $rows={rows}>
               {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((e, index) => (
                 <DateDropdownDayOfWeek
                   type="button"
@@ -443,7 +427,6 @@ export const DatePicker = (props: DateProps) => {
                   $column={index + 1}
                   key={index}
                 >
-                  <Ripple />
                   {e}
                 </DateDropdownDayOfWeek>
               ))}
@@ -456,6 +439,10 @@ export const DatePicker = (props: DateProps) => {
                   $column={day.dayOfWeek}
                   key={day.value}
                   onClick={() => updateDateFromTimestamp(day.value)}
+                  $isToday={day.isToday}
+                  $isWeekend={day.isWeekend}
+                  $isChoice={day.value === unixValue.valueOf()}
+                  $isCurrentMonth={day.isCurrentMonth}
                 >
                   <Ripple />
                   {day.labelNumber}
@@ -466,10 +453,7 @@ export const DatePicker = (props: DateProps) => {
         </DateDropdownListParent>
       </DateWrapper>
       {props?.inputProps?.isError && props?.inputProps?.errorMessage && (
-        <InputErrorMessage
-          $width={props.width}
-          $isErrorAbsolute={props.inputProps?.isErrorAbsolute}
-        >
+        <InputErrorMessage $width={props.width} $isErrorAbsolute={props.inputProps?.isErrorAbsolute}>
           {props.inputProps?.errorMessage}
         </InputErrorMessage>
       )}
