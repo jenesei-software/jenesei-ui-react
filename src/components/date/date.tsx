@@ -222,6 +222,7 @@ export const DatePicker = (props: DateProps) => {
     gsap.to(parentListRef.current, {
       height: '0px',
       display: 'none',
+      zIndex: 'auto',
       duration: 0.1,
       ease: 'power2.out',
       onComplete: () => {
@@ -238,6 +239,7 @@ export const DatePicker = (props: DateProps) => {
         gsap.to(parentListRef.current, {
           height: `${height}px`,
           display: 'flex',
+          zIndex: '1',
           duration: 0.1,
           onComplete: () => {
             handleListOptionOpenEffect()

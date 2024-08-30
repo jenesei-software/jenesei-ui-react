@@ -41,7 +41,6 @@ export const DateDropdownListParent = styled.div<DateStyledListProps>`
   margin: 0;
   padding: 0;
   margin-top: 6px;
-  z-index: 1;
 
   box-sizing: border-box;
   &::-webkit-scrollbar {
