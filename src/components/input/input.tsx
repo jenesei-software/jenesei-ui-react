@@ -18,14 +18,8 @@ export const Input = (props: InputProps) => {
 
   return (
     <>
-      <StyledInputWrapper
-        className={props.className}
-        $isDisabled={props.isDisabled}
-        $width={props.width}
-      >
-        {props.prefixChildren && (
-          <InputPrefixChildren {...props.prefixChildren} />
-        )}
+      <StyledInputWrapper className={props.className} $isDisabled={props.isDisabled} $width={props.width}>
+        {props.prefixChildren && <InputPrefixChildren {...props.prefixChildren} />}
         {props.format ? (
           <StyledInputFormat
             $isError={props?.isError}
@@ -42,9 +36,7 @@ export const Input = (props: InputProps) => {
             defaultValue={props.defaultValue}
             value={props.value ?? ''}
             placeholder={props.placeholder}
-            onValueChange={({ value }) =>
-              props.onChange && props.onChange(value)
-            }
+            onValueChange={({ value }) => props.onChange && props.onChange(value)}
             allowEmptyFormatting={props.isAllowEmptyFormatting}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
@@ -70,9 +62,8 @@ export const Input = (props: InputProps) => {
             value={props.value ?? ''}
             placeholder={props.placeholder}
             type={props.type}
-            onChange={(event) =>
-              props.onChange && props.onChange(event.target.value)
-            }
+            autoComplete={props.autocomplete}
+            onChange={(event) => props.onChange && props.onChange(event.target.value)}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
             name={props.name}
@@ -80,9 +71,7 @@ export const Input = (props: InputProps) => {
           />
         )}
 
-        {props.postfixChildren && (
-          <InputPostfixChildren {...props.postfixChildren} />
-        )}
+        {props.postfixChildren && <InputPostfixChildren {...props.postfixChildren} />}
         {props.isLoading && (
           <InputStyledModalLoading
             $genre={props.genre}
@@ -93,10 +82,7 @@ export const Input = (props: InputProps) => {
         )}
       </StyledInputWrapper>
       {props.isError && props.errorMessage && (
-        <InputErrorMessage
-          $width={props.width}
-          $isErrorAbsolute={props.isErrorAbsolute}
-        >
+        <InputErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.isErrorAbsolute}>
           {props.errorMessage}
         </InputErrorMessage>
       )}
@@ -105,13 +91,45 @@ export const Input = (props: InputProps) => {
 }
 
 function formatPhoneNumber(dialCode: string, international: string) {
-  const numberWithoutDialCode = international.replace(dialCode, '').trim()
+  function isDigit(char: string): boolean {
+    return /\d/.test(char)
+  }
 
-  const formattedNumber = numberWithoutDialCode.replace(/\d/g, '#')
-  const placeholderNumber = numberWithoutDialCode.replace(/\d/g, '_')
+  let formattedNumber = ''
+  let placeholderNumber = ''
+  let dialCodeIndex = 0
+
+  if (dialCode.length === 0) {
+    return { format: '', placeholder: '' }
+  }
+
+  for (let i = 0; i < international.length; i++) {
+    const char = international.charAt(i)
+
+    if (char === dialCode.charAt(dialCodeIndex)) {
+      formattedNumber += char
+      placeholderNumber += isDigit(char) ? '#' : char
+      dialCodeIndex++
+    } else {
+      if (isDigit(char)) {
+        formattedNumber += '#'
+        placeholderNumber += '-'
+      } else {
+        formattedNumber += char
+        placeholderNumber += char
+      }
+    }
+  }
+
+  while (dialCodeIndex < dialCode.length) {
+    formattedNumber += dialCode.charAt(dialCodeIndex)
+    placeholderNumber += dialCode.charAt(dialCodeIndex)
+    dialCodeIndex++
+  }
+
   return {
-    format: `${dialCode} ${formattedNumber}`,
-    placeholder: `${dialCode} ${placeholderNumber}`,
+    format: formattedNumber,
+    placeholder: placeholderNumber,
   }
 }
 
@@ -122,22 +140,18 @@ export const InputPhone = (
   },
 ) => {
   const countryCode = props?.countryCode ?? null
-  const country = countryCode
-    ? FullCountryList.findOneByCountryCode(countryCode)
-    : null
-  const dialCode = props?.countryDialCode ?? country?.dial_code
-  const data = dialCode && countryCode ? getExample(countryCode) : null
+  const country = countryCode ? FullCountryList.findOneByCountryCode(countryCode) : null
+  const countryDialCode = props?.countryDialCode ?? country?.dial_code
+  const data = countryDialCode && countryCode ? getExample(countryCode) : null
   const formattedPhoneNumber =
-    data && data.number?.international && dialCode
-      ? formatPhoneNumber(dialCode, data.number?.international)
+    data && data.number?.international && countryDialCode
+      ? formatPhoneNumber(countryDialCode, data.number?.international)
       : null
 
   return (
     <Input
       {...props}
-      placeholder={
-        formattedPhoneNumber?.placeholder ? undefined : props.placeholder
-      }
+      placeholder={formattedPhoneNumber?.placeholder ? undefined : props.placeholder}
       format={formattedPhoneNumber?.format}
       isAllowEmptyFormatting
       mask="_"

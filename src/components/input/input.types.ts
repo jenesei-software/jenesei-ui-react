@@ -1,4 +1,4 @@
-import { FocusEventHandler, HTMLInputTypeAttribute } from 'react'
+import { FocusEventHandler, HTMLInputAutoCompleteAttribute, HTMLInputTypeAttribute } from 'react'
 
 import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@theme/index'
 
@@ -13,10 +13,12 @@ export interface InputProps {
 
   errorMessage?: string
 
-  isErrorAbsolute?: string
+  isErrorAbsolute?: boolean
 
-  isAllowEmptyFormatting?:boolean
-  
+  autocomplete?: HTMLInputAutoCompleteAttribute
+
+  isAllowEmptyFormatting?: boolean
+
   genre: TInputGenre
 
   size: TJeneseiThemeSize
@@ -97,6 +99,7 @@ export interface StyledInputWrapperProps {
 }
 
 export interface InputErrorMessageProps {
-  $isErrorAbsolute?: string
+  $isErrorAbsolute?: InputProps['isErrorAbsolute']
   $width?: InputProps['width']
+  $size: InputProps['size']
 }

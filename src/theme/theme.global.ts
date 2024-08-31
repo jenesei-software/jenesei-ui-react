@@ -17,22 +17,22 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     --font-line-height: 1;
     --scrollbar-width: 16px;
     --scrollbar-background: ${JeneseiThemeVariables.black05};
-    --scrollbar-thumb-background: ${JeneseiThemeVariables.blueHover};
-    --scrollbar-thumb-border: 4px solid ${JeneseiThemeVariables.black05};
+    --scrollbar-thumb-background: ${JeneseiThemeVariables.black10};
+    --scrollbar-thumb-border: 2px solid ${JeneseiThemeVariables.black05};
 
-    --heading-1-font-size: 2.5rem; 
-    --heading-2-font-size: 2rem; 
-    --heading-3-font-size: 1.75rem;
-    --heading-4-font-size: 1.5rem;
-    --heading-5-font-size: 1.25rem; 
-    --heading-6-font-size: 1rem; 
+    --heading-1-font-size: 2rem; 
+    --heading-2-font-size: 1.75rem; 
+    --heading-3-font-size: 1.5rem;
+    --heading-4-font-size: 1.25rem; 
+    --heading-5-font-size: 1rem; 
+    --heading-6-font-size: 0.875rem; 
 
-    --heading-1-line-height: 1;
-    --heading-2-line-height: 1;
-    --heading-3-line-height: 1;
-    --heading-4-line-height: 1;
-    --heading-5-line-height: 1;
-    --heading-6-line-height: 1;
+    --heading-1-line-height: normal;
+    --heading-2-line-height: normal;
+    --heading-3-line-height: normal;
+    --heading-4-line-height: normal;
+    --heading-5-line-height: normal;
+    --heading-6-line-height: normal;
 
     --Ripple-custom-opacity: 0.2;
 	  --Ripple-custom-duration: 0.6s;
@@ -99,7 +99,6 @@ export const JeneseiGlobalStyles = createGlobalStyle`
   }
 
   ::-webkit-scrollbar-thumb {
-    border-radius: calc(var(--scrollbar-width) / 2);
     background: var(--scrollbar-thumb-background);
     border: var(--scrollbar-thumb-border);
     background-clip: padding-box;

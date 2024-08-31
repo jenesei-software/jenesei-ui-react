@@ -6,12 +6,7 @@ import { getFontSizeStyles } from '@components/typography'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
 
-import {
-  InputChildrenProps,
-  InputErrorMessageProps,
-  StyledInputProps,
-  StyledInputWrapperProps,
-} from '.'
+import { InputChildrenProps, InputErrorMessageProps, InputProps, StyledInputProps, StyledInputWrapperProps } from '.'
 
 /****************************************** Hidden *************************************************/
 const InputWrapperHidden = css<StyledInputWrapperProps>`
@@ -30,23 +25,33 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
   ${InputWrapperHidden};
 `
 
+/****************************************** Error Size*************************************************/
+export const InputErrorMessageSize = css<InputErrorMessageProps>`
+  ${(props) =>
+    InputErrorMessageSizeConstructor({ ...KEY_SIZE_DATA[props.$size], $isErrorAbsolute: props.$isErrorAbsolute })};
+`
+export const InputErrorMessageSizeConstructor = (
+  props: IJeneseiThemeSize & { $isErrorAbsolute: InputProps['isErrorAbsolute'] },
+) => css`
+  ${props.$isErrorAbsolute
+    ? css`
+        position: absolute;
+        top: calc(100% + ${props.padding}px);
+        left: ${props.padding}px;
+        color: ${(props) => props.theme.colors.danger};
+      `
+    : css`
+        position: static;
+        padding: 0px ${props.padding}px;
+        color: ${(props) => props.theme.colors.danger};
+      `}
+`
+
 /****************************************** Error *************************************************/
 export const InputErrorMessage = styled.div<InputErrorMessageProps>`
   ${getFontSizeStyles(12, 400, 'Inter')};
   width: ${(props) => props.$width ?? '100%'};
-  ${(props) =>
-    props.$isErrorAbsolute
-      ? css`
-          position: absolute;
-          top: calc(100% + 6px);
-          left: 6px;
-          color: ${(props) => props.theme.colors.danger};
-        `
-      : css`
-          position: static;
-          padding: 6px;
-          color: ${(props) => props.theme.colors.danger};
-        `}
+  ${InputErrorMessageSize}
 `
 
 export const InputIsErrorBorder = css<StyledInputProps>`
@@ -67,15 +72,13 @@ export const InputPlaceholder = css<StyledInputProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
     ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
-    color: ${(props) =>
-      props.theme.colors.input[props.$genre].color.placeholder};
+    color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
     line-height: 24px;
   }
   &:-ms-input-placeholder {
     ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
-    color: ${(props) =>
-      props.theme.colors.input[props.$genre].color.placeholder};
+    color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
     line-height: 24px;
   }

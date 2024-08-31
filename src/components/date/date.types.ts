@@ -1,27 +1,34 @@
 import { FocusEventHandler } from 'react'
 
-import {
-  InputProps,
-  StyledInputProps,
-  StyledInputWrapperProps,
-  TInputGenre,
-} from '@components/input'
+import { InputProps, StyledInputProps, StyledInputWrapperProps } from '@components/input'
 
-import { TJeneseiThemeSize } from '@theme/index'
+import { TJeneseiThemeGenreDate, TJeneseiThemeSize } from '@theme/index'
 
+export type TDateGenre = keyof TJeneseiThemeGenreDate
+
+export interface DateDayProps {
+  value: number
+  labelString: string
+  labelNumber: number
+  dayOfWeek: number
+  isWeekend: boolean
+  weekOfMonth: number
+  isToday: boolean
+  isCurrentMonth: boolean
+}
 export interface DateProps {
   name?: string
   id?: string
 
+  startDate?: number
+  endDate?: number
+
   size: TJeneseiThemeSize
-  genre: TInputGenre
+  genre: TDateGenre
   width?: string
   placeholder?: string
-
-  inputProps: Omit<
-    InputProps,
-    'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'
-  >
+  isOnClickClose?: boolean
+  inputProps: Omit<InputProps, 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width' | 'value'>
   value?: number | null
   onChange: (timestamp: number) => void
   onFocus?: FocusEventHandler<HTMLInputElement>
@@ -49,4 +56,15 @@ export interface DateStyledListProps {
 export interface DateDropdownListProps {
   $genre: DateStyledInputProps['$genre']
   $size?: DateStyledInputProps['$size']
+}
+
+export interface DateDropdownDayProps {
+  $row: number
+  $column: number
+  $genre: DateStyledInputProps['$genre']
+  $size?: DateStyledInputProps['$size']
+  $isToday?: DateDayProps['isToday']
+  $isWeekend?: DateDayProps['isWeekend']
+  $isChoice?: boolean
+  $isCurrentMonth?: boolean
 }

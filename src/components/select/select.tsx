@@ -1,27 +1,16 @@
 import { useVirtualizer } from '@tanstack/react-virtual'
+import { getExample } from 'awesome-phonenumber'
 import FullCountryList from 'country-list-with-dial-code-and-flag'
 import gsap from 'gsap'
-import {
-  FocusEventHandler,
-  ReactNode,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import moment from 'moment'
+import { FocusEventHandler, ReactNode, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { Button } from '@components/button'
 import { Checkbox, CheckboxProps } from '@components/checkbox'
 import { InputChildrenProps, InputErrorMessage } from '@components/input'
-import { TypographyTooltip } from '@components/typography'
+import { Typography, TypographyTooltip } from '@components/typography'
 
-import {
-  KEY_SIZE_DATA,
-  TJeneseiThemeGenreInput,
-  TJeneseiThemeSize,
-} from '@theme/index'
+import { KEY_SIZE_DATA, TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@theme/index'
 
 import {
   DropdownErase,
@@ -32,50 +21,36 @@ import {
   DropdownSelectAll,
   ISelectCountryOption,
   ISelectItem,
+  ISelectLanguageOption,
   SelectCountryProps,
+  SelectDateProps,
+  SelectLanguageProps,
   SelectProps,
   SelectStyledInput,
   SelectWrapper,
+  SelectYearProps,
 } from '.'
 
 const DEFAULT_MAX_VIEW = 5
 const DEFAULT_MIN_VIEW = 5
 const DEFAULT_OVERSCAN = 1
 
-export const Select = <T extends object & ISelectItem>(
-  props: SelectProps<T>,
-) => {
+export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
-  const [isAll, setIsAll] = useState(
-    props?.footer?.selectAll?.defaultValue ?? false,
-  )
+  const [isAll, setIsAll] = useState(props?.footer?.selectAll?.defaultValue ?? false)
   const listRef = useRef<HTMLUListElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const parentListRef = useRef<HTMLDivElement>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
 
-  const maxViewLength = useMemo(
-    () => props.maxView ?? DEFAULT_MAX_VIEW,
-    [props.maxView],
-  )
-  const minViewLength = useMemo(
-    () => props.minView ?? DEFAULT_MIN_VIEW,
-    [props.minView],
-  )
-  const optionsLength = useMemo(
-    () => props.option.length,
-    [props.option.length],
-  )
+  const maxViewLength = useMemo(() => props.maxView ?? DEFAULT_MAX_VIEW, [props.maxView])
+  const minViewLength = useMemo(() => props.minView ?? DEFAULT_MIN_VIEW, [props.minView])
+  const optionsLength = useMemo(() => props.option.length, [props.option.length])
   const isFooter: boolean = useMemo(() => !!props?.footer, [props.footer])
   const isErase: boolean = useMemo(() => !!props?.footer?.erase, [props.footer])
-  const isSelectAll: boolean = useMemo(
-    () => !!props?.footer?.selectAll,
-    [props.footer],
-  )
-  const sizeHeight = useMemo(
-    () => KEY_SIZE_DATA[props.size].height,
-    [props.size],
-  )
+  const isSelectAll: boolean = useMemo(() => !!props?.footer?.selectAll, [props.footer])
+  const sizeHeight = useMemo(() => KEY_SIZE_DATA[props.size].height, [props.size])
   const height = useMemo(
     () =>
       sizeHeight *
@@ -101,9 +76,7 @@ export const Select = <T extends object & ISelectItem>(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.preventDefault()
       event.stopPropagation()
-      props.footer?.erase?.onCLick
-        ? props.footer?.erase?.onCLick()
-        : props.onChange([])
+      props.footer?.erase?.onCLick ? props.footer?.erase?.onCLick() : props.onChange([])
       setIsAll(false)
     },
     [props],
@@ -113,7 +86,7 @@ export const Select = <T extends object & ISelectItem>(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.preventDefault()
       event.stopPropagation()
-      if (props.inputProps.value !== '') {
+      if (props?.inputProps?.value !== '') {
         return props.onChange(props.option)
       }
       if (isAll) {
@@ -130,27 +103,71 @@ export const Select = <T extends object & ISelectItem>(
     [isAll, props],
   )
 
+  const handleListOptionCloseEffect = useCallback(() => {
+    const list = listRef.current
+    if (!list) return
+
+    gsap.to(inputRef.current, {
+      duration: 0.1,
+      borderBottomLeftRadius: `${radius}px`,
+      borderBottomRightRadius: `${radius}px`,
+    })
+    gsap.to(wrapperRef.current, {
+      duration: 0.1,
+      '--after-height': `0px`,
+      zIndex: 'auto',
+    })
+    gsap.to(parentListRef.current, {
+      height: '0px',
+      zIndex: 'auto',
+      display: 'none',
+      duration: 0.1,
+      ease: 'power2.out',
+      onComplete: () => {
+        setIsAnimating(false)
+        setIsOpen(false)
+        wrapperRef?.current?.blur()
+        inputRef?.current?.blur()
+      },
+    })
+  }, [radius])
+
+  const handleOnBlurEasy = useCallback(() => {
+    if (isAnimating) return
+    if (!isOpen) return
+
+    setIsAnimating(true)
+
+    gsap.to(parentListRef.current, {
+      duration: 0.2,
+      onComplete: () => {
+        handleListOptionCloseEffect()
+      },
+    })
+  }, [handleListOptionCloseEffect, isAnimating, isOpen])
+
+  const handleOnBlur: FocusEventHandler<HTMLInputElement> = useCallback(
+    (event) => {
+      if (props.onBlur && event) props.onBlur(event)
+      handleOnBlurEasy()
+    },
+    [handleOnBlurEasy, props],
+  )
+
   const handleOptionOnClick = useCallback(
     (option: T) => {
+      if (props.isOnClickOptionClose) {
+        handleOnBlurEasy()
+      }
       if (props.isMulti) {
         if (isAll) {
-          const index = props.option.findIndex(
-            (selectedItems) => selectedItems.value === option.value,
-          )
-          const newValue = [
-            ...props.option.slice(0, index),
-            ...props.option.slice(index + 1),
-          ]
+          const index = props.option.findIndex((selectedItems) => selectedItems.value === option.value)
+          const newValue = [...props.option.slice(0, index), ...props.option.slice(index + 1)]
           props.onChange(newValue)
         } else {
-          const index = props.value.findIndex(
-            (selectedItems) => selectedItems.value === option.value,
-          )
+          const index = props.value.findIndex((selectedItems) => selectedItems.value === option.value)
 
-          if (
-            index === -1 &&
-            (!props.maxView || props.value.length < props.maxView)
-          ) {
+          if (index === -1 && (!props.maxView || props.value.length < props.maxView)) {
             const newValues = [...(props.value ?? []), option]
             props.onChange(newValues)
 
@@ -158,10 +175,7 @@ export const Select = <T extends object & ISelectItem>(
               return setIsAll(true)
             }
           } else if (index !== -1) {
-            const newValue = [
-              ...props.value.slice(0, index),
-              ...props.value.slice(index + 1),
-            ]
+            const newValue = [...props.value.slice(0, index), ...props.value.slice(index + 1)]
             props.onChange(newValue)
           }
         }
@@ -171,7 +185,7 @@ export const Select = <T extends object & ISelectItem>(
 
       return setIsAll(false)
     },
-    [isAll, props],
+    [handleOnBlurEasy, isAll, props],
   )
 
   const handleListOptionOpenEffect = useCallback(() => {
@@ -182,36 +196,21 @@ export const Select = <T extends object & ISelectItem>(
     setIsOpen(true)
   }, [])
 
-  const handleListOptionCloseEffect = useCallback(() => {
-    const list = listRef.current
-    if (!list) return
-
-    gsap.to(inputRef.current, {
-      duration: 0.1,
-      borderBottomLeftRadius: `${radius}px`,
-      borderBottomRightRadius: `${radius}px`,
-    })
-    gsap.to(parentListRef.current, {
-      height: '0px',
-      display: 'none',
-      duration: 0.1,
-      ease: 'power2.out',
-      onComplete: () => {
-        setIsAnimating(false)
-        setIsOpen(false)
-      },
-    })
-  }, [radius])
-
   const handleOnOpen = useCallback(() => {
     gsap.to(inputRef.current, {
       duration: 0.1,
       borderBottomLeftRadius: `0px`,
       borderBottomRightRadius: `0px`,
       onComplete: () => {
+        gsap.to(wrapperRef.current, {
+          duration: 0.1,
+          zIndex: '10',
+          '--after-height': `${height}px`,
+        })
         gsap.to(parentListRef.current, {
           height: `${height}px`,
           display: 'flex',
+          zIndex: '1',
           duration: 0.1,
           onComplete: () => {
             handleListOptionOpenEffect()
@@ -243,33 +242,8 @@ export const Select = <T extends object & ISelectItem>(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [height])
 
-  const handleOnBlurEasy = useCallback(() => {
-    if (isAnimating) return
-    if (!isOpen) return
-
-    setIsAnimating(true)
-
-    gsap.to(parentListRef.current, {
-      duration: 0.2,
-      onComplete: () => {
-        handleListOptionCloseEffect()
-      },
-    })
-  }, [handleListOptionCloseEffect, isAnimating, isOpen])
-
-  const handleOnBlur: FocusEventHandler<HTMLInputElement> = useCallback(
-    (event) => {
-      if (props.onBlur && event) props.onBlur(event)
-      handleOnBlurEasy()
-    },
-    [handleOnBlurEasy, props],
-  )
-
   const handleMouseDown = useCallback((event: MouseEvent) => {
-    if (
-      parentListRef.current &&
-      parentListRef.current.contains(event.target as Node)
-    ) {
+    if (parentListRef.current && parentListRef.current.contains(event.target as Node)) {
       event.preventDefault()
     }
   }, [])
@@ -308,9 +282,7 @@ export const Select = <T extends object & ISelectItem>(
 
   const listVirtualizer = useVirtualizer({
     count: optionsLength,
-    estimateSize: props.getEstimateSize
-      ? props.getEstimateSize
-      : () => sizeHeight,
+    estimateSize: props.getEstimateSize ? props.getEstimateSize : () => sizeHeight,
     getScrollElement: () => parentListRef.current,
     overscan: DEFAULT_OVERSCAN,
     paddingEnd: isFooter ? sizeHeight : 0,
@@ -320,11 +292,7 @@ export const Select = <T extends object & ISelectItem>(
     (containerRefElement?: HTMLDivElement | null) => {
       if (containerRefElement) {
         const { scrollHeight, scrollTop, clientHeight } = containerRefElement
-        if (
-          scrollHeight - scrollTop - clientHeight < height &&
-          !props.isFetching &&
-          props.fetchNextPage
-        ) {
+        if (scrollHeight - scrollTop - clientHeight < height && !props.isFetching && props.fetchNextPage) {
           props.fetchNextPage()
         }
       }
@@ -339,9 +307,10 @@ export const Select = <T extends object & ISelectItem>(
         $width={props.width}
         tabIndex={0}
         $radius={radius}
-        $parentListHeight={height}
+        $parentListHeight={isOpen ? height : 0}
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
+        ref={wrapperRef}
       >
         <SelectStyledInput
           id={props.id}
@@ -349,23 +318,20 @@ export const Select = <T extends object & ISelectItem>(
           $genre={props.genre}
           $size={props.size}
           placeholder={props.placeholder}
-          $isError={props.inputProps.isError}
-          $isLoading={props.inputProps.isLoading}
-          $postfixChildren={props.inputProps?.postfixChildren}
+          $isError={props?.inputProps?.isError}
+          $isLoading={props?.inputProps?.isLoading}
+          $postfixChildren={props?.inputProps?.postfixChildren}
           $prefixChildren={props.inputProps?.prefixChildren}
-          $isBold={props.inputProps.isBold}
-          disabled={props.inputProps.isDisabled}
-          readOnly={props.inputProps.isReadOnly}
-          required={props.inputProps.isRequired}
-          defaultValue={props.inputProps.defaultValue}
-          value={props.inputProps.value ?? ''}
-          type={props.inputProps.type}
-          onChange={(event) =>
-            props.inputProps.onChange &&
-            props.inputProps.onChange(event.target.value)
-          }
-          onBlur={props.inputProps.onBlur}
-          onFocus={props.inputProps.onFocus}
+          $isBold={props?.inputProps?.isBold}
+          disabled={props?.inputProps?.isDisabled}
+          readOnly={props?.inputProps?.isReadOnly}
+          required={props?.inputProps?.isRequired}
+          defaultValue={props?.inputProps?.defaultValue}
+          value={props?.inputProps?.value ?? ''}
+          type={props?.inputProps?.type}
+          onChange={(event) => props?.inputProps?.onChange && props?.inputProps?.onChange(event.target.value)}
+          onBlur={props?.inputProps?.onBlur}
+          onFocus={props?.inputProps?.onFocus}
           onClick={handleOnFocusEasy}
           ref={inputRef}
         />
@@ -402,15 +368,7 @@ export const Select = <T extends object & ISelectItem>(
                   genre={props.genre}
                   size={props.size}
                   isBold={props.optionProps?.isBold}
-                  checkboxProps={
-                    props.isCheckbox && props.checkboxProps?.view
-                      ? {
-                          ...props.checkboxProps,
-                          genre: props.genre,
-                          size: props.size,
-                        }
-                      : undefined
-                  }
+                  checkboxProps={props.checkboxProps}
                   isError={props.optionProps?.isError}
                   isLoading={props.optionProps?.isLoading}
                   isCustomIcon={props.optionProps?.isCustomIcon}
@@ -420,12 +378,7 @@ export const Select = <T extends object & ISelectItem>(
               )
             })}
             {isFooter && (
-              <DropdownFooter
-                $isErase={isErase}
-                $isSelectAll={isSelectAll}
-                $genre={props.genre}
-                $size={props.size}
-              >
+              <DropdownFooter $isErase={isErase} $isSelectAll={isSelectAll} $genre={props.genre} $size={props.size}>
                 {props.footer!.selectAll && (
                   <DropdownSelectAll>
                     <Button
@@ -441,13 +394,7 @@ export const Select = <T extends object & ISelectItem>(
                 )}
                 {props.footer!.erase && (
                   <DropdownErase>
-                    <Button
-                      isFullSize
-                      genre={props.genre}
-                      onClick={handleEraseOnClick}
-                      size={'medium'}
-                      isHiddenBorder
-                    >
+                    <Button isFullSize genre={props.genre} onClick={handleEraseOnClick} size={'medium'} isHiddenBorder>
                       {props.footer!.erase.label}
                     </Button>
                   </DropdownErase>
@@ -457,11 +404,8 @@ export const Select = <T extends object & ISelectItem>(
           </DropdownList>
         </DropdownListParent>
       </SelectWrapper>
-      {props.inputProps.isError && props.inputProps.errorMessage && (
-        <InputErrorMessage
-          $width={props.width}
-          $isErrorAbsolute={props.inputProps.isErrorAbsolute}
-        >
+      {props?.inputProps?.isError && props?.inputProps.errorMessage && (
+        <InputErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.inputProps.isErrorAbsolute}>
           {props.inputProps.errorMessage}
         </InputErrorMessage>
       )}
@@ -470,14 +414,13 @@ export const Select = <T extends object & ISelectItem>(
 }
 
 export const ContainerDropdownOptionComponent = (params: {
-  checkboxProps?: CheckboxProps
+  checkboxProps?: Omit<CheckboxProps, 'genre' | 'size'>
   genre: keyof TJeneseiThemeGenreInput
   size: TJeneseiThemeSize
   onClick: () => void
   isError?: boolean
   isLoading?: boolean
   isCustomIcon?: boolean
-  isCheckbox?: boolean
   isBold?: boolean
   postfixChildren?: InputChildrenProps
   prefixChildren?: InputChildrenProps
@@ -489,7 +432,7 @@ export const ContainerDropdownOptionComponent = (params: {
   return (
     <DropdownOption
       onClick={params.onClick}
-      $isCheckboxProps={params.isCheckbox}
+      $isCheckboxProps={!!params.checkboxProps}
       $isError={params.isError}
       $isLoading={params.isLoading}
       $isCustomIcon={params.isCustomIcon}
@@ -503,8 +446,8 @@ export const ContainerDropdownOptionComponent = (params: {
         transform: `translateY(${params.virtualRowStart}px)`,
       }}
     >
-      {!!params.isCheckbox && params.checkboxProps && (
-        <Checkbox {...params.checkboxProps} checked={params.checked} />
+      {params.checkboxProps && (
+        <Checkbox {...params.checkboxProps} genre={params.genre} size={params.size} checked={params.checked} />
       )}
       {params.label}
     </DropdownOption>
@@ -512,6 +455,16 @@ export const ContainerDropdownOptionComponent = (params: {
 }
 
 export const ContainerDropdownOption = memo(ContainerDropdownOptionComponent)
+
+const getNumberWithoutCountryDialCode = (countryCode: string, countryDialCode: string) => {
+  try {
+    const data = countryCode ? getExample(countryCode) : null
+    const numberWithoutCountryDialCode = (data?.number?.e164.replace(countryDialCode, '').trim() ?? '').replace(' ', '')
+    return numberWithoutCountryDialCode.length
+  } catch {
+    return 0
+  }
+}
 
 export const SelectCountry: React.FC<SelectCountryProps> = (props) => {
   const countryListOption = FullCountryList.getAll()
@@ -549,37 +502,38 @@ export const SelectCountry: React.FC<SelectCountryProps> = (props) => {
         search: e.name + ', ' + e.localName + ', ' + e.dialCode + ', ' + e.code,
         placeholder: e.name + ', ' + e.localName,
         dialCode: e.dial_code,
+        lengthNumberWithoutCountryDialCode: getNumberWithoutCountryDialCode(e.code, e.dial_code),
       })),
     [countryListOption],
   )
+
   const [viewOption, setViewOption] = useState<ISelectCountryOption[]>(option)
   const [query, setQuery] = useState<string>('')
+
   const handleSelectChange = (option: ISelectCountryOption[]) => {
-    props.onChange(option[0].value.toString())
-    props.onChangeDialCode(option[0].dialCode.toString())
+    const countryCode = option[0]?.value.toString()
+    const countryDialCode = option[0]?.dialCode.toString()
+    const lengthNumberWithoutCountryDialCode = option[0]?.lengthNumberWithoutCountryDialCode
+
+    props.onChange(countryCode, countryDialCode, lengthNumberWithoutCountryDialCode)
+    setQuery('')
   }
   const handleQueryChange = useCallback(
     (value: string) => {
       setQuery(value)
-      props.onChange('')
-      props.onChangeDialCode('')
+      props.onChange('', '', 0)
       if (value === '') return setViewOption(option)
       const filteredOptions = option.filter((option) =>
-        Object.values(option).some((field) =>
-          field?.toString().toLowerCase().includes(value.toLowerCase()),
-        ),
+        Object.values(option).some((field) => field?.toString().toLowerCase().includes(value.toLowerCase())),
       )
       setViewOption(filteredOptions)
     },
     [option, props],
   )
 
-  const [value, setValue] = useState<ISelectCountryOption | undefined>(
-    option.find((e) => e.value === props.value),
-  )
+  const [value, setValue] = useState<ISelectCountryOption | undefined>(option.find((e) => e.value === props.value))
   useEffect(() => {
-    if (value?.value !== props.value)
-      setValue(option.find((e) => e.value === props.value))
+    if (value?.value !== props.value) setValue(option.find((e) => e.value === props.value))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [option, props.value])
 
@@ -589,12 +543,170 @@ export const SelectCountry: React.FC<SelectCountryProps> = (props) => {
       option={viewOption}
       minView={1}
       maxView={8}
+      isOnClickOptionClose
       value={value ? [value] : []}
       onChange={handleSelectChange}
       inputProps={{
         ...props.inputProps,
         value: (value?.placeholder as string) ?? query,
         onChange: handleQueryChange,
+      }}
+    />
+  )
+}
+
+export const SelectLanguage: React.FC<SelectLanguageProps> = (props) => {
+  const option: ISelectLanguageOption[] = useMemo(
+    () => [
+      {
+        value: 'ru',
+        label: 'Русский',
+        placeholder: 'Русский',
+        search: 'Русский, ru',
+      },
+      {
+        value: 'en',
+        label: 'English',
+        placeholder: 'English',
+        search: 'English, en',
+      },
+    ],
+    [],
+  )
+
+  const [viewOption, setViewOption] = useState<ISelectLanguageOption[]>(option)
+  const [query, setQuery] = useState<string>('')
+  const handleSelectChange = (option: ISelectLanguageOption[]) => {
+    props.onChange(option[0]?.value.toString())
+    setQuery('')
+  }
+  const handleQueryChange = useCallback(
+    (value: string) => {
+      setQuery(value)
+      props.onChange('')
+      if (value === '') return setViewOption(option)
+      const filteredOptions = option.filter((option) =>
+        Object.values(option).some((field) => field?.toString().toLowerCase().includes(value.toLowerCase())),
+      )
+      setViewOption(filteredOptions)
+    },
+    [option, props],
+  )
+
+  const [value, setValue] = useState<ISelectLanguageOption | undefined>(option.find((e) => e.value === props.value))
+  useEffect(() => {
+    if (value?.value !== props.value) setValue(option.find((e) => e.value === props.value))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [option, props.value])
+
+  return (
+    <Select<ISelectLanguageOption>
+      {...props}
+      option={viewOption}
+      minView={1}
+      maxView={8}
+      isOnClickOptionClose
+      value={value ? [value] : []}
+      onChange={handleSelectChange}
+      inputProps={{
+        ...props.inputProps,
+        value: (value?.placeholder as string) ?? query,
+        onChange: handleQueryChange,
+      }}
+    />
+  )
+}
+
+export const SelectMonth: React.FC<SelectDateProps> = (props) => {
+  const { value, onChange, lang } = props
+
+  const year = moment(value).utc().year()
+  const months = useMemo(() => {
+    const format = lang === 'ru' ? 'MMMM' : 'MMMM'
+    return moment.months().map((_month, index) => ({
+      value: moment().utc().year(year).month(index).startOf('month').valueOf(),
+      label: <Typography>{moment().utc().year(year).month(index).format(format)}</Typography>,
+      placeholder: moment().utc().year(year).month(index).format(format),
+      search: `${moment().utc().year(year).month(index).format(format).toLowerCase()}, ${index + 1}`,
+    }))
+  }, [year, lang])
+
+  const handleSelectChange = (option: ISelectLanguageOption[]) => {
+    onChange(Number(option[0]?.value))
+  }
+
+  const selectedMonth = useMemo(() => {
+    return months.find(
+      (month) =>
+        moment(value).utc().isSameOrAfter(moment(month.value).startOf('month')) &&
+        moment(value).utc().isBefore(moment(month.value).endOf('month')),
+    )
+  }, [months, value])
+
+  return (
+    <Select<ISelectLanguageOption>
+      {...props}
+      option={months}
+      minView={1}
+      maxView={5}
+      isOnClickOptionClose
+      value={selectedMonth ? [selectedMonth] : []}
+      onChange={handleSelectChange}
+      inputProps={{
+        ...props.inputProps,
+        value: selectedMonth?.placeholder ?? props.placeholder,
+        isReadOnly: true,
+      }}
+    />
+  )
+}
+
+export const SelectYear: React.FC<SelectYearProps> = (props) => {
+  const { value, onChange, startDate, endDate, sortOrder = 'desc' } = props
+
+  const startYear = moment(startDate).utc().year()
+  const endYear = moment(endDate).utc().year()
+
+  const years = useMemo(() => {
+    const yearArray = Array.from({ length: endYear - startYear + 1 }, (_, index) => {
+      const year = startYear + index
+      return {
+        value: moment().year(year).utc().startOf('year').valueOf(),
+        label: moment().year(year).utc().format('YYYY'),
+        placeholder: moment().year(year).utc().format('YYYY'),
+        search: `${moment().year(year).utc().format('YYYY').toLowerCase()}`,
+      }
+    })
+
+    return sortOrder === 'asc'
+      ? yearArray.sort((a, b) => a.value - b.value)
+      : yearArray.sort((a, b) => b.value - a.value)
+  }, [endYear, startYear, sortOrder])
+
+  const handleSelectChange = (option: ISelectLanguageOption[]) => {
+    onChange(Number(option[0]?.value))
+  }
+
+  const selectedYear = useMemo(() => {
+    return years.find(
+      (year) =>
+        moment(value).utc().isSameOrAfter(moment(year.value)) &&
+        moment(value).utc().isBefore(moment(year.value).endOf('year')),
+    )
+  }, [years, value])
+  return (
+    <Select<ISelectLanguageOption>
+      {...props}
+      option={years}
+      minView={1}
+      maxView={5}
+      isOnClickOptionClose
+      value={selectedYear ? [selectedYear] : []}
+      onChange={handleSelectChange}
+      inputProps={{
+        ...props.inputProps,
+        value: selectedYear?.placeholder ?? props.placeholder,
+        isReadOnly: true,
       }}
     />
   )
