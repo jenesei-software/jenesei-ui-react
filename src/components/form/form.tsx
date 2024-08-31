@@ -1,6 +1,5 @@
 import { useForm } from '@tanstack/react-form'
 import { zodValidator } from '@tanstack/zod-form-adapter'
-import { getExample } from 'awesome-phonenumber'
 import moment from 'moment'
 import { z } from 'zod'
 
@@ -13,62 +12,24 @@ import { Input, InputPhone } from '@components/input'
 import { SelectCountry } from '@components/select'
 import { Typography } from '@components/typography'
 
+import {
+  validationCountryCode,
+  validationDateOfBirthday,
+  validationEmail,
+  validationFirstName,
+  validationLastName,
+  validationLogin,
+  validationPassword,
+} from '@functions/schema'
+
 const validationSchema = z.object({
-  dateOfBirthday: z
-    .number()
-    .int()
-    .min(1, 'Date of birthday is required')
-    .max(moment().subtract(18, 'years').valueOf(), 'Date of birthday must be at least 18 years ago')
-    .refine((value) => value <= moment().valueOf(), 'Date cannot be in the future'),
-  countryCode: z.string().trim().min(1, 'Country is required'),
-  firstName: z
-    .string()
-    .trim()
-    .min(1, 'First name is required')
-    .min(2, 'First name must be at least 2 characters')
-    .max(128, 'First name must be at most 128 characters')
-    .refine((value) => !value.includes(' '), 'No Spaces!'),
-  lastName: z
-    .string()
-    .trim()
-    .min(1, 'Last name is required')
-    .min(2, 'Last name must be at least 2 characters')
-    .max(128, 'Last name must be at most 128 characters')
-    .refine((value) => !value.includes(' '), 'No Spaces!'),
-  login: z
-    .string()
-    .trim()
-    .min(1, 'Login is required')
-    .min(2, 'Login must be at least 1 characters')
-    .max(12, 'Login must be at most 12 characters')
-    .refine((value) => !value.includes(' '), 'No Spaces!'),
-  email: z
-    .string()
-    .trim()
-    .min(1, { message: 'Email is required' })
-    .email('Email is not valid')
-    .refine((value) => !value.includes(' '), 'No Spaces!'),
-  currentPassword: z
-    .string()
-    .trim()
-    .min(1, 'Current password is required')
-    .min(8, { message: 'Current password must be at least 8 characters' })
-    .max(128, {
-      message: 'Current password must be at most 128 characters',
-    })
-    .refine((password) => /[A-Z]/.test(password), {
-      message: 'Current password must be at high case',
-    })
-    .refine((password) => /[a-z]/.test(password), {
-      message: 'Current password must be at low case',
-    })
-    .refine((password) => /[0-9]/.test(password), {
-      message: 'Current password must be at contain numbers',
-    })
-    .refine((password) => /[!@#$%^&*_-]/.test(password), {
-      message: 'Current password must be at contain unique characters',
-    })
-    .refine((value) => !value.includes(' '), 'No Spaces!'),
+  dateOfBirthday: validationDateOfBirthday(18),
+  countryCode: validationCountryCode,
+  firstName: validationFirstName,
+  lastName: validationLastName,
+  login: validationLogin,
+  email: validationEmail,
+  currentPassword: validationPassword,
 })
 
 export const Form = () => {
@@ -83,6 +44,8 @@ export const Form = () => {
       phone: '',
       countryCode: '',
       countryDialCode: '',
+      lengthNumberWithoutCountryDialCode: 0,
+      numberWithoutCountryDialCode: '',
       dateOfBirthday: 0,
     },
     onSubmit: async ({ value }) => {
@@ -163,9 +126,10 @@ export const Form = () => {
                   name={field.name}
                   value={field.state.value}
                   onBlur={field.handleBlur}
-                  onChange={(countryCode, countryDialCode) => {
+                  onChange={(countryCode, countryDialCode, lengthNumberWithoutCountryDialCode) => {
                     field.handleChange(countryCode)
                     field.form.setFieldValue('countryDialCode', countryDialCode)
+                    field.form.setFieldValue('lengthNumberWithoutCountryDialCode', lengthNumberWithoutCountryDialCode)
                   }}
                   genre={'grayBorder'}
                   size={'medium'}
@@ -183,25 +147,18 @@ export const Form = () => {
           <form.Field
             name="phone"
             validators={{
-              onChangeListenTo: ['countryDialCode', 'countryCode'],
-              onBlurListenTo: ['countryDialCode', 'countryCode'],
+              onChangeListenTo: ['countryDialCode', 'countryCode', 'lengthNumberWithoutCountryDialCode'],
+              onBlurListenTo: ['countryDialCode', 'countryCode', 'lengthNumberWithoutCountryDialCode'],
               onChange: (value) => {
-                const countryCode = value.fieldApi.form.getFieldValue('countryCode')
-                const countryDialCode = value.fieldApi.form.getFieldValue('countryDialCode')
-
-                const data = countryCode ? getExample(countryCode) : null
-
-                const numberWithoutDialCode = (data?.number?.e164.replace(countryDialCode, '').trim() ?? '').replace(
-                  ' ',
-                  '',
+                const lengthNumberWithoutCountryDialCode = value.fieldApi.form.getFieldValue(
+                  'lengthNumberWithoutCountryDialCode',
                 )
-
                 const schema = z
                   .string()
                   .trim()
                   .min(1, 'Phone number is required')
                   .refine(
-                    (val) => val.length == numberWithoutDialCode.length,
+                    (val) => val.length == lengthNumberWithoutCountryDialCode,
                     'The phone number is not according to your country standard',
                   )
                   .refine((val) => !val.includes(' '), 'No Spaces!')
