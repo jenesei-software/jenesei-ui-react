@@ -7,7 +7,7 @@ import { ProviderApp } from '.'
 
 const meta: Meta<typeof ProviderApp> = {
   component: ProviderApp,
-  title: 'Provider/ProviderApp',
+  title: 'Provider/App',
 }
 
 export default meta
@@ -23,7 +23,9 @@ const defaultNotification = (
       width: '100%',
     }}
   >
-    <Typography variant="h3" textWrap="nowrap">Notification</Typography>
+    <Typography variant="h3" textWrap="nowrap">
+      Notification
+    </Typography>
   </div>
 )
 const defaultHeader = (

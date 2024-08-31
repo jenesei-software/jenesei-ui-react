@@ -17,8 +17,8 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     --font-line-height: 1;
     --scrollbar-width: 16px;
     --scrollbar-background: ${JeneseiThemeVariables.black05};
-    --scrollbar-thumb-background: ${JeneseiThemeVariables.blueHover};
-    --scrollbar-thumb-border: 4px solid ${JeneseiThemeVariables.black05};
+    --scrollbar-thumb-background: ${JeneseiThemeVariables.black10};
+    --scrollbar-thumb-border: 2px solid ${JeneseiThemeVariables.black05};
 
     --heading-1-font-size: 2.5rem; 
     --heading-2-font-size: 2rem; 
@@ -99,7 +99,6 @@ export const JeneseiGlobalStyles = createGlobalStyle`
   }
 
   ::-webkit-scrollbar-thumb {
-    border-radius: calc(var(--scrollbar-width) / 2);
     background: var(--scrollbar-thumb-background);
     border: var(--scrollbar-thumb-border);
     background-clip: padding-box;

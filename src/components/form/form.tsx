@@ -1,116 +1,241 @@
 import { useForm } from '@tanstack/react-form'
-import { zodValidator } from '@tanstack/zod-form-adapter'
-import { getExample } from 'awesome-phonenumber'
+import { yupValidator } from '@tanstack/yup-form-adapter'
 import moment from 'moment'
-import { z } from 'zod'
+import { FC } from 'react'
 
 import { Icon } from '@assets/library-icon'
 
 import { Button } from '@components/button'
 import { DatePicker } from '@components/date'
 import { Stack } from '@components/flex'
-import { Input, InputPhone } from '@components/input'
-import { SelectCountry } from '@components/select'
+import { Input } from '@components/input'
+import { Toggle } from '@components/toggle'
 import { Typography } from '@components/typography'
 
-const validationSchema = z.object({
-  dateOfBirthday: z
-    .number()
-    .int()
-    .min(1, 'Date of birthday is required')
-    .max(moment().subtract(18, 'years').valueOf(), 'Date of birthday must be at least 18 years ago')
-    .refine((value) => value <= moment().valueOf(), 'Date cannot be in the future'),
-  countryCode: z.string().trim().min(1, 'Country is required'),
-  firstName: z
-    .string()
-    .trim()
-    .min(1, 'First name is required')
-    .min(2, 'First name must be at least 2 characters')
-    .max(128, 'First name must be at most 128 characters')
-    .refine((value) => !value.includes(' '), 'No Spaces!'),
-  lastName: z
-    .string()
-    .trim()
-    .min(1, 'Last name is required')
-    .min(2, 'Last name must be at least 2 characters')
-    .max(128, 'Last name must be at most 128 characters')
-    .refine((value) => !value.includes(' '), 'No Spaces!'),
-  login: z
-    .string()
-    .trim()
-    .min(1, 'Login is required')
-    .min(2, 'Login must be at least 1 characters')
-    .max(12, 'Login must be at most 12 characters')
-    .refine((value) => !value.includes(' '), 'No Spaces!'),
-  email: z
-    .string()
-    .trim()
-    .min(1, { message: 'Email is required' })
-    .email('Email is not valid')
-    .refine((value) => !value.includes(' '), 'No Spaces!'),
-  currentPassword: z
-    .string()
-    .trim()
-    .min(1, 'Current password is required')
-    .min(8, { message: 'Current password must be at least 8 characters' })
-    .max(128, {
-      message: 'Current password must be at most 128 characters',
-    })
-    .refine((password) => /[A-Z]/.test(password), {
-      message: 'Current password must be at high case',
-    })
-    .refine((password) => /[a-z]/.test(password), {
-      message: 'Current password must be at low case',
-    })
-    .refine((password) => /[0-9]/.test(password), {
-      message: 'Current password must be at contain numbers',
-    })
-    .refine((password) => /[!@#$%^&*_-]/.test(password), {
-      message: 'Current password must be at contain unique characters',
-    })
-    .refine((value) => !value.includes(' '), 'No Spaces!'),
-})
+import {
+  validationCountryCode,
+  validationDateOfBirthday,
+  validationEmail,
+  validationLogin,
+  validationPassword,
+  validationPhone,
+  validationUserAgreement,
+} from '@functions/schema'
 
-export const Form = () => {
+import { FormProps, FormSignInProps, FormSignUpProps, WrapperForm } from '.'
+
+export const Form: FC<FormProps> = (props) => {
+  const defaultSize = props.size
+  const defaultGenre = props.genre
+
+  return (
+    <WrapperForm
+      $width={props.width}
+      $isPadding={props.isPadding}
+      $isBorder={props.isBorder}
+      $size={defaultSize}
+      $genre={defaultGenre}
+      onSubmit={(e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        if (props.handleSubmit) props.handleSubmit()
+      }}
+    >
+      {props.children}
+    </WrapperForm>
+  )
+}
+
+export const FormSignIn: React.FC<FormSignInProps> = (props) => {
+  const defaultSize = props.size
+  const defaultGenre = props.genre
+
   const form = useForm({
     defaultValues: {
-      firstName: '',
-      lastName: '',
+      nickname: '',
+      password: '',
+    },
+    onSubmit: async ({ value }) => {
+      const result = {
+        nickname: value.nickname.trim(),
+        password: value.password.trim(),
+      }
+      props.onSubmit(result)
+    },
+    asyncDebounceMs: 500,
+    validatorAdapter: yupValidator({
+      transformErrors: (errors) => errors[0],
+    }),
+  })
+
+  const validationSchema = {
+    nickname: validationLogin,
+    password: validationPassword,
+  }
+
+  return (
+    <Form
+      {...props}
+      genre={defaultGenre || 'grayBorder'}
+      size={defaultSize || 'medium'}
+      handleSubmit={form.handleSubmit}
+    >
+      <Stack gap="6px" flexDirection="column" w="100%">
+        <>
+          <Typography color="black100" variant="h5">
+            Login
+          </Typography>
+          <form.Field
+            name="nickname"
+            validators={{
+              onChange: validationSchema.nickname,
+            }}
+          >
+            {(field) => (
+              <Input
+                autocomplete="username"
+                placeholder="Write the login"
+                id={field.name}
+                name={field.name}
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                onChange={field.handleChange}
+                genre={defaultGenre || 'grayBorder'}
+                size={defaultSize || 'medium'}
+                isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                errorMessage={field.state.meta.errors?.[0]?.toString()}
+              />
+            )}
+          </form.Field>
+          <Typography color="black100" variant="h5">
+            Password
+          </Typography>
+          <form.Field
+            name="password"
+            validators={{
+              onChangeListenTo: ['password'],
+              onChange: validationSchema.password,
+            }}
+          >
+            {(field) => (
+              <Input
+                autocomplete="current-password"
+                type="password"
+                placeholder="Write the password"
+                id={field.name}
+                name={field.name}
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                onChange={field.handleChange}
+                genre={defaultGenre || 'grayBorder'}
+                size={defaultSize || 'medium'}
+                isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                errorMessage={field.state.meta.errors?.[0]?.toString()}
+                postfixChildren={{
+                  width: '32px',
+                  left: '4px',
+                  right: '0px',
+                  children: (
+                    <Stack
+                      alignItems={'center'}
+                      justifyContent={'center'}
+                      p={'2px'}
+                      style={{ borderRadius: '0px 6px 6px 0px' }}
+                      bg={'black60'}
+                      minH={'100%'}
+                      h={'100%'}
+                    >
+                      <Icon size={'largeMedium'} primaryColor={'grayJanice'} type={'curved'} name={'Password'} />
+                    </Stack>
+                  ),
+                }}
+              />
+            )}
+          </form.Field>
+          <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
+            {([canSubmit, isSubmitting]) => (
+              <Stack flexDirection="column" gap="6px">
+                <>
+                  <Button
+                    width="100%"
+                    type="submit"
+                    isDisabled={!canSubmit}
+                    genre={'greenTransparent'}
+                    size={defaultSize || 'medium'}
+                  >
+                    {isSubmitting ? '...' : 'Sign In'}
+                  </Button>
+                  <Button
+                    type="reset"
+                    width="100%"
+                    genre={defaultGenre || 'grayBorder'}
+                    size={defaultSize || 'medium'}
+                    onClick={() => {
+                      form.reset()
+                      props.onBack()
+                    }}
+                  >
+                    Back
+                  </Button>
+                </>
+              </Stack>
+            )}
+          </form.Subscribe>
+        </>
+      </Stack>
+    </Form>
+  )
+}
+
+export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
+  const defaultSize = props.size
+  const defaultGenre = props.genre
+
+  const form = useForm({
+    defaultValues: {
       login: '',
       email: '',
       currentPassword: '',
       confirmPassword: '',
-      phone: '',
-      countryCode: '',
-      countryDialCode: '',
+      lengthNumberWithoutCountryDialCode: 0,
+      numberWithoutCountryDialCode: '',
       dateOfBirthday: 0,
+      isUserAgreement: false,
     },
     onSubmit: async ({ value }) => {
       const result = {
-        firstName: value.firstName.trim(),
-        lastName: value.lastName.trim(),
         login: value.login.trim(),
         email: value.email.trim(),
         currentPassword: value.currentPassword.trim(),
         confirmPassword: value.confirmPassword.trim(),
-        phone: value.phone.trim(),
-        country: value.countryCode.trim(),
-        countryDialCode: value.countryDialCode.trim(),
+        dateOfBirthday: value.dateOfBirthday,
       }
-      console.log(result)
+      props.onSubmit(result)
     },
     asyncDebounceMs: 500,
-    validatorAdapter: zodValidator(),
+    validatorAdapter: yupValidator({
+      transformErrors: (errors) => errors[0],
+    }),
   })
+
+  const validationSchema = {
+    dateOfBirthday: validationDateOfBirthday(18),
+    countryCode: validationCountryCode,
+    isUserAgreement: validationUserAgreement,
+    login: validationLogin,
+    email: validationEmail,
+    currentPassword: validationPassword,
+    phone: (phoneLength: number) => validationPhone(phoneLength),
+  }
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        form.handleSubmit()
-      }}
+    <Form
+      {...props}
+      genre={defaultGenre || 'grayBorder'}
+      size={defaultSize || 'medium'}
+      handleSubmit={form.handleSubmit}
     >
-      <Stack gap="6px" flexDirection="column" w="100%" maxW="500px">
+      <Stack gap="6px" flexDirection="column" w="100%">
         <>
           <Typography color="black100" variant="h5">
             Date of Birthday
@@ -118,7 +243,7 @@ export const Form = () => {
           <form.Field
             name="dateOfBirthday"
             validators={{
-              onBlur: validationSchema.shape.dateOfBirthday,
+              onBlur: validationSchema.dateOfBirthday,
             }}
           >
             {(field) => {
@@ -133,10 +258,10 @@ export const Form = () => {
                     value={field.state.value}
                     onBlur={field.handleBlur}
                     onChange={field.handleChange}
-                    genre={'grayBorder'}
+                    genre={defaultGenre || 'grayBorder'}
                     startDate={startDate}
                     endDate={endDate}
-                    size={'medium'}
+                    size={defaultSize || 'medium'}
                     inputProps={{
                       isError: !!field.state.meta.errors.length,
                       errorMessage: field.state.meta.errors?.[0]?.toString(),
@@ -147,177 +272,17 @@ export const Form = () => {
             }}
           </form.Field>
           <Typography color="black100" variant="h5">
-            Country
-          </Typography>
-          <form.Field
-            name="countryCode"
-            validators={{
-              onChange: validationSchema.shape.countryCode,
-            }}
-          >
-            {(field) => (
-              <>
-                <SelectCountry
-                  placeholder="Choice your country"
-                  id={field.name}
-                  name={field.name}
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={(countryCode, countryDialCode) => {
-                    field.handleChange(countryCode)
-                    field.form.setFieldValue('countryDialCode', countryDialCode)
-                  }}
-                  genre={'grayBorder'}
-                  size={'medium'}
-                  inputProps={{
-                    isError: !!field.state.meta.errors.length,
-                    errorMessage: field.state.meta.errors?.[0]?.toString(),
-                  }}
-                />
-              </>
-            )}
-          </form.Field>
-          <Typography color="black100" variant="h5">
-            Phone
-          </Typography>
-          <form.Field
-            name="phone"
-            validators={{
-              onChangeListenTo: ['countryDialCode', 'countryCode'],
-              onBlurListenTo: ['countryDialCode', 'countryCode'],
-              onChange: (value) => {
-                const countryCode = value.fieldApi.form.getFieldValue('countryCode')
-                const countryDialCode = value.fieldApi.form.getFieldValue('countryDialCode')
-
-                const data = countryCode ? getExample(countryCode) : null
-
-                const numberWithoutDialCode = (data?.number?.e164.replace(countryDialCode, '').trim() ?? '').replace(
-                  ' ',
-                  '',
-                )
-
-                const schema = z
-                  .string()
-                  .trim()
-                  .min(1, 'Phone number is required')
-                  .refine(
-                    (val) => val.length == numberWithoutDialCode.length,
-                    'The phone number is not according to your country standard',
-                  )
-                  .refine((val) => !val.includes(' '), 'No Spaces!')
-
-                const validationResult = schema.safeParse(value.value)
-
-                if (!validationResult.success) {
-                  return validationResult.error.errors[0].message
-                }
-              },
-            }}
-          >
-            {(field) => {
-              const countryCode = field.form.getFieldValue('countryCode')
-              const countryDialCode = field.form.getFieldValue('countryDialCode')
-              return (
-                <>
-                  <InputPhone
-                    countryDialCode={countryDialCode}
-                    countryCode={countryCode}
-                    placeholder="Write the phone"
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={field.handleChange}
-                    genre={'grayBorder'}
-                    size={'medium'}
-                    isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
-                    errorMessage={field.state.meta.errors?.[0]?.toString()}
-                    postfixChildren={{
-                      width: '32px',
-                      left: '4px',
-                      right: '0px',
-                      children: (
-                        <Stack
-                          alignItems={'center'}
-                          justifyContent={'center'}
-                          p={'2px'}
-                          style={{ borderRadius: '0px 6px 6px 0px' }}
-                          bg={'black60'}
-                          minH={'100%'}
-                          h={'100%'}
-                        >
-                          <Icon size={'largeMedium'} primaryColor={'grayJanice'} type={'curved'} name={'Call'} />
-                        </Stack>
-                      ),
-                    }}
-                  />
-                </>
-              )
-            }}
-          </form.Field>
-          <Typography color="black100" variant="h5">
-            First name
-          </Typography>
-          <form.Field
-            name="firstName"
-            validators={{
-              onChange: validationSchema.shape.firstName,
-            }}
-          >
-            {(field) => (
-              <>
-                <Input
-                  placeholder="Write the first name"
-                  id={field.name}
-                  name={field.name}
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={field.handleChange}
-                  genre={'grayBorder'}
-                  size={'medium'}
-                  isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
-                  errorMessage={field.state.meta.errors?.[0]?.toString()}
-                />
-              </>
-            )}
-          </form.Field>
-          <Typography color="black100" variant="h5">
-            Last name
-          </Typography>
-          <form.Field
-            name="lastName"
-            validators={{
-              onChange: validationSchema.shape.lastName,
-            }}
-          >
-            {(field) => {
-              return (
-                <Input
-                  placeholder="Write the last name"
-                  id={field.name}
-                  name={field.name}
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={field.handleChange}
-                  genre={'grayBorder'}
-                  size={'medium'}
-                  isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
-                  errorMessage={field.state.meta.errors?.[0]?.toString()}
-                />
-              )
-            }}
-          </form.Field>
-          <Typography color="black100" variant="h5">
             Email
           </Typography>
           <form.Field
             name="email"
             validators={{
-              onChange: validationSchema.shape.email,
+              onChange: validationSchema.email,
             }}
           >
             {(field) => (
               <Input
+                autocomplete="email"
                 placeholder="Write the Email"
                 type="email"
                 id={field.name}
@@ -325,8 +290,8 @@ export const Form = () => {
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 onChange={field.handleChange}
-                genre={'grayBorder'}
-                size={'medium'}
+                genre={defaultGenre || 'grayBorder'}
+                size={defaultSize || 'medium'}
                 isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
                 errorMessage={field.state.meta.errors?.[0]?.toString()}
               />
@@ -338,19 +303,20 @@ export const Form = () => {
           <form.Field
             name="login"
             validators={{
-              onChange: validationSchema.shape.login,
+              onChange: validationSchema.login,
             }}
           >
             {(field) => (
               <Input
+                autocomplete="username"
                 placeholder="Write the login"
                 id={field.name}
                 name={field.name}
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 onChange={field.handleChange}
-                genre={'grayBorder'}
-                size={'medium'}
+                genre={defaultGenre || 'grayBorder'}
+                size={defaultSize || 'medium'}
                 isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
                 errorMessage={field.state.meta.errors?.[0]?.toString()}
               />
@@ -363,7 +329,7 @@ export const Form = () => {
             name="currentPassword"
             validators={{
               onChangeListenTo: ['confirmPassword'],
-              onChange: validationSchema.shape.currentPassword,
+              onChange: validationSchema.currentPassword,
             }}
           >
             {(field) => (
@@ -376,8 +342,8 @@ export const Form = () => {
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 onChange={field.handleChange}
-                genre={'grayBorder'}
-                size={'medium'}
+                genre={defaultGenre || 'grayBorder'}
+                size={defaultSize || 'medium'}
                 isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
                 errorMessage={field.state.meta.errors?.[0]?.toString()}
                 postfixChildren={{
@@ -429,8 +395,8 @@ export const Form = () => {
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={field.handleChange}
-                  genre={'grayBorder'}
-                  size={'medium'}
+                  genre={defaultGenre || 'grayBorder'}
+                  size={defaultSize || 'medium'}
                   isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
                   errorMessage={field.state.meta.errors?.[0]?.toString()}
                   postfixChildren={{
@@ -455,20 +421,56 @@ export const Form = () => {
               )
             }}
           </form.Field>
+          <Typography color="black100" variant="h5">
+            User agreement
+          </Typography>
+          <form.Field
+            name="isUserAgreement"
+            validators={{
+              onChange: validationSchema.isUserAgreement,
+            }}
+          >
+            {(field) => (
+              <Toggle
+                isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                value={field.state.value}
+                onChange={field.handleChange}
+                genre={'product'}
+                size={'small'}
+              />
+            )}
+          </form.Field>
           <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
             {([canSubmit, isSubmitting]) => (
-              <>
-                <Button width="100%" type="submit" isDisabled={!canSubmit} genre={'greenTransparent'} size={'small'}>
-                  {isSubmitting ? '...' : 'Submit'}
-                </Button>
-                <Button type="reset" width="100%" genre={'grayBorder'} size={'small'} onClick={() => form.reset()}>
-                  Reset
-                </Button>
-              </>
+              <Stack flexDirection="column" gap="6px">
+                <>
+                  <Button
+                    width="100%"
+                    type="submit"
+                    isDisabled={!canSubmit}
+                    genre={'greenTransparent'}
+                    size={defaultSize || 'medium'}
+                  >
+                    {isSubmitting ? '...' : 'Submit'}
+                  </Button>
+                  <Button
+                    width="100%"
+                    type="reset"
+                    genre={defaultGenre || 'grayBorder'}
+                    size={defaultSize || 'medium'}
+                    onClick={() => {
+                      form.reset()
+                      props.onBack()
+                    }}
+                  >
+                    Back
+                  </Button>
+                </>
+              </Stack>
             )}
           </form.Subscribe>
         </>
       </Stack>
-    </form>
+    </Form>
   )
 }

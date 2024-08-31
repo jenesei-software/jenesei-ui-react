@@ -101,7 +101,11 @@
     "vite-tsconfig-paths": "^4.2.0"
   },
   "dependencies": {
+    "@tanstack/valibot-form-adapter": "^0.31.0",
+    "@tanstack/yup-form-adapter": "^0.31.0",
     "awesome-phonenumber": "^7.0.1",
-    "moment": "^2.30.1"
+    "moment": "^2.30.1",
+    "valibot": "^0.40.0",
+    "yup": "^1.4.0"
   }
 }

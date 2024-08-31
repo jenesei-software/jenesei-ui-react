@@ -1,4 +1,5 @@
 import { useVirtualizer } from '@tanstack/react-virtual'
+import { getExample } from 'awesome-phonenumber'
 import FullCountryList from 'country-list-with-dial-code-and-flag'
 import gsap from 'gsap'
 import moment from 'moment'
@@ -456,6 +457,16 @@ export const ContainerDropdownOptionComponent = (params: {
 
 export const ContainerDropdownOption = memo(ContainerDropdownOptionComponent)
 
+const getNumberWithoutCountryDialCode = (countryCode: string, countryDialCode: string) => {
+  try {
+    const data = countryCode ? getExample(countryCode) : null
+    const numberWithoutCountryDialCode = (data?.number?.e164.replace(countryDialCode, '').trim() ?? '').replace(' ', '')
+    return numberWithoutCountryDialCode.length
+  } catch {
+    return 0
+  }
+}
+
 export const SelectCountry: React.FC<SelectCountryProps> = (props) => {
   const countryListOption = FullCountryList.getAll()
 
@@ -492,19 +503,26 @@ export const SelectCountry: React.FC<SelectCountryProps> = (props) => {
         search: e.name + ', ' + e.localName + ', ' + e.dialCode + ', ' + e.code,
         placeholder: e.name + ', ' + e.localName,
         dialCode: e.dial_code,
+        lengthNumberWithoutCountryDialCode: getNumberWithoutCountryDialCode(e.code, e.dial_code),
       })),
     [countryListOption],
   )
+
   const [viewOption, setViewOption] = useState<ISelectCountryOption[]>(option)
   const [query, setQuery] = useState<string>('')
+
   const handleSelectChange = (option: ISelectCountryOption[]) => {
-    props.onChange(option[0]?.value.toString(), option[0]?.dialCode.toString())
+    const countryCode = option[0]?.value.toString()
+    const countryDialCode = option[0]?.dialCode.toString()
+    const lengthNumberWithoutCountryDialCode = option[0]?.lengthNumberWithoutCountryDialCode
+
+    props.onChange(countryCode, countryDialCode, lengthNumberWithoutCountryDialCode)
     setQuery('')
   }
   const handleQueryChange = useCallback(
     (value: string) => {
       setQuery(value)
-      props.onChange('', '')
+      props.onChange('', '', 0)
       if (value === '') return setViewOption(option)
       const filteredOptions = option.filter((option) =>
         Object.values(option).some((field) => field?.toString().toLowerCase().includes(value.toLowerCase())),

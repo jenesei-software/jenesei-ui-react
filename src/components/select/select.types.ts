@@ -1,12 +1,7 @@
 import { FocusEventHandler, ReactNode } from 'react'
 
 import { CheckboxProps } from '@components/checkbox'
-import {
-  InputProps,
-  StyledInputProps,
-  StyledInputWrapperProps,
-  TInputGenre,
-} from '@components/input'
+import { InputProps, StyledInputProps, StyledInputWrapperProps, TInputGenre } from '@components/input'
 
 import { TJeneseiThemeSize } from '@theme/index'
 
@@ -25,15 +20,9 @@ export interface SelectProps<T extends ISelectItem> {
   width?: string
   placeholder?: string
   isOnClickOptionClose?: boolean
-  inputProps?: Omit<
-    InputProps,
-    'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'
-  >
+  inputProps?: Omit<InputProps, 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'>
   checkboxProps?: Omit<CheckboxProps, 'genre' | 'size'>
-  optionProps?: Omit<
-    InputProps,
-    'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'
-  >
+  optionProps?: Omit<InputProps, 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'>
   isMulti?: boolean
   option: T[]
   value: T[]
@@ -63,14 +52,12 @@ export interface ISelectCountryOption extends ISelectItem {
   search?: string
   dialCode: string
   placeholder: string
+  lengthNumberWithoutCountryDialCode: number
 }
 
-export type SelectCountryProps = Omit<
-  SelectProps<ISelectCountryOption>,
-  'option' | 'value' | 'onChange'
-> & {
+export type SelectCountryProps = Omit<SelectProps<ISelectCountryOption>, 'option' | 'value' | 'onChange'> & {
   value: string
-  onChange: (countryCode: string, countryDialCode: string) => void
+  onChange: (countryCode: string, countryDialCode: string, lengthNumberWithoutCountryDialCode: number) => void
 }
 
 export interface ISelectLanguageOption extends ISelectItem {
@@ -78,18 +65,12 @@ export interface ISelectLanguageOption extends ISelectItem {
   placeholder: string
 }
 
-export type SelectLanguageProps = Omit<
-  SelectProps<ISelectCountryOption>,
-  'option' | 'value' | 'onChange'
-> & {
+export type SelectLanguageProps = Omit<SelectProps<ISelectCountryOption>, 'option' | 'value' | 'onChange'> & {
   value: string
   onChange: (language: string) => void
 }
 
-export type SelectDateProps = Omit<
-  SelectProps<ISelectCountryOption>,
-  'option' | 'value' | 'onChange'
-> & {
+export type SelectDateProps = Omit<SelectProps<ISelectCountryOption>, 'option' | 'value' | 'onChange'> & {
   value: number
   onChange: (timestamp: number) => void
   lang: 'ru' | 'en'

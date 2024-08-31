@@ -75,6 +75,12 @@ export interface TJeneseiThemeGenreTypeDate {
   }
 }
 
+export interface TJeneseiThemeGenreTypeForm {
+  background: string
+  border: string
+  color: string
+}
+
 export interface TJeneseiThemeGenre {
   gray: TJeneseiThemeGenreType
   grayBorder: TJeneseiThemeGenreType
@@ -97,6 +103,10 @@ export interface TJeneseiThemeGenreInput {
 export interface TJeneseiThemeGenreDate {
   gray: TJeneseiThemeGenreTypeDate
   grayBorder: TJeneseiThemeGenreTypeDate
+}
+export interface TJeneseiThemeGenreForm {
+  gray: TJeneseiThemeGenreTypeForm
+  grayBorder: TJeneseiThemeGenreTypeForm
 }
 export interface IJeneseiThemeSize {
   height: number
@@ -148,6 +158,7 @@ export interface IJeneseiTheme {
     button: TJeneseiThemeGenre
     toggle: TJeneseiThemeGenreToggle
     checkbox: TJeneseiThemeGenre
+    form: TJeneseiThemeGenreForm
     input: TJeneseiThemeGenreInput
   }
 }
