@@ -38,7 +38,6 @@
     "@emotion/styled": "^11.11.5",
     "@tanstack/react-form": "^0.31.0",
     "@tanstack/react-virtual": "^3.5.1",
-    "@tanstack/zod-form-adapter": "^0.31.0",
     "@types/js-cookie": "^3.0.6",
     "@types/react-helmet": "^6.1.11",
     "country-list-with-dial-code-and-flag": "^5.0.5",
@@ -57,7 +56,10 @@
     "react-toggle": "^4.1.3",
     "styled-components": ">= 5",
     "styled-reset": "^4.5.2",
-    "zod": "^3.23.8"
+    "@tanstack/yup-form-adapter": "^0.31.0",
+    "awesome-phonenumber": "^7.0.1",
+    "moment": "^2.30.1",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.3.1",
@@ -99,13 +101,5 @@
     "vite-plugin-bundle-analyzer": "^0.0.1",
     "vite-plugin-dts": "^2.3.0",
     "vite-tsconfig-paths": "^4.2.0"
-  },
-  "dependencies": {
-    "@tanstack/valibot-form-adapter": "^0.31.0",
-    "@tanstack/yup-form-adapter": "^0.31.0",
-    "awesome-phonenumber": "^7.0.1",
-    "moment": "^2.30.1",
-    "valibot": "^0.40.0",
-    "yup": "^1.4.0"
   }
 }

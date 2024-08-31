@@ -103,9 +103,7 @@ const FormWrapper: React.FC<FormProps> = (props) => {
     >
       <Stack gap="6px" flexDirection="column" w="100%">
         <>
-          <Typography color="black100" variant="h5">
-            Date of Birthday
-          </Typography>
+          <Typography variant="h5">Date of Birthday</Typography>
           <form.Field
             name="dateOfBirthday"
             validators={{
@@ -137,9 +135,7 @@ const FormWrapper: React.FC<FormProps> = (props) => {
               )
             }}
           </form.Field>
-          <Typography color="black100" variant="h5">
-            Country
-          </Typography>
+          <Typography variant="h5">Country</Typography>
           <form.Field
             name="countryCode"
             validators={{
@@ -169,9 +165,7 @@ const FormWrapper: React.FC<FormProps> = (props) => {
               </>
             )}
           </form.Field>
-          <Typography color="black100" variant="h5">
-            Phone
-          </Typography>
+          <Typography variant="h5">Phone</Typography>
           <form.Field
             name="phone"
             validators={{
@@ -238,9 +232,7 @@ const FormWrapper: React.FC<FormProps> = (props) => {
               )
             }}
           </form.Field>
-          <Typography color="black100" variant="h5">
-            First name
-          </Typography>
+          <Typography variant="h5">First name</Typography>
           <form.Field
             name="firstName"
             validators={{
@@ -265,9 +257,7 @@ const FormWrapper: React.FC<FormProps> = (props) => {
               </>
             )}
           </form.Field>
-          <Typography color="black100" variant="h5">
-            Last name
-          </Typography>
+          <Typography variant="h5">Last name</Typography>
           <form.Field
             name="lastName"
             validators={{
@@ -292,9 +282,7 @@ const FormWrapper: React.FC<FormProps> = (props) => {
               )
             }}
           </form.Field>
-          <Typography color="black100" variant="h5">
-            Email
-          </Typography>
+          <Typography variant="h5">Email</Typography>
           <form.Field
             name="email"
             validators={{
@@ -318,9 +306,7 @@ const FormWrapper: React.FC<FormProps> = (props) => {
               />
             )}
           </form.Field>
-          <Typography color="black100" variant="h5">
-            Login
-          </Typography>
+          <Typography variant="h5">Login</Typography>
           <form.Field
             name="login"
             validators={{
@@ -343,9 +329,7 @@ const FormWrapper: React.FC<FormProps> = (props) => {
               />
             )}
           </form.Field>
-          <Typography color="black100" variant="h5">
-            Current password
-          </Typography>
+          <Typography variant="h5">Current password</Typography>
           <form.Field
             name="currentPassword"
             validators={{
@@ -388,9 +372,7 @@ const FormWrapper: React.FC<FormProps> = (props) => {
               />
             )}
           </form.Field>
-          <Typography color="black100" variant="h5">
-            Confirm password
-          </Typography>
+          <Typography variant="h5">Confirm password</Typography>
           <form.Field
             name="confirmPassword"
             validators={{
@@ -442,9 +424,7 @@ const FormWrapper: React.FC<FormProps> = (props) => {
               )
             }}
           </form.Field>
-          <Typography color="black100" variant="h5">
-            User agreement
-          </Typography>
+          <Typography variant="h5">User agreement</Typography>
           <form.Field
             name="isUserAgreement"
             validators={{

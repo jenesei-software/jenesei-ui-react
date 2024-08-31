@@ -50,10 +50,12 @@ import '@jenesei-software/jenesei-ui-react'
 
 declare module '@jenesei-software/jenesei-ui-react' {
   export interface ValidCookieObject {
-    token: string
+    access_token: string
+    refresh_token: string
   }
   export interface ValidLocalStorageObject {
-    token: number
+    access_token: string
+    refresh_token: string
   }
 }
 ```

@@ -27,7 +27,7 @@ export interface DateProps {
   genre: TDateGenre
   width?: string
   placeholder?: string
-
+  isOnClickClose?: boolean
   inputProps: Omit<InputProps, 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width' | 'value'>
   value?: number | null
   onChange: (timestamp: number) => void

@@ -19,20 +19,28 @@ export const WrapperFormSize = css<WrapperFormProps>`
 export const WrapperFormSizeConstructor = (props: IJeneseiThemeSize & { $width?: string }) => css`
   border: 1px solid transparent;
   border-radius: ${props.radius + props.padding}px;
-  gap: ${props.padding - 2}px;
+  gap: ${props.padding + 6}px;
   padding: ${props.padding}px;
   width: ${props.$width || '100%'};
   ${getFontSizeStyles(props.font, 600, 'Inter')};
+  @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
+    gap: ${props.padding + 2}px;
+  }
+
+  @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
+    gap: ${props.padding - 2}px;
+  }
 `
 
 /****************************************** Default *************************************************/
 export const WrapperForm = styled.form<WrapperFormProps>`
   position: absolute;
   display: flex;
-  align-items: center;
-
+  flex-direction: column;
+  align-items: stretch;
+  transition: height ${(props) => props.theme.transition};
   ${WrapperFormSize}
-
+  height: auto;
   ${(props) =>
     props.$genre &&
     css`

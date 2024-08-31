@@ -13,7 +13,7 @@ type Story = StoryObj<typeof FormSignUp>
 
 export const SignUp: Story = {
   args: {
-    genre: 'gray',
+    genre: 'grayBorder',
     size: 'medium',
     isPadding: true,
     isBorder: true,

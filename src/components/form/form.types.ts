@@ -27,7 +27,7 @@ export interface FormSignUpProps extends FormProps {
     currentPassword: string
     confirmPassword: string
     dateOfBirthday: number
-  }) => void
+  }) => void | Promise<void>
 }
 export interface WrapperFormProps {
   $width?: FormProps['width']
