@@ -458,9 +458,13 @@ export const ContainerDropdownOptionComponent = (params: {
 export const ContainerDropdownOption = memo(ContainerDropdownOptionComponent)
 
 const getNumberWithoutCountryDialCode = (countryCode: string, countryDialCode: string) => {
-  const data = countryCode ? getExample(countryCode) : null
-  const numberWithoutCountryDialCode = (data?.number?.e164.replace(countryDialCode, '').trim() ?? '').replace(' ', '')
-  return numberWithoutCountryDialCode.length
+  try {
+    const data = countryCode ? getExample(countryCode) : null
+    const numberWithoutCountryDialCode = (data?.number?.e164.replace(countryDialCode, '').trim() ?? '').replace(' ', '')
+    return numberWithoutCountryDialCode.length
+  } catch {
+    return 0
+  }
 }
 
 export const SelectCountry: React.FC<SelectCountryProps> = (props) => {
@@ -511,6 +515,7 @@ export const SelectCountry: React.FC<SelectCountryProps> = (props) => {
     const countryCode = option[0]?.value.toString()
     const countryDialCode = option[0]?.dialCode.toString()
     const lengthNumberWithoutCountryDialCode = option[0]?.lengthNumberWithoutCountryDialCode
+
     props.onChange(countryCode, countryDialCode, lengthNumberWithoutCountryDialCode)
     setQuery('')
   }

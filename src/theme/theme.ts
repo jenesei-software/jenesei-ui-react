@@ -265,6 +265,18 @@ const DefaultJeneseiThemeGenreDate = {
     },
   },
 }
+const DefaultJeneseiThemeGenreForm = {
+  gray: {
+    background: JeneseiThemeVariables.whiteStandard,
+    color: JeneseiThemeVariables.black60,
+    border: JeneseiThemeVariables.transparent,
+  },
+  grayBorder: {
+    background: JeneseiThemeVariables.whiteStandard,
+    color: JeneseiThemeVariables.black60,
+    border: JeneseiThemeVariables.black10,
+  },
+}
 const DefaultJeneseiThemeGenreToggle = {
   product: {
     track: {
@@ -321,6 +333,7 @@ export const JeneseiTheme: IJeneseiTheme = {
   },
   palette: JeneseiThemeVariables,
   colors: {
+    form: DefaultJeneseiThemeGenreForm,
     white: JeneseiThemeVariables.whiteStandard,
     focus: JeneseiThemeVariables.black60,
     danger: JeneseiThemeVariables.redGoogle,
