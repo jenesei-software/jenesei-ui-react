@@ -193,6 +193,7 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
 }
 
 export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
+  const { axiosInstance } = useAxiosWebId()
   const defaultSize = props.size
   const defaultGenre = props.genre
 
@@ -222,8 +223,6 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
       transformErrors: (errors) => errors[0],
     }),
   })
-
-  const { axiosInstance } = useAxiosWebId()
 
   const validationSchema = {
     dateOfBirthday: validationDateOfBirthday(18),

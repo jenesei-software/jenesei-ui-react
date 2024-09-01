@@ -24,14 +24,14 @@ const queryClient = new QueryClient({
   },
 })
 
+const baseURL = import.meta.env.VITE_BASE_URL || ''
+const cookieAccessTokenName = import.meta.env.VITE_ACCESS_TOKEN_NAME || ''
+
 export const preview: Preview = {
   decorators: [
     (Story) => (
       <QueryClientProvider client={queryClient}>
-        <ProviderAxiosWebId
-          baseURL={process.env.VITE_BASE_URL || ''}
-          cookieAccessTokenName={process.env.VITE_ACCESS_TOKEN_NAME || ''}
-        >
+        <ProviderAxiosWebId baseURL={baseURL} cookieAccessTokenName={cookieAccessTokenName}>
           <ThemeProvider theme={JeneseiTheme}>
             <JeneseiGlobalStyles />
             <Story />

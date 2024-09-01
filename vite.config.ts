@@ -22,9 +22,7 @@ export default defineConfig(() => {
 
           env: {
             development: {
-              plugins: [
-                ['babel-plugin-styled-components', { displayName: true }],
-              ],
+              plugins: [['babel-plugin-styled-components', { displayName: true }]],
             },
           },
         },
@@ -74,6 +72,10 @@ export default defineConfig(() => {
             'react-helmet': 'reactHelmet',
             'react-toggle': 'ReactToggle',
             'react-dom': 'ReactDOM',
+            moment: 'moment',
+            yup: 'yup',
+            'awesome-phonenumber': 'awesomePhonenumber',
+            'country-list-with-dial-code-and-flag': 'FullCountryList',
           },
         },
       },
