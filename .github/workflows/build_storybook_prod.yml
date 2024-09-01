@@ -19,6 +19,11 @@ jobs:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Configure npm for GitHub Packages
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.PAT_CYRILSTRONE_ACTION }}" >> ~/.npmrc
+          echo "@jenesei-software:registry=https://npm.pkg.github.com/" >> ~/.npmrc
+
       - name: Clean git working directory
         run: |
           git reset --hard || echo "No changes to reset"
@@ -29,16 +34,9 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
-      - name: Configure npm for GitHub Packages
-        run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.PAT_CYRILSTRONE_ACTION }}" >> ~/.npmrc
-
       - name: Install dependencies
         run: |
           npm install
-
-      - name: Delete npmrc file
-        run: rm ~/.npmrc
 
       - name: Build
         run: |
