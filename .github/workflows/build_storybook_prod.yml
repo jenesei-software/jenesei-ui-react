@@ -21,11 +21,8 @@ jobs:
 
       - name: Configure npm for GitHub Packages
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.PAT_CYRILSTRONE_ACTION }}" > ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
           echo "@jenesei-software:registry=https://npm.pkg.github.com/" >> ~/.npmrc
-
-      - name: Check .npmrc file
-        run: cat ~/.npmrc
 
       - name: Clean git working directory
         run: |
@@ -38,17 +35,17 @@ jobs:
           git config --local user.name "github-actions[bot]"
 
       - name: Install dependencies
-        run: npm install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
+        run: |
+          npm ci
 
       - name: Build
-        run: npm run build-storybook
+        run: |
+          npm run build-storybook
 
       - name: Push changes
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: build_prod
           publish_dir: storybook-static
           force_orphan: true
