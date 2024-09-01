@@ -107,6 +107,6 @@
     "vite-tsconfig-paths": "^4.2.0"
   },
   "dependencies": {
-    "@jenesei-software/jenesei-web-id-api": "^0.0.17"
+    "@jenesei-software/jenesei-web-id-api": "^0.0.18"
   }
 }
