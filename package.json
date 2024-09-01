@@ -31,7 +31,7 @@
   "scripts": {
     "build": "tsc && vite build --mode build",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "cross-env BUILD_STORYBOOK=true storybook build --quiet --disable-telemetry --mode build",
+    "build-storybook": "cross-env BUILD_STORYBOOK=true storybook build --quiet --disable-telemetry",
     "format": "prettier --write 'src/*/*.{ts,tsx}'"
   },
   "peerDependencies": {
