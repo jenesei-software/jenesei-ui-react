@@ -20,8 +20,10 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Configure npm for GitHub Packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.PAT_CYRILSTRONE_ACTION }}" > ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
           echo "@jenesei-software:registry=https://npm.pkg.github.com/" >> ~/.npmrc
 
       - name: Check .npmrc file
