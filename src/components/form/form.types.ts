@@ -1,3 +1,4 @@
+import { AxiosInstance } from 'axios'
 import { CSSProperties, ReactElement } from 'react'
 
 import { TJeneseiThemeGenreForm, TJeneseiThemeSize } from '@theme/index'
@@ -20,6 +21,7 @@ export interface FormSignInProps extends FormProps {
   onBack: () => void
 }
 export interface FormSignUpProps extends FormProps {
+  axiosInstance: AxiosInstance
   onBack: () => void
   onSubmit: (field: {
     login: string

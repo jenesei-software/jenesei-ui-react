@@ -1,28 +1,26 @@
 import type { StorybookConfig } from '@storybook/react-vite'
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
-  staticDirs: ['../public/browser'],
+  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
-    '@storybook/addon-onboarding',
-    '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '@chromatic-com/storybook',
     '@storybook/addon-interactions',
+    '@storybook/addon-links',
+    '@storybook/addon-onboarding',
+    '@storybook/addon-themes',
   ],
-  framework: {
-    name: '@storybook/react-vite',
-    options: {},
-  },
-  docs: {
-    autodocs: 'tag',
+  framework: '@storybook/react-vite',
+  core: {
+    builder: '@storybook/builder-vite',
   },
   typescript: {
     reactDocgen: 'react-docgen-typescript',
   },
-  core: {
-    builder: '@storybook/builder-vite',
+  staticDirs: ['../public/browser'],
+  viteFinal: (config) => {
+    return config
   },
+
   managerHead: (head) => `
     ${head}
     <link rel="icon" href="/favicon.ico" />

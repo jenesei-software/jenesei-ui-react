@@ -55,22 +55,33 @@ export const validationLogin = yup
   .test('no-spaces', 'No Spaces!', (value) => !value?.includes(' '))
 
 export const validationLoginWithCheck = (axiosInstance: AxiosInstance) =>
-  yup
-    .string()
-    .trim()
-    .min(1, 'Login is required')
-    .min(2, 'Login must be at least 2 characters')
-    .max(12, 'Login must be at most 12 characters')
-    .test('no-spaces', 'No Spaces!', (value) => !value?.includes(' '))
-    .test('login-check', 'Login is already taken', async (value) => {
-      if (!value) return true
-      try {
-        const response = await userApi(axiosInstance).getUserCheckNickname({ path: { nickname: value } })
-        return !response.data.value
-      } catch (error) {
-        return false
-      }
-    })
+  yup.lazy((value) => {
+    if (!value || typeof value !== 'string' || value.length < 2 || value.length > 12 || value.includes(' ')) {
+      return yup
+        .string()
+        .trim()
+        .required('Login is required')
+        .min(2, 'Login must be at least 2 characters')
+        .max(12, 'Login must be at most 12 characters')
+        .test('no-spaces', 'No Spaces!', (v) => !v?.includes(' '))
+    }
+
+    return yup
+      .string()
+      .trim()
+      .required('Login is required')
+      .min(2, 'Login must be at least 2 characters')
+      .max(12, 'Login must be at most 12 characters')
+      .test('no-spaces', 'No Spaces!', (v) => !v?.includes(' '))
+      .test('login-check', 'Login is already taken', async (v) => {
+        try {
+          const response = await userApi(axiosInstance).getUserCheckNickname({ path: { nickname: v || '' } })
+          return !response.data.value
+        } catch (error) {
+          return false
+        }
+      })
+  })
 
 export const validationEmail = yup
   .string()
@@ -80,21 +91,35 @@ export const validationEmail = yup
   .test('no-spaces', 'No Spaces!', (value) => !value?.includes(' '))
 
 export const validationEmailWithCheck = (axiosInstance: AxiosInstance) =>
-  yup
-    .string()
-    .trim()
-    .min(1, 'Email is required')
-    .email('Email is not valid')
-    .test('no-spaces', 'No Spaces!', (value) => !value?.includes(' '))
-    .test('email-check', 'Email is already taken', async (value) => {
-      if (!value) return true
-      try {
-        const response = await userApi(axiosInstance).getUserCheckEmail({ path: { email: value } })
-        return !response.data.value
-      } catch (error) {
-        return false
-      }
-    })
+  yup.lazy((value) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+
+    if (!value || typeof value !== 'string' || value.length < 1 || value.includes(' ') || !emailRegex.test(value)) {
+      return yup
+        .string()
+        .trim()
+        .min(1, 'Email is required')
+        .matches(emailRegex, 'Email is not valid')
+        .test('no-spaces', 'No Spaces!', (v) => !v?.includes(' '))
+    }
+
+    return yup
+      .string()
+      .trim()
+      .min(1, 'Email is required')
+      .matches(emailRegex, 'Email is not valid')
+      .test('no-spaces', 'No Spaces!', (v) => !v?.includes(' '))
+      .test('email-check', 'Email is already taken', async (v) => {
+        try {
+          const response = await userApi(axiosInstance).getUserCheckEmail({
+            path: { email: v || '' },
+          })
+          return !response.data.value
+        } catch (error) {
+          return false
+        }
+      })
+  })
 
 export const validationPassword = yup
   .string()
