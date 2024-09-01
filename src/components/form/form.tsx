@@ -15,8 +15,9 @@ import { Typography } from '@components/typography'
 import {
   validationCountryCode,
   validationDateOfBirthday,
-  validationEmail,
+  validationEmailWithCheck,
   validationLogin,
+  validationLoginWithCheck,
   validationPassword,
   validationPhone,
   validationUserAgreement,
@@ -225,8 +226,8 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
     dateOfBirthday: validationDateOfBirthday(18),
     countryCode: validationCountryCode,
     isUserAgreement: validationUserAgreement,
-    login: validationLogin,
-    email: validationEmail,
+    login: validationLoginWithCheck,
+    email: validationEmailWithCheck,
     currentPassword: validationPassword,
     phone: (phoneLength: number) => validationPhone(phoneLength),
   }
@@ -277,7 +278,7 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
         <form.Field
           name="email"
           validators={{
-            onBlur: validationSchema.email,
+            onBlurAsync: validationSchema.email,
           }}
         >
           {(field) => (
@@ -305,7 +306,7 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
         <form.Field
           name="login"
           validators={{
-            onBlur: validationSchema.login,
+            onBlurAsync: validationSchema.login,
           }}
         >
           {(field) => (
