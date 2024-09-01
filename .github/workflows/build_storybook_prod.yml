@@ -24,6 +24,9 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.PAT_CYRILSTRONE_ACTION }}" > ~/.npmrc
           echo "@jenesei-software:registry=https://npm.pkg.github.com/" >> ~/.npmrc
 
+      - name: Check .npmrc file
+        run: cat ~/.npmrc
+
       - name: Clean git working directory
         run: |
           git reset --hard || echo "No changes to reset"
