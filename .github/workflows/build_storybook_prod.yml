@@ -33,6 +33,8 @@ jobs:
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
           echo "@jenesei-software:registry=https://npm.pkg.github.com/" >> ~/.npmrc
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
 
       - name: Install dependencies
         run: |
