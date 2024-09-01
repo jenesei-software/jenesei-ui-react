@@ -173,12 +173,15 @@ export const DatePicker = (props: DateProps) => {
   //   setCurrentMonth(newDate.month())
   //   setCurrentYear(newDate.year())
   // }
-  const updateDateFromTimestamp = (timestamp: number) => {
+  const updateDateFromTimestamp = (timestamp: number, isDay?: boolean) => {
     const newDate = moment(timestamp).utc()
     props.onChange(newDate.valueOf())
     setCurrentDay(newDate.date())
     setCurrentMonth(newDate.month())
     setCurrentYear(newDate.year())
+    if (props.isOnClickClose && isDay) {
+      handleOnBlurEasy()
+    }
   }
   useEffect(() => {
     if (props.value) {
@@ -194,6 +197,7 @@ export const DatePicker = (props: DateProps) => {
   const listRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const parentListRef = useRef<HTMLDivElement>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
 
   const rows = useMemo(() => countSevens(daysInMonth.length) + 1, [daysInMonth.length])
 
@@ -228,6 +232,8 @@ export const DatePicker = (props: DateProps) => {
       onComplete: () => {
         setIsAnimating(false)
         setIsOpen(false)
+        wrapperRef.current?.blur()
+        inputRef.current?.blur()
       },
     })
   }, [])
@@ -340,6 +346,7 @@ export const DatePicker = (props: DateProps) => {
         $parentListHeight={height}
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
+        ref={wrapperRef}
       >
         <DateStyledInput
           id={props.id}
@@ -391,7 +398,7 @@ export const DatePicker = (props: DateProps) => {
                       genre={props.genre}
                       size={'small'}
                       inputProps={undefined}
-                      value={unixValue.valueOf()}
+                      value={moment.utc().year(currentYear).month(currentMonth).startOf('month').valueOf()}
                       onChange={updateDateFromTimestamp}
                       lang={'ru'}
                       width="90px"
@@ -399,7 +406,7 @@ export const DatePicker = (props: DateProps) => {
                     <SelectYear
                       genre={props.genre}
                       size={'small'}
-                      value={unixValue.valueOf()}
+                      value={moment.utc().year(currentYear).startOf('year').valueOf()}
                       onChange={updateDateFromTimestamp}
                       startDate={props.startDate}
                       endDate={props.endDate}
@@ -440,7 +447,7 @@ export const DatePicker = (props: DateProps) => {
                   $row={day.weekOfMonth + 1}
                   $column={day.dayOfWeek}
                   key={day.value}
-                  onClick={() => updateDateFromTimestamp(day.value)}
+                  onClick={() => updateDateFromTimestamp(day.value, true)}
                   $isToday={day.isToday}
                   $isWeekend={day.isWeekend}
                   $isChoice={day.value === unixValue.valueOf()}
@@ -455,7 +462,7 @@ export const DatePicker = (props: DateProps) => {
         </DateDropdownListParent>
       </DateWrapper>
       {props?.inputProps?.isError && props?.inputProps?.errorMessage && (
-        <InputErrorMessage $width={props.width} $isErrorAbsolute={props.inputProps?.isErrorAbsolute}>
+        <InputErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.inputProps?.isErrorAbsolute}>
           {props.inputProps?.errorMessage}
         </InputErrorMessage>
       )}

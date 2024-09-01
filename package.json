@@ -1,7 +1,7 @@
 {
   "author": "Cyril Strone",
   "name": "@jenesei-software/jenesei-ui-react",
-  "version": "0.4.42",
+  "version": "0.4.43",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jenesei-software/jenesei-ui-react.git"
@@ -38,12 +38,14 @@
     "@emotion/styled": "^11.11.5",
     "@tanstack/react-form": "^0.31.0",
     "@tanstack/react-virtual": "^3.5.1",
-    "@tanstack/zod-form-adapter": "^0.31.0",
+    "@tanstack/yup-form-adapter": "^0.31.0",
     "@types/js-cookie": "^3.0.6",
     "@types/react-helmet": "^6.1.11",
+    "awesome-phonenumber": "^7.0.1",
     "country-list-with-dial-code-and-flag": "^5.0.5",
     "gsap": "^3.12.5",
     "js-cookie": "^3.0.5",
+    "moment": "^2.30.1",
     "react": "^18.2.0",
     "react-currency-input-field": "^3.8.0",
     "react-dom": "^18.2.0",
@@ -57,7 +59,7 @@
     "react-toggle": "^4.1.3",
     "styled-components": ">= 5",
     "styled-reset": "^4.5.2",
-    "zod": "^3.23.8"
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.3.1",
@@ -101,11 +103,6 @@
     "vite-tsconfig-paths": "^4.2.0"
   },
   "dependencies": {
-    "@tanstack/valibot-form-adapter": "^0.31.0",
-    "@tanstack/yup-form-adapter": "^0.31.0",
-    "awesome-phonenumber": "^7.0.1",
-    "moment": "^2.30.1",
-    "valibot": "^0.40.0",
-    "yup": "^1.4.0"
+    "@jenesei-software/jenesei-web-id-api": "^0.0.7"
   }
 }

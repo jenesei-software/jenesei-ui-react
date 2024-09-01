@@ -50,10 +50,12 @@ import '@jenesei-software/jenesei-ui-react'
 
 declare module '@jenesei-software/jenesei-ui-react' {
   export interface ValidCookieObject {
-    token: string
+    access_token: string
+    refresh_token: string
   }
   export interface ValidLocalStorageObject {
-    token: number
+    access_token: string
+    refresh_token: string
   }
 }
 ```
@@ -69,7 +71,6 @@ To work correctly you need to install the following dependencies:
 npm install @emotion/styled --save
 npm install @tanstack/react-form --save
 npm install @tanstack/react-virtual --save
-npm install @tanstack/zod-form-adapter --save
 npm install @types/js-cookie --save
 npm install @types/react-helmet --save
 npm install country-list-with-dial-code-and-flag --save
@@ -88,5 +89,8 @@ npm install react-ripple-click --save
 npm install react-toggle --save
 npm install styled-components --save
 npm install styled-reset --save
-npm install zod --save
+npm install @tanstack/yup-form-adapter --save
+npm install awesome-phonenumber --save
+npm install moment --save
+npm install yup --save
 ```

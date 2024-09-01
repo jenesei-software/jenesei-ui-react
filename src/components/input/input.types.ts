@@ -13,7 +13,7 @@ export interface InputProps {
 
   errorMessage?: string
 
-  isErrorAbsolute?: string
+  isErrorAbsolute?: boolean
 
   autocomplete?: HTMLInputAutoCompleteAttribute
 
@@ -99,6 +99,7 @@ export interface StyledInputWrapperProps {
 }
 
 export interface InputErrorMessageProps {
-  $isErrorAbsolute?: string
+  $isErrorAbsolute?: InputProps['isErrorAbsolute']
   $width?: InputProps['width']
+  $size: InputProps['size']
 }

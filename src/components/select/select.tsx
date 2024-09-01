@@ -8,7 +8,7 @@ import { FocusEventHandler, ReactNode, memo, useCallback, useEffect, useMemo, us
 import { Button } from '@components/button'
 import { Checkbox, CheckboxProps } from '@components/checkbox'
 import { InputChildrenProps, InputErrorMessage } from '@components/input'
-import { TypographyTooltip } from '@components/typography'
+import { Typography, TypographyTooltip } from '@components/typography'
 
 import { KEY_SIZE_DATA, TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@theme/index'
 
@@ -126,6 +126,8 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
       onComplete: () => {
         setIsAnimating(false)
         setIsOpen(false)
+        wrapperRef?.current?.blur()
+        inputRef?.current?.blur()
       },
     })
   }, [radius])
@@ -133,9 +135,6 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const handleOnBlurEasy = useCallback(() => {
     if (isAnimating) return
     if (!isOpen) return
-
-    wrapperRef?.current?.blur()
-    inputRef?.current?.blur()
 
     setIsAnimating(true)
 
@@ -406,7 +405,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         </DropdownListParent>
       </SelectWrapper>
       {props?.inputProps?.isError && props?.inputProps.errorMessage && (
-        <InputErrorMessage $width={props.width} $isErrorAbsolute={props.inputProps.isErrorAbsolute}>
+        <InputErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.inputProps.isErrorAbsolute}>
           {props.inputProps.errorMessage}
         </InputErrorMessage>
       )}
@@ -626,7 +625,7 @@ export const SelectMonth: React.FC<SelectDateProps> = (props) => {
     const format = lang === 'ru' ? 'MMMM' : 'MMMM'
     return moment.months().map((_month, index) => ({
       value: moment().utc().year(year).month(index).startOf('month').valueOf(),
-      label: moment().utc().year(year).month(index).format(format),
+      label: <Typography>{moment().utc().year(year).month(index).format(format)}</Typography>,
       placeholder: moment().utc().year(year).month(index).format(format),
       search: `${moment().utc().year(year).month(index).format(format).toLowerCase()}, ${index + 1}`,
     }))

@@ -82,7 +82,7 @@ export const Input = (props: InputProps) => {
         )}
       </StyledInputWrapper>
       {props.isError && props.errorMessage && (
-        <InputErrorMessage $width={props.width} $isErrorAbsolute={props.isErrorAbsolute}>
+        <InputErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.isErrorAbsolute}>
           {props.errorMessage}
         </InputErrorMessage>
       )}
