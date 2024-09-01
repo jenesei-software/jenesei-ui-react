@@ -33,10 +33,10 @@ jobs:
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.PAT_CYRILSTRONE_ACTION }}" > ~/.npmrc
           echo "@jenesei-software:registry=https://npm.pkg.github.com/" >> ~/.npmrc
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
 
       - name: Install dependencies
+        env:
+          NPM_CONFIG_USERCONFIG: ~/.npmrc
         run: |
           npm ci
 
