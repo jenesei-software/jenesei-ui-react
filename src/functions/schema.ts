@@ -64,7 +64,7 @@ export const validationLoginWithCheck = yup
     if (!value) return true
     try {
       const response = await userApi.getUserCheckNickname({ path: { nickname: value } })
-      return response.data.value
+      return !response.data.value
     } catch (error) {
       return false
     }
@@ -87,7 +87,7 @@ export const validationEmailWithCheck = yup
     if (!value) return true
     try {
       const response = await userApi.getUserCheckEmail({ path: { email: value } })
-      return response.data.value
+      return !response.data.value
     } catch (error) {
       return false
     }
