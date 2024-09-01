@@ -1,3 +1,4 @@
+import { useAxiosWebId } from '@jenesei-software/jenesei-web-id-api'
 import { useForm } from '@tanstack/react-form'
 import { yupValidator } from '@tanstack/yup-form-adapter'
 import moment from 'moment'
@@ -222,12 +223,14 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
     }),
   })
 
+  const { axiosInstance } = useAxiosWebId()
+
   const validationSchema = {
     dateOfBirthday: validationDateOfBirthday(18),
     countryCode: validationCountryCode,
     isUserAgreement: validationUserAgreement,
-    login: validationLoginWithCheck,
-    email: validationEmailWithCheck,
+    login: validationLoginWithCheck(axiosInstance),
+    email: validationEmailWithCheck(axiosInstance),
     currentPassword: validationPassword,
     phone: (phoneLength: number) => validationPhone(phoneLength),
   }
