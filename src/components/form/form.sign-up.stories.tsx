@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { QueryClient } from '@tanstack/react-query'
-import { QueryClientProvider } from '@tanstack/react-query'
+import axios from 'axios'
 import 'styled-components'
 
-import { FormSignUp, FormSignUpProps } from '.'
+import { FormSignUp } from '.'
 
 const meta: Meta<typeof FormSignUp> = {
   component: FormSignUp,
@@ -13,30 +12,21 @@ const meta: Meta<typeof FormSignUp> = {
 export default meta
 type Story = StoryObj<typeof FormSignUp>
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      staleTime: 60000,
-    },
+const baseURL = import.meta.env.VITE_BASE_URL || ''
+const instance = axios.create({
+  baseURL: baseURL,
+  headers: {
+    'Content-Type': 'application/json',
   },
 })
 
-const FormWrapper: React.FC<FormSignUpProps> = (props) => {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <FormSignUp {...props} />
-    </QueryClientProvider>
-  )
-}
-
 export const SignUp: Story = {
-  render: (args) => <FormWrapper {...args} />,
   args: {
     genre: 'grayBorder',
     size: 'medium',
     isPadding: true,
     isBorder: true,
+    axiosInstance: instance,
     width: '300px',
     onSubmit(field) {
       console.log(field)

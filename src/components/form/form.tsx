@@ -226,8 +226,8 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
     dateOfBirthday: validationDateOfBirthday(18),
     countryCode: validationCountryCode,
     isUserAgreement: validationUserAgreement,
-    login: validationLoginWithCheck,
-    email: validationEmailWithCheck,
+    login: validationLoginWithCheck(props.axiosInstance),
+    email: validationEmailWithCheck(props.axiosInstance),
     currentPassword: validationPassword,
     phone: (phoneLength: number) => validationPhone(phoneLength),
   }

@@ -1,25 +1,40 @@
-import { withThemeFromJSXProvider } from '@storybook/addon-themes'
+import { ProviderAxiosWebId } from '@jenesei-software/jenesei-web-id-api'
 import type { Preview } from '@storybook/react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 
-import { JeneseiTheme, JeneseiGlobalStyles } from '../src/theme/index'
+import { JeneseiGlobalStyles, JeneseiTheme } from '../src/theme/index'
 
 import '@fontsource/inter/300.css'
 import '@fontsource/inter/400.css'
 import '@fontsource/inter/500.css'
 import '@fontsource/inter/600.css'
 import '@fontsource/inter/700.css'
+
 import 'react-ripple-click/dist/index.css'
 
-export const preview: Preview = {
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      staleTime: 60000,
+    },
+  },
+})
+
+const preview: Preview = {
   decorators: [
-    (Story) => (
-      <ThemeProvider theme={JeneseiTheme}>
-        <JeneseiGlobalStyles />
-        <Story />
-      </ThemeProvider>
-    ),
+    (Story) => {
+      return (
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider theme={JeneseiTheme}>
+            <JeneseiGlobalStyles />
+            <Story />
+          </ThemeProvider>
+        </QueryClientProvider>
+      )
+    },
   ],
   parameters: {
     controls: {
@@ -31,13 +46,4 @@ export const preview: Preview = {
   },
 }
 
-export const decorators = [
-  withThemeFromJSXProvider({
-    GlobalStyles: JeneseiGlobalStyles,
-    Provider: ThemeProvider,
-    themes: {
-      light: JeneseiTheme,
-      dark: JeneseiTheme,
-    },
-  }),
-]
+export default preview
