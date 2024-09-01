@@ -32,7 +32,6 @@ jobs:
       - name: Configure npm for GitHub Packages
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.PAT_CYRILSTRONE_ACTION }}" >> ~/.npmrc
-          echo "@jenesei-software:registry=https://npm.pkg.github.com/" >> ~/.npmrc
 
       - name: Install dependencies
         run: |
