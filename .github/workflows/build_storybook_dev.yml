@@ -30,8 +30,10 @@ jobs:
           git config --local user.name "github-actions[bot]"
 
       - name: Install dependencies
+        env:
+          NPM_CONFIG_USERCONFIG: ~/.npmrc
         run: |
-          npm install
+          npm ci
 
       - name: Build
         run: |
