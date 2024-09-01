@@ -29,9 +29,17 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
+      - name: Configure npm for GitHub Packages
+        run: |
+          npm config set @jenesei-software:registry https://npm.pkg.github.com
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.PAT_CYRILSTRONE_ACTION }}" > ~/.npmrc
+
       - name: Install dependencies
         run: |
           npm install
+
+      - name: Delete npmrc file
+        run: rm ~/.npmrc
 
       - name: Build
         run: |
