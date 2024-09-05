@@ -124,7 +124,7 @@ export const validationEmailWithCheck = (axiosInstance: AxiosInstance) =>
 export const validationPassword = yup
   .string()
   .trim()
-  .min(1, 'Current password is required')
+  .required('Current password is required')
   .min(8, 'Current password must be at least 8 characters')
   .max(128, 'Current password must be at most 128 characters')
   .test('has-uppercase', 'Current password must contain at least one uppercase letter', (password) =>
@@ -135,6 +135,6 @@ export const validationPassword = yup
   )
   .test('has-number', 'Current password must contain at least one number', (password) => /[0-9]/.test(password || ''))
   .test('has-special-char', 'Current password must contain at least one unique character', (password) =>
-    /[!@#$%^&*_-]/.test(password || ''),
+    /[!()@#$%^&*_-]/.test(password || ''),
   )
   .test('no-spaces', 'No Spaces!', (value) => !value?.includes(' '))

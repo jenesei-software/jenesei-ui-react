@@ -14,10 +14,7 @@ import {
   TypographyTooltipProps,
 } from '.'
 
-export const Typography = forwardRef<
-  HTMLElement | HTMLHeadingElement,
-  TypographyProps
->((props, ref) => {
+export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefined, TypographyProps>((props, ref) => {
   const commonProps = {
     $clamp: props.clamp,
     $clampOrient: props.clampOrient,
@@ -72,13 +69,7 @@ export const Typography = forwardRef<
 
   if ('size' in props) {
     return (
-      <SpanFont
-        ref={ref}
-        {...commonProps}
-        $height={props.height}
-        $size={props.size}
-        $weight={props.weight}
-      >
+      <SpanFont ref={ref} {...commonProps} $height={props.height} $size={props.size} $weight={props.weight}>
         {props.children}
       </SpanFont>
     )
@@ -97,9 +88,7 @@ export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
   useEffect(() => {
     const checkOverflow = () => {
       if (contentRef.current) {
-        setIsOverflowing(
-          contentRef.current.scrollWidth > contentRef.current.clientWidth,
-        )
+        setIsOverflowing(contentRef.current.scrollWidth > contentRef.current.clientWidth)
       }
     }
     checkOverflow()
@@ -108,16 +97,8 @@ export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
   }, [props.children])
 
   return (
-    <Tooltip
-      isDisabled={!isOverflowing}
-      content={props.children}
-      {...props.tooltip}
-    >
-      <Typography
-        ref={contentRef}
-        {...props.typography}
-        style={{ position: 'relative' }}
-      >
+    <Tooltip isDisabled={!isOverflowing} content={props.children} {...props.tooltip}>
+      <Typography ref={contentRef} {...props.typography} style={{ position: 'relative' }}>
         {props.children}
       </Typography>
     </Tooltip>
