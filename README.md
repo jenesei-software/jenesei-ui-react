@@ -70,11 +70,13 @@ To work correctly you need to install the following dependencies:
 ```bash
 npm install @emotion/styled --save
 npm install @tanstack/react-form --save
+npm install @tanstack/react-query --save
 npm install @tanstack/react-virtual --save
 npm install @tanstack/yup-form-adapter --save
 npm install @types/js-cookie --save
 npm install @types/react-helmet --save
 npm install awesome-phonenumber --save
+npm install axios --save
 npm install country-list-with-dial-code-and-flag --save
 npm install gsap --save
 npm install js-cookie --save
