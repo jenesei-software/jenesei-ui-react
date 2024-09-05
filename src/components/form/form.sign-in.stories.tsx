@@ -17,7 +17,7 @@ export const SignIn: Story = {
     size: 'medium',
     isPadding: true,
     isBorder: true,
-    width: '300px',
+    width: '540px',
     onSubmit(field) {
       console.log(field)
     },

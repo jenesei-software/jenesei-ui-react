@@ -1,9 +1,12 @@
 import { ReactElement } from 'react'
 
+import { PreviewAdditionalProps } from '@components/preview'
+
 import { JeneseiThemeVariablesKeys } from '@theme/index'
 
 export interface ProviderAppProps {
   children: React.ReactNode
+  defaultPreview?: PreviewAdditionalProps
   defaultBgColor: JeneseiThemeVariablesKeys
   defaultStatusBarColor: JeneseiThemeVariablesKeys
   defaultBgImage?: string
@@ -56,6 +59,8 @@ export interface ProviderAppProps {
 }
 
 export interface AppContextProps {
+  changePreview: (newPreviewProps: PreviewAdditionalProps) => void
+
   changeStatusBarColor: (color: JeneseiThemeVariablesKeys) => void
   changeBgColor: (color: JeneseiThemeVariablesKeys) => void
   changeBgImage: (image: string) => void

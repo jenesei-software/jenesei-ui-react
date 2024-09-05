@@ -12,6 +12,7 @@ export const ProviderAppWrapper = styled.div<ProviderAppWrapperProps>`
   width: 100%;
   overflow: hidden;
   box-sizing: border-box;
+  position: relative;
 
   background-color: ${(props) => JeneseiThemeVariables[props.$bgColor]};
   background-image: url(${(props) => props.$bgImage});
@@ -116,28 +117,22 @@ export const ProviderAppOutletNotification = styled.section<ProviderAppOutletPro
       width: 100%;
       height: ${props.$notification.height};
       @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
-        height: ${props.$notification.heightTablet
-          ? props.$notification.heightTablet
-          : '0px'};
+        height: ${props.$notification.heightTablet ? props.$notification.heightTablet : '0px'};
       }
 
       @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
-        height: ${props.$notification && props.$notification.heightMobile
-          ? props.$notification.heightMobile
-          : '0px'};
+        height: ${props.$notification && props.$notification.heightMobile ? props.$notification.heightMobile : '0px'};
       }
     `}
 
   ${(props) => (props.$notification?.height ? visibleStyles : hiddenStyles)}
 
   @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
-    ${(props) =>
-      props.$notification?.heightTablet ? visibleStyles : hiddenStyles}
+    ${(props) => (props.$notification?.heightTablet ? visibleStyles : hiddenStyles)}
   }
 
   @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
-    ${(props) =>
-      props.$notification?.heightMobile ? visibleStyles : hiddenStyles}
+    ${(props) => (props.$notification?.heightMobile ? visibleStyles : hiddenStyles)}
   }
 `
 
@@ -203,12 +198,10 @@ export const ProviderAppOutletRightAside = styled.aside<ProviderAppOutletProps>`
   ${(props) => (props.$rightAside?.width ? visibleStyles : hiddenStyles)}
 
   @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
-    ${(props) =>
-      props.$rightAside?.widthTablet ? visibleStyles : hiddenStyles}
+    ${(props) => (props.$rightAside?.widthTablet ? visibleStyles : hiddenStyles)}
   }
 
   @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
-    ${(props) =>
-      props.$rightAside?.widthMobile ? visibleStyles : hiddenStyles}
+    ${(props) => (props.$rightAside?.widthMobile ? visibleStyles : hiddenStyles)}
   }
 `

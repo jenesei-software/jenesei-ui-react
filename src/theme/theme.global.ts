@@ -20,19 +20,17 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     --scrollbar-thumb-background: ${JeneseiThemeVariables.black10};
     --scrollbar-thumb-border: 2px solid ${JeneseiThemeVariables.black05};
 
-    --heading-1-font-size: 2rem; 
-    --heading-2-font-size: 1.75rem; 
-    --heading-3-font-size: 1.5rem;
-    --heading-4-font-size: 1.25rem; 
-    --heading-5-font-size: 1rem; 
-    --heading-6-font-size: 0.875rem; 
+    --heading-1-font-size: 2.5rem; 
+    --heading-2-font-size: 2.25rem;
+    --heading-3-font-size: 2rem;
+    --heading-4-font-size: 1.75rem; 
+    --heading-5-font-size: 1.5rem; 
+    --heading-6-font-size: 1.25rem;
+    --heading-7-font-size: 1rem; 
+    --heading-8-font-size: 0.75rem; 
+    --heading-9-font-size: 0.5rem; 
 
-    --heading-1-line-height: normal;
-    --heading-2-line-height: normal;
-    --heading-3-line-height: normal;
-    --heading-4-line-height: normal;
-    --heading-5-line-height: normal;
-    --heading-6-line-height: normal;
+    --heading-line-height: normal;
 
     --Ripple-custom-opacity: 0.2;
 	  --Ripple-custom-duration: 0.6s;
@@ -106,59 +104,66 @@ export const JeneseiGlobalStyles = createGlobalStyle`
 
   h1 {
     font-size: var(--heading-1-font-size);
-    line-height: var(--heading-1-line-height);
+    line-height: var(--heading-line-height);
     margin: 0;
   }
 
   h2 {
     font-size: var(--heading-2-font-size);
-    line-height: var(--heading-2-line-height);
+    line-height: var(--heading-line-height);
     margin: 0;
   }
 
   h3 {
     font-size: var(--heading-3-font-size);
-    line-height: var(--heading-3-line-height);
+    line-height: var(--heading-line-height);
     margin: 0;
   }
 
   h4 {
     font-size: var(--heading-4-font-size);
-    line-height: var(--heading-4-line-height);
+    line-height: var(--heading-line-height);
     margin: 0;
   }
 
   h5 {
     font-size: var(--heading-5-font-size);
-    line-height: var(--heading-5-line-height);
+    line-height: var(--heading-line-height);
     margin: 0;
   }
 
   h6 {
     font-size: var(--heading-6-font-size);
-    line-height: var(--heading-6-line-height);
+    line-height: var(--heading-line-height);
     margin: 0;
   }
 
+
   @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
     :root {
-      --heading-1-font-size: 1.75rem; 
-      --heading-2-font-size: 1.5rem;
-      --heading-3-font-size: 1.25rem; 
-      --heading-4-font-size: 1rem; 
-      --heading-5-font-size: 0.875rem; 
-      --heading-6-font-size: 0.75rem; 
+      --heading-1-font-size: 2.375rem; 
+      --heading-2-font-size: 2.125rem;
+      --heading-3-font-size: 1.875rem;
+      --heading-4-font-size: 1.625rem; 
+      --heading-5-font-size: 1.375rem; 
+      --heading-6-font-size: 1.125rem;
+      --heading-7-font-size: 0.875rem; 
+      --heading-8-font-size: 0.625rem; 
+      --heading-9-font-size: 0.375rem; 
     }
   }
 
   @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
     :root {
-      --heading-1-font-size: 1.5rem; 
-      --heading-2-font-size: 1.25rem;
-      --heading-3-font-size: 1rem;
-      --heading-4-font-size: 0.875rem; 
-      --heading-5-font-size: 0.75rem; 
-      --heading-6-font-size: 0.625rem;
+      --heading-1-font-size: 2.250rem; 
+      --heading-2-font-size: 2rem;
+      --heading-3-font-size: 1.75rem; 
+      --heading-4-font-size: 1.5rem; 
+      --heading-5-font-size: 1.25rem;
+      --heading-6-font-size: 1rem; 
+      --heading-7-font-size: 0.75rem; 
+      --heading-8-font-size: 0.5rem; 
+      --heading-9-font-size: 0.250rem; 
     }
   }
 `

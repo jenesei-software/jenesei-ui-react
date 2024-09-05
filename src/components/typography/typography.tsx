@@ -10,14 +10,14 @@ import {
   TitleH4,
   TitleH5,
   TitleH6,
+  TitleH7,
+  TitleH8,
+  TitleH9,
   TypographyProps,
   TypographyTooltipProps,
 } from '.'
 
-export const Typography = forwardRef<
-  HTMLElement | HTMLHeadingElement,
-  TypographyProps
->((props, ref) => {
+export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefined, TypographyProps>((props, ref) => {
   const commonProps = {
     $clamp: props.clamp,
     $clampOrient: props.clampOrient,
@@ -67,13 +67,31 @@ export const Typography = forwardRef<
           {props.children}
         </TitleH6>
       )
+    } else if (props.variant === 'h7') {
+      return (
+        <TitleH7 ref={ref as Ref<HTMLHeadingElement>} {...commonProps}>
+          {props.children}
+        </TitleH7>
+      )
+    } else if (props.variant === 'h8') {
+      return (
+        <TitleH8 ref={ref as Ref<HTMLHeadingElement>} {...commonProps}>
+          {props.children}
+        </TitleH8>
+      )
+    } else if (props.variant === 'h9') {
+      return (
+        <TitleH9 ref={ref as Ref<HTMLHeadingElement>} {...commonProps}>
+          {props.children}
+        </TitleH9>
+      )
     }
   }
 
   if ('size' in props) {
     return (
       <SpanFont
-        ref={ref}
+        ref={ref as Ref<HTMLElement>}
         {...commonProps}
         $height={props.height}
         $size={props.size}
@@ -85,11 +103,13 @@ export const Typography = forwardRef<
   }
 
   return (
-    <SpanFont ref={ref} {...commonProps}>
+    <SpanFont ref={ref as Ref<HTMLElement>} {...commonProps}>
       {props.children}
     </SpanFont>
   )
 })
+
+Typography.displayName = 'Typography'
 
 export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
   const [isOverflowing, setIsOverflowing] = useState(false)
@@ -97,9 +117,7 @@ export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
   useEffect(() => {
     const checkOverflow = () => {
       if (contentRef.current) {
-        setIsOverflowing(
-          contentRef.current.scrollWidth > contentRef.current.clientWidth,
-        )
+        setIsOverflowing(contentRef.current.scrollWidth > contentRef.current.clientWidth)
       }
     }
     checkOverflow()
@@ -108,18 +126,12 @@ export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
   }, [props.children])
 
   return (
-    <Tooltip
-      isDisabled={!isOverflowing}
-      content={props.children}
-      {...props.tooltip}
-    >
-      <Typography
-        ref={contentRef}
-        {...props.typography}
-        style={{ position: 'relative' }}
-      >
+    <Tooltip isDisabled={!isOverflowing} content={props.children} {...props.tooltip}>
+      <Typography ref={contentRef} {...props.typography} style={{ position: 'relative' }}>
         {props.children}
       </Typography>
     </Tooltip>
   )
 })
+
+TypographyTooltip.displayName = 'TypographyTooltip'
