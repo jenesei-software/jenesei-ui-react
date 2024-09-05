@@ -5,21 +5,9 @@ import { JeneseiThemeVariablesKeys } from '@theme/index'
 export interface FlexContainerProps {
   $flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse'
   $flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse'
-  $justifyContent?:
-    | 'flex-start'
-    | 'flex-end'
-    | 'center'
-    | 'space-between'
-    | 'space-around'
-    | 'space-evenly'
+  $justifyContent?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly'
   $alignItems?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'baseline'
-  $alignContent?:
-    | 'stretch'
-    | 'flex-start'
-    | 'flex-end'
-    | 'center'
-    | 'space-between'
-    | 'space-around'
+  $alignContent?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around'
   $gap?: string
 }
 export interface FlexItemProps {
@@ -27,13 +15,7 @@ export interface FlexItemProps {
   $flexGrow?: number
   $flexShrink?: number
   $flexBasis?: string | number
-  $alignSelf?:
-    | 'auto'
-    | 'flex-start'
-    | 'flex-end'
-    | 'center'
-    | 'baseline'
-    | 'stretch'
+  $alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch'
 }
 export interface FlexBasicProps {
   $m?: string
@@ -63,21 +45,9 @@ export interface FlexBasicProps {
 export interface FlexContainerPropsNormalized {
   flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse'
   flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse'
-  justifyContent?:
-    | 'flex-start'
-    | 'flex-end'
-    | 'center'
-    | 'space-between'
-    | 'space-around'
-    | 'space-evenly'
+  justifyContent?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly'
   alignItems?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'baseline'
-  alignContent?:
-    | 'stretch'
-    | 'flex-start'
-    | 'flex-end'
-    | 'center'
-    | 'space-between'
-    | 'space-around'
+  alignContent?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around'
   gap?: string
 }
 export interface FlexItemPropsNormalized {
@@ -85,13 +55,7 @@ export interface FlexItemPropsNormalized {
   flexGrow?: number
   flexShrink?: number
   flexBasis?: string | number
-  alignSelf?:
-    | 'auto'
-    | 'flex-start'
-    | 'flex-end'
-    | 'center'
-    | 'baseline'
-    | 'stretch'
+  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch'
 }
 export interface FlexBasicPropsNormalized {
   m?: string
@@ -118,23 +82,16 @@ export interface FlexBasicPropsNormalized {
   color?: JeneseiThemeVariablesKeys
 }
 
-export interface FlexContainerAndItemProps
-  extends FlexContainerProps,
-    FlexItemProps {}
+export interface FlexContainerAndItemProps extends FlexContainerProps, FlexItemProps {}
 
-export interface FlexContainerAndItemAndBasicProps
-  extends FlexContainerProps,
-    FlexItemProps,
-    FlexBasicProps {}
+export interface FlexContainerAndItemAndBasicProps extends FlexContainerProps, FlexItemProps, FlexBasicProps {}
 
 export interface FlexShortStylesNormalizedPropsNormalized
   extends FlexContainerPropsNormalized,
     FlexItemPropsNormalized,
     FlexBasicPropsNormalized {
-  children?: ReactElement
+  children?: ReactElement | ReactElement[]
   style?: CSSProperties
 }
 
-export interface FlexContainerAndItemPropsNormalized
-  extends FlexContainerPropsNormalized,
-    FlexItemPropsNormalized {}
+export interface FlexContainerAndItemPropsNormalized extends FlexContainerPropsNormalized, FlexItemPropsNormalized {}

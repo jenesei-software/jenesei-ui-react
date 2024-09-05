@@ -1,3 +1,4 @@
+import { AxiosInstance } from 'axios'
 import { CSSProperties, ReactElement } from 'react'
 
 import { TJeneseiThemeGenreForm, TJeneseiThemeSize } from '@theme/index'
@@ -11,15 +12,15 @@ export interface FormProps {
   genre?: TDateGenre
   children?: ReactElement
   style?: CSSProperties
-  isPadding?: boolean
-  isBorder?: boolean
+  variant?: 'sign'
 }
 
-export interface FormSignInProps extends FormProps {
+export interface FormSignInProps extends Omit<FormProps, 'children'> {
   onSubmit: (field: { nickname: string; password: string }) => void
-  onBack: () => void
+  onSignUp: () => void
 }
-export interface FormSignUpProps extends FormProps {
+export interface FormSignUpProps extends Omit<FormProps, 'children'> {
+  axiosInstance: AxiosInstance
   onBack: () => void
   onSubmit: (field: {
     login: string
@@ -31,8 +32,6 @@ export interface FormSignUpProps extends FormProps {
 }
 export interface WrapperFormProps {
   $width?: FormProps['width']
-  $size?: FormProps['size']
   $genre?: FormProps['genre']
-  $isPadding?: FormProps['isPadding']
-  $isBorder?: FormProps['isBorder']
+  $variant?: FormProps['variant']
 }

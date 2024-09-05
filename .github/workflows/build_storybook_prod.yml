@@ -31,15 +31,14 @@ jobs:
 
       - name: Configure npm for GitHub Packages
         run: |
-          npm config set @jenesei-software:registry https://npm.pkg.github.com
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.PAT_CYRILSTRONE_ACTION }}" > ~/.npmrc
+          echo "@jenesei-software:registry=https://npm.pkg.github.com/" >> ~/.npmrc
 
       - name: Install dependencies
+        env:
+          NPM_CONFIG_USERCONFIG: ~/.npmrc
         run: |
-          npm install
-
-      - name: Delete npmrc file
-        run: rm ~/.npmrc
+          npm ci
 
       - name: Build
         run: |
