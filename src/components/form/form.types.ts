@@ -1,9 +1,9 @@
 import { AxiosInstance } from 'axios'
 import { CSSProperties, ReactElement } from 'react'
 
-import { TJeneseiThemeGenreForm, TJeneseiThemeSize } from '@theme/index'
+import { TDateGenre } from '@components/date'
 
-export type TDateGenre = keyof TJeneseiThemeGenreForm
+import { TJeneseiThemeSize } from '@theme/index'
 
 export interface FormProps {
   width?: string
