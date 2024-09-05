@@ -478,8 +478,6 @@ export const Default: Story = {
   args: {
     genre: 'gray',
     size: 'medium',
-    isPadding: true,
-    isBorder: true,
     width: '500px',
   },
 }
