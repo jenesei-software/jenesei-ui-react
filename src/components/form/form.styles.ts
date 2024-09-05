@@ -18,9 +18,9 @@ export const WrapperFormSize = css<WrapperFormProps>`
 `
 export const WrapperFormSizeConstructor = (props: IJeneseiThemeSize & { $width?: string }) => css`
   border: 1px solid transparent;
-  border-radius: ${props.radius + props.padding}px;
+  border-radius: ${props.radius + props.padding * 3}px;
   gap: ${props.padding + 6}px;
-  padding: ${props.padding}px;
+  padding: ${props.padding * 3}px;
   width: ${props.$width || '100%'};
   ${getFontSizeStyles(props.font, 600, 'Inter')};
   @media (max-width: ${(props) => props.theme.screens.tablet.width}) {

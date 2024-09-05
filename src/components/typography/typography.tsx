@@ -10,6 +10,9 @@ import {
   TitleH4,
   TitleH5,
   TitleH6,
+  TitleH7,
+  TitleH8,
+  TitleH9,
   TypographyProps,
   TypographyTooltipProps,
 } from '.'
@@ -64,23 +67,49 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
           {props.children}
         </TitleH6>
       )
+    } else if (props.variant === 'h7') {
+      return (
+        <TitleH7 ref={ref as Ref<HTMLHeadingElement>} {...commonProps}>
+          {props.children}
+        </TitleH7>
+      )
+    } else if (props.variant === 'h8') {
+      return (
+        <TitleH8 ref={ref as Ref<HTMLHeadingElement>} {...commonProps}>
+          {props.children}
+        </TitleH8>
+      )
+    } else if (props.variant === 'h9') {
+      return (
+        <TitleH9 ref={ref as Ref<HTMLHeadingElement>} {...commonProps}>
+          {props.children}
+        </TitleH9>
+      )
     }
   }
 
   if ('size' in props) {
     return (
-      <SpanFont ref={ref} {...commonProps} $height={props.height} $size={props.size} $weight={props.weight}>
+      <SpanFont
+        ref={ref as Ref<HTMLElement>}
+        {...commonProps}
+        $height={props.height}
+        $size={props.size}
+        $weight={props.weight}
+      >
         {props.children}
       </SpanFont>
     )
   }
 
   return (
-    <SpanFont ref={ref} {...commonProps}>
+    <SpanFont ref={ref as Ref<HTMLElement>} {...commonProps}>
       {props.children}
     </SpanFont>
   )
 })
+
+Typography.displayName = 'Typography'
 
 export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
   const [isOverflowing, setIsOverflowing] = useState(false)
@@ -104,3 +133,5 @@ export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
     </Tooltip>
   )
 })
+
+TypographyTooltip.displayName = 'TypographyTooltip'

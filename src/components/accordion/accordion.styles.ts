@@ -2,11 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { Icon } from '@assets/library-icon'
 
-import {
-  AccordionDetailsProps,
-  AccordionStyledIconProps,
-  AccordionSummaryContentProps,
-} from '.'
+import { AccordionDetailsProps, AccordionStyledIconProps, AccordionSummaryContentProps } from '.'
 
 export const AccordionWrapper = styled.div`
   display: flex;

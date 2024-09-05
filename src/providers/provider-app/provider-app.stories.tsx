@@ -23,7 +23,7 @@ const defaultNotification = (
       width: '100%',
     }}
   >
-    <Typography variant="h3" textWrap="nowrap">
+    <Typography variant="h8" textWrap="nowrap">
       Notification
     </Typography>
   </div>
@@ -111,8 +111,8 @@ const defaultChildren = (
 )
 
 export const Default: Story = {
-  render: (args) => <ProviderApp {...args} />,
   args: {
+    defaultPreview: { time: 1000 },
     defaultBgColor: 'black40',
     isScrollOutlet: false,
     defaultTitle: 'Storybook?',

@@ -13,5 +13,7 @@ export default meta
 type Story = StoryObj<typeof Preview>
 
 export const Default: Story = {
-  args: {},
+  args: {
+    isShow: true,
+  },
 }

@@ -27,7 +27,7 @@ export const SignUp: Story = {
     isPadding: true,
     isBorder: true,
     axiosInstance: instance,
-    width: '300px',
+    width: '540px',
     onSubmit(field) {
       console.log(field)
     },

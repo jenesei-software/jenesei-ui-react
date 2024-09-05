@@ -41,6 +41,7 @@ export const Form: FC<FormProps> = (props) => {
         e.stopPropagation()
         if (props.handleSubmit) props.handleSubmit()
       }}
+      style={props.style}
     >
       {props.children}
     </WrapperForm>
@@ -91,7 +92,7 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
           {(field) => (
             <Stack flexDirection="column" gap="4px">
               <>
-                <Typography variant="h5">Login</Typography>
+                <Typography variant="h7">Login</Typography>
                 <Input
                   autocomplete="username"
                   placeholder="Write the login"
@@ -119,7 +120,7 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
           {(field) => (
             <Stack flexDirection="column" gap="4px">
               <>
-                <Typography variant="h5">Password</Typography>
+                <Typography variant="h7">Password</Typography>
                 <Input
                   autocomplete="current-password"
                   type="password"
@@ -168,7 +169,7 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                   genre={'greenTransparent'}
                   size={defaultSize || 'medium'}
                 >
-                  <Typography variant="h5">Sign In</Typography>
+                  <Typography variant="h7">Sign In</Typography>
                 </Button>
                 <Button
                   type="reset"
@@ -180,7 +181,7 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                     props.onBack()
                   }}
                 >
-                  <Typography variant="h5">Back</Typography>
+                  <Typography variant="h7">Back</Typography>
                 </Button>
               </>
             </Stack>
@@ -252,7 +253,7 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
             return (
               <Stack flexDirection="column" gap="4px">
                 <>
-                  <Typography variant="h5">Date of Birthday</Typography>
+                  <Typography variant="h7">Date of Birthday</Typography>
                   <DatePicker
                     placeholder="Choice your date of birthday"
                     id={field.name}
@@ -284,7 +285,7 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
           {(field) => (
             <Stack flexDirection="column" gap="4px">
               <>
-                <Typography variant="h5">Email</Typography>
+                <Typography variant="h7">Email</Typography>
                 <Input
                   autocomplete="email"
                   placeholder="Write the Email"
@@ -312,7 +313,7 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
           {(field) => (
             <Stack flexDirection="column" gap="4px">
               <>
-                <Typography variant="h5">Login</Typography>
+                <Typography variant="h7">Login</Typography>
                 <Input
                   autocomplete="username"
                   placeholder="Write the login"
@@ -340,7 +341,7 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
           {(field) => (
             <Stack flexDirection="column" gap="4px">
               <>
-                <Typography variant="h5">Current password</Typography>
+                <Typography variant="h7">Current password</Typography>
                 <Input
                   autocomplete="new-password"
                   type="password"
@@ -395,7 +396,7 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
             return (
               <Stack flexDirection="column" gap="4px">
                 <>
-                  <Typography variant="h5">Confirm password</Typography>
+                  <Typography variant="h7">Confirm password</Typography>
                   <Input
                     autocomplete="new-password"
                     isDisabled={!currentPasswordInfo?.isTouched || !!currentPasswordInfo?.errors.length}
@@ -443,7 +444,7 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
           {(field) => (
             <Stack alignItems="center">
               <>
-                <Typography variant="h5">User agreement</Typography>
+                <Typography variant="h7">User agreement</Typography>
                 <Toggle
                   isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
                   value={field.state.value}
@@ -467,7 +468,7 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
                   genre={'greenTransparent'}
                   size={defaultSize || 'medium'}
                 >
-                  <Typography variant="h5">SignUp</Typography>
+                  <Typography variant="h7">SignUp</Typography>
                 </Button>
                 <Button
                   width="100%"
@@ -479,7 +480,7 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
                     props.onBack()
                   }}
                 >
-                  <Typography variant="h5">Back</Typography>
+                  <Typography variant="h7">Back</Typography>
                 </Button>
               </>
             </Stack>
