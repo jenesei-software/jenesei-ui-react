@@ -1,46 +1,16 @@
 import styled, { css } from 'styled-components'
 
-import { getFontSizeStyles } from '@components/typography'
-
-import { KEY_SIZE_DATA } from '@theme/theme'
-import { IJeneseiThemeSize } from '@theme/theme.interface'
-
 import { WrapperFormProps } from '.'
 
-/****************************************** Size *************************************************/
-export const WrapperFormSize = css<WrapperFormProps>`
-  ${(props) =>
-    props.$size &&
-    WrapperFormSizeConstructor({
-      ...KEY_SIZE_DATA[props.$size],
-      $width: props.$width,
-    })};
-`
-export const WrapperFormSizeConstructor = (props: IJeneseiThemeSize & { $width?: string }) => css`
-  border: 1px solid transparent;
-  border-radius: ${props.radius + props.padding * 3}px;
-  gap: ${props.padding + 6}px;
-  padding: ${props.padding * 3}px;
-  width: ${props.$width || '100%'};
-  ${getFontSizeStyles(props.font, 600, 'Inter')};
-  @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
-    gap: ${props.padding + 2}px;
-  }
-
-  @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
-    gap: ${props.padding - 2}px;
-  }
-`
-
 /****************************************** Default *************************************************/
-export const WrapperForm = styled.form<WrapperFormProps>`
-  position: absolute;
+export const WrapperFormCSS = css<WrapperFormProps>`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   transition: height ${(props) => props.theme.transition};
-  ${WrapperFormSize}
   height: auto;
+  max-width: ${(props) => props.$width};
   ${(props) =>
     props.$genre &&
     css`
@@ -48,15 +18,27 @@ export const WrapperForm = styled.form<WrapperFormProps>`
       border-color: ${props.theme.colors.form[props.$genre].border};
       color: ${props.theme.colors.form[props.$genre].color};
     `}
+`
 
-  ${(props) =>
-    !props.$isBorder &&
-    css`
-      border: none;
-    `}
-    ${(props) =>
-    !props.$isPadding &&
-    css`
-      padding: none;
-    `}
+export const WrapperForm = styled.form<WrapperFormProps>`
+  ${(props) => (props.$variant === 'sign' ? WrapperSignForm : WrapperFormCSS)}
+`
+
+export const WrapperSignForm = css<WrapperFormProps>`
+  ${WrapperFormCSS}
+  border-radius: 20px;
+  padding: 48px 72px;
+  gap: 32px;
+
+  @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
+    border-radius: 16px;
+    gap: 26px;
+    padding: 30px 54px;
+  }
+
+  @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
+    border-radius: 0px;
+    gap: 20px;
+    padding: 16px 22px;
+  }
 `

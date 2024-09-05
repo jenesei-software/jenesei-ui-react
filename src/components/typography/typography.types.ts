@@ -15,12 +15,12 @@ export interface TypographyDefaultProps {
   className?: string
   children: React.ReactNode
   style?: CSSProperties
+  weight?: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+  height?: number
 }
 
 export interface TypographyDataProps extends TypographyDefaultProps {
   size?: number
-  weight?: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
-  height?: number
 }
 
 export interface TypographyVariantProps extends TypographyDefaultProps {

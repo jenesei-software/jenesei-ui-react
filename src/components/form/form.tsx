@@ -26,16 +26,13 @@ import {
 import { FormProps, FormSignInProps, FormSignUpProps, WrapperForm } from '.'
 
 export const Form: FC<FormProps> = (props) => {
-  const defaultSize = props.size
   const defaultGenre = props.genre
 
   return (
     <WrapperForm
       $width={props.width}
-      $isPadding={props.isPadding}
-      $isBorder={props.isBorder}
-      $size={defaultSize}
       $genre={defaultGenre}
+      $variant={props.variant}
       onSubmit={(e) => {
         e.preventDefault()
         e.stopPropagation()
@@ -83,6 +80,9 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
       handleSubmit={form.handleSubmit}
     >
       <>
+        <Typography weight={600} variant="h4">
+          Login to your account
+        </Typography>
         <form.Field
           name="nickname"
           validators={{
@@ -165,25 +165,35 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                   width="100%"
                   type="submit"
                   isLoading={isSubmitting}
-                  isDisabled={!canSubmit}
+                  isOnlyLoading
+                  isDisabled={!canSubmit || isSubmitting}
                   genre={'greenTransparent'}
                   size={defaultSize || 'medium'}
                 >
                   <Typography variant="h7">Sign In</Typography>
                 </Button>
-                <Button
-                  type="reset"
-                  width="100%"
-                  genre={defaultGenre || 'grayBorder'}
-                  size={defaultSize || 'medium'}
-                  onClick={() => {
-                    form.reset()
-                    props.onBack()
-                  }}
-                >
-                  <Typography variant="h7">Back</Typography>
-                </Button>
               </>
+            </Stack>
+          )}
+        </form.Subscribe>
+        <form.Subscribe selector={(state) => [state.isSubmitting]}>
+          {([isSubmitting]) => (
+            <Stack alignItems="center">
+              <Typography weight={500} variant="h7">
+                {"Don't have an account ?"}
+              </Typography>
+              <Button
+                type="reset"
+                isDisabled={isSubmitting}
+                genre={defaultGenre || 'grayBorder'}
+                size={defaultSize || 'medium'}
+                onClick={() => {
+                  form.reset()
+                  props.onSignUp()
+                }}
+              >
+                <Typography variant="h7">Sign up</Typography>
+              </Button>
             </Stack>
           )}
         </form.Subscribe>
@@ -241,6 +251,9 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
       handleSubmit={form.handleSubmit}
     >
       <>
+        <Typography weight={600} variant="h4">
+          Create an account
+        </Typography>
         <form.Field
           name="dateOfBirthday"
           validators={{
@@ -463,7 +476,8 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
                 <Button
                   width="100%"
                   type="submit"
-                  isDisabled={!canSubmit}
+                  isOnlyLoading
+                  isDisabled={!canSubmit || isSubmitting}
                   isLoading={isSubmitting}
                   genre={'greenTransparent'}
                   size={defaultSize || 'medium'}

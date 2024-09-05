@@ -24,12 +24,12 @@ export const SignUp: Story = {
   args: {
     genre: 'grayBorder',
     size: 'medium',
-    isPadding: true,
-    isBorder: true,
+    variant: 'sign',
     axiosInstance: instance,
     width: '540px',
     onSubmit(field) {
       console.log(field)
     },
+    onBack() {},
   },
 }

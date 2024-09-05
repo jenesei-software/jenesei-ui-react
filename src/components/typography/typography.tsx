@@ -26,6 +26,7 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
     $overflow: props.overflow,
     $textAlign: props.textAlign,
     $textWrap: props.textWrap,
+    $weight: props.weight,
     className: props.className,
     style: props.style,
   }

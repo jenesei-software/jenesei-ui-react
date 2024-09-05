@@ -15,11 +15,11 @@ export const SignIn: Story = {
   args: {
     genre: 'grayBorder',
     size: 'medium',
-    isPadding: true,
-    isBorder: true,
     width: '540px',
+    variant: 'sign',
     onSubmit(field) {
       console.log(field)
     },
+    onSignUp() {},
   },
 }
