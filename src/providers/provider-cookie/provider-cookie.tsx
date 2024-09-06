@@ -1,64 +1,49 @@
 import Cookies from 'js-cookie'
 import { FC, createContext, useCallback, useEffect, useState } from 'react'
 
-import {
-  CookieAttributes,
-  CookieContextProps,
-  ProviderCookieProps,
-  ValidCookieObject,
-} from '.'
+import { CookieAttributes, CookieContextProps, ProviderCookieProps, ValidCookieObject } from '.'
 
 export const CookieContext = createContext<CookieContextProps | null>(null)
 
 export const ProviderCookie: FC<ProviderCookieProps> = (props) => {
   const [cookieValues, setCookieValues] = useState<ValidCookieObject>()
 
-  const getCookie = useCallback(
-    <K extends keyof ValidCookieObject>(
-      name: K,
-    ): ValidCookieObject[K] | undefined => {
-      const cookie = Cookies.get(String(name))
-      setCookieValues((prevState) => ({
-        ...prevState,
-        [name]: cookie ? JSON.parse(cookie) : undefined,
-      }))
-      return cookie ? JSON.parse(cookie) : undefined
-    },
-    [],
-  )
+  const getCookie = useCallback(<K extends keyof ValidCookieObject>(name: K): ValidCookieObject[K] | undefined => {
+    const cookie = Cookies.get(String(name))
+    setCookieValues((prevState) => ({
+      ...prevState,
+      [name]: cookie ? JSON.parse(cookie) : undefined,
+    }))
+    return cookie ? JSON.parse(cookie) : undefined
+  }, [])
 
   const changeCookie = useCallback(
-    <K extends keyof ValidCookieObject>(
-      name: K,
-      value: ValidCookieObject[K],
-      options?: CookieAttributes,
-    ) => {
+    <K extends keyof ValidCookieObject>(name: K, value: ValidCookieObject[K], options?: CookieAttributes) => {
       try {
-        Cookies.set(String(name), JSON.stringify(value), options)
+        const valueToStore =
+          typeof value === 'string' ||
+          typeof value === 'boolean' ||
+          typeof value === 'number' ||
+          typeof value === 'bigint'
+            ? value
+            : JSON.stringify(value)
+        Cookies.set(String(name), valueToStore, options)
         setCookieValues((prevState) => ({ ...prevState, [name]: value }))
       } catch {
-        console.info(
-          `Provider Cookie. ChangeCookie error - key:${name}, value:${value}.`,
-        )
+        console.info(`Provider Cookie. ChangeCookie error - key:${name}, value:${value}.`)
       }
     },
     [],
   )
 
-  const removeCookieValue = useCallback(
-    <K extends keyof ValidCookieObject>(
-      name: K,
-      options?: CookieAttributes,
-    ) => {
-      try {
-        Cookies.remove(String(name), options)
-        setCookieValues((prevState) => ({ ...prevState, [name]: undefined }))
-      } catch {
-        console.info(`Provider Cookie. RemoveCookieValue error - key:${name}.`)
-      }
-    },
-    [],
-  )
+  const removeCookieValue = useCallback(<K extends keyof ValidCookieObject>(name: K, options?: CookieAttributes) => {
+    try {
+      Cookies.remove(String(name), options)
+      setCookieValues((prevState) => ({ ...prevState, [name]: undefined }))
+    } catch {
+      console.info(`Provider Cookie. RemoveCookieValue error - key:${name}.`)
+    }
+  }, [])
 
   const removeCookieValues = useCallback(() => {
     if (props.validate && props.validate.validateKeys) {
@@ -71,22 +56,13 @@ export const ProviderCookie: FC<ProviderCookieProps> = (props) => {
   }, [props.validate, removeCookieValue])
 
   const checkCookie = useCallback(() => {
-    if (
-      props.validate &&
-      props.validate.validateKeys &&
-      props.validate.getValidateCookieValue
-    ) {
+    if (props.validate && props.validate.validateKeys && props.validate.getValidateCookieValue) {
       props.validate?.validateKeys.forEach((key) => {
         const cookieValue = Cookies.get(String(key))
         if (cookieValue) {
           try {
             const parsedValue = JSON.parse(cookieValue)
-            if (
-              !props.validate?.getValidateCookieValue(
-                String(key) as never,
-                parsedValue as never,
-              )
-            ) {
+            if (!props.validate?.getValidateCookieValue(String(key) as never, parsedValue as never)) {
               removeCookieValue(String(key) as never)
             } else {
               setCookieValues((prevState) => ({
