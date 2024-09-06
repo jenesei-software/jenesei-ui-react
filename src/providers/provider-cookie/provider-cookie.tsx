@@ -58,12 +58,15 @@ export const ProviderCookie: FC<ProviderCookieProps> = (props) => {
   const checkCookie = useCallback(() => {
     if (props.validate && props.validate.validateKeys && props.validate.getValidateCookieValue) {
       props.validate?.validateKeys.forEach((key) => {
-        const cookieValue = Cookies.get(String(key))
+        const cookieName = String(key)
+        const cookieValue = Cookies.get(cookieName)
         if (cookieValue) {
           try {
-            const parsedValue = JSON.parse(cookieValue)
-            if (!props.validate?.getValidateCookieValue(String(key) as never, parsedValue as never)) {
-              removeCookieValue(String(key) as never)
+            const decodedCookieValue = decodeURIComponent(cookieValue)
+            const parsedValue = JSON.parse(decodedCookieValue)
+
+            if (!props.validate?.getValidateCookieValue(cookieName as never, parsedValue as never)) {
+              removeCookieValue(cookieName as never)
             } else {
               setCookieValues((prevState) => ({
                 ...prevState,
@@ -71,10 +74,10 @@ export const ProviderCookie: FC<ProviderCookieProps> = (props) => {
               }))
             }
           } catch {
-            removeCookieValue(String(key) as never)
+            removeCookieValue(cookieName as never)
           }
         } else {
-          removeCookieValue(String(key) as never)
+          removeCookieValue(cookieName as never)
         }
       })
     } else {
