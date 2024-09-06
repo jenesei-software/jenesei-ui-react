@@ -36,7 +36,7 @@ const loader2 = keyframes`
 	}
 `
 
-export const PreviewWrapper = styled.div<{ visible: boolean }>`
+export const PreviewWrapper = styled.div<{ $visible: boolean }>`
   background-color: ${(props) => props.theme.palette.whiteStandard};
 
   width: 100%;
@@ -51,17 +51,14 @@ export const PreviewWrapper = styled.div<{ visible: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: ${(props) => (props.visible ? 0 : 1)};
-  transform: ${(props) => (props.visible ? 'translateY(0)' : 'translateY(20px)')};
-
+  opacity: ${(props) => (props.$visible ? 0 : 1)};
   transition:
     opacity ${(props) => props.theme.transition},
     transform ${(props) => props.theme.transition};
 `
 
-export const PreviewChildren = styled.div<{ visible: boolean }>`
-  opacity: ${(props) => (props.visible ? 1 : 0)};
-  transform: ${(props) => (props.visible ? 'translateY(0)' : 'translateY(20px)')};
+export const PreviewChildren = styled.div<{ $visible: boolean }>`
+  opacity: ${(props) => (props.$visible ? 1 : 0)};
   transition:
     opacity ${(props) => props.theme.transition},
     transform ${(props) => props.theme.transition};
