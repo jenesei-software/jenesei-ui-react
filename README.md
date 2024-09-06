@@ -70,6 +70,7 @@ To work correctly you need to install the following dependencies:
 
 ```bash
 npm install @emotion/styled --save
+npm install @jenesei-software/jenesei-web-id-api --save
 npm install @tanstack/react-form --save
 npm install @tanstack/react-query --save
 npm install @tanstack/react-virtual --save
