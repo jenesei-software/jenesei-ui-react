@@ -25,10 +25,10 @@ export const Preview: FC<PreviewProps> = (props) => {
 
   return (
     <>
-      <PreviewWrapper visible={visible}>
+      <PreviewWrapper $visible={visible}>
         <PreviewLoading />
       </PreviewWrapper>
-      <PreviewChildren visible={visible}>{props.children} </PreviewChildren>
+      <PreviewChildren $visible={visible}>{visible ? props.children : null}</PreviewChildren>
     </>
   )
 }

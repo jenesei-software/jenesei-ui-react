@@ -20,14 +20,7 @@ export const ProviderCookie: FC<ProviderCookieProps> = (props) => {
   const changeCookie = useCallback(
     <K extends keyof ValidCookieObject>(name: K, value: ValidCookieObject[K], options?: CookieAttributes) => {
       try {
-        const valueToStore =
-          typeof value === 'string' ||
-          typeof value === 'boolean' ||
-          typeof value === 'number' ||
-          typeof value === 'bigint'
-            ? value
-            : JSON.stringify(value)
-        Cookies.set(String(name), valueToStore, options)
+        Cookies.set(String(name), JSON.stringify(value), options)
         setCookieValues((prevState) => ({ ...prevState, [name]: value }))
       } catch {
         console.info(`Provider Cookie. ChangeCookie error - key:${name}, value:${value}.`)
@@ -58,15 +51,12 @@ export const ProviderCookie: FC<ProviderCookieProps> = (props) => {
   const checkCookie = useCallback(() => {
     if (props.validate && props.validate.validateKeys && props.validate.getValidateCookieValue) {
       props.validate?.validateKeys.forEach((key) => {
-        const cookieName = String(key)
-        const cookieValue = Cookies.get(cookieName)
+        const cookieValue = Cookies.get(String(key))
         if (cookieValue) {
           try {
-            const decodedCookieValue = decodeURIComponent(cookieValue)
-            const parsedValue = JSON.parse(decodedCookieValue)
-
-            if (!props.validate?.getValidateCookieValue(cookieName as never, parsedValue as never)) {
-              removeCookieValue(cookieName as never)
+            const parsedValue = JSON.parse(cookieValue)
+            if (!props.validate?.getValidateCookieValue(String(key) as never, parsedValue as never)) {
+              removeCookieValue(String(key) as never)
             } else {
               setCookieValues((prevState) => ({
                 ...prevState,
@@ -74,10 +64,10 @@ export const ProviderCookie: FC<ProviderCookieProps> = (props) => {
               }))
             }
           } catch {
-            removeCookieValue(cookieName as never)
+            removeCookieValue(String(key) as never)
           }
         } else {
-          removeCookieValue(cookieName as never)
+          removeCookieValue(String(key) as never)
         }
       })
     } else {

@@ -6,7 +6,6 @@ export const useRemovePreviewLoader = () => {
 
     const handleDomReady = () => {
       if (loader) {
-        loader.style.transform = 'translateY(20px)'
         loader.style.opacity = '0'
         setTimeout(() => {
           loader.remove()

@@ -29,6 +29,7 @@ import {
 } from '@jenesei-software/jenesei-ui-react'
 
 import 'react-ripple-click/dist/index.css'
+import 'react-toggle/style.css'
 
 function App() {
   return (
