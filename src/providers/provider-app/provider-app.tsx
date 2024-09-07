@@ -58,7 +58,7 @@ export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
         <meta name="description" content={description} />
         <meta name="theme-color" content={JeneseiThemeVariables[statusBarColor]} />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
       </Helmet>
       <Preview {...previewProps}>
         <ProviderAppWrapper $bgColor={bgColor} $bgImage={bgImage}>
