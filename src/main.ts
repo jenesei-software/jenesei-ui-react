@@ -22,6 +22,9 @@ export * from './components/checkboxes'
 export * from './components/button-group'
 export * from './components/select'
 export * from './components/accordion'
+export * from './components/preview'
+export * from './components/date'
+export * from './components/form'
 
 // Export of hooks
 export * from './hooks/use-screen-width'

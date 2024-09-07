@@ -15,6 +15,7 @@ export const SignIn: Story = {
   args: {
     genre: 'grayBorder',
     size: 'medium',
+    isLoading: false,
     width: '540px',
     variant: 'sign',
     onSubmit(field) {

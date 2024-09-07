@@ -11,6 +11,7 @@ export const WrapperFormCSS = css<WrapperFormProps>`
   transition: height ${(props) => props.theme.transition};
   height: auto;
   max-width: ${(props) => props.$width};
+  width: 100%;
   ${(props) =>
     props.$genre &&
     css`

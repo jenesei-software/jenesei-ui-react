@@ -1,3 +1,4 @@
+import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import path, { resolve } from 'path'
 import { defineConfig } from 'vite'
@@ -16,6 +17,7 @@ export default defineConfig(() => {
       },
     },
     plugins: [
+      basicSsl(),
       react({
         babel: {
           plugins: [['babel-plugin-styled-components', { displayName: false }]],
@@ -58,25 +60,7 @@ export default defineConfig(() => {
         external: Object.keys(peerDependencies),
         output: {
           sourcemap: false,
-          globals: {
-            // 'styled-components': 'styled',
-            // 'react-ripple-click': 'reactRippleClick',
-            // 'styled-reset': 'reset',
-            // react: 'react',
-            // 'react-loading': 'ReactLoading',
-            // 'react-number-format': 'reactNumberFormat',
-            // '@tanstack/react-virtual': 'reactVirtual',
-            // gsap: 'gsap',
-            // 'js-cookie': 'Cookies',
-            // 'react-i18next': 'reactI18next',
-            // 'react-helmet': 'reactHelmet',
-            // 'react-toggle': 'ReactToggle',
-            // 'react-dom': 'ReactDOM',
-            // moment: 'moment',
-            // yup: 'yup',
-            // 'awesome-phonenumber': 'awesomePhonenumber',
-            // 'country-list-with-dial-code-and-flag': 'FullCountryList',
-          },
+          globals: {},
         },
       },
     },

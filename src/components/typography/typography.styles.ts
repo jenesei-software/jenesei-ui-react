@@ -107,18 +107,18 @@ export const TitleH6 = styled.h6<TypographyCSSProps>`
 
 export const TitleH7 = styled.span<TypographyCSSProps>`
   font-size: var(--heading-7-font-size);
-  line-height: var(--heading-7-line-height);
+  line-height: var(--heading-line-height);
   ${SpanFontCSS};
 `
 
 export const TitleH8 = styled.span<TypographyCSSProps>`
   font-size: var(--heading-8-font-size);
-  line-height: var(--heading-8-line-height);
+  line-height: var(--heading-line-height);
   ${SpanFontCSS};
 `
 
 export const TitleH9 = styled.span<TypographyCSSProps>`
   font-size: var(--heading-9-font-size);
-  line-height: var(--heading-9-line-height);
+  line-height: var(--heading-line-height);
   ${SpanFontCSS};
 `
