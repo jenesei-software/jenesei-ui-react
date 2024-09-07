@@ -1,3 +1,4 @@
+import { useAxiosWebId } from '@jenesei-software/jenesei-web-id-api'
 import { useForm } from '@tanstack/react-form'
 import { yupValidator } from '@tanstack/yup-form-adapter'
 import moment from 'moment'
@@ -164,9 +165,9 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                 <Button
                   width="100%"
                   type="submit"
-                  isLoading={isSubmitting}
+                  isLoading={isSubmitting || props.isLoading}
                   isOnlyLoading
-                  isDisabled={!canSubmit || isSubmitting}
+                  isDisabled={!canSubmit || isSubmitting || props.isLoading}
                   genre={'greenTransparent'}
                   size={defaultSize || 'medium'}
                 >
@@ -178,23 +179,40 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
         </form.Subscribe>
         <form.Subscribe selector={(state) => [state.isSubmitting]}>
           {([isSubmitting]) => (
-            <Stack alignItems="center">
-              <Typography weight={500} variant="h7">
-                {"Don't have an account ?"}
-              </Typography>
-              <Button
-                type="reset"
-                isDisabled={isSubmitting}
-                genre={defaultGenre || 'grayBorder'}
-                size={defaultSize || 'medium'}
-                onClick={() => {
-                  form.reset()
-                  props.onSignUp()
-                }}
-              >
-                <Typography variant="h7">Sign up</Typography>
-              </Button>
-            </Stack>
+            <>
+              <Stack alignItems="center">
+                <Typography weight={500} variant="h7">
+                  {"Don't have an account ?"}
+                </Typography>
+                <Button
+                  type="button"
+                  isDisabled={isSubmitting || props.isLoading}
+                  genre={defaultGenre || 'grayBorder'}
+                  size={defaultSize || 'medium'}
+                  onClick={() => {
+                    props.onSignUp()
+                  }}
+                >
+                  <Typography variant="h7">Sign up</Typography>
+                </Button>
+              </Stack>
+              <Stack alignItems="center">
+                <Typography weight={500} variant="h7">
+                  {'Forgot your password?'}
+                </Typography>
+                <Button
+                  type="button"
+                  isDisabled={isSubmitting || props.isLoading}
+                  genre={defaultGenre || 'grayBorder'}
+                  size={defaultSize || 'medium'}
+                  onClick={() => {
+                    props.onForgot()
+                  }}
+                >
+                  <Typography variant="h7">Restore</Typography>
+                </Button>
+              </Stack>
+            </>
           )}
         </form.Subscribe>
       </>
@@ -203,6 +221,8 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
 }
 
 export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
+  const { axiosInstance } = useAxiosWebId()
+
   const defaultSize = props.size
   const defaultGenre = props.genre
 
@@ -237,8 +257,8 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
     dateOfBirthday: validationDateOfBirthday(18),
     countryCode: validationCountryCode,
     isUserAgreement: validationUserAgreement,
-    login: validationLoginWithCheck(props.axiosInstance),
-    email: validationEmailWithCheck(props.axiosInstance),
+    login: validationLoginWithCheck(axiosInstance),
+    email: validationEmailWithCheck(axiosInstance),
     currentPassword: validationPassword,
     phone: (phoneLength: number) => validationPhone(phoneLength),
   }
@@ -471,32 +491,36 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
         </form.Field>
         <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
           {([canSubmit, isSubmitting]) => (
-            <Stack flexDirection="column" gap="6px">
-              <>
-                <Button
-                  width="100%"
-                  type="submit"
-                  isOnlyLoading
-                  isDisabled={!canSubmit || isSubmitting}
-                  isLoading={isSubmitting}
-                  genre={'greenTransparent'}
-                  size={defaultSize || 'medium'}
-                >
-                  <Typography variant="h7">SignUp</Typography>
-                </Button>
-                <Button
-                  width="100%"
-                  type="reset"
-                  genre={defaultGenre || 'grayBorder'}
-                  size={defaultSize || 'medium'}
-                  onClick={() => {
-                    form.reset()
-                    props.onBack()
-                  }}
-                >
-                  <Typography variant="h7">Back</Typography>
-                </Button>
-              </>
+            <Button
+              width="100%"
+              type="submit"
+              isOnlyLoading
+              isDisabled={!canSubmit || isSubmitting || props.isLoading}
+              isLoading={isSubmitting || props.isLoading}
+              genre={'greenTransparent'}
+              size={defaultSize || 'medium'}
+            >
+              <Typography variant="h7">SignUp</Typography>
+            </Button>
+          )}
+        </form.Subscribe>
+        <form.Subscribe selector={(state) => [state.isSubmitting]}>
+          {([isSubmitting]) => (
+            <Stack alignItems="center">
+              <Typography weight={500} variant="h7">
+                {'Already have an account?'}
+              </Typography>
+              <Button
+                type="button"
+                isDisabled={isSubmitting || props.isLoading}
+                genre={defaultGenre || 'grayBorder'}
+                size={defaultSize || 'medium'}
+                onClick={() => {
+                  props.onSignIn()
+                }}
+              >
+                <Typography variant="h7">Sign in</Typography>
+              </Button>
             </Stack>
           )}
         </form.Subscribe>

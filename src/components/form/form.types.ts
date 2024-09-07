@@ -1,4 +1,3 @@
-import { AxiosInstance } from 'axios'
 import { CSSProperties, ReactElement } from 'react'
 
 import { TDateGenre } from '@components/date'
@@ -16,12 +15,14 @@ export interface FormProps {
 }
 
 export interface FormSignInProps extends Omit<FormProps, 'children'> {
+  isLoading: boolean
   onSubmit: (field: { nickname: string; password: string }) => void
   onSignUp: () => void
+  onForgot: () => void
 }
 export interface FormSignUpProps extends Omit<FormProps, 'children'> {
-  axiosInstance: AxiosInstance
-  onBack: () => void
+  isLoading: boolean
+  onSignIn: () => void
   onSubmit: (field: {
     login: string
     email: string
