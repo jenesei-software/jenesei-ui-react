@@ -34,9 +34,11 @@
     "build-storybook": "cross-env BUILD_STORYBOOK=true storybook build --quiet --disable-telemetry",
     "format": "prettier --write 'src/*/*.{ts,tsx}'"
   },
+  "dependencies": {
+    "@jenesei-software/jenesei-web-id-api": "^0.0.24"
+  },
   "peerDependencies": {
     "@emotion/styled": "^11.11.5",
-    "@jenesei-software/jenesei-web-id-api": "^0.0.24",
     "@tanstack/react-form": "^0.31.0",
     "@tanstack/react-query": "^5.52.1",
     "@tanstack/react-virtual": "^3.5.1",
