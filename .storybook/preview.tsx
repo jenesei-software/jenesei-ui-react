@@ -22,16 +22,19 @@ const queryClient = new QueryClient({
     },
   },
 })
+const baseURL = import.meta.env.VITE_BASE_URL || ''
 
 const preview: Preview = {
   decorators: [
     (Story) => {
       return (
         <QueryClientProvider client={queryClient}>
-          <ThemeProvider theme={JeneseiTheme}>
-            <JeneseiGlobalStyles />
-            <Story />
-          </ThemeProvider>
+          <ProviderAxiosWebId baseURL={baseURL} availabilityCookieName={'auth_status'}>
+            <ThemeProvider theme={JeneseiTheme}>
+              <JeneseiGlobalStyles />
+              <Story />
+            </ThemeProvider>
+          </ProviderAxiosWebId>
         </QueryClientProvider>
       )
     },

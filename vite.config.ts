@@ -1,3 +1,4 @@
+import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import path, { resolve } from 'path'
 import { defineConfig } from 'vite'
@@ -16,6 +17,7 @@ export default defineConfig(() => {
       },
     },
     plugins: [
+      basicSsl(),
       react({
         babel: {
           plugins: [['babel-plugin-styled-components', { displayName: false }]],

@@ -20,7 +20,6 @@ const config: StorybookConfig = {
   viteFinal: (config) => {
     return config
   },
-
   managerHead: (head) => `
     ${head}
     <link rel="icon" href="/favicon.ico" />

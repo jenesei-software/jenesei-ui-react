@@ -29,13 +29,13 @@
     }
   },
   "scripts": {
-    "build": "tsc && vite build --mode build",
-    "storybook": "storybook dev -p 6006",
+    "build": "tsc && vite build",
+    "storybook": "storybook dev -p 3030 -h local.dev.jenesei.ru --https --https --ssl-cert ./ssl/cert.pem --ssl-key ./ssl/key.pem",
     "build-storybook": "cross-env BUILD_STORYBOOK=true storybook build --quiet --disable-telemetry",
     "format": "prettier --write 'src/*/*.{ts,tsx}'"
   },
   "dependencies": {
-    "@jenesei-software/jenesei-web-id-api": "^0.0.24"
+    "@jenesei-software/jenesei-web-id-api": "^0.0.30"
   },
   "peerDependencies": {
     "@emotion/styled": "^11.11.5",
@@ -90,6 +90,7 @@
     "@types/styled-components": "^5.1.34",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
     "@vitejs/plugin-react": "^4.3.1",
     "babel-plugin-styled-components": "^2.1.4",
     "cross-env": "^7.0.3",
