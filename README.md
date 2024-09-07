@@ -69,6 +69,7 @@ declare module '@jenesei-software/jenesei-ui-react' {
 To work correctly you need to install the following dependencies:
 
 ```bash
+npm install @jenesei-software/jenesei-web-id-api --save
 npm install @emotion/styled --save
 npm install @tanstack/react-form --save
 npm install @tanstack/react-query --save
