@@ -21,6 +21,6 @@ export const SignUp: Story = {
     onSubmit(field) {
       console.log(field)
     },
-    onBack() {},
+    onSignIn() {},
   },
 }
