@@ -34,7 +34,9 @@
       "@hooks/*": ["src/hooks/*"],
       "@providers/*": ["src/providers/*"],
       "@theme/*": ["src/theme/*"],
-      "@types/*": ["src/types/*"]
+      "@types/*": ["src/types/*"],
+      "@modules/*": ["src/modules/*"],
+      "@forms/*": ["src/forms/*"]
     }
   },
   "include": ["src"],
