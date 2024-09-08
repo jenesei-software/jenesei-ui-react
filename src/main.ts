@@ -10,25 +10,30 @@ export * from './assets/library-icon'
 export * from './functions'
 
 // Exporting components
+export * from './components/accordion'
+export * from './components/button'
+export * from './components/button-group'
+export * from './components/checkbox'
+export * from './components/checkboxes'
+export * from './components/date'
 export * from './components/flex'
+export * from './components/input'
+export * from './components/modal-loading'
+export * from './components/preview'
+export * from './components/select'
 export * from './components/toggle'
 export * from './components/tooltip'
 export * from './components/typography'
-export * from './components/modal-loading'
-export * from './components/button'
-export * from './components/input'
-export * from './components/checkbox'
-export * from './components/checkboxes'
-export * from './components/button-group'
-export * from './components/select'
-export * from './components/accordion'
-export * from './components/preview'
-export * from './components/date'
-export * from './components/form'
+
+export * from './forms/default'
+export * from './forms/sign-in'
+export * from './forms/sign-up'
+
+export * from './modules/resource'
 
 // Export of hooks
-export * from './hooks/use-screen-width'
 export * from './hooks/use-geolocation'
+export * from './hooks/use-screen-width'
 
 // Export of providers
 export * from './providers/provider-app'

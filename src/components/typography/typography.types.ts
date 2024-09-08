@@ -17,6 +17,7 @@ export interface TypographyDefaultProps {
   style?: CSSProperties
   weight?: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
   height?: number
+  flex?: string
 }
 
 export interface TypographyDataProps extends TypographyDefaultProps {
@@ -39,7 +40,7 @@ export interface TypographyCSSProps {
   $family?: TypographyDefaultProps['family']
   $textAlign?: TypographyDefaultProps['textAlign']
   $textWrap?: TypographyDefaultProps['textWrap']
-
+  $flex?: TypographyDefaultProps['flex']
   $variant?: TypographyVariantProps['variant']
 
   $size?: TypographyDataProps['size']

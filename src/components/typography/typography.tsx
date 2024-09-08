@@ -29,6 +29,7 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
     $weight: props.weight,
     className: props.className,
     style: props.style,
+    $flex: props.flex,
   }
 
   if ('variant' in props) {

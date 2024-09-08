@@ -2,6 +2,8 @@
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
     "^@assets/(.*)$",
+    "^@forms/(.*)$",
+    "^@modules/(.*)$",
     "^@components/(.*)$",
     "^@fonts/(.*)$",
     "^@functions/(.*)$",
