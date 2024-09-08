@@ -15,7 +15,7 @@ const SpanFontCSS = css<TypographyCSSProps>`
   ${(props) =>
     props.$flex &&
     css`
-    flex ${props.$flex};
+      flex: ${props.$flex};
     `};
   ${(props) =>
     props.$textAlign &&
