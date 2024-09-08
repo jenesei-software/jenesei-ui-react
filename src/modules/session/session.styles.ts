@@ -1,19 +1,19 @@
 import { styled } from 'styled-components'
 
 /****************************************** Default *************************************************/
-export const ModuleResourceWrapper = styled.div`
+export const ModuleSessionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
 `
 
-export const ModuleResourceListWrapper = styled.div`
+export const ModuleSessionListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
 `
 
-export const ModuleResourceListItemWrapper = styled.div`
+export const ModuleSessionListItemWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 12px;
@@ -21,7 +21,7 @@ export const ModuleResourceListItemWrapper = styled.div`
   flex-direction: column;
 `
 
-export const ModuleResourceListItemStatusWrapper = styled.div`
+export const ModuleSessionListItemStatusWrapper = styled.div`
   display: flex;
   gap: 12px;
   align-items: center;
