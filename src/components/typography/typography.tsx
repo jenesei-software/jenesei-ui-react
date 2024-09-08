@@ -27,9 +27,9 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
     $textAlign: props.textAlign,
     $textWrap: props.textWrap,
     $weight: props.weight,
+    $flex: props.flex,
     className: props.className,
     style: props.style,
-    $flex: props.flex,
   }
 
   if ('variant' in props) {

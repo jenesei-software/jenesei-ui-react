@@ -149,7 +149,7 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
           {([isSubmitting]) => (
             <>
               <Stack alignItems="center">
-                <Typography weight={500} variant="h7">
+                <Typography flex="1" weight={500} variant="h7">
                   {"Don't have an account ?"}
                 </Typography>
                 <Button
@@ -165,7 +165,7 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                 </Button>
               </Stack>
               <Stack alignItems="center">
-                <Typography weight={500} variant="h7">
+                <Typography flex="1" weight={500} variant="h7">
                   {'Forgot your password?'}
                 </Typography>
                 <Button

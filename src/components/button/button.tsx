@@ -26,7 +26,7 @@ export const Button: FC<ButtonProps> = (props) => {
       $customFontWeight={props.customFontWeight}
       $isHiddenBorder={props.isHiddenBorder || props.isPlaystationEffect}
       disabled={props.isDisabled}
-      type={props.type}
+      type={props.type ?? 'button'}
       className={props.className}
       onClick={(event) => !props.isLoading && !props.isDisabled && props.onClick && props.onClick(event)}
       $flexDirection={props.customStyles?.flexDirection}

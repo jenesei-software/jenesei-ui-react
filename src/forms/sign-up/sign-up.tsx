@@ -283,7 +283,9 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
           {(field) => (
             <Stack alignItems="center">
               <>
-                <Typography variant="h7">User agreement</Typography>
+                <Typography flex="1" variant="h7">
+                  User agreement
+                </Typography>
                 <Toggle
                   isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
                   value={field.state.value}
@@ -313,7 +315,7 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
         <form.Subscribe selector={(state) => [state.isSubmitting]}>
           {([isSubmitting]) => (
             <Stack alignItems="center">
-              <Typography weight={500} variant="h7">
+              <Typography flex="1" weight={500} variant="h7">
                 {'Already have an account?'}
               </Typography>
               <Button
