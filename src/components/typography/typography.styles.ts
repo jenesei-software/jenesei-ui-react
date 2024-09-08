@@ -11,8 +11,12 @@ const SpanFontCSS = css<TypographyCSSProps>`
   text-overflow: ellipsis;
   overflow-wrap: anywhere;
   box-sizing: border-box;
-  flex: 1;
 
+  ${(props) =>
+    props.$flex &&
+    css`
+    flex ${props.$flex};
+    `};
   ${(props) =>
     props.$textAlign &&
     css`
