@@ -6,12 +6,13 @@ import { getFontSizeStyles } from '@components/typography'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
 
-import { InputChildrenProps, InputErrorMessageProps, InputProps, StyledInputProps, StyledInputWrapperProps } from '.'
-
-/****************************************** Hidden *************************************************/
-const InputWrapperHidden = css<StyledInputWrapperProps>`
-  opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
-`
+import {
+  InputErrorMessageProps,
+  InputProps,
+  StyledInputChildrenProps,
+  StyledInputProps,
+  StyledInputWrapperProps,
+} from '.'
 
 /****************************************** Wrapper *************************************************/
 export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
@@ -22,7 +23,6 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
   justify-content: center;
   flex-direction: column;
   width: ${(props) => props.$width ?? '100%'};
-  ${InputWrapperHidden};
 `
 
 /****************************************** Error Size*************************************************/
@@ -158,6 +158,10 @@ export const InputSizeConstructor = (props: IJeneseiThemeSize) => css`
   border-radius: ${props.radius}px;
 `
 
+/****************************************** Hidden *************************************************/
+const InputHidden = css<StyledInputProps>`
+  opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
+`
 /****************************************** Default *************************************************/
 export const StyledInputCSS = css<StyledInputProps>`
   resize: none;
@@ -178,6 +182,7 @@ export const StyledInputCSS = css<StyledInputProps>`
   ${InputGenre};
   ${InputIsErrorBorder};
   ${InputPlaceholder};
+  ${InputHidden};
   ${(props) =>
     props.$prefixChildren &&
     css`
@@ -200,18 +205,26 @@ export const StyledInputFormat = styled(PatternFormat)<StyledInputProps>`
 `
 
 /****************************************** Children *************************************************/
-export const InputPrefixChildren = styled.div<InputChildrenProps>`
+export const InputPrefixChildren = styled.div<StyledInputChildrenProps>`
   position: absolute;
-  left: ${(props) => props.left};
-  width: ${(props) => props.width};
+  left: ${(props) => props.$left};
+  width: ${(props) => props.$width};
+  opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
   height: 100%;
+  transition:
+    all ${(props) => props.theme.transition},
+    outline 0s;
 `
 
-export const InputPostfixChildren = styled.div<InputChildrenProps>`
+export const InputPostfixChildren = styled.div<StyledInputChildrenProps>`
   position: absolute;
-  right: ${(props) => props.right};
-  width: ${(props) => props.width};
+  right: ${(props) => props.$right};
+  width: ${(props) => props.$width};
+  opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
   height: 100%;
+  transition:
+    all ${(props) => props.theme.transition},
+    outline 0s;
 `
 
 /****************************************** ModalLoading *************************************************/

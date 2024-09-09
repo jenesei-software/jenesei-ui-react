@@ -29,6 +29,7 @@ export * from './forms/default'
 export * from './forms/sign-in'
 export * from './forms/sign-up'
 
+export * from './modules/profile'
 export * from './modules/resource'
 export * from './modules/session'
 

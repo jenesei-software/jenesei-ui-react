@@ -1,15 +1,14 @@
-import { CSSProperties, ReactElement } from 'react'
+import { CSSProperties, PropsWithChildren } from 'react'
 
 import { TDateGenre } from '@components/date'
 
 import { TJeneseiThemeSize } from '@theme/index'
 
-export interface FormProps {
+export interface FormProps extends PropsWithChildren {
   width?: string
   handleSubmit?: () => void
   size?: TJeneseiThemeSize
   genre?: TDateGenre
-  children?: ReactElement
   style?: CSSProperties
   variant?: 'sign'
 }

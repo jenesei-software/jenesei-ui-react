@@ -22,7 +22,7 @@ import {
   validationEmail,
   validationFirstName,
   validationLastName,
-  validationLogin,
+  validationNickName,
   validationPassword,
   validationPhone,
   validationUserAgreement,
@@ -46,7 +46,7 @@ const FormWrapper: React.FC<FormProps> = (props) => {
     defaultValues: {
       firstName: '',
       lastName: '',
-      login: '',
+      nickname: '',
       email: '',
       currentPassword: '',
       confirmPassword: '',
@@ -62,7 +62,7 @@ const FormWrapper: React.FC<FormProps> = (props) => {
       const result = {
         firstName: value.firstName.trim(),
         lastName: value.lastName.trim(),
-        login: value.login.trim(),
+        nickname: value.nickname.trim(),
         email: value.email.trim(),
         currentPassword: value.currentPassword.trim(),
         confirmPassword: value.confirmPassword.trim(),
@@ -88,7 +88,7 @@ const FormWrapper: React.FC<FormProps> = (props) => {
     isUserAgreement: validationUserAgreement,
     firstName: validationFirstName,
     lastName: validationLastName,
-    login: validationLogin,
+    nickname: validationNickName,
     email: validationEmail,
     currentPassword: validationPassword,
     phone: (phoneLength: number) => validationPhone(phoneLength),
@@ -306,17 +306,17 @@ const FormWrapper: React.FC<FormProps> = (props) => {
               />
             )}
           </form.Field>
-          <Typography variant="h7">Login</Typography>
+          <Typography variant="h7">Nickname</Typography>
           <form.Field
-            name="login"
+            name="nickname"
             validators={{
-              onChange: validationSchema.login,
+              onChange: validationSchema.nickname,
             }}
           >
             {(field) => (
               <Input
                 autocomplete="username"
-                placeholder="Write the login"
+                placeholder="Write the nickname"
                 id={field.name}
                 name={field.name}
                 value={field.state.value}

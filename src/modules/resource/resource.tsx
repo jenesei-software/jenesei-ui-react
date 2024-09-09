@@ -24,17 +24,17 @@ export const ModuleResource: FC<ModuleResourceProps> = () => {
       <ModuleResourceListWrapper>
         {dataResourceAll?.map((e, key) => (
           <ModuleResourceListItemWrapper key={key}>
-            <Typography weight={400} variant="h6" color="graySarah">
+            <Typography weight={600} variant="h6" color="graySarah">
               {e.resourceName}
             </Typography>
             {e.isActive && (
               <ModuleResourceListItemStatusWrapper>
                 <Typography weight={400} variant="h6" color="graySarah">
-                  Active
+                  Status: Active
                 </Typography>
               </ModuleResourceListItemStatusWrapper>
             )}
-            <Divider height="2px" color="graySarah" />
+            <Divider height="1px" color="graySarah" />
           </ModuleResourceListItemWrapper>
         ))}
       </ModuleResourceListWrapper>

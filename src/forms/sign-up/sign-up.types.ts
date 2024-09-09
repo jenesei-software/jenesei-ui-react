@@ -4,7 +4,7 @@ export interface FormSignUpProps extends Omit<FormProps, 'children'> {
   isLoading: boolean
   onSignIn: () => void
   onSubmit: (field: {
-    login: string
+    nickname: string
     email: string
     currentPassword: string
     confirmPassword: string

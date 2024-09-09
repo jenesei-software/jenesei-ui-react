@@ -10,7 +10,7 @@ import { Stack } from '@components/flex'
 import { Input } from '@components/input'
 import { Typography } from '@components/typography'
 
-import { validationLogin, validationPassword } from '@functions/schema'
+import { validationNickName, validationPassword } from '@functions/schema'
 
 import { FormSignInProps } from '.'
 
@@ -37,7 +37,7 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
   })
 
   const validationSchema = {
-    nickname: validationLogin,
+    nickname: validationNickName,
     password: validationPassword,
   }
 

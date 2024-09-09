@@ -53,7 +53,7 @@ export const validationLastName = yup
   .max(128, 'Last name must be at most 128 characters')
   .test('no-spaces', 'No Spaces!', (value) => !value?.includes(' '))
 
-export const validationLogin = yup
+export const validationNickName = yup
   .string()
   .trim()
   .required('Login is required')
@@ -61,7 +61,7 @@ export const validationLogin = yup
   .max(12, 'Login must be at most 12 characters')
   .test('no-spaces', 'No Spaces!', (value) => !value?.includes(' '))
 
-export const validationLoginWithCheck = (axiosInstance: AxiosInstance) =>
+export const validationNickNameWithCheck = (axiosInstance: AxiosInstance) =>
   yup
     .string()
     .trim()
