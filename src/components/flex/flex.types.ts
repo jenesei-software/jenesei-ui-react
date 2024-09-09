@@ -1,4 +1,4 @@
-import { CSSProperties, ReactElement } from 'react'
+import { CSSProperties, PropsWithChildren } from 'react'
 
 import { JeneseiThemeVariablesKeys } from '@theme/index'
 
@@ -89,8 +89,8 @@ export interface FlexContainerAndItemAndBasicProps extends FlexContainerProps, F
 export interface FlexShortStylesNormalizedPropsNormalized
   extends FlexContainerPropsNormalized,
     FlexItemPropsNormalized,
-    FlexBasicPropsNormalized {
-  children?: ReactElement | ReactElement[]
+    FlexBasicPropsNormalized,
+    PropsWithChildren {
   style?: CSSProperties
 }
 

@@ -155,7 +155,7 @@ export const DateDropdownDaySize = css<DateDropdownDayProps>`
     ${(props) =>
     !props.$isCurrentMonth &&
     css`
-      opacity: 0.4;
+      opacity: 0.5;
     `}
   ${getFontSizeStyles(12, 600, 'Inter')}
 `

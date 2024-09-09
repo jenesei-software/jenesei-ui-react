@@ -40,7 +40,7 @@ export const ModuleSession: FC<ModuleSessionProps> = (props) => {
                 This is the current session
               </Typography>
             )}
-            <Stack gap="2px">
+            <Stack gap="2px" flexDirection="row" flexWrap="wrap">
               <Typography weight={600} variant="h6" color="graySarah">
                 {'Device: '}
               </Typography>

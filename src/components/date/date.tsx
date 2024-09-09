@@ -266,6 +266,7 @@ export const DatePicker = (props: DateProps) => {
 
   const handleOnFocus: FocusEventHandler<HTMLInputElement> = useCallback(
     (event) => {
+      if (props?.isDisabled) return
       if (props.onFocus) props.onFocus(event)
       handleOnFocusEasy()
     },
@@ -293,6 +294,7 @@ export const DatePicker = (props: DateProps) => {
 
   const handleOnBlur: FocusEventHandler<HTMLInputElement> = useCallback(
     (event) => {
+      if (props?.isDisabled) return
       if (props.onBlur && event) props.onBlur(event)
       handleOnBlurEasy()
     },
@@ -341,6 +343,7 @@ export const DatePicker = (props: DateProps) => {
       <DateWrapper
         $genre={props.genre}
         $width={props.width}
+        $isDisabled={props?.isDisabled}
         tabIndex={0}
         $radius={radius}
         $parentListHeight={height}
@@ -359,7 +362,8 @@ export const DatePicker = (props: DateProps) => {
           $postfixChildren={props?.inputProps?.postfixChildren}
           $prefixChildren={props?.inputProps?.prefixChildren}
           $isBold={props?.inputProps?.isBold}
-          disabled={props?.inputProps?.isDisabled}
+          disabled={props?.isDisabled}
+          $isDisabled={props?.isDisabled}
           readOnly={true}
           required={props?.inputProps?.isRequired}
           defaultValue={props?.inputProps?.defaultValue}

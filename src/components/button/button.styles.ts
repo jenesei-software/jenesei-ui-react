@@ -46,18 +46,14 @@ const ButtonDisabled = css<StyledButtonProps>`
     props.$isHidden
       ? css`
           opacity: 0.5;
-          background: ${props.theme.colors.button[props.$genre].background
-            .rest} !important;
+          background: ${props.theme.colors.button[props.$genre].background.rest} !important;
 
-          color: ${props.theme.colors.button[props.$genre].color
-            .rest} !important;
+          color: ${props.theme.colors.button[props.$genre].color.rest} !important;
           & span {
-            color: ${props.theme.colors.button[props.$genre].color
-              .rest} !important;
+            color: ${props.theme.colors.button[props.$genre].color.rest} !important;
           }
           & path {
-            fill: ${props.theme.colors.button[props.$genre].color
-              .rest} !important;
+            fill: ${props.theme.colors.button[props.$genre].color.rest} !important;
           }
         `
       : css`
@@ -110,10 +106,11 @@ export const ButtonSize = css<StyledButtonProps>`
       ...KEY_SIZE_DATA[props.$size],
       isFullSize: props.$isFullSize,
       $width: props.$width,
+      $flex: props.$flex,
     })};
 `
 export const ButtonSizeConstructor = (
-  props: IJeneseiThemeSize & { isFullSize?: boolean; $width?: string },
+  props: IJeneseiThemeSize & { isFullSize?: boolean; $width?: string; $flex?: string },
 ) => css`
   height: ${props.height}px;
   border-radius: ${props.radius}px;
@@ -127,7 +124,11 @@ export const ButtonSizeConstructor = (
       height: 100%;
       border-radius: 0px;
     `}
-
+  ${() =>
+    props.$flex &&
+    css`
+      flex: ${props.$flex};
+    `}
   ${props.$width === 'asHeight'
     ? css`
         width: ${props.height}px;

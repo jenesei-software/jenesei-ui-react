@@ -1,4 +1,4 @@
-import { FocusEventHandler, HTMLInputAutoCompleteAttribute, HTMLInputTypeAttribute } from 'react'
+import { FocusEventHandler, HTMLInputAutoCompleteAttribute, HTMLInputTypeAttribute, PropsWithChildren } from 'react'
 
 import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@theme/index'
 
@@ -62,14 +62,22 @@ export interface InputProps {
   mask?: string | string[]
 }
 
-export interface InputChildrenProps {
-  children: React.ReactNode
-
+export interface InputChildrenProps extends PropsWithChildren {
   left: string
 
   right: string
 
   width: string
+}
+
+export interface StyledInputChildrenProps {
+  $left: InputChildrenProps['left']
+
+  $right: InputChildrenProps['right']
+
+  $width: InputChildrenProps['width']
+
+  $isDisabled?: InputProps['isDisabled']
 }
 
 export type TInputGenre = keyof TJeneseiThemeGenreInput
@@ -82,6 +90,8 @@ export interface StyledInputProps {
   $isError?: InputProps['isError']
 
   $isLoading?: InputProps['isLoading']
+
+  $isDisabled?: InputProps['isDisabled']
 
   $postfixChildren?: InputChildrenProps
 
