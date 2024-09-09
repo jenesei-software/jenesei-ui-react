@@ -81,7 +81,7 @@ export const DateDropdownList = styled.div<DateDropdownListProps>`
   padding-top: 6px;
   transform: translateZ(0);
   background: ${(props) => props.theme.colors.input[props.$genre].background.rest};
-  border: solid 2px ${(props) => props.theme.colors.input[props.$genre].border.rest};
+  border: solid 1px ${(props) => props.theme.colors.input[props.$genre].border.rest};
   ${dateDropdownListSize}
   justify-content: flex-start;
   gap: 10px;
@@ -157,11 +157,11 @@ export const DateDropdownDaySize = css<DateDropdownDayProps>`
     css`
       opacity: 0.5;
     `}
-  ${getFontSizeStyles(12, 600, 'Inter')}
+  ${getFontSizeStyles(12, 700, 'Inter')}
 `
 export const DateDropdownDaySizeConstructor = (props: IJeneseiThemeSize) => css`
   border-radius: ${props.radius}px;
-  ${getFontSizeStyles(12, 600, 'Inter')};
+  ${getFontSizeStyles(12, 700, 'Inter')};
 `
 
 export const DateDropdownDay = styled.button<DateDropdownDayProps>`

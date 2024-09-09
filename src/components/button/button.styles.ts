@@ -21,7 +21,7 @@ const ButtonGenre = css<StyledButtonProps>`
     }
 
     &:focus-visible {
-      outline: 2px solid ${props.theme.colors.focus};
+      outline: 1px solid ${props.theme.colors.focus};
     }
     &:hover {
       ${!props.$isHidden &&
@@ -115,7 +115,7 @@ export const ButtonSizeConstructor = (
   height: ${props.height}px;
   border-radius: ${props.radius}px;
   gap: ${props.padding - 2}px;
-  ${getFontSizeStyles(props.font, 600, 'Inter')};
+  ${getFontSizeStyles(props.font, 700, 'Inter')};
   padding: 0px ${props.padding}px;
 
   ${() =>

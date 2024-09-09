@@ -33,6 +33,8 @@ export interface InputProps {
 
   isReadOnly?: boolean
 
+  isInputEffect?: boolean
+
   isRequired?: boolean
 
   isCustomIcon?: boolean
@@ -91,6 +93,8 @@ export interface StyledInputProps {
 
   $isLoading?: InputProps['isLoading']
 
+  $isInputEffect?: InputProps['isInputEffect']
+
   $isDisabled?: InputProps['isDisabled']
 
   $postfixChildren?: InputChildrenProps
@@ -104,7 +108,7 @@ export interface StyledInputProps {
 
 export interface StyledInputWrapperProps {
   $isDisabled?: InputProps['isDisabled']
-
+  $isInputEffect?: InputProps['isInputEffect']
   $width?: InputProps['width']
 }
 

@@ -86,7 +86,7 @@ export const ModuleProfile: FC<ModuleProfileProps> = () => {
 
   return (
     <ModuleProfileWrapper>
-      <Typography weight={600} variant="h6" color="graySarah">
+      <Typography weight={700} variant="h6" color="graySarah">
         Jenesei ID
       </Typography>
       <Divider height="2px" color="graySarah" />

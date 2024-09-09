@@ -28,7 +28,7 @@ export const ModuleSession: FC<ModuleSessionProps> = (props) => {
 
   return (
     <ModuleSessionWrapper>
-      <Typography weight={600} variant="h6" color="graySarah">
+      <Typography weight={700} variant="h6" color="graySarah">
         Jenesei Sessions
       </Typography>
       <Divider height="2px" color="graySarah" />
@@ -36,12 +36,12 @@ export const ModuleSession: FC<ModuleSessionProps> = (props) => {
         {dataSessionAllList.map((e, key) => (
           <ModuleSessionListItemWrapper key={key}>
             {e.isCurrent && (
-              <Typography weight={600} variant="h6" color="black100">
+              <Typography weight={700} variant="h6" color="black100">
                 This is the current session
               </Typography>
             )}
             <Stack gap="2px" flexDirection="row" flexWrap="wrap">
-              <Typography weight={600} variant="h6" color="graySarah">
+              <Typography weight={700} variant="h6" color="graySarah">
                 {'Device: '}
               </Typography>
               <Typography weight={400} variant="h6" color="graySarah">
@@ -49,7 +49,7 @@ export const ModuleSession: FC<ModuleSessionProps> = (props) => {
               </Typography>
             </Stack>
             <Stack gap="2px">
-              <Typography weight={600} variant="h6" color="graySarah">
+              <Typography weight={700} variant="h6" color="graySarah">
                 {'Last activity: '}
               </Typography>
               <Typography weight={400} variant="h6" color="graySarah">

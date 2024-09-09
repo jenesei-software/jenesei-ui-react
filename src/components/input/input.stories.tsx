@@ -30,13 +30,7 @@ const defaultArgs: Partial<InputProps> = {
 const InputStringWrapper: React.FC<InputProps> = (props) => {
   const [value, setValue] = useState<string>('')
 
-  return (
-    <Input
-      {...props}
-      value={value}
-      onChange={(newValue) => setValue(newValue)}
-    />
-  )
+  return <Input {...props} value={value} onChange={(newValue) => setValue(newValue)} />
 }
 
 export const Password: Story = {
@@ -44,6 +38,9 @@ export const Password: Story = {
   args: {
     ...defaultArgs,
     type: 'password',
+    isError: true,
+    errorMessage: 'Error',
+    isErrorAbsolute: true,
     placeholder: 'Password',
     postfixChildren: {
       width: '32px',
@@ -59,12 +56,7 @@ export const Password: Story = {
           minH={'100%'}
           h={'100%'}
         >
-          <Icon
-            size={'largeMedium'}
-            primaryColor={'grayJanice'}
-            type={'curved'}
-            name={'Password'}
-          />
+          <Icon size={'largeMedium'} primaryColor={'grayJanice'} type={'curved'} name={'Password'} />
         </Stack>
       ),
     },
@@ -93,12 +85,7 @@ export const Phone: Story = {
           minH={'100%'}
           h={'100%'}
         >
-          <Icon
-            size={'largeMedium'}
-            primaryColor={'grayJanice'}
-            type={'curved'}
-            name={'Call'}
-          />
+          <Icon size={'largeMedium'} primaryColor={'grayJanice'} type={'curved'} name={'Call'} />
         </Stack>
       ),
     },
@@ -126,12 +113,7 @@ export const INN: Story = {
           minH={'100%'}
           h={'100%'}
         >
-          <Icon
-            size={'largeMedium'}
-            primaryColor={'grayJanice'}
-            type={'curved'}
-            name={'ShieldDone'}
-          />
+          <Icon size={'largeMedium'} primaryColor={'grayJanice'} type={'curved'} name={'ShieldDone'} />
         </Stack>
       ),
     },
@@ -159,12 +141,7 @@ export const Code: Story = {
           minH={'100%'}
           h={'100%'}
         >
-          <Icon
-            size={'largeMedium'}
-            primaryColor={'grayJanice'}
-            type={'curved'}
-            name={'Chat'}
-          />
+          <Icon size={'largeMedium'} primaryColor={'grayJanice'} type={'curved'} name={'Chat'} />
         </Stack>
       ),
     },

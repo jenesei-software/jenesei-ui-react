@@ -36,8 +36,8 @@ export const InputErrorMessageSizeConstructor = (
   ${props.$isErrorAbsolute
     ? css`
         position: absolute;
-        top: calc(100% + ${props.padding}px);
-        left: ${props.padding}px;
+        padding-top: 6px;
+        padding-left: ${props.padding}px;
         color: ${(props) => props.theme.colors.danger};
       `
     : css`
@@ -128,7 +128,7 @@ const InputGenre = css<StyledInputProps>`
       }
     }
     &:focus-visible {
-      outline: 2px solid ${props.theme.colors.focus};
+      outline: 1px solid ${props.theme.colors.focus};
       border-color: ${props.theme.colors.input[props.$genre].border.rest};
       background: ${props.theme.colors.input[props.$genre].background.rest};
 
@@ -162,13 +162,22 @@ export const InputSizeConstructor = (props: IJeneseiThemeSize) => css`
 const InputHidden = css<StyledInputProps>`
   opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
 `
+/****************************************** is PlaystationEffect *************************************************/
+const InputIsInputEffect = css<StyledInputProps>`
+  ${(props) =>
+    props.$isInputEffect &&
+    css`
+      box-shadow: ${props.theme.effects.input.default};
+    `}
+`
+
 /****************************************** Default *************************************************/
 export const StyledInputCSS = css<StyledInputProps>`
   resize: none;
   overflow: hidden;
   box-sizing: border-box;
   width: 100%;
-  border: 2px solid;
+  border: 1px inset;
   transition:
     all ${(props) => props.theme.transition},
     outline 0s;
@@ -183,6 +192,7 @@ export const StyledInputCSS = css<StyledInputProps>`
   ${InputIsErrorBorder};
   ${InputPlaceholder};
   ${InputHidden};
+  ${InputIsInputEffect};
   ${(props) =>
     props.$prefixChildren &&
     css`
