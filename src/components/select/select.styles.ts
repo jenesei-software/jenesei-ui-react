@@ -15,30 +15,32 @@ import {
 
 export const SelectWrapper = styled.div<SelectWrapperProps>`
   --scrollbar-width: 16px;
-  --scrollbar-background: ${(props) =>
-    props.theme.colors.input[props.$genre].background.rest};
-  --scrollbar-thumb-background: ${(props) =>
-    props.theme.colors.input[props.$genre].color.rest};
-  --scrollbar-thumb-border: 4px solid
-    ${(props) => props.theme.colors.input[props.$genre].background.rest};
+  --scrollbar-background: ${(props) => props.theme.colors.input[props.$genre].background.rest};
+  --scrollbar-thumb-background: ${(props) => props.theme.colors.input[props.$genre].color.rest};
+  --scrollbar-thumb-border: 4px solid ${(props) => props.theme.colors.input[props.$genre].background.rest};
 
   width: ${(props) => props.$width ?? '100%'};
   position: relative;
 
-  &:focus-within {
-    &:after {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      bottom: -2px;
-      right: -2px;
-      border: 2px ${(props) => props.theme.colors.focus} solid;
-      border-radius: ${(props) => `${props.$radius + 1}px`};
-      pointer-events: none;
-      height: calc(100% + var(--after-height));
-    }
-  }
+  ${(props) =>
+    !props.$isDisabled &&
+    css`
+      &:focus-within {
+        &:after {
+          content: '';
+          position: absolute;
+          top: -2px;
+          left: -2px;
+          bottom: -2px;
+          right: -2px;
+          border: 2px ${props.theme.colors.focus} solid;
+          border-radius: ${`${props.$radius + 1}px`};
+          pointer-events: none;
+          height: calc(100% + var(--after-height));
+        }
+      }
+    `}
+
   outline: none !important;
 
   &:focus-visible {
@@ -47,13 +49,9 @@ export const SelectWrapper = styled.div<SelectWrapperProps>`
 `
 
 export const DropdownListParentSize = css<SelectStyledListProps>`
-  ${(props) =>
-    props.$size &&
-    DropdownListParentSizeConstructor(KEY_SIZE_DATA[props.$size])};
+  ${(props) => props.$size && DropdownListParentSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
-export const DropdownListParentSizeConstructor = (
-  props: IJeneseiThemeSize,
-) => css`
+export const DropdownListParentSizeConstructor = (props: IJeneseiThemeSize) => css`
   border-radius: 0px 0px ${props.radius}px ${props.radius}px;
 `
 
@@ -74,10 +72,8 @@ export const DropdownListParent = styled.div<SelectStyledListProps>`
 
   box-sizing: border-box;
 
-  background: ${(props) =>
-    props.theme.colors.input[props.$genre].background.rest};
-  border: solid 2px
-    ${(props) => props.theme.colors.input[props.$genre].border.rest};
+  background: ${(props) => props.theme.colors.input[props.$genre].background.rest};
+  border: solid 2px ${(props) => props.theme.colors.input[props.$genre].border.rest};
   border-top: 0px !important;
   ${DropdownListParentSize};
   ${(props) =>

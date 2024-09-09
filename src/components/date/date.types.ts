@@ -28,8 +28,9 @@ export interface DateProps {
   width?: string
   placeholder?: string
   isOnClickClose?: boolean
-  inputProps: Omit<InputProps, 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width' | 'value'>
+  inputProps: Omit<InputProps, 'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width' | 'value'>
   value?: number | null
+  isDisabled?: boolean
   onChange: (timestamp: number) => void
   onFocus?: FocusEventHandler<HTMLInputElement>
   onBlur?: FocusEventHandler<HTMLInputElement>
@@ -39,6 +40,7 @@ export interface DateWrapperProps extends StyledInputWrapperProps {
   $parentListHeight: number
   $radius: number
   $genre: DateStyledInputProps['$genre']
+  $isDisabled: DateStyledInputProps['$isDisabled']
 }
 
 export interface DateStyledInputProps extends StyledInputProps {}

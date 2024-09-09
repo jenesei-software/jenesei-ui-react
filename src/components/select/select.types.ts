@@ -19,10 +19,11 @@ export interface SelectProps<T extends ISelectItem> {
   genre: TInputGenre
   width?: string
   placeholder?: string
+  isDisabled?: boolean
   isOnClickOptionClose?: boolean
-  inputProps?: Omit<InputProps, 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'>
+  inputProps?: Omit<InputProps, 'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'>
   checkboxProps?: Omit<CheckboxProps, 'genre' | 'size'>
-  optionProps?: Omit<InputProps, 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'>
+  optionProps?: Omit<InputProps, 'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'>
   isMulti?: boolean
   option: T[]
   value: T[]
@@ -86,6 +87,7 @@ export interface SelectWrapperProps extends StyledInputWrapperProps {
   $parentListHeight: number
   $radius: number
   $genre: SelectStyledInputProps['$genre']
+  $isDisabled?: SelectStyledInputProps['$isDisabled']
 }
 
 export interface SelectStyledInputProps extends StyledInputProps {}

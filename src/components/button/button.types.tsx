@@ -1,16 +1,9 @@
-import {
-  LibraryIconItemProps ,
-  TLibraryIconCurvedNameString,
-} from '@assets/library-icon'
+import { LibraryIconItemProps, TLibraryIconCurvedNameString } from '@assets/library-icon'
 
-import { FlexContainerAndItemPropsNormalized, FlexContainerAndItemProps } from '@components/flex'
+import { FlexContainerAndItemProps, FlexContainerAndItemPropsNormalized } from '@components/flex'
 import { ModalLoadingProps } from '@components/modal-loading'
 
-import {
-  TJeneseiFontFamily,
-  TJeneseiThemeGenre,
-  TJeneseiThemeSize,
-} from '@theme/index'
+import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@theme/index'
 
 export interface ButtonProps {
   className?: string
@@ -23,9 +16,9 @@ export interface ButtonProps {
 
   iconName?: TLibraryIconCurvedNameString
 
-  iconOrder?: LibraryIconItemProps ['order']
+  iconOrder?: LibraryIconItemProps['order']
 
-  iconTurn?: LibraryIconItemProps ['turn']
+  iconTurn?: LibraryIconItemProps['turn']
 
   iconGroupOrder?: number
 
@@ -55,6 +48,8 @@ export interface ButtonProps {
 
   width?: string | 'asHeight'
 
+  flex?: string
+
   customFontFamily?: TJeneseiFontFamily
 
   customFontSize?: number
@@ -82,6 +77,8 @@ export interface StyledButtonProps extends FlexContainerAndItemProps {
   $isPlaystationEffect?: ButtonProps['isPlaystationEffect']
 
   $width?: ButtonProps['width']
+
+  $flex?: ButtonProps['flex']
 
   $size: ButtonProps['size']
 

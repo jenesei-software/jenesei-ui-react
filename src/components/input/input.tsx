@@ -19,7 +19,16 @@ export const Input = (props: InputProps) => {
   return (
     <>
       <StyledInputWrapper className={props.className} $isDisabled={props.isDisabled} $width={props.width}>
-        {props.prefixChildren && <InputPrefixChildren {...props.prefixChildren} />}
+        {props.prefixChildren && (
+          <InputPrefixChildren
+            $left={props.prefixChildren.left}
+            $right={props.prefixChildren.right}
+            $isDisabled={props.isDisabled}
+            $width={props.prefixChildren.width}
+          >
+            {props.prefixChildren.children}
+          </InputPrefixChildren>
+        )}
         {props.format ? (
           <StyledInputFormat
             $isError={props?.isError}
@@ -30,6 +39,7 @@ export const Input = (props: InputProps) => {
             $size={props.size}
             $isBold={props.isBold}
             $isCustomIcon={props.isCustomIcon}
+            $isDisabled={props.isDisabled}
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
             required={props.isRequired}
@@ -55,6 +65,7 @@ export const Input = (props: InputProps) => {
             $genre={props.genre}
             $size={props.size}
             $isBold={props.isBold}
+            $isDisabled={props.isDisabled}
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
             required={props.isRequired}
@@ -71,7 +82,16 @@ export const Input = (props: InputProps) => {
           />
         )}
 
-        {props.postfixChildren && <InputPostfixChildren {...props.postfixChildren} />}
+        {props.postfixChildren && (
+          <InputPostfixChildren
+            $left={props.postfixChildren.left}
+            $right={props.postfixChildren.right}
+            $isDisabled={props.isDisabled}
+            $width={props.postfixChildren.width}
+          >
+            {props.postfixChildren.children}
+          </InputPostfixChildren>
+        )}
         {props.isLoading && (
           <InputStyledModalLoading
             $genre={props.genre}
