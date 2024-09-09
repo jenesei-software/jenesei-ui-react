@@ -49,7 +49,7 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
       handleSubmit={form.handleSubmit}
     >
       <>
-        <Typography weight={600} variant="h4">
+        <Typography weight={700} variant="h4">
           Login to your account
         </Typography>
         <form.Field

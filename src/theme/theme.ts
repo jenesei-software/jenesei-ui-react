@@ -21,11 +21,12 @@ export const JeneseiThemeVariables: Record<JeneseiThemeVariablesKeys, string> = 
   graySandra: '#d1d1d6',
   grayPatricia: '#484848',
   graySarah: '#737373',
+  grayStassie: '#8D8D8F',
+  whiteStandard: '#ffffff',
   greenGoogle: '#34a853',
   green100: '#34a853',
   green25: 'rgba(52 168 83 / 0.25)',
   green10: 'rgba(52 168 83 / 0.1)',
-  whiteStandard: '#ffffff',
   yellowGoogle: '#fbbc04',
   redGoogle: '#ea4335',
   red100: '#ff4141',
@@ -37,6 +38,7 @@ export const JeneseiThemeVariables: Record<JeneseiThemeVariablesKeys, string> = 
   blueHover: 'rgba(23 105 165 / 0.8)',
   blueFocus: '#1769a5',
   blueBr: '#0975a6',
+  amnezia: '#222224',
 }
 
 const DefaultJeneseiThemeGenre = {
@@ -193,6 +195,21 @@ const DefaultJeneseiThemeGenreInput = {
       hover: JeneseiThemeVariables.transparent,
     },
   },
+  blackBorder: {
+    background: {
+      rest: JeneseiThemeVariables.transparent,
+      hover: JeneseiThemeVariables.transparent,
+    },
+    color: {
+      rest: JeneseiThemeVariables.black80,
+      hover: JeneseiThemeVariables.black80,
+      placeholder: JeneseiThemeVariables.black40,
+    },
+    border: {
+      rest: JeneseiThemeVariables.black100,
+      hover: JeneseiThemeVariables.black80,
+    },
+  },
   grayBorder: {
     background: {
       rest: JeneseiThemeVariables.whiteStandard,
@@ -201,7 +218,7 @@ const DefaultJeneseiThemeGenreInput = {
     color: {
       rest: JeneseiThemeVariables.black60,
       hover: JeneseiThemeVariables.black60,
-      placeholder: JeneseiThemeVariables.black80,
+      placeholder: JeneseiThemeVariables.black40,
     },
     border: {
       rest: JeneseiThemeVariables.black10,
@@ -322,6 +339,9 @@ export const JeneseiTheme: IJeneseiTheme = {
   },
   fontFamily: 'Inter',
   effects: {
+    input: {
+      default: 'inset 0px 0px 4px rgba(0, 0, 0, 0.05)',
+    },
     toggle: {
       active: '0 0 10px 0 rgba(0 0 0 / 0.4)',
       hover: '0 0 2px 0 rgba(0 0 0 / 0.2)',

@@ -15,7 +15,7 @@ export interface TypographyDefaultProps {
   className?: string
   children: React.ReactNode
   style?: CSSProperties
-  weight?: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+  weight?: 100 | 300 | 400 | 500 | 700 | 900
   height?: number
   flex?: string
 }

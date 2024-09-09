@@ -72,7 +72,7 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
       size={defaultSize || 'medium'}
       handleSubmit={form.handleSubmit}
     >
-      <Typography weight={600} variant="h4">
+      <Typography weight={700} variant="h4">
         Create an account
       </Typography>
       <form.Field
