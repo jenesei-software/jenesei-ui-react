@@ -96,7 +96,6 @@ export const AuthLayout: FC<AuthLayoutProps> = (props) => {
             </filter>
           </defs>
         </AuthLayoutWrapperBackgroundSVG>
-
         <AuthLayoutWrapperBackgroundText>
           <Typography variant="h2" weight={700} color="whiteStandard">
             Universal account
