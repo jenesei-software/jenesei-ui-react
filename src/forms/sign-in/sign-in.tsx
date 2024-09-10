@@ -110,7 +110,14 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                 </Stack>
               )}
             </form.Field>
-            <Typography cursor="pointer" weight={400} variant="h8" color="blueRest" textAlign="right">
+            <Typography
+              onClick={() => props.onForgot()}
+              cursor="pointer"
+              weight={400}
+              variant="h8"
+              color="blueRest"
+              textAlign="right"
+            >
               Forgot Password
             </Typography>
             <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
