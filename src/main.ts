@@ -26,6 +26,9 @@ export * from './components/tooltip'
 export * from './components/typography'
 
 export * from './forms/default'
+export * from './forms/forgot-password'
+export * from './forms/form-check-your-email'
+export * from './forms/reset-password'
 export * from './forms/sign-in'
 export * from './forms/sign-up'
 
