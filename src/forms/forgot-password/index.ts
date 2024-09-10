@@ -1,2 +1,2 @@
-export * from './reset-password'
-export * from './reset-password.types'
+export * from './forgot-password'
+export * from './forgot-password.types'

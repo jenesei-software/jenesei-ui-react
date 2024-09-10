@@ -10,9 +10,9 @@ import { Typography } from '@components/typography'
 
 import { validationPassword } from '@functions/schema'
 
-import { FormSignUpProps } from '.'
+import { FormResetPasswordProps } from '.'
 
-export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
+export const FormResetPassword: React.FC<FormResetPasswordProps> = (props) => {
   const form = useForm({
     defaultValues: {
       currentPassword: '',

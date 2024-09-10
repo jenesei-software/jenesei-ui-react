@@ -5,5 +5,5 @@ export interface FormForgotPasswordProps extends Omit<FormProps, 'children'> {
   isError: boolean
   onBack: () => void
   onRestore: () => void
-  onSubmit: (field: { currentPassword: string; confirmPassword: string }) => void | Promise<void>
+  onSubmit: (field: { email: string }) => void | Promise<void>
 }

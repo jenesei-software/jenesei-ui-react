@@ -5,19 +5,18 @@ import { FormForgotPassword } from '.'
 
 const meta: Meta<typeof FormForgotPassword> = {
   component: FormForgotPassword,
-  title: 'Form/ResetPassword',
+  title: 'Form/Forgot Password',
 }
 
 export default meta
 type Story = StoryObj<typeof FormForgotPassword>
 
-export const ResetPassword: Story = {
+export const Forgot_Password: Story = {
   args: {
     isLoading: false,
     width: '540px',
     onSubmit(field) {
       console.log(field)
     },
-    onSignIn() {},
   },
 }

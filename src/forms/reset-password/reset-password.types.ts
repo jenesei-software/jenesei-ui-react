@@ -1,6 +1,6 @@
 import { FormProps } from '@forms/default'
 
-export interface FormSignUpProps extends Omit<FormProps, 'children'> {
+export interface FormResetPasswordProps extends Omit<FormProps, 'children'> {
   isLoading: boolean
   isError: boolean
   onBack: () => void
