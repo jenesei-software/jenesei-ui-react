@@ -12,12 +12,14 @@ export interface TypographyDefaultProps {
   family?: TJeneseiFontFamily
   textAlign?: CSSProperties['textAlign']
   textWrap?: CSSProperties['textWrap']
+  cursor?: CSSProperties['cursor']
   className?: string
   children: React.ReactNode
   style?: CSSProperties
   weight?: 100 | 300 | 400 | 500 | 700 | 900
   height?: number
   flex?: string
+  onClick?: () => void
 }
 
 export interface TypographyDataProps extends TypographyDefaultProps {
@@ -42,7 +44,7 @@ export interface TypographyCSSProps {
   $textWrap?: TypographyDefaultProps['textWrap']
   $flex?: TypographyDefaultProps['flex']
   $variant?: TypographyVariantProps['variant']
-
+  $cursor?: TypographyVariantProps['cursor']
   $size?: TypographyDataProps['size']
   $weight?: TypographyDataProps['weight']
   $height?: TypographyDataProps['height']

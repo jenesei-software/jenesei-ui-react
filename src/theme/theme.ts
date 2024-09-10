@@ -197,8 +197,8 @@ const DefaultJeneseiThemeGenreInput = {
   },
   blackBorder: {
     background: {
-      rest: JeneseiThemeVariables.transparent,
-      hover: JeneseiThemeVariables.transparent,
+      rest: JeneseiThemeVariables.whiteStandard,
+      hover: JeneseiThemeVariables.whiteStandard,
     },
     color: {
       rest: JeneseiThemeVariables.black80,
@@ -227,6 +227,33 @@ const DefaultJeneseiThemeGenreInput = {
   },
 }
 const DefaultJeneseiThemeGenreDate = {
+  blackBorder: {
+    background: {
+      rest: JeneseiThemeVariables.whiteStandard,
+      hover: JeneseiThemeVariables.whiteStandard,
+      today: JeneseiThemeVariables.black80,
+      weekend: JeneseiThemeVariables.black10,
+      choice: JeneseiThemeVariables.graySarah,
+      line: JeneseiThemeVariables.whiteStandard,
+    },
+    color: {
+      rest: JeneseiThemeVariables.black80,
+      hover: JeneseiThemeVariables.black80,
+      placeholder: JeneseiThemeVariables.black40,
+      today: JeneseiThemeVariables.whiteStandard,
+      weekend: JeneseiThemeVariables.black100,
+      choice: JeneseiThemeVariables.whiteStandard,
+      line: JeneseiThemeVariables.transparent,
+    },
+    border: {
+      rest: JeneseiThemeVariables.black10,
+      hover: JeneseiThemeVariables.graySandra,
+      today: JeneseiThemeVariables.transparent,
+      weekend: JeneseiThemeVariables.transparent,
+      choice: JeneseiThemeVariables.transparent,
+      line: JeneseiThemeVariables.transparent,
+    },
+  },
   gray: {
     background: {
       rest: JeneseiThemeVariables.grayJanice,
@@ -340,7 +367,7 @@ export const JeneseiTheme: IJeneseiTheme = {
   fontFamily: 'Inter',
   effects: {
     input: {
-      default: 'inset 0px 0px 4px rgba(0, 0, 0, 0.05)',
+      default: 'inset 0px 0px 4px rgba(0, 0, 0, 0.20)',
     },
     toggle: {
       active: '0 0 10px 0 rgba(0 0 0 / 0.4)',

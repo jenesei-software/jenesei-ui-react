@@ -28,8 +28,10 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
     $textWrap: props.textWrap,
     $weight: props.weight,
     $flex: props.flex,
+    $cursor: props.cursor,
     className: props.className,
     style: props.style,
+    onClick: props.onClick ? props.onClick : () => {},
   }
 
   if ('variant' in props) {

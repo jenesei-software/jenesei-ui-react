@@ -41,15 +41,17 @@ export const DatePicker = (props: DateProps) => {
   }, [props.value])
 
   const daysInMonth: DateDayProps[] = useMemo(() => {
-    const today = moment.utc() // Get today's date in UTC
+    const today = moment.utc()
 
     const startOfMonth = moment.utc().year(currentYear).month(currentMonth).startOf('month')
     const endOfMonth = moment.utc().year(currentYear).month(currentMonth).endOf('month')
 
     const days = []
 
-    // Days before the start of the month to fill the first week
-    const daysToAddBefore = startOfMonth.isoWeekday() - 1 // isoWeekday: 1 = Mon, ..., 7 = Sun
+    const startDate = props.startDate ? moment.utc(props.startDate) : null
+    const endDate = props.endDate ? moment.utc(props.endDate) : null
+
+    const daysToAddBefore = startOfMonth.isoWeekday() - 1
     if (daysToAddBefore > 0) {
       for (let i = daysToAddBefore; i > 0; i--) {
         const day = startOfMonth.clone().subtract(i, 'days')
@@ -59,14 +61,14 @@ export const DatePicker = (props: DateProps) => {
           labelNumber: day.date(),
           dayOfWeek: day.isoWeekday(),
           isWeekend: day.isoWeekday() === 6 || day.isoWeekday() === 7,
-          weekOfMonth: Math.ceil((days.length + 1) / 7), // Week of the month index
+          weekOfMonth: Math.ceil((days.length + 1) / 7),
           isToday: day.isSame(today, 'day'),
           isCurrentMonth: false,
+          isDisabled: day.isBefore(startDate, 'day') || day.isAfter(endDate, 'day') || day.isSame(endDate, 'day'),
         })
       }
     }
 
-    // Days in the current month
     const currentDate = startOfMonth.clone()
     while (currentDate <= endOfMonth) {
       days.push({
@@ -75,62 +77,38 @@ export const DatePicker = (props: DateProps) => {
         labelNumber: currentDate.date(),
         dayOfWeek: currentDate.isoWeekday(),
         isWeekend: currentDate.isoWeekday() === 6 || currentDate.isoWeekday() === 7,
-        weekOfMonth: Math.ceil((days.length + 1) / 7), // Week of the month index
+        weekOfMonth: Math.ceil((days.length + 1) / 7),
         isToday: currentDate.isSame(today, 'day'),
         isCurrentMonth: true,
+        isDisabled:
+          currentDate.isBefore(startDate, 'day') ||
+          currentDate.isAfter(endDate, 'day') ||
+          currentDate.isSame(endDate, 'day'),
       })
       currentDate.add(1, 'day')
     }
 
-    // Days after the end of the month to fill the last week
     const daysToAddAfter = 7 - endOfMonth.isoWeekday()
     if (daysToAddAfter > 0) {
       for (let i = 1; i <= daysToAddAfter; i++) {
-        const day = endOfMonth.clone().add(i, 'days')
+        const day = endOfMonth.clone().add(i, 'days').startOf('day')
         days.push({
           value: day.valueOf(),
           labelString: day.format('dd'),
           labelNumber: day.date(),
           dayOfWeek: day.isoWeekday(),
           isWeekend: day.isoWeekday() === 6 || day.isoWeekday() === 7,
-          weekOfMonth: Math.ceil((days.length + 1) / 7), // Week of the month index
+          weekOfMonth: Math.ceil((days.length + 1) / 7),
           isToday: day.isSame(today, 'day'),
           isCurrentMonth: false,
+          isDisabled: day.isBefore(startDate, 'day') || day.isAfter(endDate, 'day') || day.isSame(endDate, 'day'),
         })
       }
     }
 
-    // Sorting days by value (timestamp) to ensure chronological order
     days.sort((a, b) => a.value - b.value)
-
     return days
-  }, [currentMonth, currentYear])
-
-  // // Увеличение дня
-  // const increaseDay = () => {
-  //   const newDate = moment
-  //     .utc()
-  //     .year(currentYear)
-  //     .month(currentMonth)
-  //     .date(currentDay)
-  //     .add(1, 'day')
-  //   setCurrentDay(newDate.date())
-  //   setCurrentMonth(newDate.month())
-  //   setCurrentYear(newDate.year())
-  // }
-
-  // // Уменьшение дня
-  // const decreaseDay = () => {
-  //   const newDate = moment
-  //     .utc()
-  //     .year(currentYear)
-  //     .month(currentMonth)
-  //     .date(currentDay)
-  //     .subtract(1, 'day')
-  //   setCurrentDay(newDate.date())
-  //   setCurrentMonth(newDate.month())
-  //   setCurrentYear(newDate.year())
-  // }
+  }, [currentMonth, currentYear, props.endDate, props.startDate])
 
   // Увеличение месяца
   const increaseMonth = () => {
@@ -148,31 +126,6 @@ export const DatePicker = (props: DateProps) => {
     setCurrentYear(newDate.year())
   }
 
-  // // Увеличение года
-  // const increaseYear = () => {
-  //   const newDate = moment
-  //     .utc()
-  //     .year(currentYear)
-  //     .month(currentMonth)
-  //     .date(currentDay)
-  //     .add(1, 'year')
-  //   setCurrentDay(newDate.date())
-  //   setCurrentMonth(newDate.month())
-  //   setCurrentYear(newDate.year())
-  // }
-
-  // // Уменьшение года
-  // const decreaseYear = () => {
-  //   const newDate = moment
-  //     .utc()
-  //     .year(currentYear)
-  //     .month(currentMonth)
-  //     .date(currentDay)
-  //     .subtract(1, 'year')
-  //   setCurrentDay(newDate.date())
-  //   setCurrentMonth(newDate.month())
-  //   setCurrentYear(newDate.year())
-  // }
   const updateDateFromTimestamp = (timestamp: number, isDay?: boolean) => {
     const newDate = moment(timestamp).utc()
     props.onChange(newDate.valueOf())
@@ -183,6 +136,7 @@ export const DatePicker = (props: DateProps) => {
       handleOnBlurEasy()
     }
   }
+
   useEffect(() => {
     if (props.value) {
       const newDate = moment(props.value).utc()
@@ -191,6 +145,7 @@ export const DatePicker = (props: DateProps) => {
       setCurrentYear(newDate.year())
     }
   }, [props.value])
+
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
 
@@ -307,6 +262,37 @@ export const DatePicker = (props: DateProps) => {
     }
   }, [])
 
+  const isBlockIncreaseMonth = useMemo(() => {
+    const nextMonthYear = moment
+      .utc()
+      .year(currentYear)
+      .month(currentMonth)
+      .date(currentDay)
+      .add(1, 'month')
+      .startOf('year')
+      .year()
+    const nextMonthYearEndDate = moment(props.endDate).year()
+    const isBeforeEndDate = props.endDate ? nextMonthYear >= nextMonthYearEndDate : false
+    return isBeforeEndDate
+  }, [currentYear, currentMonth, currentDay, props.endDate])
+
+  const isBlockDecreaseMonth = useMemo(() => {
+    const prevMonthYear = moment
+      .utc()
+      .year(currentYear)
+      .month(currentMonth)
+      .date(currentDay)
+      .subtract(1, 'month')
+      .startOf('year')
+      .year()
+
+    const prevMonthYearStartDate = moment(props.startDate).year()
+
+    const isAfterStartDate = props.startDate ? prevMonthYear < prevMonthYearStartDate : false
+
+    return isAfterStartDate
+  }, [currentYear, currentMonth, currentDay, props.startDate])
+
   useEffect(() => {
     document.addEventListener('mousedown', handleMouseDown)
     return () => {
@@ -338,6 +324,7 @@ export const DatePicker = (props: DateProps) => {
       handleListOptionOpenEffect()
     }
   }, [handleListOptionOpenEffect, isOpen])
+
   return (
     <>
       <DateWrapper
@@ -364,6 +351,7 @@ export const DatePicker = (props: DateProps) => {
           $isBold={props?.inputProps?.isBold}
           disabled={props?.isDisabled}
           $isDisabled={props?.isDisabled}
+          $isInputEffect={props?.isInputEffect}
           readOnly={true}
           required={props?.inputProps?.isRequired}
           defaultValue={props?.inputProps?.defaultValue}
@@ -384,7 +372,7 @@ export const DatePicker = (props: DateProps) => {
             height: `${height}px`,
           }}
         >
-          <DateDropdownList $genre={props.genre} $size={props.size} ref={listRef}>
+          <DateDropdownList $isInputEffect={props.isInputEffect} $genre={props.genre} $size={props.size} ref={listRef}>
             <Stack justifyContent="space-between" alignItems="center">
               <>
                 <Button
@@ -395,6 +383,8 @@ export const DatePicker = (props: DateProps) => {
                   genre={props.genre}
                   size={'small'}
                   onClick={decreaseMonth}
+                  isDisabled={isBlockDecreaseMonth}
+                  isHidden={isBlockDecreaseMonth}
                 />
                 <Stack gap="8px">
                   <>
@@ -427,6 +417,8 @@ export const DatePicker = (props: DateProps) => {
                   iconName="ArrowRight2"
                   genre={props.genre}
                   size={'small'}
+                  isDisabled={isBlockIncreaseMonth}
+                  isHidden={isBlockIncreaseMonth}
                 />
               </>
             </Stack>
@@ -443,24 +435,27 @@ export const DatePicker = (props: DateProps) => {
                   {e}
                 </DateDropdownDayOfWeek>
               ))}
-              {daysInMonth.map((day) => (
-                <DateDropdownDay
-                  type="button"
-                  $genre={props.genre}
-                  $size={props.size}
-                  $row={day.weekOfMonth + 1}
-                  $column={day.dayOfWeek}
-                  key={day.value}
-                  onClick={() => updateDateFromTimestamp(day.value, true)}
-                  $isToday={day.isToday}
-                  $isWeekend={day.isWeekend}
-                  $isChoice={day.value === unixValue.valueOf()}
-                  $isCurrentMonth={day.isCurrentMonth}
-                >
-                  <Ripple />
-                  {day.labelNumber}
-                </DateDropdownDay>
-              ))}
+              {daysInMonth.map(
+                (day) =>
+                  !day.isDisabled && (
+                    <DateDropdownDay
+                      type="button"
+                      $genre={props.genre}
+                      $size={props.size}
+                      $row={day.weekOfMonth + 1}
+                      $column={day.dayOfWeek}
+                      key={day.value}
+                      onClick={() => updateDateFromTimestamp(day.value, true)}
+                      $isToday={day.isToday}
+                      $isWeekend={day.isWeekend}
+                      $isChoice={day.value === unixValue.valueOf()}
+                      $isCurrentMonth={day.isCurrentMonth}
+                    >
+                      <Ripple />
+                      {day.labelNumber}
+                    </DateDropdownDay>
+                  ),
+              )}
             </DateDropdownDays>
           </DateDropdownList>
         </DateDropdownListParent>
