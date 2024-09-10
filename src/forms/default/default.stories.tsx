@@ -39,8 +39,8 @@ export default meta
 type Story = StoryObj<typeof Form>
 
 const FormWrapper: React.FC<FormProps> = (props) => {
-  const defaultSize = props.size
-  const defaultGenre = props.genre
+  const defaultSize = 'medium'
+  const defaultGenre = 'blackBorder'
 
   const form = useForm({
     defaultValues: {
@@ -95,12 +95,7 @@ const FormWrapper: React.FC<FormProps> = (props) => {
   }
 
   return (
-    <Form
-      {...props}
-      genre={defaultGenre || 'grayBorder'}
-      size={defaultSize || 'medium'}
-      handleSubmit={form.handleSubmit}
-    >
+    <Form {...props} handleSubmit={form.handleSubmit}>
       <Stack gap="6px" flexDirection="column" w="100%">
         <>
           <Typography variant="h7">Date of Birthday</Typography>
@@ -476,8 +471,6 @@ const FormWrapper: React.FC<FormProps> = (props) => {
 export const Default: Story = {
   render: (args) => <FormWrapper {...args} />,
   args: {
-    genre: 'gray',
-    size: 'medium',
     width: '500px',
   },
 }

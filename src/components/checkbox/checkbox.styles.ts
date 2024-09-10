@@ -16,7 +16,7 @@ export const CheckboxSizeConstructor = (props: IJeneseiThemeSize) => css`
   height: ${props.height}px;
   border-radius: ${props.radius + 12}px;
   gap: ${props.padding - 2}px;
-  ${getFontSizeStyles(props.font, 600, 'Inter')};
+  ${getFontSizeStyles(props.font, 700, 'Inter')};
   padding: 0px ${props.padding - 4}px;
 `
 
@@ -30,7 +30,7 @@ export const CheckboxGenre = css<StyledCheckboxProps>`
       color: ${props.theme.colors.checkbox[props.$genre].color.rest};
     }
     &:focus-visible {
-      outline: 2px solid ${props.theme.colors.focus};
+      outline: 1px solid ${props.theme.colors.focus};
     }
     &:hover {
       background: ${props.theme.colors.checkbox[props.$genre].background.hover};
@@ -49,15 +49,11 @@ const CheckboxDisabled = css<StyledCheckboxProps>`
     props.$isDisabled
       ? css`
           opacity: 0.5;
-          background: ${props.theme.colors.checkbox[props.$genre].background
-            .rest} !important;
-          border-color: ${props.theme.colors.checkbox[props.$genre].border
-            .rest} !important;
-          color: ${props.theme.colors.checkbox[props.$genre].color
-            .rest} !important;
+          background: ${props.theme.colors.checkbox[props.$genre].background.rest} !important;
+          border-color: ${props.theme.colors.checkbox[props.$genre].border.rest} !important;
+          color: ${props.theme.colors.checkbox[props.$genre].color.rest} !important;
           & span {
-            color: ${props.theme.colors.checkbox[props.$genre].color
-              .rest} !important;
+            color: ${props.theme.colors.checkbox[props.$genre].color.rest} !important;
           }
         `
       : css`

@@ -18,7 +18,7 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     --scrollbar-width: 16px;
     --scrollbar-background: ${JeneseiThemeVariables.black05};
     --scrollbar-thumb-background: ${JeneseiThemeVariables.black10};
-    --scrollbar-thumb-border: 2px solid ${JeneseiThemeVariables.black05};
+    --scrollbar-thumb-border: 1px solid ${JeneseiThemeVariables.black05};
 
     --heading-1-font-size: 2.5rem; 
     --heading-2-font-size: 2.25rem;
@@ -141,29 +141,13 @@ export const JeneseiGlobalStyles = createGlobalStyle`
 
   @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
     :root {
-      --heading-1-font-size: 2.375rem; 
-      --heading-2-font-size: 2.125rem;
-      --heading-3-font-size: 1.875rem;
-      --heading-4-font-size: 1.625rem; 
-      --heading-5-font-size: 1.375rem; 
-      --heading-6-font-size: 1.125rem;
-      --heading-7-font-size: 0.875rem; 
-      --heading-8-font-size: 0.625rem; 
-      --heading-9-font-size: 0.375rem; 
+      --font-size: 14px;
     }
   }
 
   @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
     :root {
-      --heading-1-font-size: 2.250rem; 
-      --heading-2-font-size: 2rem;
-      --heading-3-font-size: 1.75rem; 
-      --heading-4-font-size: 1.5rem; 
-      --heading-5-font-size: 1.25rem;
-      --heading-6-font-size: 1rem; 
-      --heading-7-font-size: 0.75rem; 
-      --heading-8-font-size: 0.5rem; 
-      --heading-9-font-size: 0.250rem; 
+      --font-size: 12px;
     }
   }
 `

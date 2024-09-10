@@ -15,6 +15,7 @@ export interface DateDayProps {
   weekOfMonth: number
   isToday: boolean
   isCurrentMonth: boolean
+  isDisabled: boolean
 }
 export interface DateProps {
   name?: string
@@ -28,7 +29,11 @@ export interface DateProps {
   width?: string
   placeholder?: string
   isOnClickClose?: boolean
-  inputProps: Omit<InputProps, 'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width' | 'value'>
+  isInputEffect?: InputProps['isInputEffect']
+  inputProps: Omit<
+    InputProps,
+    'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width' | 'value' | 'isInputEffect'
+  >
   value?: number | null
   isDisabled?: boolean
   onChange: (timestamp: number) => void
@@ -58,6 +63,7 @@ export interface DateStyledListProps {
 export interface DateDropdownListProps {
   $genre: DateStyledInputProps['$genre']
   $size?: DateStyledInputProps['$size']
+  $isInputEffect?: DateProps['isInputEffect']
 }
 
 export interface DateDropdownDayProps {

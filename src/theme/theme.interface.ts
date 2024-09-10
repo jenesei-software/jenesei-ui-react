@@ -99,10 +99,12 @@ export interface TJeneseiThemeGenreToggle {
 export interface TJeneseiThemeGenreInput {
   gray: TJeneseiThemeGenreType
   grayBorder: TJeneseiThemeGenreType
+  blackBorder: TJeneseiThemeGenreType
 }
 export interface TJeneseiThemeGenreDate {
   gray: TJeneseiThemeGenreTypeDate
   grayBorder: TJeneseiThemeGenreTypeDate
+  blackBorder: TJeneseiThemeGenreTypeDate
 }
 export interface TJeneseiThemeGenreForm {
   gray: TJeneseiThemeGenreTypeForm
@@ -140,6 +142,9 @@ export interface IJeneseiTheme {
   screens: IJeneseiThemeScreens
   fontFamily: TJeneseiFontFamily
   effects: {
+    input: {
+      default: string
+    }
     button: {
       playstation: string
     }
@@ -178,6 +183,7 @@ export type JeneseiThemeVariablesKeys =
   | 'graySandra'
   | 'grayPatricia'
   | 'graySarah'
+  | 'grayStassie'
   | 'greenGoogle'
   | 'green100'
   | 'green25'
@@ -194,3 +200,4 @@ export type JeneseiThemeVariablesKeys =
   | 'blueHover'
   | 'blueFocus'
   | 'blueBr'
+  | 'amnezia'

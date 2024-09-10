@@ -17,14 +17,14 @@ export const ModuleResource: FC<ModuleResourceProps> = () => {
 
   return (
     <ModuleResourceWrapper>
-      <Typography weight={600} variant="h6" color="graySarah">
+      <Typography weight={700} variant="h6" color="graySarah">
         Jenesei Resources
       </Typography>
       <Divider height="2px" color="graySarah" />
       <ModuleResourceListWrapper>
         {dataResourceAll?.map((e, key) => (
           <ModuleResourceListItemWrapper key={key}>
-            <Typography weight={600} variant="h6" color="graySarah">
+            <Typography weight={700} variant="h6" color="graySarah">
               {e.resourceName}
             </Typography>
             {e.isActive && (

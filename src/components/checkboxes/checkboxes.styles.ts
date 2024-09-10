@@ -12,7 +12,7 @@ export const CheckboxesSize = css<CheckboxesWrapperProps>`
 `
 export const CheckboxesSizeConstructor = (props: IJeneseiThemeSize) => css`
   gap: ${props.padding - 2}px;
-  ${getFontSizeStyles(props.font, 600, 'Inter')};
+  ${getFontSizeStyles(props.font, 700, 'Inter')};
 `
 
 /****************************************** Default *************************************************/

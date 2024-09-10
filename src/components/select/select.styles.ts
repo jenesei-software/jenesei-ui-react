@@ -29,11 +29,11 @@ export const SelectWrapper = styled.div<SelectWrapperProps>`
         &:after {
           content: '';
           position: absolute;
-          top: -2px;
-          left: -2px;
-          bottom: -2px;
-          right: -2px;
-          border: 2px ${props.theme.colors.focus} solid;
+          top: -1px;
+          left: -1px;
+          bottom: -1px;
+          right: -1px;
+          border: 1px ${props.theme.colors.focus} solid;
           border-radius: ${`${props.$radius + 1}px`};
           pointer-events: none;
           height: calc(100% + var(--after-height));
@@ -73,7 +73,7 @@ export const DropdownListParent = styled.div<SelectStyledListProps>`
   box-sizing: border-box;
 
   background: ${(props) => props.theme.colors.input[props.$genre].background.rest};
-  border: solid 2px ${(props) => props.theme.colors.input[props.$genre].border.rest};
+  border: solid 1px ${(props) => props.theme.colors.input[props.$genre].border.rest};
   border-top: 0px !important;
   ${DropdownListParentSize};
   ${(props) =>

@@ -18,6 +18,11 @@ const SpanFontCSS = css<TypographyCSSProps>`
       flex: ${props.$flex};
     `};
   ${(props) =>
+    props.$cursor &&
+    css`
+      cursor: ${props.$cursor};
+    `};
+  ${(props) =>
     props.$textAlign &&
     css`
      text-align ${props.$textAlign};

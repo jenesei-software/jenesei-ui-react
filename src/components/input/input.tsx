@@ -18,7 +18,12 @@ export const Input = (props: InputProps) => {
 
   return (
     <>
-      <StyledInputWrapper className={props.className} $isDisabled={props.isDisabled} $width={props.width}>
+      <StyledInputWrapper
+        $isInputEffect={props.isInputEffect}
+        className={props.className}
+        $isDisabled={props.isDisabled}
+        $width={props.width}
+      >
         {props.prefixChildren && (
           <InputPrefixChildren
             $left={props.prefixChildren.left}
@@ -31,6 +36,7 @@ export const Input = (props: InputProps) => {
         )}
         {props.format ? (
           <StyledInputFormat
+            $isInputEffect={props.isInputEffect}
             $isError={props?.isError}
             $isLoading={props.isLoading}
             $postfixChildren={props?.postfixChildren}
@@ -59,6 +65,7 @@ export const Input = (props: InputProps) => {
         ) : (
           <StyledInput
             $isError={props.isError}
+            $isInputEffect={props.isInputEffect}
             $isLoading={props.isLoading}
             $postfixChildren={props?.postfixChildren}
             $prefixChildren={props?.prefixChildren}

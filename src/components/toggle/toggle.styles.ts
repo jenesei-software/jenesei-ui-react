@@ -69,7 +69,7 @@ const StyledReactToggleGenre = css<StyledToggleProps>`
   &:focus-visible {
     ${(props) => css`
       & .react-toggle-track {
-        outline: 2px solid ${props.theme.colors.focus};
+        outline: 1px solid ${props.theme.colors.focus};
       }
     `};
   }
