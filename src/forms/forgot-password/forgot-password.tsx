@@ -10,9 +10,9 @@ import { Typography } from '@components/typography'
 
 import { validationPassword } from '@functions/schema'
 
-import { FormSignUpProps } from '.'
+import { FormForgotPasswordProps } from '.'
 
-export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
+export const FormForgotPassword: React.FC<FormForgotPasswordProps> = (props) => {
   const form = useForm({
     defaultValues: {
       currentPassword: '',
@@ -40,10 +40,11 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
       <Stack flexDirection="column" alignItems="stretch" gap="100px">
         <Stack flexDirection="column" gap="10px">
           <Typography weight={700} variant="h1" color="black100">
-            Reset Password
+            Forgot Password
           </Typography>
           <Typography weight={400} variant="h8" color="black100">
-            Choose a new password for your account
+            Enter the email you used to create your account so we can send you instructions on how to reset your
+            password.
           </Typography>
         </Stack>
         {!props.isError ? (
