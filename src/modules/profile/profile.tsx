@@ -90,7 +90,7 @@ export const ModuleProfile: FC<ModuleProfileProps> = () => {
         Jenesei ID
       </Typography>
       <Divider height="2px" color="graySarah" />
-      <Form variant="sign" genre={defaultGenre} size={defaultSize} handleSubmit={form.handleSubmit}>
+      <Form handleSubmit={form.handleSubmit}>
         <form.Field
           name="dateOfBirthday"
           validators={{
