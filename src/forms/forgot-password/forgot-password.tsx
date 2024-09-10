@@ -8,20 +8,18 @@ import { Stack } from '@components/flex'
 import { Input } from '@components/input'
 import { Typography } from '@components/typography'
 
-import { validationPassword } from '@functions/schema'
+import { validationEmail } from '@functions/schema'
 
-import { FormResetPasswordProps } from '.'
+import { FormForgotPasswordProps } from '.'
 
-export const FormResetPassword: React.FC<FormResetPasswordProps> = (props) => {
+export const FormForgotPassword: React.FC<FormForgotPasswordProps> = (props) => {
   const form = useForm({
     defaultValues: {
-      currentPassword: '',
-      confirmPassword: '',
+      email: '',
     },
     onSubmit: async ({ value }) => {
       const result = {
-        currentPassword: value.currentPassword.trim(),
-        confirmPassword: value.confirmPassword.trim(),
+        email: value.email.trim(),
       }
       props.onSubmit(result)
     },
@@ -32,7 +30,7 @@ export const FormResetPassword: React.FC<FormResetPasswordProps> = (props) => {
   })
 
   const validationSchema = {
-    currentPassword: validationPassword,
+    email: validationEmail,
   }
 
   return (
@@ -40,27 +38,27 @@ export const FormResetPassword: React.FC<FormResetPasswordProps> = (props) => {
       <Stack flexDirection="column" alignItems="stretch" gap="100px">
         <Stack flexDirection="column" gap="10px">
           <Typography weight={700} variant="h1" color="black100">
-            Reset Password
+            Forgot Password
           </Typography>
           <Typography weight={400} variant="h8" color="black100">
-            Choose a new password for your account
+            Enter the email you used to create your account so we can send you instructions on how to reset your
+            password.
           </Typography>
         </Stack>
         {!props.isError ? (
           <Stack flexDirection="column" alignItems="stretch" gap="20px">
             <form.Field
-              name="currentPassword"
+              name="email"
               validators={{
-                onChangeListenTo: ['confirmPassword'],
-                onChange: validationSchema.currentPassword,
+                onBlurAsync: validationSchema.email,
               }}
             >
               {(field) => (
                 <Stack flexDirection="column" gap="6px">
                   <Input
-                    autocomplete="new-password"
-                    type="password"
-                    placeholder="New password"
+                    autocomplete="email"
+                    placeholder="Email"
+                    type="email"
                     id={field.name}
                     name={field.name}
                     value={field.state.value}
@@ -73,42 +71,6 @@ export const FormResetPassword: React.FC<FormResetPasswordProps> = (props) => {
                   />
                 </Stack>
               )}
-            </form.Field>
-            <form.Field
-              name="confirmPassword"
-              validators={{
-                onChangeListenTo: ['currentPassword'],
-                onBlurListenTo: ['currentPassword'],
-                onChange: ({ value, fieldApi }) => {
-                  if (value !== fieldApi.form.getFieldValue('currentPassword')) {
-                    return 'Passwords do not match'
-                  }
-                  return undefined
-                },
-              }}
-            >
-              {(field) => {
-                const currentPasswordInfo = field.form.getFieldMeta('currentPassword')
-                return (
-                  <Stack flexDirection="column" gap="6px">
-                    <Input
-                      autocomplete="new-password"
-                      isDisabled={!currentPasswordInfo?.isTouched || !!currentPasswordInfo?.errors.length}
-                      type="password"
-                      placeholder="Repeat new password"
-                      id={field.name}
-                      name={field.name}
-                      value={field.state.value}
-                      onBlur={field.handleBlur}
-                      onChange={field.handleChange}
-                      genre="blackBorder"
-                      size="largeMedium"
-                      isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
-                      errorMessage={field.state.meta.errors?.[0]?.toString()}
-                    />
-                  </Stack>
-                )
-              }}
             </form.Field>
 
             <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
@@ -123,7 +85,7 @@ export const FormResetPassword: React.FC<FormResetPasswordProps> = (props) => {
                     genre="product"
                     size="largeMedium"
                   >
-                    <Typography variant="h7">Reset password</Typography>
+                    <Typography variant="h7">Send</Typography>
                   </Button>
                   <Button
                     width="100%"

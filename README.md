@@ -96,6 +96,6 @@ npm install react-ripple-click --save
 npm install react-toggle --save
 npm install styled-components --save
 npm install styled-reset --save
-npm install yup --save
 npm install ua-parser-js --save
+npm install yup --save
 ```
