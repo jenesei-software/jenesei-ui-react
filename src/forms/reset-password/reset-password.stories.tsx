@@ -5,13 +5,13 @@ import { FormSignUp } from '.'
 
 const meta: Meta<typeof FormSignUp> = {
   component: FormSignUp,
-  title: 'Form/SignUp',
+  title: 'Form/ResetPassword',
 }
 
 export default meta
 type Story = StoryObj<typeof FormSignUp>
 
-export const SignUp: Story = {
+export const ResetPassword: Story = {
   args: {
     isLoading: false,
     width: '540px',

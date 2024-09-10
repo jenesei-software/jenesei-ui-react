@@ -163,7 +163,7 @@ const InputHidden = css<StyledInputProps>`
   opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
 `
 /****************************************** is PlaystationEffect *************************************************/
-const InputIsInputEffect = css<StyledInputProps>`
+export const InputIsInputEffect = css<Pick<StyledInputProps, '$isInputEffect'>>`
   ${(props) =>
     props.$isInputEffect &&
     css`

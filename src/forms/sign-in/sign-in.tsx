@@ -1,8 +1,6 @@
 import { useForm } from '@tanstack/react-form'
 import { yupValidator } from '@tanstack/yup-form-adapter'
 
-import { Icon } from '@assets/library-icon'
-
 import { Form } from '@forms/default'
 
 import { Button } from '@components/button'
@@ -15,9 +13,6 @@ import { validationNickName, validationPassword } from '@functions/schema'
 import { FormSignInProps } from '.'
 
 export const FormSignIn: React.FC<FormSignInProps> = (props) => {
-  const defaultSize = props.size
-  const defaultGenre = props.genre
-
   const form = useForm({
     defaultValues: {
       nickname: '',
@@ -42,148 +37,128 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
   }
 
   return (
-    <Form
-      {...props}
-      genre={defaultGenre || 'grayBorder'}
-      size={defaultSize || 'medium'}
-      handleSubmit={form.handleSubmit}
-    >
-      <>
-        <Typography weight={700} variant="h4">
-          Login to your account
-        </Typography>
-        <form.Field
-          name="nickname"
-          validators={{
-            onChange: validationSchema.nickname,
-          }}
-        >
-          {(field) => (
-            <Stack flexDirection="column" gap="4px">
-              <>
-                <Typography variant="h7">Login</Typography>
-                <Input
-                  autocomplete="username"
-                  placeholder="Write the login"
-                  id={field.name}
-                  name={field.name}
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={field.handleChange}
-                  genre={defaultGenre || 'grayBorder'}
-                  size={defaultSize || 'medium'}
-                  isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
-                  errorMessage={field.state.meta.errors?.[0]?.toString()}
-                />
-              </>
-            </Stack>
-          )}
-        </form.Field>
-        <form.Field
-          name="password"
-          validators={{
-            onChangeListenTo: ['password'],
-            onChange: validationSchema.password,
-          }}
-        >
-          {(field) => (
-            <Stack flexDirection="column" gap="4px">
-              <>
-                <Typography variant="h7">Password</Typography>
-                <Input
-                  autocomplete="current-password"
-                  type="password"
-                  placeholder="Write the password"
-                  id={field.name}
-                  name={field.name}
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={field.handleChange}
-                  genre={defaultGenre || 'grayBorder'}
-                  size={defaultSize || 'medium'}
-                  isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
-                  errorMessage={field.state.meta.errors?.[0]?.toString()}
-                  postfixChildren={{
-                    width: '32px',
-                    left: '4px',
-                    right: '0px',
-                    children: (
-                      <Stack
-                        alignItems={'center'}
-                        justifyContent={'center'}
-                        p={'2px'}
-                        style={{ borderRadius: '0px 6px 6px 0px' }}
-                        bg={'black60'}
-                        minH={'100%'}
-                        h={'100%'}
-                      >
-                        <Icon size={'largeMedium'} primaryColor={'grayJanice'} type={'curved'} name={'Password'} />
-                      </Stack>
-                    ),
-                  }}
-                />
-              </>
-            </Stack>
-          )}
-        </form.Field>
-        <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-          {([canSubmit, isSubmitting]) => (
-            <Stack flexDirection="column" gap="6px">
-              <>
+    <Form handleSubmit={form.handleSubmit} width={props.width}>
+      <Stack flexDirection="column" alignItems="stretch" gap="100px">
+        <Stack flexDirection="column" gap="10px">
+          <Typography weight={700} variant="h1" color="black100">
+            Welcome Back
+          </Typography>
+          <Typography weight={400} variant="h8" color="black100">
+            {'Don’t have an account? '}
+            <Typography
+              onClick={() => {
+                props.onSignUp()
+              }}
+              cursor="pointer"
+              weight={400}
+              variant="h8"
+              color="blueRest"
+            >
+              Sign Up
+            </Typography>
+          </Typography>
+        </Stack>
+        {!props.isError ? (
+          <Stack flexDirection="column" alignItems="stretch" gap="20px">
+            <form.Field
+              name="nickname"
+              validators={{
+                onChange: validationSchema.nickname,
+              }}
+            >
+              {(field) => (
+                <Stack flexDirection="column" gap="6px">
+                  <Input
+                    autocomplete="username"
+                    placeholder="Login"
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={field.handleChange}
+                    genre="blackBorder"
+                    size="largeMedium"
+                    isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                    errorMessage={field.state.meta.errors?.[0]?.toString()}
+                  />
+                </Stack>
+              )}
+            </form.Field>
+            <form.Field
+              name="password"
+              validators={{
+                onChangeListenTo: ['password'],
+                onChange: validationSchema.password,
+              }}
+            >
+              {(field) => (
+                <Stack flexDirection="column" gap="6px">
+                  <Input
+                    autocomplete="current-password"
+                    type="password"
+                    placeholder="Password"
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={field.handleChange}
+                    genre="blackBorder"
+                    size="largeMedium"
+                    isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                    errorMessage={field.state.meta.errors?.[0]?.toString()}
+                  />
+                </Stack>
+              )}
+            </form.Field>
+            <Typography cursor="pointer" weight={400} variant="h8" color="blueRest" textAlign="right">
+              Forgot Password
+            </Typography>
+            <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
+              {([canSubmit, isSubmitting]) => (
                 <Button
                   width="100%"
                   type="submit"
                   isLoading={isSubmitting || props.isLoading}
                   isOnlyLoading
                   isDisabled={!canSubmit || isSubmitting || props.isLoading}
-                  genre={'greenTransparent'}
-                  size={defaultSize || 'medium'}
+                  genre="product"
+                  size="largeMedium"
                 >
                   <Typography variant="h7">Sign In</Typography>
                 </Button>
-              </>
-            </Stack>
-          )}
-        </form.Subscribe>
-        <form.Subscribe selector={(state) => [state.isSubmitting]}>
-          {([isSubmitting]) => (
-            <>
-              <Stack alignItems="center">
-                <Typography flex="1" weight={500} variant="h7">
-                  {"Don't have an account ?"}
-                </Typography>
-                <Button
-                  type="button"
-                  isDisabled={isSubmitting || props.isLoading}
-                  genre={defaultGenre || 'grayBorder'}
-                  size={defaultSize || 'medium'}
-                  onClick={() => {
-                    props.onSignUp()
-                  }}
-                >
-                  <Typography variant="h7">Sign up</Typography>
-                </Button>
-              </Stack>
-              <Stack alignItems="center">
-                <Typography flex="1" weight={500} variant="h7">
-                  {'Forgot your password?'}
-                </Typography>
-                <Button
-                  type="button"
-                  isDisabled={isSubmitting || props.isLoading}
-                  genre={defaultGenre || 'grayBorder'}
-                  size={defaultSize || 'medium'}
-                  onClick={() => {
-                    props.onForgot()
-                  }}
-                >
-                  <Typography variant="h7">Restore</Typography>
-                </Button>
-              </Stack>
-            </>
-          )}
-        </form.Subscribe>
-      </>
+              )}
+            </form.Subscribe>
+          </Stack>
+        ) : (
+          <Stack flexDirection="column" alignItems="stretch" gap="20px">
+            <Typography
+              onClick={() => {
+                props.onForgot()
+              }}
+              cursor="pointer"
+              weight={400}
+              variant="h7"
+              color="black100"
+              textAlign="center"
+            >
+              An unexpected error occurred
+            </Typography>
+            <Button
+              width="100%"
+              type="reset"
+              isOnlyLoading
+              genre="black"
+              size="largeMedium"
+              onClick={() => {
+                form.reset()
+                props.onRestore()
+              }}
+            >
+              <Typography variant="h7">Restore</Typography>
+            </Button>
+          </Stack>
+        )}
+      </Stack>
     </Form>
   )
 }

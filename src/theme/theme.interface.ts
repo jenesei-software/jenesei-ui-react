@@ -104,6 +104,7 @@ export interface TJeneseiThemeGenreInput {
 export interface TJeneseiThemeGenreDate {
   gray: TJeneseiThemeGenreTypeDate
   grayBorder: TJeneseiThemeGenreTypeDate
+  blackBorder: TJeneseiThemeGenreTypeDate
 }
 export interface TJeneseiThemeGenreForm {
   gray: TJeneseiThemeGenreTypeForm

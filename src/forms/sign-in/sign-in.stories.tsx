@@ -13,14 +13,13 @@ type Story = StoryObj<typeof FormSignIn>
 
 export const SignIn: Story = {
   args: {
-    genre: 'grayBorder',
-    size: 'medium',
     isLoading: false,
-    width: '540px',
-    variant: 'sign',
+    isError: false,
+    width: '500px',
     onSubmit(field) {
       console.log(field)
     },
     onSignUp() {},
+    onRestore() {},
   },
 }

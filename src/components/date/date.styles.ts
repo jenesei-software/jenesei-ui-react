@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { StyledInput } from '@components/input'
+import { InputIsInputEffect, StyledInput } from '@components/input'
 import { getFontSizeStyles } from '@components/typography'
 
 import { KEY_SIZE_DATA } from '@theme/theme'
@@ -83,6 +83,7 @@ export const DateDropdownList = styled.div<DateDropdownListProps>`
   background: ${(props) => props.theme.colors.input[props.$genre].background.rest};
   border: solid 1px ${(props) => props.theme.colors.input[props.$genre].border.rest};
   ${dateDropdownListSize}
+  ${InputIsInputEffect};
   justify-content: flex-start;
   gap: 10px;
 `
