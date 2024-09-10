@@ -36,6 +36,8 @@ export * from './modules/profile'
 export * from './modules/resource'
 export * from './modules/session'
 
+export * from './layouts/auth'
+
 // Export of hooks
 export * from './hooks/use-geolocation'
 export * from './hooks/use-screen-width'
