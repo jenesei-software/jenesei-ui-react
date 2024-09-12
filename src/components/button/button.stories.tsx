@@ -27,10 +27,7 @@ export const Default: Story = {
     isFullSize: false,
     isHiddenBorder: false,
     isPlaystationEffect: false,
-    customStyles: {
-      justifyContent: 'space-between',
-    },
-    isIconGroup: true,
+    isIconGroup: false,
   },
 }
 
