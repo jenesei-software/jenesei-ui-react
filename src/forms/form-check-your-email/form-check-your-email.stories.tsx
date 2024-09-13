@@ -16,7 +16,7 @@ export const Check_Your_Email: Story = {
   args: {
     isLoading: false,
     width: '540px',
-    email: 'cyrilstrone@gmail.com',
+    email: 'test@test.test',
     onSubmit(field) {
       console.log('field', field)
     },

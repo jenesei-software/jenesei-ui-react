@@ -14,33 +14,6 @@ import { validationCode } from '@functions/schema'
 
 import { FormCheckYourEmailProps } from '.'
 
-function maskEmail(email: string | undefined): string {
-  if (!email || typeof email !== 'string' || !email.includes('@')) {
-    return 'Invalid email'
-  }
-
-  const [localPart, domain] = email.split('@')
-
-  if (!domain || !domain.includes('.')) {
-    return 'Invalid email'
-  }
-
-  const maskedLocalPart =
-    localPart.length > 2 ? localPart[0] + '*'.repeat(localPart.length - 2) + localPart[localPart.length - 1] : localPart
-
-  const [domainName, domainExtension] = domain.split('.')
-
-  if (!domainName || !domainExtension) {
-    return 'Invalid email'
-  }
-
-  const maskedDomain =
-    domainName.length > 2
-      ? domainName[0] + '*'.repeat(domainName.length - 2) + domainName[domainName.length - 1]
-      : domainName
-
-  return `${maskedLocalPart}@${maskedDomain}.${domainExtension}`
-}
 export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (props) => {
   const [timeLeft, setTimeLeft] = useState<number>(() => {
     const endDate = moment(props.date).add(props.minutes, 'minutes')
@@ -103,7 +76,7 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (props) => 
             Check your Email
           </Typography>
           <Typography weight={400} variant="h8" color="black100">
-            We have sent an email with password reset information to {maskEmail(props.email)}.
+            We have sent an email with password reset information to {props.email}.
           </Typography>
         </Stack>
         {!props.isError ? (
