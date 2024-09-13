@@ -14,17 +14,33 @@ import { validationCode } from '@functions/schema'
 
 import { FormCheckYourEmailProps } from '.'
 
-function maskEmail(email: string): string {
+function maskEmail(email: string | undefined): string {
+  if (!email || typeof email !== 'string' || !email.includes('@')) {
+    return 'Invalid email'
+  }
+
   const [localPart, domain] = email.split('@')
 
-  const maskedLocalPart = localPart[0] + '*'.repeat(localPart.length - 2) + localPart[localPart.length - 1]
+  if (!domain || !domain.includes('.')) {
+    return 'Invalid email'
+  }
+
+  const maskedLocalPart =
+    localPart.length > 2 ? localPart[0] + '*'.repeat(localPart.length - 2) + localPart[localPart.length - 1] : localPart
 
   const [domainName, domainExtension] = domain.split('.')
-  const maskedDomain = domainName[0] + '*'.repeat(domainName.length - 2) + domainName[domainName.length - 1]
+
+  if (!domainName || !domainExtension) {
+    return 'Invalid email'
+  }
+
+  const maskedDomain =
+    domainName.length > 2
+      ? domainName[0] + '*'.repeat(domainName.length - 2) + domainName[domainName.length - 1]
+      : domainName
 
   return `${maskedLocalPart}@${maskedDomain}.${domainExtension}`
 }
-
 export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (props) => {
   const [timeLeft, setTimeLeft] = useState<number>(() => {
     const endDate = moment(props.date).add(props.minutes, 'minutes')
