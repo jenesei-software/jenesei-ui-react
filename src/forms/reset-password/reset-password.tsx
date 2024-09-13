@@ -67,6 +67,7 @@ export const FormResetPassword: React.FC<FormResetPasswordProps> = (props) => {
                     onBlur={field.handleBlur}
                     onChange={field.handleChange}
                     genre="blackBorder"
+                    isNoSpaces
                     size="largeMedium"
                     isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
                     errorMessage={field.state.meta.errors?.[0]?.toString()}
@@ -99,6 +100,7 @@ export const FormResetPassword: React.FC<FormResetPasswordProps> = (props) => {
                       id={field.name}
                       name={field.name}
                       value={field.state.value}
+                      isNoSpaces
                       onBlur={field.handleBlur}
                       onChange={field.handleChange}
                       genre="blackBorder"

@@ -60,7 +60,7 @@ export default defineConfig(() => {
         external: Object.keys(peerDependencies),
         output: {
           sourcemap: false,
-          globals: {},
+          initialGlobals: {},
         },
       },
     },
