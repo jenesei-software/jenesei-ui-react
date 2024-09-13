@@ -1,5 +1,7 @@
 import { useForm } from '@tanstack/react-form'
 import { yupValidator } from '@tanstack/yup-form-adapter'
+import moment from 'moment'
+import { useEffect, useState } from 'react'
 
 import { Form } from '@forms/default'
 
@@ -24,6 +26,31 @@ function maskEmail(email: string): string {
 }
 
 export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (props) => {
+  const [timeLeft, setTimeLeft] = useState<number>(() => {
+    const endDate = moment(props.date).add(props.minutes, 'minutes')
+    return endDate.diff(moment(), 'seconds')
+  })
+
+  useEffect(() => {
+    if (timeLeft <= 0) {
+      props.onComplete()
+      return
+    }
+
+    const intervalId = setInterval(() => {
+      setTimeLeft((prev) => {
+        const newTimeLeft = prev - 1
+        if (newTimeLeft <= 0) {
+          clearInterval(intervalId)
+          props.onComplete()
+        }
+        return newTimeLeft
+      })
+    }, 1000)
+
+    return () => clearInterval(intervalId)
+  }, [timeLeft, props])
+
   const form = useForm({
     defaultValues: {
       code: '',
@@ -42,6 +69,12 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (props) => 
 
   const validationSchema = {
     code: validationCode,
+  }
+
+  const formatTimeLeft = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60)
+    const remainingSeconds = seconds % 60
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`
   }
 
   return (
@@ -84,6 +117,10 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (props) => 
                 </Stack>
               )}
             </form.Field>
+            <Typography weight={700} variant="h7" color="black100">
+              {'Time left: '}
+              {formatTimeLeft(timeLeft)}
+            </Typography>
             <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
               {([canSubmit, isSubmitting]) => (
                 <Button

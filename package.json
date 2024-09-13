@@ -36,9 +36,9 @@
   },
   "peerDependencies": {
     "@emotion/styled": "^11.11.5",
-    "@jenesei-software/jenesei-web-id-api": "^0.0.32",
+    "@jenesei-software/jenesei-web-id-api": "^0.0.33",
     "@tanstack/react-form": "^0.31.0",
-    "@tanstack/react-query": "^5.52.1",
+    "@tanstack/react-query": "^5.56.2",
     "@tanstack/react-virtual": "^3.5.1",
     "@tanstack/yup-form-adapter": "^0.31.0",
     "@types/js-cookie": "^3.0.6",
@@ -49,9 +49,9 @@
     "gsap": "^3.12.5",
     "js-cookie": "^3.0.5",
     "moment": "^2.30.1",
-    "react": "^18.2.0",
+    "react": "^18.3.1",
     "react-currency-input-field": "^3.8.0",
-    "react-dom": "^18.2.0",
+    "react-dom": "^18.3.1",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.49.3",
     "react-i18next": "^15.0.0",
@@ -109,5 +109,8 @@
     "vite-plugin-bundle-analyzer": "^0.0.1",
     "vite-plugin-dts": "^2.3.0",
     "vite-tsconfig-paths": "^4.2.0"
+  },
+  "dependencies": {
+    "socket.io-client": "^4.7.5"
   }
 }
