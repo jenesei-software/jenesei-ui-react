@@ -1,4 +1,4 @@
-import { useAxiosWebId, useGetSSOProfile } from '@jenesei-software/jenesei-web-id-api'
+import { useAxiosWebId, useGetSSOAuthProfile } from '@jenesei-software/jenesei-web-id-api'
 import { useForm } from '@tanstack/react-form'
 import { yupValidator } from '@tanstack/yup-form-adapter'
 import moment from 'moment'
@@ -31,7 +31,7 @@ import {
 import { ModuleProfileProps, ModuleProfileWrapper } from '.'
 
 export const ModuleProfile: FC<ModuleProfileProps> = () => {
-  const { data: dataProfile } = useGetSSOProfile({ retry: false })
+  const { data: dataProfile } = useGetSSOAuthProfile({ retry: false })
   const { axiosInstance } = useAxiosWebId()
 
   const form = useForm({
