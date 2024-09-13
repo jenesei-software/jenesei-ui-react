@@ -30,6 +30,7 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (props) => 
     const endDate = moment(props.date).add(props.minutes, 'minutes')
     return endDate.diff(moment(), 'seconds')
   })
+  const [isComplete, setIsComplete] = useState<boolean>(false)
 
   useEffect(() => {
     if (timeLeft <= 0) {
@@ -42,6 +43,7 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (props) => 
         const newTimeLeft = prev - 1
         if (newTimeLeft <= 0) {
           clearInterval(intervalId)
+          setIsComplete(true)
           props.onComplete()
         }
         return newTimeLeft
@@ -111,13 +113,14 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (props) => 
                     format="# # # # #"
                     mask="_"
                     formatType="text"
+                    isDisabled={isComplete}
                     isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
                     errorMessage={field.state.meta.errors?.[0]?.toString()}
                   />
                 </Stack>
               )}
             </form.Field>
-            <Typography weight={700} variant="h7" color="black100">
+            <Typography weight={700} variant="h7" color={isComplete ? 'red100' : 'black100'}>
               {'Time left: '}
               {formatTimeLeft(timeLeft)}
             </Typography>
@@ -128,7 +131,7 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (props) => 
                   type="submit"
                   isLoading={isSubmitting || props.isLoading}
                   isOnlyLoading
-                  isDisabled={!canSubmit || isSubmitting || props.isLoading}
+                  isDisabled={!canSubmit || isSubmitting || props.isLoading || isComplete}
                   genre="product"
                   size="largeMedium"
                 >
