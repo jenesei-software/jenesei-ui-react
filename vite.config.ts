@@ -33,7 +33,7 @@ export default defineConfig(() => {
       !isStorybookBuild &&
         dts({
           include: ['src/'],
-          exclude: ['src/declaration/styled.d.ts'],
+          exclude: ['src/declaration/styled.d.ts', 'src/declaration/jenesei-web-id-api.d.ts'],
           rollupTypes: true,
           insertTypesEntry: true,
           tsConfigFilePath: './tsconfig.json',
@@ -60,7 +60,7 @@ export default defineConfig(() => {
         external: Object.keys(peerDependencies),
         output: {
           sourcemap: false,
-          globals: {},
+          initialGlobals: {},
         },
       },
     },

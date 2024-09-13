@@ -53,6 +53,14 @@ export const validationLastName = yup
   .max(128, 'Last name must be at most 128 characters')
   .test('no-spaces', 'No Spaces!', (value) => !value?.includes(' '))
 
+export const validationCode = yup
+  .string()
+  .trim()
+  .required('Code is required')
+  .min(5, 'Code must be at least 5 characters')
+  .max(5, 'Code must be at most 5 characters')
+  .test('no-spaces', 'No Spaces!', (value) => !value?.includes(' '))
+
 export const validationNickName = yup
   .string()
   .trim()
@@ -69,14 +77,30 @@ export const validationNickNameWithCheck = (axiosInstance: AxiosInstance) =>
     .min(2, 'Login must be at least 2 characters')
     .max(12, 'Login must be at most 12 characters')
     .test('no-spaces', 'No Spaces!', (v) => !v?.includes(' '))
-    .test('login-check', 'Login is already taken', async (v) => {
-      if (!v) return true
+    .test('login-check', 'Login is already taken', async function (v) {
+      const { createError } = this
+
+      if (!v) {
+        return createError({ message: 'Login is required' })
+      }
+
+      if (v.length < 2) {
+        return createError({ message: 'Login must be at least 2 characters' })
+      }
+
+      if (v.length > 12) {
+        return createError({ message: 'Login must be at most 12 characters' })
+      }
+
+      if (v.includes(' ')) {
+        return createError({ message: 'No Spaces allowed!' })
+      }
+
       try {
-        if (typeof v !== 'string') return false
         const response = await userApi(axiosInstance).getUserCheckNickname({ path: { nickname: v } })
         return !response.data.value
       } catch (error) {
-        return false
+        return createError({ message: 'Unable to validate nickname' })
       }
     })
 
@@ -92,17 +116,30 @@ export const validationEmailWithCheck = (axiosInstance: AxiosInstance) =>
     .string()
     .required('Email is required')
     .email('Email is not valid')
-    .test('no-spaces', 'No Spaces!', (value) => !value?.includes(' '))
+    .test('no-spaces', 'No Spaces allowed!', (value) => !value?.includes(' '))
     .trim()
-    .test('email-check', 'Email is already taken', async (value) => {
-      if (!value) return true
+    .test('email-check', 'Email is already taken', async function (value) {
+      const { createError } = this
+
+      if (!value) {
+        return createError({ message: 'Email is required' })
+      }
+
+      if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value)) {
+        return createError({ message: 'Email is not valid' })
+      }
+
+      if (value.includes(' ')) {
+        return createError({ message: 'No Spaces allowed!' })
+      }
+
       try {
         const response = await userApi(axiosInstance).getUserCheckEmail({
           path: { email: value },
         })
         return !response.data.value
       } catch (error) {
-        return false
+        return createError({ message: 'Unable to validate email' })
       }
     })
 

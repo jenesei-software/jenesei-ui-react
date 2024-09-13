@@ -12,6 +12,7 @@ export const Button: FC<ButtonProps> = (props) => {
   const theme = useTheme()
   return (
     <StyledButton
+      id={props.id}
       tabIndex={0}
       $isFullSize={props.isFullSize}
       $genre={props.genre}

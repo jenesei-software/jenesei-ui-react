@@ -78,6 +78,7 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                     onChange={field.handleChange}
                     genre="blackBorder"
                     size="largeMedium"
+                    isNoSpaces
                     isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
                     errorMessage={field.state.meta.errors?.[0]?.toString()}
                   />
@@ -104,6 +105,7 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                     onChange={field.handleChange}
                     genre="blackBorder"
                     size="largeMedium"
+                    isNoSpaces
                     isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
                     errorMessage={field.state.meta.errors?.[0]?.toString()}
                   />

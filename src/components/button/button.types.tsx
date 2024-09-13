@@ -6,6 +6,8 @@ import { ModalLoadingProps } from '@components/modal-loading'
 import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@theme/index'
 
 export interface ButtonProps {
+  id?: string
+
   className?: string
 
   genre: TButtonGenre
