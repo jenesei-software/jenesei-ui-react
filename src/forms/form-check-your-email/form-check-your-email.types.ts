@@ -5,6 +5,8 @@ import { FormProps } from '@forms/default'
 export interface FormCheckYourEmailProps extends Omit<FormProps, 'children' | 'handleSubmit'> {
   isLoading: boolean
   isError: boolean
+  isLoadingCodeAgain:boolean
+  isDisabledCodeAgain:boolean
   errorMessage?: string
   email: string
   onRestore: () => void

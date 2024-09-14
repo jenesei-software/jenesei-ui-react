@@ -109,10 +109,25 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (props) => 
                 </Stack>
               )}
             </form.Field>
-            <Typography weight={700} variant="h7" color={isComplete ? 'red100' : 'black100'}>
-              {'Time left: '}
-              {formatTimeLeft(timeLeft)}
-            </Typography>
+            <Stack alignItems="center" justifyContent="space-between">
+              <Typography weight={700} variant="h7" color={isComplete ? 'red100' : 'black100'}>
+                {'Time left: '}
+                {formatTimeLeft(timeLeft)}
+              </Typography>
+              <Button
+                width="min-content%"
+                type="submit"
+                isLoading={props.isLoadingCodeAgain}
+                isDisabled={props.isDisabledCodeAgain || props.isLoadingCodeAgain}
+                genre="blackBorder"
+                size="largeMedium"
+              >
+                <Typography weight={500} variant="h7">
+                  Send the code again
+                </Typography>
+              </Button>
+            </Stack>
+
             <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
               {([canSubmit, isSubmitting]) => (
                 <Button
@@ -124,7 +139,9 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (props) => 
                   genre="product"
                   size="largeMedium"
                 >
-                  <Typography variant="h7">Check</Typography>
+                  <Typography weight={500} variant="h7">
+                    Check
+                  </Typography>
                 </Button>
               )}
             </form.Subscribe>
