@@ -1,4 +1,4 @@
-import { useGetSSOSessionAll } from '@jenesei-software/jenesei-web-id-api'
+import { useGetSSOSessionAllWS } from '@jenesei-software/jenesei-web-id-api'
 import moment from 'moment'
 import { FC } from 'react'
 import UAParser from 'ua-parser-js'
@@ -11,14 +11,14 @@ import { Typography } from '@components/typography'
 import { ModuleSessionListItemWrapper, ModuleSessionListWrapper, ModuleSessionProps, ModuleSessionWrapper } from '.'
 
 export const ModuleSession: FC<ModuleSessionProps> = (props) => {
-  const { data: dataSessionAll } = useGetSSOSessionAll({ retry: false })
+  const { data: dataSessionAll } = useGetSSOSessionAllWS({})
 
   const dataSessionAllList = dataSessionAll
     ? Object.entries(dataSessionAll)
         .map(([key, session]) => ({
           key: key,
           session: session,
-          isCurrent: key === 'current',
+          isCurrent: !!session.current,
           uaResult: `${new UAParser(session.userAgent).getResult().browser.name} ${new UAParser(session.userAgent).getResult().browser.version} on ${new UAParser(session.userAgent).getResult().os.name} ${new UAParser(session.userAgent).getResult().os.version}`,
           dateResult: moment(session.lastActivity).format('MMMM Do YYYY, h:mm:ss a'),
           lastActivity: new Date(session.lastActivity),
