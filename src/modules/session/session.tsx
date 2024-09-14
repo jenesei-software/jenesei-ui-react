@@ -1,6 +1,6 @@
 import { useGetSSOSessionAllWS } from '@jenesei-software/jenesei-web-id-api'
 import moment from 'moment'
-import { FC } from 'react'
+import { FC, useMemo } from 'react'
 import UAParser from 'ua-parser-js'
 
 import { Button } from '@components/button'
@@ -13,7 +13,7 @@ import { ModuleSessionListItemWrapper, ModuleSessionListWrapper, ModuleSessionPr
 export const ModuleSession: FC<ModuleSessionProps> = (props) => {
   const { data: dataSessionAll } = useGetSSOSessionAllWS({})
 
-  const dataSessionAllList = dataSessionAll
+  const dataSessionAllList = useMemo(()=>dataSessionAll
     ? Object.entries(dataSessionAll)
         .map(([key, session]) => ({
           key: key,
@@ -24,7 +24,8 @@ export const ModuleSession: FC<ModuleSessionProps> = (props) => {
           lastActivity: new Date(session.lastActivity),
         }))
         .sort((a, b) => b.lastActivity.getTime() - a.lastActivity.getTime())
-    : []
+    : [], 
+    [dataSessionAll])
 
   return (
     <ModuleSessionWrapper>
