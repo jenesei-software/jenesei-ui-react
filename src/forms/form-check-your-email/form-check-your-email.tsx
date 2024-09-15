@@ -148,6 +148,7 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (
                   isDisabled={
                     props.isDisabledCodeAgain || props.isLoadingCodeAgain
                   }
+                  isHidden={props.isDisabledCodeAgain}
                   genre="blackBorder"
                   size="largeMedium"
                   onClick={() => {
