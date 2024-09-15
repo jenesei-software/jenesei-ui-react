@@ -18,22 +18,15 @@ export default defineConfig(() => {
     },
     plugins: [
       basicSsl(),
-      react({
-        babel: {
-          plugins: [['babel-plugin-styled-components', { displayName: false }]],
-
-          env: {
-            development: {
-              plugins: [['babel-plugin-styled-components', { displayName: true }]],
-            },
-          },
-        },
-      }),
+      react(),
       tsconfigPaths(),
       !isStorybookBuild &&
         dts({
           include: ['src/'],
-          exclude: ['src/declaration/styled.d.ts', 'src/declaration/jenesei-web-id-api.d.ts'],
+          exclude: [
+            'src/declaration/styled.d.ts',
+            'src/declaration/jenesei-web-id-api.d.ts',
+          ],
           rollupTypes: true,
           insertTypesEntry: true,
           tsConfigFilePath: './tsconfig.json',
@@ -42,7 +35,8 @@ export default defineConfig(() => {
     publicDir: false,
     build: {
       sourcemap: true,
-      outDir: 'dist',
+      outDir: './dist',
+      rootDir: './src',
       minify: 'terser',
       terserOptions: {
         compress: {
@@ -59,8 +53,30 @@ export default defineConfig(() => {
       rollupOptions: {
         external: Object.keys(peerDependencies),
         output: {
-          sourcemap: false,
-          initialGlobals: {},
+          sourcemap: true,
+          globals: {
+            'styled-components': 'styled',
+            'styled-reset': 'reset',
+            react: 'React',
+            'react-dom': 'ReactDOM',
+            '@jenesei-software/jenesei-web-id-api': 'jeneseiWebIdApi',
+            moment: 'moment',
+            yup: 'yup',
+            'react-ripple-click': 'reactRippleClick',
+            'react-loading': 'ReactLoading',
+            gsap: 'gsap',
+            'awesome-phonenumber': 'awesomePhonenumber',
+            'country-list-with-dial-code-and-flag': 'FullCountryList',
+            'react-number-format': 'reactNumberFormat',
+            '@tanstack/react-virtual': 'reactVirtual',
+            'react-toggle': 'ReactToggle',
+            '@tanstack/react-form': 'reactForm',
+            '@tanstack/yup-form-adapter': 'yupFormAdapter',
+            'ua-parser-js': 'UAParser',
+            'react-helmet': 'reactHelmet',
+            'js-cookie': 'Cookies',
+            'react-i18next': 'reactI18next',
+          },
         },
       },
     },

@@ -79,7 +79,10 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                     genre="blackBorder"
                     size="largeMedium"
                     isNoSpaces
-                    isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                    isError={
+                      !!field.state.meta.isTouched &&
+                      !!field.state.meta.errors.length
+                    }
                     errorMessage={field.state.meta.errors?.[0]?.toString()}
                   />
                 </Stack>
@@ -106,7 +109,10 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                     genre="blackBorder"
                     size="largeMedium"
                     isNoSpaces
-                    isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                    isError={
+                      !!field.state.meta.isTouched &&
+                      !!field.state.meta.errors.length
+                    }
                     errorMessage={field.state.meta.errors?.[0]?.toString()}
                   />
                 </Stack>
@@ -122,14 +128,16 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
             >
               Forgot Password
             </Typography>
-            <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-              {([canSubmit, isSubmitting]) => (
+            <form.Subscribe>
+              {(state) => (
                 <Button
                   width="100%"
                   type="submit"
-                  isLoading={isSubmitting || props.isLoading}
+                  isLoading={state.isSubmitting || props.isLoading}
                   isOnlyLoading
-                  isDisabled={!canSubmit || isSubmitting || props.isLoading}
+                  isDisabled={
+                    !state.canSubmit || state.isSubmitting || props.isLoading
+                  }
                   genre="product"
                   size="largeMedium"
                 >

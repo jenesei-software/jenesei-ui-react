@@ -3,9 +3,6 @@
 // Export styles and themes
 export * from './theme'
 
-// Exporting assets
-export * from './assets/library-icon'
-
 // Exporting utilities and functions
 export * from './functions'
 
@@ -17,6 +14,7 @@ export * from './components/checkbox'
 export * from './components/checkboxes'
 export * from './components/date'
 export * from './components/flex'
+export * from './components/icon'
 export * from './components/input'
 export * from './components/modal-loading'
 export * from './components/preview'

@@ -1,9 +1,9 @@
 import Cookies from 'node_modules/@types/js-cookie'
+import { PropsWithChildren } from 'react'
 
 export type CookieAttributes = Cookies.CookieAttributes
 
-export interface ProviderCookieProps {
-  children: React.ReactNode
+export interface ProviderCookieProps extends PropsWithChildren {
   validate?: {
     validateKeys: (keyof ValidCookieObject)[]
     getValidateCookieValue: <K extends keyof ValidCookieObject>(
