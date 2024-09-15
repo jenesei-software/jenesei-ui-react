@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { Icon } from '@assets/library-icon'
-
+import { Icon } from '@components/icon'
 import { getFontSizeStyles } from '@components/typography'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
@@ -49,11 +48,15 @@ const CheckboxDisabled = css<StyledCheckboxProps>`
     props.$isDisabled
       ? css`
           opacity: 0.5;
-          background: ${props.theme.colors.checkbox[props.$genre].background.rest} !important;
-          border-color: ${props.theme.colors.checkbox[props.$genre].border.rest} !important;
-          color: ${props.theme.colors.checkbox[props.$genre].color.rest} !important;
+          background: ${props.theme.colors.checkbox[props.$genre].background
+            .rest} !important;
+          border-color: ${props.theme.colors.checkbox[props.$genre].border
+            .rest} !important;
+          color: ${props.theme.colors.checkbox[props.$genre].color
+            .rest} !important;
           & span {
-            color: ${props.theme.colors.checkbox[props.$genre].color.rest} !important;
+            color: ${props.theme.colors.checkbox[props.$genre].color
+              .rest} !important;
           }
         `
       : css`

@@ -25,5 +25,6 @@ export const Check_Your_Email: Story = {
     },
     date: moment(),
     minutes: 1,
+    attemptNumber: 1,
   },
 }

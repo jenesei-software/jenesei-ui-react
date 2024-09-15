@@ -8,25 +8,38 @@ import { Divider } from '@components/divider'
 import { Stack } from '@components/flex'
 import { Typography } from '@components/typography'
 
-import { ModuleSessionListItemWrapper, ModuleSessionListWrapper, ModuleSessionProps, ModuleSessionWrapper } from '.'
+import {
+  ModuleSessionListItemWrapper,
+  ModuleSessionListWrapper,
+  ModuleSessionProps,
+  ModuleSessionWrapper,
+} from '.'
 
 export const ModuleSession: FC<ModuleSessionProps> = (props) => {
   const { data: dataSessionAll } = useGetSSOSessionAllWS({})
 
-  const dataSessionAllList = useMemo(()=>dataSessionAll
-    ? Object.entries(dataSessionAll)
-        .map(([key, session]) => ({
-          key: key,
-          session: session,
-          isCurrent: !!session.current,
-          uaResult: `${new UAParser(session.userAgent).getResult().browser.name} ${new UAParser(session.userAgent).getResult().browser.version} on ${new UAParser(session.userAgent).getResult().os.name} ${new UAParser(session.userAgent).getResult().os.version}`,
-          dateResult: moment(session.lastActivity).format('MMMM Do YYYY, h:mm:ss a'),
-          lastActivity: new Date(session.lastActivity),
-        }))
-        .sort((a, b) => b.lastActivity.getTime() - a.lastActivity.getTime())
-    : [], 
-    [dataSessionAll])
+  const dataSessionAllList = useMemo(() => {
+    return dataSessionAll
+      ? Object.entries(dataSessionAll)
+          .map(([key, session]) => {
+            const uaParser = new UAParser(session.userAgent)
+            const uaResult = `${uaParser.getResult().browser.name} ${uaParser.getResult().browser.version} on ${uaParser.getResult().os.name} ${uaParser.getResult().os.version}`
 
+            return {
+              key: key,
+              session: session,
+              isCurrent: !!session.current,
+              uaResult: uaResult,
+              dateResult: moment(session.lastActivity).format(
+                'MMMM Do YYYY, h:mm:ss a',
+              ),
+              lastActivity: new Date(session.lastActivity),
+            }
+          })
+          .sort((a, b) => b.lastActivity.getTime() - a.lastActivity.getTime())
+      : []
+  }, [dataSessionAll])
+  console.log('dataSessionAllList', dataSessionAllList, dataSessionAll)
   return (
     <ModuleSessionWrapper>
       <Typography weight={700} variant="h6" color="graySarah">
@@ -57,8 +70,12 @@ export const ModuleSession: FC<ModuleSessionProps> = (props) => {
                 {e.dateResult}
               </Typography>
             </Stack>
-            <Button genre={'gray'} size={'small'} onClick={() => props.onDeleteSession(e.key, e.isCurrent)}>
-              Close the session
+            <Button
+              genre={'gray'}
+              size={'small'}
+              onClick={() => props.onDeleteSession(e.key, e.isCurrent)}
+            >
+              {e.isCurrent ? 'Logout' : 'Close the session'}
             </Button>
             <Divider height="1px" color="graySarah" />
           </ModuleSessionListItemWrapper>

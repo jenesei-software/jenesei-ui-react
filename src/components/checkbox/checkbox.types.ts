@@ -1,4 +1,6 @@
-import { TLibraryIconCheckboxNameString } from '@assets/library-icon'
+import { PropsWithChildren } from 'react'
+
+import { TLibraryIconCheckboxNameString } from '@components/icon'
 
 import {
   TJeneseiFontFamily,
@@ -6,12 +8,10 @@ import {
   TJeneseiThemeSize,
 } from '@theme/index'
 
-export interface CheckboxProps {
+export interface CheckboxProps extends PropsWithChildren {
   checked?: boolean
 
   genre: TCheckboxGenre
-
-  children?: React.ReactNode
 
   view: TLibraryIconCheckboxNameString
 

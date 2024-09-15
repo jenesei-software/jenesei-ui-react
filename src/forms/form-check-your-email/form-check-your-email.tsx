@@ -14,7 +14,9 @@ import { validationCode } from '@functions/schema'
 
 import { FormCheckYourEmailProps } from '.'
 
-export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (props) => {
+export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (
+  props,
+) => {
   const [timeLeft, setTimeLeft] = useState<number>(() => {
     const endDate = moment(props.date).add(props.minutes, 'minutes')
     return endDate.diff(moment(), 'seconds')
@@ -76,7 +78,8 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (props) => 
             Check your Email
           </Typography>
           <Typography weight={400} variant="h8" color="black100">
-            We have sent an email with password reset information to {props.email}.
+            We have sent an email with password reset information to{' '}
+            {props.email}.
           </Typography>
         </Stack>
         {!props.isError ? (
@@ -103,39 +106,64 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (props) => 
                     mask="_"
                     formatType="text"
                     isDisabled={isComplete}
-                    isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                    isError={
+                      !!field.state.meta.isTouched &&
+                      !!field.state.meta.errors.length
+                    }
                     errorMessage={field.state.meta.errors?.[0]?.toString()}
                   />
                 </Stack>
               )}
             </form.Field>
             <Stack alignItems="center" justifyContent="space-between">
-              <Typography weight={700} variant="h7" color={isComplete ? 'red100' : 'black100'}>
+              <Typography
+                weight={700}
+                variant="h7"
+                color={isComplete ? 'red100' : 'black100'}
+              >
                 {'Time left: '}
                 {formatTimeLeft(timeLeft)}
               </Typography>
-              <Button
-                width="min-content%"
-                type="submit"
-                isLoading={props.isLoadingCodeAgain}
-                isDisabled={props.isDisabledCodeAgain || props.isLoadingCodeAgain}
-                genre="blackBorder"
-                size="largeMedium"
-              >
-                <Typography weight={500} variant="h7">
-                  Send the code again
+              <Stack gap="20px" alignItems="center">
+                <Typography
+                  weight={400}
+                  variant="h7"
+                  color={props.isLastAttempt ? 'red100' : 'black100'}
+                >
+                  {props.isLastAttempt
+                    ? 'No more attempts: '
+                    : `Attempt number: ${props.attemptNumber}`}
                 </Typography>
-              </Button>
+                <Button
+                  width="min-content%"
+                  type="button"
+                  isLoading={props.isLoadingCodeAgain}
+                  isDisabled={
+                    props.isDisabledCodeAgain || props.isLoadingCodeAgain
+                  }
+                  genre="blackBorder"
+                  size="largeMedium"
+                >
+                  <Typography weight={500} variant="h7">
+                    Send the code again
+                  </Typography>
+                </Button>
+              </Stack>
             </Stack>
 
-            <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-              {([canSubmit, isSubmitting]) => (
+            <form.Subscribe>
+              {(state) => (
                 <Button
                   width="100%"
                   type="submit"
-                  isLoading={isSubmitting || props.isLoading}
+                  isLoading={state.isSubmitting || props.isLoading}
                   isOnlyLoading
-                  isDisabled={!canSubmit || isSubmitting || props.isLoading || isComplete}
+                  isDisabled={
+                    !state.canSubmit ||
+                    state.isSubmitting ||
+                    props.isLoading ||
+                    isComplete
+                  }
                   genre="product"
                   size="largeMedium"
                 >
@@ -145,13 +173,25 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (props) => 
                 </Button>
               )}
             </form.Subscribe>
-            <Typography weight={400} variant="h7" color={props.errorMessage ? 'red100' : 'black100'}>
-              {props.errorMessage ? props.errorMessage : 'Didn’t receive the email? Check spam or promotion folder'}
+            <Typography
+              weight={400}
+              variant="h7"
+              color={props.errorMessage ? 'red100' : 'black100'}
+            >
+              {props.errorMessage
+                ? props.errorMessage
+                : 'Didn’t receive the email? Check spam or promotion folder'}
             </Typography>
           </Stack>
         ) : (
           <Stack flexDirection="column" alignItems="stretch" gap="30px">
-            <Typography cursor="pointer" weight={400} variant="h7" color="black100" textAlign="center">
+            <Typography
+              cursor="pointer"
+              weight={400}
+              variant="h7"
+              color="black100"
+              textAlign="center"
+            >
               An unexpected error occurred
             </Typography>
             <Button

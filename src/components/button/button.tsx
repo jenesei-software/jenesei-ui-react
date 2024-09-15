@@ -2,8 +2,7 @@ import { FC } from 'react'
 import { Ripple } from 'react-ripple-click'
 import { useTheme } from 'styled-components'
 
-import { Icon } from '@assets/library-icon'
-
+import { Icon } from '@components/icon'
 import { ModalLoading } from '@components/modal-loading'
 
 import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.'
@@ -30,7 +29,12 @@ export const Button: FC<ButtonProps> = (props) => {
       disabled={props.isDisabled}
       type={props.type ?? 'button'}
       className={props.className}
-      onClick={(event) => !props.isLoading && !props.isDisabled && props.onClick && props.onClick(event)}
+      onClick={(event) =>
+        !props.isLoading &&
+        !props.isDisabled &&
+        props.onClick &&
+        props.onClick(event)
+      }
       $flexDirection={props.customStyles?.flexDirection}
       $flexWrap={props.customStyles?.flexWrap}
       $justifyContent={props.customStyles?.justifyContent}
@@ -53,7 +57,9 @@ export const Button: FC<ButtonProps> = (props) => {
           />
         ) : (
           <>
-            <div style={{ order: 0, display: 'contents' }}>{props.children && props.children}</div>
+            <div style={{ order: 0, display: 'contents' }}>
+              {props.children && props.children}
+            </div>
             {props.iconName && (
               <Icon
                 name={props.iconName}
@@ -67,7 +73,9 @@ export const Button: FC<ButtonProps> = (props) => {
         )
       ) : (
         <>
-          <div style={{ order: 0, display: 'contents' }}>{props.children && props.children}</div>
+          <div style={{ order: 0, display: 'contents' }}>
+            {props.children && props.children}
+          </div>
           <StyledButtonIconsWrapper
             $size={props.size}
             $isIconGroup={props.isIconGroup}
