@@ -13,6 +13,7 @@ export interface FormCheckYourEmailProps
   attemptNumber: number
   isLastAttempt: boolean
   onRestore: () => void
+  onCodeAgain: () => void
   onSubmit: (field: { code: string }) => void | Promise<void>
   date: Moment
   minutes: number
