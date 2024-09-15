@@ -20,8 +20,12 @@ const defaultArgs: Partial<SelectYearProps> = {
 }
 
 const SelectYearWrapper: React.FC<SelectYearProps> = (props) => {
-  const startDate = moment.utc().subtract(100, 'years').startOf('year').valueOf()
-  const endDate = moment.utc().startOf('year').valueOf()
+  const startDate = moment
+    .utc()
+    .subtract(100, 'years')
+    .startOf('year')
+    .valueOf()
+  const endDate = moment.utc().add(1, 'year').startOf('year').valueOf()
 
   const [value, setValue] = useState<number>(moment.utc().valueOf())
   const handleSelectChange = (value: number) => {
