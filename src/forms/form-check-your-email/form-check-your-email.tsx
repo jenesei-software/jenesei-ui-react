@@ -44,6 +44,13 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (
     return () => clearInterval(intervalId)
   }, [timeLeft, props])
 
+  useEffect(() => {
+    setTimeLeft(() => {
+      const endDate = moment(props.date).add(props.minutes, 'minutes')
+      return endDate.diff(moment(), 'seconds')
+    })
+  }, [props.date, props.minutes])
+
   const form = useForm({
     defaultValues: {
       code: '',
