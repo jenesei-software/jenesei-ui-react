@@ -3,14 +3,27 @@ import { getExample } from 'awesome-phonenumber'
 import FullCountryList from 'country-list-with-dial-code-and-flag'
 import gsap from 'gsap'
 import moment from 'moment'
-import { FocusEventHandler, ReactNode, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  FocusEventHandler,
+  ReactNode,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 
 import { Button } from '@components/button'
 import { Checkbox, CheckboxProps } from '@components/checkbox'
 import { InputChildrenProps, InputErrorMessage } from '@components/input'
 import { Typography, TypographyTooltip } from '@components/typography'
 
-import { KEY_SIZE_DATA, TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@theme/index'
+import {
+  KEY_SIZE_DATA,
+  TJeneseiThemeGenreInput,
+  TJeneseiThemeSize,
+} from '@theme/index'
 
 import {
   DropdownErase,
@@ -35,22 +48,41 @@ const DEFAULT_MAX_VIEW = 5
 const DEFAULT_MIN_VIEW = 5
 const DEFAULT_OVERSCAN = 1
 
-export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) => {
+export const Select = <T extends object & ISelectItem>(
+  props: SelectProps<T>,
+) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
-  const [isAll, setIsAll] = useState(props?.footer?.selectAll?.defaultValue ?? false)
+  const [isAll, setIsAll] = useState(
+    props?.footer?.selectAll?.defaultValue ?? false,
+  )
   const listRef = useRef<HTMLUListElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const parentListRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
-  const maxViewLength = useMemo(() => props.maxView ?? DEFAULT_MAX_VIEW, [props.maxView])
-  const minViewLength = useMemo(() => props.minView ?? DEFAULT_MIN_VIEW, [props.minView])
-  const optionsLength = useMemo(() => props.option.length, [props.option.length])
+  const maxViewLength = useMemo(
+    () => props.maxView ?? DEFAULT_MAX_VIEW,
+    [props.maxView],
+  )
+  const minViewLength = useMemo(
+    () => props.minView ?? DEFAULT_MIN_VIEW,
+    [props.minView],
+  )
+  const optionsLength = useMemo(
+    () => props.option.length,
+    [props.option.length],
+  )
   const isFooter: boolean = useMemo(() => !!props?.footer, [props.footer])
   const isErase: boolean = useMemo(() => !!props?.footer?.erase, [props.footer])
-  const isSelectAll: boolean = useMemo(() => !!props?.footer?.selectAll, [props.footer])
-  const sizeHeight = useMemo(() => KEY_SIZE_DATA[props.size].height, [props.size])
+  const isSelectAll: boolean = useMemo(
+    () => !!props?.footer?.selectAll,
+    [props.footer],
+  )
+  const sizeHeight = useMemo(
+    () => KEY_SIZE_DATA[props.size].height,
+    [props.size],
+  )
   const height = useMemo(
     () =>
       sizeHeight *
@@ -76,7 +108,9 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.preventDefault()
       event.stopPropagation()
-      props.footer?.erase?.onCLick ? props.footer?.erase?.onCLick() : props.onChange([])
+      props.footer?.erase?.onCLick
+        ? props.footer?.erase?.onCLick()
+        : props.onChange([])
       setIsAll(false)
     },
     [props],
@@ -162,13 +196,23 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
       }
       if (props.isMulti) {
         if (isAll) {
-          const index = props.option.findIndex((selectedItems) => selectedItems.value === option.value)
-          const newValue = [...props.option.slice(0, index), ...props.option.slice(index + 1)]
+          const index = props.option.findIndex(
+            (selectedItems) => selectedItems.value === option.value,
+          )
+          const newValue = [
+            ...props.option.slice(0, index),
+            ...props.option.slice(index + 1),
+          ]
           props.onChange(newValue)
         } else {
-          const index = props.value.findIndex((selectedItems) => selectedItems.value === option.value)
+          const index = props.value.findIndex(
+            (selectedItems) => selectedItems.value === option.value,
+          )
 
-          if (index === -1 && (!props.maxView || props.value.length < props.maxView)) {
+          if (
+            index === -1 &&
+            (!props.maxView || props.value.length < props.maxView)
+          ) {
             const newValues = [...(props.value ?? []), option]
             props.onChange(newValues)
 
@@ -176,7 +220,10 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
               return setIsAll(true)
             }
           } else if (index !== -1) {
-            const newValue = [...props.value.slice(0, index), ...props.value.slice(index + 1)]
+            const newValue = [
+              ...props.value.slice(0, index),
+              ...props.value.slice(index + 1),
+            ]
             props.onChange(newValue)
           }
         }
@@ -245,7 +292,10 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   }, [height])
 
   const handleMouseDown = useCallback((event: MouseEvent) => {
-    if (parentListRef.current && parentListRef.current.contains(event.target as Node)) {
+    if (
+      parentListRef.current &&
+      parentListRef.current.contains(event.target as Node)
+    ) {
       event.preventDefault()
     }
   }, [])
@@ -284,7 +334,9 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
 
   const listVirtualizer = useVirtualizer({
     count: optionsLength,
-    estimateSize: props.getEstimateSize ? props.getEstimateSize : () => sizeHeight,
+    estimateSize: props.getEstimateSize
+      ? props.getEstimateSize
+      : () => sizeHeight,
     getScrollElement: () => parentListRef.current,
     overscan: DEFAULT_OVERSCAN,
     paddingEnd: isFooter ? sizeHeight : 0,
@@ -294,7 +346,11 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     (containerRefElement?: HTMLDivElement | null) => {
       if (containerRefElement) {
         const { scrollHeight, scrollTop, clientHeight } = containerRefElement
-        if (scrollHeight - scrollTop - clientHeight < height && !props.isFetching && props.fetchNextPage) {
+        if (
+          scrollHeight - scrollTop - clientHeight < height &&
+          !props.isFetching &&
+          props.fetchNextPage
+        ) {
           props.fetchNextPage()
         }
       }
@@ -333,7 +389,10 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           defaultValue={props?.inputProps?.defaultValue}
           value={props?.inputProps?.value ?? ''}
           type={props?.inputProps?.type}
-          onChange={(event) => props?.inputProps?.onChange && props?.inputProps?.onChange(event.target.value)}
+          onChange={(event) =>
+            props?.inputProps?.onChange &&
+            props?.inputProps?.onChange(event.target.value)
+          }
           onBlur={props?.inputProps?.onBlur}
           onFocus={props?.inputProps?.onFocus}
           onClick={handleOnFocusEasy}
@@ -382,7 +441,12 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
               )
             })}
             {isFooter && (
-              <DropdownFooter $isErase={isErase} $isSelectAll={isSelectAll} $genre={props.genre} $size={props.size}>
+              <DropdownFooter
+                $isErase={isErase}
+                $isSelectAll={isSelectAll}
+                $genre={props.genre}
+                $size={props.size}
+              >
                 {props.footer!.selectAll && (
                   <DropdownSelectAll>
                     <Button
@@ -398,7 +462,13 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                 )}
                 {props.footer!.erase && (
                   <DropdownErase>
-                    <Button isFullSize genre={props.genre} onClick={handleEraseOnClick} size={'medium'} isHiddenBorder>
+                    <Button
+                      isFullSize
+                      genre={props.genre}
+                      onClick={handleEraseOnClick}
+                      size={'medium'}
+                      isHiddenBorder
+                    >
                       {props.footer!.erase.label}
                     </Button>
                   </DropdownErase>
@@ -409,7 +479,11 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         </DropdownListParent>
       </SelectWrapper>
       {props?.inputProps?.isError && props?.inputProps.errorMessage && (
-        <InputErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.inputProps.isErrorAbsolute}>
+        <InputErrorMessage
+          $size={props.size}
+          $width={props.width}
+          $isErrorAbsolute={props.inputProps.isErrorAbsolute}
+        >
           {props.inputProps.errorMessage}
         </InputErrorMessage>
       )}
@@ -451,7 +525,12 @@ export const ContainerDropdownOptionComponent = (params: {
       }}
     >
       {params.checkboxProps && (
-        <Checkbox {...params.checkboxProps} genre={params.genre} size={params.size} checked={params.checked} />
+        <Checkbox
+          {...params.checkboxProps}
+          genre={params.genre}
+          size={params.size}
+          checked={params.checked}
+        />
       )}
       {params.label}
     </DropdownOption>
@@ -460,10 +539,15 @@ export const ContainerDropdownOptionComponent = (params: {
 
 export const ContainerDropdownOption = memo(ContainerDropdownOptionComponent)
 
-const getNumberWithoutCountryDialCode = (countryCode: string, countryDialCode: string) => {
+const getNumberWithoutCountryDialCode = (
+  countryCode: string,
+  countryDialCode: string,
+) => {
   try {
     const data = countryCode ? getExample(countryCode) : null
-    const numberWithoutCountryDialCode = (data?.number?.e164.replace(countryDialCode, '').trim() ?? '').replace(' ', '')
+    const numberWithoutCountryDialCode = (
+      data?.number?.e164.replace(countryDialCode, '').trim() ?? ''
+    ).replace(' ', '')
     return numberWithoutCountryDialCode.length
   } catch {
     return 0
@@ -506,7 +590,10 @@ export const SelectCountry: React.FC<SelectCountryProps> = (props) => {
         search: e.name + ', ' + e.localName + ', ' + e.dialCode + ', ' + e.code,
         placeholder: e.name + ', ' + e.localName,
         dialCode: e.dial_code,
-        lengthNumberWithoutCountryDialCode: getNumberWithoutCountryDialCode(e.code, e.dial_code),
+        lengthNumberWithoutCountryDialCode: getNumberWithoutCountryDialCode(
+          e.code,
+          e.dial_code,
+        ),
       })),
     [countryListOption],
   )
@@ -517,9 +604,14 @@ export const SelectCountry: React.FC<SelectCountryProps> = (props) => {
   const handleSelectChange = (option: ISelectCountryOption[]) => {
     const countryCode = option[0]?.value.toString()
     const countryDialCode = option[0]?.dialCode.toString()
-    const lengthNumberWithoutCountryDialCode = option[0]?.lengthNumberWithoutCountryDialCode
+    const lengthNumberWithoutCountryDialCode =
+      option[0]?.lengthNumberWithoutCountryDialCode
 
-    props.onChange(countryCode, countryDialCode, lengthNumberWithoutCountryDialCode)
+    props.onChange(
+      countryCode,
+      countryDialCode,
+      lengthNumberWithoutCountryDialCode,
+    )
     setQuery('')
   }
   const handleQueryChange = useCallback(
@@ -528,16 +620,21 @@ export const SelectCountry: React.FC<SelectCountryProps> = (props) => {
       props.onChange('', '', 0)
       if (value === '') return setViewOption(option)
       const filteredOptions = option.filter((option) =>
-        Object.values(option).some((field) => field?.toString().toLowerCase().includes(value.toLowerCase())),
+        Object.values(option).some((field) =>
+          field?.toString().toLowerCase().includes(value.toLowerCase()),
+        ),
       )
       setViewOption(filteredOptions)
     },
     [option, props],
   )
 
-  const [value, setValue] = useState<ISelectCountryOption | undefined>(option.find((e) => e.value === props.value))
+  const [value, setValue] = useState<ISelectCountryOption | undefined>(
+    option.find((e) => e.value === props.value),
+  )
   useEffect(() => {
-    if (value?.value !== props.value) setValue(option.find((e) => e.value === props.value))
+    if (value?.value !== props.value)
+      setValue(option.find((e) => e.value === props.value))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [option, props.value])
 
@@ -590,16 +687,21 @@ export const SelectLanguage: React.FC<SelectLanguageProps> = (props) => {
       props.onChange('')
       if (value === '') return setViewOption(option)
       const filteredOptions = option.filter((option) =>
-        Object.values(option).some((field) => field?.toString().toLowerCase().includes(value.toLowerCase())),
+        Object.values(option).some((field) =>
+          field?.toString().toLowerCase().includes(value.toLowerCase()),
+        ),
       )
       setViewOption(filteredOptions)
     },
     [option, props],
   )
 
-  const [value, setValue] = useState<ISelectLanguageOption | undefined>(option.find((e) => e.value === props.value))
+  const [value, setValue] = useState<ISelectLanguageOption | undefined>(
+    option.find((e) => e.value === props.value),
+  )
   useEffect(() => {
-    if (value?.value !== props.value) setValue(option.find((e) => e.value === props.value))
+    if (value?.value !== props.value)
+      setValue(option.find((e) => e.value === props.value))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [option, props.value])
 
@@ -629,20 +731,45 @@ export const SelectMonth: React.FC<SelectDateProps> = (props) => {
     const format = lang === 'ru' ? 'MMMM' : 'MMMM'
     return moment.months().map((_month, index) => ({
       value: moment().utc().year(year).month(index).startOf('month').valueOf(),
-      label: <Typography>{moment().utc().year(year).month(index).format(format)}</Typography>,
+      label: (
+        <Typography>
+          {moment().utc().year(year).month(index).format(format)}
+        </Typography>
+      ),
       placeholder: moment().utc().year(year).month(index).format(format),
       search: `${moment().utc().year(year).month(index).format(format).toLowerCase()}, ${index + 1}`,
     }))
   }, [year, lang])
 
   const handleSelectChange = (option: ISelectLanguageOption[]) => {
-    onChange(Number(option[0]?.value))
+    const selectedValue = Number(option[0]?.value)
+
+    const selectedMonthValue = moment(option[0]?.value).utc().month()
+
+    const currentMoment = moment(value).utc()
+    const currentYear = currentMoment.year()
+    const currentDay = currentMoment.date()
+
+    const newValue = moment()
+      .utc()
+      .year(currentYear)
+      .month(selectedMonthValue)
+      .date(currentDay)
+      .startOf('day')
+
+    if (newValue.isValid()) {
+      onChange(newValue.valueOf())
+    } else {
+      onChange(selectedValue)
+    }
   }
 
   const selectedMonth = useMemo(() => {
     return months.find(
       (month) =>
-        moment(value).utc().isSameOrAfter(moment(month.value).startOf('month')) &&
+        moment(value)
+          .utc()
+          .isSameOrAfter(moment(month.value).startOf('month')) &&
         moment(value).utc().isBefore(moment(month.value).endOf('month')),
     )
   }, [months, value])
@@ -672,15 +799,18 @@ export const SelectYear: React.FC<SelectYearProps> = (props) => {
   const endYear = moment(endDate).utc().year()
 
   const years = useMemo(() => {
-    const yearArray = Array.from({ length: endYear - startYear + 1 }, (_, index) => {
-      const year = startYear + index
-      return {
-        value: moment().year(year).utc().startOf('year').valueOf(),
-        label: moment().year(year).utc().format('YYYY'),
-        placeholder: moment().year(year).utc().format('YYYY'),
-        search: `${moment().year(year).utc().format('YYYY').toLowerCase()}`,
-      }
-    })
+    const yearArray = Array.from(
+      { length: endYear - 1 - startYear + 1 },
+      (_, index) => {
+        const year = startYear + index
+        return {
+          value: moment().year(year).utc().startOf('year').valueOf(),
+          label: moment().year(year).utc().format('YYYY'),
+          placeholder: moment().year(year).utc().format('YYYY'),
+          search: `${moment().year(year).utc().format('YYYY').toLowerCase()}`,
+        }
+      },
+    )
 
     return sortOrder === 'asc'
       ? yearArray.sort((a, b) => a.value - b.value)
@@ -688,7 +818,26 @@ export const SelectYear: React.FC<SelectYearProps> = (props) => {
   }, [endYear, startYear, sortOrder])
 
   const handleSelectChange = (option: ISelectLanguageOption[]) => {
-    onChange(Number(option[0]?.value))
+    const selectedValue = Number(option[0]?.value)
+
+    const selectedYearValue = moment(option[0]?.value).utc().year()
+
+    const currentMoment = moment(value).utc()
+    const currentMonth = currentMoment.month()
+    const currentDay = currentMoment.date()
+
+    const newValue = moment()
+      .utc()
+      .year(selectedYearValue)
+      .month(currentMonth)
+      .date(currentDay)
+      .startOf('day')
+
+    if (newValue.isValid()) {
+      onChange(newValue.valueOf())
+    } else {
+      onChange(selectedValue)
+    }
   }
 
   const selectedYear = useMemo(() => {

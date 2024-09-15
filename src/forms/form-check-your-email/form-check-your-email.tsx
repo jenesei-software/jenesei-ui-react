@@ -131,37 +131,40 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (
                 {'Time left: '}
                 {formatTimeLeft(timeLeft)}
               </Typography>
-              <Stack gap="20px" alignItems="center">
-                <Typography
-                  weight={400}
-                  variant="h7"
-                  color={props.isLastAttempt ? 'red100' : 'black100'}
-                >
-                  {props.isLastAttempt
-                    ? 'No more attempts: '
-                    : `Attempt number: ${props.attemptNumber}`}
-                </Typography>
-                <Button
-                  width="min-content%"
-                  type="button"
-                  isLoading={props.isLoadingCodeAgain}
-                  isDisabled={
-                    props.isDisabledCodeAgain || props.isLoadingCodeAgain
-                  }
-                  isHidden={props.isDisabledCodeAgain}
-                  genre="blackBorder"
-                  size="largeMedium"
-                  onClick={() => {
-                    props.onCodeAgain()
-                  }}
-                >
-                  <Typography weight={500} variant="h7">
-                    Send the code again
-                  </Typography>
-                </Button>
-              </Stack>
             </Stack>
-
+            <Stack alignItems="center" justifyContent="flex-end">
+              {props.isLastAttempt ? (
+                <Typography weight={400} variant="h7" color="red100">
+                  No more attempts
+                </Typography>
+              ) : (
+                <Stack gap="20px" alignItems="center">
+                  <Typography weight={400} variant="h7" color="black100">
+                    {`Attempt number: ${props.attemptNumber}`}
+                  </Typography>
+                  <Button
+                    width="min-content%"
+                    type="button"
+                    isLoading={props.isLoadingCodeAgain}
+                    isDisabled={
+                      props.isDisabledCodeAgain || props.isLoadingCodeAgain
+                    }
+                    isHidden={
+                      props.isDisabledCodeAgain || props.isLoadingCodeAgain
+                    }
+                    genre="blackBorder"
+                    size="largeMedium"
+                    onClick={() => {
+                      props.onCodeAgain()
+                    }}
+                  >
+                    <Typography weight={500} variant="h7">
+                      Send the code again
+                    </Typography>
+                  </Button>
+                </Stack>
+              )}
+            </Stack>
             <form.Subscribe>
               {(state) => (
                 <Button
@@ -184,14 +187,13 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (
                 </Button>
               )}
             </form.Subscribe>
-            <Typography
-              weight={400}
-              variant="h7"
-              color={props.errorMessage ? 'red100' : 'black100'}
-            >
-              {props.errorMessage
-                ? props.errorMessage
-                : 'Didn’t receive the email? Check spam or promotion folder'}
+            {props.errorMessage && (
+              <Typography weight={400} variant="h7" color="red100">
+                {props.errorMessage}
+              </Typography>
+            )}
+            <Typography weight={400} variant="h7" color="black100">
+              Didn’t receive the email? Check spam or promotion folder.
             </Typography>
           </Stack>
         ) : (
