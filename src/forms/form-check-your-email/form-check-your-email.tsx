@@ -3,12 +3,12 @@ import { yupValidator } from '@tanstack/yup-form-adapter'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
 
-import { Form } from '@forms/default'
-
 import { Button } from '@components/button'
 import { Stack } from '@components/flex'
 import { Input } from '@components/input'
 import { Typography } from '@components/typography'
+
+import { Form } from '@forms/default'
 
 import { validationCode } from '@functions/schema'
 
@@ -143,6 +143,9 @@ export const FormCheckYourEmail: React.FC<FormCheckYourEmailProps> = (
                   }
                   genre="blackBorder"
                   size="largeMedium"
+                  onClick={() => {
+                    props.onCodeAgain()
+                  }}
                 >
                   <Typography weight={500} variant="h7">
                     Send the code again
