@@ -12,6 +12,7 @@ export default meta
 type Story = StoryObj<typeof ModuleSession>
 
 export const Session: Story = {
+  render: (args) => <ModuleSession {...args} />,
   args: {
     onDeleteSession: (props) => console.log(props),
   },

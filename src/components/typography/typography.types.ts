@@ -1,10 +1,10 @@
-import { CSSProperties, ReactNode } from 'react'
+import { CSSProperties, PropsWithChildren, ReactNode } from 'react'
 
 import { TooltipProps } from '@components/tooltip'
 
 import { JeneseiThemeVariablesKeys, TJeneseiFontFamily } from '@theme/index'
 
-export interface TypographyDefaultProps {
+export interface TypographyDefaultProps extends PropsWithChildren {
   clamp?: number
   clampOrient?: CSSProperties['boxOrient']
   overflow?: CSSProperties['overflow']
@@ -14,7 +14,6 @@ export interface TypographyDefaultProps {
   textWrap?: CSSProperties['textWrap']
   cursor?: CSSProperties['cursor']
   className?: string
-  children: React.ReactNode
   style?: CSSProperties
   weight?: 100 | 300 | 400 | 500 | 700 | 900
   height?: number
@@ -32,7 +31,16 @@ export interface TypographyVariantProps extends TypographyDefaultProps {
 
 export type TypographyProps = TypographyDataProps | TypographyVariantProps
 
-export type TypographyVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9'
+export type TypographyVariant =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'h7'
+  | 'h8'
+  | 'h9'
 
 export interface TypographyCSSProps {
   $clamp?: TypographyDefaultProps['clamp']

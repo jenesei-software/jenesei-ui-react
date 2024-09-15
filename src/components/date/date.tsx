@@ -374,53 +374,47 @@ export const DatePicker = (props: DateProps) => {
         >
           <DateDropdownList $isInputEffect={props.isInputEffect} $genre={props.genre} $size={props.size} ref={listRef}>
             <Stack justifyContent="space-between" alignItems="center">
-              <>
-                <Button
-                  type="button"
-                  isRadius
-                  iconName="ArrowLeft2"
-                  width="asHeight"
+              <Button
+                type="button"
+                isRadius
+                iconName="ArrowLeft2"
+                width="asHeight"
+                genre={props.genre}
+                size={'small'}
+                onClick={() => !isBlockDecreaseMonth && decreaseMonth()}
+                isHidden={isBlockDecreaseMonth}
+              />
+              <Stack gap="8px">
+                <SelectMonth
                   genre={props.genre}
                   size={'small'}
-                  onClick={decreaseMonth}
-                  isDisabled={isBlockDecreaseMonth}
-                  isHidden={isBlockDecreaseMonth}
+                  inputProps={undefined}
+                  value={moment.utc().year(currentYear).month(currentMonth).startOf('month').valueOf()}
+                  onChange={updateDateFromTimestamp}
+                  lang={'ru'}
+                  width="90px"
                 />
-                <Stack gap="8px">
-                  <>
-                    <SelectMonth
-                      genre={props.genre}
-                      size={'small'}
-                      inputProps={undefined}
-                      value={moment.utc().year(currentYear).month(currentMonth).startOf('month').valueOf()}
-                      onChange={updateDateFromTimestamp}
-                      lang={'ru'}
-                      width="90px"
-                    />
-                    <SelectYear
-                      genre={props.genre}
-                      size={'small'}
-                      value={moment.utc().year(currentYear).startOf('year').valueOf()}
-                      onChange={updateDateFromTimestamp}
-                      startDate={props.startDate}
-                      endDate={props.endDate}
-                      lang={'ru'}
-                      width="70px"
-                    />
-                  </>
-                </Stack>
-                <Button
-                  type="button"
-                  onClick={increaseMonth}
-                  width="asHeight"
-                  isRadius
-                  iconName="ArrowRight2"
+                <SelectYear
                   genre={props.genre}
                   size={'small'}
-                  isDisabled={isBlockIncreaseMonth}
-                  isHidden={isBlockIncreaseMonth}
+                  value={moment.utc().year(currentYear).startOf('year').valueOf()}
+                  onChange={updateDateFromTimestamp}
+                  startDate={props.startDate}
+                  endDate={props.endDate}
+                  lang={'ru'}
+                  width="70px"
                 />
-              </>
+              </Stack>
+              <Button
+                type="button"
+                onClick={() => !isBlockIncreaseMonth && increaseMonth()}
+                width="asHeight"
+                isRadius
+                iconName="ArrowRight2"
+                genre={props.genre}
+                size={'small'}
+                isHidden={isBlockIncreaseMonth}
+              />
             </Stack>
             <DateDropdownDays $rows={rows}>
               {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((e, index) => (

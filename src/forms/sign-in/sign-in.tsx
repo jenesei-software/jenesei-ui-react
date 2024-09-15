@@ -78,7 +78,11 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                     onChange={field.handleChange}
                     genre="blackBorder"
                     size="largeMedium"
-                    isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                    isNoSpaces
+                    isError={
+                      !!field.state.meta.isTouched &&
+                      !!field.state.meta.errors.length
+                    }
                     errorMessage={field.state.meta.errors?.[0]?.toString()}
                   />
                 </Stack>
@@ -104,23 +108,36 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                     onChange={field.handleChange}
                     genre="blackBorder"
                     size="largeMedium"
-                    isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                    isNoSpaces
+                    isError={
+                      !!field.state.meta.isTouched &&
+                      !!field.state.meta.errors.length
+                    }
                     errorMessage={field.state.meta.errors?.[0]?.toString()}
                   />
                 </Stack>
               )}
             </form.Field>
-            <Typography cursor="pointer" weight={400} variant="h8" color="blueRest" textAlign="right">
+            <Typography
+              onClick={() => props.onForgot()}
+              cursor="pointer"
+              weight={400}
+              variant="h8"
+              color="blueRest"
+              textAlign="right"
+            >
               Forgot Password
             </Typography>
-            <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-              {([canSubmit, isSubmitting]) => (
+            <form.Subscribe>
+              {(state) => (
                 <Button
                   width="100%"
                   type="submit"
-                  isLoading={isSubmitting || props.isLoading}
+                  isLoading={state.isSubmitting || props.isLoading}
                   isOnlyLoading
-                  isDisabled={!canSubmit || isSubmitting || props.isLoading}
+                  isDisabled={
+                    !state.canSubmit || state.isSubmitting || props.isLoading
+                  }
                   genre="product"
                   size="largeMedium"
                 >

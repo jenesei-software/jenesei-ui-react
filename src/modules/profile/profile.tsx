@@ -1,21 +1,23 @@
-import { useAxiosWebId, useGetSSOProfile } from '@jenesei-software/jenesei-web-id-api'
+import {
+  useAxiosWebId,
+  useGetSSOAuthProfile,
+} from '@jenesei-software/jenesei-web-id-api'
 import { useForm } from '@tanstack/react-form'
 import { yupValidator } from '@tanstack/yup-form-adapter'
 import moment from 'moment'
 import { FC } from 'react'
 import * as yup from 'yup'
 
-import { Icon } from '@assets/library-icon'
-
-import { Form } from '@forms/default'
-
 import { Button } from '@components/button'
 import { DatePicker } from '@components/date'
 import { Divider } from '@components/divider'
 import { Stack } from '@components/flex'
+import { Icon } from '@components/icon'
 import { Input, InputPhone } from '@components/input'
 import { SelectCountry } from '@components/select'
 import { Typography } from '@components/typography'
+
+import { Form } from '@forms/default'
 
 import {
   validationCountryCode,
@@ -31,7 +33,7 @@ import {
 import { ModuleProfileProps, ModuleProfileWrapper } from '.'
 
 export const ModuleProfile: FC<ModuleProfileProps> = () => {
-  const { data: dataProfile } = useGetSSOProfile({ retry: false })
+  const { data: dataProfile } = useGetSSOAuthProfile({ retry: false })
   const { axiosInstance } = useAxiosWebId()
 
   const form = useForm({
@@ -98,7 +100,11 @@ export const ModuleProfile: FC<ModuleProfileProps> = () => {
           }}
         >
           {(field) => {
-            const startDate = moment.utc().subtract(100, 'years').startOf('year').valueOf()
+            const startDate = moment
+              .utc()
+              .subtract(100, 'years')
+              .startOf('year')
+              .valueOf()
             const endDate = moment.utc().startOf('year').valueOf()
             return (
               <Stack flexDirection="column" gap="4px">
@@ -141,10 +147,17 @@ export const ModuleProfile: FC<ModuleProfileProps> = () => {
                 value={field.state.value}
                 isDisabled
                 onBlur={field.handleBlur}
-                onChange={(countryCode, countryDialCode, lengthNumberWithoutCountryDialCode) => {
+                onChange={(
+                  countryCode,
+                  countryDialCode,
+                  lengthNumberWithoutCountryDialCode,
+                ) => {
                   field.handleChange(countryCode)
                   field.form.setFieldValue('countryDialCode', countryDialCode)
-                  field.form.setFieldValue('lengthNumberWithoutCountryDialCode', lengthNumberWithoutCountryDialCode)
+                  field.form.setFieldValue(
+                    'lengthNumberWithoutCountryDialCode',
+                    lengthNumberWithoutCountryDialCode,
+                  )
                 }}
                 genre={defaultGenre || 'grayBorder'}
                 size={defaultSize || 'medium'}
@@ -159,14 +172,25 @@ export const ModuleProfile: FC<ModuleProfileProps> = () => {
         <form.Field
           name="phone"
           validators={{
-            onChangeListenTo: ['countryDialCode', 'countryCode', 'lengthNumberWithoutCountryDialCode'],
-            onBlurListenTo: ['countryDialCode', 'countryCode', 'lengthNumberWithoutCountryDialCode'],
+            onChangeListenTo: [
+              'countryDialCode',
+              'countryCode',
+              'lengthNumberWithoutCountryDialCode',
+            ],
+            onBlurListenTo: [
+              'countryDialCode',
+              'countryCode',
+              'lengthNumberWithoutCountryDialCode',
+            ],
             onChange: (value) => {
-              const lengthNumberWithoutCountryDialCode = value.fieldApi.form.getFieldValue(
-                'lengthNumberWithoutCountryDialCode',
-              )
+              const lengthNumberWithoutCountryDialCode =
+                value.fieldApi.form.getFieldValue(
+                  'lengthNumberWithoutCountryDialCode',
+                )
               if (!lengthNumberWithoutCountryDialCode) return
-              const schema = validationSchema.phone(lengthNumberWithoutCountryDialCode)
+              const schema = validationSchema.phone(
+                lengthNumberWithoutCountryDialCode,
+              )
               try {
                 schema.validateSync(value.value)
 
@@ -199,7 +223,10 @@ export const ModuleProfile: FC<ModuleProfileProps> = () => {
                   onChange={field.handleChange}
                   genre={defaultGenre || 'grayBorder'}
                   size={defaultSize || 'medium'}
-                  isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                  isError={
+                    !!field.state.meta.isTouched &&
+                    !!field.state.meta.errors.length
+                  }
                   errorMessage={field.state.meta.errors?.[0]?.toString()}
                   postfixChildren={{
                     width: '32px',
@@ -215,7 +242,12 @@ export const ModuleProfile: FC<ModuleProfileProps> = () => {
                         minH={'100%'}
                         h={'100%'}
                       >
-                        <Icon size={'largeMedium'} primaryColor={'grayJanice'} type={'curved'} name={'Call'} />
+                        <Icon
+                          size={'largeMedium'}
+                          primaryColor={'grayJanice'}
+                          type={'curved'}
+                          name={'Call'}
+                        />
                       </Stack>
                     ),
                   }}
@@ -244,7 +276,10 @@ export const ModuleProfile: FC<ModuleProfileProps> = () => {
                 onChange={field.handleChange}
                 genre={defaultGenre || 'grayBorder'}
                 size={defaultSize || 'medium'}
-                isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                isError={
+                  !!field.state.meta.isTouched &&
+                  !!field.state.meta.errors.length
+                }
                 errorMessage={field.state.meta.errors?.[0]?.toString()}
               />
             </Stack>
@@ -271,7 +306,10 @@ export const ModuleProfile: FC<ModuleProfileProps> = () => {
                   onChange={field.handleChange}
                   genre={defaultGenre || 'grayBorder'}
                   size={defaultSize || 'medium'}
-                  isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                  isError={
+                    !!field.state.meta.isTouched &&
+                    !!field.state.meta.errors.length
+                  }
                   errorMessage={field.state.meta.errors?.[0]?.toString()}
                 />
               </Stack>
@@ -300,7 +338,10 @@ export const ModuleProfile: FC<ModuleProfileProps> = () => {
                   onChange={field.handleChange}
                   genre={defaultGenre || 'grayBorder'}
                   size={defaultSize || 'medium'}
-                  isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                  isError={
+                    !!field.state.meta.isTouched &&
+                    !!field.state.meta.errors.length
+                  }
                   errorMessage={field.state.meta.errors?.[0]?.toString()}
                 />
               </>
@@ -328,7 +369,10 @@ export const ModuleProfile: FC<ModuleProfileProps> = () => {
                   onChange={field.handleChange}
                   genre={defaultGenre || 'grayBorder'}
                   size={defaultSize || 'medium'}
-                  isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                  isError={
+                    !!field.state.meta.isTouched &&
+                    !!field.state.meta.errors.length
+                  }
                   errorMessage={field.state.meta.errors?.[0]?.toString()}
                 />
               </>
@@ -358,7 +402,10 @@ export const ModuleProfile: FC<ModuleProfileProps> = () => {
                   onChange={field.handleChange}
                   genre={defaultGenre || 'grayBorder'}
                   size={defaultSize || 'medium'}
-                  isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                  isError={
+                    !!field.state.meta.isTouched &&
+                    !!field.state.meta.errors.length
+                  }
                   errorMessage={field.state.meta.errors?.[0]?.toString()}
                   postfixChildren={{
                     width: '32px',
@@ -374,7 +421,12 @@ export const ModuleProfile: FC<ModuleProfileProps> = () => {
                         minH={'100%'}
                         h={'100%'}
                       >
-                        <Icon size={'largeMedium'} primaryColor={'grayJanice'} type={'curved'} name={'Password'} />
+                        <Icon
+                          size={'largeMedium'}
+                          primaryColor={'grayJanice'}
+                          type={'curved'}
+                          name={'Password'}
+                        />
                       </Stack>
                     ),
                   }}
@@ -414,7 +466,10 @@ export const ModuleProfile: FC<ModuleProfileProps> = () => {
                   onChange={field.handleChange}
                   genre={defaultGenre || 'grayBorder'}
                   size={defaultSize || 'medium'}
-                  isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                  isError={
+                    !!field.state.meta.isTouched &&
+                    !!field.state.meta.errors.length
+                  }
                   errorMessage={field.state.meta.errors?.[0]?.toString()}
                   postfixChildren={{
                     width: '32px',
@@ -430,7 +485,12 @@ export const ModuleProfile: FC<ModuleProfileProps> = () => {
                         minH={'100%'}
                         h={'100%'}
                       >
-                        <Icon size={'largeMedium'} primaryColor={'grayJanice'} type={'curved'} name={'Password'} />
+                        <Icon
+                          size={'largeMedium'}
+                          primaryColor={'grayJanice'}
+                          type={'curved'}
+                          name={'Password'}
+                        />
                       </Stack>
                     ),
                   }}
@@ -439,7 +499,7 @@ export const ModuleProfile: FC<ModuleProfileProps> = () => {
             )
           }}
         </form.Field>
-        <form.Subscribe selector={(state) => [state.canSubmit]}>
+        <form.Subscribe>
           {() => (
             <Stack gap="20px">
               <Button

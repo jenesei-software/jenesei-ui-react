@@ -27,16 +27,14 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "paths": {
-      "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
-      "@fonts/*": ["src/fonts/*"],
+      "@forms/*": ["src/forms/*"],
       "@functions/*": ["src/functions/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@providers/*": ["src/providers/*"],
-      "@theme/*": ["src/theme/*"],
-      "@types/*": ["src/types/*"],
+      "@layouts/*": ["src/layouts/*"],
       "@modules/*": ["src/modules/*"],
-      "@forms/*": ["src/forms/*"]
+      "@providers/*": ["src/providers/*"],
+      "@theme/*": ["src/theme/*"]
     }
   },
   "include": ["src"],

@@ -1,11 +1,10 @@
-import { ReactElement } from 'react'
+import { PropsWithChildren, ReactElement } from 'react'
 
 import { PreviewAdditionalProps } from '@components/preview'
 
 import { JeneseiThemeVariablesKeys } from '@theme/index'
 
-export interface ProviderAppProps {
-  children: React.ReactNode
+export interface ProviderAppProps extends PropsWithChildren {
   defaultPreview?: PreviewAdditionalProps
   defaultBgColor: JeneseiThemeVariablesKeys
   defaultStatusBarColor: JeneseiThemeVariablesKeys

@@ -1,5 +1,6 @@
 import { getExample } from 'awesome-phonenumber'
 import FullCountryList from 'country-list-with-dial-code-and-flag'
+import { useCallback } from 'react'
 import { useTheme } from 'styled-components'
 
 import {
@@ -15,6 +16,18 @@ import {
 
 export const Input = (props: InputProps) => {
   const theme = useTheme()
+
+  const handleOnChange = useCallback(
+    (value: string) => {
+      if (props.isNoSpaces) {
+        const valueWithoutSpaces = value.replace(/\s+/g, '')
+        props.onChange && props.onChange(valueWithoutSpaces)
+      } else {
+        props.onChange && props.onChange(value)
+      }
+    },
+    [props],
+  )
 
   return (
     <>
@@ -52,7 +65,7 @@ export const Input = (props: InputProps) => {
             defaultValue={props.defaultValue}
             value={props.value ?? ''}
             placeholder={props.placeholder}
-            onValueChange={({ value }) => props.onChange && props.onChange(value)}
+            onValueChange={({ value }) => handleOnChange(value)}
             allowEmptyFormatting={props.isAllowEmptyFormatting}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
@@ -81,7 +94,7 @@ export const Input = (props: InputProps) => {
             placeholder={props.placeholder}
             type={props.type}
             autoComplete={props.autocomplete}
-            onChange={(event) => props.onChange && props.onChange(event.target.value)}
+            onChange={(event) => handleOnChange(event.target.value)}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
             name={props.name}

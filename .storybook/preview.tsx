@@ -1,4 +1,7 @@
-import { ProviderAxiosWebId } from '@jenesei-software/jenesei-web-id-api'
+import {
+  ProviderAxiosWebId,
+  ProviderWSWebId,
+} from '@jenesei-software/jenesei-web-id-api'
 import type { Preview } from '@storybook/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import React from 'react'
@@ -24,17 +27,27 @@ const queryClient = new QueryClient({
   },
 })
 const baseURL = import.meta.env.VITE_BASE_URL || ''
+const socketURL = import.meta.env.VITE_SOCKET_URL || ''
 
 const preview: Preview = {
   decorators: [
     (Story) => {
       return (
         <QueryClientProvider client={queryClient}>
-          <ProviderAxiosWebId baseURL={baseURL} availabilityCookieName={'auth_status'}>
-            <ThemeProvider theme={JeneseiTheme}>
-              <JeneseiGlobalStyles />
-              <Story />
-            </ThemeProvider>
+          <ProviderAxiosWebId
+            baseURL={baseURL}
+            availabilityCookieName={'auth_status'}
+          >
+            <ProviderWSWebId
+              socketURL={socketURL}
+              onLogout={() => {}}
+              client={queryClient}
+            >
+              <ThemeProvider theme={JeneseiTheme}>
+                <JeneseiGlobalStyles />
+                <Story />
+              </ThemeProvider>
+            </ProviderWSWebId>
           </ProviderAxiosWebId>
         </QueryClientProvider>
       )

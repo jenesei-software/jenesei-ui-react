@@ -67,8 +67,12 @@ export const FormResetPassword: React.FC<FormResetPasswordProps> = (props) => {
                     onBlur={field.handleBlur}
                     onChange={field.handleChange}
                     genre="blackBorder"
+                    isNoSpaces
                     size="largeMedium"
-                    isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                    isError={
+                      !!field.state.meta.isTouched &&
+                      !!field.state.meta.errors.length
+                    }
                     errorMessage={field.state.meta.errors?.[0]?.toString()}
                   />
                 </Stack>
@@ -80,7 +84,9 @@ export const FormResetPassword: React.FC<FormResetPasswordProps> = (props) => {
                 onChangeListenTo: ['currentPassword'],
                 onBlurListenTo: ['currentPassword'],
                 onChange: ({ value, fieldApi }) => {
-                  if (value !== fieldApi.form.getFieldValue('currentPassword')) {
+                  if (
+                    value !== fieldApi.form.getFieldValue('currentPassword')
+                  ) {
                     return 'Passwords do not match'
                   }
                   return undefined
@@ -88,22 +94,30 @@ export const FormResetPassword: React.FC<FormResetPasswordProps> = (props) => {
               }}
             >
               {(field) => {
-                const currentPasswordInfo = field.form.getFieldMeta('currentPassword')
+                const currentPasswordInfo =
+                  field.form.getFieldMeta('currentPassword')
                 return (
                   <Stack flexDirection="column" gap="6px">
                     <Input
                       autocomplete="new-password"
-                      isDisabled={!currentPasswordInfo?.isTouched || !!currentPasswordInfo?.errors.length}
+                      isDisabled={
+                        !currentPasswordInfo?.isTouched ||
+                        !!currentPasswordInfo?.errors.length
+                      }
                       type="password"
                       placeholder="Repeat new password"
                       id={field.name}
                       name={field.name}
                       value={field.state.value}
+                      isNoSpaces
                       onBlur={field.handleBlur}
                       onChange={field.handleChange}
                       genre="blackBorder"
                       size="largeMedium"
-                      isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                      isError={
+                        !!field.state.meta.isTouched &&
+                        !!field.state.meta.errors.length
+                      }
                       errorMessage={field.state.meta.errors?.[0]?.toString()}
                     />
                   </Stack>
@@ -111,15 +125,17 @@ export const FormResetPassword: React.FC<FormResetPasswordProps> = (props) => {
               }}
             </form.Field>
 
-            <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-              {([canSubmit, isSubmitting]) => (
+            <form.Subscribe>
+              {(state) => (
                 <>
                   <Button
                     width="100%"
                     type="submit"
-                    isLoading={isSubmitting || props.isLoading}
+                    isLoading={state.isSubmitting || props.isLoading}
                     isOnlyLoading
-                    isDisabled={!canSubmit || isSubmitting || props.isLoading}
+                    isDisabled={
+                      !state.canSubmit || state.isSubmitting || props.isLoading
+                    }
                     genre="product"
                     size="largeMedium"
                   >
@@ -132,7 +148,7 @@ export const FormResetPassword: React.FC<FormResetPasswordProps> = (props) => {
                       form.reset()
                       props.onBack()
                     }}
-                    isDisabled={isSubmitting || props.isLoading}
+                    isDisabled={state.isSubmitting || props.isLoading}
                     genre="blackBorder"
                     size="largeMedium"
                   >
@@ -144,7 +160,13 @@ export const FormResetPassword: React.FC<FormResetPasswordProps> = (props) => {
           </Stack>
         ) : (
           <Stack flexDirection="column" alignItems="stretch" gap="30px">
-            <Typography cursor="pointer" weight={400} variant="h7" color="black100" textAlign="center">
+            <Typography
+              cursor="pointer"
+              weight={400}
+              variant="h7"
+              color="black100"
+              textAlign="center"
+            >
               An unexpected error occurred
             </Typography>
             <Button

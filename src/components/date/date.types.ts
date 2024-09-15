@@ -8,11 +8,14 @@ export type TDateGenre = keyof TJeneseiThemeGenreDate
 
 export interface DateDayProps {
   value: number
+
   labelString: string
   labelNumber: number
+
   dayOfWeek: number
-  isWeekend: boolean
   weekOfMonth: number
+
+  isWeekend: boolean
   isToday: boolean
   isCurrentMonth: boolean
   isDisabled: boolean
@@ -28,14 +31,18 @@ export interface DateProps {
   genre: TDateGenre
   width?: string
   placeholder?: string
+
   isOnClickClose?: boolean
   isInputEffect?: InputProps['isInputEffect']
   inputProps: Omit<
     InputProps,
     'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width' | 'value' | 'isInputEffect'
   >
+
   value?: number | null
+
   isDisabled?: boolean
+
   onChange: (timestamp: number) => void
   onFocus?: FocusEventHandler<HTMLInputElement>
   onBlur?: FocusEventHandler<HTMLInputElement>

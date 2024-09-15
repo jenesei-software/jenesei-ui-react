@@ -12,7 +12,9 @@ import { validationEmail } from '@functions/schema'
 
 import { FormForgotPasswordProps } from '.'
 
-export const FormForgotPassword: React.FC<FormForgotPasswordProps> = (props) => {
+export const FormForgotPassword: React.FC<FormForgotPasswordProps> = (
+  props,
+) => {
   const form = useForm({
     defaultValues: {
       email: '',
@@ -41,8 +43,8 @@ export const FormForgotPassword: React.FC<FormForgotPasswordProps> = (props) => 
             Forgot Password
           </Typography>
           <Typography weight={400} variant="h8" color="black100">
-            Enter the email you used to create your account so we can send you instructions on how to reset your
-            password.
+            Enter the email you used to create your account so we can send you
+            instructions on how to reset your password.
           </Typography>
         </Stack>
         {!props.isError ? (
@@ -66,22 +68,28 @@ export const FormForgotPassword: React.FC<FormForgotPasswordProps> = (props) => 
                     onChange={field.handleChange}
                     genre="blackBorder"
                     size="largeMedium"
-                    isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                    isNoSpaces
+                    isError={
+                      !!field.state.meta.isTouched &&
+                      !!field.state.meta.errors.length
+                    }
                     errorMessage={field.state.meta.errors?.[0]?.toString()}
                   />
                 </Stack>
               )}
             </form.Field>
 
-            <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-              {([canSubmit, isSubmitting]) => (
+            <form.Subscribe>
+              {(state) => (
                 <>
                   <Button
                     width="100%"
                     type="submit"
-                    isLoading={isSubmitting || props.isLoading}
+                    isLoading={state.isSubmitting || props.isLoading}
                     isOnlyLoading
-                    isDisabled={!canSubmit || isSubmitting || props.isLoading}
+                    isDisabled={
+                      !state.canSubmit || state.isSubmitting || props.isLoading
+                    }
                     genre="product"
                     size="largeMedium"
                   >
@@ -94,7 +102,7 @@ export const FormForgotPassword: React.FC<FormForgotPasswordProps> = (props) => 
                       form.reset()
                       props.onBack()
                     }}
-                    isDisabled={isSubmitting || props.isLoading}
+                    isDisabled={state.isSubmitting || props.isLoading}
                     genre="blackBorder"
                     size="largeMedium"
                   >
@@ -106,7 +114,13 @@ export const FormForgotPassword: React.FC<FormForgotPasswordProps> = (props) => 
           </Stack>
         ) : (
           <Stack flexDirection="column" alignItems="stretch" gap="30px">
-            <Typography cursor="pointer" weight={400} variant="h7" color="black100" textAlign="center">
+            <Typography
+              cursor="pointer"
+              weight={400}
+              variant="h7"
+              color="black100"
+              textAlign="center"
+            >
               An unexpected error occurred
             </Typography>
             <Button

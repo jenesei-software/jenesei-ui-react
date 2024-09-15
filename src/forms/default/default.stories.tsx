@@ -6,11 +6,10 @@ import { useEffect } from 'react'
 import 'styled-components'
 import * as yup from 'yup'
 
-import { Icon } from '@assets/library-icon'
-
 import { Button } from '@components/button'
 import { DatePicker } from '@components/date'
 import { Stack } from '@components/flex'
+import { Icon } from '@components/icon'
 import { Input, InputPhone } from '@components/input'
 import { SelectCountry } from '@components/select'
 import { Toggle } from '@components/toggle'
@@ -106,7 +105,11 @@ const FormWrapper: React.FC<FormProps> = (props) => {
             }}
           >
             {(field) => {
-              const startDate = moment.utc().subtract(100, 'years').startOf('year').valueOf()
+              const startDate = moment
+                .utc()
+                .subtract(100, 'years')
+                .startOf('year')
+                .valueOf()
               const endDate = moment.utc().startOf('year').valueOf()
               return (
                 <>
@@ -145,10 +148,17 @@ const FormWrapper: React.FC<FormProps> = (props) => {
                   name={field.name}
                   value={field.state.value}
                   onBlur={field.handleBlur}
-                  onChange={(countryCode, countryDialCode, lengthNumberWithoutCountryDialCode) => {
+                  onChange={(
+                    countryCode,
+                    countryDialCode,
+                    lengthNumberWithoutCountryDialCode,
+                  ) => {
                     field.handleChange(countryCode)
                     field.form.setFieldValue('countryDialCode', countryDialCode)
-                    field.form.setFieldValue('lengthNumberWithoutCountryDialCode', lengthNumberWithoutCountryDialCode)
+                    field.form.setFieldValue(
+                      'lengthNumberWithoutCountryDialCode',
+                      lengthNumberWithoutCountryDialCode,
+                    )
                   }}
                   genre={defaultGenre || 'grayBorder'}
                   size={defaultSize || 'medium'}
@@ -164,14 +174,25 @@ const FormWrapper: React.FC<FormProps> = (props) => {
           <form.Field
             name="phone"
             validators={{
-              onChangeListenTo: ['countryDialCode', 'countryCode', 'lengthNumberWithoutCountryDialCode'],
-              onBlurListenTo: ['countryDialCode', 'countryCode', 'lengthNumberWithoutCountryDialCode'],
+              onChangeListenTo: [
+                'countryDialCode',
+                'countryCode',
+                'lengthNumberWithoutCountryDialCode',
+              ],
+              onBlurListenTo: [
+                'countryDialCode',
+                'countryCode',
+                'lengthNumberWithoutCountryDialCode',
+              ],
               onChange: (value) => {
-                const lengthNumberWithoutCountryDialCode = value.fieldApi.form.getFieldValue(
-                  'lengthNumberWithoutCountryDialCode',
-                )
+                const lengthNumberWithoutCountryDialCode =
+                  value.fieldApi.form.getFieldValue(
+                    'lengthNumberWithoutCountryDialCode',
+                  )
                 if (!lengthNumberWithoutCountryDialCode) return
-                const schema = validationSchema.phone(lengthNumberWithoutCountryDialCode)
+                const schema = validationSchema.phone(
+                  lengthNumberWithoutCountryDialCode,
+                )
                 try {
                   schema.validateSync(value.value)
 
@@ -188,7 +209,8 @@ const FormWrapper: React.FC<FormProps> = (props) => {
           >
             {(field) => {
               const countryCode = field.form.getFieldValue('countryCode')
-              const countryDialCode = field.form.getFieldValue('countryDialCode')
+              const countryDialCode =
+                field.form.getFieldValue('countryDialCode')
               return (
                 <>
                   <InputPhone
@@ -202,7 +224,10 @@ const FormWrapper: React.FC<FormProps> = (props) => {
                     onChange={field.handleChange}
                     genre={defaultGenre || 'grayBorder'}
                     size={defaultSize || 'medium'}
-                    isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                    isError={
+                      !!field.state.meta.isTouched &&
+                      !!field.state.meta.errors.length
+                    }
                     errorMessage={field.state.meta.errors?.[0]?.toString()}
                     postfixChildren={{
                       width: '32px',
@@ -218,7 +243,12 @@ const FormWrapper: React.FC<FormProps> = (props) => {
                           minH={'100%'}
                           h={'100%'}
                         >
-                          <Icon size={'largeMedium'} primaryColor={'grayJanice'} type={'curved'} name={'Call'} />
+                          <Icon
+                            size={'largeMedium'}
+                            primaryColor={'grayJanice'}
+                            type={'curved'}
+                            name={'Call'}
+                          />
                         </Stack>
                       ),
                     }}
@@ -246,7 +276,10 @@ const FormWrapper: React.FC<FormProps> = (props) => {
                   onChange={field.handleChange}
                   genre={defaultGenre || 'grayBorder'}
                   size={defaultSize || 'medium'}
-                  isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                  isError={
+                    !!field.state.meta.isTouched &&
+                    !!field.state.meta.errors.length
+                  }
                   errorMessage={field.state.meta.errors?.[0]?.toString()}
                 />
               </>
@@ -271,7 +304,10 @@ const FormWrapper: React.FC<FormProps> = (props) => {
                   onChange={field.handleChange}
                   genre={defaultGenre || 'grayBorder'}
                   size={defaultSize || 'medium'}
-                  isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                  isError={
+                    !!field.state.meta.isTouched &&
+                    !!field.state.meta.errors.length
+                  }
                   errorMessage={field.state.meta.errors?.[0]?.toString()}
                 />
               )
@@ -296,7 +332,10 @@ const FormWrapper: React.FC<FormProps> = (props) => {
                 onChange={field.handleChange}
                 genre={defaultGenre || 'grayBorder'}
                 size={defaultSize || 'medium'}
-                isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                isError={
+                  !!field.state.meta.isTouched &&
+                  !!field.state.meta.errors.length
+                }
                 errorMessage={field.state.meta.errors?.[0]?.toString()}
               />
             )}
@@ -319,7 +358,10 @@ const FormWrapper: React.FC<FormProps> = (props) => {
                 onChange={field.handleChange}
                 genre={defaultGenre || 'grayBorder'}
                 size={defaultSize || 'medium'}
-                isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                isError={
+                  !!field.state.meta.isTouched &&
+                  !!field.state.meta.errors.length
+                }
                 errorMessage={field.state.meta.errors?.[0]?.toString()}
               />
             )}
@@ -344,7 +386,10 @@ const FormWrapper: React.FC<FormProps> = (props) => {
                 onChange={field.handleChange}
                 genre={defaultGenre || 'grayBorder'}
                 size={defaultSize || 'medium'}
-                isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                isError={
+                  !!field.state.meta.isTouched &&
+                  !!field.state.meta.errors.length
+                }
                 errorMessage={field.state.meta.errors?.[0]?.toString()}
                 postfixChildren={{
                   width: '32px',
@@ -360,7 +405,12 @@ const FormWrapper: React.FC<FormProps> = (props) => {
                       minH={'100%'}
                       h={'100%'}
                     >
-                      <Icon size={'largeMedium'} primaryColor={'grayJanice'} type={'curved'} name={'Password'} />
+                      <Icon
+                        size={'largeMedium'}
+                        primaryColor={'grayJanice'}
+                        type={'curved'}
+                        name={'Password'}
+                      />
                     </Stack>
                   ),
                 }}
@@ -381,7 +431,8 @@ const FormWrapper: React.FC<FormProps> = (props) => {
             }}
           >
             {(field) => {
-              const currentPassword = field.form.getFieldValue('currentPassword')
+              const currentPassword =
+                field.form.getFieldValue('currentPassword')
               return (
                 <Input
                   autocomplete="new-password"
@@ -395,7 +446,10 @@ const FormWrapper: React.FC<FormProps> = (props) => {
                   onChange={field.handleChange}
                   genre={defaultGenre || 'grayBorder'}
                   size={defaultSize || 'medium'}
-                  isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                  isError={
+                    !!field.state.meta.isTouched &&
+                    !!field.state.meta.errors.length
+                  }
                   errorMessage={field.state.meta.errors?.[0]?.toString()}
                   postfixChildren={{
                     width: '32px',
@@ -411,7 +465,12 @@ const FormWrapper: React.FC<FormProps> = (props) => {
                         minH={'100%'}
                         h={'100%'}
                       >
-                        <Icon size={'largeMedium'} primaryColor={'grayJanice'} type={'curved'} name={'Password'} />
+                        <Icon
+                          size={'largeMedium'}
+                          primaryColor={'grayJanice'}
+                          type={'curved'}
+                          name={'Password'}
+                        />
                       </Stack>
                     ),
                   }}
@@ -428,7 +487,10 @@ const FormWrapper: React.FC<FormProps> = (props) => {
           >
             {(field) => (
               <Toggle
-                isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                isError={
+                  !!field.state.meta.isTouched &&
+                  !!field.state.meta.errors.length
+                }
                 value={field.state.value}
                 onChange={field.handleChange}
                 genre={'product'}
@@ -436,18 +498,18 @@ const FormWrapper: React.FC<FormProps> = (props) => {
               />
             )}
           </form.Field>
-          <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-            {([canSubmit, isSubmitting]) => (
+          <form.Subscribe>
+            {(state) => (
               <Stack flexDirection="row" gap="6px">
                 <>
                   <Button
                     width="fit-content"
                     type="submit"
-                    isDisabled={!canSubmit}
+                    isDisabled={!state.canSubmit}
                     genre={'greenTransparent'}
                     size={defaultSize || 'medium'}
                   >
-                    {isSubmitting ? '...' : 'Submit'}
+                    {state.isSubmitting ? '...' : 'Submit'}
                   </Button>
                   <Button
                     type="reset"

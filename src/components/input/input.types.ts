@@ -1,4 +1,10 @@
-import { FocusEventHandler, HTMLInputAutoCompleteAttribute, HTMLInputTypeAttribute, PropsWithChildren } from 'react'
+import {
+  FocusEventHandler,
+  HTMLInputAutoCompleteAttribute,
+  HTMLInputTypeAttribute,
+  KeyboardEventHandler,
+  PropsWithChildren,
+} from 'react'
 
 import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@theme/index'
 
@@ -39,11 +45,15 @@ export interface InputProps {
 
   isCustomIcon?: boolean
 
+  isNoSpaces?: boolean
+
   onBlur?: FocusEventHandler<HTMLInputElement>
 
   onChange?: (value: string) => void
 
   onFocus?: FocusEventHandler<HTMLInputElement>
+
+  onKeyDown?: KeyboardEventHandler<HTMLInputElement>
 
   placeholder?: string
 

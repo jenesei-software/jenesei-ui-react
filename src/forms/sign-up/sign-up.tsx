@@ -91,8 +91,16 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
               }}
             >
               {(field) => {
-                const startDate = moment.utc().subtract(100, 'years').startOf('year').valueOf()
-                const endDate = moment.utc().add(1, 'year').startOf('year').valueOf()
+                const startDate = moment
+                  .utc()
+                  .subtract(100, 'years')
+                  .startOf('year')
+                  .valueOf()
+                const endDate = moment
+                  .utc()
+                  .add(1, 'year')
+                  .startOf('year')
+                  .valueOf()
                 return (
                   <Stack flexDirection="column" gap="6px">
                     <DatePicker
@@ -135,7 +143,11 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
                     onChange={field.handleChange}
                     genre="blackBorder"
                     size="largeMedium"
-                    isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                    isNoSpaces
+                    isError={
+                      !!field.state.meta.isTouched &&
+                      !!field.state.meta.errors.length
+                    }
                     errorMessage={field.state.meta.errors?.[0]?.toString()}
                   />
                 </Stack>
@@ -159,7 +171,11 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
                     onChange={field.handleChange}
                     genre="blackBorder"
                     size="largeMedium"
-                    isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                    isNoSpaces
+                    isError={
+                      !!field.state.meta.isTouched &&
+                      !!field.state.meta.errors.length
+                    }
                     errorMessage={field.state.meta.errors?.[0]?.toString()}
                   />
                 </Stack>
@@ -185,7 +201,11 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
                     onChange={field.handleChange}
                     genre="blackBorder"
                     size="largeMedium"
-                    isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                    isNoSpaces
+                    isError={
+                      !!field.state.meta.isTouched &&
+                      !!field.state.meta.errors.length
+                    }
                     errorMessage={field.state.meta.errors?.[0]?.toString()}
                   />
                 </Stack>
@@ -197,7 +217,9 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
                 onChangeListenTo: ['currentPassword'],
                 onBlurListenTo: ['currentPassword'],
                 onChange: ({ value, fieldApi }) => {
-                  if (value !== fieldApi.form.getFieldValue('currentPassword')) {
+                  if (
+                    value !== fieldApi.form.getFieldValue('currentPassword')
+                  ) {
                     return 'Passwords do not match'
                   }
                   return undefined
@@ -205,12 +227,16 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
               }}
             >
               {(field) => {
-                const currentPasswordInfo = field.form.getFieldMeta('currentPassword')
+                const currentPasswordInfo =
+                  field.form.getFieldMeta('currentPassword')
                 return (
                   <Stack flexDirection="column" gap="6px">
                     <Input
                       autocomplete="new-password"
-                      isDisabled={!currentPasswordInfo?.isTouched || !!currentPasswordInfo?.errors.length}
+                      isDisabled={
+                        !currentPasswordInfo?.isTouched ||
+                        !!currentPasswordInfo?.errors.length
+                      }
                       type="password"
                       placeholder="Repeat password"
                       id={field.name}
@@ -220,7 +246,11 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
                       onChange={field.handleChange}
                       genre="blackBorder"
                       size="largeMedium"
-                      isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                      isNoSpaces
+                      isError={
+                        !!field.state.meta.isTouched &&
+                        !!field.state.meta.errors.length
+                      }
                       errorMessage={field.state.meta.errors?.[0]?.toString()}
                     />
                   </Stack>
@@ -236,7 +266,10 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
               {(field) => (
                 <Stack alignItems="center" gap="15px">
                   <Toggle
-                    isError={!!field.state.meta.isTouched && !!field.state.meta.errors.length}
+                    isError={
+                      !!field.state.meta.isTouched &&
+                      !!field.state.meta.errors.length
+                    }
                     value={field.state.value}
                     onChange={field.handleChange}
                     genre={'product'}
@@ -272,14 +305,16 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
               )}
             </form.Field>
 
-            <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-              {([canSubmit, isSubmitting]) => (
+            <form.Subscribe>
+              {(state) => (
                 <Button
                   width="100%"
                   type="submit"
-                  isLoading={isSubmitting || props.isLoading}
+                  isLoading={state.isSubmitting || props.isLoading}
                   isOnlyLoading
-                  isDisabled={!canSubmit || isSubmitting || props.isLoading}
+                  isDisabled={
+                    !state.canSubmit || state.isSubmitting || props.isLoading
+                  }
                   genre="product"
                   size="largeMedium"
                 >
@@ -290,7 +325,13 @@ export const FormSignUp: React.FC<FormSignUpProps> = (props) => {
           </Stack>
         ) : (
           <Stack flexDirection="column" alignItems="stretch" gap="30px">
-            <Typography cursor="pointer" weight={400} variant="h7" color="black100" textAlign="center">
+            <Typography
+              cursor="pointer"
+              weight={400}
+              variant="h7"
+              color="black100"
+              textAlign="center"
+            >
               An unexpected error occurred
             </Typography>
             <Button
