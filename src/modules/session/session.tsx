@@ -39,7 +39,7 @@ export const ModuleSession: FC<ModuleSessionProps> = (props) => {
           .sort((a, b) => b.lastActivity.getTime() - a.lastActivity.getTime())
       : []
   }, [dataSessionAll])
-  console.log('dataSessionAllList', dataSessionAllList, dataSessionAll)
+
   return (
     <ModuleSessionWrapper>
       <Typography weight={700} variant="h6" color="graySarah">
