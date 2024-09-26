@@ -15,7 +15,7 @@ type Story = StoryObj<typeof AuthLayout>
 
 export const Auth: Story = {
   args: {
-    backUrl: '/public/pictures/auth-back-min.gif',
+    backUrl: 'https://id.jenesei.ru/pictures/auth-back.gif',
     children: (
       <FormSignUp
         width="500px"
