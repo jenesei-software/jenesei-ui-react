@@ -2,18 +2,18 @@ import { PropsWithChildren } from 'react'
 
 import {
   FlexContainerAndItemProps,
-  FlexContainerAndItemPropsNormalized,
+  FlexContainerAndItemPropsNormalized
 } from '@components/flex'
 import {
   LibraryIconItemProps,
-  TLibraryIconCurvedNameString,
+  TLibraryIconCurvedNameString
 } from '@components/icon'
 import { ModalLoadingProps } from '@components/modal-loading'
 
 import {
   TJeneseiFontFamily,
   TJeneseiThemeGenre,
-  TJeneseiThemeSize,
+  TJeneseiThemeSize
 } from '@theme/index'
 
 export interface ButtonProps extends PropsWithChildren {
@@ -44,6 +44,8 @@ export interface ButtonProps extends PropsWithChildren {
   isOnlyLoadingWithGroup?: boolean
 
   isRadius?: boolean
+
+  isEffect?: boolean
 
   isLoading?: boolean
 
@@ -100,6 +102,11 @@ export interface StyledButtonProps extends FlexContainerAndItemProps {
   $customFontWeight?: ButtonProps['customFontWeight']
 
   $isFullSize?: ButtonProps['isFullSize']
+}
+
+export interface StyledButtonContainerProps {
+  $width: string
+  $height: string
 }
 
 export interface StyledButtonIconsWrapperProps {
