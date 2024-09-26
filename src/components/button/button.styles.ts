@@ -5,7 +5,11 @@ import { getFontSizeStyles } from '@components/typography'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
 
-import { StyledButtonIconsWrapperProps, StyledButtonProps } from '.'
+import {
+  StyledButtonContainerProps,
+  StyledButtonIconsWrapperProps,
+  StyledButtonProps
+} from '.'
 
 /****************************************** Genre *************************************************/
 const ButtonGenre = css<StyledButtonProps>`
@@ -46,14 +50,18 @@ const ButtonDisabled = css<StyledButtonProps>`
     props.$isHidden
       ? css`
           opacity: 0.5;
-          background: ${props.theme.colors.button[props.$genre].background.rest} !important;
+          background: ${props.theme.colors.button[props.$genre].background
+            .rest} !important;
 
-          color: ${props.theme.colors.button[props.$genre].color.rest} !important;
+          color: ${props.theme.colors.button[props.$genre].color
+            .rest} !important;
           & span {
-            color: ${props.theme.colors.button[props.$genre].color.rest} !important;
+            color: ${props.theme.colors.button[props.$genre].color
+              .rest} !important;
           }
           & path {
-            fill: ${props.theme.colors.button[props.$genre].color.rest} !important;
+            fill: ${props.theme.colors.button[props.$genre].color
+              .rest} !important;
           }
         `
       : css`
@@ -106,11 +114,15 @@ export const ButtonSize = css<StyledButtonProps>`
       ...KEY_SIZE_DATA[props.$size],
       isFullSize: props.$isFullSize,
       $width: props.$width,
-      $flex: props.$flex,
+      $flex: props.$flex
     })};
 `
 export const ButtonSizeConstructor = (
-  props: IJeneseiThemeSize & { isFullSize?: boolean; $width?: string; $flex?: string },
+  props: IJeneseiThemeSize & {
+    isFullSize?: boolean
+    $width?: string
+    $flex?: string
+  }
 ) => css`
   height: ${props.height}px;
   border-radius: ${props.radius}px;
@@ -181,4 +193,11 @@ export const StyledButton = styled.button<StyledButtonProps>`
   font-family: ${(props) => props.$customFontFamily};
   font-size: ${(props) => props.$customFontSize};
   font-weight: ${(props) => props.$customFontWeight};
+`
+
+export const StyledButtonContainer = styled.div<StyledButtonContainerProps>`
+  display: inline-block;
+  position: relative;
+  width: ${(props) => props.$width};
+  height: ${(props) => props.$height};
 `

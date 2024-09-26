@@ -19,7 +19,7 @@ export const AuthLayoutWrapperBackground = styled.div<AuthLayoutWrapperBackgroun
   background-position: center;
   background-size: cover;
   flex-grow: 1;
-  flex-basis: 50%;
+  width: 50%;
   height: 100%;
   display: flex;
   align-items: stretch;
@@ -29,7 +29,6 @@ export const AuthLayoutWrapperBackground = styled.div<AuthLayoutWrapperBackgroun
   @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
     height: 170px;
     width: 100%;
-    flex-basis: auto;
     justify-content: center;
     padding: 0px 100px;
   }
@@ -41,7 +40,7 @@ export const AuthLayoutWrapperBackground = styled.div<AuthLayoutWrapperBackgroun
 
 export const AuthLayoutWrapperChildren = styled.div`
   flex-grow: 1;
-  flex-basis: 50%;
+  width: 50%;
   height: 100%;
   padding: 80px;
   display: flex;
@@ -53,7 +52,6 @@ export const AuthLayoutWrapperChildren = styled.div`
     align-items: flex-start;
     width: 100%;
     height: calc(100% - 170px);
-    flex-basis: auto;
     padding: 100px;
   }
   @media (max-width: ${(props) => props.theme.screens.mobile.width}) {

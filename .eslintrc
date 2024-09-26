@@ -3,19 +3,19 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "node": true,
+    "node": true
   },
   "extends": [
     "plugin:react/recommended",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:storybook/recommended",
+    "plugin:storybook/recommended"
   ],
   "settings": {
     "react": {
-      "version": "detect",
-    },
+      "version": "detect"
+    }
   },
   "ignorePatterns": ["dist", ".eslintrc.yaml"],
   "parser": "@typescript-eslint/parser",
@@ -26,8 +26,8 @@
     "react/prop-types": "off",
     "react-refresh/only-export-components": [
       "warn",
-      { "allowConstantExport": true },
+      { "allowConstantExport": true }
     ],
-    "react/react-in-jsx-scope": "off",
-  },
+    "react/react-in-jsx-scope": "off"
+  }
 }

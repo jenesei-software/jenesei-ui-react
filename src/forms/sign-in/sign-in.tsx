@@ -1,12 +1,12 @@
 import { useForm } from '@tanstack/react-form'
 import { yupValidator } from '@tanstack/yup-form-adapter'
 
-import { Form } from '@forms/default'
-
 import { Button } from '@components/button'
 import { Stack } from '@components/flex'
 import { Input } from '@components/input'
 import { Typography } from '@components/typography'
+
+import { Form } from '@forms/default'
 
 import { validationNickName, validationPassword } from '@functions/schema'
 
@@ -118,16 +118,34 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                 </Stack>
               )}
             </form.Field>
-            <Typography
-              onClick={() => props.onForgot()}
-              cursor="pointer"
-              weight={400}
-              variant="h8"
-              color="blueRest"
-              textAlign="right"
-            >
-              Forgot Password
-            </Typography>
+            <Stack justifyContent="space-between" alignItems="center">
+              {props.isIncorrect && (
+                <Typography
+                  onClick={() => {
+                    props.onForgot()
+                  }}
+                  cursor="pointer"
+                  weight={400}
+                  variant="h7"
+                  color="red100"
+                  textAlign="left"
+                >
+                  Incorrect login or password
+                </Typography>
+              )}{' '}
+              <Typography
+                onClick={() => props.onForgot()}
+                cursor="pointer"
+                weight={400}
+                variant="h7"
+                color="blueRest"
+                textAlign="right"
+                style={{ marginLeft: 'auto' }}
+              >
+                Forgot Password
+              </Typography>
+            </Stack>
+
             <form.Subscribe>
               {(state) => (
                 <Button

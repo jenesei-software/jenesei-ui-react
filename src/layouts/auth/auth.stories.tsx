@@ -7,7 +7,7 @@ import { AuthLayout } from '.'
 
 const meta: Meta<typeof AuthLayout> = {
   component: AuthLayout,
-  title: 'Layout/Auth',
+  title: 'Layout/Auth'
 }
 
 export default meta
@@ -15,7 +15,7 @@ type Story = StoryObj<typeof AuthLayout>
 
 export const Auth: Story = {
   args: {
-    backUrl: '/public/pictures/auth-back.gif',
+    backUrl: '/public/pictures/auth-back-min.gif',
     children: (
       <FormSignUp
         width="500px"
@@ -27,6 +27,6 @@ export const Auth: Story = {
         onPrivacyPolicy={() => {}}
         onSubmit={() => {}}
       />
-    ),
-  },
+    )
+  }
 }
