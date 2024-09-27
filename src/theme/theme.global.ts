@@ -7,7 +7,7 @@ export const JeneseiGlobalStyles = createGlobalStyle`
   ${reset};
   
   .sb-show-main.sb-main-padded {
-    /* padding:0; */
+    padding:0;
   }
 
   :root {

@@ -104,11 +104,6 @@ export interface StyledButtonProps extends FlexContainerAndItemProps {
   $isFullSize?: ButtonProps['isFullSize']
 }
 
-export interface StyledButtonContainerProps {
-  $width: string
-  $height: string
-}
-
 export interface StyledButtonIconsWrapperProps {
   $isIconGroup?: ButtonProps['isIconGroup']
   $size: ButtonProps['size']

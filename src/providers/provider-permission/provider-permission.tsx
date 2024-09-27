@@ -3,11 +3,11 @@ import { createContext, useCallback, useEffect, useState } from 'react'
 import {
   PermissionContextProps,
   ProviderPermissionProps,
-  urlBase64ToUint8Array,
+  urlBase64ToUint8Array
 } from '.'
 
 export const PermissionContext = createContext<PermissionContextProps | null>(
-  null,
+  null
 )
 
 export const ProviderPermission = (props: ProviderPermissionProps) => {
@@ -22,6 +22,36 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
     useState<boolean>(false)
   const [pushSubscription, setPushSubscription] =
     useState<PushSubscription | null>(null)
+  const [isBiometricSupported, setIsBiometricSupported] = useState(false)
+
+  useEffect(() => {
+    const checkBiometricSupport = async () => {
+      if ('credentials' in navigator) {
+        try {
+          const result = await navigator.credentials.get({
+            publicKey: {
+              challenge: new Uint8Array(32),
+              allowCredentials: [
+                {
+                  id: new Uint8Array(32),
+                  type: 'public-key'
+                }
+              ],
+              userVerification: 'required'
+            }
+          })
+
+          if (result) {
+            setIsBiometricSupported(true)
+          }
+        } catch (error) {
+          setIsBiometricSupported(false)
+        }
+      }
+    }
+
+    checkBiometricSupport()
+  }, [])
 
   useEffect(() => {
     if ('Notification' in window) {
@@ -56,12 +86,12 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
         .catch((error) => {
           console.error(
             'Provider Permission. Service Worker registration or access failed:',
-            error,
+            error
           )
         })
     } else {
       console.warn(
-        'Provider Permission. Push notifications are not supported in this browser.',
+        'Provider Permission. Push notifications are not supported in this browser.'
       )
     }
   }, [])
@@ -69,47 +99,55 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
   const requestNotificationPermission = useCallback(async () => {
     if ('Notification' in window) {
       try {
-        const permission = await window.Notification.requestPermission();
-        setNotificationPermission(permission);
+        const permission = await window.Notification.requestPermission()
+        setNotificationPermission(permission)
       } catch (error) {
-        console.error('Provider Permission. Failed to request notification permission:', error);
+        console.error(
+          'Provider Permission. Failed to request notification permission:',
+          error
+        )
       }
     } else {
-      console.warn('Provider Permission. Notifications are not supported in this browser.');
+      console.warn(
+        'Provider Permission. Notifications are not supported in this browser.'
+      )
     }
-  }, []);
-  
+  }, [])
+
   const requestGeolocationPermission = useCallback(() => {
     if ('geolocation' in window.navigator) {
       window.navigator.geolocation.getCurrentPosition(
-        () => setGeolocationPermission('granted'), 
-        () => setGeolocationPermission('denied'),  
-      );
+        () => setGeolocationPermission('granted'),
+        () => setGeolocationPermission('denied')
+      )
     } else {
-      console.warn('Provider Permission. Geolocation is not supported in this browser.');
+      console.warn(
+        'Provider Permission. Geolocation is not supported in this browser.'
+      )
     }
-  }, []);
+  }, [])
 
   const registerServiceWorker = useCallback(async () => {
     if ('serviceWorker' in navigator) {
       try {
-        const registration =
-          await navigator.serviceWorker.register('/service-worker.js')
+        const registration = await navigator.serviceWorker.register(
+          props.serviceWorkerPath
+        )
         console.log(
           'Provider Permission. Service Worker registered with scope:',
-          registration.scope,
+          registration.scope
         )
         setServiceWorkerRegistered(true)
       } catch (error) {
         console.error(
           'Provider Permission. Service Worker registration failed:',
-          error,
+          error
         )
         setServiceWorkerRegistered(false)
       }
     } else {
       console.warn(
-        'Provider Permission. Service Workers are not supported in this browser.',
+        'Provider Permission. Service Workers are not supported in this browser.'
       )
     }
   }, [])
@@ -122,19 +160,19 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
           await registration.unregister()
           console.log(
             'Provider Permission. Service Worker unregistered successfully:',
-            registration.scope,
+            registration.scope
           )
         }
         setServiceWorkerRegistered(false)
       } catch (error) {
         console.error(
           'Provider Permission. Failed to unregister Service Worker:',
-          error,
+          error
         )
       }
     } else {
       console.warn(
-        'Provider Permission. Service Workers are not supported in this browser.',
+        'Provider Permission. Service Workers are not supported in this browser.'
       )
     }
   }, [])
@@ -143,7 +181,7 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
     async (vapidKey: string) => {
       if (!serviceWorkerRegistered) {
         console.error(
-          'Provider Permission. Service Worker registration is not available.',
+          'Provider Permission. Service Worker registration is not available.'
         )
         return
       }
@@ -152,21 +190,21 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
         const registration = await navigator.serviceWorker.ready
         const subscription = await registration.pushManager.subscribe({
           userVisibleOnly: true,
-          applicationServerKey: urlBase64ToUint8Array(vapidKey),
+          applicationServerKey: urlBase64ToUint8Array(vapidKey)
         })
         setPushSubscription(subscription)
         console.log(
           'Provider Permission. Push Notification Subscription:',
-          subscription,
+          subscription
         )
       } catch (error) {
         console.error(
           'Provider Permission. Failed to subscribe for Push Notifications',
-          error,
+          error
         )
       }
     },
-    [serviceWorkerRegistered],
+    [serviceWorkerRegistered]
   )
 
   const setupPushNotifications = useCallback(
@@ -181,7 +219,7 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
 
       if (!serviceWorkerRegistered) {
         console.error(
-          'Provider Permission. Service Worker registration or access failed.',
+          'Provider Permission. Service Worker registration or access failed.'
         )
       }
 
@@ -191,8 +229,8 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
       notificationPermission,
       requestNotificationPermission,
       serviceWorkerRegistered,
-      subscribeToPushNotifications,
-    ],
+      subscribeToPushNotifications
+    ]
   )
 
   const unsubscribeToPushNotifications = useCallback(async () => {
@@ -204,7 +242,7 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
       } catch (error) {
         console.error(
           'Provider Permission. Failed to cancel push subscription',
-          error,
+          error
         )
       }
     } else {
@@ -215,6 +253,7 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
   return (
     <PermissionContext.Provider
       value={{
+        isBiometricSupported,
         notificationPermission,
         geolocationPermission,
         pushNotificationSupported,
@@ -226,7 +265,7 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
         unregisterServiceWorker,
         subscribeToPushNotifications,
         unsubscribeToPushNotifications,
-        setupPushNotifications,
+        setupPushNotifications
       }}
     >
       {props.children}
