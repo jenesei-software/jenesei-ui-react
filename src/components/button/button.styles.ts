@@ -5,11 +5,7 @@ import { getFontSizeStyles } from '@components/typography'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
 
-import {
-  StyledButtonContainerProps,
-  StyledButtonIconsWrapperProps,
-  StyledButtonProps
-} from '.'
+import { StyledButtonIconsWrapperProps, StyledButtonProps } from '.'
 
 /****************************************** Genre *************************************************/
 const ButtonGenre = css<StyledButtonProps>`
@@ -193,11 +189,4 @@ export const StyledButton = styled.button<StyledButtonProps>`
   font-family: ${(props) => props.$customFontFamily};
   font-size: ${(props) => props.$customFontSize};
   font-weight: ${(props) => props.$customFontWeight};
-`
-
-export const StyledButtonContainer = styled.div<StyledButtonContainerProps>`
-  display: inline-block;
-  position: relative;
-  width: ${(props) => props.$width};
-  height: ${(props) => props.$height};
 `

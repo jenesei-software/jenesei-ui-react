@@ -3,6 +3,7 @@ import { yupValidator } from '@tanstack/yup-form-adapter'
 
 import { Button } from '@components/button'
 import { Stack } from '@components/flex'
+import { Icon } from '@components/icon'
 import { Input } from '@components/input'
 import { Typography } from '@components/typography'
 
@@ -10,32 +11,41 @@ import { Form } from '@forms/default'
 
 import { validationNickName, validationPassword } from '@functions/schema'
 
+import { usePermission } from '@providers/provider-permission'
+
 import { FormSignInProps } from '.'
 
 export const FormSignIn: React.FC<FormSignInProps> = (props) => {
+  const { isBiometricSupported } = usePermission()
+
   const form = useForm({
     defaultValues: {
       nickname: '',
-      password: '',
+      password: ''
     },
     onSubmit: async ({ value }) => {
       const result = {
         nickname: value.nickname.trim(),
-        password: value.password.trim(),
+        password: value.password.trim()
       }
       props.onSubmit(result)
     },
     asyncDebounceMs: 500,
     validatorAdapter: yupValidator({
-      transformErrors: (errors) => errors[0],
-    }),
+      transformErrors: (errors) => errors[0]
+    })
   })
 
   const validationSchema = {
     nickname: validationNickName,
-    password: validationPassword,
+    password: validationPassword
   }
 
+  const isLoading =
+    props.isLoadingAuthApp ||
+    props.isLoadingBiometry ||
+    props.isLoadingLogin ||
+    props.isLoadingPasskey
   return (
     <Form handleSubmit={form.handleSubmit} width={props.width}>
       <Stack flexDirection="column" alignItems="stretch" gap="100px">
@@ -63,7 +73,7 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
             <form.Field
               name="nickname"
               validators={{
-                onChange: validationSchema.nickname,
+                onChange: validationSchema.nickname
               }}
             >
               {(field) => (
@@ -92,7 +102,7 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
               name="password"
               validators={{
                 onChangeListenTo: ['password'],
-                onChange: validationSchema.password,
+                onChange: validationSchema.password
               }}
             >
               {(field) => (
@@ -145,22 +155,98 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                 Forgot Password
               </Typography>
             </Stack>
-
             <form.Subscribe>
               {(state) => (
-                <Button
-                  width="100%"
-                  type="submit"
-                  isLoading={state.isSubmitting || props.isLoading}
-                  isOnlyLoading
-                  isDisabled={
-                    !state.canSubmit || state.isSubmitting || props.isLoading
-                  }
-                  genre="product"
-                  size="largeMedium"
-                >
-                  <Typography variant="h7">Sign In</Typography>
-                </Button>
+                <Stack flexDirection="column" alignItems="stretch" gap="20px">
+                  <Button
+                    width="100%"
+                    type="submit"
+                    isLoading={state.isSubmitting || props.isLoadingLogin}
+                    isOnlyLoading
+                    isDisabled={
+                      !state.canSubmit || state.isSubmitting || isLoading
+                    }
+                    genre="product"
+                    size="largeMedium"
+                  >
+                    <Typography variant="h7">Sign In</Typography>
+                  </Button>
+                  <Stack
+                    flexDirection="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    gap="8px"
+                  >
+                    <Stack flexGrow={1} h="2px" bg="black80" />
+                    <Typography
+                      cursor="pointer"
+                      weight={400}
+                      variant="h7"
+                      color="black80"
+                      textAlign="center"
+                    >
+                      Or
+                    </Typography>
+                    <Stack flexGrow={1} h="2px" bg="black80" />
+                  </Stack>
+                  <Stack
+                    flexDirection="row"
+                    justifyContent="space-between"
+                    alignItems="stretch"
+                    gap="8px"
+                  >
+                    <Button
+                      onClick={() => props.onQR && props.onQR()}
+                      flex="1"
+                      type="button"
+                      isLoading={props.isLoadingQR}
+                      isOnlyLoading
+                      isDisabled={isLoading}
+                      genre="blackBorder"
+                      size="medium"
+                    >
+                      <Icon type="curved" name="QR" size="medium" />
+                    </Button>
+                    {isBiometricSupported && (
+                      <Button
+                        onClick={() => props.onBiometry && props.onBiometry()}
+                        flex="1"
+                        type="button"
+                        isLoading={props.isLoadingBiometry}
+                        isOnlyLoading
+                        isDisabled={isLoading}
+                        genre="blackBorder"
+                        size="medium"
+                      >
+                        <Icon type="curved" name="Biometry" size="medium" />
+                      </Button>
+                    )}
+                    <Button
+                      onClick={() => props.onPasskey && props.onPasskey()}
+                      flex="1"
+                      type="button"
+                      isLoading={props.isLoadingPasskey}
+                      isOnlyLoading
+                      isDisabled={isLoading}
+                      genre="blackBorder"
+                      size="medium"
+                    >
+                      <Typography variant="h8">Passkey</Typography>
+                    </Button>
+                    <Button
+                      onClick={() => props.onAuthApp && props.onAuthApp()}
+                      flex="1"
+                      type="button"
+                      isLoading={props.isLoadingAuthApp}
+                      isOnlyLoading
+                      isDisabled={isLoading}
+                      genre="blackBorder"
+                      size="medium"
+                    >
+                      <Typography variant="h8">Auth App</Typography>
+                    </Button>
+                  </Stack>
+                </Stack>
               )}
             </form.Subscribe>
           </Stack>

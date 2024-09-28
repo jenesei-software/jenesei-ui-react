@@ -35,6 +35,8 @@ export interface StyledLibraryIconCurvedItemProps
 }
 
 export enum LibraryIconCurvedName {
+  Biometry,
+  QR,
   Search,
   Folder,
   Wallet,
@@ -134,11 +136,11 @@ export enum LibraryIconCurvedName {
   ArrowLeftSquare,
   ArrowLeft,
   ArrowLeft2,
-  ArrowLeft3,
+  ArrowLeft3
 }
 export enum LibraryIconCheckboxName {
   Radio,
-  Square,
+  Square
 }
 export type TLibraryIconCurvedNameString = keyof typeof LibraryIconCurvedName
 export type TLibraryIconCheckboxNameString =

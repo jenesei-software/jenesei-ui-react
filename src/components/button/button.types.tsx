@@ -45,8 +45,6 @@ export interface ButtonProps extends PropsWithChildren {
 
   isRadius?: boolean
 
-  isEffect?: boolean
-
   isLoading?: boolean
 
   loadingOrder?: ModalLoadingProps['order']
@@ -102,11 +100,6 @@ export interface StyledButtonProps extends FlexContainerAndItemProps {
   $customFontWeight?: ButtonProps['customFontWeight']
 
   $isFullSize?: ButtonProps['isFullSize']
-}
-
-export interface StyledButtonContainerProps {
-  $width: string
-  $height: string
 }
 
 export interface StyledButtonIconsWrapperProps {

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
-import { FormSignUp } from '@forms/sign-up'
+import { FormSignIn } from '@forms/sign-in'
 
 import { AuthLayout } from '.'
 
@@ -16,15 +16,20 @@ type Story = StoryObj<typeof AuthLayout>
 export const Auth: Story = {
   args: {
     backUrl: 'https://id.jenesei.ru/pictures/auth-back.gif',
+    backUrlWebp: 'https://id.jenesei.ru/pictures/auth-back.webp',
     children: (
-      <FormSignUp
+      <FormSignIn
+        onForgot={() => {}}
+        isIncorrect={false}
+        onSignUp={() => {}}
         width="500px"
         onRestore={() => {}}
-        onSignIn={() => {}}
-        isLoading={false}
+        isLoadingAuthApp={false}
+        isLoadingBiometry={false}
+        isLoadingLogin={false}
+        isLoadingPasskey={false}
+        isLoadingQR={false}
         isError={false}
-        onTermOfService={() => {}}
-        onPrivacyPolicy={() => {}}
         onSubmit={() => {}}
       />
     )

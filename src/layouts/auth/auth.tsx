@@ -10,7 +10,8 @@ import {
   AuthLayoutWrapperBackground,
   AuthLayoutWrapperBackgroundSVG,
   AuthLayoutWrapperBackgroundText,
-  AuthLayoutWrapperChildren
+  AuthLayoutWrapperChildren,
+  AuthStyledImage
 } from '.'
 
 export const AuthLayout: FC<AuthLayoutProps> = (props) => {
@@ -30,6 +31,7 @@ export const AuthLayout: FC<AuthLayoutProps> = (props) => {
           opacity: 0,
           pointerEvents: 'none'
         })
+
         gsap.fromTo(
           currentBackground,
           {
@@ -42,15 +44,16 @@ export const AuthLayout: FC<AuthLayoutProps> = (props) => {
             height: currentHeight,
             duration: 2,
             delay: 1,
-            ease: 'power1.out',
+            ease: 'power2.out',
             onComplete: () => {
               gsap.to(currentBackground, {
-                position: 'static'
+                position: 'relative'
               })
               gsap.to(currentChildren, {
                 opacity: 1,
                 pointerEvents: 'auto',
                 duration: 0.5,
+                ease: 'power2.out',
                 onComplete: () => {
                   gsap.set(currentBackground, { clearProps: 'all' })
                 }
@@ -65,7 +68,8 @@ export const AuthLayout: FC<AuthLayoutProps> = (props) => {
 
   return (
     <AuthLayoutWrapper style={props.style}>
-      <AuthLayoutWrapperBackground ref={backgroundRef} $backUrl={props.backUrl}>
+      <AuthLayoutWrapperBackground ref={backgroundRef}>
+        <AuthStyledImage src={props.backUrl} webp={props.backUrlWebp} />
         <AuthLayoutWrapperBackgroundSVG
           width="283"
           height="62"
