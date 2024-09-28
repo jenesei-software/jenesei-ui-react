@@ -25,32 +25,26 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
   const [isBiometricSupported, setIsBiometricSupported] = useState(false)
 
   useEffect(() => {
-    const checkBiometricSupport = async () => {
-      if ('credentials' in navigator) {
-        try {
-          const result = await navigator.credentials.get({
-            publicKey: {
-              challenge: new Uint8Array(32),
-              allowCredentials: [
-                {
-                  id: new Uint8Array(32),
-                  type: 'public-key'
-                }
-              ],
-              userVerification: 'required'
-            }
-          })
-
-          if (result) {
-            setIsBiometricSupported(true)
-          }
-        } catch (error) {
+    const checkBiometricAvailability = async () => {
+      try {
+        if (
+          window.PublicKeyCredential &&
+          typeof window.PublicKeyCredential
+            .isUserVerifyingPlatformAuthenticatorAvailable === 'function'
+        ) {
+          const available =
+            await window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()
+          setIsBiometricSupported(available)
+        } else {
           setIsBiometricSupported(false)
         }
+      } catch (error) {
+        console.error('Error checking biometric availability:', error)
+        setIsBiometricSupported(false)
       }
     }
 
-    checkBiometricSupport()
+    checkBiometricAvailability()
   }, [])
 
   useEffect(() => {
