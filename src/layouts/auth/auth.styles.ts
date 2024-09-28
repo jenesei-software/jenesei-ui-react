@@ -19,7 +19,7 @@ export const AuthStyledImage = styled(Image)`
   left: 0;
   top: 0;
   background-color: ${(props) => props.theme.palette.black100};
-  z-index: -1;
+  z-index: 0;
 `
 export const AuthLayoutWrapperBackground = styled.div`
   position: relative;
@@ -66,9 +66,12 @@ export const AuthLayoutWrapperChildren = styled.div`
   }
 `
 
-export const AuthLayoutWrapperBackgroundSVG = styled.svg``
+export const AuthLayoutWrapperBackgroundSVG = styled.svg`
+  z-index: 1;
+`
 
 export const AuthLayoutWrapperBackgroundText = styled.div`
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 20px;
