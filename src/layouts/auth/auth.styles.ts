@@ -1,6 +1,5 @@
+import Image from 'react-image-webp'
 import styled from 'styled-components'
-
-import { AuthLayoutWrapperBackgroundProps } from '.'
 
 export const AuthLayoutWrapper = styled.div`
   display: flex;
@@ -12,14 +11,20 @@ export const AuthLayoutWrapper = styled.div`
     flex-direction: column;
   }
 `
-
-export const AuthLayoutWrapperBackground = styled.div<AuthLayoutWrapperBackgroundProps>`
-  background-image: url(${(props) => props.$backUrl});
+export const AuthStyledImage = styled(Image)`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  left: 0;
+  top: 0;
   background-color: ${(props) => props.theme.palette.black100};
-  background-position: center;
-  background-size: cover;
+  z-index: -1;
+`
+export const AuthLayoutWrapperBackground = styled.div`
+  position: relative;
   flex-grow: 1;
-  flex-basis: 50%;
+  width: 50%;
   height: 100%;
   display: flex;
   align-items: stretch;
@@ -29,7 +34,6 @@ export const AuthLayoutWrapperBackground = styled.div<AuthLayoutWrapperBackgroun
   @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
     height: 170px;
     width: 100%;
-    flex-basis: auto;
     justify-content: center;
     padding: 0px 100px;
   }
@@ -41,7 +45,7 @@ export const AuthLayoutWrapperBackground = styled.div<AuthLayoutWrapperBackgroun
 
 export const AuthLayoutWrapperChildren = styled.div`
   flex-grow: 1;
-  flex-basis: 50%;
+  width: 50%;
   height: 100%;
   padding: 80px;
   display: flex;
@@ -53,7 +57,6 @@ export const AuthLayoutWrapperChildren = styled.div`
     align-items: flex-start;
     width: 100%;
     height: calc(100% - 170px);
-    flex-basis: auto;
     padding: 100px;
   }
   @media (max-width: ${(props) => props.theme.screens.mobile.width}) {

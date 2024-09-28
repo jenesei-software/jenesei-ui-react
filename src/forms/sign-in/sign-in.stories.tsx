@@ -5,7 +5,7 @@ import { FormSignIn } from '.'
 
 const meta: Meta<typeof FormSignIn> = {
   component: FormSignIn,
-  title: 'Form/SignIn',
+  title: 'Form/SignIn'
 }
 
 export default meta
@@ -13,13 +13,13 @@ type Story = StoryObj<typeof FormSignIn>
 
 export const SignIn: Story = {
   args: {
-    isLoading: false,
+    isLoadingAuthApp: false,
     isError: false,
     width: '500px',
     onSubmit(field) {
       console.log(field)
     },
     onSignUp() {},
-    onRestore() {},
-  },
+    onRestore() {}
+  }
 }

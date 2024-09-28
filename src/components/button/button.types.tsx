@@ -2,18 +2,18 @@ import { PropsWithChildren } from 'react'
 
 import {
   FlexContainerAndItemProps,
-  FlexContainerAndItemPropsNormalized,
+  FlexContainerAndItemPropsNormalized
 } from '@components/flex'
 import {
   LibraryIconItemProps,
-  TLibraryIconCurvedNameString,
+  TLibraryIconCurvedNameString
 } from '@components/icon'
 import { ModalLoadingProps } from '@components/modal-loading'
 
 import {
   TJeneseiFontFamily,
   TJeneseiThemeGenre,
-  TJeneseiThemeSize,
+  TJeneseiThemeSize
 } from '@theme/index'
 
 export interface ButtonProps extends PropsWithChildren {

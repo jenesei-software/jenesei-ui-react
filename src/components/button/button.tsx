@@ -9,6 +9,21 @@ import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.'
 
 export const Button: FC<ButtonProps> = (props) => {
   const theme = useTheme()
+
+  const modalLoadingComponent = (
+    <ModalLoading
+      size={props.size}
+      color={theme.colors.button[props.genre].color.rest}
+      order={props.loadingOrder}
+    />
+  )
+
+  const handleClick: ButtonProps['onClick'] = (event) => {
+    if (!props.isLoading && !props.isDisabled && props.onClick) {
+      props.onClick(event)
+    }
+  }
+
   return (
     <StyledButton
       id={props.id}
@@ -29,12 +44,7 @@ export const Button: FC<ButtonProps> = (props) => {
       disabled={props.isDisabled}
       type={props.type ?? 'button'}
       className={props.className}
-      onClick={(event) =>
-        !props.isLoading &&
-        !props.isDisabled &&
-        props.onClick &&
-        props.onClick(event)
-      }
+      onClick={handleClick}
       $flexDirection={props.customStyles?.flexDirection}
       $flexWrap={props.customStyles?.flexWrap}
       $justifyContent={props.customStyles?.justifyContent}
@@ -50,11 +60,7 @@ export const Button: FC<ButtonProps> = (props) => {
       {!props.isHidden && <Ripple />}
       {props.isOnlyLoading ? (
         props.isLoading ? (
-          <ModalLoading
-            size={props.size}
-            color={theme.colors.button[props.genre].color.rest}
-            order={props.loadingOrder}
-          />
+          modalLoadingComponent
         ) : (
           <>
             <div style={{ order: 0, display: 'contents' }}>
@@ -82,24 +88,10 @@ export const Button: FC<ButtonProps> = (props) => {
             $iconGroupOrder={props.iconGroupOrder}
           >
             {props.isOnlyLoadingWithGroup ? (
-              <>
-                {props.isLoading && (
-                  <ModalLoading
-                    size={props.size}
-                    color={theme.colors.button[props.genre].color.rest}
-                    order={props.loadingOrder}
-                  />
-                )}
-              </>
+              <>{props.isLoading && modalLoadingComponent}</>
             ) : (
               <>
-                {props.isLoading && (
-                  <ModalLoading
-                    size={props.size}
-                    color={theme.colors.button[props.genre].color.rest}
-                    order={props.loadingOrder}
-                  />
-                )}
+                {props.isLoading && modalLoadingComponent}
                 {props.iconName && (
                   <Icon
                     name={props.iconName}
