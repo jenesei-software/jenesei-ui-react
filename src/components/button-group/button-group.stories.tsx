@@ -29,8 +29,7 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           type: 'button',
           genre: 'black',
           size: 'medium',
-          isLoading: true,
-          isEffect: true
+          isLoading: true
         },
         {
           customStyles: {
@@ -44,8 +43,7 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           type: 'button',
           genre: 'gray',
           size: 'medium',
-          isLoading: true,
-          isEffect: true
+          isLoading: true
         },
         {
           customStyles: {
@@ -61,8 +59,7 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           size: 'medium',
           isLoading: true,
           isIconGroup: true,
-          isOnlyLoadingWithGroup: false,
-          isEffect: true
+          isOnlyLoadingWithGroup: false
         },
 
         {
@@ -74,8 +71,7 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           width: 'auto',
           type: 'button',
           genre: 'greenTransparent',
-          size: 'medium',
-          isEffect: true
+          size: 'medium'
         },
         {
           customStyles: {
@@ -86,8 +82,7 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
           width: 'auto',
           type: 'button',
           genre: 'grayBorder',
-          size: 'medium',
-          isEffect: true
+          size: 'medium'
         },
         {
           customStyles: {

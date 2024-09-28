@@ -45,8 +45,6 @@ export interface ButtonProps extends PropsWithChildren {
 
   isRadius?: boolean
 
-  isEffect?: boolean
-
   isLoading?: boolean
 
   loadingOrder?: ModalLoadingProps['order']
