@@ -199,11 +199,9 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                       onClick={() => props.onQR && props.onQR()}
                       flex="1"
                       type="button"
-                      isLoading={state.isSubmitting || props.isLoadingQR}
+                      isLoading={props.isLoadingQR}
                       isOnlyLoading
-                      isDisabled={
-                        !state.canSubmit || state.isSubmitting || isLoading
-                      }
+                      isDisabled={isLoading}
                       genre="blackBorder"
                       size="medium"
                     >
@@ -214,13 +212,9 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                         onClick={() => props.onBiometry && props.onBiometry()}
                         flex="1"
                         type="button"
-                        isLoading={
-                          state.isSubmitting || props.isLoadingBiometry
-                        }
+                        isLoading={props.isLoadingBiometry}
                         isOnlyLoading
-                        isDisabled={
-                          !state.canSubmit || state.isSubmitting || isLoading
-                        }
+                        isDisabled={isLoading}
                         genre="blackBorder"
                         size="medium"
                       >
@@ -231,11 +225,9 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                       onClick={() => props.onPasskey && props.onPasskey()}
                       flex="1"
                       type="button"
-                      isLoading={state.isSubmitting || props.isLoadingPasskey}
+                      isLoading={props.isLoadingPasskey}
                       isOnlyLoading
-                      isDisabled={
-                        !state.canSubmit || state.isSubmitting || isLoading
-                      }
+                      isDisabled={isLoading}
                       genre="blackBorder"
                       size="medium"
                     >
@@ -245,11 +237,9 @@ export const FormSignIn: React.FC<FormSignInProps> = (props) => {
                       onClick={() => props.onAuthApp && props.onAuthApp()}
                       flex="1"
                       type="button"
-                      isLoading={state.isSubmitting || props.isLoadingAuthApp}
+                      isLoading={props.isLoadingAuthApp}
                       isOnlyLoading
-                      isDisabled={
-                        !state.canSubmit || state.isSubmitting || isLoading
-                      }
+                      isDisabled={isLoading}
                       genre="blackBorder"
                       size="medium"
                     >
