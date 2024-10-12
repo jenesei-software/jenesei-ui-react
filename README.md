@@ -69,24 +69,7 @@ declare module '@jenesei-software/jenesei-ui-react' {
 To work correctly you need to install the following dependencies:
 
 ```bash
-npm install @emotion/styled --save
-npm install @gsap/react --save
-npm install @tanstack/react-query --save
-npm install @tanstack/react-virtual --save
-npm install @types/js-cookie --save
-npm install @types/react-helmet --save
-npm install awesome-phonenumber --save
-npm install country-list-with-dial-code-and-flag --save
-npm install gsap --save
-npm install js-cookie --save
-npm install moment --save
 npm install react --save
 npm install react-dom --save
-npm install react-helmet --save
-npm install react-loading --save
-npm install react-number-format --save
-npm install react-ripple-click --save
-npm install react-toggle --save
 npm install styled-components --save
-npm install styled-reset --save
 ```
