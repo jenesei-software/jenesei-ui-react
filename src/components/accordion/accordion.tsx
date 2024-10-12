@@ -8,7 +8,7 @@ import {
   AccordionStyledIcon,
   AccordionSummary,
   AccordionSummaryContent,
-  AccordionWrapper,
+  AccordionWrapper
 } from '.'
 
 export const Accordion: React.FC<AccordionProps> = (props) => {
@@ -23,7 +23,7 @@ export const Accordion: React.FC<AccordionProps> = (props) => {
         props.onClickIcon()
       }
     },
-    [props.onClickIcon],
+    [props.onClickIcon]
   )
 
   return (
@@ -44,9 +44,7 @@ export const Accordion: React.FC<AccordionProps> = (props) => {
             />
           )}
         </AccordionSummary>
-        <AccordionDetails $expanded={props.expanded}>
-          {props.accordionDetails}
-        </AccordionDetails>
+        <AccordionDetails $expanded={props.expanded}>{props.accordionDetails}</AccordionDetails>
       </AccordionWrapper>
     </Stack>
   )

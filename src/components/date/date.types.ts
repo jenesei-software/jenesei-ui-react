@@ -1,4 +1,5 @@
 import { FocusEventHandler } from 'react'
+import { AddDollarSign } from 'src/types'
 
 import { InputProps, StyledInputProps, StyledInputWrapperProps } from '@components/input'
 
@@ -48,38 +49,32 @@ export interface DateProps {
   onBlur?: FocusEventHandler<HTMLInputElement>
 }
 
-export interface DateWrapperProps extends StyledInputWrapperProps {
-  $parentListHeight: number
-  $radius: number
-  $genre: DateStyledInputProps['$genre']
-  $isDisabled: DateStyledInputProps['$isDisabled']
-}
+export type DateWrapperProps = AddDollarSign<
+  Pick<InputProps, 'genre' | 'isDisabled'> & {
+    parentListHeight: number
+    radius: number
+  }
+> &
+  StyledInputWrapperProps
 
 export interface DateStyledInputProps extends StyledInputProps {}
 
-export interface DateStyledOptionProps extends StyledInputProps {
-  $isSelectedItem?: boolean
-  $isCheckboxProps?: boolean
-}
+export type DateStyledOptionProps = AddDollarSign<{
+  isSelectedItem?: boolean
+  isCheckboxProps?: boolean
+}> &
+  StyledInputProps
 
-export interface DateStyledListProps {
-  $genre: DateStyledInputProps['$genre']
-  $size?: DateStyledInputProps['$size']
-}
+export type DateStyledListProps = AddDollarSign<Pick<InputProps, 'genre' | 'size'>>
 
-export interface DateDropdownListProps {
-  $genre: DateStyledInputProps['$genre']
-  $size?: DateStyledInputProps['$size']
-  $isInputEffect?: DateProps['isInputEffect']
-}
+export type DateDropdownListProps = AddDollarSign<Pick<DateProps, 'isInputEffect'> & Pick<InputProps, 'genre' | 'size'>>
 
-export interface DateDropdownDayProps {
-  $row: number
-  $column: number
-  $genre: DateStyledInputProps['$genre']
-  $size?: DateStyledInputProps['$size']
-  $isToday?: DateDayProps['isToday']
-  $isWeekend?: DateDayProps['isWeekend']
-  $isChoice?: boolean
-  $isCurrentMonth?: boolean
-}
+export type DateDropdownDayProps = AddDollarSign<
+  Pick<InputProps, 'genre' | 'size'> &
+    Pick<DateDayProps, 'isToday' | 'isWeekend'> & {
+      row: number
+      column: number
+      isChoice?: boolean
+      isCurrentMonth?: boolean
+    }
+>

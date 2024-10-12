@@ -1,4 +1,5 @@
 import { FocusEventHandler, ReactNode } from 'react'
+import { AddDollarSign } from 'src/types'
 
 import { CheckboxProps } from '@components/checkbox'
 import { InputProps, StyledInputProps, StyledInputWrapperProps, TInputGenre } from '@components/input'
@@ -83,28 +84,28 @@ export type SelectYearProps = SelectDateProps & {
   sortOrder?: 'asc' | 'desc'
 }
 
-export interface SelectWrapperProps extends StyledInputWrapperProps {
-  $parentListHeight: number
-  $radius: number
-  $genre: SelectStyledInputProps['$genre']
-  $isDisabled?: SelectStyledInputProps['$isDisabled']
-}
+export type SelectWrapperProps = AddDollarSign<
+  Pick<InputProps, 'genre'> & { parentListHeight: number; radius: number }
+> &
+  StyledInputWrapperProps
 
 export interface SelectStyledInputProps extends StyledInputProps {}
 
-export interface SelectStyledOptionProps extends StyledInputProps {
-  $isSelectedItem?: boolean
-  $isCheckboxProps?: boolean
-}
+export type SelectStyledOptionProps = AddDollarSign<{
+  isSelectedItem?: boolean
+  isCheckboxProps?: boolean
+}> &
+  StyledInputProps
 
-export interface SelectStyledListProps {
-  $genre: SelectStyledInputProps['$genre']
-  $isShowScroll?: boolean
-  $isFooter?: boolean
-  $size?: SelectStyledInputProps['$size']
-}
+export type SelectStyledListProps = AddDollarSign<
+  Pick<InputProps, 'genre' | 'size'> & {
+    isShowScroll?: boolean
+    isFooter?: boolean
+  }
+>
 
-export interface SelectStyledFooterProps extends StyledInputProps {
-  $isErase?: boolean
-  $isSelectAll?: boolean
-}
+export type SelectStyledFooterProps = StyledInputProps &
+  AddDollarSign<{
+    isErase?: boolean
+    isSelectAll?: boolean
+  }>

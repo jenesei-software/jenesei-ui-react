@@ -1,6 +1,6 @@
-import { CheckboxProps } from '@components/checkbox'
+import { AddDollarSign } from 'src/types'
 
-import { TJeneseiThemeSize } from '@theme/index'
+import { CheckboxProps } from '@components/checkbox'
 
 export interface ICheckboxValue {
   label: string | number
@@ -39,8 +39,4 @@ export interface CheckboxesProps<T extends ICheckboxValue> {
   width?: string
 }
 
-export interface CheckboxesWrapperProps {
-  $width?: string
-
-  $size: TJeneseiThemeSize
-}
+export type CheckboxesWrapperProps = AddDollarSign<Pick<CheckboxesProps<ICheckboxValue>, 'width' | 'size'>>

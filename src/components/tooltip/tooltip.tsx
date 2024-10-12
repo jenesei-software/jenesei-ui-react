@@ -1,12 +1,4 @@
-import {
-  FC,
-  MouseEventHandler,
-  memo,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { FC, MouseEventHandler, memo, useCallback, useMemo, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useTheme } from 'styled-components'
 
@@ -16,10 +8,10 @@ import { TooltipArrow, TooltipBox, TooltipContainer, TooltipProps } from '.'
 
 export const Tooltip: FC<TooltipProps> = memo((props) => {
   if (props.isDisabled) {
-    return <>{props.children}</>;
+    return <>{props.children}</>
   }
-  return <TooltipContent {...props} />;
-});
+  return <TooltipContent {...props} />
+})
 
 export const TooltipContent: FC<TooltipProps> = (props) => {
   const theme = useTheme()
@@ -33,25 +25,20 @@ export const TooltipContent: FC<TooltipProps> = (props) => {
   const refTooltip = useRef<HTMLDivElement>(null)
   const refContainer = useRef<HTMLDivElement>(null)
 
-  const handleMouseEnter: MouseEventHandler<HTMLDivElement> =
-    useCallback(() => {
-      setVisible(true)
-    }, [])
+  const handleMouseEnter: MouseEventHandler<HTMLDivElement> = useCallback(() => {
+    setVisible(true)
+  }, [])
 
-  const handleMouseLeave: MouseEventHandler<HTMLDivElement> = useCallback(
-    (event) => {
-      const target = event.relatedTarget as Node
+  const handleMouseLeave: MouseEventHandler<HTMLDivElement> = useCallback((event) => {
+    const target = event.relatedTarget as Node
 
-      if (
-        !(target instanceof Node) ||
-        (!refTooltip.current?.contains(target) &&
-          !refContainer.current?.contains(target))
-      ) {
-        setVisible(false)
-      }
-    },
-    [],
-  )
+    if (
+      !(target instanceof Node) ||
+      (!refTooltip.current?.contains(target) && !refContainer.current?.contains(target))
+    ) {
+      setVisible(false)
+    }
+  }, [])
 
   const styleTooltip = useMemo(() => {
     if (!refTooltip.current || (!refContainer.current && !visible)) return {}
@@ -233,11 +220,7 @@ export const TooltipContent: FC<TooltipProps> = (props) => {
 
   return (
     <>
-      <TooltipContainer
-        ref={refContainer}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
+      <TooltipContainer ref={refContainer} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         {props.children}
       </TooltipContainer>
       {ReactDOM.createPortal(
@@ -256,8 +239,10 @@ export const TooltipContent: FC<TooltipProps> = (props) => {
             {<Typography size={props.size ?? 14}>{props.content}</Typography>}
           </TooltipBox>
         </>,
-        document.body,
+        document.body
       )}
     </>
   )
 }
+
+Tooltip.displayName = 'Tooltip'

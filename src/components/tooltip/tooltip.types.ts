@@ -1,4 +1,5 @@
 import { CSSProperties, ReactNode } from 'react'
+import { AddDollarSign } from 'src/types'
 
 export type Placement =
   | 'top'
@@ -25,13 +26,8 @@ export interface TooltipProps {
   size?: number
 }
 
-export interface TooltipBoxProps {
-  $placement: Placement
-  $visible: boolean
-  $whiteSpace?: TooltipProps['whiteSpace']
-  $maxWidth?: TooltipProps['maxWidth']
-  $maxHeight?: TooltipProps['maxHeight']
-}
-export interface TooltipArrowProps {
-  $visible: boolean
-}
+export type TooltipBoxProps = AddDollarSign<
+  Pick<TooltipProps, 'whiteSpace' | 'maxWidth' | 'maxHeight'> & { placement: Placement; visible: boolean }
+>
+
+export type TooltipArrowProps = Pick<TooltipBoxProps, '$visible'>

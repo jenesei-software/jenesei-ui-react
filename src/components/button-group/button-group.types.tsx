@@ -1,4 +1,6 @@
-import { ButtonProps } from "@components/button"
+import { AddDollarSign } from 'src/types'
+
+import { ButtonProps } from '@components/button'
 
 export interface ButtonGroupProps {
   value: ButtonProps[]
@@ -7,6 +9,4 @@ export interface ButtonGroupProps {
   width?: ButtonProps['width']
 }
 
-export interface StyledButtonGroupProps {
-  $position: ButtonGroupProps['position']
-}
+export type StyledButtonGroupProps = AddDollarSign<Pick<ButtonGroupProps, 'position'>>
