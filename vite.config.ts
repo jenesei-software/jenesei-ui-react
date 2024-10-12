@@ -57,7 +57,6 @@ export default defineConfig(() => {
             react: 'React',
             'react-dom': 'ReactDOM',
             moment: 'moment',
-            yup: 'yup',
             'react-ripple-click': 'reactRippleClick',
             'react-loading': 'ReactLoading',
             gsap: 'gsap',
@@ -66,12 +65,8 @@ export default defineConfig(() => {
             'react-number-format': 'reactNumberFormat',
             '@tanstack/react-virtual': 'reactVirtual',
             'react-toggle': 'ReactToggle',
-            '@tanstack/react-form': 'reactForm',
-            '@tanstack/yup-form-adapter': 'yupFormAdapter',
-            'ua-parser-js': 'UAParser',
             'react-helmet': 'reactHelmet',
-            'js-cookie': 'Cookies',
-            'react-i18next': 'reactI18next'
+            'js-cookie': 'Cookies'
           }
         }
       }
