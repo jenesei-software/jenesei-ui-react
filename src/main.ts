@@ -29,6 +29,5 @@ export * from './hooks/use-screen-width'
 // Export of providers
 export * from './providers/provider-app'
 export * from './providers/provider-cookie'
-export * from './providers/provider-language'
 export * from './providers/provider-local-storage'
 export * from './providers/provider-permission'
