@@ -3,9 +3,6 @@
 // Export styles and themes
 export * from './theme'
 
-// Exporting utilities and functions
-export * from './functions'
-
 // Exporting components
 export * from './components/accordion'
 export * from './components/button'
@@ -22,18 +19,6 @@ export * from './components/select'
 export * from './components/toggle'
 export * from './components/tooltip'
 export * from './components/typography'
-
-export * from './forms/default'
-export * from './forms/forgot-password'
-export * from './forms/form-check-your-email'
-export * from './forms/form-status'
-export * from './forms/reset-password'
-export * from './forms/sign-in'
-export * from './forms/sign-up'
-
-export * from './modules/profile'
-export * from './modules/resource'
-export * from './modules/session'
 
 export * from './layouts/auth'
 
