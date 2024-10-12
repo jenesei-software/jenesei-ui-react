@@ -11,11 +11,7 @@ export const Button: FC<ButtonProps> = (props) => {
   const theme = useTheme()
 
   const modalLoadingComponent = (
-    <ModalLoading
-      size={props.size}
-      color={theme.colors.button[props.genre].color.rest}
-      order={props.loadingOrder}
-    />
+    <ModalLoading size={props.size} color={theme.colors.button[props.genre].color.rest} order={props.loadingOrder} />
   )
 
   const handleClick: ButtonProps['onClick'] = (event) => {
@@ -63,9 +59,7 @@ export const Button: FC<ButtonProps> = (props) => {
           modalLoadingComponent
         ) : (
           <>
-            <div style={{ order: 0, display: 'contents' }}>
-              {props.children && props.children}
-            </div>
+            <div style={{ order: 0, display: 'contents' }}>{props.children && props.children}</div>
             {props.iconName && (
               <Icon
                 name={props.iconName}
@@ -79,9 +73,7 @@ export const Button: FC<ButtonProps> = (props) => {
         )
       ) : (
         <>
-          <div style={{ order: 0, display: 'contents' }}>
-            {props.children && props.children}
-          </div>
+          <div style={{ order: 0, display: 'contents' }}>{props.children && props.children}</div>
           <StyledButtonIconsWrapper
             $size={props.size}
             $isIconGroup={props.isIconGroup}

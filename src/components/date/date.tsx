@@ -1,13 +1,6 @@
 import gsap from 'gsap'
 import moment from 'moment'
-import {
-  FocusEventHandler,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { FocusEventHandler, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Ripple } from 'react-ripple-click'
 
 import { Button } from '@components/button'
@@ -26,7 +19,7 @@ import {
   DateDropdownListParent,
   DateProps,
   DateStyledInput,
-  DateWrapper,
+  DateWrapper
 } from '.'
 
 function countSevens(number: number) {
@@ -50,16 +43,8 @@ export const DatePicker = (props: DateProps) => {
   const daysInMonth: DateDayProps[] = useMemo(() => {
     const today = moment.utc()
 
-    const startOfMonth = moment
-      .utc()
-      .year(currentYear)
-      .month(currentMonth)
-      .startOf('month')
-    const endOfMonth = moment
-      .utc()
-      .year(currentYear)
-      .month(currentMonth)
-      .endOf('month')
+    const startOfMonth = moment.utc().year(currentYear).month(currentMonth).startOf('month')
+    const endOfMonth = moment.utc().year(currentYear).month(currentMonth).endOf('month')
 
     const days = []
 
@@ -79,10 +64,7 @@ export const DatePicker = (props: DateProps) => {
           weekOfMonth: Math.ceil((days.length + 1) / 7),
           isToday: day.isSame(today, 'day'),
           isCurrentMonth: false,
-          isDisabled:
-            day.isBefore(startDate, 'day') ||
-            day.isAfter(endDate, 'day') ||
-            day.isSame(endDate, 'day'),
+          isDisabled: day.isBefore(startDate, 'day') || day.isAfter(endDate, 'day') || day.isSame(endDate, 'day')
         })
       }
     }
@@ -94,15 +76,14 @@ export const DatePicker = (props: DateProps) => {
         labelString: currentDate.format('dd'),
         labelNumber: currentDate.date(),
         dayOfWeek: currentDate.isoWeekday(),
-        isWeekend:
-          currentDate.isoWeekday() === 6 || currentDate.isoWeekday() === 7,
+        isWeekend: currentDate.isoWeekday() === 6 || currentDate.isoWeekday() === 7,
         weekOfMonth: Math.ceil((days.length + 1) / 7),
         isToday: currentDate.isSame(today, 'day'),
         isCurrentMonth: true,
         isDisabled:
           currentDate.isBefore(startDate, 'day') ||
           currentDate.isAfter(endDate, 'day') ||
-          currentDate.isSame(endDate, 'day'),
+          currentDate.isSame(endDate, 'day')
       })
       currentDate.add(1, 'day')
     }
@@ -120,10 +101,7 @@ export const DatePicker = (props: DateProps) => {
           weekOfMonth: Math.ceil((days.length + 1) / 7),
           isToday: day.isSame(today, 'day'),
           isCurrentMonth: false,
-          isDisabled:
-            day.isBefore(startDate, 'day') ||
-            day.isAfter(endDate, 'day') ||
-            day.isSame(endDate, 'day'),
+          isDisabled: day.isBefore(startDate, 'day') || day.isAfter(endDate, 'day') || day.isSame(endDate, 'day')
         })
       }
     }
@@ -134,12 +112,7 @@ export const DatePicker = (props: DateProps) => {
 
   // Увеличение месяца
   const increaseMonth = () => {
-    const newDate = moment
-      .utc()
-      .year(currentYear)
-      .month(currentMonth)
-      .date(currentDay)
-      .add(1, 'month')
+    const newDate = moment.utc().year(currentYear).month(currentMonth).date(currentDay).add(1, 'month')
     setCurrentDay(newDate.date())
     setCurrentMonth(newDate.month())
     setCurrentYear(newDate.year())
@@ -147,12 +120,7 @@ export const DatePicker = (props: DateProps) => {
 
   // Уменьшение месяца
   const decreaseMonth = () => {
-    const newDate = moment
-      .utc()
-      .year(currentYear)
-      .month(currentMonth)
-      .date(currentDay)
-      .subtract(1, 'month')
+    const newDate = moment.utc().year(currentYear).month(currentMonth).date(currentDay).subtract(1, 'month')
     setCurrentDay(newDate.date())
     setCurrentMonth(newDate.month())
     setCurrentYear(newDate.year())
@@ -186,15 +154,11 @@ export const DatePicker = (props: DateProps) => {
   const parentListRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
-  const rows = useMemo(
-    () => countSevens(daysInMonth.length) + 1,
-    [daysInMonth.length],
-  )
+  const rows = useMemo(() => countSevens(daysInMonth.length) + 1, [daysInMonth.length])
 
   const height = useMemo(
-    () =>
-      40 + rows * 28 + (rows - 1) * 6 + KEY_SIZE_DATA[props.size].padding * 2,
-    [props.size, rows],
+    () => 40 + rows * 28 + (rows - 1) * 6 + KEY_SIZE_DATA[props.size].padding * 2,
+    [props.size, rows]
   )
 
   const radius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size])
@@ -212,7 +176,7 @@ export const DatePicker = (props: DateProps) => {
     if (!list) return
 
     gsap.to(inputRef.current, {
-      duration: 0.1,
+      duration: 0.1
     })
     gsap.to(parentListRef.current, {
       height: '0px',
@@ -225,7 +189,7 @@ export const DatePicker = (props: DateProps) => {
         setIsOpen(false)
         wrapperRef.current?.blur()
         inputRef.current?.blur()
-      },
+      }
     })
   }, [])
 
@@ -240,9 +204,9 @@ export const DatePicker = (props: DateProps) => {
           duration: 0.1,
           onComplete: () => {
             handleListOptionOpenEffect()
-          },
+          }
         })
-      },
+      }
     })
   }, [handleListOptionOpenEffect, height])
 
@@ -261,7 +225,7 @@ export const DatePicker = (props: DateProps) => {
       if (props.onFocus) props.onFocus(event)
       handleOnFocusEasy()
     },
-    [handleOnFocusEasy, props],
+    [handleOnFocusEasy, props]
   )
 
   useEffect(() => {
@@ -279,7 +243,7 @@ export const DatePicker = (props: DateProps) => {
       duration: 0.2,
       onComplete: () => {
         handleListOptionCloseEffect()
-      },
+      }
     })
   }, [handleListOptionCloseEffect, isAnimating, isOpen])
 
@@ -289,14 +253,11 @@ export const DatePicker = (props: DateProps) => {
       if (props.onBlur && event) props.onBlur(event)
       handleOnBlurEasy()
     },
-    [handleOnBlurEasy, props],
+    [handleOnBlurEasy, props]
   )
 
   const handleMouseDown = useCallback((event: MouseEvent) => {
-    if (
-      parentListRef.current &&
-      parentListRef.current.contains(event.target as Node)
-    ) {
+    if (parentListRef.current && parentListRef.current.contains(event.target as Node)) {
       event.preventDefault()
     }
   }, [])
@@ -311,9 +272,7 @@ export const DatePicker = (props: DateProps) => {
       .startOf('year')
       .year()
     const nextMonthYearEndDate = moment(props.endDate).year()
-    const isBeforeEndDate = props.endDate
-      ? nextMonthYear >= nextMonthYearEndDate
-      : false
+    const isBeforeEndDate = props.endDate ? nextMonthYear >= nextMonthYearEndDate : false
     return isBeforeEndDate
   }, [currentYear, currentMonth, currentDay, props.endDate])
 
@@ -329,9 +288,7 @@ export const DatePicker = (props: DateProps) => {
 
     const prevMonthYearStartDate = moment(props.startDate).year()
 
-    const isAfterStartDate = props.startDate
-      ? prevMonthYear < prevMonthYearStartDate
-      : false
+    const isAfterStartDate = props.startDate ? prevMonthYear < prevMonthYearStartDate : false
 
     return isAfterStartDate
   }, [currentYear, currentMonth, currentDay, props.startDate])
@@ -400,10 +357,7 @@ export const DatePicker = (props: DateProps) => {
           defaultValue={props?.inputProps?.defaultValue}
           value={currentDateLabel}
           type={props?.inputProps?.type}
-          onChange={(event) =>
-            props.inputProps?.onChange &&
-            props.inputProps?.onChange(event.target.value)
-          }
+          onChange={(event) => props.inputProps?.onChange && props.inputProps?.onChange(event.target.value)}
           onBlur={props?.inputProps?.onBlur}
           onFocus={props?.inputProps?.onFocus}
           onClick={handleOnFocusEasy}
@@ -415,15 +369,10 @@ export const DatePicker = (props: DateProps) => {
           $genre={props.genre}
           $size={props.size}
           style={{
-            height: `${height}px`,
+            height: `${height}px`
           }}
         >
-          <DateDropdownList
-            $isInputEffect={props.isInputEffect}
-            $genre={props.genre}
-            $size={props.size}
-            ref={listRef}
-          >
+          <DateDropdownList $isInputEffect={props.isInputEffect} $genre={props.genre} $size={props.size} ref={listRef}>
             <Stack justifyContent="space-between" alignItems="center">
               <Button
                 type="button"
@@ -485,6 +434,8 @@ export const DatePicker = (props: DateProps) => {
             <DateDropdownDays $rows={rows}>
               {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((e, index) => (
                 <DateDropdownDayOfWeek
+                  $isToday={false}
+                  $isWeekend={false}
                   type="button"
                   $genre={props.genre}
                   $size={props.size}
@@ -514,18 +465,14 @@ export const DatePicker = (props: DateProps) => {
                       <Ripple />
                       {day.labelNumber}
                     </DateDropdownDay>
-                  ),
+                  )
               )}
             </DateDropdownDays>
           </DateDropdownList>
         </DateDropdownListParent>
       </DateWrapper>
       {props?.inputProps?.isError && props?.inputProps?.errorMessage && (
-        <InputErrorMessage
-          $size={props.size}
-          $width={props.width}
-          $isErrorAbsolute={props.inputProps?.isErrorAbsolute}
-        >
+        <InputErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.inputProps?.isErrorAbsolute}>
           {props.inputProps?.errorMessage}
         </InputErrorMessage>
       )}

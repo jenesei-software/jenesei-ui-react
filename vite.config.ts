@@ -13,8 +13,8 @@ export default defineConfig(() => {
   return {
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
-      },
+        '@': path.resolve(__dirname, './src')
+      }
     },
     plugins: [
       basicSsl(),
@@ -23,14 +23,11 @@ export default defineConfig(() => {
       !isStorybookBuild &&
         dts({
           include: ['src/'],
-          exclude: [
-            'src/declaration/styled.d.ts',
-            'src/declaration/jenesei-web-id-api.d.ts',
-          ],
+          exclude: ['src/declaration/styled.d.ts', 'src/declaration/jenesei-web-id-api.d.ts'],
           rollupTypes: true,
           insertTypesEntry: true,
-          tsConfigFilePath: './tsconfig.json',
-        }),
+          tsConfigFilePath: './tsconfig.json'
+        })
     ].filter(Boolean),
     publicDir: false,
     build: {
@@ -41,14 +38,14 @@ export default defineConfig(() => {
       terserOptions: {
         compress: {
           drop_console: true,
-          drop_debugger: true,
-        },
+          drop_debugger: true
+        }
       },
       lib: {
         entry: resolve(__dirname, 'src/main.ts'),
         name: 'jenesei-ui-react',
         formats: ['es', 'umd'],
-        fileName: (format) => `jenesei-ui-react.${format}.js`,
+        fileName: (format) => `jenesei-ui-react.${format}.js`
       },
       rollupOptions: {
         external: Object.keys(peerDependencies),
@@ -59,7 +56,6 @@ export default defineConfig(() => {
             'styled-reset': 'reset',
             react: 'React',
             'react-dom': 'ReactDOM',
-            '@jenesei-software/jenesei-web-id-api': 'jeneseiWebIdApi',
             moment: 'moment',
             yup: 'yup',
             'react-ripple-click': 'reactRippleClick',
@@ -75,10 +71,10 @@ export default defineConfig(() => {
             'ua-parser-js': 'UAParser',
             'react-helmet': 'reactHelmet',
             'js-cookie': 'Cookies',
-            'react-i18next': 'reactI18next',
-          },
-        },
-      },
-    },
+            'react-i18next': 'reactI18next'
+          }
+        }
+      }
+    }
   }
 })

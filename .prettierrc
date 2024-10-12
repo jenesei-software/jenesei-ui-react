@@ -9,8 +9,8 @@
     "^@modules/(.*)$",
     "^@providers/(.*)$",
     "^@theme/(.*)$",
-    "^[./]",
     "^@fontsource/(.*)$",
+    "^[./]",
     ".css"
   ],
   "importOrderSeparation": true,
