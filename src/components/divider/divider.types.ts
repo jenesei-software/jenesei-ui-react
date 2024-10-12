@@ -1,3 +1,5 @@
+import { AddDollarSign } from 'src/types'
+
 import { JeneseiThemeVariablesKeys } from '@theme/index'
 
 export interface DividerProps {
@@ -7,9 +9,4 @@ export interface DividerProps {
   color: JeneseiThemeVariablesKeys
 }
 
-export interface DividerWrapperProps {
-  $width?: DividerProps['width']
-  $height: DividerProps['height']
-  $radius?: DividerProps['radius']
-  $color: DividerProps['color']
-}
+export type DividerWrapperProps = AddDollarSign<Pick<DividerProps, 'width' | 'height' | 'radius' | 'color'>>

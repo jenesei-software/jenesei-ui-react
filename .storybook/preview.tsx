@@ -1,11 +1,7 @@
-import { ProviderAxiosWebId, ProviderWSWebId } from '@jenesei-software/jenesei-web-id-api'
 import type { Preview } from '@storybook/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
-
-import { ProviderPermission } from '../src/providers/provider-permission'
-import { JeneseiGlobalStyles, JeneseiTheme } from '../src/theme/index'
 
 import '@fontsource/inter/100.css'
 import '@fontsource/inter/300.css'
@@ -13,6 +9,9 @@ import '@fontsource/inter/400.css'
 import '@fontsource/inter/500.css'
 import '@fontsource/inter/700.css'
 import '@fontsource/inter/900.css'
+
+import { ProviderPermission } from '../src/providers/provider-permission'
+import { JeneseiGlobalStyles, JeneseiTheme } from '../src/theme/index'
 
 import 'react-ripple-click/dist/index.css'
 
@@ -35,16 +34,12 @@ const preview: Preview = {
     (Story) => {
       return (
         <QueryClientProvider client={queryClient}>
-          <ProviderAxiosWebId baseURL={baseURL} coreURL={coreURL} availabilityCookieName={availabilityCookieName}>
-            <ProviderWSWebId socketURL={socketURL} onLogout={() => {}} client={queryClient}>
-              <ProviderPermission serviceWorkerPath={'/service-worker.js'}>
-                <ThemeProvider theme={JeneseiTheme}>
-                  <JeneseiGlobalStyles />
-                  <Story />
-                </ThemeProvider>
-              </ProviderPermission>
-            </ProviderWSWebId>
-          </ProviderAxiosWebId>
+          <ProviderPermission serviceWorkerPath={'/service-worker.js'}>
+            <ThemeProvider theme={JeneseiTheme}>
+              <JeneseiGlobalStyles />
+              <Story />
+            </ThemeProvider>
+          </ProviderPermission>
         </QueryClientProvider>
       )
     }

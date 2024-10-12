@@ -3,8 +3,9 @@ import {
   HTMLInputAutoCompleteAttribute,
   HTMLInputTypeAttribute,
   KeyboardEventHandler,
-  PropsWithChildren,
+  PropsWithChildren
 } from 'react'
+import { AddDollarSign } from 'src/types'
 
 import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@theme/index'
 
@@ -82,48 +83,28 @@ export interface InputChildrenProps extends PropsWithChildren {
   width: string
 }
 
-export interface StyledInputChildrenProps {
-  $left: InputChildrenProps['left']
-
-  $right: InputChildrenProps['right']
-
-  $width: InputChildrenProps['width']
-
-  $isDisabled?: InputProps['isDisabled']
-}
+export type StyledInputChildrenProps = AddDollarSign<
+  Pick<InputProps, 'isDisabled'> & Pick<InputChildrenProps, 'left' | 'right' | 'width'>
+>
 
 export type TInputGenre = keyof TJeneseiThemeGenreInput
 
-export interface StyledInputProps {
-  $genre: InputProps['genre']
+export type StyledInputProps = AddDollarSign<
+  Pick<
+    InputProps,
+    | 'genre'
+    | 'size'
+    | 'isError'
+    | 'isLoading'
+    | 'isInputEffect'
+    | 'isDisabled'
+    | 'postfixChildren'
+    | 'prefixChildren'
+    | 'isBold'
+    | 'isCustomIcon'
+  >
+>
 
-  $size: InputProps['size']
+export type StyledInputWrapperProps = AddDollarSign<Pick<InputProps, 'isDisabled' | 'isInputEffect' | 'width'>>
 
-  $isError?: InputProps['isError']
-
-  $isLoading?: InputProps['isLoading']
-
-  $isInputEffect?: InputProps['isInputEffect']
-
-  $isDisabled?: InputProps['isDisabled']
-
-  $postfixChildren?: InputChildrenProps
-
-  $prefixChildren?: InputChildrenProps
-
-  $isBold?: InputProps['isBold']
-
-  $isCustomIcon?: InputProps['isCustomIcon']
-}
-
-export interface StyledInputWrapperProps {
-  $isDisabled?: InputProps['isDisabled']
-  $isInputEffect?: InputProps['isInputEffect']
-  $width?: InputProps['width']
-}
-
-export interface InputErrorMessageProps {
-  $isErrorAbsolute?: InputProps['isErrorAbsolute']
-  $width?: InputProps['width']
-  $size: InputProps['size']
-}
+export type InputErrorMessageProps = AddDollarSign<Pick<InputProps, 'isErrorAbsolute' | 'width' | 'size'>>

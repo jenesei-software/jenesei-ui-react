@@ -1,4 +1,5 @@
 import { CSSProperties, PropsWithChildren, ReactNode } from 'react'
+import { AddDollarSign } from 'src/types'
 
 import { TooltipProps } from '@components/tooltip'
 
@@ -31,32 +32,18 @@ export interface TypographyVariantProps extends TypographyDefaultProps {
 
 export type TypographyProps = TypographyDataProps | TypographyVariantProps
 
-export type TypographyVariant =
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'h4'
-  | 'h5'
-  | 'h6'
-  | 'h7'
-  | 'h8'
-  | 'h9'
+export type TypographyVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9'
 
-export interface TypographyCSSProps {
-  $clamp?: TypographyDefaultProps['clamp']
-  $clampOrient?: TypographyDefaultProps['clampOrient']
-  $overflow?: TypographyDefaultProps['overflow']
-  $color?: TypographyDefaultProps['color']
-  $family?: TypographyDefaultProps['family']
-  $textAlign?: TypographyDefaultProps['textAlign']
-  $textWrap?: TypographyDefaultProps['textWrap']
-  $flex?: TypographyDefaultProps['flex']
-  $variant?: TypographyVariantProps['variant']
-  $cursor?: TypographyVariantProps['cursor']
-  $size?: TypographyDataProps['size']
-  $weight?: TypographyDataProps['weight']
-  $height?: TypographyDataProps['height']
-}
+export type TypographyCSSProps = Partial<
+  AddDollarSign<
+    Pick<
+      TypographyDefaultProps,
+      'clamp' | 'clampOrient' | 'overflow' | 'color' | 'family' | 'textAlign' | 'textWrap' | 'flex'
+    > &
+      Pick<TypographyVariantProps, 'variant' | 'cursor'> &
+      Pick<TypographyDataProps, 'size' | 'weight' | 'height'>
+  >
+>
 
 export interface TypographyTooltipProps {
   typography: Omit<TypographyProps, 'children'>

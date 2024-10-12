@@ -1,9 +1,10 @@
 import { ReactElement } from 'react'
+import { AddDollarSign } from 'src/types'
 
-import { FlexShortStylesNormalizedPropsNormalized } from '@components/flex'
+import { FlexShortStylesProps } from '@components/flex'
 
 export interface AccordionProps {
-  wrapperProps: FlexShortStylesNormalizedPropsNormalized
+  wrapperProps: FlexShortStylesProps
   accordionSummary: ReactElement
   accordionDetails: ReactElement
   expanded: boolean
@@ -13,14 +14,8 @@ export interface AccordionProps {
   triggerUpdate?: unknown[]
 }
 
-export interface AccordionStyledIconProps {
-  $expanded: boolean
-}
+export type AccordionStyledIconProps = AddDollarSign<Pick<AccordionProps, 'expanded'>>
 
-export interface AccordionSummaryContentProps {
-  $isAccordionIcon?: boolean
-}
+export type AccordionSummaryContentProps = AddDollarSign<Pick<AccordionProps, 'isAccordionIcon'>>
 
-export interface AccordionDetailsProps {
-  $expanded: boolean
-}
+export type AccordionDetailsProps = AddDollarSign<Pick<AccordionProps, 'expanded'>>

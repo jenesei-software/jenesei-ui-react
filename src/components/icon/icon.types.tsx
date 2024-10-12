@@ -1,4 +1,6 @@
-import { FlexContainerAndItemAndBasicProps } from '@components/flex'
+import { AddDollarSign } from 'src/types'
+
+import { DollarFlexContainerAndItemAndBasicProps } from '@components/flex'
 
 import { JeneseiThemeVariablesKeys, TJeneseiThemeSize } from '@theme/index'
 
@@ -8,7 +10,7 @@ export interface BaseLibraryIconProps {
   size: TJeneseiThemeSize
   primaryColor?: JeneseiThemeVariablesKeys
   secondColor?: JeneseiThemeVariablesKeys
-  styles?: FlexContainerAndItemAndBasicProps
+  styles?: DollarFlexContainerAndItemAndBasicProps
   turn?: number
   order?: number
 }
@@ -23,16 +25,10 @@ export interface LibraryIconCheckboxItemProps extends BaseLibraryIconProps {
   name: TLibraryIconCheckboxNameString
 }
 
-export type LibraryIconItemProps =
-  | LibraryIconCurvedItemProps
-  | LibraryIconCheckboxItemProps
+export type LibraryIconItemProps = LibraryIconCurvedItemProps | LibraryIconCheckboxItemProps
 
-export interface StyledLibraryIconCurvedItemProps
-  extends FlexContainerAndItemAndBasicProps {
-  $size: LibraryIconItemProps['size']
-  $turn?: LibraryIconItemProps['turn']
-  $order?: LibraryIconItemProps['order']
-}
+export type StyledLibraryIconCurvedItemProps = AddDollarSign<Pick<LibraryIconItemProps, 'size' | 'turn' | 'order'>> &
+  DollarFlexContainerAndItemAndBasicProps
 
 export enum LibraryIconCurvedName {
   Biometry,
@@ -143,5 +139,4 @@ export enum LibraryIconCheckboxName {
   Square
 }
 export type TLibraryIconCurvedNameString = keyof typeof LibraryIconCurvedName
-export type TLibraryIconCheckboxNameString =
-  keyof typeof LibraryIconCheckboxName
+export type TLibraryIconCheckboxNameString = keyof typeof LibraryIconCheckboxName
