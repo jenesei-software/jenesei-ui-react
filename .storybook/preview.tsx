@@ -1,5 +1,4 @@
 import type { Preview } from '@storybook/react'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 
@@ -15,32 +14,16 @@ import { JeneseiGlobalStyles, JeneseiTheme } from '../src/theme/index'
 
 import 'react-ripple-click/dist/index.css'
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      staleTime: 60000
-    }
-  }
-})
-
-const baseURL = import.meta.env.VITE_BASE_URL || ''
-const socketURL = import.meta.env.VITE_SOCKET_URL || ''
-const coreURL = import.meta.env.VITE_CORE_URL || ''
-const availabilityCookieName = import.meta.env.VITE_AVAILABILITY_COOKIE_NAME || ''
-
 const preview: Preview = {
   decorators: [
     (Story) => {
       return (
-        <QueryClientProvider client={queryClient}>
-          <ProviderPermission serviceWorkerPath={'/service-worker.js'}>
-            <ThemeProvider theme={JeneseiTheme}>
-              <JeneseiGlobalStyles />
-              <Story />
-            </ThemeProvider>
-          </ProviderPermission>
-        </QueryClientProvider>
+        <ProviderPermission serviceWorkerPath={'/service-worker.js'}>
+          <ThemeProvider theme={JeneseiTheme}>
+            <JeneseiGlobalStyles />
+            <Story />
+          </ThemeProvider>
+        </ProviderPermission>
       )
     }
   ],
