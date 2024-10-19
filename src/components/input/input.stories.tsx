@@ -2,41 +2,31 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import 'styled-components'
 
-import { Icon } from '@assets/library-icon'
-
-import { Stack } from '@components/flex'
-
 import { Input, InputProps } from '.'
 
 const meta: Meta<typeof Input> = {
   component: Input,
-  title: 'Input',
+  title: 'Input'
 }
 
 export default meta
 type Story = StoryObj<typeof Input>
 
 const defaultArgs: Partial<InputProps> = {
-  genre: 'gray',
-  size: 'medium',
+  genre: 'blackBorder',
+  size: 'largeMedium',
   isError: false,
   isDisabled: false,
   isRequired: false,
   isReadOnly: false,
   isLoading: false,
-  width: '300px',
+  width: '300px'
 }
 
 const InputStringWrapper: React.FC<InputProps> = (props) => {
   const [value, setValue] = useState<string>('')
 
-  return (
-    <Input
-      {...props}
-      value={value}
-      onChange={(newValue) => setValue(newValue)}
-    />
-  )
+  return <Input {...props} value={value} onChange={(newValue) => setValue(newValue)} />
 }
 
 export const Password: Story = {
@@ -44,31 +34,10 @@ export const Password: Story = {
   args: {
     ...defaultArgs,
     type: 'password',
-    placeholder: 'Password',
-    postfixChildren: {
-      width: '32px',
-      left: '4px',
-      right: '0px',
-      children: (
-        <Stack
-          alignItems={'center'}
-          justifyContent={'center'}
-          p={'2px'}
-          style={{ borderRadius: '0px 6px 6px 0px' }}
-          bg={'black60'}
-          minH={'100%'}
-          h={'100%'}
-        >
-          <Icon
-            size={'largeMedium'}
-            primaryColor={'grayJanice'}
-            type={'curved'}
-            name={'Password'}
-          />
-        </Stack>
-      ),
-    },
-  },
+    errorMessage: 'Error',
+    isErrorAbsolute: true,
+    placeholder: 'Password'
+  }
 }
 
 export const Phone: Story = {
@@ -78,31 +47,8 @@ export const Phone: Story = {
     format: '+7 (9##) ###-##-##',
     mask: '_',
     formatType: 'tel',
-    placeholder: 'Phone',
-    postfixChildren: {
-      width: '32px',
-      left: '4px',
-      right: '0px',
-      children: (
-        <Stack
-          alignItems={'center'}
-          justifyContent={'center'}
-          p={'2px'}
-          style={{ borderRadius: '0px 6px 6px 0px' }}
-          bg={'black60'}
-          minH={'100%'}
-          h={'100%'}
-        >
-          <Icon
-            size={'largeMedium'}
-            primaryColor={'grayJanice'}
-            type={'curved'}
-            name={'Call'}
-          />
-        </Stack>
-      ),
-    },
-  },
+    placeholder: 'Phone'
+  }
 }
 
 export const INN: Story = {
@@ -111,31 +57,8 @@ export const INN: Story = {
     format: '### ### ### ###',
     placeholder: 'INN',
     mask: '',
-    formatType: 'text',
-    postfixChildren: {
-      width: '32px',
-      left: '4px',
-      right: '0px',
-      children: (
-        <Stack
-          alignItems={'center'}
-          justifyContent={'center'}
-          p={'2px'}
-          style={{ borderRadius: '0px 6px 6px 0px' }}
-          bg={'black60'}
-          minH={'100%'}
-          h={'100%'}
-        >
-          <Icon
-            size={'largeMedium'}
-            primaryColor={'grayJanice'}
-            type={'curved'}
-            name={'ShieldDone'}
-          />
-        </Stack>
-      ),
-    },
-  },
+    formatType: 'text'
+  }
 }
 
 export const Code: Story = {
@@ -144,29 +67,6 @@ export const Code: Story = {
     format: '# # # #',
     placeholder: 'Code',
     mask: '_',
-    formatType: 'text',
-    postfixChildren: {
-      width: '32px',
-      left: '4px',
-      right: '0px',
-      children: (
-        <Stack
-          alignItems={'center'}
-          justifyContent={'center'}
-          p={'2px'}
-          style={{ borderRadius: '0px 6px 6px 0px' }}
-          bg={'black60'}
-          minH={'100%'}
-          h={'100%'}
-        >
-          <Icon
-            size={'largeMedium'}
-            primaryColor={'grayJanice'}
-            type={'curved'}
-            name={'Chat'}
-          />
-        </Stack>
-      ),
-    },
-  },
+    formatType: 'text'
+  }
 }

@@ -1,35 +1,32 @@
-import {
-  LibraryIconItemProps ,
-  TLibraryIconCurvedNameString,
-} from '@assets/library-icon'
+import { PropsWithChildren } from 'react'
+import { AddDollarSign } from 'src/types'
 
-import { FlexContainerAndItemPropsNormalized, FlexContainerAndItemProps } from '@components/flex'
+import { DollarFlexContainerAndItemProps, FlexContainerAndItemProps } from '@components/flex'
+import { LibraryIconItemProps, TLibraryIconCurvedNameString } from '@components/icon'
 import { ModalLoadingProps } from '@components/modal-loading'
 
-import {
-  TJeneseiFontFamily,
-  TJeneseiThemeGenre,
-  TJeneseiThemeSize,
-} from '@theme/index'
+import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@theme/index'
 
-export interface ButtonProps {
+export type TButtonGenre = keyof TJeneseiThemeGenre
+
+export interface ButtonProps extends PropsWithChildren {
+  isIconGroup?: boolean
+
+  size: TJeneseiThemeSize
+
+  iconGroupOrder?: number
+
+  id?: string
+
   className?: string
 
   genre: TButtonGenre
 
-  children?: React.ReactNode
-
-  size: TJeneseiThemeSize
-
   iconName?: TLibraryIconCurvedNameString
 
-  iconOrder?: LibraryIconItemProps ['order']
+  iconOrder?: LibraryIconItemProps['order']
 
-  iconTurn?: LibraryIconItemProps ['turn']
-
-  iconGroupOrder?: number
-
-  isIconGroup?: boolean
+  iconTurn?: LibraryIconItemProps['turn']
 
   isDisabled?: boolean
 
@@ -55,6 +52,8 @@ export interface ButtonProps {
 
   width?: string | 'asHeight'
 
+  flex?: string
+
   customFontFamily?: TJeneseiFontFamily
 
   customFontSize?: number
@@ -63,39 +62,29 @@ export interface ButtonProps {
 
   isFullSize?: boolean
 
-  customStyles?: FlexContainerAndItemPropsNormalized
+  customStyles?: FlexContainerAndItemProps
 }
 
-export type TButtonGenre = keyof TJeneseiThemeGenre
+export type StyledDollarButtonProps = AddDollarSign<
+  Pick<
+    ButtonProps,
+    | 'genre'
+    | 'isDisabled'
+    | 'isHidden'
+    | 'isRadius'
+    | 'isHiddenBorder'
+    | 'isPlaystationEffect'
+    | 'width'
+    | 'flex'
+    | 'size'
+    | 'customFontFamily'
+    | 'customFontSize'
+    | 'customFontWeight'
+    | 'isFullSize'
+  >
+> &
+  DollarFlexContainerAndItemProps
 
-export interface StyledButtonProps extends FlexContainerAndItemProps {
-  $genre: ButtonProps['genre']
-
-  $isDisabled?: ButtonProps['isDisabled']
-
-  $isHidden?: ButtonProps['isHidden']
-
-  $isRadius?: ButtonProps['isRadius']
-
-  $isHiddenBorder?: ButtonProps['isHiddenBorder']
-
-  $isPlaystationEffect?: ButtonProps['isPlaystationEffect']
-
-  $width?: ButtonProps['width']
-
-  $size: ButtonProps['size']
-
-  $customFontFamily?: ButtonProps['customFontFamily']
-
-  $customFontSize?: ButtonProps['customFontSize']
-
-  $customFontWeight?: ButtonProps['customFontWeight']
-
-  $isFullSize?: ButtonProps['isFullSize']
-}
-
-export interface StyledButtonIconsWrapperProps {
-  $isIconGroup?: ButtonProps['isIconGroup']
-  $size: ButtonProps['size']
-  $iconGroupOrder?: ButtonProps['iconGroupOrder']
-}
+export type StyledDollarButtonIconsWrapperProps = AddDollarSign<
+  Pick<ButtonProps, 'isIconGroup' | 'size' | 'iconGroupOrder'>
+>

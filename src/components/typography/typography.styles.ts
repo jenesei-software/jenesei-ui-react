@@ -11,8 +11,17 @@ const SpanFontCSS = css<TypographyCSSProps>`
   text-overflow: ellipsis;
   overflow-wrap: anywhere;
   box-sizing: border-box;
-  flex: 1;
 
+  ${(props) =>
+    props.$flex &&
+    css`
+      flex: ${props.$flex};
+    `};
+  ${(props) =>
+    props.$cursor &&
+    css`
+      cursor: ${props.$cursor};
+    `};
   ${(props) =>
     props.$textAlign &&
     css`
@@ -103,4 +112,22 @@ export const TitleH5 = styled.h5<TypographyCSSProps>`
 
 export const TitleH6 = styled.h6<TypographyCSSProps>`
   ${SpanFontCSS}
+`
+
+export const TitleH7 = styled.span<TypographyCSSProps>`
+  font-size: var(--heading-7-font-size);
+  line-height: var(--heading-line-height);
+  ${SpanFontCSS};
+`
+
+export const TitleH8 = styled.span<TypographyCSSProps>`
+  font-size: var(--heading-8-font-size);
+  line-height: var(--heading-line-height);
+  ${SpanFontCSS};
+`
+
+export const TitleH9 = styled.span<TypographyCSSProps>`
+  font-size: var(--heading-9-font-size);
+  line-height: var(--heading-line-height);
+  ${SpanFontCSS};
 `

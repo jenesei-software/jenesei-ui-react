@@ -1,4 +1,11 @@
-import { FocusEventHandler, HTMLInputTypeAttribute } from 'react'
+import {
+  FocusEventHandler,
+  HTMLInputAutoCompleteAttribute,
+  HTMLInputTypeAttribute,
+  KeyboardEventHandler,
+  PropsWithChildren
+} from 'react'
+import { AddDollarSign } from 'src/types'
 
 import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@theme/index'
 
@@ -13,7 +20,11 @@ export interface InputProps {
 
   errorMessage?: string
 
-  isErrorAbsolute?: string
+  isErrorAbsolute?: boolean
+
+  autocomplete?: HTMLInputAutoCompleteAttribute
+
+  isAllowEmptyFormatting?: boolean
 
   genre: TInputGenre
 
@@ -29,15 +40,21 @@ export interface InputProps {
 
   isReadOnly?: boolean
 
+  isInputEffect?: boolean
+
   isRequired?: boolean
 
   isCustomIcon?: boolean
+
+  isNoSpaces?: boolean
 
   onBlur?: FocusEventHandler<HTMLInputElement>
 
   onChange?: (value: string) => void
 
   onFocus?: FocusEventHandler<HTMLInputElement>
+
+  onKeyDown?: KeyboardEventHandler<HTMLInputElement>
 
   placeholder?: string
 
@@ -58,9 +75,7 @@ export interface InputProps {
   mask?: string | string[]
 }
 
-export interface InputChildrenProps {
-  children: React.ReactNode
-
+export interface InputChildrenProps extends PropsWithChildren {
   left: string
 
   right: string
@@ -68,33 +83,28 @@ export interface InputChildrenProps {
   width: string
 }
 
+export type StyledInputChildrenProps = AddDollarSign<
+  Pick<InputProps, 'isDisabled'> & Pick<InputChildrenProps, 'left' | 'right' | 'width'>
+>
+
 export type TInputGenre = keyof TJeneseiThemeGenreInput
 
-export interface StyledInputProps {
-  $genre: InputProps['genre']
+export type StyledInputProps = AddDollarSign<
+  Pick<
+    InputProps,
+    | 'genre'
+    | 'size'
+    | 'isError'
+    | 'isLoading'
+    | 'isInputEffect'
+    | 'isDisabled'
+    | 'postfixChildren'
+    | 'prefixChildren'
+    | 'isBold'
+    | 'isCustomIcon'
+  >
+>
 
-  $size: InputProps['size']
+export type StyledInputWrapperProps = AddDollarSign<Pick<InputProps, 'isDisabled' | 'isInputEffect' | 'width'>>
 
-  $isError?: InputProps['isError']
-
-  $isLoading?: InputProps['isLoading']
-
-  $postfixChildren?: InputChildrenProps
-
-  $prefixChildren?: InputChildrenProps
-
-  $isBold?: InputProps['isBold']
-
-  $isCustomIcon?: InputProps['isCustomIcon']
-}
-
-export interface StyledInputWrapperProps {
-  $isDisabled?: InputProps['isDisabled']
-
-  $width?: InputProps['width']
-}
-
-export interface InputErrorMessageProps {
-  $isErrorAbsolute?: string
-  $width?: InputProps['width']
-}
+export type InputErrorMessageProps = AddDollarSign<Pick<InputProps, 'isErrorAbsolute' | 'width' | 'size'>>

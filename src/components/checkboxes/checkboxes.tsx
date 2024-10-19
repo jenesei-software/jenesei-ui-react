@@ -58,17 +58,15 @@ export const Checkboxes = <T extends ICheckboxValue>(
               size={props.size}
               width={props.checkboxWidth}
               checked={isChecked}
-              children={
-                props.labelField &&
-                e?.[props.labelField] !== undefined && (
-                  <CheckboxesLabel
-                    dangerouslySetInnerHTML={createMarkup(
-                      e[props.labelField] as string,
-                    )}
-                  />
-                )
-              }
-            />
+            >
+              {props.labelField && e?.[props.labelField] !== undefined && (
+                <CheckboxesLabel
+                  dangerouslySetInnerHTML={createMarkup(
+                    e[props.labelField] as string,
+                  )}
+                />
+              )}
+            </Checkbox>
             {props.childrenField && e?.[props.childrenField] !== undefined && (
               <CheckboxChildren>
                 {e[props.childrenField] as React.ReactNode}

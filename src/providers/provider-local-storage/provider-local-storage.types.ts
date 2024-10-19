@@ -1,5 +1,6 @@
-export interface ProviderLocalStorageProps {
-  children: React.ReactNode
+import { PropsWithChildren } from 'react'
+
+export interface ProviderLocalStorageProps extends PropsWithChildren {
   validate?: {
     validateKeys: (keyof ValidLocalStorageObject)[]
     getValidateLocalStorageValue: <K extends keyof ValidLocalStorageObject>(

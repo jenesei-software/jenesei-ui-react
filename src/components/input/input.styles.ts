@@ -7,16 +7,12 @@ import { getFontSizeStyles } from '@components/typography'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
 
 import {
-  InputChildrenProps,
   InputErrorMessageProps,
+  InputProps,
+  StyledInputChildrenProps,
   StyledInputProps,
   StyledInputWrapperProps,
 } from '.'
-
-/****************************************** Hidden *************************************************/
-const InputWrapperHidden = css<StyledInputWrapperProps>`
-  opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
-`
 
 /****************************************** Wrapper *************************************************/
 export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
@@ -27,26 +23,35 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
   justify-content: center;
   flex-direction: column;
   width: ${(props) => props.$width ?? '100%'};
-  ${InputWrapperHidden};
+`
+
+/****************************************** Error Size*************************************************/
+export const InputErrorMessageSize = css<InputErrorMessageProps>`
+  ${(props) =>
+    InputErrorMessageSizeConstructor({ ...KEY_SIZE_DATA[props.$size], $isErrorAbsolute: props.$isErrorAbsolute })};
+`
+export const InputErrorMessageSizeConstructor = (
+  props: IJeneseiThemeSize & { $isErrorAbsolute: InputProps['isErrorAbsolute'] },
+) => css`
+  ${props.$isErrorAbsolute
+    ? css`
+        position: absolute;
+        padding-top: 6px;
+        padding-left: ${props.padding}px;
+        color: ${(props) => props.theme.colors.danger};
+      `
+    : css`
+        position: static;
+        padding: 0px ${props.padding}px;
+        color: ${(props) => props.theme.colors.danger};
+      `}
 `
 
 /****************************************** Error *************************************************/
 export const InputErrorMessage = styled.div<InputErrorMessageProps>`
   ${getFontSizeStyles(12, 400, 'Inter')};
   width: ${(props) => props.$width ?? '100%'};
-  ${(props) =>
-    props.$isErrorAbsolute
-      ? css`
-          position: absolute;
-          top: calc(100% + 6px);
-          left: 6px;
-          color: ${(props) => props.theme.colors.danger};
-        `
-      : css`
-          position: static;
-          padding: 6px;
-          color: ${(props) => props.theme.colors.danger};
-        `}
+  ${InputErrorMessageSize}
 `
 
 export const InputIsErrorBorder = css<StyledInputProps>`
@@ -67,15 +72,13 @@ export const InputPlaceholder = css<StyledInputProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
     ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
-    color: ${(props) =>
-      props.theme.colors.input[props.$genre].color.placeholder};
+    color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
     line-height: 24px;
   }
   &:-ms-input-placeholder {
     ${(props) => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
-    color: ${(props) =>
-      props.theme.colors.input[props.$genre].color.placeholder};
+    color: ${(props) => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
     line-height: 24px;
   }
@@ -125,7 +128,7 @@ const InputGenre = css<StyledInputProps>`
       }
     }
     &:focus-visible {
-      outline: 2px solid ${props.theme.colors.focus};
+      outline: 1px solid ${props.theme.colors.focus};
       border-color: ${props.theme.colors.input[props.$genre].border.rest};
       background: ${props.theme.colors.input[props.$genre].background.rest};
 
@@ -155,13 +158,26 @@ export const InputSizeConstructor = (props: IJeneseiThemeSize) => css`
   border-radius: ${props.radius}px;
 `
 
+/****************************************** Hidden *************************************************/
+const InputHidden = css<StyledInputProps>`
+  opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
+`
+/****************************************** is PlaystationEffect *************************************************/
+export const InputIsInputEffect = css<Pick<StyledInputProps, '$isInputEffect'>>`
+  ${(props) =>
+    props.$isInputEffect &&
+    css`
+      box-shadow: ${props.theme.effects.input.default};
+    `}
+`
+
 /****************************************** Default *************************************************/
 export const StyledInputCSS = css<StyledInputProps>`
   resize: none;
   overflow: hidden;
   box-sizing: border-box;
   width: 100%;
-  border: 2px solid;
+  border: 1px inset;
   transition:
     all ${(props) => props.theme.transition},
     outline 0s;
@@ -175,6 +191,8 @@ export const StyledInputCSS = css<StyledInputProps>`
   ${InputGenre};
   ${InputIsErrorBorder};
   ${InputPlaceholder};
+  ${InputHidden};
+  ${InputIsInputEffect};
   ${(props) =>
     props.$prefixChildren &&
     css`
@@ -197,18 +215,26 @@ export const StyledInputFormat = styled(PatternFormat)<StyledInputProps>`
 `
 
 /****************************************** Children *************************************************/
-export const InputPrefixChildren = styled.div<InputChildrenProps>`
+export const InputPrefixChildren = styled.div<StyledInputChildrenProps>`
   position: absolute;
-  left: ${(props) => props.left};
-  width: ${(props) => props.width};
+  left: ${(props) => props.$left};
+  width: ${(props) => props.$width};
+  opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
   height: 100%;
+  transition:
+    all ${(props) => props.theme.transition},
+    outline 0s;
 `
 
-export const InputPostfixChildren = styled.div<InputChildrenProps>`
+export const InputPostfixChildren = styled.div<StyledInputChildrenProps>`
   position: absolute;
-  right: ${(props) => props.right};
-  width: ${(props) => props.width};
+  right: ${(props) => props.$right};
+  width: ${(props) => props.$width};
+  opacity: ${(props) => (props.$isDisabled ? 0.5 : 1)};
   height: 100%;
+  transition:
+    all ${(props) => props.theme.transition},
+    outline 0s;
 `
 
 /****************************************** ModalLoading *************************************************/

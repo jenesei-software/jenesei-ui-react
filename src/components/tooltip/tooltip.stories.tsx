@@ -7,7 +7,7 @@ import { Tooltip, TooltipProps } from '.'
 
 const meta: Meta<typeof Tooltip> = {
   component: Tooltip,
-  title: 'Tooltip',
+  title: 'Tooltip'
 }
 
 export default meta
@@ -19,11 +19,11 @@ const TooltipWrapper: React.FC<TooltipProps> = (props) => {
     <Tooltip
       {...props}
       content={
-        'Piska Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska? Piska? Piska? Piska? Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?Piska?'
+        'Tootlip Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip? Tootlip? Tootlip? Tootlip? Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?'
       }
     >
       <Button genre={'black'} size={'medium'}>
-        Piska?
+        Tootlip?
       </Button>
     </Tooltip>
   )
@@ -31,5 +31,5 @@ const TooltipWrapper: React.FC<TooltipProps> = (props) => {
 
 export const Default: Story = {
   render: (args) => <TooltipWrapper {...args} />,
-  args: { placement: 'bottom-start' },
+  args: { placement: 'bottom-start' }
 }

@@ -8,13 +8,13 @@ import {
   AccordionStyledIcon,
   AccordionSummary,
   AccordionSummaryContent,
-  AccordionWrapper,
+  AccordionWrapper
 } from '.'
 
 export const Accordion: React.FC<AccordionProps> = (props) => {
   const onClickSummary = useCallback(() => {
     if (props.onClickSummary) props.onClickSummary()
-  }, [props.onClickSummary])
+  }, [props])
 
   const onClickIcon = useCallback(
     (event: React.MouseEvent<SVGSVGElement>) => {
@@ -23,7 +23,7 @@ export const Accordion: React.FC<AccordionProps> = (props) => {
         props.onClickIcon()
       }
     },
-    [props.onClickIcon],
+    [props]
   )
 
   return (
@@ -44,9 +44,7 @@ export const Accordion: React.FC<AccordionProps> = (props) => {
             />
           )}
         </AccordionSummary>
-        <AccordionDetails $expanded={props.expanded}>
-          {props.accordionDetails}
-        </AccordionDetails>
+        <AccordionDetails $expanded={props.expanded}>{props.accordionDetails}</AccordionDetails>
       </AccordionWrapper>
     </Stack>
   )

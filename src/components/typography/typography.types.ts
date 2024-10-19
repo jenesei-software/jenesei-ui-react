@@ -1,10 +1,11 @@
-import { CSSProperties, ReactNode } from 'react'
+import { CSSProperties, PropsWithChildren, ReactNode } from 'react'
+import { AddDollarSign } from 'src/types'
 
 import { TooltipProps } from '@components/tooltip'
 
 import { JeneseiThemeVariablesKeys, TJeneseiFontFamily } from '@theme/index'
 
-export interface TypographyDefaultProps {
+export interface TypographyDefaultProps extends PropsWithChildren {
   clamp?: number
   clampOrient?: CSSProperties['boxOrient']
   overflow?: CSSProperties['overflow']
@@ -12,15 +13,17 @@ export interface TypographyDefaultProps {
   family?: TJeneseiFontFamily
   textAlign?: CSSProperties['textAlign']
   textWrap?: CSSProperties['textWrap']
-  className?: string
-  children: React.ReactNode
+  cursor?: CSSProperties['cursor']
   style?: CSSProperties
+  className?: string
+  weight?: 100 | 300 | 400 | 500 | 700 | 900
+  height?: number
+  flex?: string
+  onClick?: () => void
 }
 
 export interface TypographyDataProps extends TypographyDefaultProps {
   size?: number
-  weight?: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
-  height?: number
 }
 
 export interface TypographyVariantProps extends TypographyDefaultProps {
@@ -29,23 +32,18 @@ export interface TypographyVariantProps extends TypographyDefaultProps {
 
 export type TypographyProps = TypographyDataProps | TypographyVariantProps
 
-export type TypographyVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+export type TypographyVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9'
 
-export interface TypographyCSSProps {
-  $clamp?: TypographyDefaultProps['clamp']
-  $clampOrient?: TypographyDefaultProps['clampOrient']
-  $overflow?: TypographyDefaultProps['overflow']
-  $color?: TypographyDefaultProps['color']
-  $family?: TypographyDefaultProps['family']
-  $textAlign?: TypographyDefaultProps['textAlign']
-  $textWrap?: TypographyDefaultProps['textWrap']
-
-  $variant?: TypographyVariantProps['variant']
-
-  $size?: TypographyDataProps['size']
-  $weight?: TypographyDataProps['weight']
-  $height?: TypographyDataProps['height']
-}
+export type TypographyCSSProps = Partial<
+  AddDollarSign<
+    Pick<
+      TypographyDefaultProps,
+      'clamp' | 'clampOrient' | 'overflow' | 'color' | 'family' | 'textAlign' | 'textWrap' | 'flex'
+    > &
+      Pick<TypographyVariantProps, 'variant' | 'cursor'> &
+      Pick<TypographyDataProps, 'size' | 'weight' | 'height'>
+  >
+>
 
 export interface TypographyTooltipProps {
   typography: Omit<TypographyProps, 'children'>

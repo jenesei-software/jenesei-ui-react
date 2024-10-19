@@ -5,6 +5,7 @@ export interface PermissionContextProps {
   geolocationPermission: PermissionState | null
   pushNotificationSupported: boolean
   serviceWorkerRegistered: boolean
+  isBiometricSupported: boolean
   pushSubscription: PushSubscription | null
   requestNotificationPermission: () => void
   requestGeolocationPermission: () => void
@@ -17,4 +18,5 @@ export interface PermissionContextProps {
 
 export interface ProviderPermissionProps {
   children: ReactNode
+  serviceWorkerPath: string
 }

@@ -4,15 +4,15 @@ import styled, { css } from 'styled-components'
 import { JeneseiThemeVariables } from '@theme/index'
 
 import {
-  FlexContainerProps,
-  FlexItemProps,
-  FlexShortStylesNormalizedPropsNormalized,
-  FlexContainerAndItemAndBasicProps,
-  FlexContainerAndItemProps,
-  FlexBasicProps,
+  DollarFlexBasicProps,
+  DollarFlexContainerAndItemAndBasicProps,
+  DollarFlexContainerAndItemProps,
+  DollarFlexContainerProps,
+  DollarFlexItemProps,
+  FlexShortStylesProps
 } from '.'
 
-const FlexContainer = css<FlexContainerProps>`
+const FlexContainer = css<DollarFlexContainerProps>`
   display: flex;
   ${({ $flexDirection }) =>
     $flexDirection &&
@@ -46,7 +46,7 @@ const FlexContainer = css<FlexContainerProps>`
     `}
 `
 
-const FlexItem = css<FlexItemProps>`
+const FlexItem = css<DollarFlexItemProps>`
   ${({ $order }) =>
     $order &&
     css`
@@ -74,7 +74,7 @@ const FlexItem = css<FlexItemProps>`
     `}
 `
 
-const FlexBasic = css<FlexBasicProps>`
+const FlexBasic = css<DollarFlexBasicProps>`
   ${({ $m }) =>
     $m &&
     css`
@@ -191,36 +191,36 @@ const FlexBasic = css<FlexBasicProps>`
     `}
 `
 
-export const FlexContainerAndItem = css<FlexContainerAndItemProps>`
+export const FlexContainerAndItem = css<DollarFlexContainerAndItemProps>`
   ${FlexContainer}
   ${FlexItem}
 `
 
-export const FlexContainerAndItemAndBasic = css<FlexContainerAndItemAndBasicProps>`
+export const FlexContainerAndItemAndBasic = css<DollarFlexContainerAndItemAndBasicProps>`
   ${FlexContainerAndItem}
   ${FlexBasic}
 `
 
-const StyledStack = styled.div<FlexContainerAndItemAndBasicProps>`
+const StyledStack = styled.div<DollarFlexContainerAndItemAndBasicProps>`
   ${FlexContainerAndItemAndBasic}
 `
 
-export const Stack: React.FC<FlexShortStylesNormalizedPropsNormalized> = (props) => {
+export const Stack: React.FC<FlexShortStylesProps> = (props) => {
   return (
     <StyledStack
+      onClick={props.onClick}
+      className={props.className}
       $flexDirection={props.flexDirection}
       $flexWrap={props.flexWrap}
       $justifyContent={props.justifyContent}
       $alignItems={props.alignItems}
       $alignContent={props.alignContent}
-      
       $order={props.order}
       $flexGrow={props.flexGrow}
       $flexShrink={props.flexShrink}
       $flexBasis={props.flexBasis}
       $alignSelf={props.alignSelf}
       $gap={props.gap}
-
       $m={props.m}
       $mt={props.mt}
       $mr={props.mr}

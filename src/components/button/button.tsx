@@ -1,22 +1,33 @@
-import { FC, memo } from 'react'
+import { FC } from 'react'
 import { Ripple } from 'react-ripple-click'
 import { useTheme } from 'styled-components'
 
-import { Icon } from '@assets/library-icon'
-
+import { Icon } from '@components/icon'
 import { ModalLoading } from '@components/modal-loading'
 
 import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.'
 
-export const Button: FC<ButtonProps> = memo((props) => {
+export const Button: FC<ButtonProps> = (props) => {
   const theme = useTheme()
+
+  const modalLoadingComponent = (
+    <ModalLoading size={props.size} color={theme.colors.button[props.genre].color.rest} order={props.loadingOrder} />
+  )
+
+  const handleClick: ButtonProps['onClick'] = (event) => {
+    if (!props.isLoading && !props.isDisabled && props.onClick) {
+      props.onClick(event)
+    }
+  }
+
   return (
     <StyledButton
-      id="jenesei-button"
+      id={props.id}
       tabIndex={0}
       $isFullSize={props.isFullSize}
       $genre={props.genre}
       $width={props.width}
+      $flex={props.flex}
       $size={props.size}
       $isDisabled={props.isDisabled}
       $isRadius={props.isRadius}
@@ -27,14 +38,9 @@ export const Button: FC<ButtonProps> = memo((props) => {
       $customFontWeight={props.customFontWeight}
       $isHiddenBorder={props.isHiddenBorder || props.isPlaystationEffect}
       disabled={props.isDisabled}
-      type={props.type}
+      type={props.type ?? 'button'}
       className={props.className}
-      onClick={(event) =>
-        !props.isLoading &&
-        !props.isDisabled &&
-        props.onClick &&
-        props.onClick(event)
-      }
+      onClick={handleClick}
       $flexDirection={props.customStyles?.flexDirection}
       $flexWrap={props.customStyles?.flexWrap}
       $justifyContent={props.customStyles?.justifyContent}
@@ -50,16 +56,10 @@ export const Button: FC<ButtonProps> = memo((props) => {
       {!props.isHidden && <Ripple />}
       {props.isOnlyLoading ? (
         props.isLoading ? (
-          <ModalLoading
-            size={props.size}
-            color={theme.colors.button[props.genre].color.rest}
-            order={props.loadingOrder}
-          />
+          modalLoadingComponent
         ) : (
           <>
-            <div style={{ order: 0, display: 'contents' }}>
-              {props.children && props.children}
-            </div>
+            <div style={{ order: 0, display: 'contents' }}>{props.children && props.children}</div>
             {props.iconName && (
               <Icon
                 name={props.iconName}
@@ -73,33 +73,17 @@ export const Button: FC<ButtonProps> = memo((props) => {
         )
       ) : (
         <>
-          <div style={{ order: 0, display: 'contents' }}>
-            {props.children && props.children}
-          </div>
+          <div style={{ order: 0, display: 'contents' }}>{props.children && props.children}</div>
           <StyledButtonIconsWrapper
             $size={props.size}
             $isIconGroup={props.isIconGroup}
             $iconGroupOrder={props.iconGroupOrder}
           >
             {props.isOnlyLoadingWithGroup ? (
-              <>
-                {props.isLoading && (
-                  <ModalLoading
-                    size={props.size}
-                    color={theme.colors.button[props.genre].color.rest}
-                    order={props.loadingOrder}
-                  />
-                )}
-              </>
+              <>{props.isLoading && modalLoadingComponent}</>
             ) : (
               <>
-                {props.isLoading && (
-                  <ModalLoading
-                    size={props.size}
-                    color={theme.colors.button[props.genre].color.rest}
-                    order={props.loadingOrder}
-                  />
-                )}
+                {props.isLoading && modalLoadingComponent}
                 {props.iconName && (
                   <Icon
                     name={props.iconName}
@@ -116,4 +100,4 @@ export const Button: FC<ButtonProps> = memo((props) => {
       )}
     </StyledButton>
   )
-})
+}

@@ -2,6 +2,9 @@ import styled, { css } from 'styled-components'
 
 import { StyledInput, StyledInputCSS } from '@components/input'
 
+import { IJeneseiThemeSize } from '@theme/index'
+import { KEY_SIZE_DATA } from '@theme/theme'
+
 import {
   SelectStyledFooterProps,
   SelectStyledInputProps,
@@ -12,36 +15,44 @@ import {
 
 export const SelectWrapper = styled.div<SelectWrapperProps>`
   --scrollbar-width: 16px;
-  --scrollbar-background: ${(props) =>
-    props.theme.colors.input[props.$genre].background.rest};
-  --scrollbar-thumb-background: ${(props) =>
-    props.theme.colors.input[props.$genre].color.rest};
-  --scrollbar-thumb-border: 4px solid
-    ${(props) => props.theme.colors.input[props.$genre].background.rest};
+  --scrollbar-background: ${(props) => props.theme.colors.input[props.$genre].background.rest};
+  --scrollbar-thumb-background: ${(props) => props.theme.colors.input[props.$genre].color.rest};
+  --scrollbar-thumb-border: 4px solid ${(props) => props.theme.colors.input[props.$genre].background.rest};
 
   width: ${(props) => props.$width ?? '100%'};
   position: relative;
 
-  &:focus-within {
-    &:after {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      bottom: -2px;
-      right: -2px;
-      border: 2px ${(props) => props.theme.colors.focus} solid;
-      border-radius: ${(props) => `${props.$radius + 1}px`};
-      pointer-events: none;
-      z-index: 10;
-      height: calc(100% + ${(props) => `${props.$parentListHeight}px`});
-    }
-  }
+  ${(props) =>
+    !props.$isDisabled &&
+    css`
+      &:focus-within {
+        &:after {
+          content: '';
+          position: absolute;
+          top: -1px;
+          left: -1px;
+          bottom: -1px;
+          right: -1px;
+          border: 1px ${props.theme.colors.focus} solid;
+          border-radius: ${`${props.$radius + 1}px`};
+          pointer-events: none;
+          height: calc(100% + var(--after-height));
+        }
+      }
+    `}
+
   outline: none !important;
 
   &:focus-visible {
     outline: none !important;
   }
+`
+
+export const DropdownListParentSize = css<SelectStyledListProps>`
+  ${(props) => props.$size && DropdownListParentSizeConstructor(KEY_SIZE_DATA[props.$size])};
+`
+export const DropdownListParentSizeConstructor = (props: IJeneseiThemeSize) => css`
+  border-radius: 0px 0px ${props.radius}px ${props.radius}px;
 `
 
 export const DropdownListParent = styled.div<SelectStyledListProps>`
@@ -58,16 +69,13 @@ export const DropdownListParent = styled.div<SelectStyledListProps>`
 
   margin: 0;
   padding: 0;
-  z-index: 1;
 
   box-sizing: border-box;
 
-  background: ${(props) =>
-    props.theme.colors.input[props.$genre].background.rest};
-  border: solid 2px
-    ${(props) => props.theme.colors.input[props.$genre].border.rest};
+  background: ${(props) => props.theme.colors.input[props.$genre].background.rest};
+  border: solid 1px ${(props) => props.theme.colors.input[props.$genre].border.rest};
   border-top: 0px !important;
-
+  ${DropdownListParentSize};
   ${(props) =>
     !props.$isShowScroll &&
     css`
@@ -143,5 +151,9 @@ export const DropdownSelectAll = styled.div`
 `
 
 export const SelectStyledInput = styled(StyledInput)<SelectStyledInputProps>`
-  outline: none !important;
+  ${(props) =>
+    !props.$isError &&
+    css`
+      outline: none !important;
+    `}
 `

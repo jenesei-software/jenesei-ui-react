@@ -1,3 +1,4 @@
+import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import path, { resolve } from 'path'
 import { defineConfig } from 'vite'
@@ -12,49 +13,39 @@ export default defineConfig(() => {
   return {
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
-      },
+        '@': path.resolve(__dirname, './src')
+      }
     },
     plugins: [
-      react({
-        babel: {
-          plugins: [['babel-plugin-styled-components', { displayName: false }]],
-
-          env: {
-            development: {
-              plugins: [
-                ['babel-plugin-styled-components', { displayName: true }],
-              ],
-            },
-          },
-        },
-      }),
+      basicSsl(),
+      react(),
       tsconfigPaths(),
       !isStorybookBuild &&
         dts({
           include: ['src/'],
-          exclude: ['src/declaration/styled.d.ts'],
+          exclude: ['src/declaration/styled.d.ts', 'src/declaration/jenesei-web-id-api.d.ts'],
           rollupTypes: true,
           insertTypesEntry: true,
-          tsConfigFilePath: './tsconfig.json',
-        }),
+          tsConfigFilePath: './tsconfig.json'
+        })
     ].filter(Boolean),
     publicDir: false,
     build: {
       sourcemap: true,
-      outDir: 'dist',
+      outDir: './dist',
+      rootDir: './src',
       minify: 'terser',
       terserOptions: {
         compress: {
           drop_console: true,
-          drop_debugger: true,
-        },
+          drop_debugger: true
+        }
       },
       lib: {
         entry: resolve(__dirname, 'src/main.ts'),
         name: 'jenesei-ui-react',
         formats: ['es', 'umd'],
-        fileName: (format) => `jenesei-ui-react.${format}.js`,
+        fileName: (format) => `jenesei-ui-react.${format}.js`
       },
       rollupOptions: {
         external: Object.keys(peerDependencies),
@@ -62,21 +53,23 @@ export default defineConfig(() => {
           sourcemap: true,
           globals: {
             'styled-components': 'styled',
-            'react-ripple-click': 'reactRippleClick',
             'styled-reset': 'reset',
             react: 'React',
+            'react-dom': 'ReactDOM',
+            moment: 'moment',
+            'react-ripple-click': 'reactRippleClick',
             'react-loading': 'ReactLoading',
+            gsap: 'gsap',
+            'awesome-phonenumber': 'awesomePhonenumber',
+            'country-list-with-dial-code-and-flag': 'FullCountryList',
             'react-number-format': 'reactNumberFormat',
             '@tanstack/react-virtual': 'reactVirtual',
-            gsap: 'gsap',
-            'js-cookie': 'Cookies',
-            'react-i18next': 'reactI18next',
-            'react-helmet': 'reactHelmet',
             'react-toggle': 'ReactToggle',
-            'react-dom': 'ReactDOM',
-          },
-        },
-      },
-    },
+            'react-helmet': 'reactHelmet',
+            'js-cookie': 'Cookies'
+          }
+        }
+      }
+    }
   }
 })

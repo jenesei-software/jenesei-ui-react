@@ -1,26 +1,24 @@
 {
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
-    "^@assets/(.*)$",
     "^@components/(.*)$",
-    "^@fonts/(.*)$",
+    "^@forms/(.*)$",
     "^@functions/(.*)$",
     "^@hooks/(.*)$",
+    "^@layouts/(.*)$",
+    "^@modules/(.*)$",
     "^@providers/(.*)$",
     "^@theme/(.*)$",
-    "^@types/(.*)$",
-    "^[./]",
     "^@fontsource/(.*)$",
+    "^[./]",
     ".css"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
-  "plugins": [
-    "@trivago/prettier-plugin-sort-imports"
-  ],
-  "printWidth": 80,
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "printWidth": 120,
   "semi": false,
   "singleQuote": true,
   "tabWidth": 2,
-  "trailingComma": "all"
+  "trailingComma": "none"
 }
