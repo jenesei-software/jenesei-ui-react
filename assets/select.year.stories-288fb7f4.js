@@ -1,0 +1,6 @@
+import{j as m}from"./styled-components.browser.esm-028b5a71.js";import{d as u,h as t}from"./select.styles-456f15d6.js";import{r as s}from"./index-ff614419.js";import"./index-4da86cf0.js";import"./input.styles-3432116f.js";import"./modal-loading.styles-b2147eb5.js";import"./theme-8055a2b2.js";import"./theme.global-a81b07d6.js";import"./typography-193d1fd6.js";import"./typography.functions-dcbec177.js";import"./index-7d9a9c74.js";import"./button-b8e4e48f.js";import"./icon.styles-0c25b35e.js";import"./checkbox.styles-6aa4778c.js";const w={component:u,title:"Select/Year"},d=t.utc().subtract(100,"years").startOf("year").valueOf(),f=t.utc().startOf("day").valueOf(),g=t.utc().valueOf(),v={size:"medium",genre:"gray",width:"70px",startDate:d,endDate:f,value:g},x=e=>{const[l,a]=s.useState(e.value),p=i=>{a(i)};return s.useEffect(()=>{a(e.value)},[e.value]),m.jsx(u,{...e,placeholder:"Year",value:l,onChange:p})},r={render:e=>m.jsx(x,{...e}),args:{...v}};var o,c,n;r.parameters={...r.parameters,docs:{...(o=r.parameters)==null?void 0:o.docs,source:{originalSource:`{
+  render: args => <SelectYearWrapper {...args} />,
+  args: {
+    ...defaultArgs
+  }
+}`,...(n=(c=r.parameters)==null?void 0:c.docs)==null?void 0:n.source}}};const z=["Year"];export{r as Year,z as __namedExportsOrder,w as default};
