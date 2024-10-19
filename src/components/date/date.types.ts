@@ -40,7 +40,7 @@ export interface DateProps {
     'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width' | 'value' | 'isInputEffect'
   >
 
-  value?: number | null
+  value: number | null
 
   isDisabled?: boolean
 
