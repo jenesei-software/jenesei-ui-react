@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react'
+import { FC, useCallback, useMemo } from 'react'
 import { useTheme } from 'styled-components'
 
 import { ModalLoading } from '@components/modal-loading'
@@ -13,11 +13,14 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
     [props]
   )
   const theme = useTheme()
-  const children = (
-    <>
-      <StyledIcon size={props.size} name={props.view} type="checkbox" $genre={props.genre} $checked={props.checked} />
-      {props.children && props.children}
-    </>
+  const children = useMemo(
+    () => (
+      <>
+        <StyledIcon size={props.size} name={props.view} type="checkbox" $genre={props.genre} $checked={props.checked} />
+        {props.children && props.children}
+      </>
+    ),
+    [props.checked, props.children, props.genre, props.size, props.view]
   )
   return (
     <CheckboxWrapper

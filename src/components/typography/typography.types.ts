@@ -14,8 +14,8 @@ export interface TypographyDefaultProps extends PropsWithChildren {
   textAlign?: CSSProperties['textAlign']
   textWrap?: CSSProperties['textWrap']
   cursor?: CSSProperties['cursor']
-  className?: string
   style?: CSSProperties
+  className?: string
   weight?: 100 | 300 | 400 | 500 | 700 | 900
   height?: number
   flex?: string
