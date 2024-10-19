@@ -59,7 +59,11 @@ export interface ISelectCountryOption extends ISelectItem {
 
 export type SelectCountryProps = Omit<SelectProps<ISelectCountryOption>, 'option' | 'value' | 'onChange'> & {
   value: string
-  onChange: (countryCode: string, countryDialCode: string, lengthNumberWithoutCountryDialCode: number) => void
+  onChange: (props: {
+    countryCode: string
+    countryDialCode: string
+    lengthNumberWithoutCountryDialCode: number
+  }) => void
 }
 
 export interface ISelectLanguageOption extends ISelectItem {
@@ -73,6 +77,8 @@ export type SelectLanguageProps = Omit<SelectProps<ISelectCountryOption>, 'optio
 }
 
 export type SelectDateProps = Omit<SelectProps<ISelectCountryOption>, 'option' | 'value' | 'onChange'> & {
+  startDate?: number
+  endDate?: number
   value: number
   onChange: (timestamp: number) => void
   lang: 'ru' | 'en'

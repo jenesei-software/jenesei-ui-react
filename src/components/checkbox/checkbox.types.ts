@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react'
+import { CSSProperties, PropsWithChildren } from 'react'
 import { AddDollarSign } from 'src/types'
 
 import { TLibraryIconCheckboxNameString } from '@components/icon'
@@ -33,6 +33,8 @@ export interface CheckboxProps extends PropsWithChildren {
   customFontSize?: number
 
   customFontWeight?: number
+
+  style?: CSSProperties
 }
 
 export type StyledCheckboxProps = AddDollarSign<

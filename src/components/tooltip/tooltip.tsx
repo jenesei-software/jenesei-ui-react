@@ -118,7 +118,7 @@ export const TooltipContent: FC<TooltipProps> = (props) => {
     }
 
     return style
-  }, [props.placement, visible])
+  }, [arrowLength, props.placement, visible])
 
   const styleArrow = useMemo(() => {
     if (!refContainer.current && !visible) return {}
@@ -216,7 +216,7 @@ export const TooltipContent: FC<TooltipProps> = (props) => {
     }
 
     return style
-  }, [props.placement, visible])
+  }, [arrowSizeString, props.placement, theme.palette.grayPatricia, visible])
 
   return (
     <>
