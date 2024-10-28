@@ -1,4 +1,3 @@
-import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import path, { resolve } from 'path'
 import { defineConfig } from 'vite'
@@ -17,7 +16,6 @@ export default defineConfig(() => {
       }
     },
     plugins: [
-      basicSsl(),
       react(),
       tsconfigPaths(),
       !isStorybookBuild &&
@@ -26,7 +24,7 @@ export default defineConfig(() => {
           exclude: ['src/declaration/styled.d.ts', 'src/declaration/jenesei-web-id-api.d.ts'],
           rollupTypes: true,
           insertTypesEntry: true,
-          tsConfigFilePath: './tsconfig.json'
+          tsconfigPath: './tsconfig.json'
         })
     ].filter(Boolean),
     publicDir: false,

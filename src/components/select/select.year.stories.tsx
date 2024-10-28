@@ -26,7 +26,7 @@ const defaultArgs: Partial<SelectYearProps> = {
   value: value
 }
 
-const SelectYearWrapper: React.FC<SelectYearProps> = (props) => {
+const SelectYearWrapper: React.FC<SelectYearProps> = props => {
   const [value, setValue] = useState<number>(props.value)
   const handleSelectChange = (value: number) => {
     setValue(value)
@@ -39,7 +39,7 @@ const SelectYearWrapper: React.FC<SelectYearProps> = (props) => {
 }
 
 export const Year: Story = {
-  render: (args) => <SelectYearWrapper {...args} />,
+  render: args => <SelectYearWrapper {...args} />,
   args: {
     ...defaultArgs
   }

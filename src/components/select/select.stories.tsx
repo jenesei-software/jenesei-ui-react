@@ -9,7 +9,7 @@ import { ISelectItem, Select, SelectProps } from '.'
 
 const meta: Meta<typeof Select> = {
   component: Select,
-  title: 'Select/Default',
+  title: 'Select/Default'
 }
 
 export default meta
@@ -18,22 +18,22 @@ type Story = StoryObj<typeof Select>
 const defaultArgs: Partial<SelectProps<IOption>> = {
   size: 'medium',
   genre: 'gray',
-  width: '300px',
+  width: '300px'
 }
 
 interface IOption extends ISelectItem {
   search?: string
 }
 
-const DefaultSelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
+const DefaultSelectWrapper: React.FC<SelectProps<IOption>> = props => {
   const CountryListOption = FullCountryList.getAll()
 
   const [option] = useState<IOption[]>(
-    CountryListOption.map((e) => ({
+    CountryListOption.map(e => ({
       label: (
         <TypographyTooltip
           typography={{
-            textWrap: 'nowrap',
+            textWrap: 'nowrap'
           }}
           tooltip={{ size: 14, placement: 'bottom' }}
         >
@@ -41,8 +41,8 @@ const DefaultSelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
         </TypographyTooltip>
       ),
       value: e.code,
-      search: e.name,
-    })),
+      search: e.name
+    }))
   )
   const [viewOption, setViewOption] = useState<IOption[]>(option)
   const [value, setValue] = useState<IOption[]>([option[0]])
@@ -54,14 +54,12 @@ const DefaultSelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
     (value: string) => {
       setQuery(value)
       if (value === '') return setViewOption(option)
-      const filteredOptions = option.filter((option) =>
-        Object.values(option).some((field) =>
-          field?.toString().toLowerCase().includes(value.toLowerCase()),
-        ),
+      const filteredOptions = option.filter(option =>
+        Object.values(option).some(field => field?.toString().toLowerCase().includes(value.toLowerCase()))
       )
       setViewOption(filteredOptions)
     },
-    [option],
+    [option]
   )
 
   return (
@@ -74,28 +72,28 @@ const DefaultSelectWrapper: React.FC<SelectProps<IOption>> = (props) => {
       onChange={handleSelectChange}
       inputProps={{
         value: query,
-        onChange: handleQueryChange,
+        onChange: handleQueryChange
       }}
       checkboxProps={{
         view: 'Square',
         isHiddenBorder: true,
-        isNotBackground: true,
+        isNotBackground: true
       }}
       footer={{
         erase: {
-          label: 'Erase',
+          label: 'Erase'
         },
         selectAll: {
-          label: 'Select All',
-        },
+          label: 'Select All'
+        }
       }}
     />
   )
 }
 
 export const Default: Story = {
-  render: (args) => <DefaultSelectWrapper {...args} />,
+  render: args => <DefaultSelectWrapper {...args} />,
   args: {
-    ...defaultArgs,
-  },
+    ...defaultArgs
+  }
 }

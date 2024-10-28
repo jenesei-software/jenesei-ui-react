@@ -9,7 +9,7 @@ import { StyledCheckboxProps, StyledIconProps } from '.'
 
 /****************************************** Size *************************************************/
 export const CheckboxSize = css<StyledCheckboxProps>`
-  ${(props) => CheckboxSizeConstructor(KEY_SIZE_DATA[props.$size])};
+  ${props => CheckboxSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
 export const CheckboxSizeConstructor = (props: IJeneseiThemeSize) => css`
   height: ${props.height}px;
@@ -22,7 +22,7 @@ export const CheckboxSizeConstructor = (props: IJeneseiThemeSize) => css`
 
 /****************************************** Genre *************************************************/
 export const CheckboxGenre = css<StyledCheckboxProps>`
-  ${(props) => css`
+  ${props => css`
     background: ${props.theme.colors.checkbox[props.$genre].background.rest};
     border-color: ${props.theme.colors.checkbox[props.$genre].border.rest};
     color: ${props.theme.colors.checkbox[props.$genre].color.rest};
@@ -45,7 +45,7 @@ export const CheckboxGenre = css<StyledCheckboxProps>`
 
 /****************************************** Disabled *************************************************/
 const CheckboxDisabled = css<StyledCheckboxProps>`
-  ${(props) =>
+  ${props =>
     props.$isDisabled
       ? css`
           opacity: 0.5;
@@ -63,7 +63,7 @@ const CheckboxDisabled = css<StyledCheckboxProps>`
 
 /****************************************** HiddenBorder *************************************************/
 const CheckboxHiddenBorder = css<StyledCheckboxProps>`
-  ${(props) =>
+  ${props =>
     props.$isHiddenBorder &&
     css`
       border-color: transparent !important;
@@ -81,7 +81,7 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   overflow: hidden;
   isolation: isolate;
   user-select: none;
-  transition: all ${(props) => props.theme.transition};
+  transition: all ${props => props.theme.transition};
 
   & {
     user-select: none;
@@ -93,17 +93,17 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   ${CheckboxHiddenBorder};
   ${CheckboxSize};
 
-  font-family: ${(props) => props.$customFontFamily};
-  font-size: ${(props) => props.$customFontSize};
-  font-weight: ${(props) => props.$customFontWeight};
-  width: ${(props) => props.$width ?? 'max-content'};
-  min-width: ${(props) => props.$width ?? 'max-content'};
-  background-color: ${(props) => props.$isNotBackground && 'transparent'};
+  font-family: ${props => props.$customFontFamily};
+  font-size: ${props => props.$customFontSize};
+  font-weight: ${props => props.$customFontWeight};
+  width: ${props => props.$width ?? 'max-content'};
+  min-width: ${props => props.$width ?? 'max-content'};
+  background-color: ${props => props.$isNotBackground && 'transparent'};
 `
 
 /****************************************** Styled *************************************************/
 export const StyledIcon = styled(Icon)<StyledIconProps>`
-  ${(props) =>
+  ${props =>
     props.$checked
       ? css`
           & #check {

@@ -7,7 +7,7 @@ import { ProviderApp } from '.'
 
 const meta: Meta<typeof ProviderApp> = {
   component: ProviderApp,
-  title: 'Provider/App',
+  title: 'Provider/App'
 }
 
 export default meta
@@ -20,7 +20,7 @@ const defaultNotification = (
       backgroundColor: 'darkgoldenrod',
       padding: '2px',
       height: '100%',
-      width: '100%',
+      width: '100%'
     }}
   >
     <Typography variant="h8" textWrap="nowrap">
@@ -34,7 +34,7 @@ const defaultHeader = (
       backgroundColor: 'lightblue',
       padding: '10px',
       height: '100%',
-      width: '100%',
+      width: '100%'
     }}
   >
     <Typography variant="h1" textWrap="nowrap">
@@ -48,7 +48,7 @@ const defaultFooter = (
       backgroundColor: 'lightcoral',
       padding: '10px',
       height: '100%',
-      width: '100%',
+      width: '100%'
     }}
   >
     <Typography variant="h1">Footer</Typography>
@@ -60,7 +60,7 @@ const defaultLeftAside = (
       backgroundColor: 'lightgreen',
       padding: '10px',
       height: '100%',
-      width: '100%',
+      width: '100%'
     }}
   >
     <Typography variant="h6">Left Aside</Typography>
@@ -72,7 +72,7 @@ const defaultRightAside = (
       backgroundColor: 'lightyellow',
       padding: '10px',
       height: '100%',
-      width: '100%',
+      width: '100%'
     }}
   >
     <Typography variant="h6">Right Aside</Typography>
@@ -85,7 +85,7 @@ const defaultNav = (
       backgroundColor: 'beige',
       padding: '10px',
       height: '100%',
-      width: '100%',
+      width: '100%'
     }}
   >
     <Typography>Nav</Typography>
@@ -98,7 +98,7 @@ const defaultChildren = (
       backgroundColor: 'white',
       padding: '10px',
       height: '600px',
-      width: '100%',
+      width: '100%'
     }}
   >
     <Typography variant="h1">Title H1</Typography>
@@ -122,42 +122,42 @@ export const Default: Story = {
       height: '30px',
       heightTablet: '20px',
       heightMobile: '20px',
-      isFixed: false,
+      isFixed: false
     },
     header: {
       component: defaultHeader,
       height: '80px',
       heightTablet: '60px',
-      heightMobile: '40px',
+      heightMobile: '40px'
     },
     leftAside: {
       component: defaultLeftAside,
       width: '80px',
-      widthTablet: '60px',
+      widthTablet: '60px'
     },
     nav: {
       component: defaultNav,
       height: '80px',
       heightTablet: '60px',
-      heightMobile: '40px',
+      heightMobile: '40px'
     },
     rightAside: {
       component: defaultRightAside,
       width: '80px',
-      widthTablet: '60px',
+      widthTablet: '60px'
     },
     footer: {
       component: defaultFooter,
       height: '80px',
       heightTablet: '60px',
-      heightMobile: '40px',
+      heightMobile: '40px'
     },
-    children: defaultChildren,
-  },
+    children: defaultChildren
+  }
 }
 
 export const AsideDifferentTop: Story = {
-  render: (args) => <ProviderApp {...args} />,
+  render: args => <ProviderApp {...args} />,
   args: {
     defaultBgColor: 'black40',
     isScrollOutlet: true,
@@ -165,39 +165,39 @@ export const AsideDifferentTop: Story = {
       component: defaultHeader,
       height: '80px',
       heightTablet: '60px',
-      heightMobile: '40px',
+      heightMobile: '40px'
     },
     nav: {
       component: defaultNav,
       height: '80px',
       heightTablet: '60px',
-      heightMobile: '40px',
+      heightMobile: '40px'
     },
     leftAside: {
       component: defaultLeftAside,
       width: '80px',
       widthTablet: '60px',
-      isTopNav: true,
+      isTopNav: true
     },
     rightAside: {
       component: defaultRightAside,
       width: '80px',
       widthTablet: '60px',
       isTopFooter: true,
-      isTopHeader: true,
+      isTopHeader: true
     },
     footer: {
       component: defaultFooter,
       height: '80px',
       heightTablet: '60px',
-      heightMobile: '40px',
+      heightMobile: '40px'
     },
-    children: defaultChildren,
-  },
+    children: defaultChildren
+  }
 }
 
 export const WithoutAsides: Story = {
-  render: (args) => <ProviderApp {...args} />,
+  render: args => <ProviderApp {...args} />,
   args: {
     defaultBgColor: 'black50',
     isScrollOutlet: false,
@@ -205,14 +205,14 @@ export const WithoutAsides: Story = {
       component: defaultHeader,
       height: '80px',
       heightTablet: '60px',
-      heightMobile: '40px',
+      heightMobile: '40px'
     },
     footer: {
       component: defaultFooter,
       height: '80px',
       heightTablet: '60px',
-      heightMobile: '40px',
+      heightMobile: '40px'
     },
-    children: defaultChildren,
-  },
+    children: defaultChildren
+  }
 }

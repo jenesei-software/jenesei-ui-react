@@ -14,7 +14,7 @@ import {
   AuthStyledImage
 } from '.'
 
-export const AuthLayout: FC<AuthLayoutProps> = (props) => {
+export const AuthLayout: FC<AuthLayoutProps> = props => {
   const backgroundRef = useRef<HTMLDivElement>(null)
   const childrenRef = useRef<HTMLDivElement>(null)
 
@@ -108,18 +108,12 @@ export const AuthLayout: FC<AuthLayoutProps> = (props) => {
               d="M195.527 36.7551C195.66 38.5911 196.228 39.9931 197.229 40.9612C198.231 41.9293 199.599 42.4134 201.335 42.4134C202.637 42.4134 203.722 42.0962 204.59 41.462C205.491 40.7943 206.059 39.893 206.293 38.758L212.201 39.6593C211.634 42.163 210.365 44.1326 208.396 45.568C206.459 47.0035 204.106 47.7212 201.335 47.7212C197.596 47.7212 194.659 46.6029 192.522 44.3662C190.419 42.0962 189.368 38.9917 189.368 35.0525C189.368 31.1802 190.386 28.1257 192.422 25.8891C194.458 23.6191 197.246 22.4841 200.784 22.4841C204.323 22.4841 207.11 23.6191 209.147 25.8891C211.183 28.1257 212.201 31.08 212.201 34.7521V36.7551H195.527ZM206.042 32.649H195.627C195.827 31.08 196.361 29.8783 197.229 29.0437C198.131 28.1758 199.316 27.7418 200.784 27.7418C202.287 27.7418 203.538 28.2092 204.54 29.1439C205.541 30.0452 206.042 31.2136 206.042 32.649Z"
               fill="white"
             />
-            <path
-              d="M215.597 23.6358H221.656V46.6696H215.597V23.6358Z"
-              fill="white"
-            />
+            <path d="M215.597 23.6358H221.656V46.6696H215.597V23.6358Z" fill="white" />
             <path
               d="M215.046 17.3766C215.046 16.4418 215.397 15.624 216.098 14.9229C216.799 14.2219 217.616 13.8714 218.551 13.8714C219.519 13.8714 220.337 14.2219 221.005 14.9229C221.706 15.624 222.056 16.4418 222.056 17.3766C222.056 18.3446 221.706 19.1792 221.005 19.8802C220.337 20.5813 219.519 20.9318 218.551 20.9318C217.616 20.9318 216.799 20.5813 216.098 19.8802C215.397 19.1792 215.046 18.3446 215.046 17.3766Z"
               fill="white"
             />
-            <path
-              d="M236.428 13.8714H242.487V46.6696H236.428V13.8714Z"
-              fill="white"
-            />
+            <path d="M236.428 13.8714H242.487V46.6696H236.428V13.8714Z" fill="white" />
             <path
               fillRule="evenodd"
               clipRule="evenodd"
@@ -151,21 +145,9 @@ export const AuthLayout: FC<AuthLayoutProps> = (props) => {
               <feOffset />
               <feGaussianBlur stdDeviation="5" />
               <feComposite in2="hardAlpha" operator="out" />
-              <feColorMatrix
-                type="matrix"
-                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0"
-              />
-              <feBlend
-                mode="normal"
-                in2="BackgroundImageFix"
-                result="effect1_dropShadow_2171_4468"
-              />
-              <feBlend
-                mode="normal"
-                in="SourceGraphic"
-                in2="effect1_dropShadow_2171_4468"
-                result="shape"
-              />
+              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0" />
+              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2171_4468" />
+              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2171_4468" result="shape" />
             </filter>
           </defs>
         </AuthLayoutWrapperBackgroundSVG>
@@ -178,9 +160,7 @@ export const AuthLayout: FC<AuthLayoutProps> = (props) => {
           </Typography>
         </AuthLayoutWrapperBackgroundText>
       </AuthLayoutWrapperBackground>
-      <AuthLayoutWrapperChildren ref={childrenRef}>
-        {props.children}
-      </AuthLayoutWrapperChildren>
+      <AuthLayoutWrapperChildren ref={childrenRef}>{props.children}</AuthLayoutWrapperChildren>
     </AuthLayoutWrapper>
   )
 }

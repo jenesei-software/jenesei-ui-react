@@ -5,7 +5,7 @@ import { ModalLoading } from '.'
 
 const meta: Meta<typeof ModalLoading> = {
   component: ModalLoading,
-  title: 'Modal/Loading',
+  title: 'Modal/Loading'
 }
 
 export default meta
@@ -13,8 +13,8 @@ type Story = StoryObj<typeof ModalLoading>
 
 export const Default: Story = {
   args: {
-    type:'cubes',
+    type: 'cubes',
     size: 'large',
-    colorKey: 'blueRest',
-  },
+    colorKey: 'blueRest'
+  }
 }

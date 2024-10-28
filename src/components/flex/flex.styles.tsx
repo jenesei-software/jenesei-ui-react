@@ -205,7 +205,7 @@ const StyledStack = styled.div<DollarFlexContainerAndItemAndBasicProps>`
   ${FlexContainerAndItemAndBasic}
 `
 
-export const Stack: React.FC<FlexShortStylesProps> = (props) => {
+export const Stack: React.FC<FlexShortStylesProps> = props => {
   return (
     <StyledStack
       onClick={props.onClick}

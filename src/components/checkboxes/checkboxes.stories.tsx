@@ -24,18 +24,18 @@ const defaultArgs: Partial<CheckboxesProps<ICheckboxValue>> = {
   width: '300px'
 }
 
-const CheckboxesWrapper: React.FC<CheckboxesProps<ICheckboxValue>> = (props) => {
+const CheckboxesWrapper: React.FC<CheckboxesProps<ICheckboxValue>> = props => {
   const [value, setValue] = useState<ICheckboxValue[]>([])
   const [options] = useState<ICheckboxValue[]>([
     { value: 0, label: 'First' },
     { value: 1, label: 'Second' }
   ])
 
-  return <CheckboxesComponent {...props} value={value} options={options} onChange={(value) => setValue(value)} />
+  return <CheckboxesComponent {...props} value={value} options={options} onChange={value => setValue(value)} />
 }
 
 export const Checkboxes: Story = {
-  render: (args) => <CheckboxesWrapper {...args} />,
+  render: args => <CheckboxesWrapper {...args} />,
   args: {
     ...defaultArgs
   }

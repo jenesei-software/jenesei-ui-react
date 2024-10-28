@@ -12,74 +12,74 @@ const SpanFontCSS = css<TypographyCSSProps>`
   overflow-wrap: anywhere;
   box-sizing: border-box;
 
-  ${(props) =>
+  ${props =>
     props.$flex &&
     css`
       flex: ${props.$flex};
     `};
-  ${(props) =>
+  ${props =>
     props.$cursor &&
     css`
       cursor: ${props.$cursor};
     `};
-  ${(props) =>
+  ${props =>
     props.$textAlign &&
     css`
      text-align ${props.$textAlign};
     `};
-  ${(props) =>
+  ${props =>
     props.$textWrap &&
     css`
      text-wrap ${props.$textWrap};
     `};
 
-  ${(props) =>
+  ${props =>
     props.$overflow &&
     css`
      overflow ${props.$overflow};
     `};
-  ${(props) =>
+  ${props =>
     props.$clamp &&
     css`
       display: -webkit-box;
       -webkit-line-clamp: ${props.$clamp};
     `};
-  ${(props) =>
+  ${props =>
     props.$clampOrient &&
     css`
       -webkit-box-orient: ${props.$clampOrient};
     `};
-  ${(props) =>
+  ${props =>
     props.$family &&
     css`
       font-family: ${props.$family};
     `};
-  ${(props) =>
+  ${props =>
     props.$size &&
     css`
       font-size: ${props.$size}px;
     `};
-  ${(props) =>
+  ${props =>
     props.$weight &&
     css`
       font-weight: ${props.$weight};
     `};
-  ${(props) =>
+  ${props =>
     props.$height &&
     css`
       line-height: ${props.$height}px;
     `};
-  ${(props) =>
+  ${props =>
     props.$color &&
     css`
       color: ${JeneseiThemeVariables[props.$color]};
     `};
-  ${(props) =>
+  ${props =>
     props.$textAlign &&
     css`
       text-align: ${props.$textAlign};
     `};
-  ${(props) =>
+  ${props =>
     props.$textWrap &&
     css`
       text-wrap: ${props.$textWrap};

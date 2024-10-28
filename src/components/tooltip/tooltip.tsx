@@ -6,14 +6,14 @@ import { Typography } from '@components/typography'
 
 import { TooltipArrow, TooltipBox, TooltipContainer, TooltipProps } from '.'
 
-export const Tooltip: FC<TooltipProps> = memo((props) => {
+export const Tooltip: FC<TooltipProps> = memo(props => {
   if (props.isDisabled) {
     return <>{props.children}</>
   }
   return <TooltipContent {...props} />
 })
 
-export const TooltipContent: FC<TooltipProps> = (props) => {
+export const TooltipContent: FC<TooltipProps> = props => {
   const theme = useTheme()
 
   const [visible, setVisible] = useState(false)
@@ -29,7 +29,7 @@ export const TooltipContent: FC<TooltipProps> = (props) => {
     setVisible(true)
   }, [])
 
-  const handleMouseLeave: MouseEventHandler<HTMLDivElement> = useCallback((event) => {
+  const handleMouseLeave: MouseEventHandler<HTMLDivElement> = useCallback(event => {
     const target = event.relatedTarget as Node
 
     if (

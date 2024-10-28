@@ -147,7 +147,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   }, [handleListOptionCloseEffect, isAnimating, isOpen])
 
   const handleOnBlur: FocusEventHandler<HTMLInputElement> = useCallback(
-    (event) => {
+    event => {
       if (props?.isDisabled) return
       if (props.onBlur && event) props.onBlur(event)
       handleOnBlurEasy()
@@ -162,11 +162,11 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
       }
       if (props.isMulti) {
         if (isAll) {
-          const index = props.option.findIndex((selectedItems) => selectedItems.value === option.value)
+          const index = props.option.findIndex(selectedItems => selectedItems.value === option.value)
           const newValue = [...props.option.slice(0, index), ...props.option.slice(index + 1)]
           props.onChange(newValue)
         } else {
-          const index = props.value.findIndex((selectedItems) => selectedItems.value === option.value)
+          const index = props.value.findIndex(selectedItems => selectedItems.value === option.value)
 
           if (index === -1 && (!props.maxView || props.value.length < props.maxView)) {
             const newValues = [...(props.value ?? []), option]
@@ -231,7 +231,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   }, [handleOnOpen, isAnimating, isOpen])
 
   const handleOnFocus: FocusEventHandler<HTMLInputElement> = useCallback(
-    (event) => {
+    event => {
       if (props?.isDisabled) return
       if (props.onFocus) props.onFocus(event)
       handleOnFocusEasy()
@@ -333,7 +333,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           defaultValue={props?.inputProps?.defaultValue}
           value={props?.inputProps?.value ?? ''}
           type={props?.inputProps?.type}
-          onChange={(event) => props?.inputProps?.onChange && props?.inputProps?.onChange(event.target.value)}
+          onChange={event => props?.inputProps?.onChange && props?.inputProps?.onChange(event.target.value)}
           onBlur={props?.inputProps?.onBlur}
           onFocus={props?.inputProps?.onFocus}
           onClick={handleOnFocusEasy}
@@ -346,7 +346,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           $isShowScroll={optionsLength > maxViewLength}
           $isFooter={isFooter}
           $size={props.size}
-          onScroll={(e) => handleFetchNextPage(e.target as HTMLDivElement)}
+          onScroll={e => handleFetchNextPage(e.target as HTMLDivElement)}
           style={{
             maxHeight: `${height}px`
           }}
@@ -358,7 +358,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
               minHeight: `${height}px`
             }}
           >
-            {listVirtualizer.getVirtualItems().map((virtualRow) => {
+            {listVirtualizer.getVirtualItems().map(virtualRow => {
               const item = props.option[virtualRow.index]
               const checked = isSelectedItem(item)
               return (
@@ -470,12 +470,12 @@ const getNumberWithoutCountryDialCode = (countryCode: string, countryDialCode: s
   }
 }
 
-export const SelectCountry: React.FC<SelectCountryProps> = (props) => {
+export const SelectCountry: React.FC<SelectCountryProps> = props => {
   const countryListOption = FullCountryList.getAll()
 
   const option = useMemo<ISelectCountryOption[]>(
     () =>
-      countryListOption.map((e) => ({
+      countryListOption.map(e => ({
         label: (
           <>
             <img
@@ -530,17 +530,17 @@ export const SelectCountry: React.FC<SelectCountryProps> = (props) => {
       setQuery(value)
       props.onChange({ countryCode: '', countryDialCode: '', lengthNumberWithoutCountryDialCode: 0 })
       if (value === '') return setViewOption(option)
-      const filteredOptions = option.filter((option) =>
-        Object.values(option).some((field) => field?.toString().toLowerCase().includes(value.toLowerCase()))
+      const filteredOptions = option.filter(option =>
+        Object.values(option).some(field => field?.toString().toLowerCase().includes(value.toLowerCase()))
       )
       setViewOption(filteredOptions)
     },
     [option, props]
   )
 
-  const [value, setValue] = useState<ISelectCountryOption | undefined>(option.find((e) => e.value === props.value))
+  const [value, setValue] = useState<ISelectCountryOption | undefined>(option.find(e => e.value === props.value))
   useEffect(() => {
-    if (value?.value !== props.value) setValue(option.find((e) => e.value === props.value))
+    if (value?.value !== props.value) setValue(option.find(e => e.value === props.value))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [option, props.value])
 
@@ -562,7 +562,7 @@ export const SelectCountry: React.FC<SelectCountryProps> = (props) => {
   )
 }
 
-export const SelectLanguage: React.FC<SelectLanguageProps> = (props) => {
+export const SelectLanguage: React.FC<SelectLanguageProps> = props => {
   const option: ISelectLanguageOption[] = useMemo(
     () => [
       {
@@ -592,17 +592,17 @@ export const SelectLanguage: React.FC<SelectLanguageProps> = (props) => {
       setQuery(value)
       props.onChange('')
       if (value === '') return setViewOption(option)
-      const filteredOptions = option.filter((option) =>
-        Object.values(option).some((field) => field?.toString().toLowerCase().includes(value.toLowerCase()))
+      const filteredOptions = option.filter(option =>
+        Object.values(option).some(field => field?.toString().toLowerCase().includes(value.toLowerCase()))
       )
       setViewOption(filteredOptions)
     },
     [option, props]
   )
 
-  const [value, setValue] = useState<ISelectLanguageOption | undefined>(option.find((e) => e.value === props.value))
+  const [value, setValue] = useState<ISelectLanguageOption | undefined>(option.find(e => e.value === props.value))
   useEffect(() => {
-    if (value?.value !== props.value) setValue(option.find((e) => e.value === props.value))
+    if (value?.value !== props.value) setValue(option.find(e => e.value === props.value))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [option, props.value])
 
@@ -624,7 +624,7 @@ export const SelectLanguage: React.FC<SelectLanguageProps> = (props) => {
   )
 }
 
-export const SelectMonth: React.FC<SelectDateProps> = (props) => {
+export const SelectMonth: React.FC<SelectDateProps> = props => {
   const { value, onChange, lang, startDate, endDate } = props
 
   const year = moment(value).utc().year()
@@ -666,7 +666,7 @@ export const SelectMonth: React.FC<SelectDateProps> = (props) => {
 
   const selectedMonth = useMemo(() => {
     return months.find(
-      (month) =>
+      month =>
         moment(value).utc().isSameOrAfter(moment(month.value).startOf('month')) &&
         moment(value).utc().isBefore(moment(month.value).endOf('month'))
     )
@@ -675,7 +675,7 @@ export const SelectMonth: React.FC<SelectDateProps> = (props) => {
   return (
     <Select<ISelectLanguageOption>
       {...props}
-      option={months.filter((e) => !e.isDisabled)}
+      option={months.filter(e => !e.isDisabled)}
       minView={1}
       maxView={5}
       isOnClickOptionClose
@@ -690,7 +690,7 @@ export const SelectMonth: React.FC<SelectDateProps> = (props) => {
   )
 }
 
-export const SelectYear: React.FC<SelectYearProps> = (props) => {
+export const SelectYear: React.FC<SelectYearProps> = props => {
   const { value, onChange, startDate, endDate, sortOrder = 'desc' } = props
 
   const startYear = moment(startDate).utc().year()
@@ -732,7 +732,7 @@ export const SelectYear: React.FC<SelectYearProps> = (props) => {
 
   const selectedYear = useMemo(() => {
     return years.find(
-      (year) =>
+      year =>
         moment(value).utc().isSameOrAfter(moment(year.value)) &&
         moment(value).utc().isBefore(moment(year.value).endOf('year'))
     )

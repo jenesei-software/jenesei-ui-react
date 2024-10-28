@@ -17,13 +17,13 @@ export default meta
 
 type Story = StoryObj<typeof Accordion>
 
-const MultiLevelAccordionWrapper: React.FC<AccordionProps> = (props) => {
+const MultiLevelAccordionWrapper: React.FC<AccordionProps> = props => {
   const [expanded, setExpanded] = useState<boolean>(false)
   const [expandedTwo, setExpandedTwo] = useState<boolean>(false)
   const [expandedThree, setExpandedThree] = useState<boolean>(false)
 
   const changeExpanded = useCallback(() => {
-    setExpanded((prevState) => !prevState)
+    setExpanded(prevState => !prevState)
   }, [])
 
   const onClickSummary = useCallback(() => {
@@ -35,7 +35,7 @@ const MultiLevelAccordionWrapper: React.FC<AccordionProps> = (props) => {
   }, [changeExpanded])
 
   const changeExpandedTwo = useCallback(() => {
-    setExpandedTwo((prevState) => !prevState)
+    setExpandedTwo(prevState => !prevState)
   }, [])
 
   const onClickSummaryTwo = useCallback(() => {
@@ -47,7 +47,7 @@ const MultiLevelAccordionWrapper: React.FC<AccordionProps> = (props) => {
   }, [changeExpandedTwo])
 
   const changeExpandedThree = useCallback(() => {
-    setExpandedThree((prevState) => !prevState)
+    setExpandedThree(prevState => !prevState)
   }, [])
 
   const onClickSummaryThree = useCallback(() => {
@@ -178,11 +178,11 @@ const MultiLevelAccordionWrapper: React.FC<AccordionProps> = (props) => {
   )
 }
 
-const OneLevelAccordionWrapper: React.FC<AccordionProps> = (props) => {
+const OneLevelAccordionWrapper: React.FC<AccordionProps> = props => {
   const [expanded, setExpanded] = useState<boolean>(false)
 
   const changeExpanded = useCallback(() => {
-    setExpanded((prevState) => !prevState)
+    setExpanded(prevState => !prevState)
   }, [])
 
   const onClickSummary = useCallback(() => {
@@ -238,7 +238,7 @@ const OneLevelAccordionWrapper: React.FC<AccordionProps> = (props) => {
 }
 
 export const OneLevel: Story = {
-  render: (args) => <OneLevelAccordionWrapper {...args} />,
+  render: args => <OneLevelAccordionWrapper {...args} />,
   args: {
     isAccordionIcon: true,
     accordionSummary: (
@@ -254,7 +254,7 @@ export const OneLevel: Story = {
 }
 
 export const MultiLevel: Story = {
-  render: (args) => <MultiLevelAccordionWrapper {...args} />,
+  render: args => <MultiLevelAccordionWrapper {...args} />,
   args: {
     isAccordionIcon: true,
     accordionSummary: (

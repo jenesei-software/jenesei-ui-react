@@ -4,7 +4,7 @@ import { Button } from '@components/button'
 
 import { ButtonGroupProps, ButtonGroupWrapper } from '.'
 
-export const ButtonGroup: FC<ButtonGroupProps> = (props) => {
+export const ButtonGroup: FC<ButtonGroupProps> = props => {
   return (
     <ButtonGroupWrapper $position={props.position} className={props.className} id="jenesei-button-group">
       {props.value?.map((button, id) => {

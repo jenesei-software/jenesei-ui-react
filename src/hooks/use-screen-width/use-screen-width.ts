@@ -9,10 +9,7 @@ export const useScreenWidth = () => {
   const theme = useTheme()
   const [screenWidth, setScreenWidth] = useState<Screens>('other')
 
-  const isMaxWidthTablet = useMemo(
-    () => screenWidth === 'mobile' || screenWidth === 'tablet',
-    [screenWidth],
-  )
+  const isMaxWidthTablet = useMemo(() => screenWidth === 'mobile' || screenWidth === 'tablet', [screenWidth])
 
   const isTablet = useMemo(() => screenWidth === 'tablet', [screenWidth])
 

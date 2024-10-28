@@ -8,7 +8,7 @@ import { CheckboxesWrapperProps } from '.'
 
 /****************************************** Size *************************************************/
 export const CheckboxesSize = css<CheckboxesWrapperProps>`
-  ${(props) => CheckboxesSizeConstructor(KEY_SIZE_DATA[props.$size])};
+  ${props => CheckboxesSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
 export const CheckboxesSizeConstructor = (props: IJeneseiThemeSize) => css`
   gap: ${props.padding - 2}px;
@@ -20,7 +20,7 @@ export const CheckboxesWrapper = styled.div<CheckboxesWrapperProps>`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: ${(props) => props.$width ?? '100%'};
+  width: ${props => props.$width ?? '100%'};
   ${CheckboxesSize};
 `
 

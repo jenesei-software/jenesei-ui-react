@@ -12,7 +12,7 @@ export default meta
 
 type Story = StoryObj<typeof ButtonGroup>
 
-const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
+const ButtonGroupWrapper: React.FC<ButtonGroupProps> = props => {
   return (
     <ButtonGroup
       {...props}
@@ -135,14 +135,14 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
 }
 
 export const Horizontal: Story = {
-  render: (args) => <ButtonGroupWrapper {...args} />,
+  render: args => <ButtonGroupWrapper {...args} />,
   args: {
     position: 'horizontal'
   }
 }
 
 export const Vertical: Story = {
-  render: (args) => <ButtonGroupWrapper {...args} />,
+  render: args => <ButtonGroupWrapper {...args} />,
   args: {
     position: 'vertical',
     width: '200px'

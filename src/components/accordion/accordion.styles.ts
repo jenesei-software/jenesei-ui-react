@@ -2,11 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { Icon } from '@components/icon'
 
-import {
-  AccordionDetailsProps,
-  AccordionStyledIconProps,
-  AccordionSummaryContentProps,
-} from '.'
+import { AccordionDetailsProps, AccordionStyledIconProps, AccordionSummaryContentProps } from '.'
 
 export const AccordionWrapper = styled.div`
   display: flex;
@@ -22,16 +18,16 @@ export const AccordionSummary = styled.div`
 export const AccordionSummaryContent = styled.div<AccordionSummaryContentProps>`
   width: 100%;
 
-  ${(props) =>
+  ${props =>
     props.$isAccordionIcon &&
     css`
       width: calc(100% - 26px);
     `}
 `
 export const AccordionDetails = styled.div<AccordionDetailsProps>`
-  max-height: ${(props) => (props.$expanded ? '9999px' : '0')};
-  height: ${(props) => (props.$expanded ? '100%' : '0')};
-  opacity: ${(props) => (props.$expanded ? 1 : 0)};
+  max-height: ${props => (props.$expanded ? '9999px' : '0')};
+  height: ${props => (props.$expanded ? '100%' : '0')};
+  opacity: ${props => (props.$expanded ? 1 : 0)};
   overflow: hidden;
   transition-property: max-height, opacity, height;
   transition-duration: 0.3s;
@@ -41,7 +37,7 @@ export const AccordionStyledIcon = styled(Icon)<AccordionStyledIconProps>`
   padding: 4px;
   box-sizing: content-box;
   cursor: pointer;
-  ${(props) =>
+  ${props =>
     props.$expanded
       ? css`
           transform: rotate(180deg);

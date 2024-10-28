@@ -11,18 +11,18 @@ const meta: Meta<typeof CheckboxComponent> = {
 export default meta
 type Story = StoryObj<typeof CheckboxComponent>
 
-const CheckboxWrapper: React.FC<CheckboxProps> = (props) => {
+const CheckboxWrapper: React.FC<CheckboxProps> = props => {
   const [value, setValue] = useState<boolean>(props.checked ?? false)
 
   useEffect(() => {
     setValue(props.checked ?? false)
   }, [props.checked])
 
-  return <CheckboxComponent {...props} checked={value} onChange={(checked) => setValue(checked)} />
+  return <CheckboxComponent {...props} checked={value} onChange={checked => setValue(checked)} />
 }
 
 export const Checkbox: Story = {
-  render: (args) => <CheckboxWrapper {...args} />,
+  render: args => <CheckboxWrapper {...args} />,
   args: {
     genre: 'gray',
     view: 'Square',

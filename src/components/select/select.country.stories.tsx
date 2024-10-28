@@ -18,7 +18,7 @@ const defaultArgs: Partial<SelectCountryProps> = {
   width: '300px'
 }
 
-const SelectCountryWrapper: React.FC<SelectCountryProps> = (props) => {
+const SelectCountryWrapper: React.FC<SelectCountryProps> = props => {
   const [value, setValue] = useState<string>('')
   const handleSelectChange = (props: { countryCode: string }) => {
     setValue(props.countryCode)
@@ -28,7 +28,7 @@ const SelectCountryWrapper: React.FC<SelectCountryProps> = (props) => {
 }
 
 export const Country: Story = {
-  render: (args) => <SelectCountryWrapper {...args} />,
+  render: args => <SelectCountryWrapper {...args} />,
   args: {
     ...defaultArgs
   }

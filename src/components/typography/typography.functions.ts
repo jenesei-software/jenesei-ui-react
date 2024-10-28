@@ -6,7 +6,7 @@ export const getFontSizeStyles = (
   size: TypographyCSSProps['$size'],
   weight: TypographyCSSProps['$weight'],
   family: TypographyCSSProps['$family'],
-  height?: TypographyCSSProps['$height'],
+  height?: TypographyCSSProps['$height']
 ) => css`
   font-family: ${family};
   font-style: normal;

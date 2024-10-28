@@ -7,7 +7,7 @@ import { SelectDateProps, SelectMonth } from '.'
 
 const meta: Meta<typeof SelectMonth> = {
   component: SelectMonth,
-  title: 'Select/Month',
+  title: 'Select/Month'
 }
 
 export default meta
@@ -16,10 +16,10 @@ type Story = StoryObj<typeof SelectMonth>
 const defaultArgs: Partial<SelectDateProps> = {
   size: 'medium',
   genre: 'gray',
-  width: '300px',
+  width: '300px'
 }
 
-const SelectMonthWrapper: React.FC<SelectDateProps> = (props) => {
+const SelectMonthWrapper: React.FC<SelectDateProps> = props => {
   const [value, setValue] = useState<number>(moment.utc().valueOf())
   const handleSelectChange = (value: number) => {
     setValue(value)
@@ -29,8 +29,8 @@ const SelectMonthWrapper: React.FC<SelectDateProps> = (props) => {
 }
 
 export const Month: Story = {
-  render: (args) => <SelectMonthWrapper {...args} />,
+  render: args => <SelectMonthWrapper {...args} />,
   args: {
-    ...defaultArgs,
-  },
+    ...defaultArgs
+  }
 }

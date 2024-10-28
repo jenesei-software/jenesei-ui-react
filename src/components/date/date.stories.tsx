@@ -13,7 +13,7 @@ const meta: Meta<typeof DatePicker> = {
 export default meta
 type Story = StoryObj<typeof DatePicker>
 
-const DatePickerWrapper: React.FC<DateProps> = (props) => {
+const DatePickerWrapper: React.FC<DateProps> = props => {
   const [value, setValue] = useState<number | null>(props.value)
   const handleSelectChange = (value: number) => {
     setValue(value)
@@ -31,7 +31,7 @@ const PastHundredYearsEndDate = moment.utc().startOf('day').valueOf()
 const PastHundredYearsValue = moment.utc().startOf('day').valueOf()
 
 export const PastHundredYears: Story = {
-  render: (args) => <DatePickerWrapper {...args} />,
+  render: args => <DatePickerWrapper {...args} />,
   args: {
     size: 'medium',
     genre: 'gray',
@@ -47,7 +47,7 @@ const LastHundredYear18YearsAgoEndDate = moment.utc().subtract(18, 'years').valu
 const LastHundredYear18YearsAgoValue = moment.utc().subtract(18, 'years').startOf('day').valueOf()
 
 export const LastHundredYear18YearsAgo: Story = {
-  render: (args) => <DatePickerWrapper {...args} />,
+  render: args => <DatePickerWrapper {...args} />,
   args: {
     size: 'medium',
     genre: 'gray',
@@ -63,7 +63,7 @@ const LastHundredYear21YearsAgoEndDate = moment.utc().subtract(21, 'years').valu
 const LastHundredYear21YearsAgoValue = moment.utc().subtract(21, 'years').startOf('day').valueOf()
 
 export const LastHundredYear21YearsAgo: Story = {
-  render: (args) => <DatePickerWrapper {...args} />,
+  render: args => <DatePickerWrapper {...args} />,
   args: {
     size: 'medium',
     genre: 'gray',
@@ -79,7 +79,7 @@ const NextThreeMonthsEndDate = moment.utc().add(3, 'months').startOf('day').valu
 const NextThreeMonthsValue = moment.utc().startOf('day').valueOf()
 
 export const NextThreeMonths: Story = {
-  render: (args) => <DatePickerWrapper {...args} />,
+  render: args => <DatePickerWrapper {...args} />,
   args: {
     size: 'medium',
     genre: 'gray',

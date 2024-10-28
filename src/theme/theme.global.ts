@@ -11,7 +11,7 @@ export const JeneseiGlobalStyles = createGlobalStyle`
   }
 
   :root {
-    --font-family:  ${(props) => props.theme.fontFamily}, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    --font-family:  ${props => props.theme.fontFamily}, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     --font-weight: 400;
     --font-size: 16px;
     --font-line-height: 1;
@@ -47,7 +47,7 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     font-family: var(--font-family);
     font-weight: var(--font-weight-normal);
     line-height: var(--font-line-height);
-    transition: font-size ${(props) => props.theme.transition};
+    transition: font-size ${props => props.theme.transition};
   }
 
   body {
@@ -139,13 +139,13 @@ export const JeneseiGlobalStyles = createGlobalStyle`
   }
 
 
-  @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
+  @media (max-width: ${props => props.theme.screens.tablet.width}) {
     :root {
       --font-size: 14px;
     }
   }
 
-  @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
+  @media (max-width: ${props => props.theme.screens.mobile.width}) {
     :root {
       --font-size: 12px;
     }

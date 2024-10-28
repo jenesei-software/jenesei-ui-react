@@ -16,20 +16,20 @@ import {
   ProviderAppOutletNotification,
   ProviderAppOutletRightAside,
   ProviderAppProps,
-  ProviderAppWrapper,
+  ProviderAppWrapper
 } from '.'
 
 export const AppContext = createContext<AppContextProps | null>(null)
 
-export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
+export const ProviderApp: React.FC<ProviderAppProps> = props => {
   const { bgColor, changeBgColor, historyBgColor, setDefaultBgColor } = useBgColor(props.defaultBgColor)
   const { statusBarColor, changeStatusBarColor, historyStatusBarColor, setDefaultStatusBarColor } = useStatusBarColor(
-    props.defaultStatusBarColor,
+    props.defaultStatusBarColor
   )
   const { bgImage, changeBgImage, historyBgImage, setDefaultBgImage } = useBgImage(props.defaultBgImage || null)
   const { title, changeTitle, historyTitle, setDefaultTitle } = useTitle(props.defaultTitle || null)
   const { description, changeDescription, historyDescription, setDefaultDescription } = useDescription(
-    props.defaultDescription,
+    props.defaultDescription
   )
   const { changePreview, previewProps } = usePreview(props.defaultPreview)
   return (
@@ -50,7 +50,7 @@ export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
         setDefaultBgColor,
         setDefaultBgImage,
         setDefaultTitle,
-        setDefaultDescription,
+        setDefaultDescription
       }}
     >
       <Helmet>
@@ -115,13 +115,13 @@ const useBgColor = (defaultColor: JeneseiThemeVariablesKeys) => {
   const changeBgColor = useCallback(
     (color: JeneseiThemeVariablesKeys) => {
       setBgColor(color)
-      setBgColorHistory((prev) => {
+      setBgColorHistory(prev => {
         const newHistory = [...prev.slice(0, bgColorIndex + 1), color]
         setBgColorIndex(newHistory.length - 1)
         return newHistory
       })
     },
-    [bgColorIndex],
+    [bgColorIndex]
   )
 
   const historyBgColor = useCallback(
@@ -132,7 +132,7 @@ const useBgColor = (defaultColor: JeneseiThemeVariablesKeys) => {
         setBgColorIndex(newIndex)
       }
     },
-    [bgColorHistory, bgColorIndex],
+    [bgColorHistory, bgColorIndex]
   )
 
   const setDefaultBgColor = useCallback(() => {
@@ -157,13 +157,13 @@ const useStatusBarColor = (defaultColor: JeneseiThemeVariablesKeys) => {
   const changeStatusBarColor = useCallback(
     (color: JeneseiThemeVariablesKeys) => {
       setStatusBarColor(color)
-      setStatusBarColorHistory((prev) => {
+      setStatusBarColorHistory(prev => {
         const newHistory = [...prev.slice(0, statusBarColorIndex + 1), color]
         setStatusBarColorIndex(newHistory.length - 1)
         return newHistory
       })
     },
-    [statusBarColorIndex],
+    [statusBarColorIndex]
   )
 
   const historyStatusBarColor = useCallback(
@@ -174,7 +174,7 @@ const useStatusBarColor = (defaultColor: JeneseiThemeVariablesKeys) => {
         setStatusBarColorIndex(newIndex)
       }
     },
-    [statusBarColorHistory, statusBarColorIndex],
+    [statusBarColorHistory, statusBarColorIndex]
   )
 
   const setDefaultStatusBarColor = useCallback(() => {
@@ -199,13 +199,13 @@ const useBgImage = (defaultImage: string | null) => {
   const changeBgImage = useCallback(
     (image: string | null) => {
       setBgImage(image)
-      setBgImageHistory((prev) => {
+      setBgImageHistory(prev => {
         const newHistory = [...prev.slice(0, bgImageIndex + 1), image]
         setBgImageIndex(newHistory.length - 1)
         return newHistory
       })
     },
-    [bgImageIndex],
+    [bgImageIndex]
   )
 
   const historyBgImage = useCallback(
@@ -216,7 +216,7 @@ const useBgImage = (defaultImage: string | null) => {
         setBgImageIndex(newIndex)
       }
     },
-    [bgImageHistory, bgImageIndex],
+    [bgImageHistory, bgImageIndex]
   )
 
   const setDefaultBgImage = useCallback(() => {
@@ -241,13 +241,13 @@ const useTitle = (defaultTitle: string | null) => {
   const changeTitle = useCallback(
     (newTitle: string | null) => {
       setTitle(newTitle)
-      setTitleHistory((prev) => {
+      setTitleHistory(prev => {
         const newHistory = [...prev.slice(0, titleIndex + 1), newTitle]
         setTitleIndex(newHistory.length - 1)
         return newHistory
       })
     },
-    [titleIndex],
+    [titleIndex]
   )
 
   const historyTitle = useCallback(
@@ -258,7 +258,7 @@ const useTitle = (defaultTitle: string | null) => {
         setTitleIndex(newIndex)
       }
     },
-    [titleHistory, titleIndex],
+    [titleHistory, titleIndex]
   )
 
   const setDefaultTitle = useCallback(() => {
@@ -283,13 +283,13 @@ const useDescription = (defaultDescription: string) => {
   const changeDescription = useCallback(
     (newDescription: string) => {
       setDescription(newDescription)
-      setDescriptionHistory((prev) => {
+      setDescriptionHistory(prev => {
         const newHistory = [...prev.slice(0, descriptionIndex + 1), newDescription]
         setDescriptionIndex(newHistory.length - 1)
         return newHistory
       })
     },
-    [descriptionIndex],
+    [descriptionIndex]
   )
 
   const historyDescription = useCallback(
@@ -300,7 +300,7 @@ const useDescription = (defaultDescription: string) => {
         setDescriptionIndex(newIndex)
       }
     },
-    [descriptionHistory, descriptionIndex],
+    [descriptionHistory, descriptionIndex]
   )
 
   const setDefaultDescription = useCallback(() => {

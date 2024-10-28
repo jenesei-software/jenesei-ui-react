@@ -11,7 +11,7 @@ import {
   AccordionWrapper
 } from '.'
 
-export const Accordion: React.FC<AccordionProps> = (props) => {
+export const Accordion: React.FC<AccordionProps> = props => {
   const onClickSummary = useCallback(() => {
     if (props.onClickSummary) props.onClickSummary()
   }, [props])
@@ -20,6 +20,7 @@ export const Accordion: React.FC<AccordionProps> = (props) => {
     (event: React.MouseEvent<SVGSVGElement>) => {
       if (props.onClickIcon) {
         event.stopPropagation()
+
         props.onClickIcon()
       }
     },

@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react'
 import { usePermission } from '@providers/provider-permission'
 
 export const useGeolocation = () => {
-  const { geolocationPermission, requestGeolocationPermission } =
-    usePermission()
+  const { geolocationPermission, requestGeolocationPermission } = usePermission()
 
   const [location, setLocation] = useState<GeolocationPosition | null>(null)
   const [error, setError] = useState<GeolocationPositionError | null>(null)

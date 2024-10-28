@@ -40,7 +40,7 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
     }
 
     if ('permissions' in window.navigator) {
-      window.navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => {
+      window.navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
         setGeolocationPermission(permissionStatus.state)
         permissionStatus.onchange = () => {
           setGeolocationPermission(permissionStatus.state)
@@ -54,15 +54,15 @@ export const ProviderPermission = (props: ProviderPermissionProps) => {
 
     if ('serviceWorker' in navigator && 'PushManager' in window) {
       navigator.serviceWorker.ready
-        .then((registration) => {
+        .then(registration => {
           setServiceWorkerRegistered(true)
-          registration.pushManager.getSubscription().then((subscription) => {
+          registration.pushManager.getSubscription().then(subscription => {
             if (subscription) {
               setPushSubscription(subscription)
             }
           })
         })
-        .catch((error) => {
+        .catch(error => {
           console.error('Provider Permission. Service Worker registration or access failed:', error)
         })
     } else {

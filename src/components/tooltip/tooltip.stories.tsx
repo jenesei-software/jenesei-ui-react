@@ -14,7 +14,7 @@ export default meta
 
 type Story = StoryObj<typeof Tooltip>
 
-const TooltipWrapper: React.FC<TooltipProps> = (props) => {
+const TooltipWrapper: React.FC<TooltipProps> = props => {
   return (
     <Tooltip
       {...props}
@@ -30,6 +30,6 @@ const TooltipWrapper: React.FC<TooltipProps> = (props) => {
 }
 
 export const Default: Story = {
-  render: (args) => <TooltipWrapper {...args} />,
+  render: args => <TooltipWrapper {...args} />,
   args: { placement: 'bottom-start' }
 }

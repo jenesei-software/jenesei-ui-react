@@ -7,14 +7,14 @@ import { ModalLoading } from '@components/modal-loading'
 
 import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.'
 
-export const Button: FC<ButtonProps> = (props) => {
+export const Button: FC<ButtonProps> = props => {
   const theme = useTheme()
 
   const modalLoadingComponent = (
     <ModalLoading size={props.size} color={theme.colors.button[props.genre].color.rest} order={props.loadingOrder} />
   )
 
-  const handleClick: ButtonProps['onClick'] = (event) => {
+  const handleClick: ButtonProps['onClick'] = event => {
     if (!props.isLoading && !props.isDisabled && props.onClick) {
       props.onClick(event)
     }
