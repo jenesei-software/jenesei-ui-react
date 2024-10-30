@@ -3,10 +3,11 @@ import { AddDollarSign } from 'src/types'
 
 import { TooltipProps } from '@components/tooltip'
 
-import { JeneseiThemeVariablesKeys, TJeneseiFontFamily } from '@theme/index'
+import { IJeneseiThemeScreens, JeneseiThemeVariablesKeys, TJeneseiFontFamily } from '@theme/index'
 
 export interface TypographyDefaultProps extends PropsWithChildren {
   clamp?: number
+  screen?: keyof IJeneseiThemeScreens
   clampOrient?: CSSProperties['boxOrient']
   overflow?: CSSProperties['overflow']
   color?: JeneseiThemeVariablesKeys
@@ -38,7 +39,7 @@ export type TypographyCSSProps = Partial<
   AddDollarSign<
     Pick<
       TypographyDefaultProps,
-      'clamp' | 'clampOrient' | 'overflow' | 'color' | 'family' | 'textAlign' | 'textWrap' | 'flex'
+      'clamp' | 'clampOrient' | 'overflow' | 'color' | 'family' | 'textAlign' | 'textWrap' | 'flex' | 'screen'
     > &
       Pick<TypographyVariantProps, 'variant' | 'cursor'> &
       Pick<TypographyDataProps, 'size' | 'weight' | 'height'>

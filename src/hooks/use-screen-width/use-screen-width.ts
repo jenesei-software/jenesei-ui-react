@@ -7,7 +7,7 @@ type Screens = keyof IJeneseiThemeScreens
 
 export const useScreenWidth = () => {
   const theme = useTheme()
-  const [screenWidth, setScreenWidth] = useState<Screens>('other')
+  const [screenWidth, setScreenWidth] = useState<Screens | 'other'>('other')
 
   const isMaxWidthTablet = useMemo(() => screenWidth === 'mobile' || screenWidth === 'tablet', [screenWidth])
 
@@ -18,12 +18,12 @@ export const useScreenWidth = () => {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth
-      const screenSize: Screens =
-        width <= +theme.screens.mobile.width.slice(0, -2)
-          ? 'mobile'
-          : width <= +theme.screens.tablet.width.slice(0, -2)
-            ? 'tablet'
-            : 'other'
+      const screenSizes = Object.entries(theme.screens).sort(
+        ([, a], [, b]) => +(a as { width: string }).width.slice(0, -2) - +(b as { width: string }).width.slice(0, -2)
+      )
+      const screenSize: Screens | 'other' =
+        (screenSizes.find(([, size]) => width <= +(size as { width: string }).width.slice(0, -2))?.[0] as Screens) ||
+        'other'
       setScreenWidth(screenSize)
     }
 
@@ -31,7 +31,7 @@ export const useScreenWidth = () => {
 
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [theme.screens.mobile.width, theme.screens.tablet.width])
+  }, [theme.screens])
 
   return { isMobile, isTablet, isMaxWidthTablet }
 }

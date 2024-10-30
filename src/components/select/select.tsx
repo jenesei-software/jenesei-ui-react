@@ -3,7 +3,7 @@ import { getExample } from 'awesome-phonenumber'
 import FullCountryList from 'country-list-with-dial-code-and-flag'
 import gsap from 'gsap'
 import moment from 'moment'
-import { FocusEventHandler, ReactNode, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { FC, FocusEventHandler, ReactNode, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { Button } from '@components/button'
 import { Checkbox, CheckboxProps } from '@components/checkbox'
@@ -76,7 +76,11 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.preventDefault()
       event.stopPropagation()
-      props.footer?.erase?.onCLick ? props.footer?.erase?.onCLick() : props.onChange([])
+      if (props.footer?.erase?.onCLick) {
+        props.footer.erase.onCLick()
+      } else {
+        props.onChange([])
+      }
       setIsAll(false)
     },
     [props]
@@ -470,7 +474,7 @@ const getNumberWithoutCountryDialCode = (countryCode: string, countryDialCode: s
   }
 }
 
-export const SelectCountry: React.FC<SelectCountryProps> = props => {
+export const SelectCountry: FC<SelectCountryProps> = props => {
   const countryListOption = FullCountryList.getAll()
 
   const option = useMemo<ISelectCountryOption[]>(
@@ -562,7 +566,7 @@ export const SelectCountry: React.FC<SelectCountryProps> = props => {
   )
 }
 
-export const SelectLanguage: React.FC<SelectLanguageProps> = props => {
+export const SelectLanguage: FC<SelectLanguageProps> = props => {
   const option: ISelectLanguageOption[] = useMemo(
     () => [
       {
@@ -624,7 +628,7 @@ export const SelectLanguage: React.FC<SelectLanguageProps> = props => {
   )
 }
 
-export const SelectMonth: React.FC<SelectDateProps> = props => {
+export const SelectMonth: FC<SelectDateProps> = props => {
   const { value, onChange, lang, startDate, endDate } = props
 
   const year = moment(value).utc().year()
@@ -690,7 +694,7 @@ export const SelectMonth: React.FC<SelectDateProps> = props => {
   )
 }
 
-export const SelectYear: React.FC<SelectYearProps> = props => {
+export const SelectYear: FC<SelectYearProps> = props => {
   const { value, onChange, startDate, endDate, sortOrder = 'desc' } = props
 
   const startYear = moment(startDate).utc().year()

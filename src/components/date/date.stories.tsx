@@ -1,19 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import moment from 'moment'
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import 'styled-components'
 
 import { DatePicker, DateProps } from '.'
 
 const meta: Meta<typeof DatePicker> = {
   component: DatePicker,
-  title: 'DatePicker'
+  title: 'DatePicker',
+  tags: ['autodocs']
 }
 
 export default meta
 type Story = StoryObj<typeof DatePicker>
 
-const DatePickerWrapper: React.FC<DateProps> = props => {
+const DatePickerWrapper: FC<DateProps> = props => {
   const [value, setValue] = useState<number | null>(props.value)
   const handleSelectChange = (value: number) => {
     setValue(value)

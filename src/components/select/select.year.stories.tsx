@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import moment from 'moment'
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import 'styled-components'
 
 import { SelectYear, SelectYearProps } from '.'
@@ -26,7 +26,7 @@ const defaultArgs: Partial<SelectYearProps> = {
   value: value
 }
 
-const SelectYearWrapper: React.FC<SelectYearProps> = props => {
+const SelectYearWrapper: FC<SelectYearProps> = props => {
   const [value, setValue] = useState<number>(props.value)
   const handleSelectChange = (value: number) => {
     setValue(value)

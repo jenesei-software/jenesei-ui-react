@@ -2,10 +2,13 @@ import { useContext } from 'react'
 
 import { LocalStorageContext } from '.'
 
-export const useLocalStorage = () => {
+/**
+ * Custom hook to access the LocalStorageContext.
+ */
+export const useLocalStorageContext = () => {
   const context = useContext(LocalStorageContext)
   if (!context) {
-    throw new Error('useLocalStorage must be used within an ProviderLocalStorage')
+    throw new Error('useLocalStorageContext must be used within an ProviderLocalStorage')
   }
   return context
 }

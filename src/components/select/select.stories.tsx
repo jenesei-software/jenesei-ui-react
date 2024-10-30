@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import FullCountryList from 'country-list-with-dial-code-and-flag'
-import { useCallback, useState } from 'react'
+import { FC, useCallback, useState } from 'react'
 import 'styled-components'
 
 import { TypographyTooltip } from '@components/typography'
@@ -25,7 +25,7 @@ interface IOption extends ISelectItem {
   search?: string
 }
 
-const DefaultSelectWrapper: React.FC<SelectProps<IOption>> = props => {
+const DefaultSelectWrapper: FC<SelectProps<IOption>> = props => {
   const CountryListOption = FullCountryList.getAll()
 
   const [option] = useState<IOption[]>(

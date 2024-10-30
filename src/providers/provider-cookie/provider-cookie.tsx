@@ -3,9 +3,52 @@ import { FC, createContext, useCallback, useEffect, useState } from 'react'
 
 import { CookieAttributes, CookieContextProps, ProviderCookieProps, ValidCookieObject } from '.'
 
+/**
+ * Context for managing cookies.
+ */
 export const CookieContext = createContext<CookieContextProps | null>(null)
 
+/**
+ * Provider component for managing cookies.
+ * 
+ * @remarks
+ * You should understand which cookies you are changing and whether you have access to them.
+ * 
+ * @remarks
+ * The local storage is typed using the `jenesei-ui-react.d.ts` file:
+ * 
+ * ```typescript
+ * import '@jenesei-software/jenesei-ui-react'
+ * 
+ * declare module '@jenesei-software/jenesei-ui-react' {
+ *   export interface ValidCookieObject {
+ *    access_token: string
+ *    refresh_token: string
+ *   } 
+ * }
+ * ```
+ */
 export const ProviderCookie: FC<ProviderCookieProps> = props => {
+  const { getCookie, setCookie, removeCookieValue, removeCookieValues, checkCookie, cookieValues } =
+    useProviderCookie(props)
+
+  return (
+    <CookieContext.Provider
+      value={{
+        getCookie,
+        setCookie,
+        removeCookieValue,
+        removeCookieValues,
+        checkCookie,
+        cookieValues
+      }}
+    >
+      {props.children}
+    </CookieContext.Provider>
+  )
+}
+
+const useProviderCookie = (props: ProviderCookieProps) => {
   const [cookieValues, setCookieValues] = useState<ValidCookieObject>()
 
   const getCookie = useCallback(<K extends keyof ValidCookieObject>(name: K): ValidCookieObject[K] | undefined => {
@@ -79,18 +122,5 @@ export const ProviderCookie: FC<ProviderCookieProps> = props => {
     checkCookie()
   }, [checkCookie])
 
-  return (
-    <CookieContext.Provider
-      value={{
-        getCookie,
-        setCookie: changeCookie,
-        removeCookieValue,
-        removeCookieValues,
-        checkCookie,
-        cookieValues
-      }}
-    >
-      {props.children}
-    </CookieContext.Provider>
-  )
+  return { getCookie, setCookie: changeCookie, removeCookieValue, removeCookieValues, checkCookie, cookieValues }
 }

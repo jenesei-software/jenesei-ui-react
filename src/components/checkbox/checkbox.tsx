@@ -8,7 +8,7 @@ import { CheckboxProps, CheckboxWrapper, StyledIcon } from '.'
 export const Checkbox: FC<CheckboxProps> = props => {
   const handleOnClick = useCallback(
     (checked: boolean) => {
-      props.onChange && props.onChange(checked)
+      props.onChange?.(checked)
     },
     [props]
   )

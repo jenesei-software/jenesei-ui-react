@@ -128,7 +128,6 @@ export interface IJeneseiThemeSizeToggle {
 export interface IJeneseiThemeScreens {
   mobile: { width: string }
   tablet: { width: string }
-  other: boolean
 }
 
 export type TJeneseiThemeSize = 'large' | 'largeMedium' | 'medium' | 'mediumSmall' | 'small'

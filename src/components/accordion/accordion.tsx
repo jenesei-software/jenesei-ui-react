@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { FC, useCallback } from 'react'
 
 import { Stack } from '@components/flex'
 
@@ -11,7 +11,7 @@ import {
   AccordionWrapper
 } from '.'
 
-export const Accordion: React.FC<AccordionProps> = props => {
+export const Accordion: FC<AccordionProps> = props => {
   const onClickSummary = useCallback(() => {
     if (props.onClickSummary) props.onClickSummary()
   }, [props])

@@ -84,6 +84,17 @@ const SpanFontCSS = css<TypographyCSSProps>`
     css`
       text-wrap: ${props.$textWrap};
     `}
+
+  ${props =>
+    props.$screen === 'mobile'
+      ? css`
+          --font-size: 12px !important;
+        `
+      : props.$screen === 'tablet'
+        ? css`
+            --font-size: 14px !important;
+          `
+        : ''}
 `
 
 export const SpanFont = styled.span<TypographyCSSProps>`

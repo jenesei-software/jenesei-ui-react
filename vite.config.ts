@@ -43,12 +43,11 @@ export default defineConfig(() => {
         entry: resolve(__dirname, 'src/main.ts'),
         name: 'jenesei-ui-react',
         formats: ['es', 'umd'],
-        fileName: (format) => `jenesei-ui-react.${format}.js`
+        fileName: format => `jenesei-ui-react.${format}.js`
       },
       rollupOptions: {
         external: Object.keys(peerDependencies),
         output: {
-          sourcemap: true,
           globals: {
             'styled-components': 'styled',
             'styled-reset': 'reset',

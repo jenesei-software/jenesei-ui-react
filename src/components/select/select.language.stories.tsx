@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import 'styled-components'
 
 import { SelectLanguage, SelectLanguageProps } from '.'
@@ -18,7 +18,7 @@ const defaultArgs: Partial<SelectLanguageProps> = {
   width: '300px'
 }
 
-const SelectLanguageWrapper: React.FC<SelectLanguageProps> = props => {
+const SelectLanguageWrapper: FC<SelectLanguageProps> = props => {
   const [value, setValue] = useState<string>('')
   const handleSelectChange = (value: string) => {
     setValue(value)

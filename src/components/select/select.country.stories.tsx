@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import 'styled-components'
 
 import { SelectCountry, SelectCountryProps } from '.'
@@ -18,7 +18,7 @@ const defaultArgs: Partial<SelectCountryProps> = {
   width: '300px'
 }
 
-const SelectCountryWrapper: React.FC<SelectCountryProps> = props => {
+const SelectCountryWrapper: FC<SelectCountryProps> = props => {
   const [value, setValue] = useState<string>('')
   const handleSelectChange = (props: { countryCode: string }) => {
     setValue(props.countryCode)

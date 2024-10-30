@@ -16,6 +16,7 @@ export const AuthStyledImage = styled(Image)`
   height: 100%;
   position: absolute;
   object-fit: cover;
+  object-position: center;
   left: 0;
   top: 0;
   background-color: ${props => props.theme.palette.black100};

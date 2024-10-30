@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { FC } from 'react'
 import 'styled-components'
 
 import { Button } from '@components/button'
@@ -7,14 +8,15 @@ import { Tooltip, TooltipProps } from '.'
 
 const meta: Meta<typeof Tooltip> = {
   component: Tooltip,
-  title: 'Tooltip'
+  title: 'Tooltip',
+  tags: ['autodocs']
 }
 
 export default meta
 
 type Story = StoryObj<typeof Tooltip>
 
-const TooltipWrapper: React.FC<TooltipProps> = props => {
+const TooltipWrapper: FC<TooltipProps> = props => {
   return (
     <Tooltip
       {...props}

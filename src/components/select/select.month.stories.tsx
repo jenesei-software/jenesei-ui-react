@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import moment from 'moment'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import 'styled-components'
 
 import { SelectDateProps, SelectMonth } from '.'
@@ -19,7 +19,7 @@ const defaultArgs: Partial<SelectDateProps> = {
   width: '300px'
 }
 
-const SelectMonthWrapper: React.FC<SelectDateProps> = props => {
+const SelectMonthWrapper: FC<SelectDateProps> = props => {
   const [value, setValue] = useState<number>(moment.utc().valueOf())
   const handleSelectChange = (value: number) => {
     setValue(value)

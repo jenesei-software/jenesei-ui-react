@@ -4,7 +4,50 @@ import { LocalStorageContextProps, ProviderLocalStorageProps, ValidLocalStorageO
 
 export const LocalStorageContext = createContext<LocalStorageContextProps | null>(null)
 
+/**
+ * Provider component for managing local storage.
+ *
+ * @remarks
+ * The local storage is typed using the `jenesei-ui-react.d.ts` file:
+ * 
+ * ```typescript
+ * import '@jenesei-software/jenesei-ui-react'
+ * 
+ * declare module '@jenesei-software/jenesei-ui-react' {
+ *   export interface ValidLocalStorageObject {
+ *     access_token: string
+ *     refresh_token: string
+ *   }
+ * }
+ * ```
+ */
 export const ProviderLocalStorage: FC<ProviderLocalStorageProps> = props => {
+  const {
+    getLocalStorage,
+    setLocalStorage,
+    removeLocalStorageValue,
+    removeLocalStorageValues,
+    checkLocalStorage,
+    localStorageValues
+  } = useProviderLocalStorage(props)
+
+  return (
+    <LocalStorageContext.Provider
+      value={{
+        getLocalStorage,
+        setLocalStorage,
+        removeLocalStorageValue,
+        removeLocalStorageValues,
+        checkLocalStorage,
+        localStorageValues
+      }}
+    >
+      {props.children}
+    </LocalStorageContext.Provider>
+  )
+}
+
+const useProviderLocalStorage = (props: ProviderLocalStorageProps) => {
   const [localStorageValues, setLocalStorageValues] = useState<ValidLocalStorageObject>()
 
   const getLocalStorage = useCallback(
@@ -84,18 +127,12 @@ export const ProviderLocalStorage: FC<ProviderLocalStorageProps> = props => {
     checkLocalStorage()
   }, [checkLocalStorage])
 
-  return (
-    <LocalStorageContext.Provider
-      value={{
-        getLocalStorage,
-        setLocalStorage: changeLocalStorage,
-        removeLocalStorageValue,
-        removeLocalStorageValues,
-        checkLocalStorage,
-        localStorageValues
-      }}
-    >
-      {props.children}
-    </LocalStorageContext.Provider>
-  )
+  return {
+    getLocalStorage,
+    setLocalStorage: changeLocalStorage,
+    removeLocalStorageValue,
+    removeLocalStorageValues,
+    checkLocalStorage,
+    localStorageValues
+  }
 }

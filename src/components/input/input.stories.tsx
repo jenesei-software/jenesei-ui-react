@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import 'styled-components'
 
 import { Input, InputProps } from '.'
 
 const meta: Meta<typeof Input> = {
   component: Input,
-  title: 'Input'
+  title: 'Input',
+  tags: ['autodocs']
 }
 
 export default meta
@@ -23,7 +24,7 @@ const defaultArgs: Partial<InputProps> = {
   width: '300px'
 }
 
-const InputStringWrapper: React.FC<InputProps> = props => {
+const InputStringWrapper: FC<InputProps> = props => {
   const [value, setValue] = useState<string>('')
 
   return <Input {...props} value={value} onChange={newValue => setValue(newValue)} />

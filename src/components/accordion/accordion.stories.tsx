@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { useCallback, useState } from 'react'
+import { FC, useCallback, useState } from 'react'
 import 'styled-components'
 
 import { Button } from '@components/button'
@@ -10,14 +10,15 @@ import { Accordion, AccordionProps } from '.'
 
 const meta: Meta<typeof Accordion> = {
   component: Accordion,
-  title: 'Accordion'
+  title: 'Accordion',
+  tags: ['autodocs']
 }
 
 export default meta
 
 type Story = StoryObj<typeof Accordion>
 
-const MultiLevelAccordionWrapper: React.FC<AccordionProps> = props => {
+const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
   const [expanded, setExpanded] = useState<boolean>(false)
   const [expandedTwo, setExpandedTwo] = useState<boolean>(false)
   const [expandedThree, setExpandedThree] = useState<boolean>(false)
@@ -178,7 +179,7 @@ const MultiLevelAccordionWrapper: React.FC<AccordionProps> = props => {
   )
 }
 
-const OneLevelAccordionWrapper: React.FC<AccordionProps> = props => {
+const OneLevelAccordionWrapper: FC<AccordionProps> = props => {
   const [expanded, setExpanded] = useState<boolean>(false)
 
   const changeExpanded = useCallback(() => {

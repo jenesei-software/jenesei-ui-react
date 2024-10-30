@@ -362,7 +362,6 @@ export const JeneseiTheme: IJeneseiTheme = {
   screens: {
     mobile: { width: '850px' },
     tablet: { width: '1290px' },
-    other: true
   },
   fontFamily: 'Inter',
   effects: {
