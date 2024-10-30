@@ -1,4 +1,3 @@
-import { PatternFormat } from 'react-number-format'
 import styled, { css } from 'styled-components'
 
 import { ModalLoading } from '@components/modal-loading'
@@ -6,32 +5,31 @@ import { getFontSizeStyles } from '@components/typography'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
 
-import {
-  InputErrorMessageProps,
-  InputProps,
-  StyledInputChildrenProps,
-  StyledInputProps,
-  StyledInputWrapperProps
-} from '.'
+import { StyledTextAreaProps, StyledTextAreaWrapperProps, TextAreaErrorMessageProps, TextAreaProps } from '.'
 
 /****************************************** Wrapper *************************************************/
-export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
+export const StyledTextAreaWrapper = styled.div<StyledTextAreaWrapperProps>`
   width: max-content;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   width: ${props => props.$width ?? '100%'};
+  ${props =>
+    props.$width &&
+    css`
+      max-width: ${props.$width};
+    `}
 `
 
 /****************************************** Error Size*************************************************/
-export const InputErrorMessageSize = css<InputErrorMessageProps>`
+export const TextAreaErrorMessageSize = css<TextAreaErrorMessageProps>`
   ${props =>
-    InputErrorMessageSizeConstructor({ ...KEY_SIZE_DATA[props.$size], $isErrorAbsolute: props.$isErrorAbsolute })};
+    TextAreaErrorMessageSizeConstructor({ ...KEY_SIZE_DATA[props.$size], $isErrorAbsolute: props.$isErrorAbsolute })};
 `
-export const InputErrorMessageSizeConstructor = (
-  props: IJeneseiThemeSize & { $isErrorAbsolute: InputProps['isErrorAbsolute'] }
+export const TextAreaErrorMessageSizeConstructor = (
+  props: IJeneseiThemeSize & { $isErrorAbsolute: TextAreaProps['isErrorAbsolute'] }
 ) => css`
   ${props.$isErrorAbsolute
     ? css`
@@ -48,13 +46,13 @@ export const InputErrorMessageSizeConstructor = (
 `
 
 /****************************************** Error *************************************************/
-export const InputErrorMessage = styled.div<InputErrorMessageProps>`
+export const TextAreaErrorMessage = styled.div<TextAreaErrorMessageProps>`
   ${getFontSizeStyles(12, 400, 'Inter')};
   width: ${props => props.$width ?? '100%'};
-  ${InputErrorMessageSize}
+  ${TextAreaErrorMessageSize}
 `
 
-export const InputIsErrorBorder = css<StyledInputProps>`
+export const TextAreaIsErrorBorder = css<StyledTextAreaProps>`
   ${props =>
     props.$isError &&
     css`
@@ -68,7 +66,7 @@ export const InputIsErrorBorder = css<StyledInputProps>`
 `
 
 /****************************************** Placeholder *************************************************/
-export const InputPlaceholder = css<StyledInputProps>`
+export const TextAreaPlaceholder = css<StyledTextAreaProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
     ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
@@ -85,7 +83,7 @@ export const InputPlaceholder = css<StyledInputProps>`
 `
 
 /****************************************** Genre *************************************************/
-const InputGenre = css<StyledInputProps>`
+const TextAreaGenre = css<StyledTextAreaProps>`
   ${props => css`
     background: ${props.theme.colors.input[props.$genre].background.rest};
     border-color: ${props.theme.colors.input[props.$genre].border.rest};
@@ -147,106 +145,74 @@ const InputGenre = css<StyledInputProps>`
 `
 
 /****************************************** Size *************************************************/
-export const InputSize = css<StyledInputProps>`
-  ${props => InputSizeConstructor(KEY_SIZE_DATA[props.$size])};
+export const TextAreaSize = css<StyledTextAreaProps>`
+  ${props => TextAreaSizeConstructor({ ...KEY_SIZE_DATA[props.$size], height: props.$height })};
 `
-export const InputSizeConstructor = (props: IJeneseiThemeSize) => css`
-  padding: 0px ${props.padding}px;
-  height: ${props.height}px;
-  min-height: ${props.height}px;
-  max-height: ${props.height}px;
+export const TextAreaSizeConstructor = (props: Omit<IJeneseiThemeSize, 'height'> & { height?: string }) => css`
+  padding: ${props.padding - 6}px ${props.padding}px ${props.padding - 4}px ${props.padding}px;
+  ${props.height &&
+  css`
+    height: ${props.height}px;
+    min-height: ${props.height}px;
+    max-height: ${props.height}px;
+  `}
+
   border-radius: ${props.radius}px;
 `
 
 /****************************************** Hidden *************************************************/
-const InputHidden = css<StyledInputProps>`
+const TextAreaHidden = css<StyledTextAreaProps>`
   opacity: ${props => (props.$isDisabled ? 0.5 : 1)};
 `
 /****************************************** is PlaystationEffect *************************************************/
-export const InputIsInputEffect = css<Pick<StyledInputProps, '$isInputEffect'>>`
+export const TextAreaIsTextAreaEffect = css<Pick<StyledTextAreaProps, '$isTextAreaEffect'>>`
   ${props =>
-    props.$isInputEffect &&
+    props.$isTextAreaEffect &&
     css`
       box-shadow: ${props.theme.effects.input.default};
     `}
 `
 
 /****************************************** Default *************************************************/
-export const StyledInputCSS = css<StyledInputProps>`
-  resize: none;
+export const StyledTextAreaCSS = css<StyledTextAreaProps>`
   overflow: hidden;
   box-sizing: border-box;
-  width: 100%;
+  width: 100% !important;
   border: 1px inset;
   transition:
-    all ${props => props.theme.transition},
+    color,
+    border,
+    background-color ${props => props.theme.transition},
     outline 0s;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   outline: none;
+  text-wrap: auto;
 
   ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
-  ${InputSize};
-  ${InputGenre};
-  ${InputIsErrorBorder};
-  ${InputPlaceholder};
-  ${InputHidden};
-  ${InputIsInputEffect};
-  ${props =>
-    props.$prefixChildren &&
-    css`
-      padding-left: ${`calc(${props.$prefixChildren.width} + ${props.$prefixChildren.right} + ${props.$prefixChildren.left})`};
-    `};
-
-  ${props =>
-    props.$postfixChildren &&
-    css`
-      padding-right: ${`calc(${props.$postfixChildren.width} + ${props.$postfixChildren.right} + ${props.$postfixChildren.left})`};
-    `};
+  ${TextAreaSize};
+  ${TextAreaGenre};
+  ${TextAreaIsErrorBorder};
+  ${TextAreaPlaceholder};
+  ${TextAreaHidden};
+  ${TextAreaIsTextAreaEffect};
 `
 
-export const StyledInput = styled.input<StyledInputProps>`
-  ${StyledInputCSS};
-`
-
-export const StyledInputFormat = styled(PatternFormat)<StyledInputProps>`
-  ${StyledInputCSS};
-`
-
-/****************************************** Children *************************************************/
-export const InputPrefixChildren = styled.div<StyledInputChildrenProps>`
-  position: absolute;
-  left: ${props => props.$left};
-  width: ${props => props.$width};
-  opacity: ${props => (props.$isDisabled ? 0.5 : 1)};
-  height: 100%;
-  transition:
-    all ${props => props.theme.transition},
-    outline 0s;
-`
-
-export const InputPostfixChildren = styled.div<StyledInputChildrenProps>`
-  position: absolute;
-  right: ${props => props.$right};
-  width: ${props => props.$width};
-  opacity: ${props => (props.$isDisabled ? 0.5 : 1)};
-  height: 100%;
-  transition:
-    all ${props => props.theme.transition},
-    outline 0s;
+export const StyledTextArea = styled.textarea<StyledTextAreaProps>`
+  ${StyledTextAreaCSS};
 `
 
 /****************************************** ModalLoading *************************************************/
-const InputStyledModalLoadingSize = css<StyledInputProps>`
-  ${props => InputStyledModalLoadingConstructor(KEY_SIZE_DATA[props.$size])};
+const TextAreaStyledModalLoadingSize = css<StyledTextAreaProps>`
+  ${props => TextAreaStyledModalLoadingConstructor({ ...KEY_SIZE_DATA[props.$size], height: props.$height })};
 `
-const InputStyledModalLoadingConstructor = (props: IJeneseiThemeSize) => css`
+const TextAreaStyledModalLoadingConstructor = (props: Omit<IJeneseiThemeSize, 'height'> & { height?: string }) => css`
   padding: ${props.padding - 6}px ${props.padding}px ${props.padding - 4}px ${props.padding}px;
 `
 
-export const InputStyledModalLoading = styled(ModalLoading)<StyledInputProps>`
-  ${InputStyledModalLoadingSize};
+export const TextAreaStyledModalLoading = styled(ModalLoading)<StyledTextAreaProps>`
+  ${TextAreaStyledModalLoadingSize};
   position: absolute;
   display: flex;
   align-items: center;

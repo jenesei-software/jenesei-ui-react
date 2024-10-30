@@ -22,11 +22,9 @@ export * from './components/typography'
 
 export * from './layouts/auth'
 
-// Export of hooks
 export * from './hooks/use-geolocation'
 export * from './hooks/use-screen-width'
 
-// Export of providers
 export * from './providers/provider-app'
 export * from './providers/provider-cookie'
 export * from './providers/provider-local-storage'

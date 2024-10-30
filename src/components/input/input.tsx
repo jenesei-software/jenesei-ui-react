@@ -21,9 +21,9 @@ export const Input = (props: InputProps) => {
     (value: string) => {
       if (props.isNoSpaces) {
         const valueWithoutSpaces = value.replace(/\s+/g, '')
-        props.onChange && props.onChange(valueWithoutSpaces)
+        props.onChange?.(valueWithoutSpaces)
       } else {
-        props.onChange && props.onChange(value)
+        props.onChange?.(value)
       }
     },
     [props]
