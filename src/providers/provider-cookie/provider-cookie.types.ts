@@ -8,7 +8,7 @@ export interface ProviderCookieProps extends PropsWithChildren {
     validateKeys: (keyof ValidCookieObject)[]
     getValidateCookieValue: <K extends keyof ValidCookieObject>(
       key: K,
-      value: ValidCookieObject[K],
+      value: ValidCookieObject[K]
     ) => value is ValidCookieObject[K]
   }
 }
@@ -16,18 +16,13 @@ export interface ProviderCookieProps extends PropsWithChildren {
 export interface ValidCookieObject {}
 
 export interface CookieContextProps {
-  getCookie: <K extends keyof ValidCookieObject>(
-    name: K,
-  ) => ValidCookieObject[K] | undefined
+  getCookie: <K extends keyof ValidCookieObject>(name: K) => ValidCookieObject[K] | undefined
   setCookie: <K extends keyof ValidCookieObject>(
     name: K,
     value: ValidCookieObject[K],
-    options?: CookieAttributes,
+    options?: CookieAttributes
   ) => void
-  removeCookieValue: <K extends keyof ValidCookieObject>(
-    name: K,
-    options?: CookieAttributes,
-  ) => void
+  removeCookieValue: <K extends keyof ValidCookieObject>(name: K, options?: CookieAttributes) => void
   removeCookieValues: () => void
   checkCookie: () => void
   cookieValues: ValidCookieObject | undefined

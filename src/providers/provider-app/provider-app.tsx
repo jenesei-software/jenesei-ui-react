@@ -1,4 +1,4 @@
-import { createContext, useCallback, useEffect, useState } from 'react'
+import { FC, createContext, useCallback, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 
 import { Preview, PreviewAdditionalProps } from '@components/preview'
@@ -16,22 +16,47 @@ import {
   ProviderAppOutletNotification,
   ProviderAppOutletRightAside,
   ProviderAppProps,
-  ProviderAppWrapper,
+  ProviderAppWrapper
 } from '.'
 
 export const AppContext = createContext<AppContextProps | null>(null)
 
-export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
+/**
+ * ProviderApp component is a context provider that manages various application-level states
+ * such as background color, status bar color, background image, title, and description.
+ * It uses several custom hooks to handle these states and provides them via the AppContext.
+ * 
+ * @component
+ * 
+ * @param {ProviderAppProps} props - The properties passed to the ProviderApp component.
+ * @param {string} props.defaultBgColor - The default background color.
+ * @param {string} props.defaultStatusBarColor - The default status bar color.
+ * @param {string} [props.defaultBgImage] - The default background image.
+ * @param {string} [props.defaultTitle] - The default title.
+ * @param {string} [props.defaultDescription] - The default description.
+ * @param {boolean} [props.isScrollOutlet] - Determines if the outlet should be scrollable.
+ * @param {object} [props.footer] - The footer component and its properties.
+ * @param {object} [props.notification] - The notification component and its properties.
+ * @param {object} [props.header] - The header component and its properties.
+ * @param {object} [props.nav] - The navigation component and its properties.
+ * @param {object} [props.leftAside] - The left aside component and its properties.
+ * @param {object} [props.rightAside] - The right aside component and its properties.
+ * @param {React.ReactNode} props.children - The children components to be rendered inside the ProviderApp.
+ * 
+ * @returns {JSX.Element} The rendered ProviderApp component.
+ */
+export const ProviderApp: FC<ProviderAppProps> = props => {
   const { bgColor, changeBgColor, historyBgColor, setDefaultBgColor } = useBgColor(props.defaultBgColor)
   const { statusBarColor, changeStatusBarColor, historyStatusBarColor, setDefaultStatusBarColor } = useStatusBarColor(
-    props.defaultStatusBarColor,
+    props.defaultStatusBarColor
   )
   const { bgImage, changeBgImage, historyBgImage, setDefaultBgImage } = useBgImage(props.defaultBgImage || null)
   const { title, changeTitle, historyTitle, setDefaultTitle } = useTitle(props.defaultTitle || null)
   const { description, changeDescription, historyDescription, setDefaultDescription } = useDescription(
-    props.defaultDescription,
+    props.defaultDescription
   )
   const { changePreview, previewProps } = usePreview(props.defaultPreview)
+
   return (
     <AppContext.Provider
       value={{
@@ -50,7 +75,7 @@ export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
         setDefaultBgColor,
         setDefaultBgImage,
         setDefaultTitle,
-        setDefaultDescription,
+        setDefaultDescription
       }}
     >
       <Helmet>
@@ -91,7 +116,9 @@ export const ProviderApp: React.FC<ProviderAppProps> = (props) => {
   )
 }
 
-// Хук для управления Превью
+/**
+ * Custom hook to manage preview properties.
+ */
 const usePreview = (defaultPreview: ProviderAppProps['defaultPreview']) => {
   const [previewProps, setPreviewProps] = useState(defaultPreview || { isShow: false })
 
@@ -106,7 +133,9 @@ const usePreview = (defaultPreview: ProviderAppProps['defaultPreview']) => {
   return { previewProps, changePreview }
 }
 
-// Хук для управления фоновым цветом
+/**
+ * Custom hook to manage background color state with history tracking.
+ */
 const useBgColor = (defaultColor: JeneseiThemeVariablesKeys) => {
   const [bgColor, setBgColor] = useState(defaultColor)
   const [bgColorHistory, setBgColorHistory] = useState([defaultColor])
@@ -115,13 +144,13 @@ const useBgColor = (defaultColor: JeneseiThemeVariablesKeys) => {
   const changeBgColor = useCallback(
     (color: JeneseiThemeVariablesKeys) => {
       setBgColor(color)
-      setBgColorHistory((prev) => {
+      setBgColorHistory(prev => {
         const newHistory = [...prev.slice(0, bgColorIndex + 1), color]
         setBgColorIndex(newHistory.length - 1)
         return newHistory
       })
     },
-    [bgColorIndex],
+    [bgColorIndex]
   )
 
   const historyBgColor = useCallback(
@@ -132,7 +161,7 @@ const useBgColor = (defaultColor: JeneseiThemeVariablesKeys) => {
         setBgColorIndex(newIndex)
       }
     },
-    [bgColorHistory, bgColorIndex],
+    [bgColorHistory, bgColorIndex]
   )
 
   const setDefaultBgColor = useCallback(() => {
@@ -148,7 +177,9 @@ const useBgColor = (defaultColor: JeneseiThemeVariablesKeys) => {
   return { bgColor, changeBgColor, historyBgColor, setDefaultBgColor }
 }
 
-// Хук для управления цветом строки состояния
+/**
+ * Custom hook to manage the status bar color with history tracking.
+ */
 const useStatusBarColor = (defaultColor: JeneseiThemeVariablesKeys) => {
   const [statusBarColor, setStatusBarColor] = useState(defaultColor)
   const [statusBarColorHistory, setStatusBarColorHistory] = useState([defaultColor])
@@ -157,13 +188,13 @@ const useStatusBarColor = (defaultColor: JeneseiThemeVariablesKeys) => {
   const changeStatusBarColor = useCallback(
     (color: JeneseiThemeVariablesKeys) => {
       setStatusBarColor(color)
-      setStatusBarColorHistory((prev) => {
+      setStatusBarColorHistory(prev => {
         const newHistory = [...prev.slice(0, statusBarColorIndex + 1), color]
         setStatusBarColorIndex(newHistory.length - 1)
         return newHistory
       })
     },
-    [statusBarColorIndex],
+    [statusBarColorIndex]
   )
 
   const historyStatusBarColor = useCallback(
@@ -174,7 +205,7 @@ const useStatusBarColor = (defaultColor: JeneseiThemeVariablesKeys) => {
         setStatusBarColorIndex(newIndex)
       }
     },
-    [statusBarColorHistory, statusBarColorIndex],
+    [statusBarColorHistory, statusBarColorIndex]
   )
 
   const setDefaultStatusBarColor = useCallback(() => {
@@ -190,7 +221,9 @@ const useStatusBarColor = (defaultColor: JeneseiThemeVariablesKeys) => {
   return { statusBarColor, changeStatusBarColor, historyStatusBarColor, setDefaultStatusBarColor }
 }
 
-// Хук для управления фоновым изображением
+/**
+ * Custom hook to manage background images with history.
+ */
 const useBgImage = (defaultImage: string | null) => {
   const [bgImage, setBgImage] = useState<string | null>(defaultImage)
   const [bgImageHistory, setBgImageHistory] = useState<(string | null)[]>([defaultImage])
@@ -199,13 +232,13 @@ const useBgImage = (defaultImage: string | null) => {
   const changeBgImage = useCallback(
     (image: string | null) => {
       setBgImage(image)
-      setBgImageHistory((prev) => {
+      setBgImageHistory(prev => {
         const newHistory = [...prev.slice(0, bgImageIndex + 1), image]
         setBgImageIndex(newHistory.length - 1)
         return newHistory
       })
     },
-    [bgImageIndex],
+    [bgImageIndex]
   )
 
   const historyBgImage = useCallback(
@@ -216,7 +249,7 @@ const useBgImage = (defaultImage: string | null) => {
         setBgImageIndex(newIndex)
       }
     },
-    [bgImageHistory, bgImageIndex],
+    [bgImageHistory, bgImageIndex]
   )
 
   const setDefaultBgImage = useCallback(() => {
@@ -232,7 +265,9 @@ const useBgImage = (defaultImage: string | null) => {
   return { bgImage, changeBgImage, historyBgImage, setDefaultBgImage }
 }
 
-// Хук для управления заголовком
+/**
+ * Custom hook to manage the document title with history tracking.
+ */
 const useTitle = (defaultTitle: string | null) => {
   const [title, setTitle] = useState(defaultTitle)
   const [titleHistory, setTitleHistory] = useState([defaultTitle])
@@ -241,13 +276,13 @@ const useTitle = (defaultTitle: string | null) => {
   const changeTitle = useCallback(
     (newTitle: string | null) => {
       setTitle(newTitle)
-      setTitleHistory((prev) => {
+      setTitleHistory(prev => {
         const newHistory = [...prev.slice(0, titleIndex + 1), newTitle]
         setTitleIndex(newHistory.length - 1)
         return newHistory
       })
     },
-    [titleIndex],
+    [titleIndex]
   )
 
   const historyTitle = useCallback(
@@ -258,7 +293,7 @@ const useTitle = (defaultTitle: string | null) => {
         setTitleIndex(newIndex)
       }
     },
-    [titleHistory, titleIndex],
+    [titleHistory, titleIndex]
   )
 
   const setDefaultTitle = useCallback(() => {
@@ -274,7 +309,9 @@ const useTitle = (defaultTitle: string | null) => {
   return { title, changeTitle, historyTitle, setDefaultTitle }
 }
 
-// Хук для управления описанием
+/**
+ * Custom hook to manage a description with history tracking.
+ */
 const useDescription = (defaultDescription: string) => {
   const [description, setDescription] = useState(defaultDescription)
   const [descriptionHistory, setDescriptionHistory] = useState([defaultDescription])
@@ -283,13 +320,13 @@ const useDescription = (defaultDescription: string) => {
   const changeDescription = useCallback(
     (newDescription: string) => {
       setDescription(newDescription)
-      setDescriptionHistory((prev) => {
+      setDescriptionHistory(prev => {
         const newHistory = [...prev.slice(0, descriptionIndex + 1), newDescription]
         setDescriptionIndex(newHistory.length - 1)
         return newHistory
       })
     },
-    [descriptionIndex],
+    [descriptionIndex]
   )
 
   const historyDescription = useCallback(
@@ -300,7 +337,7 @@ const useDescription = (defaultDescription: string) => {
         setDescriptionIndex(newIndex)
       }
     },
-    [descriptionHistory, descriptionIndex],
+    [descriptionHistory, descriptionIndex]
   )
 
   const setDefaultDescription = useCallback(() => {

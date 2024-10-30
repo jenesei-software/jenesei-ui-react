@@ -53,8 +53,6 @@ export const ButtonGroupWrapper = styled.div<StyledButtonGroupProps>`
       z-index: 1;
     }
   }
-  ${(props) =>
-    props.$position === 'horizontal'
-      ? ButtonGroupWrapperPositionHorizontal
-      : ButtonGroupWrapperPositionVertical}
+  ${props =>
+    props.$position === 'horizontal' ? ButtonGroupWrapperPositionHorizontal : ButtonGroupWrapperPositionVertical}
 `

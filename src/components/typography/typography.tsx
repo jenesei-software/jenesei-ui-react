@@ -14,7 +14,7 @@ import {
   TitleH8,
   TitleH9,
   TypographyProps,
-  TypographyTooltipProps,
+  TypographyTooltipProps
 } from '.'
 
 export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefined, TypographyProps>((props, ref) => {
@@ -31,7 +31,7 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
     $cursor: props.cursor,
     className: props.className,
     style: props.style,
-    onClick: props.onClick ? props.onClick : () => {},
+    onClick: props.onClick ? props.onClick : () => {}
   }
 
   if ('variant' in props) {

@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react'
 
 import { PreviewChildren, PreviewLoading, PreviewProps, PreviewWrapper } from '.'
 
-export const Preview: FC<PreviewProps> = (props) => {
+export const Preview: FC<PreviewProps> = props => {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {

@@ -1,0 +1,37 @@
+import pluginJs from '@eslint/js'
+import configPrettier from 'eslint-config-prettier'
+import pluginPrettier from 'eslint-plugin-prettier'
+import pluginReact from 'eslint-plugin-react'
+import pluginReactHooks from 'eslint-plugin-react-hooks'
+import pluginStorybook from 'eslint-plugin-storybook'
+import globals from 'globals'
+import pluginTypescript from 'typescript-eslint'
+
+export default [
+  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
+  { languageOptions: { globals: globals.browser } },
+  ...pluginTypescript.configs.recommended,
+  pluginReact.configs.flat.recommended,
+  pluginJs.configs.recommended,
+  configPrettier,
+  {
+    plugins: {
+      'react-hooks': pluginReactHooks,
+      storybook: pluginStorybook,
+      prettier: pluginPrettier
+    },
+    rules: {
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+      'storybook/hierarchy-separator': 'error',
+      'storybook/default-exports': 'off',
+      'prettier/prettier': 'error',
+      'react/react-in-jsx-scope': 'off'
+    },
+    settings: {
+      react: {
+        version: 'detect'
+      }
+    }
+  }
+]

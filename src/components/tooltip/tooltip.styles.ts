@@ -16,15 +16,15 @@ export const TooltipBox = styled.div<TooltipBoxProps>`
   padding: 8px;
   border-radius: 6px;
 
-  background-color: ${(props) => props.theme.palette.grayPatricia};
-  color: ${(props) => props.theme.palette.whiteStandard};
+  background-color: ${props => props.theme.palette.grayPatricia};
+  color: ${props => props.theme.palette.whiteStandard};
 
-  white-space: ${(props) => props.$whiteSpace ?? 'normal'};
-  max-width: ${(props) => props.$maxWidth ?? '300px'};
-  max-height: ${(props) => props.$maxHeight ?? '200px'};
+  white-space: ${props => props.$whiteSpace ?? 'normal'};
+  max-width: ${props => props.$maxWidth ?? '300px'};
+  max-height: ${props => props.$maxHeight ?? '200px'};
 
-  opacity: ${(props) => (props.$visible ? '1' : '0')};
-  transition: opacity ${(props) => props.theme.transition};
+  opacity: ${props => (props.$visible ? '1' : '0')};
+  transition: opacity ${props => props.theme.transition};
 `
 
 export const TooltipArrow = styled.div<TooltipArrowProps>`
@@ -35,6 +35,6 @@ export const TooltipArrow = styled.div<TooltipArrowProps>`
   border-style: solid;
   padding: 0.1px;
 
-  opacity: ${(props) => (props.$visible ? '1' : '0')};
-  transition: opacity ${(props) => props.theme.transition};
+  opacity: ${props => (props.$visible ? '1' : '0')};
+  transition: opacity ${props => props.theme.transition};
 `

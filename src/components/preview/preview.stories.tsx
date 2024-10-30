@@ -5,7 +5,8 @@ import { Preview } from '.'
 
 const meta: Meta<typeof Preview> = {
   component: Preview,
-  title: 'Preview'
+  title: 'Preview',
+  tags: ['autodocs']
 }
 
 export default meta

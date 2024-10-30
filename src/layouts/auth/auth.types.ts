@@ -1,4 +1,5 @@
 import { CSSProperties, PropsWithChildren } from 'react'
+import { AddDollarSign } from 'src/types'
 
 export interface AuthLayoutProps extends PropsWithChildren {
   backUrl: string
@@ -6,6 +7,4 @@ export interface AuthLayoutProps extends PropsWithChildren {
   style?: CSSProperties
 }
 
-export interface AuthLayoutWrapperBackgroundProps {
-  $backUrl: AuthLayoutProps['backUrl']
-}
+export type AuthLayoutWrapperBackgroundProps = AddDollarSign<Pick<AuthLayoutProps, 'backUrl'>>

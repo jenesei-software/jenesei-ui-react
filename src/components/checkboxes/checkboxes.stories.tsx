@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import 'styled-components'
 
 import { Checkboxes as CheckboxesComponent, CheckboxesProps, ICheckboxValue } from '.'
 
 const meta: Meta<typeof CheckboxesComponent> = {
   component: CheckboxesComponent,
-  title: 'Checkbox/Checkboxes'
+  title: 'Checkbox/Checkboxes',
+  tags: ['autodocs']
 }
 
 export default meta
@@ -24,18 +25,18 @@ const defaultArgs: Partial<CheckboxesProps<ICheckboxValue>> = {
   width: '300px'
 }
 
-const CheckboxesWrapper: React.FC<CheckboxesProps<ICheckboxValue>> = (props) => {
+const CheckboxesWrapper: FC<CheckboxesProps<ICheckboxValue>> = props => {
   const [value, setValue] = useState<ICheckboxValue[]>([])
   const [options] = useState<ICheckboxValue[]>([
     { value: 0, label: 'First' },
     { value: 1, label: 'Second' }
   ])
 
-  return <CheckboxesComponent {...props} value={value} options={options} onChange={(value) => setValue(value)} />
+  return <CheckboxesComponent {...props} value={value} options={options} onChange={value => setValue(value)} />
 }
 
 export const Checkboxes: Story = {
-  render: (args) => <CheckboxesWrapper {...args} />,
+  render: args => <CheckboxesWrapper {...args} />,
   args: {
     ...defaultArgs
   }

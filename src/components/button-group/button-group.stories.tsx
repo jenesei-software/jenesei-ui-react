@@ -1,18 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { FC } from 'react'
 import 'styled-components'
 
 import { ButtonGroup, ButtonGroupProps } from '.'
 
 const meta: Meta<typeof ButtonGroup> = {
   component: ButtonGroup,
-  title: 'ButtonGroup'
+  title: 'ButtonGroup',
+  tags: ['autodocs']
 }
 
 export default meta
 
 type Story = StoryObj<typeof ButtonGroup>
 
-const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
+const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
   return (
     <ButtonGroup
       {...props}
@@ -135,14 +137,14 @@ const ButtonGroupWrapper: React.FC<ButtonGroupProps> = (props) => {
 }
 
 export const Horizontal: Story = {
-  render: (args) => <ButtonGroupWrapper {...args} />,
+  render: args => <ButtonGroupWrapper {...args} />,
   args: {
     position: 'horizontal'
   }
 }
 
 export const Vertical: Story = {
-  render: (args) => <ButtonGroupWrapper {...args} />,
+  render: args => <ButtonGroupWrapper {...args} />,
   args: {
     position: 'vertical',
     width: '200px'

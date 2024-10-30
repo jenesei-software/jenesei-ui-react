@@ -20,3 +20,6 @@ export interface ProviderPermissionProps {
   children: ReactNode
   serviceWorkerPath: string
 }
+
+export type UseServiceWorkerProps = Pick<ProviderPermissionProps, 'serviceWorkerPath'> &
+  Pick<PermissionContextProps, 'notificationPermission' | 'requestNotificationPermission'>

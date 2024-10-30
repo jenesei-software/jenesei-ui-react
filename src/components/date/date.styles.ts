@@ -11,11 +11,11 @@ import {
   DateDropdownListProps,
   DateStyledInputProps,
   DateStyledListProps,
-  DateWrapperProps,
+  DateWrapperProps
 } from '.'
 
 export const DateWrapper = styled.div<DateWrapperProps>`
-  width: ${(props) => props.$width ?? '100%'};
+  width: ${props => props.$width ?? '100%'};
   position: relative;
 
   outline: none !important;
@@ -62,7 +62,7 @@ export const DateDropdownListParent = styled.div<DateStyledListProps>`
 
 /****************************************** Size *************************************************/
 export const dateDropdownListSize = css<DateDropdownListProps>`
-  ${(props) => props.$size && DateDropdownListSizeConstructor(KEY_SIZE_DATA[props.$size])};
+  ${props => props.$size && DateDropdownListSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
 export const DateDropdownListSizeConstructor = (props: IJeneseiThemeSize) => css`
   padding: ${props.padding}px;
@@ -80,8 +80,8 @@ export const DateDropdownList = styled.div<DateDropdownListProps>`
   width: 100%;
   padding-top: 6px;
   transform: translateZ(0);
-  background: ${(props) => props.theme.colors.input[props.$genre].background.rest};
-  border: solid 1px ${(props) => props.theme.colors.input[props.$genre].border.rest};
+  background: ${props => props.theme.colors.input[props.$genre].background.rest};
+  border: solid 1px ${props => props.theme.colors.input[props.$genre].border.rest};
   ${dateDropdownListSize}
   ${InputIsInputEffect};
   justify-content: flex-start;
@@ -94,27 +94,27 @@ export const DateDropdownDays = styled.div<{ $rows: number }>`
   row-gap: normal;
   gap: 6px;
   grid-template-columns: repeat(7, 28px);
-  grid-template-rows: repeat(${(props) => props.$rows}, 28px);
+  grid-template-rows: repeat(${props => props.$rows}, 28px);
   justify-content: space-between;
 `
 
 export const DateDropdownDaySize = css<DateDropdownDayProps>`
-  ${(props) =>
+  ${props =>
     props.$size &&
     DateDropdownDaySizeConstructor({
-      ...KEY_SIZE_DATA[props.$size],
+      ...KEY_SIZE_DATA[props.$size]
     })};
   position: relative;
   overflow: hidden;
   isolation: isolate;
   user-select: none;
-  background: ${(props) => props.theme.colors.date[props.$genre].background.rest};
-  border-color: ${(props) => props.theme.colors.date[props.$genre].border.rest};
-  color: ${(props) => props.theme.colors.date[props.$genre].color.rest};
+  background: ${props => props.theme.colors.date[props.$genre].background.rest};
+  border-color: ${props => props.theme.colors.date[props.$genre].border.rest};
+  color: ${props => props.theme.colors.date[props.$genre].color.rest};
   outline: 1px solid transparent;
   border: 1px solid transparent;
-  grid-row: ${(props) => props.$row};
-  grid-column: ${(props) => props.$column};
+  grid-row: ${props => props.$row};
+  grid-column: ${props => props.$column};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -122,38 +122,38 @@ export const DateDropdownDaySize = css<DateDropdownDayProps>`
   height: 100%;
   cursor: pointer;
   &:hover {
-    ${(props) => css`
+    ${props => css`
       background: ${props.theme.colors.date[props.$genre].background.hover};
       border-color: ${props.theme.colors.date[props.$genre].border.hover};
       color: ${props.theme.colors.date[props.$genre].color.hover};
     `}
   }
   transition:
-    all ${(props) => props.theme.transition},
+    all ${props => props.theme.transition},
     outline 0s;
 
-  ${(props) =>
+  ${props =>
     props.$isWeekend &&
     css`
       background: ${props.theme.colors.date[props.$genre].background.weekend};
       border-color: ${props.theme.colors.date[props.$genre].border.weekend};
       color: ${props.theme.colors.date[props.$genre].color.weekend};
     `}
-  ${(props) =>
+  ${props =>
     props.$isToday &&
     css`
       background: ${props.theme.colors.date[props.$genre].background.today};
       border-color: ${props.theme.colors.date[props.$genre].border.today};
       color: ${props.theme.colors.date[props.$genre].color.today};
     `}
-    ${(props) =>
+    ${props =>
     props.$isChoice &&
     css`
       background: ${props.theme.colors.date[props.$genre].background.choice};
       border-color: ${props.theme.colors.date[props.$genre].border.choice};
       color: ${props.theme.colors.date[props.$genre].color.choice};
     `}
-    ${(props) =>
+    ${props =>
     !props.$isCurrentMonth &&
     css`
       opacity: 0.5;

@@ -9,7 +9,7 @@ import { StyledDollarButtonIconsWrapperProps, StyledDollarButtonProps } from '.'
 
 /****************************************** Genre *************************************************/
 const ButtonGenre = css<StyledDollarButtonProps>`
-  ${(props) => css`
+  ${props => css`
     background: ${props.theme.colors.button[props.$genre].background.rest};
     border-color: ${props.theme.colors.button[props.$genre].border.rest};
     color: ${props.theme.colors.button[props.$genre].color.rest};
@@ -42,7 +42,7 @@ const ButtonGenre = css<StyledDollarButtonProps>`
 
 /****************************************** Disabled *************************************************/
 const ButtonDisabled = css<StyledDollarButtonProps>`
-  ${(props) =>
+  ${props =>
     props.$isHidden
       ? css`
           opacity: 0.5;
@@ -62,7 +62,7 @@ const ButtonDisabled = css<StyledDollarButtonProps>`
 `
 /****************************************** is HiddenBorder *************************************************/
 const ButtonIsHiddenBorder = css<StyledDollarButtonProps>`
-  ${(props) =>
+  ${props =>
     props.$isHiddenBorder &&
     css`
       border: 0px transparent !important;
@@ -70,7 +70,7 @@ const ButtonIsHiddenBorder = css<StyledDollarButtonProps>`
 `
 /****************************************** is Radius *************************************************/
 const ButtonIsRadius = css<StyledDollarButtonProps>`
-  ${(props) =>
+  ${props =>
     props.$isRadius &&
     css`
       border-radius: 100px;
@@ -78,7 +78,7 @@ const ButtonIsRadius = css<StyledDollarButtonProps>`
 `
 /****************************************** is PlaystationEffect *************************************************/
 const ButtonIsPlaystationEffect = css<StyledDollarButtonProps>`
-  ${(props) =>
+  ${props =>
     props.$isPlaystationEffect &&
     css`
       box-shadow: ${props.theme.effects.button.playstation};
@@ -86,7 +86,7 @@ const ButtonIsPlaystationEffect = css<StyledDollarButtonProps>`
 `
 /****************************************** Icons Wrapper *************************************************/
 export const StyledButtonIconsWrapper = styled.div<StyledDollarButtonIconsWrapperProps>`
-  ${(props) =>
+  ${props =>
     props.$isIconGroup
       ? css`
           display: flex;
@@ -101,7 +101,7 @@ export const StyledButtonIconsWrapper = styled.div<StyledDollarButtonIconsWrappe
 
 /****************************************** Size *************************************************/
 export const ButtonSize = css<StyledDollarButtonProps>`
-  ${(props) =>
+  ${props =>
     ButtonSizeConstructor({
       ...KEY_SIZE_DATA[props.$size],
       isFullSize: props.$isFullSize,
@@ -166,7 +166,7 @@ export const StyledButton = styled.button<StyledDollarButtonProps>`
   isolation: isolate;
   user-select: none;
   transition:
-    all ${(props) => props.theme.transition},
+    all ${props => props.theme.transition},
     outline 0s;
   box-sizing: border-box;
   overflow: hidden;
@@ -182,7 +182,7 @@ export const StyledButton = styled.button<StyledDollarButtonProps>`
   ${ButtonIsHiddenBorder};
   ${ButtonIsRadius};
   ${ButtonIsPlaystationEffect};
-  font-family: ${(props) => props.$customFontFamily};
-  font-size: ${(props) => props.$customFontSize};
-  font-weight: ${(props) => props.$customFontWeight};
+  font-family: ${props => props.$customFontFamily};
+  font-size: ${props => props.$customFontSize};
+  font-weight: ${props => props.$customFontWeight};
 `
