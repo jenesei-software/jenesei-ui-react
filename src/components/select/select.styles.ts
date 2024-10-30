@@ -10,19 +10,19 @@ import {
   SelectStyledInputProps,
   SelectStyledListProps,
   SelectStyledOptionProps,
-  SelectWrapperProps,
+  SelectWrapperProps
 } from '.'
 
 export const SelectWrapper = styled.div<SelectWrapperProps>`
   --scrollbar-width: 16px;
-  --scrollbar-background: ${(props) => props.theme.colors.input[props.$genre].background.rest};
-  --scrollbar-thumb-background: ${(props) => props.theme.colors.input[props.$genre].color.rest};
-  --scrollbar-thumb-border: 4px solid ${(props) => props.theme.colors.input[props.$genre].background.rest};
+  --scrollbar-background: ${props => props.theme.colors.input[props.$genre].background.rest};
+  --scrollbar-thumb-background: ${props => props.theme.colors.input[props.$genre].color.rest};
+  --scrollbar-thumb-border: 4px solid ${props => props.theme.colors.input[props.$genre].background.rest};
 
-  width: ${(props) => props.$width ?? '100%'};
+  width: ${props => props.$width ?? '100%'};
   position: relative;
 
-  ${(props) =>
+  ${props =>
     !props.$isDisabled &&
     css`
       &:focus-within {
@@ -49,7 +49,7 @@ export const SelectWrapper = styled.div<SelectWrapperProps>`
 `
 
 export const DropdownListParentSize = css<SelectStyledListProps>`
-  ${(props) => props.$size && DropdownListParentSizeConstructor(KEY_SIZE_DATA[props.$size])};
+  ${props => props.$size && DropdownListParentSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
 export const DropdownListParentSizeConstructor = (props: IJeneseiThemeSize) => css`
   border-radius: 0px 0px ${props.radius}px ${props.radius}px;
@@ -72,11 +72,11 @@ export const DropdownListParent = styled.div<SelectStyledListProps>`
 
   box-sizing: border-box;
 
-  background: ${(props) => props.theme.colors.input[props.$genre].background.rest};
-  border: solid 1px ${(props) => props.theme.colors.input[props.$genre].border.rest};
+  background: ${props => props.theme.colors.input[props.$genre].background.rest};
+  border: solid 1px ${props => props.theme.colors.input[props.$genre].border.rest};
   border-top: 0px !important;
   ${DropdownListParentSize};
-  ${(props) =>
+  ${props =>
     !props.$isShowScroll &&
     css`
       &::-webkit-scrollbar {
@@ -118,7 +118,7 @@ export const DropdownOption = styled.li<SelectStyledOptionProps>`
   opacity: 1;
   border: 0px;
   cursor: pointer;
-  padding-left: ${(props) => props.$isCheckboxProps && `0px`};
+  padding-left: ${props => props.$isCheckboxProps && `0px`};
   position: absolute;
   top: 0;
   left: 0;
@@ -151,7 +151,7 @@ export const DropdownSelectAll = styled.div`
 `
 
 export const SelectStyledInput = styled(StyledInput)<SelectStyledInputProps>`
-  ${(props) =>
+  ${props =>
     !props.$isError &&
     css`
       outline: none !important;

@@ -9,6 +9,13 @@ import '@fontsource/inter/500.css'
 import '@fontsource/inter/700.css'
 import '@fontsource/inter/900.css'
 
+import '@fontsource/roboto/100.css'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
+import '@fontsource/roboto/900.css'
+
 import { ProviderPermission } from '../src/providers/provider-permission'
 import { JeneseiGlobalStyles, JeneseiTheme } from '../src/theme/index'
 
@@ -16,7 +23,7 @@ import 'react-ripple-click/dist/index.css'
 
 const preview: Preview = {
   decorators: [
-    (Story) => {
+    Story => {
       return (
         <ProviderPermission serviceWorkerPath={'/service-worker.js'}>
           <ThemeProvider theme={JeneseiTheme}>

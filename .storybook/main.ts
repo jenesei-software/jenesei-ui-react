@@ -1,26 +1,25 @@
 import type { StorybookConfig } from '@storybook/react-vite'
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-    '@storybook/addon-links',
     '@storybook/addon-onboarding',
-    '@storybook/addon-themes',
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@chromatic-com/storybook'
   ],
-  framework: '@storybook/react-vite',
-  core: {
-    builder: '@storybook/builder-vite',
+  framework: {
+    name: '@storybook/react-vite',
+    options: {}
   },
   typescript: {
-    reactDocgen: 'react-docgen-typescript',
+    reactDocgen: 'react-docgen-typescript'
   },
   staticDirs: ['../public'],
-  viteFinal: (config) => {
+  viteFinal: config => {
     return config
   },
-  managerHead: (head) => ` 
+  managerHead: head => ` 
     ${head}
     <link rel="shortcut icon" href="/favicon.ico" />
     <link
@@ -34,6 +33,6 @@ const config: StorybookConfig = {
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-  `,
+  `
 }
 export default config

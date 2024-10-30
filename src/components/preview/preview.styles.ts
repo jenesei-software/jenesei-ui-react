@@ -37,7 +37,7 @@ const loader2 = keyframes`
 `
 
 export const PreviewWrapper = styled.div<{ $visible: boolean }>`
-  background-color: ${(props) => props.theme.palette.whiteStandard};
+  background-color: ${props => props.theme.palette.whiteStandard};
 
   width: 100%;
   height: 100%;
@@ -51,21 +51,21 @@ export const PreviewWrapper = styled.div<{ $visible: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: ${(props) => (props.$visible ? 0 : 1)};
+  opacity: ${props => (props.$visible ? 0 : 1)};
   transition:
-    opacity ${(props) => props.theme.transition},
-    transform ${(props) => props.theme.transition};
+    opacity ${props => props.theme.transition},
+    transform ${props => props.theme.transition};
 `
 
 export const PreviewChildren = styled.div<{ $visible: boolean }>`
-  opacity: ${(props) => (props.$visible ? 1 : 0)};
+  opacity: ${props => (props.$visible ? 1 : 0)};
   transition:
-    opacity ${(props) => props.theme.transition},
-    transform ${(props) => props.theme.transition};
+    opacity ${props => props.theme.transition},
+    transform ${props => props.theme.transition};
 `
 
 export const PreviewLoading = styled.div`
-  --color: ${(props) => props.theme.palette.blueFocus};
+  --color: ${props => props.theme.palette.blueFocus};
   --size-mid: 6vmin;
   --size-dot: 1.5vmin;
   --size-bar: 0.4vmin;

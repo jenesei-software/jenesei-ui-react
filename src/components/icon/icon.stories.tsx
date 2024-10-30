@@ -6,6 +6,7 @@ import { Icon } from '.'
 const meta: Meta<typeof Icon> = {
   component: Icon,
   title: 'Icon',
+  tags: ['autodocs']
 }
 
 export default meta
@@ -17,8 +18,8 @@ export const Curved: Story = {
     primaryColor: 'blueGoogle',
     name: 'Folder',
     size: 'large',
-    type: 'curved',
-  },
+    type: 'curved'
+  }
 }
 
 export const Checkbox: Story = {
@@ -26,6 +27,6 @@ export const Checkbox: Story = {
     primaryColor: 'blueGoogle',
     size: 'large',
     type: 'checkbox',
-    name: 'Radio',
-  },
+    name: 'Radio'
+  }
 }

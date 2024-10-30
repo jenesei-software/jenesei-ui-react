@@ -11,7 +11,7 @@ import {
   InputStyledModalLoading,
   StyledInput,
   StyledInputFormat,
-  StyledInputWrapper,
+  StyledInputWrapper
 } from '.'
 
 export const Input = (props: InputProps) => {
@@ -26,7 +26,7 @@ export const Input = (props: InputProps) => {
         props.onChange && props.onChange(value)
       }
     },
-    [props],
+    [props]
   )
 
   return (
@@ -94,7 +94,7 @@ export const Input = (props: InputProps) => {
             placeholder={props.placeholder}
             type={props.type}
             autoComplete={props.autocomplete}
-            onChange={(event) => handleOnChange(event.target.value)}
+            onChange={event => handleOnChange(event.target.value)}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
             name={props.name}
@@ -169,7 +169,7 @@ function formatPhoneNumber(dialCode: string, international: string) {
 
   return {
     format: formattedNumber,
-    placeholder: placeholderNumber,
+    placeholder: placeholderNumber
   }
 }
 
@@ -177,7 +177,7 @@ export const InputPhone = (
   props: Omit<InputProps, 'format' | 'mask' | 'formatType'> & {
     countryCode?: string
     countryDialCode?: string
-  },
+  }
 ) => {
   const countryCode = props?.countryCode ?? null
   const country = countryCode ? FullCountryList.findOneByCountryCode(countryCode) : null

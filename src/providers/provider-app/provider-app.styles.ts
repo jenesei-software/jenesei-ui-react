@@ -14,8 +14,8 @@ export const ProviderAppWrapper = styled.div<ProviderAppWrapperProps>`
   box-sizing: border-box;
   position: relative;
 
-  background-color: ${(props) => JeneseiThemeVariables[props.$bgColor]};
-  background-image: url(${(props) => props.$bgImage});
+  background-color: ${props => JeneseiThemeVariables[props.$bgColor]};
+  background-image: url(${props => props.$bgImage});
 `
 
 const generateGridTemplateAreas = (props: ProviderAppOutletProps) => {
@@ -47,39 +47,39 @@ export const ProviderAppOutlet = styled.div<ProviderAppOutletProps>`
   max-height: none;
 
   transition:
-    grid-template-areas ${(props) => props.theme.transition},
-    grid-template-rows ${(props) => props.theme.transition},
-    grid-template-columns ${(props) => props.theme.transition};
+    grid-template-areas ${props => props.theme.transition},
+    grid-template-rows ${props => props.theme.transition},
+    grid-template-columns ${props => props.theme.transition};
 
-  ${(props) => `
+  ${props => `
     grid-template-areas: ${generateGridTemplateAreas(props)};
   `}
 
-  ${(props) =>
+  ${props =>
     props.$isScrollOutlet &&
     css`
       max-height: 100dvh;
     `}
 
-    grid-template-columns: ${(props) =>
+    grid-template-columns: ${props =>
     `${props.$leftAside ? props.$leftAside.width : '0px'} 1fr ${props.$rightAside ? props.$rightAside.width : '0px'}`};
 
-  grid-template-rows: ${(props) =>
+  grid-template-rows: ${props =>
     `${props.$notification ? props.$notification.height : '0px'} ${props.$header ? props.$header.height : '0px'} ${props.$nav ? props.$nav.height : '0px'} 1fr ${props.$footer ? props.$footer.height : '0px'}`};
 
-  @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
-    grid-template-columns: ${(props) =>
+  @media (max-width: ${props => props.theme.screens.tablet.width}) {
+    grid-template-columns: ${props =>
       `${props.$leftAside && props.$leftAside.widthTablet ? props.$leftAside.widthTablet : '0px'} 1fr ${props.$rightAside && props.$rightAside.widthTablet ? props.$rightAside.widthTablet : '0px'}`};
 
-    grid-template-rows: ${(props) =>
+    grid-template-rows: ${props =>
       `${props.$notification && props.$notification.heightTablet ? props.$notification.heightTablet : '0px'} ${props.$header && props.$header.heightTablet ? props.$header.heightTablet : '0px'} ${props.$nav && props.$nav.heightTablet ? props.$nav.heightTablet : '0px'} 1fr ${props.$footer && props.$footer.heightTablet ? props.$footer.heightTablet : '0px'}`};
   }
 
-  @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
-    grid-template-columns: ${(props) =>
+  @media (max-width: ${props => props.theme.screens.mobile.width}) {
+    grid-template-columns: ${props =>
       `${props.$leftAside && props.$leftAside.widthMobile ? props.$leftAside.widthMobile : '0px'} 1fr ${props.$rightAside && props.$rightAside.widthMobile ? props.$rightAside.widthMobile : '0px'}`};
 
-    grid-template-rows: ${(props) =>
+    grid-template-rows: ${props =>
       `${props.$notification && props.$notification.heightMobile ? props.$notification.heightMobile : '0px'} ${props.$header && props.$header.heightMobile ? props.$header.heightMobile : '0px'} ${props.$nav && props.$nav.heightMobile ? props.$nav.heightMobile : '0px'} 1fr ${props.$footer && props.$footer.heightMobile ? props.$footer.heightMobile : '0px'}`};
   }
 `
@@ -88,17 +88,17 @@ const hiddenStyles = css`
   opacity: 0;
   visibility: hidden;
   transition:
-    opacity ${(props) => props.theme.transition},
-    visibility ${(props) => props.theme.transition};
+    opacity ${props => props.theme.transition},
+    visibility ${props => props.theme.transition};
 `
 
 const visibleStyles = css`
   opacity: 1;
   visibility: visible;
   transition:
-    height ${(props) => props.theme.transition},
-    opacity ${(props) => props.theme.transition},
-    visibility ${(props) => props.theme.transition};
+    height ${props => props.theme.transition},
+    opacity ${props => props.theme.transition},
+    visibility ${props => props.theme.transition};
 `
 
 export const ProviderAppOutletChildren = styled.main`
@@ -110,98 +110,98 @@ export const ProviderAppOutletChildren = styled.main`
 
 export const ProviderAppOutletNotification = styled.section<ProviderAppOutletProps>`
   grid-area: notification;
-  ${(props) =>
+  ${props =>
     props.$notification?.isFixed &&
     css`
       position: fixed;
       width: 100%;
       height: ${props.$notification.height};
-      @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
+      @media (max-width: ${props => props.theme.screens.tablet.width}) {
         height: ${props.$notification.heightTablet ? props.$notification.heightTablet : '0px'};
       }
 
-      @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
+      @media (max-width: ${props => props.theme.screens.mobile.width}) {
         height: ${props.$notification && props.$notification.heightMobile ? props.$notification.heightMobile : '0px'};
       }
     `}
 
-  ${(props) => (props.$notification?.height ? visibleStyles : hiddenStyles)}
+  ${props => (props.$notification?.height ? visibleStyles : hiddenStyles)}
 
-  @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
-    ${(props) => (props.$notification?.heightTablet ? visibleStyles : hiddenStyles)}
+  @media (max-width: ${props => props.theme.screens.tablet.width}) {
+    ${props => (props.$notification?.heightTablet ? visibleStyles : hiddenStyles)}
   }
 
-  @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
-    ${(props) => (props.$notification?.heightMobile ? visibleStyles : hiddenStyles)}
+  @media (max-width: ${props => props.theme.screens.mobile.width}) {
+    ${props => (props.$notification?.heightMobile ? visibleStyles : hiddenStyles)}
   }
 `
 
 export const ProviderAppOutletHeader = styled.header<ProviderAppOutletProps>`
   grid-area: header;
 
-  ${(props) => (props.$header?.height ? visibleStyles : hiddenStyles)}
+  ${props => (props.$header?.height ? visibleStyles : hiddenStyles)}
 
-  @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
-    ${(props) => (props.$header?.heightTablet ? visibleStyles : hiddenStyles)}
+  @media (max-width: ${props => props.theme.screens.tablet.width}) {
+    ${props => (props.$header?.heightTablet ? visibleStyles : hiddenStyles)}
   }
 
-  @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
-    ${(props) => (props.$header?.heightMobile ? visibleStyles : hiddenStyles)}
+  @media (max-width: ${props => props.theme.screens.mobile.width}) {
+    ${props => (props.$header?.heightMobile ? visibleStyles : hiddenStyles)}
   }
 `
 
 export const ProviderAppOutletFooter = styled.footer<ProviderAppOutletProps>`
   grid-area: footer;
 
-  ${(props) => (props.$footer?.height ? visibleStyles : hiddenStyles)}
+  ${props => (props.$footer?.height ? visibleStyles : hiddenStyles)}
 
-  @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
-    ${(props) => (props.$footer?.heightTablet ? visibleStyles : hiddenStyles)}
+  @media (max-width: ${props => props.theme.screens.tablet.width}) {
+    ${props => (props.$footer?.heightTablet ? visibleStyles : hiddenStyles)}
   }
 
-  @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
-    ${(props) => (props.$footer?.heightMobile ? visibleStyles : hiddenStyles)}
+  @media (max-width: ${props => props.theme.screens.mobile.width}) {
+    ${props => (props.$footer?.heightMobile ? visibleStyles : hiddenStyles)}
   }
 `
 
 export const ProviderAppOutletNav = styled.nav<ProviderAppOutletProps>`
   grid-area: nav;
 
-  ${(props) => (props.$nav?.height ? visibleStyles : hiddenStyles)}
+  ${props => (props.$nav?.height ? visibleStyles : hiddenStyles)}
 
-  @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
-    ${(props) => (props.$nav?.heightTablet ? visibleStyles : hiddenStyles)}
+  @media (max-width: ${props => props.theme.screens.tablet.width}) {
+    ${props => (props.$nav?.heightTablet ? visibleStyles : hiddenStyles)}
   }
 
-  @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
-    ${(props) => (props.$nav?.heightMobile ? visibleStyles : hiddenStyles)}
+  @media (max-width: ${props => props.theme.screens.mobile.width}) {
+    ${props => (props.$nav?.heightMobile ? visibleStyles : hiddenStyles)}
   }
 `
 
 export const ProviderAppOutletLeftAside = styled.aside<ProviderAppOutletProps>`
   grid-area: leftAside;
 
-  ${(props) => (props.$leftAside?.width ? visibleStyles : hiddenStyles)}
+  ${props => (props.$leftAside?.width ? visibleStyles : hiddenStyles)}
 
-  @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
-    ${(props) => (props.$leftAside?.widthTablet ? visibleStyles : hiddenStyles)}
+  @media (max-width: ${props => props.theme.screens.tablet.width}) {
+    ${props => (props.$leftAside?.widthTablet ? visibleStyles : hiddenStyles)}
   }
 
-  @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
-    ${(props) => (props.$leftAside?.widthMobile ? visibleStyles : hiddenStyles)}
+  @media (max-width: ${props => props.theme.screens.mobile.width}) {
+    ${props => (props.$leftAside?.widthMobile ? visibleStyles : hiddenStyles)}
   }
 `
 
 export const ProviderAppOutletRightAside = styled.aside<ProviderAppOutletProps>`
   grid-area: rightAside;
 
-  ${(props) => (props.$rightAside?.width ? visibleStyles : hiddenStyles)}
+  ${props => (props.$rightAside?.width ? visibleStyles : hiddenStyles)}
 
-  @media (max-width: ${(props) => props.theme.screens.tablet.width}) {
-    ${(props) => (props.$rightAside?.widthTablet ? visibleStyles : hiddenStyles)}
+  @media (max-width: ${props => props.theme.screens.tablet.width}) {
+    ${props => (props.$rightAside?.widthTablet ? visibleStyles : hiddenStyles)}
   }
 
-  @media (max-width: ${(props) => props.theme.screens.mobile.width}) {
-    ${(props) => (props.$rightAside?.widthMobile ? visibleStyles : hiddenStyles)}
+  @media (max-width: ${props => props.theme.screens.mobile.width}) {
+    ${props => (props.$rightAside?.widthMobile ? visibleStyles : hiddenStyles)}
   }
 `

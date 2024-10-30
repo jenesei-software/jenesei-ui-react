@@ -13,9 +13,7 @@ export const Icon = (props: LibraryIconItemProps) => {
         : null
 
   const primaryColor = JeneseiThemeVariables[props.primaryColor ?? 'grayKaren']
-  const secondColor = props.secondColor
-    ? JeneseiThemeVariables[props.secondColor]
-    : primaryColor
+  const secondColor = props.secondColor ? JeneseiThemeVariables[props.secondColor] : primaryColor
 
   if (!icon) {
     console.warn(`Icon ${props.name} not found in the library.`)

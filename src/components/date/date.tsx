@@ -206,7 +206,7 @@ export const DatePicker = (props: DateProps) => {
   }, [handleOnOpen, isAnimating, isOpen])
 
   const handleOnFocus: FocusEventHandler<HTMLInputElement> = useCallback(
-    (event) => {
+    event => {
       if (props?.isDisabled) return
       if (props.onFocus) props.onFocus(event)
       handleOnFocusEasy()
@@ -234,7 +234,7 @@ export const DatePicker = (props: DateProps) => {
   }, [handleListOptionCloseEffect, isAnimating, isOpen])
 
   const handleOnBlur: FocusEventHandler<HTMLInputElement> = useCallback(
-    (event) => {
+    event => {
       if (props?.isDisabled) return
       if (props.onBlur && event) props.onBlur(event)
       handleOnBlurEasy()
@@ -369,7 +369,7 @@ export const DatePicker = (props: DateProps) => {
           defaultValue={props?.inputProps?.defaultValue}
           value={currentDateLabel}
           type={props?.inputProps?.type}
-          onChange={(event) => props.inputProps?.onChange && props.inputProps?.onChange(event.target.value)}
+          onChange={event => props.inputProps?.onChange && props.inputProps?.onChange(event.target.value)}
           onBlur={props?.inputProps?.onBlur}
           onFocus={props?.inputProps?.onFocus}
           onClick={handleOnFocusEasy}
@@ -459,7 +459,7 @@ export const DatePicker = (props: DateProps) => {
                   {e}
                 </DateDropdownDayOfWeek>
               ))}
-              {daysInMonth.map((day) =>
+              {daysInMonth.map(day =>
                 !day.isDisabled ? (
                   <DateDropdownDay
                     type="button"

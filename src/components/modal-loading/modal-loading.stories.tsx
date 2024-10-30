@@ -1,20 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
-import { ModalLoading } from '.'
+import { ModalLoading as ModalLoadingComponent } from '.'
 
-const meta: Meta<typeof ModalLoading> = {
-  component: ModalLoading,
+const meta: Meta<typeof ModalLoadingComponent> = {
+  component: ModalLoadingComponent,
   title: 'Modal/Loading',
+  tags: ['autodocs']
 }
 
 export default meta
-type Story = StoryObj<typeof ModalLoading>
+type Story = StoryObj<typeof ModalLoadingComponent>
 
-export const Default: Story = {
+export const Loading: Story = {
   args: {
-    type:'cubes',
+    type: 'cubes',
     size: 'large',
-    colorKey: 'blueRest',
-  },
+    colorKey: 'blueRest'
+  }
 }

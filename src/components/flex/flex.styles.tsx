@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { FC } from 'react'
 import styled, { css } from 'styled-components'
 
 import { JeneseiThemeVariables } from '@theme/index'
@@ -205,7 +206,7 @@ const StyledStack = styled.div<DollarFlexContainerAndItemAndBasicProps>`
   ${FlexContainerAndItemAndBasic}
 `
 
-export const Stack: React.FC<FlexShortStylesProps> = (props) => {
+export const Stack: FC<FlexShortStylesProps> = props => {
   return (
     <StyledStack
       onClick={props.onClick}

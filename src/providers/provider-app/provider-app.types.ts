@@ -1,4 +1,5 @@
 import { PropsWithChildren, ReactElement } from 'react'
+import { AddDollarSign } from 'src/types'
 
 import { PreviewAdditionalProps } from '@components/preview'
 
@@ -82,12 +83,8 @@ export interface ProviderAppWrapperProps {
   $bgImage: ProviderAppProps['defaultBgImage'] | null
 }
 
-export interface ProviderAppOutletProps {
-  $isScrollOutlet?: boolean
-  $notification?: ProviderAppProps['notification']
-  $header?: ProviderAppProps['header']
-  $nav?: ProviderAppProps['nav']
-  $footer?: ProviderAppProps['footer']
-  $leftAside?: ProviderAppProps['leftAside']
-  $rightAside?: ProviderAppProps['rightAside']
-}
+export type ProviderAppOutletProps = Partial<
+  AddDollarSign<
+    Pick<ProviderAppProps, 'isScrollOutlet' | 'notification' | 'header' | 'nav' | 'footer' | 'leftAside' | 'rightAside'>
+  >
+>
