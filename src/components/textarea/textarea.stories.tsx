@@ -21,7 +21,9 @@ const defaultArgs: Partial<TextAreaProps> = {
   isRequired: false,
   isReadOnly: false,
   isLoading: false,
-  width: '300px'
+  isAutoHeight: true,
+  width: '300px',
+  maxRows: 8
 }
 
 const TextAreaStringWrapper: FC<TextAreaProps> = props => {

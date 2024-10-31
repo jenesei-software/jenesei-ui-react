@@ -145,6 +145,12 @@ export interface IJeneseiTheme {
   transition: string
   screens: IJeneseiThemeScreens
   fontFamily: TJeneseiFontFamily
+  defaultLineHeight: number
+  defaultFontSize: {
+    desktop: number
+    mobile: number
+    tablet: number
+  }
   effects: {
     input: {
       default: string

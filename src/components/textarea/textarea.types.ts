@@ -20,7 +20,9 @@ export interface TextAreaProps {
 
   genre: TTextAreaGenre
 
-  height?: string
+  height?: number
+
+  maxRows?: number
 
   size: TJeneseiThemeSize
 
@@ -29,6 +31,10 @@ export interface TextAreaProps {
   isDisabled?: boolean
 
   isError?: boolean
+
+  isResize?: boolean
+
+  isAutoHeight?: boolean
 
   isLoading?: boolean
 
@@ -70,7 +76,7 @@ export type StyledTextAreaProps = AddDollarSign<
     | 'isDisabled'
     | 'isBold'
     | 'isCustomIcon'
-    | 'height'
+    | 'isResize'
   >
 >
 

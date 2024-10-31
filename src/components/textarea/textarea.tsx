@@ -1,5 +1,7 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useTheme } from 'styled-components'
+
+import { KEY_SIZE_DATA } from '@theme/theme'
 
 import {
   StyledTextArea,
@@ -23,6 +25,55 @@ export const TextArea = (props: TextAreaProps) => {
     [props]
   )
 
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+
+  const handleHeight = useCallback(
+    (contentHeight: number) => {
+      if (textareaRef.current) {
+        const minHeight = KEY_SIZE_DATA[props.size].height
+        const maxHeight = Math.max(KEY_SIZE_DATA[props.size].height, contentHeight)
+
+        textareaRef.current.style.height = `${minHeight}px`
+        const scrollHeight = textareaRef.current.scrollHeight
+
+        let newHeight = contentHeight
+        if (props.isAutoHeight && !props.height) {
+          newHeight = Math.max(minHeight, Math.min(scrollHeight, maxHeight))
+        } else {
+          newHeight = Math.max(minHeight, contentHeight)
+        }
+
+        textareaRef.current.style.height = `${newHeight}px`
+        textareaRef.current.style.minHeight = `${minHeight}px`
+        textareaRef.current.style.maxHeight = `${maxHeight}px`
+
+        if (textareaRef.current.scrollHeight > maxHeight) {
+          textareaRef.current.style.overflowY = 'auto'
+        } else {
+          textareaRef.current.style.overflowY = 'hidden'
+        }
+      }
+    },
+    [props.height, props.isAutoHeight, props.size]
+  )
+  const checkHeight = useCallback(() => {
+    if (props.height) {
+      handleHeight(props.height)
+    } else {
+      if (props.maxRows) {
+        const lineHeight = theme.defaultFontSize.desktop * theme.defaultLineHeight
+        const initialHeight = props.maxRows ? lineHeight * props.maxRows : lineHeight
+        handleHeight(initialHeight + KEY_SIZE_DATA[props.size].padding * 2 - 8)
+      } else {
+        handleHeight(KEY_SIZE_DATA[props.size].height)
+      }
+    }
+  }, [handleHeight, props.height, props.maxRows, props.size, theme.defaultFontSize.desktop, theme.defaultLineHeight])
+
+  useEffect(() => {
+    checkHeight()
+  }, [checkHeight, props.isAutoHeight, props.value])
+
   return (
     <>
       <StyledTextAreaWrapper
@@ -32,6 +83,8 @@ export const TextArea = (props: TextAreaProps) => {
         $width={props.width}
       >
         <StyledTextArea
+          ref={textareaRef}
+          $isResize={props.isResize}
           $isError={props.isError}
           $isTextAreaEffect={props.isTextAreaEffect}
           $isLoading={props.isLoading}
@@ -39,7 +92,6 @@ export const TextArea = (props: TextAreaProps) => {
           $size={props.size}
           $isBold={props.isBold}
           $isDisabled={props.isDisabled}
-          $height={props.height}
           disabled={props.isDisabled}
           readOnly={props.isReadOnly}
           required={props.isRequired}
@@ -56,7 +108,6 @@ export const TextArea = (props: TextAreaProps) => {
           <TextAreaStyledModalLoading
             $genre={props.genre}
             $size={props.size}
-            $height={props.height}
             size={props.size}
             color={theme.colors.input[props.genre].color.rest}
           />
