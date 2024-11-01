@@ -29,6 +29,7 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
     $weight: props.weight,
     $flex: props.flex,
     $cursor: props.cursor,
+    $isHoverUnderlining: props.isHoverUnderlining,
     className: props.className,
     style: props.style,
     onClick: props.onClick ? props.onClick : () => {}

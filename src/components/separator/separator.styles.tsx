@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
-import { DividerWrapperProps } from '.'
+import { SeparatorWrapperProps } from '.'
 
-export const DividerWrapper = styled.div<DividerWrapperProps>`
+export const SeparatorWrapper = styled.div<SeparatorWrapperProps>`
   height: ${props => props.$height};
   width: ${props => props.$width || '100%'};
   background: ${props => props.theme.palette[props.$color]};

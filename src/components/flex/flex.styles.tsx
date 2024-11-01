@@ -10,7 +10,8 @@ import {
   DollarFlexContainerAndItemProps,
   DollarFlexContainerProps,
   DollarFlexItemProps,
-  FlexShortStylesProps
+  FlexShortStylesProps,
+  StyledStackProps
 } from '.'
 
 const FlexContainer = css<DollarFlexContainerProps>`
@@ -202,8 +203,20 @@ export const FlexContainerAndItemAndBasic = css<DollarFlexContainerAndItemAndBas
   ${FlexBasic}
 `
 
-const StyledStack = styled.div<DollarFlexContainerAndItemAndBasicProps>`
+const StyledStack = styled.div<StyledStackProps>`
   ${FlexContainerAndItemAndBasic}
+
+  ${props =>
+    props.$isHover &&
+    css`
+      border-radius: 4px;
+      transition:
+        background-color ${props => props.theme.transition},
+        outline 0s;
+      &:hover {
+        background-color: ${props => props.theme.palette.black05};
+      }
+    `}
 `
 
 export const Stack: FC<FlexShortStylesProps> = props => {
@@ -244,6 +257,7 @@ export const Stack: FC<FlexShortStylesProps> = props => {
       $maxH={props.maxH}
       $bg={props.bg}
       $color={props.color}
+      $isHover={props.isHover}
       style={props.style}
     >
       {props.children}

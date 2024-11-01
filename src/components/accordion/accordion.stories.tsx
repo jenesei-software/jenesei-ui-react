@@ -244,7 +244,9 @@ export const OneLevel: Story = {
     isAccordionIcon: true,
     accordionSummary: (
       <Stack p="10px" w="200px" style={{ cursor: 'pointer' }}>
-        <Typography variant="h4">Show</Typography>
+        <Typography isHoverUnderlining variant="h4">
+          Show
+        </Typography>
       </Stack>
     ),
     wrapperProps: {
@@ -260,7 +262,9 @@ export const MultiLevel: Story = {
     isAccordionIcon: true,
     accordionSummary: (
       <Stack p="10px" w="200px" style={{ cursor: 'pointer' }}>
-        <Typography variant="h4">MultiLevel</Typography>
+        <Typography isHoverUnderlining variant="h4">
+          MultiLevel
+        </Typography>
       </Stack>
     ),
     wrapperProps: {

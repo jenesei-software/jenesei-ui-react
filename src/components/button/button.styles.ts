@@ -106,7 +106,8 @@ export const ButtonSize = css<StyledDollarButtonProps>`
       ...KEY_SIZE_DATA[props.$size],
       isFullSize: props.$isFullSize,
       $width: props.$width,
-      $flex: props.$flex
+      $flex: props.$flex,
+      $minWidth: props.$minWidth
     })};
 `
 export const ButtonSizeConstructor = (
@@ -114,6 +115,7 @@ export const ButtonSizeConstructor = (
     isFullSize?: boolean
     $width?: string
     $flex?: string
+    $minWidth?: string
   }
 ) => css`
   height: ${props.height}px;
@@ -127,21 +129,26 @@ export const ButtonSizeConstructor = (
     css`
       height: 100%;
       border-radius: 0px;
-    `}
+    `};
   ${() =>
     props.$flex &&
     css`
       flex: ${props.$flex};
-    `}
+    `};
   ${props.$width === 'asHeight'
     ? css`
         width: ${props.height}px;
-        min-width: ${props.height}px;
         padding: 0px;
       `
     : css`
         width: ${props.$width ?? 'max-content'};
-        min-width: ${props.$width ?? 'max-content'};
+      `};
+  ${props.$minWidth === 'asHeight'
+    ? css`
+        min-width: ${props.height}px;
+      `
+    : css`
+        min-width: ${props.$minWidth ?? 'max-content'};
       `}
 `
 /****************************************** Border *************************************************/

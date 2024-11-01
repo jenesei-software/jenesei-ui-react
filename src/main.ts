@@ -19,6 +19,7 @@ export * from './components/select'
 export * from './components/toggle'
 export * from './components/tooltip'
 export * from './components/typography'
+export * from './components/separator'
 
 export * from './layouts/auth'
 

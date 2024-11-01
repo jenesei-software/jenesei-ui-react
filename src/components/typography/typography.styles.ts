@@ -95,6 +95,14 @@ const SpanFontCSS = css<TypographyCSSProps>`
             --font-size: 14px !important;
           `
         : ''}
+
+${props =>
+    props.$isHoverUnderlining &&
+    css`
+      &:hover {
+        text-decoration: underline;
+      }
+    `};
 `
 
 export const SpanFont = styled.span<TypographyCSSProps>`

@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react'
+import React, { PropsWithChildren } from 'react'
 import { AddDollarSign } from 'src/types'
 
 import { DollarFlexContainerAndItemProps, FlexContainerAndItemProps } from '@components/flex'
@@ -52,6 +52,8 @@ export interface ButtonProps extends PropsWithChildren {
 
   width?: string | 'asHeight'
 
+  minWidth?: string | 'asHeight'
+
   flex?: string
 
   customFontFamily?: TJeneseiFontFamily
@@ -81,6 +83,7 @@ export type StyledDollarButtonProps = AddDollarSign<
     | 'customFontSize'
     | 'customFontWeight'
     | 'isFullSize'
+    | 'minWidth'
   >
 > &
   DollarFlexContainerAndItemProps

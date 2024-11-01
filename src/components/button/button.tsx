@@ -27,6 +27,7 @@ export const Button: FC<ButtonProps> = props => {
       $isFullSize={props.isFullSize}
       $genre={props.genre}
       $width={props.width}
+      $minWidth={props.minWidth}
       $flex={props.flex}
       $size={props.size}
       $isDisabled={props.isDisabled}
