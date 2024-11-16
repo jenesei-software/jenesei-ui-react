@@ -3,14 +3,14 @@ import { FC, useCallback, useState } from 'react'
 import 'styled-components'
 
 import { Button } from '@components/button'
-import { Stack } from '@components/flex'
+import { Stack } from '@components/stack'
 import { Typography } from '@components/typography'
 
 import { Accordion, AccordionProps } from '.'
 
 const meta: Meta<typeof Accordion> = {
   component: Accordion,
-  title: 'Accordion',
+  title: 'Component/Accordion',
   tags: ['autodocs']
 }
 

@@ -7,7 +7,7 @@ import { SelectYear, SelectYearProps } from '.'
 
 const meta: Meta<typeof SelectYear> = {
   component: SelectYear,
-  title: 'Select/Year'
+  title: 'Component/Select'
 }
 
 export default meta

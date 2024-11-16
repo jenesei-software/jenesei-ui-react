@@ -1,9 +1,9 @@
+import { DollarFlexContainerAndItemProps, FlexContainerAndItemProps } from '@styles/base'
 import React, { PropsWithChildren } from 'react'
 import { AddDollarSign } from 'src/types'
 
-import { DollarFlexContainerAndItemProps, FlexContainerAndItemProps } from '@components/flex'
 import { LibraryIconItemProps, TLibraryIconCurvedNameString } from '@components/icon'
-import { ModalLoadingProps } from '@components/modal-loading'
+import { LoadingProps } from '@components/loading'
 
 import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@theme/index'
 
@@ -40,7 +40,7 @@ export interface ButtonProps extends PropsWithChildren {
 
   isLoading?: boolean
 
-  loadingOrder?: ModalLoadingProps['order']
+  loadingOrder?: LoadingProps['order']
 
   isHiddenBorder?: boolean
 

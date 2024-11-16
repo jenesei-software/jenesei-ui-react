@@ -3,15 +3,15 @@ import { Ripple } from 'react-ripple-click'
 import { useTheme } from 'styled-components'
 
 import { Icon } from '@components/icon'
-import { ModalLoading } from '@components/modal-loading'
+import { Loading } from '@components/loading'
 
 import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.'
 
 export const Button: FC<ButtonProps> = props => {
   const theme = useTheme()
 
-  const modalLoadingComponent = (
-    <ModalLoading size={props.size} color={theme.colors.button[props.genre].color.rest} order={props.loadingOrder} />
+  const LoadingComponent = (
+    <Loading size={props.size} color={theme.colors.button[props.genre].color.rest} order={props.loadingOrder} />
   )
 
   const handleClick: ButtonProps['onClick'] = event => {
@@ -57,7 +57,7 @@ export const Button: FC<ButtonProps> = props => {
       {!props.isHidden && <Ripple />}
       {props.isOnlyLoading ? (
         props.isLoading ? (
-          modalLoadingComponent
+          LoadingComponent
         ) : (
           <>
             <div style={{ order: 0, display: 'contents' }}>{props.children && props.children}</div>
@@ -81,10 +81,10 @@ export const Button: FC<ButtonProps> = props => {
             $iconGroupOrder={props.iconGroupOrder}
           >
             {props.isOnlyLoadingWithGroup ? (
-              <>{props.isLoading && modalLoadingComponent}</>
+              <>{props.isLoading && LoadingComponent}</>
             ) : (
               <>
-                {props.isLoading && modalLoadingComponent}
+                {props.isLoading && LoadingComponent}
                 {props.iconName && (
                   <Icon
                     name={props.iconName}

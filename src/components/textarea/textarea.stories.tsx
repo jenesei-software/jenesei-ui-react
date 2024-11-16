@@ -6,7 +6,7 @@ import { TextArea, TextAreaProps } from '.'
 
 const meta: Meta<typeof TextArea> = {
   component: TextArea,
-  title: 'TextArea',
+  title: 'Component/TextArea',
   tags: ['autodocs']
 }
 

@@ -2,13 +2,13 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FC, useEffect, useState } from 'react'
 import 'styled-components'
 
-import { Stack } from '@components/flex'
+import { Stack } from '@components/stack'
 
 import { Pagination, PaginationProps } from '.'
 
 const meta: Meta<typeof Pagination> = {
   component: Pagination,
-  title: 'Pagination',
+  title: 'Component/Pagination',
   tags: ['autodocs']
 }
 

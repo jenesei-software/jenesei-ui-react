@@ -1,6 +1,6 @@
+import { DollarFlexContainerAndItemAndBasicProps } from '@styles/base'
+import React from 'react'
 import { AddDollarSign } from 'src/types'
-
-import { DollarFlexContainerAndItemAndBasicProps } from '@components/flex'
 
 import { JeneseiThemeVariablesKeys, TJeneseiThemeSize } from '@theme/index'
 

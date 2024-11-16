@@ -6,7 +6,7 @@ import { ButtonGroup, ButtonGroupProps } from '.'
 
 const meta: Meta<typeof ButtonGroup> = {
   component: ButtonGroup,
-  title: 'ButtonGroup',
+  title: 'Component/ButtonGroup',
   tags: ['autodocs']
 }
 

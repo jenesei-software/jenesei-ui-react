@@ -16,6 +16,7 @@ export default {
     '^@hooks/(.*)$',
     '^@layouts/(.*)$',
     '^@modules/(.*)$',
+    '^@styles/(.*)$',
     '^@providers/(.*)$',
     '^@theme/(.*)$',
     '^@fontsource/(.*)$',

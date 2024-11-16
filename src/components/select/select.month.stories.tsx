@@ -7,7 +7,7 @@ import { SelectDateProps, SelectMonth } from '.'
 
 const meta: Meta<typeof SelectMonth> = {
   component: SelectMonth,
-  title: 'Select/Month'
+  title: 'Component/Select'
 }
 
 export default meta

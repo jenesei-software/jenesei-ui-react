@@ -1,7 +1,6 @@
 import { FC, createContext, useCallback, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
-
-import { Preview, PreviewAdditionalProps } from '@components/preview'
+import { Preview, PreviewAdditionalProps } from 'src/areas/preview'
 
 import { JeneseiThemeVariables, JeneseiThemeVariablesKeys } from '@theme/index'
 
@@ -25,9 +24,9 @@ export const AppContext = createContext<AppContextProps | null>(null)
  * ProviderApp component is a context provider that manages various application-level states
  * such as background color, status bar color, background image, title, and description.
  * It uses several custom hooks to handle these states and provides them via the AppContext.
- * 
+ *
  * @component
- * 
+ *
  * @param {ProviderAppProps} props - The properties passed to the ProviderApp component.
  * @param {string} props.defaultBgColor - The default background color.
  * @param {string} props.defaultStatusBarColor - The default status bar color.
@@ -42,7 +41,7 @@ export const AppContext = createContext<AppContextProps | null>(null)
  * @param {object} [props.leftAside] - The left aside component and its properties.
  * @param {object} [props.rightAside] - The right aside component and its properties.
  * @param {React.ReactNode} props.children - The children components to be rendered inside the ProviderApp.
- * 
+ *
  * @returns {JSX.Element} The rendered ProviderApp component.
  */
 export const ProviderApp: FC<ProviderAppProps> = props => {

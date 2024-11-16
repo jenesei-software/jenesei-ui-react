@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { ModalLoading } from '@components/modal-loading'
+import { Loading } from '@components/loading'
 import { getFontSizeStyles } from '@components/typography'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
@@ -72,13 +72,13 @@ export const TextAreaPlaceholder = css<StyledTextAreaProps>`
     ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
     color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
-    line-height: 24px;
+    line-height: ${props => props.theme.defaultLineHeight};
   }
   &:-ms-input-placeholder {
     ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
     color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
-    line-height: 24px;
+    line-height: ${props => props.theme.defaultLineHeight};
   }
 `
 
@@ -149,7 +149,7 @@ export const TextAreaSize = css<StyledTextAreaProps>`
   ${props => TextAreaSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
 export const TextAreaSizeConstructor = (props: IJeneseiThemeSize) => css`
-  padding: ${props.padding - 6}px ${props.padding}px ${props.padding - 4}px ${props.padding}px;
+  padding: ${props.padding - 4}px ${props.padding}px ${props.padding - 6}px ${props.padding}px;
   border-radius: ${props.radius}px;
 `
 
@@ -204,16 +204,16 @@ export const StyledTextArea = styled.textarea<StyledTextAreaProps>`
   ${StyledTextAreaCSS};
 `
 
-/****************************************** ModalLoading *************************************************/
-const TextAreaStyledModalLoadingSize = css<StyledTextAreaProps>`
-  ${props => TextAreaStyledModalLoadingConstructor(KEY_SIZE_DATA[props.$size])};
+/****************************************** Loading *************************************************/
+const TextAreaStyledLoadingSize = css<StyledTextAreaProps>`
+  ${props => TextAreaStyledLoadingConstructor(KEY_SIZE_DATA[props.$size])};
 `
-const TextAreaStyledModalLoadingConstructor = (props: IJeneseiThemeSize) => css`
+const TextAreaStyledLoadingConstructor = (props: IJeneseiThemeSize) => css`
   padding: ${props.padding - 6}px ${props.padding}px ${props.padding - 4}px ${props.padding}px;
 `
 
-export const TextAreaStyledModalLoading = styled(ModalLoading)<StyledTextAreaProps>`
-  ${TextAreaStyledModalLoadingSize};
+export const TextAreaStyledLoading = styled(Loading)<StyledTextAreaProps>`
+  ${TextAreaStyledLoadingSize};
   position: absolute;
   display: flex;
   align-items: center;

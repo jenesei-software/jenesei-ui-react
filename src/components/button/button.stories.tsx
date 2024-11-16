@@ -5,7 +5,7 @@ import { Button } from '.'
 
 const meta: Meta<typeof Button> = {
   component: Button,
-  title: 'Button',
+  title: 'Component/Button',
   tags: ['autodocs']
 }
 
@@ -28,6 +28,7 @@ export const Icon: Story = {
     width: 'asHeight',
     type: 'button',
     iconName: 'Heart',
+    iconOrder: -1,
     genre: 'gray',
     size: 'medium'
   }

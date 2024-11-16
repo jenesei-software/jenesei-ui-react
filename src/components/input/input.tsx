@@ -8,7 +8,7 @@ import {
   InputPostfixChildren,
   InputPrefixChildren,
   InputProps,
-  InputStyledModalLoading,
+  InputStyledLoading,
   StyledInput,
   StyledInputFormat,
   StyledInputWrapper
@@ -113,7 +113,7 @@ export const Input = (props: InputProps) => {
           </InputPostfixChildren>
         )}
         {props.isLoading && (
-          <InputStyledModalLoading
+          <InputStyledLoading
             $genre={props.genre}
             $size={props.size}
             size={props.size}

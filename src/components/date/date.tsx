@@ -4,9 +4,9 @@ import { FocusEventHandler, useCallback, useEffect, useMemo, useRef, useState } 
 import { Ripple } from 'react-ripple-click'
 
 import { Button } from '@components/button'
-import { Stack } from '@components/flex'
 import { InputErrorMessage } from '@components/input'
 import { SelectMonth, SelectYear } from '@components/select'
+import { Stack } from '@components/stack'
 
 import { KEY_SIZE_DATA } from '@theme/index'
 

@@ -1,15 +1,14 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import { PaginationQuantityWrapperProps } from '.'
 
 export const PaginationQuantityWrapper = styled.div<PaginationQuantityWrapperProps>`
   position: relative;
-  ${props =>
-    props.$viewQuantity &&
-    css`
-      width: ${props.$viewQuantity * 30 + (props.$viewQuantity - 1) * 12}px;
-      overflow: hidden;
-    `}
+  width: ${props => props.$width};
+  overflow: hidden;
+  transition:
+    width ${props => props.theme.transition},
+    outline 0s;
 `
 
 export const PaginationQuantityButtons = styled.div<PaginationQuantityWrapperProps>`
@@ -19,10 +18,8 @@ export const PaginationQuantityButtons = styled.div<PaginationQuantityWrapperPro
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  ${props =>
-    props.$viewQuantity &&
-    css`
-      overflow: hidden;
-      left: -${props.$index * 30}px;
-    `}
+  left: ${props => props.$left};
+  transition:
+    left ${props => props.theme.transition},
+    outline 0s;
 `

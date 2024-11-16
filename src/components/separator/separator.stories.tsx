@@ -2,13 +2,13 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FC } from 'react'
 import 'styled-components'
 
-import { Stack } from '@components/flex'
+import { Stack } from '@components/stack'
 
 import { Separator, SeparatorProps } from '.'
 
 const meta: Meta<typeof Separator> = {
   component: Separator,
-  title: 'Separator',
+  title: 'Component/Separator',
   tags: ['autodocs']
 }
 
