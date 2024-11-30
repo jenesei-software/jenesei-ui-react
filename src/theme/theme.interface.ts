@@ -101,6 +101,11 @@ export interface TJeneseiThemeGenreInput {
   grayBorder: TJeneseiThemeGenreType
   blackBorder: TJeneseiThemeGenreType
 }
+export interface TJeneseiThemeGenreTextArea {
+  gray: TJeneseiThemeGenreType
+  grayBorder: TJeneseiThemeGenreType
+  blackBorder: TJeneseiThemeGenreType
+}
 export interface TJeneseiThemeGenreDate {
   gray: TJeneseiThemeGenreTypeDate
   grayBorder: TJeneseiThemeGenreTypeDate
@@ -140,6 +145,12 @@ export interface IJeneseiTheme {
   transition: string
   screens: IJeneseiThemeScreens
   fontFamily: TJeneseiFontFamily
+  defaultLineHeight: number
+  defaultFontSize: {
+    desktop: number
+    mobile: number
+    tablet: number
+  }
   effects: {
     input: {
       default: string
@@ -151,6 +162,9 @@ export interface IJeneseiTheme {
       rest: string
       hover: string
       active: string
+    }
+    sonner: {
+      background: string
     }
   }
   palette: Record<JeneseiThemeVariablesKeys, string>

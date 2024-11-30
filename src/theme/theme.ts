@@ -358,13 +358,22 @@ const DefaultJeneseiThemeGenreToggle = {
 export const JeneseiTheme: IJeneseiTheme = {
   transition: '0.3s ease',
   transitionDuration: '0.3s',
+  defaultLineHeight: 1.2,
+  defaultFontSize: {
+    desktop: 16,
+    mobile: 12,
+    tablet: 14
+  },
   transitionTimingFunction: 'ease',
   screens: {
     mobile: { width: '850px' },
-    tablet: { width: '1290px' },
+    tablet: { width: '1290px' }
   },
   fontFamily: 'Inter',
   effects: {
+    sonner: {
+      background: '0px 10px 30px 0px rgba(0, 0, 0, 0.2)'
+    },
     input: {
       default: 'inset 0px 0px 4px rgba(0, 0, 0, 0.20)'
     },

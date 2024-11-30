@@ -8,7 +8,7 @@ import {
   InputPostfixChildren,
   InputPrefixChildren,
   InputProps,
-  InputStyledModalLoading,
+  InputStyledLoading,
   StyledInput,
   StyledInputFormat,
   StyledInputWrapper
@@ -21,9 +21,9 @@ export const Input = (props: InputProps) => {
     (value: string) => {
       if (props.isNoSpaces) {
         const valueWithoutSpaces = value.replace(/\s+/g, '')
-        props.onChange && props.onChange(valueWithoutSpaces)
+        props.onChange?.(valueWithoutSpaces)
       } else {
-        props.onChange && props.onChange(value)
+        props.onChange?.(value)
       }
     },
     [props]
@@ -113,7 +113,7 @@ export const Input = (props: InputProps) => {
           </InputPostfixChildren>
         )}
         {props.isLoading && (
-          <InputStyledModalLoading
+          <InputStyledLoading
             $genre={props.genre}
             $size={props.size}
             size={props.size}

@@ -6,7 +6,7 @@ import { SelectCountry, SelectCountryProps } from '.'
 
 const meta: Meta<typeof SelectCountry> = {
   component: SelectCountry,
-  title: 'Select/Country'
+  title: 'Component/Select'
 }
 
 export default meta

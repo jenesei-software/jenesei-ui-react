@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import { AddDollarSign } from 'src/types'
 
-import { FlexShortStylesProps } from '@components/flex'
+import { FlexShortStylesProps } from '@components/stack'
 
 export interface AccordionProps {
   wrapperProps: FlexShortStylesProps

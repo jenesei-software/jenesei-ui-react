@@ -83,18 +83,15 @@ const SpanFontCSS = css<TypographyCSSProps>`
     props.$textWrap &&
     css`
       text-wrap: ${props.$textWrap};
-    `}
+    `};
 
   ${props =>
-    props.$screen === 'mobile'
-      ? css`
-          --font-size: 12px !important;
-        `
-      : props.$screen === 'tablet'
-        ? css`
-            --font-size: 14px !important;
-          `
-        : ''}
+    props.$isHoverUnderlining &&
+    css`
+      &:hover {
+        text-decoration: underline;
+      }
+    `};
 `
 
 export const SpanFont = styled.span<TypographyCSSProps>`

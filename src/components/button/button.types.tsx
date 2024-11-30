@@ -1,9 +1,9 @@
-import { PropsWithChildren } from 'react'
+import { DollarFlexContainerAndItemProps, FlexContainerAndItemProps } from '@styles/base'
+import React, { PropsWithChildren } from 'react'
 import { AddDollarSign } from 'src/types'
 
-import { DollarFlexContainerAndItemProps, FlexContainerAndItemProps } from '@components/flex'
 import { LibraryIconItemProps, TLibraryIconCurvedNameString } from '@components/icon'
-import { ModalLoadingProps } from '@components/modal-loading'
+import { LoadingProps } from '@components/loading'
 
 import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@theme/index'
 
@@ -40,7 +40,7 @@ export interface ButtonProps extends PropsWithChildren {
 
   isLoading?: boolean
 
-  loadingOrder?: ModalLoadingProps['order']
+  loadingOrder?: LoadingProps['order']
 
   isHiddenBorder?: boolean
 
@@ -51,6 +51,8 @@ export interface ButtonProps extends PropsWithChildren {
   type?: 'button' | 'submit' | 'reset'
 
   width?: string | 'asHeight'
+
+  minWidth?: string | 'asHeight'
 
   flex?: string
 
@@ -81,6 +83,7 @@ export type StyledDollarButtonProps = AddDollarSign<
     | 'customFontSize'
     | 'customFontWeight'
     | 'isFullSize'
+    | 'minWidth'
   >
 > &
   DollarFlexContainerAndItemProps

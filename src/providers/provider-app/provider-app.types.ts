@@ -1,7 +1,6 @@
 import { PropsWithChildren, ReactElement } from 'react'
+import { PreviewAdditionalProps } from 'src/areas/preview'
 import { AddDollarSign } from 'src/types'
-
-import { PreviewAdditionalProps } from '@components/preview'
 
 import { JeneseiThemeVariablesKeys } from '@theme/index'
 
