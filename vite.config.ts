@@ -7,76 +7,69 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import { peerDependencies } from './package.json'
 
 export default defineConfig(() => {
+  // eslint-disable-next-line no-undef
   const isStorybookBuild = process.env.BUILD_STORYBOOK === 'true'
 
   return {
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
-      },
+        // eslint-disable-next-line no-undef
+        '@': path.resolve(__dirname, './src')
+      }
     },
     plugins: [
-      react({
-        babel: {
-          plugins: [['babel-plugin-styled-components', { displayName: false }]],
-
-          env: {
-            development: {
-              plugins: [
-                ['babel-plugin-styled-components', { displayName: true }],
-              ],
-            },
-          },
-        },
-      }),
+      react(),
       tsconfigPaths(),
       !isStorybookBuild &&
         dts({
           include: ['src/'],
-          exclude: ['src/declaration/styled.d.ts'],
+          exclude: ['src/declaration/styled.d.ts', 'src/declaration/jenesei-web-id-api.d.ts'],
           rollupTypes: true,
           insertTypesEntry: true,
-          tsConfigFilePath: './tsconfig.json',
-        }),
+          tsconfigPath: './tsconfig.json'
+        })
     ].filter(Boolean),
     publicDir: false,
     build: {
       sourcemap: true,
-      outDir: 'dist',
+      outDir: './dist',
+      rootDir: './src',
       minify: 'terser',
       terserOptions: {
         compress: {
           drop_console: true,
-          drop_debugger: true,
-        },
+          drop_debugger: true
+        }
       },
       lib: {
+        // eslint-disable-next-line no-undef
         entry: resolve(__dirname, 'src/main.ts'),
         name: 'jenesei-ui-react',
         formats: ['es', 'umd'],
-        fileName: (format) => `jenesei-ui-react.${format}.js`,
+        fileName: format => `jenesei-ui-react.${format}.js`
       },
       rollupOptions: {
         external: Object.keys(peerDependencies),
         output: {
-          sourcemap: true,
           globals: {
             'styled-components': 'styled',
-            'react-ripple-click': 'reactRippleClick',
             'styled-reset': 'reset',
             react: 'React',
+            'react-dom': 'ReactDOM',
+            moment: 'moment',
+            'react-ripple-click': 'reactRippleClick',
             'react-loading': 'ReactLoading',
+            gsap: 'gsap',
+            'awesome-phonenumber': 'awesomePhonenumber',
+            'country-list-with-dial-code-and-flag': 'FullCountryList',
             'react-number-format': 'reactNumberFormat',
             '@tanstack/react-virtual': 'reactVirtual',
-            gsap: 'gsap',
-            'js-cookie': 'Cookies',
-            'react-i18next': 'reactI18next',
-            'react-helmet': 'reactHelmet',
             'react-toggle': 'ReactToggle',
-            'react-dom': 'ReactDOM',
-          },
-        },
-      },
-    },
+            'react-helmet': 'reactHelmet',
+            'js-cookie': 'Cookies'
+          }
+        }
+      }
+    }
   }
 })

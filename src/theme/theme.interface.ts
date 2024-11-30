@@ -47,6 +47,40 @@ export interface TJeneseiThemeGenreTypeToggle {
   }
 }
 
+export interface TJeneseiThemeGenreTypeDate {
+  background: {
+    rest: string
+    hover: string
+    today: string
+    weekend: string
+    choice: string
+    line: string
+  }
+  border: {
+    rest: string
+    hover: string
+    today: string
+    weekend: string
+    choice: string
+    line: string
+  }
+  color: {
+    rest: string
+    hover: string
+    placeholder: string
+    today: string
+    weekend: string
+    choice: string
+    line: string
+  }
+}
+
+export interface TJeneseiThemeGenreTypeForm {
+  background: string
+  border: string
+  color: string
+}
+
 export interface TJeneseiThemeGenre {
   gray: TJeneseiThemeGenreType
   grayBorder: TJeneseiThemeGenreType
@@ -65,6 +99,21 @@ export interface TJeneseiThemeGenreToggle {
 export interface TJeneseiThemeGenreInput {
   gray: TJeneseiThemeGenreType
   grayBorder: TJeneseiThemeGenreType
+  blackBorder: TJeneseiThemeGenreType
+}
+export interface TJeneseiThemeGenreTextArea {
+  gray: TJeneseiThemeGenreType
+  grayBorder: TJeneseiThemeGenreType
+  blackBorder: TJeneseiThemeGenreType
+}
+export interface TJeneseiThemeGenreDate {
+  gray: TJeneseiThemeGenreTypeDate
+  grayBorder: TJeneseiThemeGenreTypeDate
+  blackBorder: TJeneseiThemeGenreTypeDate
+}
+export interface TJeneseiThemeGenreForm {
+  gray: TJeneseiThemeGenreTypeForm
+  grayBorder: TJeneseiThemeGenreTypeForm
 }
 export interface IJeneseiThemeSize {
   height: number
@@ -84,15 +133,9 @@ export interface IJeneseiThemeSizeToggle {
 export interface IJeneseiThemeScreens {
   mobile: { width: string }
   tablet: { width: string }
-  other: boolean
 }
 
-export type TJeneseiThemeSize =
-  | 'large'
-  | 'largeMedium'
-  | 'medium'
-  | 'mediumSmall'
-  | 'small'
+export type TJeneseiThemeSize = 'large' | 'largeMedium' | 'medium' | 'mediumSmall' | 'small'
 
 export type TJeneseiFontFamily = 'Inter' | 'Roboto'
 
@@ -102,7 +145,16 @@ export interface IJeneseiTheme {
   transition: string
   screens: IJeneseiThemeScreens
   fontFamily: TJeneseiFontFamily
+  defaultLineHeight: number
+  defaultFontSize: {
+    desktop: number
+    mobile: number
+    tablet: number
+  }
   effects: {
+    input: {
+      default: string
+    }
     button: {
       playstation: string
     }
@@ -111,15 +163,20 @@ export interface IJeneseiTheme {
       hover: string
       active: string
     }
+    sonner: {
+      background: string
+    }
   }
   palette: Record<JeneseiThemeVariablesKeys, string>
   colors: {
     focus: string
     white: string
     danger: string
+    date: TJeneseiThemeGenreDate
     button: TJeneseiThemeGenre
     toggle: TJeneseiThemeGenreToggle
     checkbox: TJeneseiThemeGenre
+    form: TJeneseiThemeGenreForm
     input: TJeneseiThemeGenreInput
   }
 }
@@ -139,6 +196,7 @@ export type JeneseiThemeVariablesKeys =
   | 'graySandra'
   | 'grayPatricia'
   | 'graySarah'
+  | 'grayStassie'
   | 'greenGoogle'
   | 'green100'
   | 'green25'
@@ -155,3 +213,4 @@ export type JeneseiThemeVariablesKeys =
   | 'blueHover'
   | 'blueFocus'
   | 'blueBr'
+  | 'amnezia'

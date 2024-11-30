@@ -11,70 +11,87 @@ const SpanFontCSS = css<TypographyCSSProps>`
   text-overflow: ellipsis;
   overflow-wrap: anywhere;
   box-sizing: border-box;
-  flex: 1;
 
-  ${(props) =>
+  ${props =>
+    props.$flex &&
+    css`
+      flex: ${props.$flex};
+    `};
+  ${props =>
+    props.$cursor &&
+    css`
+      cursor: ${props.$cursor};
+    `};
+  ${props =>
     props.$textAlign &&
     css`
      text-align ${props.$textAlign};
     `};
-  ${(props) =>
+  ${props =>
     props.$textWrap &&
     css`
      text-wrap ${props.$textWrap};
     `};
 
-  ${(props) =>
+  ${props =>
     props.$overflow &&
     css`
      overflow ${props.$overflow};
     `};
-  ${(props) =>
+  ${props =>
     props.$clamp &&
     css`
       display: -webkit-box;
       -webkit-line-clamp: ${props.$clamp};
     `};
-  ${(props) =>
+  ${props =>
     props.$clampOrient &&
     css`
       -webkit-box-orient: ${props.$clampOrient};
     `};
-  ${(props) =>
+  ${props =>
     props.$family &&
     css`
       font-family: ${props.$family};
     `};
-  ${(props) =>
+  ${props =>
     props.$size &&
     css`
       font-size: ${props.$size}px;
     `};
-  ${(props) =>
+  ${props =>
     props.$weight &&
     css`
       font-weight: ${props.$weight};
     `};
-  ${(props) =>
+  ${props =>
     props.$height &&
     css`
       line-height: ${props.$height}px;
     `};
-  ${(props) =>
+  ${props =>
     props.$color &&
     css`
       color: ${JeneseiThemeVariables[props.$color]};
     `};
-  ${(props) =>
+  ${props =>
     props.$textAlign &&
     css`
       text-align: ${props.$textAlign};
     `};
-  ${(props) =>
+  ${props =>
     props.$textWrap &&
     css`
       text-wrap: ${props.$textWrap};
-    `}
+    `};
+
+  ${props =>
+    props.$isHoverUnderlining &&
+    css`
+      &:hover {
+        text-decoration: underline;
+      }
+    `};
 `
 
 export const SpanFont = styled.span<TypographyCSSProps>`
@@ -103,4 +120,22 @@ export const TitleH5 = styled.h5<TypographyCSSProps>`
 
 export const TitleH6 = styled.h6<TypographyCSSProps>`
   ${SpanFontCSS}
+`
+
+export const TitleH7 = styled.span<TypographyCSSProps>`
+  font-size: var(--heading-7-font-size);
+  line-height: var(--heading-line-height);
+  ${SpanFontCSS};
+`
+
+export const TitleH8 = styled.span<TypographyCSSProps>`
+  font-size: var(--heading-8-font-size);
+  line-height: var(--heading-line-height);
+  ${SpanFontCSS};
+`
+
+export const TitleH9 = styled.span<TypographyCSSProps>`
+  font-size: var(--heading-9-font-size);
+  line-height: var(--heading-line-height);
+  ${SpanFontCSS};
 `

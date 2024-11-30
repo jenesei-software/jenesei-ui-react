@@ -1,9 +1,11 @@
-import { ReactElement } from 'react'
+import { PropsWithChildren, ReactElement } from 'react'
+import { PreviewAdditionalProps } from 'src/areas/preview'
+import { AddDollarSign } from 'src/types'
 
 import { JeneseiThemeVariablesKeys } from '@theme/index'
 
-export interface ProviderAppProps {
-  children: React.ReactNode
+export interface ProviderAppProps extends PropsWithChildren {
+  defaultPreview?: PreviewAdditionalProps
   defaultBgColor: JeneseiThemeVariablesKeys
   defaultStatusBarColor: JeneseiThemeVariablesKeys
   defaultBgImage?: string
@@ -56,6 +58,8 @@ export interface ProviderAppProps {
 }
 
 export interface AppContextProps {
+  changePreview: (newPreviewProps: PreviewAdditionalProps) => void
+
   changeStatusBarColor: (color: JeneseiThemeVariablesKeys) => void
   changeBgColor: (color: JeneseiThemeVariablesKeys) => void
   changeBgImage: (image: string) => void
@@ -78,12 +82,8 @@ export interface ProviderAppWrapperProps {
   $bgImage: ProviderAppProps['defaultBgImage'] | null
 }
 
-export interface ProviderAppOutletProps {
-  $isScrollOutlet?: boolean
-  $notification?: ProviderAppProps['notification']
-  $header?: ProviderAppProps['header']
-  $nav?: ProviderAppProps['nav']
-  $footer?: ProviderAppProps['footer']
-  $leftAside?: ProviderAppProps['leftAside']
-  $rightAside?: ProviderAppProps['rightAside']
-}
+export type ProviderAppOutletProps = Partial<
+  AddDollarSign<
+    Pick<ProviderAppProps, 'isScrollOutlet' | 'notification' | 'header' | 'nav' | 'footer' | 'leftAside' | 'rightAside'>
+  >
+>

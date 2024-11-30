@@ -12,6 +12,9 @@ node_modules
 dist
 dist-ssr
 *.local
+*.npmrc
+
+public/pictures/*
 
 # Editor directories and files
 .vscode/*

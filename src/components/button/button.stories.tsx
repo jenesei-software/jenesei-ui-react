@@ -5,45 +5,31 @@ import { Button } from '.'
 
 const meta: Meta<typeof Button> = {
   component: Button,
-  title: 'Button',
+  title: 'Component/Button',
+  tags: ['autodocs']
 }
 
 export default meta
 
 type Story = StoryObj<typeof Button>
 
-export const Default: Story = {
+export const Text: Story = {
   args: {
     children: 'Click',
     width: 'auto',
     type: 'button',
     genre: 'gray',
-    size: 'medium',
-    isLoading: false,
-    isDisabled: false,
-    isOnlyLoading: false,
-    isRadius: false,
-    isHidden: false,
-    isFullSize: false,
-    isHiddenBorder: false,
-    isPlaystationEffect: false,
-    customStyles: {
-      justifyContent: 'space-between',
-    },
-    isIconGroup: true,
-  },
+    size: 'medium'
+  }
 }
 
-export const iconName: Story = {
+export const Icon: Story = {
   args: {
     width: 'asHeight',
     type: 'button',
     iconName: 'Heart',
+    iconOrder: -1,
     genre: 'gray',
-    size: 'medium',
-    isLoading: false,
-    isDisabled: false,
-    isOnlyLoading: false,
-    isRadius: false,
-  },
+    size: 'medium'
+  }
 }

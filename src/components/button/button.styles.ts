@@ -1,15 +1,15 @@
+import { FlexContainerAndItem } from '@styles/base'
 import styled, { css } from 'styled-components'
 
-import { FlexContainerAndItem } from '@components/flex'
 import { getFontSizeStyles } from '@components/typography'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
 
-import { StyledButtonIconsWrapperProps, StyledButtonProps } from '.'
+import { StyledDollarButtonIconsWrapperProps, StyledDollarButtonProps } from '.'
 
 /****************************************** Genre *************************************************/
-const ButtonGenre = css<StyledButtonProps>`
-  ${(props) => css`
+const ButtonGenre = css<StyledDollarButtonProps>`
+  ${props => css`
     background: ${props.theme.colors.button[props.$genre].background.rest};
     border-color: ${props.theme.colors.button[props.$genre].border.rest};
     color: ${props.theme.colors.button[props.$genre].color.rest};
@@ -21,7 +21,7 @@ const ButtonGenre = css<StyledButtonProps>`
     }
 
     &:focus-visible {
-      outline: 2px solid ${props.theme.colors.focus};
+      outline: 1px solid ${props.theme.colors.focus};
     }
     &:hover {
       ${!props.$isHidden &&
@@ -41,23 +41,19 @@ const ButtonGenre = css<StyledButtonProps>`
 `
 
 /****************************************** Disabled *************************************************/
-const ButtonDisabled = css<StyledButtonProps>`
-  ${(props) =>
+const ButtonDisabled = css<StyledDollarButtonProps>`
+  ${props =>
     props.$isHidden
       ? css`
           opacity: 0.5;
-          background: ${props.theme.colors.button[props.$genre].background
-            .rest} !important;
+          background: ${props.theme.colors.button[props.$genre].background.rest} !important;
 
-          color: ${props.theme.colors.button[props.$genre].color
-            .rest} !important;
+          color: ${props.theme.colors.button[props.$genre].color.rest} !important;
           & span {
-            color: ${props.theme.colors.button[props.$genre].color
-              .rest} !important;
+            color: ${props.theme.colors.button[props.$genre].color.rest} !important;
           }
           & path {
-            fill: ${props.theme.colors.button[props.$genre].color
-              .rest} !important;
+            fill: ${props.theme.colors.button[props.$genre].color.rest} !important;
           }
         `
       : css`
@@ -65,32 +61,32 @@ const ButtonDisabled = css<StyledButtonProps>`
         `}
 `
 /****************************************** is HiddenBorder *************************************************/
-const ButtonIsHiddenBorder = css<StyledButtonProps>`
-  ${(props) =>
+const ButtonIsHiddenBorder = css<StyledDollarButtonProps>`
+  ${props =>
     props.$isHiddenBorder &&
     css`
       border: 0px transparent !important;
     `}
 `
 /****************************************** is Radius *************************************************/
-const ButtonIsRadius = css<StyledButtonProps>`
-  ${(props) =>
+const ButtonIsRadius = css<StyledDollarButtonProps>`
+  ${props =>
     props.$isRadius &&
     css`
       border-radius: 100px;
     `}
 `
 /****************************************** is PlaystationEffect *************************************************/
-const ButtonIsPlaystationEffect = css<StyledButtonProps>`
-  ${(props) =>
+const ButtonIsPlaystationEffect = css<StyledDollarButtonProps>`
+  ${props =>
     props.$isPlaystationEffect &&
     css`
       box-shadow: ${props.theme.effects.button.playstation};
     `}
 `
 /****************************************** Icons Wrapper *************************************************/
-export const StyledButtonIconsWrapper = styled.div<StyledButtonIconsWrapperProps>`
-  ${(props) =>
+export const StyledButtonIconsWrapper = styled.div<StyledDollarButtonIconsWrapperProps>`
+  ${props =>
     props.$isIconGroup
       ? css`
           display: flex;
@@ -104,21 +100,29 @@ export const StyledButtonIconsWrapper = styled.div<StyledButtonIconsWrapperProps
 `
 
 /****************************************** Size *************************************************/
-export const ButtonSize = css<StyledButtonProps>`
-  ${(props) =>
+export const ButtonSize = css<StyledDollarButtonProps>`
+  ${props =>
     ButtonSizeConstructor({
       ...KEY_SIZE_DATA[props.$size],
       isFullSize: props.$isFullSize,
       $width: props.$width,
+      $flex: props.$flex,
+      $minWidth: props.$minWidth
     })};
 `
 export const ButtonSizeConstructor = (
-  props: IJeneseiThemeSize & { isFullSize?: boolean; $width?: string },
+  props: IJeneseiThemeSize & {
+    isFullSize?: boolean
+    $width?: string
+    $flex?: string
+    $minWidth?: string
+  }
 ) => css`
   height: ${props.height}px;
+  min-height: ${props.height}px;
   border-radius: ${props.radius}px;
   gap: ${props.padding - 2}px;
-  ${getFontSizeStyles(props.font, 600, 'Inter')};
+  ${getFontSizeStyles(props.font, 700, 'Inter')};
   padding: 0px ${props.padding}px;
 
   ${() =>
@@ -126,8 +130,12 @@ export const ButtonSizeConstructor = (
     css`
       height: 100%;
       border-radius: 0px;
-    `}
-
+    `};
+  ${() =>
+    props.$flex &&
+    css`
+      flex: ${props.$flex};
+    `};
   ${props.$width === 'asHeight'
     ? css`
         width: ${props.height}px;
@@ -136,8 +144,12 @@ export const ButtonSizeConstructor = (
       `
     : css`
         width: ${props.$width ?? 'max-content'};
-        min-width: ${props.$width ?? 'max-content'};
-      `}
+        min-width: ${props.$width ? `${props.$width}px` : 'max-content'};
+      `};
+  ${props.$minWidth === 'asHeight' &&
+  css`
+    min-width: ${props.height}px;
+  `}
 `
 /****************************************** Border *************************************************/
 const ButtonBorder = css`
@@ -146,14 +158,14 @@ const ButtonBorder = css`
 `
 
 /****************************************** Flex *************************************************/
-const ButtonFlex = css<StyledButtonProps>`
+const ButtonFlex = css<StyledDollarButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
   ${FlexContainerAndItem};
 `
 /****************************************** Styled *************************************************/
-export const StyledButton = styled.button<StyledButtonProps>`
+export const StyledButton = styled.button<StyledDollarButtonProps>`
   outline: 1px solid transparent;
   border: 1px solid transparent;
   position: relative;
@@ -161,7 +173,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   isolation: isolate;
   user-select: none;
   transition:
-    all ${(props) => props.theme.transition},
+    all ${props => props.theme.transition},
     outline 0s;
   box-sizing: border-box;
   overflow: hidden;
@@ -177,7 +189,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   ${ButtonIsHiddenBorder};
   ${ButtonIsRadius};
   ${ButtonIsPlaystationEffect};
-  font-family: ${(props) => props.$customFontFamily};
-  font-size: ${(props) => props.$customFontSize};
-  font-weight: ${(props) => props.$customFontWeight};
+  font-family: ${props => props.$customFontFamily};
+  font-size: ${props => props.$customFontSize};
+  font-weight: ${props => props.$customFontWeight};
 `

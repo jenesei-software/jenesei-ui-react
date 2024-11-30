@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { Icon } from '@assets/library-icon'
-
+import { Icon } from '@components/icon'
 import { getFontSizeStyles } from '@components/typography'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
@@ -10,19 +9,20 @@ import { StyledCheckboxProps, StyledIconProps } from '.'
 
 /****************************************** Size *************************************************/
 export const CheckboxSize = css<StyledCheckboxProps>`
-  ${(props) => CheckboxSizeConstructor(KEY_SIZE_DATA[props.$size])};
+  ${props => CheckboxSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
 export const CheckboxSizeConstructor = (props: IJeneseiThemeSize) => css`
   height: ${props.height}px;
+  min-height: ${props.height}px;
   border-radius: ${props.radius + 12}px;
   gap: ${props.padding - 2}px;
-  ${getFontSizeStyles(props.font, 600, 'Inter')};
+  ${getFontSizeStyles(props.font, 700, 'Inter')};
   padding: 0px ${props.padding - 4}px;
 `
 
 /****************************************** Genre *************************************************/
 export const CheckboxGenre = css<StyledCheckboxProps>`
-  ${(props) => css`
+  ${props => css`
     background: ${props.theme.colors.checkbox[props.$genre].background.rest};
     border-color: ${props.theme.colors.checkbox[props.$genre].border.rest};
     color: ${props.theme.colors.checkbox[props.$genre].color.rest};
@@ -30,7 +30,7 @@ export const CheckboxGenre = css<StyledCheckboxProps>`
       color: ${props.theme.colors.checkbox[props.$genre].color.rest};
     }
     &:focus-visible {
-      outline: 2px solid ${props.theme.colors.focus};
+      outline: 1px solid ${props.theme.colors.focus};
     }
     &:hover {
       background: ${props.theme.colors.checkbox[props.$genre].background.hover};
@@ -45,19 +45,15 @@ export const CheckboxGenre = css<StyledCheckboxProps>`
 
 /****************************************** Disabled *************************************************/
 const CheckboxDisabled = css<StyledCheckboxProps>`
-  ${(props) =>
+  ${props =>
     props.$isDisabled
       ? css`
           opacity: 0.5;
-          background: ${props.theme.colors.checkbox[props.$genre].background
-            .rest} !important;
-          border-color: ${props.theme.colors.checkbox[props.$genre].border
-            .rest} !important;
-          color: ${props.theme.colors.checkbox[props.$genre].color
-            .rest} !important;
+          background: ${props.theme.colors.checkbox[props.$genre].background.rest} !important;
+          border-color: ${props.theme.colors.checkbox[props.$genre].border.rest} !important;
+          color: ${props.theme.colors.checkbox[props.$genre].color.rest} !important;
           & span {
-            color: ${props.theme.colors.checkbox[props.$genre].color
-              .rest} !important;
+            color: ${props.theme.colors.checkbox[props.$genre].color.rest} !important;
           }
         `
       : css`
@@ -67,7 +63,7 @@ const CheckboxDisabled = css<StyledCheckboxProps>`
 
 /****************************************** HiddenBorder *************************************************/
 const CheckboxHiddenBorder = css<StyledCheckboxProps>`
-  ${(props) =>
+  ${props =>
     props.$isHiddenBorder &&
     css`
       border-color: transparent !important;
@@ -85,7 +81,7 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   overflow: hidden;
   isolation: isolate;
   user-select: none;
-  transition: all ${(props) => props.theme.transition};
+  transition: all ${props => props.theme.transition};
 
   & {
     user-select: none;
@@ -97,17 +93,17 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   ${CheckboxHiddenBorder};
   ${CheckboxSize};
 
-  font-family: ${(props) => props.$customFontFamily};
-  font-size: ${(props) => props.$customFontSize};
-  font-weight: ${(props) => props.$customFontWeight};
-  width: ${(props) => props.$width ?? 'max-content'};
-  min-width: ${(props) => props.$width ?? 'max-content'};
-  background-color: ${(props) => props.$isNotBackground && 'transparent'};
+  font-family: ${props => props.$customFontFamily};
+  font-size: ${props => props.$customFontSize};
+  font-weight: ${props => props.$customFontWeight};
+  width: ${props => props.$width ?? 'max-content'};
+  min-width: ${props => props.$width ?? 'max-content'};
+  background-color: ${props => props.$isNotBackground && 'transparent'};
 `
 
 /****************************************** Styled *************************************************/
 export const StyledIcon = styled(Icon)<StyledIconProps>`
-  ${(props) =>
+  ${props =>
     props.$checked
       ? css`
           & #check {

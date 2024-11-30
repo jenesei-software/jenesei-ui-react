@@ -1,39 +1,38 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
-import { Checkbox, CheckboxProps } from '.'
+import { Checkbox as CheckboxComponent, CheckboxProps } from '.'
 
-const meta: Meta<typeof Checkbox> = {
-  component: Checkbox,
-  title: 'Checkbox/Checkbox',
+const meta: Meta<typeof CheckboxComponent> = {
+  component: CheckboxComponent,
+  title: 'Component/Checkbox',
+  tags: ['autodocs']
 }
 
 export default meta
-type Story = StoryObj<typeof Checkbox>
+type Story = StoryObj<typeof CheckboxComponent>
 
-const CheckboxWrapper: React.FC<CheckboxProps> = (props) => {
-  const [value, setValue] = useState<boolean>(false)
+const CheckboxWrapper: FC<CheckboxProps> = props => {
+  const [value, setValue] = useState<boolean>(props.checked ?? false)
 
-  return (
-    <Checkbox
-      {...props}
-      checked={value}
-      onChange={(checked) => setValue(checked)}
-    />
-  )
+  useEffect(() => {
+    setValue(props.checked ?? false)
+  }, [props.checked])
+
+  return <CheckboxComponent {...props} checked={value} onChange={checked => setValue(checked)} />
 }
 
-export const Default: Story = {
-  render: (args) => <CheckboxWrapper {...args} />,
+export const Checkbox: Story = {
+  render: args => <CheckboxWrapper {...args} />,
   args: {
     genre: 'gray',
-    view: 'Radio',
+    view: 'Square',
     checked: true,
-    children: 'Zhopa',
+    children: 'First',
     size: 'medium',
     isLoading: false,
     isDisabled: false,
     isOnlyLoading: false,
-    isHiddenBorder: false,
-  },
+    isHiddenBorder: false
+  }
 }

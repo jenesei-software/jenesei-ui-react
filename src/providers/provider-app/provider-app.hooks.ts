@@ -2,6 +2,9 @@ import { useContext } from 'react'
 
 import { AppContext } from '.'
 
+/**
+ * Custom hook to access the AppContext.
+ */
 export const useAppContext = () => {
   const context = useContext(AppContext)
   if (!context) {

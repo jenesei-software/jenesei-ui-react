@@ -1,8 +1,6 @@
-import { memo } from 'react'
-
 import { StyledReactToggle, ToggleProps } from '.'
 
-export const Toggle = memo((props: ToggleProps) => {
+export const Toggle = (props: ToggleProps) => {
   return (
     <StyledReactToggle
       checked={props.value}
@@ -12,7 +10,8 @@ export const Toggle = memo((props: ToggleProps) => {
       $isDisabled={props.isDisabled}
       $value={props.value}
       $size={props.size}
+      $isError={props.isError}
       tabIndex={0}
     />
   )
-})
+}

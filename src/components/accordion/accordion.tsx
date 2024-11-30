@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react'
+import React, { FC, useCallback } from 'react'
 
-import { Stack } from '@components/flex'
+import { Stack } from '@components/stack'
 
 import {
   AccordionDetails,
@@ -8,22 +8,23 @@ import {
   AccordionStyledIcon,
   AccordionSummary,
   AccordionSummaryContent,
-  AccordionWrapper,
+  AccordionWrapper
 } from '.'
 
-export const Accordion: React.FC<AccordionProps> = (props) => {
+export const Accordion: FC<AccordionProps> = props => {
   const onClickSummary = useCallback(() => {
     if (props.onClickSummary) props.onClickSummary()
-  }, [props.onClickSummary])
+  }, [props])
 
   const onClickIcon = useCallback(
     (event: React.MouseEvent<SVGSVGElement>) => {
       if (props.onClickIcon) {
         event.stopPropagation()
+
         props.onClickIcon()
       }
     },
-    [props.onClickIcon],
+    [props]
   )
 
   return (
@@ -44,9 +45,7 @@ export const Accordion: React.FC<AccordionProps> = (props) => {
             />
           )}
         </AccordionSummary>
-        <AccordionDetails $expanded={props.expanded}>
-          {props.accordionDetails}
-        </AccordionDetails>
+        <AccordionDetails $expanded={props.expanded}>{props.accordionDetails}</AccordionDetails>
       </AccordionWrapper>
     </Stack>
   )
