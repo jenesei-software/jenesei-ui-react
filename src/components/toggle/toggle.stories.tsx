@@ -6,7 +6,7 @@ import { Toggle, ToggleProps } from '.'
 
 const meta: Meta<typeof Toggle> = {
   component: Toggle,
-  title: 'Toggle',
+  title: 'Component/Toggle',
   tags: ['autodocs']
 }
 

@@ -21,6 +21,7 @@ export interface TypographyDefaultProps extends PropsWithChildren {
   height?: number
   flex?: string
   onClick?: () => void
+  isHoverUnderlining?: boolean
 }
 
 export interface TypographyDataProps extends TypographyDefaultProps {
@@ -39,7 +40,16 @@ export type TypographyCSSProps = Partial<
   AddDollarSign<
     Pick<
       TypographyDefaultProps,
-      'clamp' | 'clampOrient' | 'overflow' | 'color' | 'family' | 'textAlign' | 'textWrap' | 'flex' | 'screen'
+      | 'clamp'
+      | 'clampOrient'
+      | 'overflow'
+      | 'color'
+      | 'family'
+      | 'textAlign'
+      | 'textWrap'
+      | 'flex'
+      | 'screen'
+      | 'isHoverUnderlining'
     > &
       Pick<TypographyVariantProps, 'variant' | 'cursor'> &
       Pick<TypographyDataProps, 'size' | 'weight' | 'height'>

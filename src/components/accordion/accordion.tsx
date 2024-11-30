@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from 'react'
 
-import { Stack } from '@components/flex'
+import { Stack } from '@components/stack'
 
 import {
   AccordionDetails,

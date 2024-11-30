@@ -1,6 +1,6 @@
+import { FlexContainerAndItem } from '@styles/base'
 import styled, { css } from 'styled-components'
 
-import { FlexContainerAndItem } from '@components/flex'
 import { getFontSizeStyles } from '@components/typography'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
@@ -106,7 +106,8 @@ export const ButtonSize = css<StyledDollarButtonProps>`
       ...KEY_SIZE_DATA[props.$size],
       isFullSize: props.$isFullSize,
       $width: props.$width,
-      $flex: props.$flex
+      $flex: props.$flex,
+      $minWidth: props.$minWidth
     })};
 `
 export const ButtonSizeConstructor = (
@@ -114,9 +115,11 @@ export const ButtonSizeConstructor = (
     isFullSize?: boolean
     $width?: string
     $flex?: string
+    $minWidth?: string
   }
 ) => css`
   height: ${props.height}px;
+  min-height: ${props.height}px;
   border-radius: ${props.radius}px;
   gap: ${props.padding - 2}px;
   ${getFontSizeStyles(props.font, 700, 'Inter')};
@@ -127,12 +130,12 @@ export const ButtonSizeConstructor = (
     css`
       height: 100%;
       border-radius: 0px;
-    `}
+    `};
   ${() =>
     props.$flex &&
     css`
       flex: ${props.$flex};
-    `}
+    `};
   ${props.$width === 'asHeight'
     ? css`
         width: ${props.height}px;
@@ -141,8 +144,12 @@ export const ButtonSizeConstructor = (
       `
     : css`
         width: ${props.$width ?? 'max-content'};
-        min-width: ${props.$width ?? 'max-content'};
-      `}
+        min-width: ${props.$width ? `${props.$width}px` : 'max-content'};
+      `};
+  ${props.$minWidth === 'asHeight' &&
+  css`
+    min-width: ${props.height}px;
+  `}
 `
 /****************************************** Border *************************************************/
 const ButtonBorder = css`

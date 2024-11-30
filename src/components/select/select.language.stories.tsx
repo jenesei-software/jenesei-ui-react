@@ -6,7 +6,7 @@ import { SelectLanguage, SelectLanguageProps } from '.'
 
 const meta: Meta<typeof SelectLanguage> = {
   component: SelectLanguage,
-  title: 'Select/Language'
+  title: 'Component/Select'
 }
 
 export default meta

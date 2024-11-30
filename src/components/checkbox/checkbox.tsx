@@ -1,7 +1,7 @@
 import { FC, useCallback, useMemo } from 'react'
 import { useTheme } from 'styled-components'
 
-import { ModalLoading } from '@components/modal-loading'
+import { Loading } from '@components/loading'
 
 import { CheckboxProps, CheckboxWrapper, StyledIcon } from '.'
 
@@ -42,14 +42,14 @@ export const Checkbox: FC<CheckboxProps> = props => {
     >
       {props.isOnlyLoading ? (
         props.isLoading ? (
-          <ModalLoading size={props.size} color={theme.colors.checkbox[props.genre].color.rest} />
+          <Loading size={props.size} color={theme.colors.checkbox[props.genre].color.rest} />
         ) : (
           children
         )
       ) : (
         <>
           {children}
-          {props.isLoading && <ModalLoading size={props.size} color={theme.colors.checkbox[props.genre].color.rest} />}
+          {props.isLoading && <Loading size={props.size} color={theme.colors.checkbox[props.genre].color.rest} />}
         </>
       )}
     </CheckboxWrapper>

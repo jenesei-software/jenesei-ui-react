@@ -3,14 +3,14 @@ import { FC, useCallback, useState } from 'react'
 import 'styled-components'
 
 import { Button } from '@components/button'
-import { Stack } from '@components/flex'
+import { Stack } from '@components/stack'
 import { Typography } from '@components/typography'
 
 import { Accordion, AccordionProps } from '.'
 
 const meta: Meta<typeof Accordion> = {
   component: Accordion,
-  title: 'Accordion',
+  title: 'Component/Accordion',
   tags: ['autodocs']
 }
 
@@ -244,7 +244,9 @@ export const OneLevel: Story = {
     isAccordionIcon: true,
     accordionSummary: (
       <Stack p="10px" w="200px" style={{ cursor: 'pointer' }}>
-        <Typography variant="h4">Show</Typography>
+        <Typography isHoverUnderlining variant="h4">
+          Show
+        </Typography>
       </Stack>
     ),
     wrapperProps: {
@@ -260,7 +262,9 @@ export const MultiLevel: Story = {
     isAccordionIcon: true,
     accordionSummary: (
       <Stack p="10px" w="200px" style={{ cursor: 'pointer' }}>
-        <Typography variant="h4">MultiLevel</Typography>
+        <Typography isHoverUnderlining variant="h4">
+          MultiLevel
+        </Typography>
       </Stack>
     ),
     wrapperProps: {

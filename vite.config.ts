@@ -7,11 +7,13 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import { peerDependencies } from './package.json'
 
 export default defineConfig(() => {
+  // eslint-disable-next-line no-undef
   const isStorybookBuild = process.env.BUILD_STORYBOOK === 'true'
 
   return {
     resolve: {
       alias: {
+        // eslint-disable-next-line no-undef
         '@': path.resolve(__dirname, './src')
       }
     },
@@ -40,6 +42,7 @@ export default defineConfig(() => {
         }
       },
       lib: {
+        // eslint-disable-next-line no-undef
         entry: resolve(__dirname, 'src/main.ts'),
         name: 'jenesei-ui-react',
         formats: ['es', 'umd'],

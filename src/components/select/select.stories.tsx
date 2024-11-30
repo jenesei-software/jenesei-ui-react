@@ -9,7 +9,7 @@ import { ISelectItem, Select, SelectProps } from '.'
 
 const meta: Meta<typeof Select> = {
   component: Select,
-  title: 'Select/Default'
+  title: 'Component/Select'
 }
 
 export default meta

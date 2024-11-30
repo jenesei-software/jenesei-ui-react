@@ -10,7 +10,7 @@ export const getFontSizeStyles = (
 ) => css`
   font-family: ${family};
   font-style: normal;
-  line-height: normal;
+  line-height: var(--font-line-height);
   font-size: ${size}px;
   font-weight: ${weight};
   ${height &&
