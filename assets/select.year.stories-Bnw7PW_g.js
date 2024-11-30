@@ -1,0 +1,6 @@
+import{j as c}from"./jsx-runtime-CkxqCPlQ.js";import{d as p,h as r}from"./select.styles-BzMa4DYZ.js";import{r as o}from"./index-DJO9vBfz.js";import"./index-rCr475hU.js";import"./input.styles-DZwuulkh.js";import"./styled-components.browser.esm-CCP31c1y.js";import"./loading.styles-C9X5Vsl2.js";import"./theme-DVhjlqOZ.js";import"./theme.global-B2IBlToM.js";import"./typography--gcTkdSy.js";import"./typography.functions-_Xr-RK7k.js";import"./index-DjKJqAo0.js";import"./button-DS29UrEA.js";import"./icon.styles-ke4R2kUL.js";import"./base.styles-lMUunFc3.js";import"./checkbox.styles-uw8iikki.js";const R={component:p,title:"Component/Select"},d=r.utc().subtract(100,"years").startOf("year").valueOf(),f=r.utc().startOf("day").valueOf(),g=r.utc().valueOf(),v={size:"medium",genre:"gray",width:"70px",startDate:d,endDate:f,value:g},x=e=>{const[u,a]=o.useState(e.value),i=l=>{a(l)};return o.useEffect(()=>{a(e.value)},[e.value]),c.jsx(p,{...e,placeholder:"Year",value:u,onChange:i})},t={render:e=>c.jsx(x,{...e}),args:{...v}};var s,n,m;t.parameters={...t.parameters,docs:{...(s=t.parameters)==null?void 0:s.docs,source:{originalSource:`{
+  render: args => <SelectYearWrapper {...args} />,
+  args: {
+    ...defaultArgs
+  }
+}`,...(m=(n=t.parameters)==null?void 0:n.docs)==null?void 0:m.source}}};const V=["Year"];export{t as Year,V as __namedExportsOrder,R as default};

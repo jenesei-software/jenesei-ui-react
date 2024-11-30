@@ -1,0 +1,6 @@
+import{j as n}from"./jsx-runtime-CkxqCPlQ.js";import{r as u}from"./index-DJO9vBfz.js";import{S as a}from"./select.styles-BzMa4DYZ.js";import"./index-rCr475hU.js";import"./input.styles-DZwuulkh.js";import"./styled-components.browser.esm-CCP31c1y.js";import"./loading.styles-C9X5Vsl2.js";import"./theme-DVhjlqOZ.js";import"./theme.global-B2IBlToM.js";import"./typography--gcTkdSy.js";import"./typography.functions-_Xr-RK7k.js";import"./index-DjKJqAo0.js";import"./button-DS29UrEA.js";import"./icon.styles-ke4R2kUL.js";import"./base.styles-lMUunFc3.js";import"./checkbox.styles-uw8iikki.js";const R={component:a,title:"Component/Select"},d={size:"medium",genre:"gray",width:"300px"},l=t=>{const[p,m]=u.useState(""),c=i=>{m(i.countryCode)};return n.jsx(a,{...t,placeholder:"Choice country...",value:p,onChange:c})},r={render:t=>n.jsx(l,{...t}),args:{...d}};var e,o,s;r.parameters={...r.parameters,docs:{...(e=r.parameters)==null?void 0:e.docs,source:{originalSource:`{
+  render: args => <SelectCountryWrapper {...args} />,
+  args: {
+    ...defaultArgs
+  }
+}`,...(s=(o=r.parameters)==null?void 0:o.docs)==null?void 0:s.source}}};const V=["Country"];export{r as Country,V as __namedExportsOrder,R as default};
