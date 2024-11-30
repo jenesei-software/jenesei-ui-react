@@ -18,7 +18,10 @@ import {
 export const SonnerContext = createContext<SonnerContextProps | null>(null)
 
 export const ProviderSonner: FC<ProviderSonnerProps> = props => {
-  const DEFAULT_HIDING_MODE: ProviderSonnerProps['defaultHidingMode'] = useMemo(() => 'clickOnButton', [])
+  const DEFAULT_HIDING_MODE: ProviderSonnerProps['defaultHidingMode'] = useMemo(
+    () => props.defaultHidingMode ?? 'clickOnButton',
+    [props.defaultHidingMode]
+  )
   const DEFAULT_BUTTON: ProviderSonnerProps['defaultButton'] = useMemo(() => ({ text: 'Undo', onClick: () => {} }), [])
   const DEFAULT_HIDING_TIME: ProviderSonnerProps['defaultHidingTime'] = useMemo(
     () => props.defaultHidingTime,
