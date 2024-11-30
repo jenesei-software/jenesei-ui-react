@@ -163,6 +163,9 @@ export interface IJeneseiTheme {
       hover: string
       active: string
     }
+    sonner: {
+      background: string
+    }
   }
   palette: Record<JeneseiThemeVariablesKeys, string>
   colors: {
