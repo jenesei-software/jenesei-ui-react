@@ -2,21 +2,23 @@ import styled from 'styled-components'
 
 import { getFontSizeStyles } from '@components/typography'
 
+import { removeScrollbar } from '@styles/base'
+
 export const SonnerLayout = styled.div`
   position: fixed;
   right: 0;
   bottom: 0;
-  max-height: 100dvh;
-  height: 100dvh;
+  max-height: calc(100dvh - 20px);
   width: 320px;
   display: flex;
   justify-content: flex-start;
   gap: 10px;
   margin: 10px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 5px;
+  box-sizing: content-box;
+  overflow-y: visible;
+  overflow-x: visible;
   flex-direction: column-reverse;
+  ${removeScrollbar}
 `
 
 export const SonnerElementWrapper = styled.div`
@@ -28,7 +30,6 @@ export const SonnerElementWrapper = styled.div`
   padding: 16px 20px 16px 20px;
   display: flex;
   flex-direction: row;
-  height: 64px;
   gap: 10px;
   align-items: center;
   justify-content: flex-start;
@@ -38,14 +39,18 @@ export const SonnerElementWrapper = styled.div`
   min-width: 320px;
   transform-origin: center center;
   box-shadow: ${props => props.theme.effects.sonner.background};
-  overflow: hidden;
+  overflow: visible;
   transition:
+    box-shadow ${props => props.theme.transition},
     transform ${props => props.theme.transition},
     margin ${props => props.theme.transition},
     opacity ${props => props.theme.transition},
     right ${props => props.theme.transition},
     bottom ${props => props.theme.transition},
     zoom ${props => props.theme.transition};
+  &:hover {
+    box-shadow: ${props => props.theme.effects.sonner.backgroundHover};
+  }
 `
 export const SonnerContent = styled.div`
   display: flex;

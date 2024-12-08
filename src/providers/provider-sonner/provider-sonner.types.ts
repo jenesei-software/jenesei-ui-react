@@ -24,7 +24,7 @@ export type SonnerElementProps = {
   isMoreThanLastViewIndexPlusOne: boolean
   isMoreThanLastViewIndex: boolean
   isHovered: boolean
-  isLastIndex: boolean
+  isLastViewIndex: boolean
 }
 
 export type SonnerContextProps = {
