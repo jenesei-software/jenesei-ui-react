@@ -6,9 +6,20 @@ export const SonnerLayout = styled.div`
   position: fixed;
   right: 0;
   bottom: 0;
-  padding: 20px;
+  max-height: 100dvh;
+  height: 100dvh;
+  width: 320px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 5px;
+  flex-direction: column-reverse;
 `
-export const SonnerWrapper = styled.div`
+
+export const SonnerElementWrapper = styled.div`
   background: ${props => props.theme.palette.whiteStandard};
   border-radius: 12px;
   border-style: solid;
@@ -17,15 +28,24 @@ export const SonnerWrapper = styled.div`
   padding: 16px 20px 16px 20px;
   display: flex;
   flex-direction: row;
+  height: 64px;
   gap: 10px;
   align-items: center;
   justify-content: flex-start;
   align-self: stretch;
   flex-shrink: 0;
+  flex-shrink: 1;
   min-width: 320px;
-  position: relative;
+  transform-origin: center center;
   box-shadow: ${props => props.theme.effects.sonner.background};
   overflow: hidden;
+  transition:
+    transform ${props => props.theme.transition},
+    margin ${props => props.theme.transition},
+    opacity ${props => props.theme.transition},
+    right ${props => props.theme.transition},
+    bottom ${props => props.theme.transition},
+    zoom ${props => props.theme.transition};
 `
 export const SonnerContent = styled.div`
   display: flex;

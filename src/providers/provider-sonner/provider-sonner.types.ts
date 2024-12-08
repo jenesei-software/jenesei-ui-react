@@ -1,6 +1,7 @@
 import { PropsWithChildren, ReactNode } from 'react'
 
 export type ProviderSonnerProps = PropsWithChildren & {
+  maxViewIndex?: number
   defaultHidingMode?: 'clickOnSonner' | 'clickOnButton'
   defaultHidingTime?: number
   defaultDescription?: string | ReactNode | false
@@ -13,8 +14,21 @@ export type ProviderSonnerProps = PropsWithChildren & {
     | false
 }
 
+export type SonnerElementProps = {
+  id: SonnerContentProps['id']
+  title: SonnerContentProps['title']
+  description: SonnerContentProps['description']
+  index: number
+  buttonText: ReactNode
+  handleOnClick: (id: SonnerContentProps['id'], hidingMode?: SonnerContentProps['hidingMode']) => void
+  isMoreThanLastViewIndexPlusOne: boolean
+  isMoreThanLastViewIndex: boolean
+  isHovered: boolean
+  isLastIndex: boolean
+}
+
 export type SonnerContextProps = {
-  toast: (content: SonnerContentProps) => void
+  toast: (content: Omit<SonnerContentProps, 'index'>) => void
   contentHistory: SonnerContentProps[]
   removeToast: (id: SonnerContentProps['id']) => void
 }
@@ -25,6 +39,6 @@ export type SonnerContentProps = {
   hidingMode?: ProviderSonnerProps['defaultHidingMode']
   hidingTime?: ProviderSonnerProps['defaultHidingTime']
   button?: ProviderSonnerProps['defaultButton']
-  index?: number
+  index: number
   id?: string
 }

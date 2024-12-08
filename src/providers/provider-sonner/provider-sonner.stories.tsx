@@ -26,7 +26,7 @@ const ProviderSonnerWrapper: FC<ProviderSonnerProps> = props => {
   )
 }
 
-const ProviderSonnerWrapperDouble: FC = props => {
+const ProviderSonnerWrapperDouble: FC = () => {
   const { toast } = useSonnerContext()
 
   const handleToast = () => {
@@ -45,5 +45,7 @@ const ProviderSonnerWrapperDouble: FC = props => {
 
 export const Default: Story = {
   render: args => <ProviderSonnerWrapper {...args} />,
-  args: {}
+  args: {
+    maxViewIndex: 16
+  }
 }
