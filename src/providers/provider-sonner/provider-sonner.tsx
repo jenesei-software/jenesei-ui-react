@@ -1,19 +1,5 @@
-import { useGSAP } from '@gsap/react'
 import { AnimatePresence, motion } from 'framer-motion'
-import gsap from 'gsap'
-import React, {
-  FC,
-  MouseEventHandler,
-  createContext,
-  memo,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState
-} from 'react'
-import { Flipped, Flipper } from 'react-flip-toolkit'
+import { FC, createContext, memo, useCallback, useMemo, useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { Button } from '@components/button'
