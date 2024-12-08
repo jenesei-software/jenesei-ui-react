@@ -56,13 +56,13 @@ export const ProviderSonner: FC<ProviderSonnerProps> = props => {
 
   const [contentHistory, setContentHistory] = useState<SonnerContentProps[]>([])
 
-  const [isHovered, setIsHovered] = useState(true)
+  const [isHovered, setIsHovered] = useState(false)
   const handleMouseEnter = useCallback(() => {
     setIsHovered(true)
   }, [])
 
   const handleMouseLeave = useCallback(() => {
-    setIsHovered(true)
+    setIsHovered(false)
   }, [])
 
   const removeToast = useCallback(
@@ -134,10 +134,11 @@ export const ProviderSonner: FC<ProviderSonnerProps> = props => {
         <AnimatePresence>
           {contentHistory.map(content => {
             const index = content.index ? +content.index : 0
-
-            const isMoreThanLastViewIndexPlusOne = memoMaxViewIndex ? index > memoMaxViewIndex : false
-            const isMoreThanLastViewIndex = memoMaxViewIndex ? index > memoMaxViewIndex - 1 : false
-            const isLastIndex = memoMaxViewIndex ? index == memoMaxViewIndex - 1 : false
+            // const localMemoMaxViewIndex = memoMaxViewIndex ? (!isHovered ? memoMaxViewIndex : undefined) : undefined
+            const localMemoMaxViewIndex = memoMaxViewIndex
+            const isMoreThanLastViewIndexPlusOne = localMemoMaxViewIndex ? index >= localMemoMaxViewIndex : false
+            const isMoreThanLastViewIndex = localMemoMaxViewIndex ? index >= localMemoMaxViewIndex - 1 : false
+            const isLastViewIndex = localMemoMaxViewIndex ? index == localMemoMaxViewIndex - 1 : false
 
             const title = content.title || memoDefaultTitle
             const description = content.description || memoDefaultDescription
@@ -148,6 +149,7 @@ export const ProviderSonner: FC<ProviderSonnerProps> = props => {
               <MemoizedSonnerElement
                 isMoreThanLastViewIndexPlusOne={isMoreThanLastViewIndexPlusOne}
                 isMoreThanLastViewIndex={isMoreThanLastViewIndex}
+                isLastViewIndex={isLastViewIndex}
                 key={content.id}
                 id={content.id}
                 index={index}
@@ -156,7 +158,6 @@ export const ProviderSonner: FC<ProviderSonnerProps> = props => {
                 description={description}
                 buttonText={buttonText}
                 handleOnClick={handleOnClick}
-                isLastIndex={isLastIndex}
               />
             )
           })}
@@ -173,22 +174,34 @@ export const SonnerElement: FC<SonnerElementProps> = props => {
   const id = useMemo(() => props.id, [props.id])
 
   const isHovered = useMemo(() => props.isHovered, [props.isHovered])
-  const isLastIndex = useMemo(() => props.isLastIndex, [props.isLastIndex])
+  const isLastViewIndex = useMemo(() => props.isLastViewIndex, [props.isLastViewIndex])
   const isMoreThanLastViewIndex = useMemo(() => props.isMoreThanLastViewIndex, [props.isMoreThanLastViewIndex])
+  const isMoreThanLastViewIndexPlusOne = useMemo(
+    () => props.isMoreThanLastViewIndexPlusOne,
+    [props.isMoreThanLastViewIndexPlusOne]
+  )
 
   return (
     <motion.div
       key={id}
       layout
-      initial={{ opacity: 0, scale: 1, y: isLastIndex ? -100 : 100 }}
+      initial={{ opacity: 0, scale: 1, y: isLastViewIndex ? -100 : 100 }}
       animate={{
         opacity: isMoreThanLastViewIndex ? 0 : 1,
-        scale: !isHovered ? 1 - index * 0.05 : 1,
         y: 0,
-        marginTop: !isHovered ? `-40px` : '0px'
+        display: isMoreThanLastViewIndexPlusOne ? 'none' : 'flex',
+        scale: !isHovered ? 1 - index * 0.04 : 1,
+        marginBottom: isHovered || index === 0 ? `0px` : `-${55}px`
       }}
-      exit={{ opacity: 0 }}
-      transition={{ type: 'spring', duration: 0.2 }}
+      style={{
+        zIndex: -index,
+        alignItems: 'center',
+        justifyContent: 'center',
+        transformOrigin: 'center'
+      }}
+      whileInView={{ opacity: isMoreThanLastViewIndex ? 0 : 1 }}
+      exit={{ opacity: 0, y: 100 }}
+      transition={{ type: 'spring', duration: 0.4 }}
     >
       <SonnerElementWrapper ref={elementRef} onClick={() => props.handleOnClick(props.id, 'clickOnSonner')}>
         <SonnerContent>

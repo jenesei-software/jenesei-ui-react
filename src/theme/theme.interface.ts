@@ -165,6 +165,7 @@ export interface IJeneseiTheme {
     }
     sonner: {
       background: string
+      backgroundHover: string
     }
   }
   palette: Record<JeneseiThemeVariablesKeys, string>
