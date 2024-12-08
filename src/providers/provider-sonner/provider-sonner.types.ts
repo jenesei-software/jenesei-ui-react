@@ -1,25 +1,18 @@
 import { PropsWithChildren, ReactNode } from 'react'
 
 export type ProviderSonnerProps = PropsWithChildren & {
-  maxViewIndex?: number
-  defaultHidingMode?: 'clickOnSonner' | 'clickOnButton'
-  defaultHidingTime?: number
-  defaultDescription?: string | ReactNode | false
-  defaultTitle?: string | ReactNode | false
-  defaultButton?:
-    | {
-        text?: string | ReactNode
-        onClick?: () => void
-      }
-    | false
+  theme: 'standard'
+  position: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'bottom-center' | 'top-center'
+  visibleToasts?: number
+  default: Omit<SonnerContentProps, 'index'>
 }
 
 export type SonnerElementProps = {
   id: SonnerContentProps['id']
   title: SonnerContentProps['title']
   description: SonnerContentProps['description']
+  button: SonnerContentProps['button']
   index: number
-  buttonText: ReactNode
   handleOnClick: (id: SonnerContentProps['id'], hidingMode?: SonnerContentProps['hidingMode']) => void
   isMoreThanLastViewIndexPlusOne: boolean
   isMoreThanLastViewIndex: boolean
@@ -29,16 +22,21 @@ export type SonnerElementProps = {
 
 export type SonnerContextProps = {
   toast: (content: Omit<SonnerContentProps, 'index'>) => void
+  remove: (id: SonnerContentProps['id']) => void
   contentHistory: SonnerContentProps[]
-  removeToast: (id: SonnerContentProps['id']) => void
 }
 
 export type SonnerContentProps = {
-  title: ProviderSonnerProps['defaultTitle']
-  description?: ProviderSonnerProps['defaultDescription']
-  hidingMode?: ProviderSonnerProps['defaultHidingMode']
-  hidingTime?: ProviderSonnerProps['defaultHidingTime']
-  button?: ProviderSonnerProps['defaultButton']
-  index: number
+  hidingMode?: 'clickOnSonner' | 'clickOnButton'
+  hidingTime?: number
+  description?: string | ReactNode
+  title?: string | ReactNode
   id?: string
+  button?:
+    | {
+        content?: string | ReactNode
+        onClick?: () => void
+      }
+    | false
+  index: number
 }

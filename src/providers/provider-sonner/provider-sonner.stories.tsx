@@ -9,8 +9,7 @@ import { ProviderSonner, ProviderSonnerProps, useSonnerContext } from '.'
 
 const meta: Meta<typeof ProviderSonner> = {
   component: ProviderSonner,
-  title: 'Provider/Sonner',
-  tags: ['autodocs']
+  title: 'Provider/Sonner'
 }
 
 export default meta
@@ -31,8 +30,7 @@ const ProviderSonnerWrapperDouble: FC = () => {
   const handleToast = () => {
     toast({
       title: 'Чебурашка',
-      description:
-        'огрооооооооомный пэнисяра огрооооооооомный пэнисяра огрооооооооомный пэнисяра огрооооооооомный пэнисяра огрооооооооомный пэнисяра огрооооооооомный пэнисяра'
+      description: 'Или крокодайл?'
     })
   }
   return (
@@ -47,6 +45,8 @@ const ProviderSonnerWrapperDouble: FC = () => {
 export const Default: Story = {
   render: args => <ProviderSonnerWrapper {...args} />,
   args: {
-    maxViewIndex: 3
+    visibleToasts: 3,
+    position: 'bottom-left',
+    theme: 'standard'
   }
 }
