@@ -1,44 +1,79 @@
 import { PropsWithChildren, ReactNode } from 'react'
+import { AddDollarSign } from 'src/types'
+
+import { TLibraryIconCurvedNameString } from '@components/icon'
+
+import { IJeneseiTheme, JeneseiThemeVariablesKeys, TJeneseiThemeGenre } from '@theme/theme.interface'
 
 export type ProviderSonnerProps = PropsWithChildren & {
-  maxViewIndex?: number
-  defaultHidingMode?: 'clickOnSonner' | 'clickOnButton'
-  defaultHidingTime?: number
-  defaultDescription?: string | ReactNode | false
-  defaultTitle?: string | ReactNode | false
-  defaultButton?:
-    | {
-        text?: string | ReactNode
-        onClick?: () => void
-      }
-    | false
+  gap: number
+  position: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'bottom-center' | 'top-center'
+  visibleToasts?: number
+  default: Omit<SonnerContentStandardProps, 'index'>
 }
 
-export type SonnerElementProps = {
-  id: SonnerContentProps['id']
-  title: SonnerContentProps['title']
-  description: SonnerContentProps['description']
+export type SonnerLayoutProps = Required<AddDollarSign<Pick<ProviderSonnerProps, 'position' | 'gap'>>>
+export type SonnerElementWrapperProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre'>>>
+export type SonnerContentTitleProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre'>>>
+export type SonnerContentDescriptionProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre'>>>
+
+export type SonnerContextProps = {
+  toast: (content: Omit<SonnerContentStandardProps, 'index'>) => void
+  promise: <T>(
+    promise: Promise<T>,
+    expectation: Omit<SonnerContentStandardProps, 'index'>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    toast: (success: T | undefined, error: any | undefined) => Omit<SonnerContentProps, 'index'>
+  ) => void
+  remove: (id: SonnerContentDefaultProps['id']) => void
+  contentHistory: SonnerContentProps[]
+}
+
+export type SonnerElementProps = SonnerElementDefaultProps
+
+type SonnerElementDefaultProps = {
+  id: SonnerContentDefaultProps['id']
+  title: SonnerContentStandardProps['title']
+  description: SonnerContentStandardProps['description']
+  content: SonnerContentContentProps['content']
+  icon?: SonnerContentDefaultProps['icon']
+  isLoading: SonnerContentDefaultProps['isLoading']
+  hidingMode: SonnerContentDefaultProps['hidingMode']
+  button: SonnerContentDefaultProps['button']
   index: number
-  buttonText: ReactNode
-  handleOnClick: (id: SonnerContentProps['id'], hidingMode?: SonnerContentProps['hidingMode']) => void
+  handleOnClick: (id: SonnerContentDefaultProps['id'], hidingMode?: SonnerContentDefaultProps['hidingMode']) => void
   isMoreThanLastViewIndexPlusOne: boolean
   isMoreThanLastViewIndex: boolean
   isHovered: boolean
   isLastViewIndex: boolean
-}
+  buttonGenre: keyof TJeneseiThemeGenre
+  isTop: boolean
+  iconColor: JeneseiThemeVariablesKeys
+} & Required<Pick<SonnerContentDefaultProps, 'genre'>>
 
-export type SonnerContextProps = {
-  toast: (content: Omit<SonnerContentProps, 'index'>) => void
-  contentHistory: SonnerContentProps[]
-  removeToast: (id: SonnerContentProps['id']) => void
-}
+export type SonnerContentProps = SonnerContentContentProps | SonnerContentStandardProps
 
-export type SonnerContentProps = {
-  title: ProviderSonnerProps['defaultTitle']
-  description?: ProviderSonnerProps['defaultDescription']
-  hidingMode?: ProviderSonnerProps['defaultHidingMode']
-  hidingTime?: ProviderSonnerProps['defaultHidingTime']
-  button?: ProviderSonnerProps['defaultButton']
-  index: number
+type SonnerContentDefaultProps = {
+  hidingMode?: 'clickOnSonner' | 'clickOnButton'
+  hidingTime?: number
+  icon?: TLibraryIconCurvedNameString
   id?: string
+  genre?: keyof IJeneseiTheme['colors']['sonner']
+  isLoading?: boolean
+  button?:
+    | {
+        content?: string | ReactNode
+        onClick?: () => void
+      }
+    | false
+  index: number
+}
+
+type SonnerContentContentProps = SonnerContentDefaultProps & {
+  content: ReactNode | false
+}
+
+export type SonnerContentStandardProps = SonnerContentDefaultProps & {
+  description?: string | ReactNode
+  title?: string | ReactNode
 }

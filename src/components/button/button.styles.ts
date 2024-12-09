@@ -1,7 +1,8 @@
-import { FlexContainerAndItem } from '@styles/base'
 import styled, { css } from 'styled-components'
 
 import { getFontSizeStyles } from '@components/typography'
+
+import { FlexContainerAndItem } from '@styles/base'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
 

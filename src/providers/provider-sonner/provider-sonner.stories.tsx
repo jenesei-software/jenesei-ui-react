@@ -9,8 +9,7 @@ import { ProviderSonner, ProviderSonnerProps, useSonnerContext } from '.'
 
 const meta: Meta<typeof ProviderSonner> = {
   component: ProviderSonner,
-  title: 'Provider/Sonner',
-  tags: ['autodocs']
+  title: 'Provider/Sonner'
 }
 
 export default meta
@@ -24,21 +23,93 @@ const ProviderSonnerWrapper: FC<ProviderSonnerProps> = props => {
     </ProviderSonner>
   )
 }
-
 const ProviderSonnerWrapperDouble: FC = () => {
-  const { toast } = useSonnerContext()
+  const { toast, promise } = useSonnerContext()
 
-  const handleToast = () => {
+  const handlePromise = () => {
+    promise(
+      new Promise<string>((resolve, reject) => setTimeout(() => resolve('Data loaded successfully!'), 3000)),
+      {
+        title: 'ЗАГРУЗКА',
+        description: 'Подождите, данные загружаются...',
+        genre: 'black',
+        button: false
+      },
+      (success, error) => ({
+        title: 'Офигенчик!',
+        description: 'Данные загрузились!',
+        genre: 'greenTransparent',
+        icon: 'Heart'
+      })
+    )
+  }
+  const handleToastBlack = () => {
     toast({
-      title: 'Чебурашка',
-      description:
-        'огрооооооооомный пэнисяра огрооооооооомный пэнисяра огрооооооооомный пэнисяра огрооооооооомный пэнисяра огрооооооооомный пэнисяра огрооооооооомный пэнисяра'
+      title: 'Обычный тост',
+      description: 'Или чебурашка?',
+      genre: 'black'
+    })
+  }
+  const handleToastWithoutButton = () => {
+    toast({
+      title: 'Не обычный тост',
+      description: 'Да оно же без кнопки!',
+      genre: 'black',
+      button: false,
+      hidingMode: 'clickOnSonner'
+    })
+  }
+  const handleToastWarning = () => {
+    toast({
+      title: 'Предупреждение!',
+      description: 'Или чебурашка?',
+      genre: 'yellowTransparent'
+    })
+  }
+  const handleToastError = () => {
+    toast({
+      title: 'Ошибка!',
+      description: 'Или чебурашка?',
+      genre: 'redTransparent'
+    })
+  }
+  const handleToastSuccess = () => {
+    toast({
+      title: 'Успех!',
+      description: 'Или чебурашка?',
+      genre: 'greenTransparent'
+    })
+  }
+  const handleToastWithHidingTime = () => {
+    toast({
+      title: 'Обычный тост?',
+      description: 'Да оно ж само исчезнет!',
+      genre: 'black',
+      hidingTime: 3000
     })
   }
   return (
     <Stack p="12px" gap="8px">
-      <Button onClick={handleToast} genre="product" size="medium">
-        Toast!
+      <Button onClick={handlePromise} genre="black" size="medium">
+        Promise Toast!
+      </Button>
+      <Button onClick={handleToastBlack} genre="black" size="medium">
+        Black Toast!
+      </Button>
+      <Button onClick={handleToastWithoutButton} genre="black" size="medium">
+        Without Button Toast!
+      </Button>
+      <Button onClick={handleToastWithHidingTime} genre="black" size="medium">
+        With Hiding Time Toast!
+      </Button>
+      <Button onClick={handleToastError} genre="redTransparent" size="medium">
+        Error Toast!
+      </Button>
+      <Button onClick={handleToastWarning} genre="yellowTransparent" size="medium">
+        Warning Toast!
+      </Button>
+      <Button onClick={handleToastSuccess} genre="greenTransparent" size="medium">
+        Success Toast!
       </Button>
     </Stack>
   )
@@ -47,6 +118,8 @@ const ProviderSonnerWrapperDouble: FC = () => {
 export const Default: Story = {
   render: args => <ProviderSonnerWrapper {...args} />,
   args: {
-    maxViewIndex: 3
+    visibleToasts: 3,
+    position: 'bottom-left',
+    gap: 12
   }
 }
