@@ -1,10 +1,11 @@
 import gsap from 'gsap'
 import moment from 'moment'
 import { FocusEventHandler, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Ripple } from 'react-ripple-click'
+import { useTheme } from 'styled-components'
 
 import { Button } from '@components/button'
 import { InputErrorMessage } from '@components/input'
+import { Ripple } from '@components/ripple'
 import { SelectMonth, SelectYear } from '@components/select'
 import { Stack } from '@components/stack'
 
@@ -31,6 +32,8 @@ function countSevens(number: number) {
 }
 
 export const DatePicker = (props: DateProps) => {
+  const theme = useTheme()
+
   const [unixValue, setUnixValue] = useState(props.value ? moment(props.value).utc() : moment.utc())
   const [currentMonth, setCurrentMonth] = useState(unixValue.clone().month())
   const [currentYear, setCurrentYear] = useState(unixValue.clone().year())
@@ -474,7 +477,7 @@ export const DatePicker = (props: DateProps) => {
                     $isChoice={day.value === unixValue.valueOf()}
                     $isCurrentMonth={day.isCurrentMonth}
                   >
-                    <Ripple />
+                    <Ripple color={theme.colors.date[props.genre].color.rest} />
                     {day.labelNumber}
                   </DateDropdownDay>
                 ) : null

@@ -20,6 +20,7 @@ export * from './components/toggle'
 export * from './components/tooltip'
 export * from './components/typography'
 export * from './components/separator'
+export * from './components/ripple'
 
 export * from './layouts/auth'
 

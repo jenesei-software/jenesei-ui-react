@@ -1,149 +1,49 @@
-import ReactToggle from 'react-toggle'
+import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
 import { IJeneseiThemeSizeToggle, KEY_SIZE_DATA_TOGGLE } from '@theme/index'
 
 import { StyledToggleProps } from '.'
 
-import 'react-toggle/style.css'
-
 /****************************************** Size *************************************************/
-export const StyledReactToggleSize = css<StyledToggleProps>`
-  ${props => ToggleSizeConstructor(KEY_SIZE_DATA_TOGGLE[props.$size])};
+const ToggleWrapperSize = css<StyledToggleProps>`
+  ${props => ToggleWrapperSizeConstructor(KEY_SIZE_DATA_TOGGLE[props.$size])};
 `
-export const ToggleSizeConstructor = (props: IJeneseiThemeSizeToggle) => css`
-  & .react-toggle-track {
-    height: ${props.height}px;
-    width: ${props.width}px;
-  }
-  & .react-toggle-thumb {
-    top: ${props.padding}px;
-    left: ${props.padding}px;
-    height: ${props.thumb}px;
-    width: ${props.thumb}px;
-  }
-
-  &.react-toggle--checked .react-toggle-thumb {
-    left: calc(100% - ${props.thumb + props.padding}px);
-  }
+const ToggleWrapperSizeConstructor = (props: IJeneseiThemeSizeToggle) => css`
+  height: ${props.height}px;
+  width: ${props.width}px;
+  padding: ${props.padding}px;
+  border-radius: 100px;
 `
 
-/****************************************** Error *************************************************/
-export const ToggleIsErrorBorder = css<StyledToggleProps>`
-  ${props =>
-    props.$isError &&
-    css`
-      border-color: ${props => props.theme.colors.danger} !important;
-      &:focus,
-      &:active,
-      &:focus-visible {
-        border-color: ${props => props.theme.colors.danger} !important;
-      }
-    `}
+const ToggleCenterSize = css<StyledToggleProps>`
+  ${props => ToggleCenterSizeConstructor(KEY_SIZE_DATA_TOGGLE[props.$size])};
+`
+const ToggleCenterSizeConstructor = (props: IJeneseiThemeSizeToggle) => css`
+  height: ${props.thumb}px;
+  width: ${props.thumb}px;
+  border-radius: 100px;
 `
 
-/****************************************** Genre *************************************************/
-const StyledReactToggleGenre = css<StyledToggleProps>`
-  & div {
-    transition:
-      all ${props => props.theme.transition},
-      outline 0s;
-  }
-  &.react-toggle {
-    outline: 0;
-  }
-  &.react-toggle--focus {
-    & .react-toggle-track {
-    }
-    & .react-toggle-thumb {
-      box-shadow: none !important;
-    }
-  }
-  & .react-toggle-track-check {
-    display: none;
-  }
-  & .react-toggle-track-x {
-    display: none;
-  }
+/****************************************** Standard *************************************************/
+export const ToggleWrapper = styled(motion.div)<StyledToggleProps>`
+  ${ToggleWrapperSize};
+
+  cursor: pointer;
+  border: 1px solid transparent;
+
+  display: flex;
+  align-items: center;
+
+  transition:
+    border-color ${props => props.theme.transition},
+    background-color ${props => props.theme.transition},
+    opacity ${props => props.theme.transition},
+    outline 0s;
 
   &:focus-visible {
-    ${props => css`
-      & .react-toggle-track {
-        outline: 1px solid ${props.theme.colors.focus};
-      }
-    `};
+    outline: 1px solid ${props => props.theme.colors.focus};
   }
-
-  &.react-toggle--checked {
-    & .react-toggle-track {
-      background: ${props => props.theme.colors.toggle[props.$genre].track.rest.active};
-      border-color: ${props => props.theme.colors.toggle[props.$genre].border.rest.active};
-    }
-    & .react-toggle-thumb {
-      background: ${props => props.theme.colors.toggle[props.$genre].thumb.rest.active};
-      border-color: transparent;
-    }
-  }
-
-  &.react-toggle:focus-visible {
-    & .react-toggle-track {
-    }
-    & .react-toggle-thumb {
-    }
-  }
-
-  & .react-toggle-thumb {
-    ${props => css`
-      background: ${props.theme.colors.toggle[props.$genre].thumb.rest.unActive};
-      border-color: transparent;
-      box-shadow: ${props => props.theme.effects.toggle.rest} !important;
-    `};
-  }
-  & .react-toggle-track {
-    border: 1px solid transparent;
-    border-color: ${props => props.theme.colors.toggle[props.$genre].border.rest.unActive};
-    background: ${props => props.theme.colors.toggle[props.$genre].track.rest.unActive};
-    ${ToggleIsErrorBorder}
-  }
-
-  &.react-toggle:hover:not(.react-toggle--disabled) {
-    & .react-toggle-thumb {
-      ${props => css`
-        background: ${props.theme.colors.toggle[props.$genre].thumb.hover.unActive};
-        border-color: transparent;
-        box-shadow: ${props => props.theme.effects.toggle.hover} !important;
-      `};
-    }
-    & .react-toggle-track {
-      border-color: ${props => props.theme.colors.toggle[props.$genre].border.hover.unActive};
-      background: ${props => props.theme.colors.toggle[props.$genre].track.hover.unActive};
-      ${ToggleIsErrorBorder}
-    }
-    &.react-toggle--checked {
-      & .react-toggle-track {
-        background: ${props => props.theme.colors.toggle[props.$genre].track.hover.active};
-        border-color: ${props => props.theme.colors.toggle[props.$genre].border.hover.active};
-        ${ToggleIsErrorBorder}
-      }
-      & .react-toggle-thumb {
-        background: ${props => props.theme.colors.toggle[props.$genre].thumb.hover.active};
-        border-color: transparent;
-      }
-    }
-  }
-  &.react-toggle:active:not(.react-toggle--disabled) {
-    & .react-toggle-track {
-      border-color: ${props => props.theme.colors.toggle[props.$genre].border.hover.active};
-      ${ToggleIsErrorBorder}
-    }
-    & .react-toggle-thumb {
-      box-shadow: ${props => props.theme.effects.toggle.active} !important;
-    }
-  }
-`
-
-/****************************************** Disabled *************************************************/
-const StyledReactToggleDisabled = css<StyledToggleProps>`
   ${props =>
     props.$isDisabled
       ? css`
@@ -151,12 +51,62 @@ const StyledReactToggleDisabled = css<StyledToggleProps>`
         `
       : css`
           opacity: 1;
-        `}
+        `};
+
+  ${props =>
+    props.$value
+      ? css`
+          background: ${props.theme.colors.toggle[props.$genre].active.rest.track};
+          border-color: ${props.theme.colors.toggle[props.$genre].active.rest.border};
+          justify-content: flex-end;
+          &:hover {
+            background: ${props.theme.colors.toggle[props.$genre].active.hover.track};
+            border-color: ${props.theme.colors.toggle[props.$genre].active.hover.border};
+          }
+        `
+      : css`
+          background: ${props.theme.colors.toggle[props.$genre].unActive.rest.track};
+          border-color: ${props.theme.colors.toggle[props.$genre].unActive.rest.border};
+          justify-content: flex-start;
+          &:hover {
+            background: ${props.theme.colors.toggle[props.$genre].unActive.hover.track};
+            border-color: ${props.theme.colors.toggle[props.$genre].unActive.hover.border};
+          }
+        `};
+
+  ${props =>
+    props.$isError &&
+    css`
+      border-color: ${props.theme.colors.danger};
+      &:focus,
+      &:active,
+      &:focus-visible {
+        border-color: ${props.theme.colors.danger};
+      }
+    `};
 `
-export const StyledReactToggle = styled(ReactToggle)<StyledToggleProps>`
-  position: relative;
-  width: fit-content;
-  ${StyledReactToggleGenre};
-  ${StyledReactToggleDisabled};
-  ${StyledReactToggleSize};
+
+export const ToggleCenter = styled(motion.div)<StyledToggleProps>`
+  ${ToggleCenterSize};
+
+  transition: box-shadow ${props => props.theme.transition};
+
+  ${props =>
+    props.$value
+      ? css`
+          background: ${props.theme.colors.toggle[props.$genre].active.rest.thumb};
+          box-shadow: ${props.theme.colors.toggle[props.$genre].active.rest.thumbBoxShadow};
+          &:hover {
+            background: ${props.theme.colors.toggle[props.$genre].active.hover.thumb};
+            box-shadow: ${props.theme.colors.toggle[props.$genre].active.hover.thumbBoxShadow};
+          }
+        `
+      : css`
+          background: ${props.theme.colors.toggle[props.$genre].unActive.rest.thumb};
+          box-shadow: ${props.theme.colors.toggle[props.$genre].unActive.rest.thumbBoxShadow};
+          &:hover {
+            background: ${props.theme.colors.toggle[props.$genre].unActive.hover.thumb};
+            box-shadow: ${props.theme.colors.toggle[props.$genre].unActive.hover.thumbBoxShadow};
+          }
+        `}
 `

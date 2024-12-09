@@ -15,34 +15,32 @@ export interface TJeneseiThemeGenreType {
 }
 
 export interface TJeneseiThemeGenreTypeToggle {
-  track: {
+  active: {
     rest: {
-      active: string
-      unActive: string
+      track: string
+      thumb: string
+      border: string
+      thumbBoxShadow: string
     }
     hover: {
-      active: string
-      unActive: string
+      track: string
+      thumb: string
+      border: string
+      thumbBoxShadow: string
     }
   }
-  thumb: {
+  unActive: {
     rest: {
-      active: string
-      unActive: string
+      track: string
+      thumb: string
+      border: string
+      thumbBoxShadow: string
     }
     hover: {
-      active: string
-      unActive: string
-    }
-  }
-  border: {
-    rest: {
-      active: string
-      unActive: string
-    }
-    hover: {
-      active: string
-      unActive: string
+      track: string
+      thumb: string
+      border: string
+      thumbBoxShadow: string
     }
   }
 }
@@ -173,6 +171,7 @@ export interface IJeneseiTheme {
   screens: IJeneseiThemeScreens
   fontFamily: TJeneseiFontFamily
   defaultLineHeight: number
+  defaultLineHeightInput: number
   defaultFontSize: {
     desktop: number
     mobile: number
@@ -184,11 +183,6 @@ export interface IJeneseiTheme {
     }
     button: {
       playstation: string
-    }
-    toggle: {
-      rest: string
-      hover: string
-      active: string
     }
   }
   palette: Record<JeneseiThemeVariablesKeys, string>

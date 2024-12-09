@@ -1,0 +1,1 @@
+export const DEFAULT_RIPPLE_DURATION = 600

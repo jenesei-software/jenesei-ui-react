@@ -20,8 +20,6 @@ import '@fontsource/roboto/900.css'
 import { ProviderPermission } from '../src/providers/provider-permission'
 import { JeneseiGlobalStyles, JeneseiTheme } from '../src/theme/index'
 
-import 'react-ripple-click/dist/index.css'
-
 gsap.registerPlugin(useGSAP)
 
 const preview: Preview = {

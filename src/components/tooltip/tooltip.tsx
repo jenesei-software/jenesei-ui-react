@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler, memo, useCallback, useMemo, useRef, useState } from 'react'
+import { CSSProperties, FC, MouseEventHandler, memo, useCallback, useMemo, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useTheme } from 'styled-components'
 
@@ -129,7 +129,7 @@ export const TooltipContent: FC<TooltipProps> = props => {
 
     const containerRect = container.children[0].getBoundingClientRect()
 
-    const style: React.CSSProperties = {}
+    const style: CSSProperties = {}
 
     switch (props.placement) {
       case 'right':
