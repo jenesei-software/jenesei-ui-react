@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion'
 import ReactToggle from 'react-toggle'
 import styled, { css } from 'styled-components'
 
@@ -160,3 +161,7 @@ export const StyledReactToggle = styled(ReactToggle)<StyledToggleProps>`
   ${StyledReactToggleDisabled};
   ${StyledReactToggleSize};
 `
+
+export const ToggleWrapper = styled(motion.div)``
+
+export const ToggleCenter = styled(motion.div)``
