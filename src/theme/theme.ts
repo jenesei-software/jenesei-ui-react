@@ -3,6 +3,7 @@ import {
   IJeneseiThemeSize,
   IJeneseiThemeSizeToggle,
   JeneseiThemeVariablesKeys,
+  TJeneseiThemeGenreSonner,
   TJeneseiThemeSize
 } from '.'
 
@@ -26,12 +27,21 @@ export const JeneseiThemeVariables: Record<JeneseiThemeVariablesKeys, string> = 
   greenGoogle: '#34a853',
   green100: '#34a853',
   green25: 'rgba(52 168 83 / 0.25)',
+  green50: 'rgba(52 168 83 / 0.50)',
   green10: 'rgba(52 168 83 / 0.1)',
+  green10Background: '#EFFFF3',
   yellowGoogle: '#fbbc04',
+  yellow100: '#e4bc1b',
+  yellow50: 'rgba(228, 188, 27, 0.50)',
+  yellow25: 'rgba(228, 188, 27, 0.25)',
+  yellow10: 'rgba(228, 188, 27, 0.1)',
+  yellow10Background: '#FFFBEA',
   redGoogle: '#ea4335',
   red100: '#ff4141',
+  red50: 'rgba(255 65 65 / 0.50)',
   red25: 'rgba(255 65 65 / 0.25)',
   red10: 'rgba(255 65 65 / 0.1)',
+  red10Background: '#FFEDED',
   blueGoogle: '#4285f4',
   blueRest: '#4195d2',
   blueActive: 'rgba(65 149 210 / 0.1)',
@@ -156,6 +166,21 @@ const DefaultJeneseiThemeGenre = {
       rest: JeneseiThemeVariables.green100,
       hover: JeneseiThemeVariables.green100,
       placeholder: JeneseiThemeVariables.green100
+    },
+    border: {
+      rest: JeneseiThemeVariables.transparent,
+      hover: JeneseiThemeVariables.transparent
+    }
+  },
+  yellowTransparent: {
+    background: {
+      rest: JeneseiThemeVariables.yellow10,
+      hover: JeneseiThemeVariables.yellow25
+    },
+    color: {
+      rest: JeneseiThemeVariables.yellow100,
+      hover: JeneseiThemeVariables.yellow100,
+      placeholder: JeneseiThemeVariables.yellow100
     },
     border: {
       rest: JeneseiThemeVariables.transparent,
@@ -355,6 +380,88 @@ const DefaultJeneseiThemeGenreToggle = {
     }
   }
 }
+const DefaultJeneseiThemeGenreSonner: TJeneseiThemeGenreSonner = {
+  black: {
+    button: {
+      genre: 'black'
+    },
+    wrapper: {
+      background: JeneseiThemeVariables.whiteStandard,
+      borderColor: JeneseiThemeVariables.grayKaren,
+      boxShadow: '0px 10px 30px 0px rgba(0, 0, 0, 0.2)',
+      boxShadowHover: '0px 10px 30px 0px rgba(0, 0, 0, 0.5)'
+    },
+    icon: {
+      color: 'black100'
+    },
+    title: {
+      color: JeneseiThemeVariables.black100
+    },
+    description: {
+      color: JeneseiThemeVariables.grayPatricia
+    }
+  },
+  greenTransparent: {
+    button: {
+      genre: 'greenTransparent'
+    },
+    wrapper: {
+      background: JeneseiThemeVariables.green10Background,
+      borderColor: JeneseiThemeVariables.green25,
+      boxShadow: `0px 10px 30px 0px ${JeneseiThemeVariables.green25}`,
+      boxShadowHover: `0px 10px 30px 0px  ${JeneseiThemeVariables.green50}`
+    },
+    icon: {
+      color: 'green100'
+    },
+    title: {
+      color: JeneseiThemeVariables.green100
+    },
+    description: {
+      color: JeneseiThemeVariables.greenGoogle
+    }
+  },
+  redTransparent: {
+    button: {
+      genre: 'redTransparent'
+    },
+    wrapper: {
+      background: JeneseiThemeVariables.red10Background,
+      borderColor: JeneseiThemeVariables.red25,
+      boxShadow: `0px 10px 30px 0px ${JeneseiThemeVariables.red25}`,
+      boxShadowHover: `0px 10px 30px 0px  ${JeneseiThemeVariables.red50}`
+    },
+    icon: {
+      color: 'red100'
+    },
+    title: {
+      color: JeneseiThemeVariables.red100
+    },
+    description: {
+      color: JeneseiThemeVariables.redGoogle
+    }
+  },
+  yellowTransparent: {
+    button: {
+      genre: 'yellowTransparent'
+    },
+    wrapper: {
+      background: JeneseiThemeVariables.yellow10Background,
+      borderColor: JeneseiThemeVariables.yellow25,
+      boxShadow: `0px 10px 30px 0px ${JeneseiThemeVariables.yellow25}`,
+      boxShadowHover: `0px 10px 30px 0px  ${JeneseiThemeVariables.yellow50}`
+    },
+    icon: {
+      color: 'yellow100'
+    },
+    title: {
+      color: JeneseiThemeVariables.yellow100
+    },
+    description: {
+      color: JeneseiThemeVariables.yellowGoogle
+    }
+  }
+}
 export const JeneseiTheme: IJeneseiTheme = {
   transition: '0.3s ease',
   transitionDuration: '0.3s',
@@ -371,10 +478,6 @@ export const JeneseiTheme: IJeneseiTheme = {
   },
   fontFamily: 'Inter',
   effects: {
-    sonner: {
-      background: '0px 10px 30px 0px rgba(0, 0, 0, 0.2)',
-      backgroundHover: '0px 10px 30px 0px rgba(0, 0, 0, 0.4)'
-    },
     input: {
       default: 'inset 0px 0px 4px rgba(0, 0, 0, 0.20)'
     },
@@ -389,6 +492,7 @@ export const JeneseiTheme: IJeneseiTheme = {
   },
   palette: JeneseiThemeVariables,
   colors: {
+    sonner: DefaultJeneseiThemeGenreSonner,
     form: DefaultJeneseiThemeGenreForm,
     white: JeneseiThemeVariables.whiteStandard,
     focus: JeneseiThemeVariables.black60,
