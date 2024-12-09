@@ -162,6 +162,8 @@ export const StyledReactToggle = styled(ReactToggle)<StyledToggleProps>`
   ${StyledReactToggleSize};
 `
 
-export const ToggleWrapper = styled(motion.div)``
+export const ToggleWrapper = styled(motion.div)<StyledToggleProps>`
+  background: ${props => props.theme.colors.toggle[props.$genre].thumb.rest.active};
+`
 
-export const ToggleCenter = styled(motion.div)``
+export const ToggleCenter = styled(motion.div)<StyledToggleProps>``
