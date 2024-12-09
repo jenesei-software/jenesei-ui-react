@@ -1,5 +1,6 @@
-import { FlexContainerAndItemAndBasic } from '@styles/base'
 import styled, { css } from 'styled-components'
+
+import { FlexContainerAndItemAndBasic } from '@styles/base'
 
 import { KEY_SIZE_DATA } from '@theme/index'
 

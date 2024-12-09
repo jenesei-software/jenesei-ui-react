@@ -1,4 +1,4 @@
-import { FocusEventHandler, KeyboardEventHandler, PropsWithChildren } from 'react'
+import { FocusEventHandler, KeyboardEventHandler } from 'react'
 import { AddDollarSign } from 'src/types'
 
 import { TJeneseiThemeGenreTextArea, TJeneseiThemeSize } from '@theme/index'

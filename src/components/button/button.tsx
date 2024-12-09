@@ -1,9 +1,9 @@
 import { FC } from 'react'
-import { Ripple } from 'react-ripple-click'
 import { useTheme } from 'styled-components'
 
 import { Icon } from '@components/icon'
 import { Loading } from '@components/loading'
+import { Ripple } from '@components/ripple'
 
 import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.'
 
@@ -54,7 +54,7 @@ export const Button: FC<ButtonProps> = props => {
       $alignSelf={props.customStyles?.alignSelf}
       $gap={props.customStyles?.gap}
     >
-      {!props.isHidden && <Ripple />}
+      {!props.isHidden && <Ripple color={theme.colors.button[props.genre].color.rest} />}
       {props.isOnlyLoading ? (
         props.isLoading ? (
           LoadingComponent

@@ -213,3 +213,12 @@ export const FlexContainerAndItemAndBasic = css<DollarFlexContainerAndItemAndBas
   ${FlexContainerAndItem}
   ${FlexBasic}
 `
+
+export const removeScrollbar = css`
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`

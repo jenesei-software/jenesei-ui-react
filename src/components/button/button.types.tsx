@@ -1,9 +1,10 @@
-import { DollarFlexContainerAndItemProps, FlexContainerAndItemProps } from '@styles/base'
 import React, { PropsWithChildren } from 'react'
 import { AddDollarSign } from 'src/types'
 
 import { LibraryIconItemProps, TLibraryIconCurvedNameString } from '@components/icon'
 import { LoadingProps } from '@components/loading'
+
+import { DollarFlexContainerAndItemProps, FlexContainerAndItemProps } from '@styles/base'
 
 import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@theme/index'
 

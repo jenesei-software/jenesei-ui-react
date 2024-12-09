@@ -1,30 +1,79 @@
 import { PropsWithChildren, ReactNode } from 'react'
+import { AddDollarSign } from 'src/types'
+
+import { TLibraryIconCurvedNameString } from '@components/icon'
+
+import { IJeneseiTheme, JeneseiThemeVariablesKeys, TJeneseiThemeGenre } from '@theme/theme.interface'
 
 export type ProviderSonnerProps = PropsWithChildren & {
-  defaultHidingMode?: 'clickOnSonner' | 'clickOnButton'
-  defaultHidingTime?: number
-  defaultDescription?: string | ReactNode | false
-  defaultTitle?: string | ReactNode | false
-  defaultButton?:
+  gap: number
+  position: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'bottom-center' | 'top-center'
+  visibleToasts?: number
+  default: Omit<SonnerContentStandardProps, 'index'>
+}
+
+export type SonnerLayoutProps = Required<AddDollarSign<Pick<ProviderSonnerProps, 'position' | 'gap'>>>
+export type SonnerElementWrapperProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre'>>>
+export type SonnerContentTitleProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre'>>>
+export type SonnerContentDescriptionProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre'>>>
+
+export type SonnerContextProps = {
+  toast: (content: Omit<SonnerContentStandardProps, 'index'>) => void
+  promise: <T>(
+    promise: Promise<T>,
+    expectation: Omit<SonnerContentStandardProps, 'index'>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    toast: (success: T | undefined, error: any | undefined) => Omit<SonnerContentProps, 'index'>
+  ) => void
+  remove: (id: SonnerContentDefaultProps['id']) => void
+  contentHistory: SonnerContentProps[]
+}
+
+export type SonnerElementProps = SonnerElementDefaultProps
+
+type SonnerElementDefaultProps = {
+  id: SonnerContentDefaultProps['id']
+  title: SonnerContentStandardProps['title']
+  description: SonnerContentStandardProps['description']
+  content: SonnerContentContentProps['content']
+  icon?: SonnerContentDefaultProps['icon']
+  isLoading: SonnerContentDefaultProps['isLoading']
+  hidingMode: SonnerContentDefaultProps['hidingMode']
+  button: SonnerContentDefaultProps['button']
+  index: number
+  handleOnClick: (id: SonnerContentDefaultProps['id'], hidingMode?: SonnerContentDefaultProps['hidingMode']) => void
+  isMoreThanLastViewIndexPlusOne: boolean
+  isMoreThanLastViewIndex: boolean
+  isHovered: boolean
+  isLastViewIndex: boolean
+  buttonGenre: keyof TJeneseiThemeGenre
+  isTop: boolean
+  iconColor: JeneseiThemeVariablesKeys
+} & Required<Pick<SonnerContentDefaultProps, 'genre'>>
+
+export type SonnerContentProps = SonnerContentContentProps | SonnerContentStandardProps
+
+type SonnerContentDefaultProps = {
+  hidingMode?: 'clickOnSonner' | 'clickOnButton'
+  hidingTime?: number
+  icon?: TLibraryIconCurvedNameString
+  id?: string
+  genre?: keyof IJeneseiTheme['colors']['sonner']
+  isLoading?: boolean
+  button?:
     | {
-        text?: string | ReactNode
+        content?: string | ReactNode
         onClick?: () => void
       }
     | false
+  index: number
 }
 
-export type SonnerContextProps = {
-  toast: (content: SonnerContentProps) => void
-  contentHistory: SonnerContentProps[]
-  removeToast: (id: SonnerContentProps['id']) => void
+type SonnerContentContentProps = SonnerContentDefaultProps & {
+  content: ReactNode | false
 }
 
-export type SonnerContentProps = {
-  title: ProviderSonnerProps['defaultTitle']
-  description?: ProviderSonnerProps['defaultDescription']
-  hidingMode?: ProviderSonnerProps['defaultHidingMode']
-  hidingTime?: ProviderSonnerProps['defaultHidingTime']
-  button?: ProviderSonnerProps['defaultButton']
-  index?: number
-  id?: string
+export type SonnerContentStandardProps = SonnerContentDefaultProps & {
+  description?: string | ReactNode
+  title?: string | ReactNode
 }
