@@ -28,14 +28,14 @@ const ProviderSonnerWrapperDouble: FC = () => {
 
   const handlePromise = () => {
     promise(
-      new Promise<string>((resolve, reject) => setTimeout(() => resolve('Data loaded successfully!'), 3000)),
+      new Promise<string>(resolve => setTimeout(() => resolve('Data loaded successfully!'), 3000)),
       {
         title: 'ЗАГРУЗКА',
         description: 'Подождите, данные загружаются...',
         genre: 'black',
         button: false
       },
-      (success, error) => ({
+      () => ({
         title: 'Офигенчик!',
         description: 'Данные загрузились!',
         genre: 'greenTransparent',
