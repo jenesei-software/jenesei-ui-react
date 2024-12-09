@@ -74,6 +74,26 @@ export interface TJeneseiThemeGenreTypeDate {
     line: string
   }
 }
+export interface TJeneseiThemeGenreTypeSonner {
+  button: {
+    genre: keyof TJeneseiThemeGenre
+  }
+  wrapper: {
+    background: string
+    borderColor: string
+    boxShadow: string
+    boxShadowHover: string
+  }
+  icon: {
+    color: JeneseiThemeVariablesKeys
+  }
+  title: {
+    color: string
+  }
+  description: {
+    color: string
+  }
+}
 
 export interface TJeneseiThemeGenreTypeForm {
   background: string
@@ -91,10 +111,17 @@ export interface TJeneseiThemeGenre {
   white: TJeneseiThemeGenreType
   greenTransparent: TJeneseiThemeGenreType
   redTransparent: TJeneseiThemeGenreType
+  yellowTransparent: TJeneseiThemeGenreType
 }
 
 export interface TJeneseiThemeGenreToggle {
   product: TJeneseiThemeGenreTypeToggle
+}
+export interface TJeneseiThemeGenreSonner {
+  black: TJeneseiThemeGenreTypeSonner
+  greenTransparent: TJeneseiThemeGenreTypeSonner
+  redTransparent: TJeneseiThemeGenreTypeSonner
+  yellowTransparent: TJeneseiThemeGenreTypeSonner
 }
 export interface TJeneseiThemeGenreInput {
   gray: TJeneseiThemeGenreType
@@ -163,10 +190,6 @@ export interface IJeneseiTheme {
       hover: string
       active: string
     }
-    sonner: {
-      background: string
-      backgroundHover: string
-    }
   }
   palette: Record<JeneseiThemeVariablesKeys, string>
   colors: {
@@ -179,6 +202,7 @@ export interface IJeneseiTheme {
     checkbox: TJeneseiThemeGenre
     form: TJeneseiThemeGenreForm
     input: TJeneseiThemeGenreInput
+    sonner: TJeneseiThemeGenreSonner
   }
 }
 
@@ -200,14 +224,23 @@ export type JeneseiThemeVariablesKeys =
   | 'grayStassie'
   | 'greenGoogle'
   | 'green100'
+  | 'green50'
   | 'green25'
   | 'green10'
+  | 'green10Background'
   | 'whiteStandard'
   | 'yellowGoogle'
+  | 'yellow100'
+  | 'yellow50'
+  | 'yellow25'
+  | 'yellow10'
+  | 'yellow10Background'
   | 'redGoogle'
   | 'red100'
+  | 'red50'
   | 'red25'
   | 'red10'
+  | 'red10Background'
   | 'blueGoogle'
   | 'blueRest'
   | 'blueActive'
