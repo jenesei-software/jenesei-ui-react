@@ -1,0 +1,6 @@
+import{j as p}from"./jsx-runtime-CkxqCPlQ.js";import{B as e}from"./button-DxJKBbe2.js";import{a as T}from"./typography-3k44A8Yn.js";import"./index-DJO9vBfz.js";import"./styled-components.browser.esm-CCP31c1y.js";import"./icon.styles-ig3CQChh.js";import"./theme-6wvtFABo.js";import"./base.styles-BarGonPG.js";import"./theme.global-j_wjL8sr.js";import"./loading.styles-92ldLbyd.js";import"./typography.functions-_Xr-RK7k.js";import"./index-rCr475hU.js";const B={component:T,title:"Component/Tooltip",tags:["autodocs"]},a=t=>p.jsx(T,{...t,content:"Tootlip Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip? Tootlip? Tootlip? Tootlip? Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?",children:p.jsx(e,{genre:"black",size:"medium",children:"Tootlip?"})}),o={render:t=>p.jsx(a,{...t}),args:{placement:"bottom-start"}};var i,l,r;o.parameters={...o.parameters,docs:{...(i=o.parameters)==null?void 0:i.docs,source:{originalSource:`{
+  render: args => <TooltipWrapper {...args} />,
+  args: {
+    placement: 'bottom-start'
+  }
+}`,...(r=(l=o.parameters)==null?void 0:l.docs)==null?void 0:r.source}}};const D=["Default"];export{o as Default,D as __namedExportsOrder,B as default};
