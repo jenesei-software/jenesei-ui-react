@@ -346,36 +346,35 @@ const DefaultJeneseiThemeGenreForm = {
     border: JeneseiThemeVariables.black10
   }
 }
+
 const DefaultJeneseiThemeGenreToggle = {
   product: {
-    track: {
+    active: {
       rest: {
-        active: JeneseiThemeVariables.blueRest,
-        unActive: JeneseiThemeVariables.black10
+        border: JeneseiThemeVariables.transparent,
+        track: JeneseiThemeVariables.blueRest,
+        thumb: JeneseiThemeVariables.whiteStandard,
+        thumbBoxShadow: '0px 0px 10px 1px rgba(0, 0, 0, 0.1)'
       },
       hover: {
-        active: JeneseiThemeVariables.blueHover,
-        unActive: JeneseiThemeVariables.graySandra
+        border: JeneseiThemeVariables.transparent,
+        track: JeneseiThemeVariables.blueHover,
+        thumb: JeneseiThemeVariables.whiteStandard,
+        thumbBoxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.6)'
       }
     },
-    thumb: {
+    unActive: {
       rest: {
-        active: JeneseiThemeVariables.whiteStandard,
-        unActive: JeneseiThemeVariables.whiteStandard
+        border: JeneseiThemeVariables.transparent,
+        track: JeneseiThemeVariables.black10,
+        thumb: JeneseiThemeVariables.whiteStandard,
+        thumbBoxShadow: '0px 0px 10px 1px rgba(0, 0, 0, 0.1)'
       },
       hover: {
-        active: JeneseiThemeVariables.whiteStandard,
-        unActive: JeneseiThemeVariables.whiteStandard
-      }
-    },
-    border: {
-      rest: {
-        active: JeneseiThemeVariables.transparent,
-        unActive: JeneseiThemeVariables.transparent
-      },
-      hover: {
-        active: JeneseiThemeVariables.transparent,
-        unActive: JeneseiThemeVariables.transparent
+        border: JeneseiThemeVariables.transparent,
+        track: JeneseiThemeVariables.graySandra,
+        thumb: JeneseiThemeVariables.whiteStandard,
+        thumbBoxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.6)'
       }
     }
   }
@@ -465,7 +464,8 @@ const DefaultJeneseiThemeGenreSonner: TJeneseiThemeGenreSonner = {
 export const JeneseiTheme: IJeneseiTheme = {
   transition: '0.3s ease',
   transitionDuration: '0.3s',
-  defaultLineHeight: 1.2,
+  defaultLineHeight: 1,
+  defaultLineHeightInput: 1.2,
   defaultFontSize: {
     desktop: 16,
     mobile: 12,
@@ -480,11 +480,6 @@ export const JeneseiTheme: IJeneseiTheme = {
   effects: {
     input: {
       default: 'inset 0px 0px 4px rgba(0, 0, 0, 0.20)'
-    },
-    toggle: {
-      active: '0 0 10px 0 rgba(0 0 0 / 0.4)',
-      hover: '0 0 2px 0 rgba(0 0 0 / 0.2)',
-      rest: ' 0 0 2px 1px rgba(0 0 0 / 0.1)'
     },
     button: {
       playstation: '0px 0px 4px 0px rgba(0, 0, 0, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25)'

@@ -81,6 +81,7 @@ export const SonnerElementWrapper = styled.div<SonnerElementWrapperProps>`
   flex-shrink: 0;
   flex-shrink: 1;
   min-width: 320px;
+  min-height: 64px;
   transform-origin: center center;
   box-shadow: ${props => props.theme.colors.sonner[props.$genre].wrapper.boxShadow};
   overflow: visible;
