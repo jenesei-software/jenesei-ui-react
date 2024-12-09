@@ -20,6 +20,7 @@ export * from './components/toggle'
 export * from './components/tooltip'
 export * from './components/typography'
 export * from './components/separator'
+export * from './components/ripple'
 
 export * from './layouts/auth'
 
@@ -29,3 +30,4 @@ export * from './providers/provider-app'
 export * from './providers/provider-cookie'
 export * from './providers/provider-local-storage'
 export * from './providers/provider-permission'
+export * from './providers/provider-sonner'
