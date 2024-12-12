@@ -1,0 +1,51 @@
+import type { Meta, StoryObj } from '@storybook/react'
+import { FC } from 'react'
+import 'styled-components'
+
+import { Button } from '@components/button'
+import { Stack } from '@components/stack'
+
+import { ProviderDialog, ProviderDialogProps, useDialogItemContext } from '.'
+
+const meta: Meta<typeof ProviderDialog> = {
+  component: ProviderDialog,
+  title: 'Provider/Dialog'
+}
+
+export default meta
+
+type Story = StoryObj<typeof ProviderDialog>
+
+const ProviderDialogWrapper: FC<ProviderDialogProps> = props => {
+  return (
+    <ProviderDialog {...props}>
+      <ProviderDialogWrapperDouble />
+    </ProviderDialog>
+  )
+}
+const ProviderDialogWrapperDouble: FC = () => {
+  const { add, remove } = useDialogItemContext()
+
+  const handleAdd = () => {
+    add({
+      content: <Stack>test</Stack>
+    })
+  }
+  return (
+    <Stack p="12px" gap="8px">
+      <Button onClick={handleAdd} genre="black" size="medium">
+        Add Dialog!
+      </Button>
+      <Button onClick={remove} genre="black" size="medium">
+        Remove Dialog!
+      </Button>
+    </Stack>
+  )
+}
+
+export const Default: Story = {
+  render: args => <ProviderDialogWrapper {...args} />,
+  args: {
+    zIndex: 100
+  }
+}
