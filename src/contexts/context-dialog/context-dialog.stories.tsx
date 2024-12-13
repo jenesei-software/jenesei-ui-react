@@ -10,7 +10,7 @@ import { ProviderDialog, ProviderDialogProps, useDialog } from '.'
 
 const meta: Meta<typeof ProviderDialog> = {
   component: ProviderDialog,
-  title: 'Provider/Dialog'
+  title: 'Context/Dialog'
 }
 
 export default meta
