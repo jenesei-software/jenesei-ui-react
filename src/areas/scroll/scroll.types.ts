@@ -1,6 +1,5 @@
-import { AddDollarSign } from 'src/types'
-
-import { FlexShortStylesProps } from '@components/stack'
+import { FlexShortStylesProps } from '@local/components/stack'
+import { AddDollarSign } from '@local/types'
 
 type DefaultScrollProps = {
   vertical?: boolean

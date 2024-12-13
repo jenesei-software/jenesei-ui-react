@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
-import { IJeneseiThemeSizeToggle, KEY_SIZE_DATA_TOGGLE } from '@theme/index'
+import { IJeneseiThemeSizeToggle, KEY_SIZE_DATA_TOGGLE } from '@local/theme'
 
 import { StyledToggleProps } from '.'
 

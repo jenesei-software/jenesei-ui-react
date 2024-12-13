@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FC } from 'react'
 import 'styled-components'
 
-import { Stack } from '@components/stack'
-import { Typography } from '@components/typography'
+import { Stack } from '@local/components/stack'
+import { Typography } from '@local/components/typography'
 
 import { Skeleton, SkeletonProps } from '.'
 

@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FC, useState } from 'react'
 import 'styled-components'
 
-import { Button } from '@components/button'
-import { FlexShortStylesProps, Stack } from '@components/stack'
-import { Typography } from '@components/typography'
+import { Button } from '@local/components/button'
+import { FlexShortStylesProps, Stack } from '@local/components/stack'
+import { Typography } from '@local/components/typography'
 
 import { Smooth } from '.'
 

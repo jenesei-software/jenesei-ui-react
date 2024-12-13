@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { JeneseiThemeVariablesKeys } from '@theme/theme.interface'
+import { JeneseiThemeVariablesKeys } from '@local/theme/theme.interface'
 
 import { SeparatorProps, SeparatorWrapper } from '.'
 

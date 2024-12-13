@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { Button } from '@components/button'
+import { Button } from '@local/components/button'
 
 import { ButtonGroupProps, ButtonGroupWrapper } from '.'
 

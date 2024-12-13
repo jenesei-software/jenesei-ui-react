@@ -17,7 +17,7 @@ import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import '@fontsource/roboto/900.css'
 
-import { ProviderPermission } from '../src/providers/provider-permission'
+import { ProviderPermission } from '../src/contexts/context-permission'
 import { JeneseiGlobalStyles, JeneseiTheme } from '../src/theme/index'
 
 gsap.registerPlugin(useGSAP)

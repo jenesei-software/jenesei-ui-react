@@ -1,7 +1,7 @@
 import { FC, useCallback, useMemo } from 'react'
 import { useTheme } from 'styled-components'
 
-import { Loading } from '@components/loading'
+import { Loading } from '@local/components/loading'
 
 import { CheckboxProps, CheckboxWrapper, StyledIcon } from '.'
 

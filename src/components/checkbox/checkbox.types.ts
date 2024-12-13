@@ -1,9 +1,8 @@
 import { CSSProperties, PropsWithChildren } from 'react'
-import { AddDollarSign } from 'src/types'
 
-import { TLibraryIconCheckboxNameString } from '@components/icon'
-
-import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@theme/index'
+import { TLibraryIconCheckboxNameString } from '@local/components/icon'
+import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
+import { AddDollarSign } from '@local/types'
 
 export interface CheckboxProps extends PropsWithChildren {
   checked?: boolean

@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react'
-import { AddDollarSign } from 'src/types'
 
-import { JeneseiThemeVariablesKeys } from '@theme/index'
+import { JeneseiThemeVariablesKeys } from '@local/theme'
+import { AddDollarSign } from '@local/types'
 
 export type DollarFlexContainerProps = AddDollarSign<FlexContainerProps>
 export type DollarFlexItemProps = AddDollarSign<FlexItemProps>

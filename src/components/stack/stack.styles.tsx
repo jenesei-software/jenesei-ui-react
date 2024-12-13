@@ -1,5 +1,6 @@
-import { FlexContainerAndItemAndBasic } from '@styles/base'
 import styled, { css } from 'styled-components'
+
+import { FlexContainerAndItemAndBasic } from '@local/styles/base'
 
 import { StyledStackProps } from '.'
 

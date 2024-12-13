@@ -1,10 +1,9 @@
 import { PatternFormat } from 'react-number-format'
 import styled, { css } from 'styled-components'
 
-import { Loading } from '@components/loading'
-import { getFontSizeStyles } from '@components/typography'
-
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
+import { Loading } from '@local/components/loading'
+import { getFontSizeStyles } from '@local/components/typography'
+import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import {
   InputErrorMessageProps,
