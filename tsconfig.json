@@ -27,15 +27,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@forms/*": ["src/forms/*"],
-      "@functions/*": ["src/functions/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@modules/*": ["src/modules/*"],
-      "@providers/*": ["src/providers/*"],
-      "@theme/*": ["src/theme/*"],
-      "@styles/*": ["src/styles/*"]
+      "@local/*": ["src/*"],
     }
   },
   "include": ["src"],

@@ -1,6 +1,6 @@
 import { ReactNode, useCallback } from 'react'
 
-import { Checkbox } from '@components/checkbox'
+import { Checkbox } from '@local/components/checkbox'
 
 import {
   CheckboxChildren,

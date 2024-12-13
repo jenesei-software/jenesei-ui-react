@@ -2,20 +2,19 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FC, useState } from 'react'
 import 'styled-components'
 
-import { Button } from '@components/button'
-import { FlexShortStylesProps, Stack } from '@components/stack'
-import { Typography } from '@components/typography'
+import { Button } from '@local/components/button'
+import { FlexShortStylesProps, Stack } from '@local/components/stack'
+import { Typography } from '@local/components/typography'
 
-import { Smooth } from '.'
+import { Smooth as SmoothComponent } from '.'
 
-const meta: Meta<typeof Smooth> = {
-  component: Smooth,
-  title: 'Area/Smooth',
-  tags: ['autodocs']
+const meta: Meta<typeof SmoothComponent> = {
+  component: SmoothComponent,
+  title: 'Area/Smooth'
 }
 
 export default meta
-type Story = StoryObj<typeof Smooth>
+type Story = StoryObj<typeof SmoothComponent>
 
 const SmoothWrapper: FC<FlexShortStylesProps> = props => {
   const [content, setContent] = useState<boolean>(false)
@@ -25,7 +24,7 @@ const SmoothWrapper: FC<FlexShortStylesProps> = props => {
   }
 
   return (
-    <Smooth {...props} flexDirection="column" bg="black40" p="12px" bs="content-box">
+    <SmoothComponent {...props} flexDirection="column" bg="black40" p="12px" bs="content-box">
       <Button onClick={toggleContent} size={'small'} genre={'gray'}>
         Toggle Content
       </Button>
@@ -37,11 +36,11 @@ const SmoothWrapper: FC<FlexShortStylesProps> = props => {
           <Typography variant="h7">Two</Typography>
         </Stack>
       )}
-    </Smooth>
+    </SmoothComponent>
   )
 }
 
-export const Default: Story = {
+export const Smooth: Story = {
   render: args => <SmoothWrapper {...args} />,
   args: {}
 }

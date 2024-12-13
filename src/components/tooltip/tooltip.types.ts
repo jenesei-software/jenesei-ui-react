@@ -1,5 +1,6 @@
-import { CSSProperties, ReactNode } from 'react'
-import { AddDollarSign } from 'src/types'
+import { CSSProperties, PropsWithChildren, ReactNode } from 'react'
+
+import { AddDollarSign } from '@local/types'
 
 export type Placement =
   | 'top'
@@ -15,9 +16,8 @@ export type Placement =
   | 'left-start'
   | 'left-end'
 
-export interface TooltipProps {
+export interface TooltipProps extends PropsWithChildren {
   content: ReactNode
-  children: ReactNode
   placement?: Placement
   whiteSpace?: CSSProperties['whiteSpace']
   maxWidth?: number

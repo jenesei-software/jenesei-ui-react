@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 
-interface PreviewDefaultProps extends PropsWithChildren {}
+type PreviewDefaultProps = PropsWithChildren
 
 interface PreviewIsShowProps {
   isShow: boolean
