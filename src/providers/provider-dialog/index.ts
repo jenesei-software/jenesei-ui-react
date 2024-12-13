@@ -1,5 +1,0 @@
-export * from './provider-dialog'
-export * from './provider-dialog.types'
-export * from './provider-dialog.hooks'
-export * from './provider-dialog.styles'
-export * from './provider-dialog.constants'
