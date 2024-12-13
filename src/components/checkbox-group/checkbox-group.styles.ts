@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components'
 
-import { getFontSizeStyles } from '@components/typography'
-
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
+import { getFontSizeStyles } from '@local/components/typography'
+import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { CheckboxGroupWrapperProps } from '.'
 

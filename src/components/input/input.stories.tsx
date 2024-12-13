@@ -6,8 +6,7 @@ import { Input, InputProps } from '.'
 
 const meta: Meta<typeof Input> = {
   component: Input,
-  title: 'Component/Input',
-  tags: ['autodocs']
+  title: 'Component/Input'
 }
 
 export default meta

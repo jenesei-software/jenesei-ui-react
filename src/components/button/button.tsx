@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import { useTheme } from 'styled-components'
 
-import { Icon } from '@components/icon'
-import { Loading } from '@components/loading'
-import { Ripple } from '@components/ripple'
+import { Icon } from '@local/components/icon'
+import { Loading } from '@local/components/loading'
+import { Ripple } from '@local/components/ripple'
 
 import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.'
 

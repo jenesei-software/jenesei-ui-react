@@ -1,10 +1,9 @@
 import { FocusEventHandler, ReactNode } from 'react'
-import { AddDollarSign } from 'src/types'
 
-import { CheckboxProps } from '@components/checkbox'
-import { InputProps, StyledInputProps, StyledInputWrapperProps, TInputGenre } from '@components/input'
-
-import { TJeneseiThemeSize } from '@theme/index'
+import { CheckboxProps } from '@local/components/checkbox'
+import { InputProps, StyledInputProps, StyledInputWrapperProps, TInputGenre } from '@local/components/input'
+import { TJeneseiThemeSize } from '@local/theme'
+import { AddDollarSign } from '@local/types'
 
 export interface ISelectItem {
   label: string | number | ReactNode

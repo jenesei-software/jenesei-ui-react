@@ -1,6 +1,5 @@
-import { AddDollarSign } from 'src/types'
-
-import { TJeneseiThemeGenreToggle, TJeneseiThemeSize } from '@theme/index'
+import { TJeneseiThemeGenreToggle, TJeneseiThemeSize } from '@local/theme'
+import { AddDollarSign } from '@local/types'
 
 export interface ToggleProps {
   value: boolean

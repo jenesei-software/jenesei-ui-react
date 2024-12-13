@@ -1,7 +1,7 @@
 import { FocusEventHandler, KeyboardEventHandler } from 'react'
-import { AddDollarSign } from 'src/types'
 
-import { TJeneseiThemeGenreTextArea, TJeneseiThemeSize } from '@theme/index'
+import { TJeneseiThemeGenreTextArea, TJeneseiThemeSize } from '@local/theme'
+import { AddDollarSign } from '@local/types'
 
 export interface TextAreaProps {
   name?: string

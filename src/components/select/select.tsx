@@ -5,12 +5,11 @@ import gsap from 'gsap'
 import moment from 'moment'
 import React, { FC, FocusEventHandler, ReactNode, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-import { Button } from '@components/button'
-import { Checkbox, CheckboxProps } from '@components/checkbox'
-import { InputChildrenProps, InputErrorMessage } from '@components/input'
-import { Typography, TypographyTooltip } from '@components/typography'
-
-import { KEY_SIZE_DATA, TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@theme/index'
+import { Button } from '@local/components/button'
+import { Checkbox, CheckboxProps } from '@local/components/checkbox'
+import { InputChildrenProps, InputErrorMessage } from '@local/components/input'
+import { Typography, TypographyTooltip } from '@local/components/typography'
+import { KEY_SIZE_DATA, TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
 
 import {
   DropdownErase,

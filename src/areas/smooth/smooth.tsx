@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef, useState } from 'react'
 
-import { FlexShortStylesProps } from '@components/stack'
+import { FlexShortStylesProps } from '@local/components/stack'
 
 import { StyledSmooth } from '.'
 

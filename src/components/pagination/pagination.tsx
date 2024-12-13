@@ -1,10 +1,9 @@
 import { FC, useCallback, useMemo } from 'react'
 
-import { Button } from '@components/button'
-import { Stack } from '@components/stack'
-
-import { KEY_SIZE_DATA } from '@theme/theme'
-import { TJeneseiThemeSize } from '@theme/theme.interface'
+import { Button } from '@local/components/button'
+import { Stack } from '@local/components/stack'
+import { KEY_SIZE_DATA } from '@local/theme/theme'
+import { TJeneseiThemeSize } from '@local/theme/theme.interface'
 
 import { PaginationProps, PaginationQuantityButtons, PaginationQuantityWrapper } from '.'
 

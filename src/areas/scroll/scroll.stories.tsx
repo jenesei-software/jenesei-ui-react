@@ -2,20 +2,19 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FC, useState } from 'react'
 import 'styled-components'
 
-import { Button } from '@components/button'
-import { Stack } from '@components/stack'
-import { Typography } from '@components/typography'
+import { Button } from '@local/components/button'
+import { Stack } from '@local/components/stack'
+import { Typography } from '@local/components/typography'
 
-import { Scroll, ScrollProps } from '.'
+import { Scroll as ScrollComponent, ScrollProps } from '.'
 
-const meta: Meta<typeof Scroll> = {
-  component: Scroll,
-  title: 'Area/Scroll',
-  tags: ['autodocs']
+const meta: Meta<typeof ScrollComponent> = {
+  component: ScrollComponent,
+  title: 'Area/Scroll'
 }
 
 export default meta
-type Story = StoryObj<typeof Scroll>
+type Story = StoryObj<typeof ScrollComponent>
 
 const ScrollWrapper: FC<ScrollProps> = props => {
   const [content, setContent] = useState<boolean>(false)
@@ -25,7 +24,7 @@ const ScrollWrapper: FC<ScrollProps> = props => {
   }
 
   return (
-    <Scroll {...props} w="300px" bg="black40" p="12px" bs="content-box">
+    <ScrollComponent {...props} w="300px" bg="black40" p="12px" bs="content-box">
       <Button onClick={toggleContent} size={'small'} genre={'gray'}>
         Toggle Content
       </Button>
@@ -37,11 +36,11 @@ const ScrollWrapper: FC<ScrollProps> = props => {
           <Typography variant="h7">Two</Typography>
         </Stack>
       )}
-    </Scroll>
+    </ScrollComponent>
   )
 }
 
-export const Default: Story = {
+export const Scroll: Story = {
   render: args => <ScrollWrapper {...args} />,
   args: { horizontal: true }
 }

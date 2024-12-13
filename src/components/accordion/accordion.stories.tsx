@@ -2,16 +2,15 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FC, useCallback, useState } from 'react'
 import 'styled-components'
 
-import { Button } from '@components/button'
-import { Stack } from '@components/stack'
-import { Typography } from '@components/typography'
+import { Button } from '@local/components/button'
+import { Stack } from '@local/components/stack'
+import { Typography } from '@local/components/typography'
 
 import { Accordion, AccordionProps } from '.'
 
 const meta: Meta<typeof Accordion> = {
   component: Accordion,
-  title: 'Component/Accordion',
-  tags: ['autodocs']
+  title: 'Component/Accordion'
 }
 
 export default meta

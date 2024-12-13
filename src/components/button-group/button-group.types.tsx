@@ -1,6 +1,5 @@
-import { AddDollarSign } from 'src/types'
-
-import { ButtonProps } from '@components/button'
+import { ButtonProps } from '@local/components/button'
+import { AddDollarSign } from '@local/types'
 
 export interface ButtonGroupProps {
   value: ButtonProps[]

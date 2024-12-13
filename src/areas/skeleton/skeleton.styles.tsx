@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from 'styled-components'
 
-import { Stack } from '@components/stack'
+import { Stack } from '@local/components/stack'
 
 import { StyledSkeletonProps } from '.'
 

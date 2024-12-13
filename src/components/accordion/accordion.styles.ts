@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { Icon } from '@components/icon'
+import { Icon } from '@local/components/icon'
 
 import { AccordionDetailsProps, AccordionStyledIconProps, AccordionSummaryContentProps } from '.'
 

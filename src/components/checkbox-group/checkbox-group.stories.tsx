@@ -6,8 +6,7 @@ import { CheckboxGroup as CheckboxGroupComponent, CheckboxGroupProps, ICheckboxV
 
 const meta: Meta<typeof CheckboxGroupComponent> = {
   component: CheckboxGroupComponent,
-  title: 'Component/CheckboxGroup',
-  tags: ['autodocs']
+  title: 'Component/CheckboxGroup'
 }
 
 export default meta

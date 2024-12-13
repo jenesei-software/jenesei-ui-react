@@ -1,12 +1,10 @@
 import React, { PropsWithChildren } from 'react'
-import { AddDollarSign } from 'src/types'
 
-import { LibraryIconItemProps, TLibraryIconCurvedNameString } from '@components/icon'
-import { LoadingProps } from '@components/loading'
-
-import { DollarFlexContainerAndItemProps, FlexContainerAndItemProps } from '@styles/base'
-
-import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@theme/index'
+import { LibraryIconItemProps, TLibraryIconCurvedNameString } from '@local/components/icon'
+import { LoadingProps } from '@local/components/loading'
+import { DollarFlexContainerAndItemProps, FlexContainerAndItemProps } from '@local/styles/base'
+import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
+import { AddDollarSign } from '@local/types'
 
 export type TButtonGenre = keyof TJeneseiThemeGenre
 

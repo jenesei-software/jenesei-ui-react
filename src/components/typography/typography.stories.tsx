@@ -1,19 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
-import { Typography } from '.'
+import { Typography as TypographyComponent } from '.'
 
-const meta: Meta<typeof Typography> = {
-  component: Typography,
-  title: 'Component/Typography',
-  tags: ['autodocs']
+const meta: Meta<typeof TypographyComponent> = {
+  component: TypographyComponent,
+  title: 'Component/Typography'
 }
 
 export default meta
 
-type Story = StoryObj<typeof Typography>
+type Story = StoryObj<typeof TypographyComponent>
 
-export const Default: Story = {
+export const Typography: Story = {
   args: {
     variant: 'h1',
     children: 'Hello, World!'

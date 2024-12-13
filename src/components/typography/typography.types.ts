@@ -1,9 +1,8 @@
 import { CSSProperties, PropsWithChildren, ReactNode } from 'react'
-import { AddDollarSign } from 'src/types'
 
-import { TooltipProps } from '@components/tooltip'
-
-import { IJeneseiThemeScreens, JeneseiThemeVariablesKeys, TJeneseiFontFamily } from '@theme/index'
+import { TooltipProps } from '@local/components/tooltip'
+import { IJeneseiThemeScreens, JeneseiThemeVariablesKeys, TJeneseiFontFamily } from '@local/theme'
+import { AddDollarSign } from '@local/types'
 
 export interface TypographyDefaultProps extends PropsWithChildren {
   clamp?: number

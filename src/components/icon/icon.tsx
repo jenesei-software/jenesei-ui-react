@@ -1,4 +1,4 @@
-import { JeneseiThemeVariables } from '@theme/theme'
+import { JeneseiThemeVariables } from '@local/theme/theme'
 
 import { LibraryIconItemProps, StyledSVG } from '.'
 import LibraryIconCheckboxJSON from './icon-checkbox.json'

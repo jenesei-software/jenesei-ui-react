@@ -5,8 +5,7 @@ import { Loading as LoadingComponent } from '.'
 
 const meta: Meta<typeof LoadingComponent> = {
   component: LoadingComponent,
-  title: 'Component/Loading',
-  tags: ['autodocs']
+  title: 'Component/Loading'
 }
 
 export default meta

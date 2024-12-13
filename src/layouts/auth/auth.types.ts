@@ -1,5 +1,6 @@
 import { CSSProperties, PropsWithChildren } from 'react'
-import { AddDollarSign } from 'src/types'
+
+import { AddDollarSign } from '@local/types'
 
 export interface AuthLayoutProps extends PropsWithChildren {
   backUrl: string

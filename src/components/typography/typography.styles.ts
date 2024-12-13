@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { JeneseiThemeVariables } from '@theme/theme'
+import { JeneseiThemeVariables } from '@local/theme/theme'
 
 import { TypographyCSSProps } from '.'
 

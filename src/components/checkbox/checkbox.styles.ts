@@ -1,9 +1,8 @@
 import styled, { css } from 'styled-components'
 
-import { Icon } from '@components/icon'
-import { getFontSizeStyles } from '@components/typography'
-
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
+import { Icon } from '@local/components/icon'
+import { getFontSizeStyles } from '@local/components/typography'
+import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledCheckboxProps, StyledIconProps } from '.'
 

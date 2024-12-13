@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components'
 
-import { FlexContainerAndItemAndBasic } from '@styles/base'
-
-import { KEY_SIZE_DATA } from '@theme/index'
+import { FlexContainerAndItemAndBasic } from '@local/styles/base'
+import { KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledLibraryIconCurvedItemProps } from '.'
 

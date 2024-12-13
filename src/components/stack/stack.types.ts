@@ -1,11 +1,12 @@
+import { CSSProperties, PropsWithChildren } from 'react'
+
 import {
   DollarFlexContainerAndItemAndBasicProps,
   FlexBasicProps,
   FlexContainerProps,
   FlexItemProps
-} from '@styles/base'
-import { CSSProperties, PropsWithChildren } from 'react'
-import { AddDollarSign } from 'src/types'
+} from '@local/styles/base'
+import { AddDollarSign } from '@local/types'
 
 export interface FlexShortStylesProps extends FlexContainerProps, FlexItemProps, FlexBasicProps, PropsWithChildren {
   style?: CSSProperties

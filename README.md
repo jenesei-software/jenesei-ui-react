@@ -12,6 +12,7 @@ import 'styled-components';
 import { IJeneseiTheme } from '@jenesei-software/jenesei-ui-react';
 
 declare module 'styled-components' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   export interface DefaultTheme extends IJeneseiTheme {
     // Your additional theme properties
   }

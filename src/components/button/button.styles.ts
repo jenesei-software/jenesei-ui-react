@@ -1,10 +1,8 @@
 import styled, { css } from 'styled-components'
 
-import { getFontSizeStyles } from '@components/typography'
-
-import { FlexContainerAndItem } from '@styles/base'
-
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@theme/index'
+import { getFontSizeStyles } from '@local/components/typography'
+import { FlexContainerAndItem } from '@local/styles/base'
+import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledDollarButtonIconsWrapperProps, StyledDollarButtonProps } from '.'
 

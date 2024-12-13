@@ -1,9 +1,8 @@
 import styled, { css } from 'styled-components'
 
-import { StyledInput, StyledInputCSS } from '@components/input'
-
-import { IJeneseiThemeSize } from '@theme/index'
-import { KEY_SIZE_DATA } from '@theme/theme'
+import { StyledInput, StyledInputCSS } from '@local/components/input'
+import { IJeneseiThemeSize } from '@local/theme'
+import { KEY_SIZE_DATA } from '@local/theme/theme'
 
 import {
   SelectStyledFooterProps,

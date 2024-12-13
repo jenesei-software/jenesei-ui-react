@@ -1,15 +1,15 @@
-import { CSSProperties, FC, MouseEventHandler, memo, useCallback, useMemo, useRef, useState } from 'react'
+import React, { CSSProperties, FC, MouseEventHandler, memo, useCallback, useMemo, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useTheme } from 'styled-components'
 
-import { Typography } from '@components/typography'
+import { Typography } from '@local/components/typography'
 
 import { TooltipArrow, TooltipBox, TooltipContainer, TooltipProps } from '.'
 
 export const Tooltip: FC<TooltipProps> = memo(props => {
-  if (props.isDisabled) {
-    return <>{props.children}</>
-  }
+  // eslint-disable-next-line react/prop-types
+  if (props.isDisabled) return <>{props.children}</>
+
   return <TooltipContent {...props} />
 })
 

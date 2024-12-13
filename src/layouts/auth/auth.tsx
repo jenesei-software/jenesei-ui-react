@@ -2,7 +2,7 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { FC, useRef } from 'react'
 
-import { Typography } from '@components/typography'
+import { Typography } from '@local/components/typography'
 
 import {
   AuthLayoutProps,

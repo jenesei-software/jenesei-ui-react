@@ -1,6 +1,5 @@
-import { AddDollarSign } from 'src/types'
-
-import { CheckboxProps } from '@components/checkbox'
+import { CheckboxProps } from '@local/components/checkbox'
+import { AddDollarSign } from '@local/types'
 
 export interface ICheckboxValue {
   label: string | number

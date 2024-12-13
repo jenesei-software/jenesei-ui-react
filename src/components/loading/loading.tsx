@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { JeneseiThemeVariables, KEY_SIZE_DATA } from '@theme/index'
+import { JeneseiThemeVariables, KEY_SIZE_DATA } from '@local/theme'
 
 import { LoadingProps, StyledReactLoading } from '.'
 

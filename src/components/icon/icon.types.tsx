@@ -1,9 +1,8 @@
 import React from 'react'
-import { AddDollarSign } from 'src/types'
 
-import { DollarFlexContainerAndItemAndBasicProps } from '@styles/base'
-
-import { JeneseiThemeVariablesKeys, TJeneseiThemeSize } from '@theme/index'
+import { DollarFlexContainerAndItemAndBasicProps } from '@local/styles/base'
+import { JeneseiThemeVariablesKeys, TJeneseiThemeSize } from '@local/theme'
+import { AddDollarSign } from '@local/types'
 
 export interface BaseLibraryIconProps {
   className?: string

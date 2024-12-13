@@ -346,7 +346,6 @@ const DefaultJeneseiThemeGenreForm = {
     border: JeneseiThemeVariables.black10
   }
 }
-
 const DefaultJeneseiThemeGenreToggle = {
   product: {
     active: {
@@ -499,7 +498,6 @@ export const JeneseiTheme: IJeneseiTheme = {
     input: DefaultJeneseiThemeGenreInput
   }
 }
-
 export const KEY_SIZE_DATA: Record<TJeneseiThemeSize, IJeneseiThemeSize> = {
   large: {
     height: 46,
@@ -537,7 +535,6 @@ export const KEY_SIZE_DATA: Record<TJeneseiThemeSize, IJeneseiThemeSize> = {
     font: 12
   }
 }
-
 export const KEY_SIZE_DATA_TOGGLE: Record<TJeneseiThemeSize, IJeneseiThemeSizeToggle> = {
   large: {
     height: 46,

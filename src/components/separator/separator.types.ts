@@ -1,6 +1,5 @@
-import { AddDollarSign } from 'src/types'
-
-import { JeneseiThemeVariablesKeys } from '@theme/index'
+import { JeneseiThemeVariablesKeys } from '@local/theme'
+import { AddDollarSign } from '@local/types'
 
 export interface SeparatorProps {
   width?: string
