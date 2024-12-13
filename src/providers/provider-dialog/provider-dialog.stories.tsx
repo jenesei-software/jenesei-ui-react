@@ -4,6 +4,7 @@ import 'styled-components'
 
 import { Button } from '@components/button'
 import { Stack } from '@components/stack'
+import { Typography } from '@components/typography'
 
 import { ProviderDialog, ProviderDialogProps, useDialogItemContext } from '.'
 
@@ -28,7 +29,11 @@ const ProviderDialogWrapperDouble: FC = () => {
 
   const handleAdd = () => {
     add({
-      content: <Stack>test</Stack>
+      content: (
+        <Stack>
+          <Typography variant="h6">test</Typography>
+        </Stack>
+      )
     })
   }
   return (
