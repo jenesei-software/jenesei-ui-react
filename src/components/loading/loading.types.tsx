@@ -1,7 +1,7 @@
 import { LoadingType } from 'react-loading'
-import { AddDollarSign } from 'src/types'
 
-import { JeneseiThemeVariablesKeys, TJeneseiThemeSize } from '@theme/index'
+import { JeneseiThemeVariablesKeys, TJeneseiThemeSize } from '@local/theme'
+import { AddDollarSign } from '@local/types'
 
 export interface LoadingProps {
   type?: LoadingType

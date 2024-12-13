@@ -1,6 +1,6 @@
 import { Ref, forwardRef, memo, useEffect, useRef, useState } from 'react'
 
-import { Tooltip } from '@components/tooltip'
+import { Tooltip } from '@local/components/tooltip'
 
 import {
   SpanFont,

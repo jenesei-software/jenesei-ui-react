@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FC } from 'react'
 import 'styled-components'
 
-import { Button } from '@components/button'
+import { Button } from '@local/components/button'
 
 import { Tooltip, TooltipProps } from '.'
 

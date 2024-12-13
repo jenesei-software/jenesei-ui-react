@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-import { JeneseiThemeVariables } from '@theme/index'
+import { JeneseiThemeVariables } from '@local/theme'
 
 import {
   DollarFlexBasicProps,

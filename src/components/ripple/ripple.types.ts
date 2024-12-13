@@ -1,4 +1,4 @@
-import { AddDollarSign } from 'src/types'
+import { AddDollarSign } from '@local/types'
 
 export interface RippleProps {
   duration?: number

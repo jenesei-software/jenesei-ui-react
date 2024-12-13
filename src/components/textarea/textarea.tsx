@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react'
 import { useTheme } from 'styled-components'
 
-import { KEY_SIZE_DATA } from '@theme/theme'
+import { KEY_SIZE_DATA } from '@local/theme/theme'
 
 import { StyledTextArea, StyledTextAreaWrapper, TextAreaErrorMessage, TextAreaProps, TextAreaStyledLoading } from '.'
 

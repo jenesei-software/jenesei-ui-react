@@ -5,9 +5,9 @@ import {
   KeyboardEventHandler,
   PropsWithChildren
 } from 'react'
-import { AddDollarSign } from 'src/types'
 
-import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@theme/index'
+import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
+import { AddDollarSign } from '@local/types'
 
 export interface InputProps {
   name?: string

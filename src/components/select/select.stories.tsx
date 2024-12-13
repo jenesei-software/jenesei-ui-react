@@ -3,7 +3,7 @@ import FullCountryList from 'country-list-with-dial-code-and-flag'
 import { FC, useCallback, useState } from 'react'
 import 'styled-components'
 
-import { TypographyTooltip } from '@components/typography'
+import { TypographyTooltip } from '@local/components/typography'
 
 import { ISelectItem, Select, SelectProps } from '.'
 
