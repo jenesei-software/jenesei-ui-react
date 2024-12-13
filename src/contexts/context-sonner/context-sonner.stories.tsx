@@ -115,7 +115,7 @@ const ProviderSonnerWrapperDouble: FC = () => {
   )
 }
 
-export const Default: Story = {
+export const Sonner: Story = {
   render: args => <ProviderSonnerWrapper {...args} />,
   args: {
     visibleToasts: 3,

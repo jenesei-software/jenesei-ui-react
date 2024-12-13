@@ -48,7 +48,7 @@ const ProviderDialogWrapperDouble: FC = () => {
   )
 }
 
-export const Default: Story = {
+export const Dialog: Story = {
   render: args => <ProviderDialogWrapper {...args} />,
   args: {
     zIndex: 100
