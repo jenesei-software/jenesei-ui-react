@@ -10,8 +10,7 @@ import { Accordion, AccordionProps } from '.'
 
 const meta: Meta<typeof Accordion> = {
   component: Accordion,
-  title: 'Component/Accordion',
-  tags: ['autodocs']
+  title: 'Component/Accordion'
 }
 
 export default meta

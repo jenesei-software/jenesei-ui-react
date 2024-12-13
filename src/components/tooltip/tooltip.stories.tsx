@@ -4,21 +4,20 @@ import 'styled-components'
 
 import { Button } from '@local/components/button'
 
-import { Tooltip, TooltipProps } from '.'
+import { Tooltip as TooltipComponent, TooltipProps } from '.'
 
-const meta: Meta<typeof Tooltip> = {
-  component: Tooltip,
-  title: 'Component/Tooltip',
-  tags: ['autodocs']
+const meta: Meta<typeof TooltipComponent> = {
+  component: TooltipComponent,
+  title: 'Component/Tooltip'
 }
 
 export default meta
 
-type Story = StoryObj<typeof Tooltip>
+type Story = StoryObj<typeof TooltipComponent>
 
 const TooltipWrapper: FC<TooltipProps> = props => {
   return (
-    <Tooltip
+    <TooltipComponent
       {...props}
       content={
         'Tootlip Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip? Tootlip? Tootlip? Tootlip? Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?'
@@ -27,11 +26,11 @@ const TooltipWrapper: FC<TooltipProps> = props => {
       <Button genre={'black'} size={'medium'}>
         Tootlip?
       </Button>
-    </Tooltip>
+    </TooltipComponent>
   )
 }
 
-export const Default: Story = {
+export const Tooltip: Story = {
   render: args => <TooltipWrapper {...args} />,
   args: { placement: 'bottom-start' }
 }

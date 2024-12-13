@@ -9,7 +9,7 @@ import { ProviderSonner, ProviderSonnerProps, useSonner } from '.'
 
 const meta: Meta<typeof ProviderSonner> = {
   component: ProviderSonner,
-  title: 'Provider/Sonner'
+  title: 'Context/Sonner'
 }
 
 export default meta

@@ -7,7 +7,7 @@ import { ProviderApp } from '.'
 
 const meta: Meta<typeof ProviderApp> = {
   component: ProviderApp,
-  title: 'Provider/App'
+  title: 'Context/App'
 }
 
 export default meta

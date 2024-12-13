@@ -1,19 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
-import { Preview } from '.'
+import { Preview as PreviewComponent } from '.'
 
-const meta: Meta<typeof Preview> = {
-  component: Preview,
-  title: 'Area/Preview',
-  tags: ['autodocs']
+const meta: Meta<typeof PreviewComponent> = {
+  component: PreviewComponent,
+  title: 'Area/Preview'
 }
 
 export default meta
 
-type Story = StoryObj<typeof Preview>
+type Story = StoryObj<typeof PreviewComponent>
 
-export const Default: Story = {
+export const Preview: Story = {
   args: {
     isShow: true
   }
