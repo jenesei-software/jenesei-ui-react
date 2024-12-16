@@ -13,10 +13,20 @@ import {
 } from '.'
 
 export const SelectWrapper = styled.div<SelectWrapperProps>`
-  --scrollbar-width: 16px;
-  --scrollbar-background: ${props => props.theme.colors.input[props.$genre].background.rest};
-  --scrollbar-thumb-background: ${props => props.theme.colors.input[props.$genre].color.rest};
-  --scrollbar-thumb-border: 4px solid ${props => props.theme.colors.input[props.$genre].background.rest};
+  ::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${props => props.theme.colors.input[props.$genre].background.rest};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${props => props.theme.colors.input[props.$genre].color.rest};
+    border: 4px solid ${props => props.theme.colors.input[props.$genre].background.rest};
+    background-clip: padding-box;
+  }
 
   width: ${props => props.$width ?? '100%'};
   position: relative;

@@ -251,6 +251,62 @@ const DefaultJeneseiThemeGenreInput = {
     }
   }
 }
+const DefaultJeneseiThemeGenreInputSelect = {
+  gray: {
+    background: {
+      rest: JeneseiThemeVariables.grayJanice,
+      hover: JeneseiThemeVariables.graySandra,
+      select: ''
+    },
+    color: {
+      rest: JeneseiThemeVariables.black60,
+      hover: JeneseiThemeVariables.black60,
+      placeholder: JeneseiThemeVariables.black80,
+      select: ''
+    },
+    border: {
+      rest: JeneseiThemeVariables.transparent,
+      hover: JeneseiThemeVariables.transparent,
+      select: ''
+    }
+  },
+  blackBorder: {
+    background: {
+      rest: JeneseiThemeVariables.whiteStandard,
+      hover: JeneseiThemeVariables.whiteStandard,
+      select: JeneseiThemeVariables.blueActive
+    },
+    color: {
+      rest: JeneseiThemeVariables.black80,
+      hover: JeneseiThemeVariables.black80,
+      placeholder: JeneseiThemeVariables.black40,
+      select: JeneseiThemeVariables.black100
+    },
+    border: {
+      rest: JeneseiThemeVariables.black100,
+      hover: JeneseiThemeVariables.black80,
+      select: JeneseiThemeVariables.blueRest
+    }
+  },
+  grayBorder: {
+    background: {
+      rest: JeneseiThemeVariables.whiteStandard,
+      hover: JeneseiThemeVariables.whiteStandard,
+      select: ''
+    },
+    color: {
+      rest: JeneseiThemeVariables.black60,
+      hover: JeneseiThemeVariables.black60,
+      placeholder: JeneseiThemeVariables.black40,
+      select: ''
+    },
+    border: {
+      rest: JeneseiThemeVariables.black10,
+      hover: JeneseiThemeVariables.graySandra,
+      select: ''
+    }
+  }
+}
 const DefaultJeneseiThemeGenreDate = {
   blackBorder: {
     background: {
@@ -461,41 +517,60 @@ const DefaultJeneseiThemeGenreSonner: TJeneseiThemeGenreSonner = {
   }
 }
 export const JeneseiTheme: IJeneseiTheme = {
-  transition: '0.3s ease',
-  transitionDuration: '0.3s',
-  defaultLineHeight: 1.2,
-  defaultLineHeightInput: 1.2,
-  defaultFontSize: {
-    desktop: 16,
-    mobile: 12,
-    tablet: 14
+  transition: {
+    duration: '0.3s',
+    timingFunction: 'ease',
+    default: '0.3s ease'
   },
-  transitionTimingFunction: 'ease',
+  scrollbar: {
+    width: 4,
+    background: JeneseiThemeVariables.black05,
+    thumb: JeneseiThemeVariables.black10,
+    thumbBorder: JeneseiThemeVariables.black05
+  },
+  font: {
+    family: 'Inter',
+    weight: 400,
+    lineHeight: 1.2,
+    sizeDefault: {
+      default: 16,
+      mobile: 12,
+      tablet: 14
+    },
+    sizeHeading: {
+      h1: 2.5,
+      h2: 2.25,
+      h3: 2,
+      h4: 1.75,
+      h5: 1.5,
+      h6: 1.25,
+      h7: 1,
+      h8: 0.75,
+      h9: 0.5
+    }
+  },
   screens: {
     mobile: { width: '850px' },
-    tablet: { width: '1290px' }
+    tablet: { width: '1290px' },
+    default: { width: '1920px' }
   },
-  fontFamily: 'Inter',
   effects: {
-    input: {
-      default: 'inset 0px 0px 4px rgba(0, 0, 0, 0.20)'
-    },
-    button: {
-      playstation: '0px 0px 4px 0px rgba(0, 0, 0, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25)'
-    }
+    input: 'inset 0px 0px 4px rgba(0, 0, 0, 0.20)',
+    button: '0px 0px 4px 0px rgba(0, 0, 0, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25)'
   },
   palette: JeneseiThemeVariables,
   colors: {
-    sonner: DefaultJeneseiThemeGenreSonner,
-    form: DefaultJeneseiThemeGenreForm,
     white: JeneseiThemeVariables.whiteStandard,
     focus: JeneseiThemeVariables.black60,
     danger: JeneseiThemeVariables.redGoogle,
+    sonner: DefaultJeneseiThemeGenreSonner,
+    form: DefaultJeneseiThemeGenreForm,
     button: DefaultJeneseiThemeGenre,
     date: DefaultJeneseiThemeGenreDate,
     toggle: DefaultJeneseiThemeGenreToggle,
     checkbox: DefaultJeneseiThemeGenre,
-    input: DefaultJeneseiThemeGenreInput
+    input: DefaultJeneseiThemeGenreInput,
+    select: DefaultJeneseiThemeGenreInputSelect
   }
 }
 export const KEY_SIZE_DATA: Record<TJeneseiThemeSize, IJeneseiThemeSize> = {

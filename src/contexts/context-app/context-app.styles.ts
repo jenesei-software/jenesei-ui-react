@@ -47,9 +47,9 @@ export const ProviderAppOutlet = styled.div<ProviderAppOutletProps>`
   max-height: none;
 
   transition:
-    grid-template-areas ${props => props.theme.transition},
-    grid-template-rows ${props => props.theme.transition},
-    grid-template-columns ${props => props.theme.transition};
+    grid-template-areas ${props => props.theme.transition.default},
+    grid-template-rows ${props => props.theme.transition.default},
+    grid-template-columns ${props => props.theme.transition.default};
 
   ${props => `
     grid-template-areas: ${generateGridTemplateAreas(props)};
@@ -88,17 +88,17 @@ const hiddenStyles = css`
   opacity: 0;
   visibility: hidden;
   transition:
-    opacity ${props => props.theme.transition},
-    visibility ${props => props.theme.transition};
+    opacity ${props => props.theme.transition.default},
+    visibility ${props => props.theme.transition.default};
 `
 
 const visibleStyles = css`
   opacity: 1;
   visibility: visible;
   transition:
-    height ${props => props.theme.transition},
-    opacity ${props => props.theme.transition},
-    visibility ${props => props.theme.transition};
+    height ${props => props.theme.transition.default},
+    opacity ${props => props.theme.transition.default},
+    visibility ${props => props.theme.transition.default};
 `
 
 export const ProviderAppOutletChildren = styled.main`
