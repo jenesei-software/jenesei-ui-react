@@ -1,12 +1,12 @@
 import { CSSProperties, PropsWithChildren, ReactNode } from 'react'
 
 import { TooltipProps } from '@local/components/tooltip'
-import { IJeneseiThemeScreens, JeneseiThemeVariablesKeys, TJeneseiFontFamily } from '@local/theme'
+import { JeneseiThemeVariablesKeys, TJeneseiDevice, TJeneseiFontFamily } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export interface TypographyDefaultProps extends PropsWithChildren {
   clamp?: number
-  screen?: keyof IJeneseiThemeScreens
+  device?: TJeneseiDevice
   clampOrient?: CSSProperties['boxOrient']
   overflow?: CSSProperties['overflow']
   color?: JeneseiThemeVariablesKeys
@@ -33,7 +33,7 @@ export interface TypographyVariantProps extends TypographyDefaultProps {
 
 export type TypographyProps = TypographyDataProps | TypographyVariantProps
 
-export type TypographyVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9'
+type TypographyVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9'
 
 export type TypographyCSSProps = Partial<
   AddDollarSign<
@@ -47,12 +47,16 @@ export type TypographyCSSProps = Partial<
       | 'textAlign'
       | 'textWrap'
       | 'flex'
-      | 'screen'
       | 'isHoverUnderlining'
+      | 'cursor'
+      | 'weight'
+      | 'height'
+      | 'device'
     > &
-      Pick<TypographyVariantProps, 'variant' | 'cursor'> &
-      Pick<TypographyDataProps, 'size' | 'weight' | 'height'>
-  >
+      Pick<TypographyVariantProps, 'variant'> &
+      Pick<TypographyDataProps, 'size'>
+  > &
+    Pick<TypographyDefaultProps, 'className' | 'style' | 'onClick'>
 >
 
 export interface TypographyTooltipProps {

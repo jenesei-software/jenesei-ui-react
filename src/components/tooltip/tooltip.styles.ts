@@ -24,7 +24,7 @@ export const TooltipBox = styled.div<TooltipBoxProps>`
   max-height: ${props => props.$maxHeight ?? '200px'};
 
   opacity: ${props => (props.$visible ? '1' : '0')};
-  transition: opacity ${props => props.theme.transition};
+  transition: opacity ${props => props.theme.transition.default};
 `
 
 export const TooltipArrow = styled.div<TooltipArrowProps>`
@@ -36,5 +36,5 @@ export const TooltipArrow = styled.div<TooltipArrowProps>`
   padding: 0.1px;
 
   opacity: ${props => (props.$visible ? '1' : '0')};
-  transition: opacity ${props => props.theme.transition};
+  transition: opacity ${props => props.theme.transition.default};
 `

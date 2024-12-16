@@ -6,7 +6,6 @@ import moment from 'moment'
 import React, { FC, FocusEventHandler, ReactNode, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { Button } from '@local/components/button'
-import { Checkbox, CheckboxProps } from '@local/components/checkbox'
 import { InputChildrenProps, InputErrorMessage } from '@local/components/input'
 import { Typography, TypographyTooltip } from '@local/components/typography'
 import { KEY_SIZE_DATA, TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
@@ -17,6 +16,7 @@ import {
   DropdownList,
   DropdownListParent,
   DropdownOption,
+  DropdownOptionHoverAndChecked,
   DropdownSelectAll,
   ISelectCountryOption,
   ISelectItem,
@@ -375,7 +375,6 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                   genre={props.genre}
                   size={props.size}
                   isBold={props.optionProps?.isBold}
-                  checkboxProps={props.checkboxProps}
                   isError={props.optionProps?.isError}
                   isLoading={props.optionProps?.isLoading}
                   isCustomIcon={props.optionProps?.isCustomIcon}
@@ -421,7 +420,6 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
 }
 
 export const ContainerDropdownOptionComponent = (params: {
-  checkboxProps?: Omit<CheckboxProps, 'genre' | 'size'>
   genre: keyof TJeneseiThemeGenreInput
   size: TJeneseiThemeSize
   onClick: () => void
@@ -439,7 +437,6 @@ export const ContainerDropdownOptionComponent = (params: {
   return (
     <DropdownOption
       onClick={params.onClick}
-      $isCheckboxProps={!!params.checkboxProps}
       $isError={params.isError}
       $isLoading={params.isLoading}
       $isCustomIcon={params.isCustomIcon}
@@ -448,15 +445,21 @@ export const ContainerDropdownOptionComponent = (params: {
       $genre={params.genre}
       $size={params.size}
       $isBold={params.isBold}
+      $checked={params.checked}
       style={{
         height: `${params.virtualRowSize}px`,
         transform: `translateY(${params.virtualRowStart}px)`
       }}
     >
-      {params.checkboxProps && (
-        <Checkbox {...params.checkboxProps} genre={params.genre} size={params.size} checked={params.checked} />
-      )}
-      {params.label}
+      <div style={{ position: 'relative', display: 'contents' }}>
+        {params.label}
+        <DropdownOptionHoverAndChecked
+          $genre={params.genre}
+          $size={params.size}
+          $isBold={params.isBold}
+          $checked={params.checked}
+        />
+      </div>
     </DropdownOption>
   )
 }

@@ -36,9 +36,9 @@ export const ToggleWrapper = styled(motion.div)<StyledToggleProps>`
   align-items: center;
 
   transition:
-    border-color ${props => props.theme.transition},
-    background-color ${props => props.theme.transition},
-    opacity ${props => props.theme.transition},
+    border-color ${props => props.theme.transition.default},
+    background-color ${props => props.theme.transition.default},
+    opacity ${props => props.theme.transition.default},
     outline 0s;
 
   &:focus-visible {
@@ -89,7 +89,7 @@ export const ToggleWrapper = styled(motion.div)<StyledToggleProps>`
 export const ToggleCenter = styled(motion.div)<StyledToggleProps>`
   ${ToggleCenterSize};
 
-  transition: box-shadow ${props => props.theme.transition};
+  transition: box-shadow ${props => props.theme.transition.default};
 
   ${props =>
     props.$value

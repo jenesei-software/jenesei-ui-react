@@ -85,9 +85,9 @@ export const SonnerElementWrapper = styled.div<SonnerElementWrapperProps>`
   box-shadow: ${props => props.theme.colors.sonner[props.$genre].wrapper.boxShadow};
   overflow: visible;
   transition:
-    background-color ${props => props.theme.transition},
-    box-shadow ${props => props.theme.transition},
-    border-color ${props => props.theme.transition};
+    background-color ${props => props.theme.transition.default},
+    box-shadow ${props => props.theme.transition.default},
+    border-color ${props => props.theme.transition.default};
   &:hover {
     box-shadow: ${props => props.theme.colors.sonner[props.$genre].wrapper.boxShadowHover};
   }

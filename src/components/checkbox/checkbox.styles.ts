@@ -80,7 +80,7 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   overflow: hidden;
   isolation: isolate;
   user-select: none;
-  transition: all ${props => props.theme.transition};
+  transition: all ${props => props.theme.transition.default};
 
   & {
     user-select: none;

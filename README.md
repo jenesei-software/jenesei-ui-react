@@ -8,8 +8,8 @@ To use themes in your application, create a declaration themes file and extend `
 
 ```typescript
 // styled.d.ts
-import 'styled-components';
-import { IJeneseiTheme } from '@jenesei-software/jenesei-ui-react';
+import { IJeneseiTheme } from '@jenesei-software/jenesei-ui-react'
+import 'styled-components'
 
 declare module 'styled-components' {
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -17,7 +17,6 @@ declare module 'styled-components' {
     // Your additional theme properties
   }
 }
-
 ```
 
 Import `JeneseiTheme` and `JeneseiGlobalStyles` from our library and apply them in the root component of your application:
@@ -28,6 +27,19 @@ import {
   JeneseiGlobalStyles,
   JeneseiTheme,
 } from '@jenesei-software/jenesei-ui-react'
+
+import '@fontsource/inter/100.css'
+import '@fontsource/inter/300.css'
+import '@fontsource/inter/400.css'
+import '@fontsource/inter/500.css'
+import '@fontsource/inter/700.css'
+import '@fontsource/inter/900.css'
+import '@fontsource/roboto/100.css'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
+import '@fontsource/roboto/900.css'
 
 function App() {
   return (
@@ -60,7 +72,6 @@ declare module '@jenesei-software/jenesei-ui-react' {
 ```
 
 # IMPORTANT
-
 
 ## Installing dependencies
 

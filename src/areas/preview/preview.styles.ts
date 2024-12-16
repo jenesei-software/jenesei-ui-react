@@ -53,15 +53,15 @@ export const PreviewWrapper = styled.div<{ $visible: boolean }>`
   justify-content: center;
   opacity: ${props => (props.$visible ? 0 : 1)};
   transition:
-    opacity ${props => props.theme.transition},
-    transform ${props => props.theme.transition};
+    opacity ${props => props.theme.transition.default},
+    transform ${props => props.theme.transition.default};
 `
 
 export const PreviewChildren = styled.div<{ $visible: boolean }>`
   opacity: ${props => (props.$visible ? 1 : 0)};
   transition:
-    opacity ${props => props.theme.transition},
-    transform ${props => props.theme.transition};
+    opacity ${props => props.theme.transition.default},
+    transform ${props => props.theme.transition.default};
 `
 
 export const PreviewLoading = styled.div`

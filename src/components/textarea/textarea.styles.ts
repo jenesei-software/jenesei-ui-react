@@ -71,13 +71,11 @@ export const TextAreaPlaceholder = css<StyledTextAreaProps>`
     ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
     color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
-    line-height: ${props => props.theme.defaultLineHeightInput};
   }
   &:-ms-input-placeholder {
     ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
     color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
-    line-height: ${props => props.theme.defaultLineHeightInput};
   }
 `
 
@@ -161,7 +159,7 @@ export const TextAreaIsTextAreaEffect = css<Pick<StyledTextAreaProps, '$isTextAr
   ${props =>
     props.$isTextAreaEffect &&
     css`
-      box-shadow: ${props.theme.effects.input.default};
+      box-shadow: ${props.theme.effects.input};
     `}
 `
 
@@ -182,7 +180,7 @@ export const StyledTextAreaCSS = css<StyledTextAreaProps>`
   transition:
     color,
     border,
-    background-color ${props => props.theme.transition},
+    background-color ${props => props.theme.transition.default},
     outline 0s;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -190,7 +188,7 @@ export const StyledTextAreaCSS = css<StyledTextAreaProps>`
   text-wrap: auto;
 
   ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
-  line-height: ${props => props.theme.defaultLineHeightInput};
+  line-height: ${props => props.theme.font.lineHeight};
 
   ${TextAreaIsResize};
   ${TextAreaSize};

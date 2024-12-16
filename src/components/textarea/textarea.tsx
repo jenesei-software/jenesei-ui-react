@@ -55,14 +55,14 @@ export const TextArea = (props: TextAreaProps) => {
       handleHeight(props.height)
     } else {
       if (props.maxRows) {
-        const lineHeight = theme.defaultFontSize.desktop * theme.defaultLineHeight
+        const lineHeight = theme.fontSize.default * theme.lineHeight.default
         const initialHeight = props.maxRows ? lineHeight * props.maxRows : lineHeight
         handleHeight(initialHeight + KEY_SIZE_DATA[props.size].padding * 2 - 8)
       } else {
         handleHeight(KEY_SIZE_DATA[props.size].height)
       }
     }
-  }, [handleHeight, props.height, props.maxRows, props.size, theme.defaultFontSize.desktop, theme.defaultLineHeight])
+  }, [handleHeight, props.height, props.maxRows, props.size, theme.fontSize.default, theme.lineHeight.default])
 
   useEffect(() => {
     checkHeight()

@@ -1,9 +1,10 @@
 import { FocusEventHandler, ReactNode } from 'react'
 
-import { CheckboxProps } from '@local/components/checkbox'
-import { InputProps, StyledInputProps, StyledInputWrapperProps, TInputGenre } from '@local/components/input'
-import { TJeneseiThemeSize } from '@local/theme'
+import { InputProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
+import { TJeneseiThemeGenreSelect, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
+
+export type TInputSelect = keyof TJeneseiThemeGenreSelect
 
 export interface ISelectItem {
   label: string | number | ReactNode
@@ -16,13 +17,12 @@ export interface SelectProps<T extends ISelectItem> {
   id?: string
 
   size: TJeneseiThemeSize
-  genre: TInputGenre
+  genre: TInputSelect
   width?: string
   placeholder?: string
   isDisabled?: boolean
   isOnClickOptionClose?: boolean
   inputProps?: Omit<InputProps, 'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'>
-  checkboxProps?: Omit<CheckboxProps, 'genre' | 'size'>
   optionProps?: Omit<InputProps, 'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'>
   isMulti?: boolean
   option: T[]
@@ -94,11 +94,11 @@ export type SelectWrapperProps = AddDollarSign<
 > &
   StyledInputWrapperProps
 
-export interface SelectStyledInputProps extends StyledInputProps {}
+export type SelectStyledInputProps = StyledInputProps
 
 export type SelectStyledOptionProps = AddDollarSign<{
   isSelectedItem?: boolean
-  isCheckboxProps?: boolean
+  checked?: boolean
 }> &
   StyledInputProps
 

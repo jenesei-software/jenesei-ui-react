@@ -12,7 +12,7 @@ export const StyledStack = styled.div<StyledStackProps>`
     css`
       border-radius: 4px;
       transition:
-        background-color ${props => props.theme.transition},
+        background-color ${props => props.theme.transition.default},
         outline 0s;
       &:hover {
         background-color: ${props => props.theme.palette.black05};
