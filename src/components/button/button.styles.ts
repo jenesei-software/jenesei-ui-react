@@ -80,7 +80,7 @@ const ButtonIsPlaystationEffect = css<StyledDollarButtonProps>`
   ${props =>
     props.$isPlaystationEffect &&
     css`
-      box-shadow: ${props.theme.effects.button.playstation};
+      box-shadow: ${props.theme.effects.button};
     `}
 `
 /****************************************** Icons Wrapper *************************************************/
@@ -172,7 +172,7 @@ export const StyledButton = styled.button<StyledDollarButtonProps>`
   isolation: isolate;
   user-select: none;
   transition:
-    all ${props => props.theme.transition},
+    all ${props => props.theme.transition.default},
     outline 0s;
   box-sizing: border-box;
   overflow: hidden;

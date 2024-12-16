@@ -185,25 +185,33 @@ export type TJeneseiThemeSize = 'large' | 'largeMedium' | 'medium' | 'mediumSmal
 
 export type TJeneseiFontFamily = 'Inter' | 'Roboto'
 
-export type TJeneseiTypographyVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9'
+export type TJeneseiTypographyHeading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9'
+export type TJeneseiTypographyWeight = 100 | 300 | 400 | 500 | 700 | 900
 export type TJeneseiDevice = 'default' | 'mobile' | 'tablet'
 
-export type TJeneseiTypography = Record<TJeneseiTypographyVariant, number>
 export interface IJeneseiTheme {
-  transitionDuration: string
-  transitionTimingFunction: string
-  transition: string
   screens: IJeneseiThemeScreens
-  fontFamily: TJeneseiFontFamily
-  lineHeight: { default: number; input: number }
-  fontSize: Record<TJeneseiDevice, number>
+  transition: {
+    duration: string
+    timingFunction: string
+    default: string
+  }
+  scrollbar: {
+    width: number
+    background: string
+    thumb: string
+    thumbBorder: string
+  }
+  font: {
+    family: TJeneseiFontFamily
+    weight: TJeneseiTypographyWeight
+    sizeDefault: Record<TJeneseiDevice, number>
+    sizeHeading: Record<TJeneseiTypographyHeading, number>
+    lineHeight: number
+  }
   effects: {
-    input: {
-      default: string
-    }
-    button: {
-      playstation: string
-    }
+    input: string
+    button: string
   }
   palette: Record<JeneseiThemeVariablesKeys, string>
   colors: {

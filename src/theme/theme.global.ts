@@ -1,8 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 
-import { JeneseiThemeVariables } from '.'
-
 export const JeneseiGlobalStyles = createGlobalStyle`
   ${reset};
   
@@ -10,44 +8,16 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     padding:0;
   }
 
-  :root {
-    --font-family:  ${props => props.theme.fontFamily}, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    --font-weight: 400;
-    --font-size: ${props => props.theme.fontSize.default}px;
-    --font-line-height: ${props => props.theme.lineHeight.default};
-    --scrollbar-width: 4px;
-    --scrollbar-background: ${JeneseiThemeVariables.black05};
-    --scrollbar-thumb-background: ${JeneseiThemeVariables.black10};
-    --scrollbar-thumb-border: 1px solid ${JeneseiThemeVariables.black05};
-
-    --heading-1-font-size: 2.5rem; 
-    --heading-2-font-size: 2.25rem;
-    --heading-3-font-size: 2rem;
-    --heading-4-font-size: 1.75rem; 
-    --heading-5-font-size: 1.5rem; 
-    --heading-6-font-size: 1.25rem;
-    --heading-7-font-size: 1rem; 
-    --heading-8-font-size: 0.75rem; 
-    --heading-9-font-size: 0.5rem; 
-
-    --heading-line-height: ${props => props.theme.lineHeight.default};
-
-    --Ripple-custom-opacity: 0.2;
-	  --Ripple-custom-duration: 0.6s;
-	  --Ripple-custom-timing-function: ease-in;
-	  --Ripple-custom-color: currentColor;
-  }
-
   * {
     box-sizing: border-box;
   }
 
   html {
-    font-size: var(--font-size);
-    font-family: var(--font-family);
-    font-weight: var(--font-weight-normal);
-    line-height: var(--font-line-height);
-    transition: font-size ${props => props.theme.transition};
+    font-size: ${props => props.theme.font.sizeDefault.default}px;
+    font-family: ${props => props.theme.font.family}, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-weight: ${props => props.theme.font.weight};
+    line-height: ${props => props.theme.font.lineHeight};
+    transition: font-size ${props => props.theme.transition.default};
   }
 
   body {
@@ -88,66 +58,106 @@ export const JeneseiGlobalStyles = createGlobalStyle`
   }
 
   ::-webkit-scrollbar {
-    width: var(--scrollbar-width);
-    height: var(--scrollbar-width);
+    width: ${props => props.theme.scrollbar.width}px;
+    height: ${props => props.theme.scrollbar.width}px;
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--scrollbar-background);
+    background: ${props => props.theme.scrollbar.background};
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--scrollbar-thumb-background);
-    border: var(--scrollbar-thumb-border);
+    background:  ${props => props.theme.scrollbar.thumb};
+    border: ${props => props.theme.scrollbar.thumbBorder};
     background-clip: padding-box;
   }
 
   h1 {
-    font-size: var(--heading-1-font-size);
-    line-height: var(--heading-line-height);
+    font-size:  ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.default}px;
+    line-height: ${props => props.theme.font.lineHeight};
     margin: 0;
   }
 
   h2 {
-    font-size: var(--heading-2-font-size);
-    line-height: var(--heading-line-height);
+    font-size: ${props => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.default}px;
+    line-height: ${props => props.theme.font.lineHeight};
     margin: 0;
   }
 
   h3 {
-    font-size: var(--heading-3-font-size);
-    line-height: var(--heading-line-height);
+    font-size: ${props => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.default}px;
+    line-height: ${props => props.theme.font.lineHeight};
     margin: 0;
   }
 
   h4 {
-    font-size: var(--heading-4-font-size);
-    line-height: var(--heading-line-height);
+    font-size: ${props => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.default}px;
+    line-height: ${props => props.theme.font.lineHeight};
     margin: 0;
   }
 
   h5 {
-    font-size: var(--heading-5-font-size);
-    line-height: var(--heading-line-height);
+    font-size: ${props => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.default}px;
+    line-height: ${props => props.theme.font.lineHeight};
     margin: 0;
   }
 
   h6 {
-    font-size: var(--heading-6-font-size);
-    line-height: var(--heading-line-height);
+    font-size: v${props => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.default}px;
+    line-height: ${props => props.theme.font.lineHeight};
     margin: 0;
   }
 
 
   @media (max-width: ${props => props.theme.screens.tablet.width}) {
-    :root {
-      --font-size: ${props => props.theme.fontSize.tablet}px;
+    h1 {
+      font-size:  ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.tablet}px;
+    }
+
+    h2 {
+      font-size: ${props => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.tablet}px;
+    }
+
+    h3 {
+      font-size: ${props => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.tablet}px;
+    }
+
+    h4 {
+      font-size: ${props => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.tablet}px;
+    }
+
+    h5 {
+      font-size: ${props => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.tablet}px;
+    }
+
+    h6 {
+      font-size: v${props => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.tablet}px;
     }
   }
 
   @media (max-width: ${props => props.theme.screens.mobile.width}) {
-    :root {
-      --font-size: ${props => props.theme.fontSize.mobile}px;
+    h1 {
+      font-size:  ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.mobile}px;
+    }
+
+    h2 {
+      font-size: ${props => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.mobile}px;
+    }
+
+    h3 {
+      font-size: ${props => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.mobile}px;
+    }
+
+    h4 {
+      font-size: ${props => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.mobile}px;
+    }
+
+    h5 {
+      font-size: ${props => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.mobile}px;
+    }
+
+    h6 {
+      font-size: v${props => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.mobile}px;
     }
   }
 `

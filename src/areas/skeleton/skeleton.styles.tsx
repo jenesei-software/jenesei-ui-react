@@ -15,7 +15,7 @@ const shimmer = keyframes`
 
 export const StyledSkeleton = styled(Stack)<StyledSkeletonProps>`
   background: transition;
-  transition: background ${props => props.theme.transition};
+  transition: background ${props => props.theme.transition.default};
 
   ${props => css`
     ${props.$visible &&
@@ -33,6 +33,6 @@ export const StyledSkeleton = styled(Stack)<StyledSkeletonProps>`
   `}
   & > * {
     opacity: ${props => (props.$visible ? 0 : 1)};
-    transition: opacity ${props => props.theme.transition};
+    transition: opacity ${props => props.theme.transition.default};
   }
 `

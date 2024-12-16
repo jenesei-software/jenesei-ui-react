@@ -166,7 +166,7 @@ export const InputIsInputEffect = css<Pick<StyledInputProps, '$isInputEffect'>>`
   ${props =>
     props.$isInputEffect &&
     css`
-      box-shadow: ${props.theme.effects.input.default};
+      box-shadow: ${props.theme.effects.input};
     `}
 `
 
@@ -178,7 +178,7 @@ export const StyledInputCSS = css<StyledInputProps>`
   width: 100%;
   border: 1px inset;
   transition:
-    all ${props => props.theme.transition},
+    all ${props => props.theme.transition.default},
     outline 0s;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -223,7 +223,7 @@ export const InputPrefixChildren = styled.div<StyledInputChildrenProps>`
   opacity: ${props => (props.$isDisabled ? 0.5 : 1)};
   height: 100%;
   transition:
-    all ${props => props.theme.transition},
+    all ${props => props.theme.transition.default},
     outline 0s;
 `
 
@@ -234,7 +234,7 @@ export const InputPostfixChildren = styled.div<StyledInputChildrenProps>`
   opacity: ${props => (props.$isDisabled ? 0.5 : 1)};
   height: 100%;
   transition:
-    all ${props => props.theme.transition},
+    all ${props => props.theme.transition.default},
     outline 0s;
 `
 
