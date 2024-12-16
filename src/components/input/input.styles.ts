@@ -73,13 +73,13 @@ export const InputPlaceholder = css<StyledInputProps>`
     ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
     color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
-    line-height: ${props => props.theme.lineHeight.input};
+    line-height: ${props => props.theme.font.lineHeight};
   }
   &:-ms-input-placeholder {
     ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
     color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
-    line-height: ${props => props.theme.lineHeight.input};
+    line-height: ${props => props.theme.font.lineHeight};
   }
 `
 
@@ -186,7 +186,7 @@ export const StyledInputCSS = css<StyledInputProps>`
   outline: none;
 
   ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
-  line-height: ${props => props.theme.lineHeight.input};
+  line-height: ${props => props.theme.font.lineHeight};
 
   ${InputSize};
   ${InputGenre};
