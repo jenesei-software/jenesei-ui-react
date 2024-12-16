@@ -3,6 +3,7 @@ import { FC } from 'react'
 import 'styled-components'
 
 import { ProviderScreenWidth } from '@local/contexts/context-screen-width'
+import { Typography } from '@local/main'
 
 import { AuthLayout, AuthLayoutProps } from '.'
 
@@ -27,6 +28,12 @@ export const Auth: Story = {
   args: {
     backUrl: 'https://id.jenesei.ru/pictures/auth-back-mountain.gif',
     backUrlWebp: 'https://id.jenesei.ru/pictures/auth-back-mountain.webp',
-    children: <></>
+    children: (
+      <>
+        <Typography variant="h7" color="black100">
+          Test
+        </Typography>
+      </>
+    )
   }
 }

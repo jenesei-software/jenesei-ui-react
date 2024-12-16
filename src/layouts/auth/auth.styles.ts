@@ -4,9 +4,13 @@ import styled from 'styled-components'
 
 export const AuthLayoutWrapper = styled(motion.div)`
   display: grid;
-  width: 100%;
+  width: 100dvw;
   height: 100dvh;
   position: relative;
+  align-items: stretch;
+  justify-items: stretch;
+  overflow: hidden;
+  justify-items: stretch;
 `
 export const AuthStyledImage = styled(Image)`
   width: 100%;
@@ -25,24 +29,34 @@ export const AuthStyledImage = styled(Image)`
 `
 
 export const AuthLayoutWrapperBackground = styled(motion.div)`
+  grid-area: picture;
   position: relative;
   display: flex;
   flex-direction: column;
   padding: 100px 100px;
+  justify-self: stretch;
+  justify-content: space-between;
   @media (max-width: ${props => props.theme.screens.tablet.width}) {
     padding: 0px 100px;
+    align-items: center;
+    justify-content: center;
   }
   @media (max-width: ${props => props.theme.screens.mobile.width}) {
   }
 `
 
-export const AuthLayoutWrapperChildren = styled.svg`
+export const AuthLayoutWrapperChildren = styled.div`
+  grid-area: children;
   background-color: ${props => props.theme.palette.whiteStandard};
+  width: 100%;
+  height: 100%;
   z-index: 0;
+  justify-self: stretch;
+  display: flex;
+  align-items: stretch;
 `
 
 export const AuthLayoutWrapperChildrenWrapper = styled(motion.div)`
-  background-color: ${props => props.theme.palette.whiteStandard};
   z-index: 0;
   padding: 80px;
   display: flex;
@@ -62,11 +76,11 @@ export const AuthLayoutWrapperChildrenWrapper = styled(motion.div)`
   }
 `
 
-export const AuthLayoutWrapperBackgroundSVG = styled(motion.svg)`
+export const AuthLayoutWrapperBackgroundSVG = styled.svg`
   z-index: 1;
 `
 
-export const AuthLayoutWrapperBackgroundText = styled(motion.div)`
+export const AuthLayoutWrapperBackgroundText = styled.div`
   z-index: 1;
   display: flex;
   flex-direction: column;
