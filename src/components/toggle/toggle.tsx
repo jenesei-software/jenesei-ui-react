@@ -16,6 +16,7 @@ export const Toggle = (props: ToggleProps) => {
       >
         <ToggleCenter
           layout
+          transition={spring}
           $genre={props.genre}
           $isDisabled={props.isDisabled}
           $value={props.value}
@@ -25,4 +26,9 @@ export const Toggle = (props: ToggleProps) => {
       </ToggleWrapper>
     </AnimatePresence>
   )
+}
+const spring = {
+  type: 'spring',
+  stiffness: 700,
+  damping: 30
 }
