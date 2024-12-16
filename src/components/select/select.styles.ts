@@ -121,17 +121,70 @@ export const DropdownList = styled.ul`
 
 export const DropdownOption = styled.li<SelectStyledOptionProps>`
   ${StyledInputCSS};
+  border: 0px;
   display: flex;
   align-items: center;
   border-radius: 0;
   opacity: 1;
   border: 0px;
   cursor: pointer;
-  padding-left: ${props => props.$isCheckboxProps && `0px`};
   position: absolute;
   top: 0;
   left: 0;
+`
+
+export const DropdownOptionHoverAndCheckedSize = css<SelectStyledOptionProps>`
+  ${props => DropdownOptionHoverAndCheckedSizeConstructor(KEY_SIZE_DATA[props.$size])};
+`
+export const DropdownOptionHoverAndCheckedSizeConstructor = (props: IJeneseiThemeSize) => css`
+  width: calc(100% - ${props.padding - 6}px);
+  height: calc(100% - ${props.padding - 8}px);
+  border-radius: ${props.radius}px;
+`
+
+export const DropdownOptionHoverAndChecked = styled.div<SelectStyledOptionProps>`
+  position: absolute;
   width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  ${DropdownOptionHoverAndCheckedSize};
+  border-radius: 6px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: transparent;
+  &:hover {
+    background: ${props => props.theme.colors.select[props.$genre].background.select};
+    color: ${props => props.theme.colors.select[props.$genre].color.select};
+    & span {
+      color: ${props => props.theme.colors.select[props.$genre].color.select};
+    }
+    & path {
+      ${props =>
+        !props.$isCustomIcon &&
+        css`
+          fill: ${props.theme.colors.select[props.$genre].color.select};
+        `}
+    }
+  }
+  ${props =>
+    props.$checked &&
+    css`
+      background: ${props.theme.colors.select[props.$genre].background.select};
+      border-color: ${props.theme.colors.select[props.$genre].border.select};
+      color: ${props.theme.colors.select[props.$genre].color.select};
+      & span {
+        color: ${props.theme.colors.select[props.$genre].color.select};
+      }
+      & path {
+        ${!props.$isCustomIcon &&
+        css`
+          fill: ${props.theme.colors.select[props.$genre].color.select};
+        `}
+      }
+    `}
 `
 
 export const DropdownFooter = styled.li<SelectStyledFooterProps>`
