@@ -1,0 +1,6 @@
+import{j as p}from"./jsx-runtime-CkxqCPlQ.js";import{B as e}from"./button-Bcaqca6Z.js";import{b as T}from"./typography-DCobQ7y0.js";import"./index-DJO9vBfz.js";import"./styled-components.browser.esm-CCP31c1y.js";import"./icon.styles-CWbskPAg.js";import"./theme-3X06DcYZ.js";import"./base.styles-CKuPPCfG.js";import"./theme.global-3OPldRDj.js";import"./loading.styles-_WGkLspa.js";import"./typography.functions-CeSMEUjp.js";import"./index-rCr475hU.js";const B={component:T,title:"Component/Tooltip"},m=t=>p.jsx(T,{...t,content:"Tootlip Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip? Tootlip? Tootlip? Tootlip? Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?Tootlip?",children:p.jsx(e,{genre:"black",size:"medium",children:"Tootlip?"})}),o={render:t=>p.jsx(m,{...t}),args:{placement:"bottom-start"}};var i,l,r;o.parameters={...o.parameters,docs:{...(i=o.parameters)==null?void 0:i.docs,source:{originalSource:`{
+  render: args => <TooltipWrapper {...args} />,
+  args: {
+    placement: 'bottom-start'
+  }
+}`,...(r=(l=o.parameters)==null?void 0:l.docs)==null?void 0:r.source}}};const E=["Tooltip"];export{o as Tooltip,E as __namedExportsOrder,B as default};
