@@ -92,6 +92,11 @@ const SpanFontCSS = css<TypographyCSSProps>`
         text-decoration: underline;
       }
     `};
+  ${props =>
+    props.$device &&
+    css`
+      --font-size: ${props.theme.fontSize?.[props.$device]}px;
+    `}
 `
 
 export const SpanFont = styled.span<TypographyCSSProps>`

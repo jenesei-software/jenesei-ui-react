@@ -26,7 +26,7 @@ const AuthWrapper: FC<AuthLayoutProps> = props => {
 export const Auth: Story = {
   render: args => <AuthWrapper {...args} />,
   args: {
-    backUrl: 'https://id.jenesei.ru/pictures/auth-back-mountain.gif',
+    backUrl: 'https://id.jenesei.ru/pictures/auth-back-mountain.jpg',
     backUrlWebp: 'https://id.jenesei.ru/pictures/auth-back-mountain.webp',
     children: (
       <>

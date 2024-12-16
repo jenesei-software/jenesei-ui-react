@@ -14,6 +14,25 @@ export interface TJeneseiThemeGenreType {
   }
 }
 
+export interface TJeneseiThemeGenreTypeSelect {
+  background: {
+    rest: string
+    hover: string
+    select: string
+  }
+  border: {
+    rest: string
+    hover: string
+    select: string
+  }
+  color: {
+    rest: string
+    hover: string
+    select: string
+    placeholder: string
+  }
+}
+
 export interface TJeneseiThemeGenreTypeToggle {
   active: {
     rest: {
@@ -126,6 +145,11 @@ export interface TJeneseiThemeGenreInput {
   grayBorder: TJeneseiThemeGenreType
   blackBorder: TJeneseiThemeGenreType
 }
+export interface TJeneseiThemeGenreSelect {
+  gray: TJeneseiThemeGenreTypeSelect
+  grayBorder: TJeneseiThemeGenreTypeSelect
+  blackBorder: TJeneseiThemeGenreTypeSelect
+}
 export interface TJeneseiThemeGenreTextArea {
   gray: TJeneseiThemeGenreType
   grayBorder: TJeneseiThemeGenreType
@@ -155,28 +179,24 @@ export interface IJeneseiThemeSizeToggle {
   thumb: number
 }
 
-export interface IJeneseiThemeScreens {
-  mobile: { width: string }
-  tablet: { width: string }
-}
+export type IJeneseiThemeScreens = Record<TJeneseiDevice, { width: string }>
 
 export type TJeneseiThemeSize = 'large' | 'largeMedium' | 'medium' | 'mediumSmall' | 'small'
 
 export type TJeneseiFontFamily = 'Inter' | 'Roboto'
 
+export type TJeneseiTypographyVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9'
+export type TJeneseiDevice = 'default' | 'mobile' | 'tablet'
+
+export type TJeneseiTypography = Record<TJeneseiTypographyVariant, number>
 export interface IJeneseiTheme {
   transitionDuration: string
   transitionTimingFunction: string
   transition: string
   screens: IJeneseiThemeScreens
   fontFamily: TJeneseiFontFamily
-  defaultLineHeight: number
-  defaultLineHeightInput: number
-  defaultFontSize: {
-    desktop: number
-    mobile: number
-    tablet: number
-  }
+  lineHeight: { default: number; input: number }
+  fontSize: Record<TJeneseiDevice, number>
   effects: {
     input: {
       default: string
@@ -196,6 +216,7 @@ export interface IJeneseiTheme {
     checkbox: TJeneseiThemeGenre
     form: TJeneseiThemeGenreForm
     input: TJeneseiThemeGenreInput
+    select: TJeneseiThemeGenreSelect
     sonner: TJeneseiThemeGenreSonner
   }
 }

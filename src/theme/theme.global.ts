@@ -13,8 +13,8 @@ export const JeneseiGlobalStyles = createGlobalStyle`
   :root {
     --font-family:  ${props => props.theme.fontFamily}, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     --font-weight: 400;
-    --font-size: ${props => props.theme.defaultFontSize.desktop}px;
-    --font-line-height: ${props => props.theme.defaultLineHeight};
+    --font-size: ${props => props.theme.fontSize.default}px;
+    --font-line-height: ${props => props.theme.lineHeight.default};
     --scrollbar-width: 4px;
     --scrollbar-background: ${JeneseiThemeVariables.black05};
     --scrollbar-thumb-background: ${JeneseiThemeVariables.black10};
@@ -30,7 +30,7 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     --heading-8-font-size: 0.75rem; 
     --heading-9-font-size: 0.5rem; 
 
-    --heading-line-height: ${props => props.theme.defaultLineHeight};
+    --heading-line-height: ${props => props.theme.lineHeight.default};
 
     --Ripple-custom-opacity: 0.2;
 	  --Ripple-custom-duration: 0.6s;
@@ -141,13 +141,13 @@ export const JeneseiGlobalStyles = createGlobalStyle`
 
   @media (max-width: ${props => props.theme.screens.tablet.width}) {
     :root {
-      --font-size: ${props => props.theme.defaultFontSize.tablet}px;
+      --font-size: ${props => props.theme.fontSize.tablet}px;
     }
   }
 
   @media (max-width: ${props => props.theme.screens.mobile.width}) {
     :root {
-      --font-size: ${props => props.theme.defaultFontSize.mobile}px;
+      --font-size: ${props => props.theme.fontSize.mobile}px;
     }
   }
 `
