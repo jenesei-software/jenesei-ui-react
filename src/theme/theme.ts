@@ -463,7 +463,7 @@ const DefaultJeneseiThemeGenreSonner: TJeneseiThemeGenreSonner = {
 export const JeneseiTheme: IJeneseiTheme = {
   transition: '0.3s ease',
   transitionDuration: '0.3s',
-  defaultLineHeight: 1,
+  defaultLineHeight: 1.2,
   defaultLineHeightInput: 1.2,
   defaultFontSize: {
     desktop: 16,

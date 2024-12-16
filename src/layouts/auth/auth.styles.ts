@@ -1,53 +1,63 @@
+import { motion } from 'framer-motion'
 import Image from 'react-image-webp'
 import styled from 'styled-components'
 
-export const AuthLayoutWrapper = styled.div`
-  display: flex;
-  width: 100%;
+export const AuthLayoutWrapper = styled(motion.div)`
+  display: grid;
+  width: 100dvw;
   height: 100dvh;
+  position: relative;
+  align-items: stretch;
+  justify-items: stretch;
   overflow: hidden;
-  flex-direction: row;
-  @media (max-width: ${props => props.theme.screens.tablet.width}) {
-    flex-direction: column;
-  }
+  justify-items: stretch;
 `
 export const AuthStyledImage = styled(Image)`
   width: 100%;
   height: 100%;
   position: absolute;
   object-fit: cover;
-  object-position: center;
+  object-position: left;
   left: 0;
   top: 0;
   background-color: ${props => props.theme.palette.black100};
-  z-index: 0;
-`
-export const AuthLayoutWrapperBackground = styled.div`
-  position: relative;
-  flex-grow: 1;
-  width: 50%;
-  height: 100%;
-  display: flex;
-  align-items: stretch;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 100px 100px;
   @media (max-width: ${props => props.theme.screens.tablet.width}) {
-    height: 170px;
+    height: 100%;
     width: 100%;
-    justify-content: center;
-    padding: 0px 100px;
+    object-position: bottom;
   }
-  @media (max-width: ${props => props.theme.screens.mobile.width}) {
+`
+
+export const AuthLayoutWrapperBackground = styled(motion.div)`
+  grid-area: picture;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 100px 100px;
+  justify-self: stretch;
+  justify-content: space-between;
+  @media (max-width: ${props => props.theme.screens.tablet.width}) {
+    padding: 0px 100px;
     align-items: center;
     justify-content: center;
+  }
+  @media (max-width: ${props => props.theme.screens.mobile.width}) {
   }
 `
 
 export const AuthLayoutWrapperChildren = styled.div`
-  flex-grow: 1;
-  width: 50%;
+  grid-area: children;
+  background-color: ${props => props.theme.palette.whiteStandard};
+  width: 100%;
   height: 100%;
+  z-index: 0;
+  justify-self: stretch;
+  display: flex;
+  align-items: stretch;
+`
+
+export const AuthLayoutWrapperChildrenWrapper = styled(motion.div)`
+  z-index: 0;
   padding: 80px;
   display: flex;
   align-items: center;
@@ -57,7 +67,6 @@ export const AuthLayoutWrapperChildren = styled.div`
     justify-content: center;
     align-items: flex-start;
     width: 100%;
-    height: calc(100% - 170px);
     padding: 100px;
   }
   @media (max-width: ${props => props.theme.screens.mobile.width}) {
