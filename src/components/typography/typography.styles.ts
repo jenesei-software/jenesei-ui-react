@@ -100,42 +100,108 @@ export const SpanFont = styled.span<TypographyCSSProps>`
 
 export const TitleH1 = styled.h1<TypographyCSSProps>`
   ${SpanFontCSS}
+  ${props =>
+    props.$device &&
+    css`
+      font-size: ${props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault[props.$device]}px;
+    `}
 `
 
 export const TitleH2 = styled.h2<TypographyCSSProps>`
   ${SpanFontCSS}
+  ${props =>
+    props.$device &&
+    css`
+      font-size: ${props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault[props.$device]}px;
+    `}
 `
 
 export const TitleH3 = styled.h3<TypographyCSSProps>`
   ${SpanFontCSS}
+  ${props =>
+    props.$device &&
+    css`
+      font-size: ${props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault[props.$device]}px;
+    `}
 `
 
 export const TitleH4 = styled.h4<TypographyCSSProps>`
   ${SpanFontCSS}
+  ${props =>
+    props.$device &&
+    css`
+      font-size: ${props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault[props.$device]}px;
+    `}
 `
 
 export const TitleH5 = styled.h5<TypographyCSSProps>`
   ${SpanFontCSS}
+  ${props =>
+    props.$device &&
+    css`
+      font-size: ${props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault[props.$device]}px;
+    `}
 `
 
 export const TitleH6 = styled.h6<TypographyCSSProps>`
   ${SpanFontCSS}
+  ${props =>
+    props.$device &&
+    css`
+      font-size: ${props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault[props.$device]}px;
+    `}
 `
 
 export const TitleH7 = styled.span<TypographyCSSProps>`
-  font-size: var(--heading-7-font-size);
-  line-height: var(--heading-line-height);
+  font-size: ${props => props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.default}px;
+  line-height: ${props => props.theme.font.lineHeight};
+  margin: 0;
+  @media (max-width: ${props => props.theme.screens.tablet.width}) {
+    font-size: ${props => props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.tablet}px;
+  }
+  @media (max-width: ${props => props.theme.screens.mobile.width}) {
+    font-size: ${props => props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.mobile}px;
+  }
   ${SpanFontCSS};
+  ${props =>
+    props.$device &&
+    css`
+      font-size: ${props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault[props.$device]}px;
+    `}
 `
 
 export const TitleH8 = styled.span<TypographyCSSProps>`
-  font-size: var(--heading-8-font-size);
-  line-height: var(--heading-line-height);
+  font-size: ${props => props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.default}px;
+  line-height: ${props => props.theme.font.lineHeight};
+  margin: 0;
+  @media (max-width: ${props => props.theme.screens.tablet.width}) {
+    font-size: ${props => props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.tablet}px;
+  }
+  @media (max-width: ${props => props.theme.screens.mobile.width}) {
+    font-size: ${props => props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.mobile}px;
+  }
   ${SpanFontCSS};
+  ${props =>
+    props.$device &&
+    css`
+      font-size: ${props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault[props.$device]}px;
+    `}
 `
 
 export const TitleH9 = styled.span<TypographyCSSProps>`
-  font-size: var(--heading-9-font-size);
-  line-height: var(--heading-line-height);
+  font-size: ${props => props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.default}px;
+  line-height: ${props => props.theme.font.lineHeight};
+  margin: 0;
+  @media (max-width: ${props => props.theme.screens.tablet.width}) {
+    font-size: ${props => props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.tablet}px;
+  }
+  @media (max-width: ${props => props.theme.screens.mobile.width}) {
+    font-size: ${props => props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.mobile}px;
+  }
   ${SpanFontCSS};
+  ${props =>
+    props.$device &&
+    css`
+      font-size: ${props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault[props.$device]}px;
+    `}
 `

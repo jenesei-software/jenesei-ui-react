@@ -7,7 +7,7 @@ export const PaginationQuantityWrapper = styled.div<PaginationQuantityWrapperPro
   width: ${props => props.$width};
   overflow: hidden;
   transition:
-    width ${props => props.theme.transition},
+    width ${props => props.theme.transition.default},
     outline 0s;
 `
 
@@ -20,6 +20,6 @@ export const PaginationQuantityButtons = styled.div<PaginationQuantityWrapperPro
   width: 100%;
   left: ${props => props.$left};
   transition:
-    left ${props => props.theme.transition},
+    left ${props => props.theme.transition.default},
     outline 0s;
 `

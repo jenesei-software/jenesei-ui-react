@@ -111,7 +111,7 @@ const FlexBasic = css<DollarFlexBasicProps>`
     ${({ $maxTransition }) =>
     $maxTransition &&
     css`
-      transition: all ${props => props.theme.transition};
+      transition: all ${props => props.theme.transition.default};
     `}
   ${({ $mx }) =>
     $mx &&

@@ -116,7 +116,7 @@ export const DateDropdownDaySize = css<DateDropdownDayProps>`
     `}
   }
   transition:
-    all ${props => props.theme.transition},
+    all ${props => props.theme.transition.default},
     outline 0s;
 
   ${props =>

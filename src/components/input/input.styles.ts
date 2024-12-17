@@ -73,13 +73,13 @@ export const InputPlaceholder = css<StyledInputProps>`
     ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
     color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
-    line-height: ${props => props.theme.lineHeight.input};
+    line-height: ${props => props.theme.font.lineHeight};
   }
   &:-ms-input-placeholder {
     ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
     color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
-    line-height: ${props => props.theme.lineHeight.input};
+    line-height: ${props => props.theme.font.lineHeight};
   }
 `
 
@@ -166,7 +166,7 @@ export const InputIsInputEffect = css<Pick<StyledInputProps, '$isInputEffect'>>`
   ${props =>
     props.$isInputEffect &&
     css`
-      box-shadow: ${props.theme.effects.input.default};
+      box-shadow: ${props.theme.effects.input};
     `}
 `
 
@@ -178,7 +178,7 @@ export const StyledInputCSS = css<StyledInputProps>`
   width: 100%;
   border: 1px inset;
   transition:
-    all ${props => props.theme.transition},
+    all ${props => props.theme.transition.default},
     outline 0s;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -186,7 +186,7 @@ export const StyledInputCSS = css<StyledInputProps>`
   outline: none;
 
   ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
-  line-height: ${props => props.theme.lineHeight.input};
+  line-height: ${props => props.theme.font.lineHeight};
 
   ${InputSize};
   ${InputGenre};
@@ -223,7 +223,7 @@ export const InputPrefixChildren = styled.div<StyledInputChildrenProps>`
   opacity: ${props => (props.$isDisabled ? 0.5 : 1)};
   height: 100%;
   transition:
-    all ${props => props.theme.transition},
+    all ${props => props.theme.transition.default},
     outline 0s;
 `
 
@@ -234,7 +234,7 @@ export const InputPostfixChildren = styled.div<StyledInputChildrenProps>`
   opacity: ${props => (props.$isDisabled ? 0.5 : 1)};
   height: 100%;
   transition:
-    all ${props => props.theme.transition},
+    all ${props => props.theme.transition.default},
     outline 0s;
 `
 
