@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { StyledInput, StyledInputCSS } from '@local/components/input'
+import { removeScrollbar } from '@local/styles/base'
 import { IJeneseiThemeSize } from '@local/theme'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 
@@ -13,11 +14,6 @@ import {
 } from '.'
 
 export const SelectWrapper = styled.div<SelectWrapperProps>`
-  --scrollbar-width: 16px;
-  --scrollbar-background: ${props => props.theme.colors.input[props.$genre].background.rest};
-  --scrollbar-thumb-background: ${props => props.theme.colors.input[props.$genre].color.rest};
-  --scrollbar-thumb-border: 4px solid ${props => props.theme.colors.input[props.$genre].background.rest};
-
   width: ${props => props.$width ?? '100%'};
   position: relative;
 
@@ -75,25 +71,7 @@ export const DropdownListParent = styled.div<SelectStyledListProps>`
   border: solid 1px ${props => props.theme.colors.input[props.$genre].border.rest};
   border-top: 0px !important;
   ${DropdownListParentSize};
-  ${props =>
-    !props.$isShowScroll &&
-    css`
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      &::-webkit-scrollbar-horizontal {
-        display: none;
-      }
-
-      &::-webkit-scrollbar-vertical {
-        display: none;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        display: none;
-      }
-    `};
+  ${props => !props.$isShowScroll && removeScrollbar};
 `
 
 export const DropdownList = styled.ul`
@@ -111,6 +89,7 @@ export const DropdownList = styled.ul`
 
 export const DropdownOption = styled.li<SelectStyledOptionProps>`
   ${StyledInputCSS};
+  width: 100%;
   border: 0px;
   display: flex;
   align-items: center;
@@ -128,7 +107,7 @@ export const DropdownOptionHoverAndCheckedSize = css<SelectStyledOptionProps>`
 `
 export const DropdownOptionHoverAndCheckedSizeConstructor = (props: IJeneseiThemeSize) => css`
   width: calc(100% - ${props.padding - 6}px);
-  height: calc(100% - ${props.padding - 8}px);
+  height: calc(100% - ${props.padding - 4}px);
   border-radius: ${props.radius}px;
 `
 
@@ -141,10 +120,10 @@ export const DropdownOptionHoverAndChecked = styled.div<SelectStyledOptionProps>
   left: 0;
   right: 0;
   ${DropdownOptionHoverAndCheckedSize};
-  border-radius: 6px;
   border-style: solid;
   border-width: 1px;
   border-color: transparent;
+  transition: all ${props => props.theme.transition.default};
   &:hover {
     background: ${props => props.theme.colors.select[props.$genre].background.select};
     color: ${props => props.theme.colors.select[props.$genre].color.select};
