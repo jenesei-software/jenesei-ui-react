@@ -25,7 +25,7 @@ export { Typography } from './components/typography'
 export { Separator } from './components/separator'
 export { Ripple } from './components/ripple'
 
-export { Preview } from './areas/preview'
+export { Preview, useRemovePreviewLoader } from './areas/preview'
 export { Outside } from './areas/outside'
 export { Scroll } from './areas/scroll'
 export { Skeleton } from './areas/skeleton'
@@ -39,5 +39,4 @@ export { ProviderLocalStorage, LocalStorageContext, useLocalStorage } from './co
 export { ProviderPermission, PermissionContext, usePermission } from './contexts/context-permission'
 export { ProviderSonner, SonnerContext, useSonner } from './contexts/context-sonner'
 export { ProviderGeolocation, GeolocationContext, useGeolocation } from './contexts/context-geolocation'
-
 export { ProviderDialog, DialogContext, useDialogs, useDialog } from './contexts/context-dialog'
