@@ -1,33 +1,21 @@
 import styled, { css } from 'styled-components'
 
 import { StyledInput, StyledInputCSS } from '@local/components/input'
+import { removeScrollbar } from '@local/styles/base'
 import { IJeneseiThemeSize } from '@local/theme'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 
 import {
+  DropdownOptionIconProps,
   SelectStyledFooterProps,
   SelectStyledInputProps,
   SelectStyledListProps,
   SelectStyledOptionProps,
   SelectWrapperProps
 } from '.'
+import { Icon } from '../icon'
 
 export const SelectWrapper = styled.div<SelectWrapperProps>`
-  ::-webkit-scrollbar {
-    width: 16px;
-    height: 16px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: ${props => props.theme.colors.input[props.$genre].background.rest};
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: ${props => props.theme.colors.input[props.$genre].color.rest};
-    border: 4px solid ${props => props.theme.colors.input[props.$genre].background.rest};
-    background-clip: padding-box;
-  }
-
   width: ${props => props.$width ?? '100%'};
   position: relative;
 
@@ -85,25 +73,7 @@ export const DropdownListParent = styled.div<SelectStyledListProps>`
   border: solid 1px ${props => props.theme.colors.input[props.$genre].border.rest};
   border-top: 0px !important;
   ${DropdownListParentSize};
-  ${props =>
-    !props.$isShowScroll &&
-    css`
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      &::-webkit-scrollbar-horizontal {
-        display: none;
-      }
-
-      &::-webkit-scrollbar-vertical {
-        display: none;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        display: none;
-      }
-    `};
+  ${props => !props.$isShowScroll && removeScrollbar};
 `
 
 export const DropdownList = styled.ul`
@@ -121,6 +91,7 @@ export const DropdownList = styled.ul`
 
 export const DropdownOption = styled.li<SelectStyledOptionProps>`
   ${StyledInputCSS};
+  width: 100%;
   border: 0px;
   display: flex;
   align-items: center;
@@ -138,11 +109,11 @@ export const DropdownOptionHoverAndCheckedSize = css<SelectStyledOptionProps>`
 `
 export const DropdownOptionHoverAndCheckedSizeConstructor = (props: IJeneseiThemeSize) => css`
   width: calc(100% - ${props.padding - 6}px);
-  height: calc(100% - ${props.padding - 8}px);
+  height: calc(100% - ${props.padding - 4}px);
   border-radius: ${props.radius}px;
 `
 
-export const DropdownOptionHoverAndChecked = styled.div<SelectStyledOptionProps>`
+export const DropdownOptionLayout = styled.div<SelectStyledOptionProps>`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -151,10 +122,13 @@ export const DropdownOptionHoverAndChecked = styled.div<SelectStyledOptionProps>
   left: 0;
   right: 0;
   ${DropdownOptionHoverAndCheckedSize};
-  border-radius: 6px;
   border-style: solid;
   border-width: 1px;
   border-color: transparent;
+  transition: all ${props => props.theme.transition.default};
+  & path {
+    transition: all ${props => props.theme.transition.default};
+  }
   &:hover {
     background: ${props => props.theme.colors.select[props.$genre].background.select};
     color: ${props => props.theme.colors.select[props.$genre].color.select};
@@ -187,6 +161,53 @@ export const DropdownOptionHoverAndChecked = styled.div<SelectStyledOptionProps>
     `}
 `
 
+const DropdownOptionIconSize = css<DropdownOptionIconProps>`
+  ${props => DropdownOptionIconSizeConstructor(KEY_SIZE_DATA[props.$size])};
+`
+const DropdownOptionIconSizeConstructor = (props: IJeneseiThemeSize) => css`
+  right: ${props.padding - 6}px;
+  height: ${props.height}px;
+`
+
+export const DropdownOptionIcon = styled(Icon)<DropdownOptionIconProps>`
+  position: absolute;
+  right: 0;
+  height: 100%;
+  align-items: center;
+  ${DropdownOptionIconSize};
+  ${props =>
+    props.$checked
+      ? css`
+          path {
+            fill: ${props.theme.colors.select[props.$genre].border.select};
+          }
+        `
+      : css`
+          path {
+            fill: transparent;
+          }
+        `}
+`
+
+export const SelectInputIcon = styled(Icon)<DropdownOptionIconProps>`
+  position: absolute;
+  right: 0;
+  top: 0;
+  align-items: center;
+  ${DropdownOptionIconSize};
+  ${props =>
+    props.$checked
+      ? css`
+          path {
+            fill: ${props.theme.colors.select[props.$genre].border.select};
+          }
+        `
+      : css`
+          path {
+            fill: ${props.theme.colors.input[props.$genre].border.rest};
+          }
+        `}
+`
 export const DropdownFooter = styled.li<SelectStyledFooterProps>`
   ${StyledInputCSS};
   display: flex;

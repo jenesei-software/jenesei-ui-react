@@ -74,11 +74,6 @@ const DefaultSelectWrapper: FC<SelectProps<IOption>> = props => {
         value: query,
         onChange: handleQueryChange
       }}
-      checkboxProps={{
-        view: 'Square',
-        isHiddenBorder: true,
-        isNotBackground: true
-      }}
       footer={{
         erase: {
           label: 'Erase'

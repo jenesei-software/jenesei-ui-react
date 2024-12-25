@@ -15,7 +15,9 @@ type Story = StoryObj<typeof SelectLanguage>
 const defaultArgs: Partial<SelectLanguageProps> = {
   size: 'medium',
   genre: 'gray',
-  width: '300px'
+  width: '300px',
+  isShowDropdownOptionIcon: true,
+  isShowSelectInputIcon: true
 }
 
 const SelectLanguageWrapper: FC<SelectLanguageProps> = props => {

@@ -221,4 +221,16 @@ export const removeScrollbar = css`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  &::-webkit-scrollbar-horizontal {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-vertical {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    display: none;
+  }
 `

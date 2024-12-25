@@ -3,6 +3,8 @@
 // Export styles and themes
 export { JeneseiGlobalStyles, JeneseiTheme } from './theme'
 export type { IJeneseiTheme } from './theme'
+
+// Export types
 export * from './types'
 
 // Exporting components

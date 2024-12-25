@@ -93,6 +93,7 @@ export enum LibraryIconCurvedName {
   VolumeDown,
   VolumeOff,
   Star,
+  Select,
   Ticket,
   Camera,
   Profile,
@@ -136,7 +137,8 @@ export enum LibraryIconCurvedName {
 }
 export enum LibraryIconCheckboxName {
   Radio,
-  Square
+  Square,
+  Arrow
 }
 export type TLibraryIconCurvedNameString = keyof typeof LibraryIconCurvedName
 export type TLibraryIconCheckboxNameString = keyof typeof LibraryIconCheckboxName
