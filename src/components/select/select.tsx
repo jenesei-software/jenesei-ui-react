@@ -16,13 +16,15 @@ import {
   DropdownList,
   DropdownListParent,
   DropdownOption,
-  DropdownOptionHoverAndChecked,
+  DropdownOptionIcon,
+  DropdownOptionLayout,
   DropdownSelectAll,
   ISelectCountryOption,
   ISelectItem,
   ISelectLanguageOption,
   SelectCountryProps,
   SelectDateProps,
+  SelectInputIcon,
   SelectLanguageProps,
   SelectProps,
   SelectStyledInput,
@@ -209,10 +211,10 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         gsap.to(wrapperRef.current, {
           duration: 0.1,
           zIndex: '10',
-          '--after-height': `${height}px`
+          '--after-height': `${height + 1}px`
         })
         gsap.to(parentListRef.current, {
-          height: `${height}px`,
+          height: `${height + 1}px`,
           display: 'flex',
           zIndex: '1',
           duration: 0.1,
@@ -342,7 +344,16 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           onClick={handleOnFocusEasy}
           ref={inputRef}
         />
-
+        {props.isShowSelectInputIcon && (
+          <SelectInputIcon
+            size={props.size}
+            type="curved"
+            name="Select"
+            $genre={props.genre}
+            $checked={isOpen}
+            $size={props.size}
+          />
+        )}
         <DropdownListParent
           ref={parentListRef}
           $genre={props.genre}
@@ -351,7 +362,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           $size={props.size}
           onScroll={e => handleFetchNextPage(e.target as HTMLDivElement)}
           style={{
-            maxHeight: `${height}px`
+            maxHeight: `${height + 1}px`
           }}
         >
           <DropdownList
@@ -380,6 +391,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                   isCustomIcon={props.optionProps?.isCustomIcon}
                   prefixChildren={props.optionProps?.prefixChildren}
                   postfixChildren={props.optionProps?.postfixChildren}
+                  isShowDropdownOptionIcon={props.isShowDropdownOptionIcon}
                 />
               )
             })}
@@ -419,13 +431,14 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   )
 }
 
-export const ContainerDropdownOptionComponent = (params: {
+const ContainerDropdownOptionComponent = (params: {
   genre: keyof TJeneseiThemeGenreInput
   size: TJeneseiThemeSize
   onClick: () => void
   isError?: boolean
   isLoading?: boolean
   isCustomIcon?: boolean
+  isShowDropdownOptionIcon?: boolean
   isBold?: boolean
   postfixChildren?: InputChildrenProps
   prefixChildren?: InputChildrenProps
@@ -453,7 +466,17 @@ export const ContainerDropdownOptionComponent = (params: {
     >
       <div style={{ position: 'relative', display: 'contents' }}>
         {params.label}
-        <DropdownOptionHoverAndChecked
+        {params.isShowDropdownOptionIcon && (
+          <DropdownOptionIcon
+            size={params.size}
+            type="checkbox"
+            name="Arrow"
+            $genre={params.genre}
+            $checked={params.checked}
+            $size={params.size}
+          />
+        )}
+        <DropdownOptionLayout
           $genre={params.genre}
           $size={params.size}
           $isBold={params.isBold}
@@ -545,6 +568,7 @@ export const SelectCountry: FC<SelectCountryProps> = props => {
   )
 
   const [value, setValue] = useState<ISelectCountryOption | undefined>(option.find(e => e.value === props.value))
+
   useEffect(() => {
     if (value?.value !== props.value) setValue(option.find(e => e.value === props.value))
     // eslint-disable-next-line react-hooks/exhaustive-deps
