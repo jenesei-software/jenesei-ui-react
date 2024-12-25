@@ -30,11 +30,11 @@ export const Icon = (props: LibraryIconItemProps) => {
     icon.paths.map((path, index) => (
       <path
         key={index}
-        id={'id' in path ? path.id : undefined}
+        id={'id' in path ? (path.id as string) : undefined}
         d={path.d}
         clipRule="evenodd"
         fillRule="evenodd"
-        fill={'fill' in path ? getFillColor(path.fill) : undefined}
+        fill={'fill' in path ? getFillColor(path.fill as string) : undefined}
       />
     ))
 

@@ -16,9 +16,9 @@ export const StyledSVG = styled.svg<StyledLibraryIconCurvedItemProps>`
     css`
       order: ${props.$order};
     `}
-  transition: all ${props => props.theme.transition};
+  transition: all ${props => props.theme.transition.default};
   & path {
-    transition: all ${props => props.theme.transition};
+    transition: all ${props => props.theme.transition.default};
   }
   ${FlexContainerAndItemAndBasic};
 `

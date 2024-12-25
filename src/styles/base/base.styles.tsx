@@ -111,7 +111,7 @@ const FlexBasic = css<DollarFlexBasicProps>`
     ${({ $maxTransition }) =>
     $maxTransition &&
     css`
-      transition: all ${props => props.theme.transition};
+      transition: all ${props => props.theme.transition.default};
     `}
   ${({ $mx }) =>
     $mx &&
@@ -219,6 +219,18 @@ export const removeScrollbar = css`
   -ms-overflow-style: none;
 
   &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-horizontal {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-vertical {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
     display: none;
   }
 `
