@@ -5,3 +5,8 @@ export type AddDollarSign<T> = {
 export enum Service {
   jenesei_id = 'jenesei_id'
 }
+
+export enum Language {
+  en = 'English',
+  ru = 'Русский'
+}
