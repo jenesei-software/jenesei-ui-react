@@ -1,0 +1,6 @@
+import{j as p}from"./jsx-runtime-CkxqCPlQ.js";import{r as o}from"./index-DJO9vBfz.js";import{C as c}from"./checkbox-group.styles-WU5yQFsj.js";import"./checkbox.styles-DNPN2n3b.js";import"./styled-components.browser.esm-CCP31c1y.js";import"./loading.styles-_WGkLspa.js";import"./theme-3X06DcYZ.js";import"./theme.global-3OPldRDj.js";import"./icon.styles-Cg4ODpap.js";import"./base.styles-62mSIwMs.js";import"./typography-DY6CFA4c.js";import"./index-rCr475hU.js";import"./typography.functions-CeSMEUjp.js";const W={component:c,title:"Component/CheckboxGroup"},l={checkboxGenre:"gray",checkBoxView:"Radio",checkboxWidth:"100%",checkboxIsHiddenBorder:!1,multiple:!0,size:"medium",labelField:"label",valueField:"value",width:"300px"},d=r=>{const[i,m]=o.useState([]),[n]=o.useState([{value:0,label:"First"},{value:1,label:"Second"}]);return p.jsx(c,{...r,value:i,options:n,onChange:u=>m(u)})},e={render:r=>p.jsx(d,{...r}),args:{...l}};var t,a,s;e.parameters={...e.parameters,docs:{...(t=e.parameters)==null?void 0:t.docs,source:{originalSource:`{
+  render: args => <CheckboxGroupWrapper {...args} />,
+  args: {
+    ...defaultArgs
+  }
+}`,...(s=(a=e.parameters)==null?void 0:a.docs)==null?void 0:s.source}}};const w=["CheckboxGroup"];export{e as CheckboxGroup,w as __namedExportsOrder,W as default};

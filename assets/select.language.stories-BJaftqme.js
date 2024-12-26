@@ -1,0 +1,6 @@
+import{j as n}from"./jsx-runtime-CkxqCPlQ.js";import{r as g}from"./index-DJO9vBfz.js";import{a as s}from"./select.styles-DEjaW0e-.js";import"./index-rCr475hU.js";import"./input.styles-B9wNqWi1.js";import"./styled-components.browser.esm-CCP31c1y.js";import"./loading.styles-_WGkLspa.js";import"./theme-3X06DcYZ.js";import"./theme.global-3OPldRDj.js";import"./typography-DY6CFA4c.js";import"./typography.functions-CeSMEUjp.js";import"./index-DjKJqAo0.js";import"./button-DS91_tax.js";import"./icon.styles-Cg4ODpap.js";import"./base.styles-62mSIwMs.js";const v={component:s,title:"Component/Select"},u={size:"medium",genre:"gray",width:"300px",isShowDropdownOptionIcon:!0,isShowSelectInputIcon:!0},l=r=>{const[p,m]=g.useState(""),i=c=>{m(c)};return n.jsx(s,{...r,placeholder:"Choice language...",value:p,onChange:i})},e={render:r=>n.jsx(l,{...r}),args:{...u}};var t,o,a;e.parameters={...e.parameters,docs:{...(t=e.parameters)==null?void 0:t.docs,source:{originalSource:`{
+  render: args => <SelectLanguageWrapper {...args} />,
+  args: {
+    ...defaultArgs
+  }
+}`,...(a=(o=e.parameters)==null?void 0:o.docs)==null?void 0:a.source}}};const y=["Language"];export{e as Language,y as __namedExportsOrder,v as default};

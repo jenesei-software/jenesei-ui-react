@@ -1,0 +1,32 @@
+import{j as s}from"./jsx-runtime-CkxqCPlQ.js";import{r as a}from"./index-DJO9vBfz.js";import{d as h}from"./styled-components.browser.esm-CCP31c1y.js";import{A as b,m as y}from"./index-C20QuurF.js";const m=e=>{const r=a.useRef(null);return a.useEffect(()=>{const c=u=>{r.current&&!r.current.contains(u.target)&&e.onOutsideClick()};return document.addEventListener("mousedown",c),()=>{document.removeEventListener("mousedown",c)}},[e]),s.jsx("div",{style:{display:"contents"},ref:r,children:e.children})};try{m.displayName="Outside",m.__docgenInfo={description:"",displayName:"Outside",props:{onOutsideClick:{defaultValue:null,description:"",name:"onOutsideClick",required:!0,type:{name:"() => void"}}}}}catch{}const H=a.createContext(null),D=e=>{var _,g;const[r,c]=a.useState([]),u=a.useCallback(t=>{c(i=>{const d=i.find(n=>n.id===t);if(!d)return i;const o=d.index;return i.filter(n=>n.id!==t).map(n=>({...n,index:n.index>o?n.index-1:n.index}))})},[]),T=a.useCallback(t=>{const i=t.id;c(d=>{const o=d.findIndex(n=>n.id===i);let l;if(o!==-1)l=[...d],l[o]={...t,id:i,index:d[o].index};else{l=d.map(p=>({...p,index:p.index+1}));const n={...t,id:i,index:0};l.unshift(n)}return l})},[]),v=a.useMemo(()=>r.length,[r.length]),A=a.useMemo(()=>e.zIndex,[e.zIndex]),O=a.useMemo(()=>{var t;return(t=e==null?void 0:e.default)==null?void 0:t.maxHeight},[(_=e==null?void 0:e.default)==null?void 0:_.maxHeight]),W=a.useMemo(()=>{var t;return(t=e==null?void 0:e.default)==null?void 0:t.maxWidth},[(g=e==null?void 0:e.default)==null?void 0:g.maxWidth]);return s.jsxs(H.Provider,{value:{add:T,remove:u,dialogHistory:r},children:[s.jsx(b,{children:v&&s.jsx(x,{$zIndex:A,initial:{opacity:0},exit:{opacity:0},animate:{opacity:1},transition:{type:"spring",duration:I},children:r.map(t=>{const i=t.index,d=t.content,o=t.id,l=t.maxWidth||W||R,n=t.maxHeight||O||N;return s.jsx(w,{index:i,content:d,id:o,maxWidth:l,maxHeight:n,remove:()=>u(o)},o)})})}),e.children]})},L=e=>s.jsx(m,{onOutsideClick:()=>e.remove(),children:s.jsx(f,{initial:{opacity:0,scale:.8},animate:{opacity:1,scale:1},transition:{type:"spring",duration:V,delay:I},style:{zIndex:-e.index},$maxHeight:e.maxHeight,$maxWidth:e.maxWidth,children:e.content},e.id)}),w=a.memo(L);try{D.displayName="ProviderDialog",D.__docgenInfo={description:"",displayName:"ProviderDialog",props:{zIndex:{defaultValue:null,description:"",name:"zIndex",required:!0,type:{name:"number"}},default:{defaultValue:null,description:"",name:"default",required:!0,type:{name:'Pick<DialogContentProps, "maxWidth" | "maxHeight">'}}}}}catch{}const x=h(y.div)`
+  position: fixed;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  background-color: ${e=>e.theme.palette.black50};
+  z-index: ${e=>e.$zIndex};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+`,f=h(y.div)`
+  max-width: ${e=>e.$maxWidth};
+  max-height: ${e=>e.$maxHeight};
+  width: 100%;
+  height: fit-content;
+  background: ${e=>e.theme.palette.whiteStandard};
+  border-radius: 12px;
+  border-style: solid;
+  border-color: ${e=>e.theme.palette.grayKaren};
+  border-width: 1px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+`,E=h(y.div)``;try{x.displayName="DialogLayout",x.__docgenInfo={description:"",displayName:"DialogLayout",props:{theme:{defaultValue:null,description:"",name:"theme",required:!1,type:{name:"DefaultTheme"}},as:{defaultValue:null,description:"",name:"as",required:!1,type:{name:"void | WebTarget"}},forwardedAs:{defaultValue:null,description:"",name:"forwardedAs",required:!1,type:{name:"void | WebTarget"}}}}}catch{}try{f.displayName="DialogElementWrapper",f.__docgenInfo={description:"",displayName:"DialogElementWrapper",props:{theme:{defaultValue:null,description:"",name:"theme",required:!1,type:{name:"DefaultTheme"}},as:{defaultValue:null,description:"",name:"as",required:!1,type:{name:"void | WebTarget"}},forwardedAs:{defaultValue:null,description:"",name:"forwardedAs",required:!1,type:{name:"void | WebTarget"}}}}}catch{}try{E.displayName="DialogContent",E.__docgenInfo={description:"",displayName:"DialogContent",props:{theme:{defaultValue:null,description:"",name:"theme",required:!1,type:{name:"DefaultTheme"}},as:{defaultValue:null,description:"",name:"as",required:!1,type:{name:"void | WebTarget"}},forwardedAs:{defaultValue:null,description:"",name:"forwardedAs",required:!1,type:{name:"void | WebTarget"}}}}}catch{}const V=.3,I=.4,N="245px",R="300px";export{H as D,D as P};
