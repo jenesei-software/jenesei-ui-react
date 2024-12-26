@@ -2,7 +2,7 @@ import { AnimatePresence } from 'framer-motion'
 import { FC } from 'react'
 
 import { Typography } from '@local/components/typography'
-import { useScreenWidthContext } from '@local/contexts/context-screen-width'
+import { useScreenWidth } from '@local/contexts/context-screen-width'
 
 import {
   AuthLayoutProps,
@@ -16,7 +16,7 @@ import {
 } from '.'
 
 export const AuthLayout: FC<AuthLayoutProps> = props => {
-  const { isTablet, isMobile } = useScreenWidthContext()
+  const { isTablet, isMobile } = useScreenWidth()
 
   return (
     <AnimatePresence>
