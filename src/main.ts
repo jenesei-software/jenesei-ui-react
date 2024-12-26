@@ -7,6 +7,9 @@ export type { IJeneseiTheme } from './theme'
 // Export types
 export * from './types'
 
+//Export functions
+export * from './functions'
+
 // Exporting components
 export { Accordion } from './components/accordion'
 export { Button } from './components/button'
@@ -35,13 +38,20 @@ export { AuthLayout } from './layouts/auth'
 
 export { ProviderApp, AppContext, useApp } from './contexts/context-app'
 
-export { ProviderCookie, CookieContext, useCookie } from './contexts/context-cookie'
+export { ProviderCookie, CookieContext, useCookie, getFromCookie, setToCookie } from './contexts/context-cookie'
 export type { ValidCookieObject } from './contexts/context-cookie'
 
-export { ProviderLocalStorage, LocalStorageContext, useLocalStorage } from './contexts/context-local-storage'
+export {
+  ProviderLocalStorage,
+  LocalStorageContext,
+  useLocalStorage,
+  getFromLocalStorage,
+  setToLocalStorage
+} from './contexts/context-local-storage'
 export type { ValidLocalStorageObject } from './contexts/context-local-storage'
 
 export { ProviderPermission, PermissionContext, usePermission } from './contexts/context-permission'
 export { ProviderSonner, SonnerContext, useSonner } from './contexts/context-sonner'
 export { ProviderGeolocation, GeolocationContext, useGeolocation } from './contexts/context-geolocation'
 export { ProviderDialog, DialogContext, useDialogs, useDialog } from './contexts/context-dialog'
+export { ProviderScreenWidth, ScreenWidthContext, useScreenWidth } from './contexts/context-screen-width'
