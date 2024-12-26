@@ -10,6 +10,9 @@ export * from './types'
 //Export functions
 export * from './functions'
 
+//Export consts
+export * from './consts'
+
 // Exporting components
 export { Accordion } from './components/accordion'
 export { Button } from './components/button'
