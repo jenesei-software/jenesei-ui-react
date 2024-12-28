@@ -31,7 +31,9 @@ export { Typography } from './components/typography'
 export { Separator } from './components/separator'
 export { Ripple } from './components/ripple'
 
-export { Preview, useRemovePreviewLoader } from './areas/preview'
+export { useRemovePreviewLoader } from './areas/preview'
+export { default as Preview } from './areas/preview/preview'
+
 export { Outside } from './areas/outside'
 export { Scroll } from './areas/scroll'
 export { Skeleton } from './areas/skeleton'

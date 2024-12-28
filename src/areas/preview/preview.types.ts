@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 
-type PreviewDefaultProps = PropsWithChildren
+type PreviewDefaultProps = PropsWithChildren & { defaultVisible?: boolean }
 
 interface PreviewIsShowProps {
   isShow: boolean
