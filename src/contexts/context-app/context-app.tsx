@@ -1,7 +1,7 @@
-import { FC, createContext, useCallback, useEffect, useState } from 'react'
-import { Helmet } from 'react-helmet'
+import { FC, Suspense, createContext, lazy, useCallback, useEffect, useState } from 'react'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 
-import { Preview, PreviewAdditionalProps } from '@local/areas/preview'
+import { PreviewAdditionalProps } from '@local/areas/preview'
 import { JeneseiThemeVariables, JeneseiThemeVariablesKeys } from '@local/theme'
 
 import {
@@ -17,6 +17,8 @@ import {
   ProviderAppProps,
   ProviderAppWrapper
 } from '.'
+
+const Preview = lazy(() => import('@local/areas/preview/preview'))
 
 export const AppContext = createContext<AppContextProps | null>(null)
 
@@ -57,61 +59,69 @@ export const ProviderApp: FC<ProviderAppProps> = props => {
   const { changePreview, previewProps } = usePreview(props.defaultPreview)
 
   return (
-    <AppContext.Provider
-      value={{
-        changePreview,
-        changeStatusBarColor,
-        changeBgColor,
-        changeBgImage,
-        changeTitle,
-        changeDescription,
-        historyStatusBarColor,
-        historyBgColor,
-        historyBgImage,
-        historyTitle,
-        historyDescription,
-        setDefaultStatusBarColor,
-        setDefaultBgColor,
-        setDefaultBgImage,
-        setDefaultTitle,
-        setDefaultDescription
-      }}
-    >
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta name="theme-color" content={JeneseiThemeVariables[statusBarColor]} />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="mobile-web-app-capable" content="yes" />
-      </Helmet>
-      <Preview {...previewProps}>
-        <ProviderAppWrapper $bgColor={bgColor} $bgImage={bgImage}>
-          <ProviderAppOutlet
-            $isScrollOutlet={props.isScrollOutlet}
-            $footer={props.footer}
-            $notification={props.notification}
-            $header={props.header}
-            $nav={props.nav}
-            $leftAside={props.leftAside}
-            $rightAside={props.rightAside}
-          >
-            <ProviderAppOutletNotification $notification={props.notification}>
-              {props.notification?.component || null}
-            </ProviderAppOutletNotification>
-            <ProviderAppOutletHeader $header={props.header}>{props.header?.component || null}</ProviderAppOutletHeader>
-            <ProviderAppOutletNav $nav={props.nav}>{props.nav?.component || null}</ProviderAppOutletNav>
-            <ProviderAppOutletLeftAside $leftAside={props.leftAside}>
-              {props.leftAside?.component || null}
-            </ProviderAppOutletLeftAside>
-            <ProviderAppOutletChildren>{props.children}</ProviderAppOutletChildren>
-            <ProviderAppOutletRightAside $rightAside={props.rightAside}>
-              {props.rightAside?.component || null}
-            </ProviderAppOutletRightAside>
-            <ProviderAppOutletFooter $footer={props.footer}>{props.footer?.component || null}</ProviderAppOutletFooter>
-          </ProviderAppOutlet>
-        </ProviderAppWrapper>{' '}
-      </Preview>
-    </AppContext.Provider>
+    <HelmetProvider>
+      <AppContext.Provider
+        value={{
+          changePreview,
+          changeStatusBarColor,
+          changeBgColor,
+          changeBgImage,
+          changeTitle,
+          changeDescription,
+          historyStatusBarColor,
+          historyBgColor,
+          historyBgImage,
+          historyTitle,
+          historyDescription,
+          setDefaultStatusBarColor,
+          setDefaultBgColor,
+          setDefaultBgImage,
+          setDefaultTitle,
+          setDefaultDescription
+        }}
+      >
+        <Helmet>
+          <title>{title}</title>
+          <meta name="description" content={description} />
+          <meta name="theme-color" content={JeneseiThemeVariables[statusBarColor]} />
+          <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+          <meta name="mobile-web-app-capable" content="yes" />
+        </Helmet>
+        <Suspense fallback={<Preview isShow defaultVisible />}>
+          <Preview {...previewProps}>
+            <ProviderAppWrapper $bgColor={bgColor} $bgImage={bgImage}>
+              <ProviderAppOutlet
+                $isScrollOutlet={props.isScrollOutlet}
+                $footer={props.footer}
+                $notification={props.notification}
+                $header={props.header}
+                $nav={props.nav}
+                $leftAside={props.leftAside}
+                $rightAside={props.rightAside}
+              >
+                <ProviderAppOutletNotification $notification={props.notification}>
+                  {props.notification?.component || null}
+                </ProviderAppOutletNotification>
+                <ProviderAppOutletHeader $header={props.header}>
+                  {props.header?.component || null}
+                </ProviderAppOutletHeader>
+                <ProviderAppOutletNav $nav={props.nav}>{props.nav?.component || null}</ProviderAppOutletNav>
+                <ProviderAppOutletLeftAside $leftAside={props.leftAside}>
+                  {props.leftAside?.component || null}
+                </ProviderAppOutletLeftAside>
+                <ProviderAppOutletChildren>{props.children}</ProviderAppOutletChildren>
+                <ProviderAppOutletRightAside $rightAside={props.rightAside}>
+                  {props.rightAside?.component || null}
+                </ProviderAppOutletRightAside>
+                <ProviderAppOutletFooter $footer={props.footer}>
+                  {props.footer?.component || null}
+                </ProviderAppOutletFooter>
+              </ProviderAppOutlet>
+            </ProviderAppWrapper>{' '}
+          </Preview>
+        </Suspense>
+      </AppContext.Provider>
+    </HelmetProvider>
   )
 }
 

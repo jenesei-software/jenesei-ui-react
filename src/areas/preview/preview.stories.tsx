@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
-import { Preview as PreviewComponent } from '.'
+import PreviewComponent from './preview'
 
 const meta: Meta<typeof PreviewComponent> = {
   component: PreviewComponent,

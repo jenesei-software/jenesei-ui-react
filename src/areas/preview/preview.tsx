@@ -2,8 +2,8 @@ import { FC, useEffect, useState } from 'react'
 
 import { PreviewChildren, PreviewLoading, PreviewProps, PreviewWrapper } from '.'
 
-export const Preview: FC<PreviewProps> = props => {
-  const [visible, setVisible] = useState(false)
+const Preview: FC<PreviewProps> = props => {
+  const [visible, setVisible] = useState(props.defaultVisible ?? true)
 
   useEffect(() => {
     if ('time' in props) {
@@ -22,7 +22,7 @@ export const Preview: FC<PreviewProps> = props => {
       setVisible(!props.isShow)
     }
   }, [props])
-
+  console.log('visible', visible)
   return (
     <>
       <PreviewWrapper $visible={visible}>
@@ -32,3 +32,5 @@ export const Preview: FC<PreviewProps> = props => {
     </>
   )
 }
+
+export default Preview
