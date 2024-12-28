@@ -22,7 +22,7 @@ const Preview: FC<PreviewProps> = props => {
       setVisible(!props.isShow)
     }
   }, [props])
-  console.log('visible', visible)
+  
   return (
     <>
       <PreviewWrapper $visible={visible}>
