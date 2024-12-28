@@ -87,7 +87,7 @@ export const ProviderApp: FC<ProviderAppProps> = props => {
           <meta name="apple-mobile-web-app-status-bar-style" content="default" />
           <meta name="mobile-web-app-capable" content="yes" />
         </Helmet>
-        <Suspense fallback={<Preview isShow defaultVisible />}>
+        <Suspense fallback={<Preview isShow defaultVisible={false} />}>
           <Preview {...previewProps}>
             <ProviderAppWrapper $bgColor={bgColor} $bgImage={bgImage}>
               <ProviderAppOutlet
