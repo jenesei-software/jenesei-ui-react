@@ -112,7 +112,14 @@ const defaultChildren = (
 
 export const Default: Story = {
   args: {
-    // defaultPreview: { time: 1000 },
+    defaultPreview: {
+      time: 1000,
+      content: (
+        <Typography variant="h6" weight={700}>
+          Loading
+        </Typography>
+      )
+    },
     defaultBgColor: 'black40',
     isScrollOutlet: false,
     defaultTitle: 'Storybook?',

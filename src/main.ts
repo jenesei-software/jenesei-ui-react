@@ -30,9 +30,9 @@ export { Tooltip } from './components/tooltip'
 export { Typography } from './components/typography'
 export { Separator } from './components/separator'
 export { Ripple } from './components/ripple'
+export { Image } from './components/image'
 
-export { useRemovePreviewLoader } from './areas/preview'
-export { default as Preview } from './areas/preview/preview'
+export { useRemovePreviewLoader, Preview } from './areas/preview'
 
 export { Outside } from './areas/outside'
 export { Scroll } from './areas/scroll'
