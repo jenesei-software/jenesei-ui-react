@@ -18,6 +18,15 @@ jobs:
         with:
           node-version: '20.x'
 
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: |
+            r1/${{ runner.os }}/npm/${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            r1/${{ runner.os }}/npm/
+
       - name: Clean git working directory
         run: |
           git reset --hard || echo "No changes to reset"

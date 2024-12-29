@@ -1,4 +1,4 @@
-import { FC, Suspense, createContext, lazy, useCallback, useEffect, useState } from 'react'
+import { FC, createContext, useCallback, useEffect, useState } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 import { Preview, PreviewAdditionalProps } from '@local/areas/preview'
