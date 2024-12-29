@@ -1,15 +1,15 @@
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, ReactNode } from 'react'
 
-type PreviewDefaultProps = PropsWithChildren & { defaultVisible?: boolean }
+type PreviewDefaultProps = { defaultVisible?: boolean; content?: ReactNode }
 
-interface PreviewIsShowProps {
-  isShow: boolean
+interface PreviewIsShowProps extends PreviewDefaultProps {
+  visible: boolean
 }
 
-interface PreviewTimeProps {
+interface PreviewTimeProps extends PreviewDefaultProps {
   time: number
 }
 
 export type PreviewAdditionalProps = PreviewIsShowProps | PreviewTimeProps
 
-export type PreviewProps = PreviewDefaultProps & PreviewAdditionalProps
+export type PreviewProps = PropsWithChildren & PreviewAdditionalProps
