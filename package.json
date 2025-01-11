@@ -18,7 +18,7 @@
     "react",
     "ui",
     "tanstack",
-    "gsap",
+    "framer-motion",
     "styled-components"
   ],
   "exports": {
