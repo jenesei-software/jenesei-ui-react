@@ -51,7 +51,7 @@ jobs:
         run: |
           node update-readme.js
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit and push changes
         run: |
@@ -62,7 +62,7 @@ jobs:
 
       - name: Configure npm for GitHub Packages
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.PAT_CYRILSTRONE_ACTION }}" >> ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
 
       - name: Check if version exists in GitHub Packages
         id: check_version_github
@@ -105,7 +105,7 @@ jobs:
         run: |
           npm publish --registry=https://npm.pkg.github.com/
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to NPM
         if: env.publishGH == 'true' && env.publishNPM == 'true'
