@@ -40,7 +40,7 @@ jobs:
 
       - name: Configure npm for GitHub Packages
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.PAT_CYRILSTRONE_ACTION }}" > ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
           echo "@jenesei-software:registry=https://npm.pkg.github.com/" >> ~/.npmrc
 
       - name: Install dependencies
@@ -56,7 +56,7 @@ jobs:
       - name: Push changes
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.PAT_CYRILSTRONE_ACTION }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: build_prod
           publish_dir: storybook-static
           force_orphan: true
