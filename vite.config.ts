@@ -23,7 +23,7 @@ export default defineConfig(() => {
       !isStorybookBuild &&
         dts({
           include: ['src/'],
-          exclude: ['src/declaration/styled.d.ts', 'src/declaration/jenesei-web-id-api.d.ts'],
+          exclude: ['src/declaration/styled.d.ts'],
           rollupTypes: true,
           insertTypesEntry: true,
           tsconfigPath: './tsconfig.json'

@@ -65,12 +65,6 @@ export const PreviewChildren = styled.div<{ $visible: boolean }>`
 `
 
 export const PreviewLoading = styled.div`
-  --color: ${props => props.theme.palette.blueFocus};
-  --size-mid: 6vmin;
-  --size-dot: 1.5vmin;
-  --size-bar: 0.4vmin;
-  --size-square: 3vmin;
-
   &:before,
   &::after {
     content: '';
@@ -80,14 +74,14 @@ export const PreviewLoading = styled.div`
 
   &::before,
   &::after {
-    width: var(--size-square);
-    height: var(--size-square);
-    background-color: var(--color);
+    width: 3vmin;
+    height: 3vmin;
+    background-color: ${props => props.theme.palette.blueFocus};
   }
 
   &::before {
-    top: calc(50% - var(--size-square));
-    left: calc(50% - var(--size-square));
+    top: calc(50% - 3vmin);
+    left: calc(50% - 3vmin);
     animation: ${loader2} 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
   }
 
@@ -97,4 +91,13 @@ export const PreviewLoading = styled.div`
     animation: ${loader1} 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
   }
   mation-delay: 0.12s;
+`
+
+export const PreviewContent = styled.div`
+  position: relative;
+  margin-top: calc(18vmin);
+  z-index: 1;
+  transition:
+    opacity ${props => props.theme.transition.default},
+    transform ${props => props.theme.transition.default};
 `

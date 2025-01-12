@@ -13,3 +13,20 @@ export function transformEnumToOptions<T extends Record<string, string>>(enumObj
     search: `${value}, ${key}`
   }))
 }
+
+type GenericObject<T> = {
+  [key: string]: T
+}
+
+export function transformObjectToArray<T>(obj: GenericObject<T>): Array<T> {
+  return Object.entries(obj).map(([, value]) => ({
+    ...value
+  }))
+}
+
+export function transformObjectValuesToKeys<T>(obj: GenericObject<T>): GenericObject<string> {
+  return Object.keys(obj).reduce((acc, key) => {
+    acc[key] = key
+    return acc
+  }, {} as GenericObject<string>)
+}

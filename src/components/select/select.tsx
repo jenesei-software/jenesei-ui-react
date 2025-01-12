@@ -8,9 +8,8 @@ import React, { FC, FocusEventHandler, ReactNode, memo, useCallback, useEffect, 
 import { Button } from '@local/components/button'
 import { InputChildrenProps, InputErrorMessage } from '@local/components/input'
 import { Typography, TypographyTooltip } from '@local/components/typography'
-import { transformEnumToOptions } from '@local/functions'
+import { ListLanguage } from '@local/consts'
 import { KEY_SIZE_DATA, TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
-import { Language } from '@local/types'
 
 import {
   DropdownErase,
@@ -595,7 +594,7 @@ export const SelectCountry: FC<SelectCountryProps> = props => {
 }
 
 export const SelectLanguage: FC<SelectLanguageProps> = props => {
-  const option = transformEnumToOptions(Language)
+  const option = ListLanguage
 
   const [viewOption, setViewOption] = useState<ISelectLanguageOption[]>(option)
   const [query, setQuery] = useState<string>('')

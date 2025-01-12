@@ -10,6 +10,9 @@ export * from './types'
 //Export functions
 export * from './functions'
 
+//Export consts
+export * from './consts'
+
 // Exporting components
 export { Accordion } from './components/accordion'
 export { Button } from './components/button'
@@ -27,8 +30,10 @@ export { Tooltip } from './components/tooltip'
 export { Typography } from './components/typography'
 export { Separator } from './components/separator'
 export { Ripple } from './components/ripple'
+export { Image } from './components/image'
 
-export { Preview, useRemovePreviewLoader } from './areas/preview'
+export { useRemovePreviewLoader, Preview } from './areas/preview'
+
 export { Outside } from './areas/outside'
 export { Scroll } from './areas/scroll'
 export { Skeleton } from './areas/skeleton'
