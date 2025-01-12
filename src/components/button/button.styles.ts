@@ -183,7 +183,9 @@ export const StyledButton = styled.button<StyledDollarButtonProps>`
   &:active * {
     pointer-events: none;
   }
-
+  & * {
+    user-select: none;
+  }
   ${ButtonFlex};
   ${ButtonBorder};
   ${ButtonSize};
