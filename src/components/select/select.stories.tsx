@@ -33,7 +33,7 @@ const DefaultSelectWrapper: FC<SelectProps<IOption>> = props => {
       label: (
         <TypographyTooltip
           typography={{
-            textWrap: 'nowrap'
+            wrap: 'nowrap'
           }}
           tooltip={{ size: 14, placement: 'bottom' }}
         >
