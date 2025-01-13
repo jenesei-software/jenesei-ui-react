@@ -20,7 +20,7 @@ async function updateReadme() {
 
   // Формирование команд для установки
   const commands = Object.keys(peerDependencies)
-    .map((dep) => `npm install ${dep} --save`)
+    .map(dep => `npm install ${dep} --save`)
     .join('\n')
 
   // Формирование секции установки
@@ -42,8 +42,7 @@ ${commands}
 
   if (readmeContent.includes(insertionPoint)) {
     // Найти позицию вставки
-    const insertionIndex =
-      readmeContent.indexOf(insertionPoint) + insertionPoint.length
+    const insertionIndex = readmeContent.indexOf(insertionPoint) + insertionPoint.length
 
     // Сформировать обновлённое содержание
     const beforeInsertion = readmeContent.slice(0, insertionIndex).trim()
