@@ -7,19 +7,25 @@ import { AddDollarSign } from '@local/types'
 export interface TypographyDefaultProps extends PropsWithChildren {
   clamp?: number
   device?: TJeneseiDevice
-  clampOrient?: CSSProperties['boxOrient']
-  overflow?: CSSProperties['overflow']
   color?: JeneseiThemeVariablesKeys
   family?: TJeneseiFontFamily
-  textAlign?: CSSProperties['textAlign']
-  textWrap?: CSSProperties['textWrap']
+
+  clampOrient?: CSSProperties['boxOrient']
+  overflow?: CSSProperties['overflow']
+  align?: CSSProperties['textAlign']
+  decoration?: CSSProperties['textDecoration']
+  transform?: CSSProperties['textTransform']
+  wrap?: CSSProperties['textWrap']
   cursor?: CSSProperties['cursor']
   style?: CSSProperties
+
   className?: string
   weight?: 100 | 300 | 400 | 500 | 700 | 900
   height?: number
   flex?: string
+
   onClick?: () => void
+
   isHoverUnderlining?: boolean
 }
 
@@ -44,14 +50,16 @@ export type TypographyCSSProps = Partial<
       | 'overflow'
       | 'color'
       | 'family'
-      | 'textAlign'
-      | 'textWrap'
+      | 'align'
+      | 'wrap'
       | 'flex'
       | 'isHoverUnderlining'
       | 'cursor'
       | 'weight'
       | 'height'
       | 'device'
+      | 'decoration'
+      | 'transform'
     > &
       Pick<TypographyVariantProps, 'variant'> &
       Pick<TypographyDataProps, 'size'>
