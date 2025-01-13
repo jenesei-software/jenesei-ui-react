@@ -5,6 +5,7 @@ import { FlexContainerAndItem } from '@local/styles/base'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledDollarButtonIconsWrapperProps, StyledDollarButtonProps } from '.'
+import { DEFAULT_RIPPLE_ID } from '../ripple'
 
 /****************************************** Genre *************************************************/
 const ButtonGenre = css<StyledDollarButtonProps>`
@@ -170,7 +171,6 @@ export const StyledButton = styled.button<StyledDollarButtonProps>`
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  user-select: none;
   transition:
     all ${props => props.theme.transition.default},
     outline 0s;
@@ -179,12 +179,11 @@ export const StyledButton = styled.button<StyledDollarButtonProps>`
   text-overflow: ellipsis;
 
   cursor: pointer;
+  user-select: none;
 
-  &:active * {
-    pointer-events: none;
-  }
-  & * {
+  & *:not(${DEFAULT_RIPPLE_ID}) {
     user-select: none;
+    pointer-events: none;
   }
   ${ButtonFlex};
   ${ButtonBorder};

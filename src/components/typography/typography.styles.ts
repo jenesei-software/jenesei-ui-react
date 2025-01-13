@@ -24,16 +24,25 @@ const SpanFontCSS = css<TypographyCSSProps>`
       cursor: ${props.$cursor};
     `};
   ${props =>
-    props.$textAlign &&
+    props.$align &&
     css`
-     text-align ${props.$textAlign};
+     text-align ${props.$align};
     `};
   ${props =>
-    props.$textWrap &&
+    props.$wrap &&
     css`
-     text-wrap ${props.$textWrap};
+     text-wrap ${props.$wrap};
     `};
-
+  ${props =>
+    props.$decoration &&
+    css`
+     text-decoration ${props.$decoration};
+    `};
+  ${props =>
+    props.$transform &&
+    css`
+     text-transform ${props.$transform};
+    `};
   ${props =>
     props.$overflow &&
     css`
@@ -74,16 +83,6 @@ const SpanFontCSS = css<TypographyCSSProps>`
     props.$color &&
     css`
       color: ${JeneseiThemeVariables[props.$color]};
-    `};
-  ${props =>
-    props.$textAlign &&
-    css`
-      text-align: ${props.$textAlign};
-    `};
-  ${props =>
-    props.$textWrap &&
-    css`
-      text-wrap: ${props.$textWrap};
     `};
 
   ${props =>
