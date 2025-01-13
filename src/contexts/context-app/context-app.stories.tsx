@@ -23,7 +23,7 @@ const defaultNotification = (
       width: '100%'
     }}
   >
-    <Typography variant="h8" textWrap="nowrap">
+    <Typography variant="h8" wrap="nowrap">
       Notification
     </Typography>
   </div>
@@ -37,7 +37,7 @@ const defaultHeader = (
       width: '100%'
     }}
   >
-    <Typography variant="h1" textWrap="nowrap">
+    <Typography variant="h1" wrap="nowrap">
       Header
     </Typography>
   </div>

@@ -524,7 +524,7 @@ export const SelectCountry: FC<SelectCountryProps> = props => {
             />
             <TypographyTooltip
               typography={{
-                textWrap: 'nowrap'
+                wrap: 'nowrap'
               }}
               tooltip={{ size: 14, placement: 'bottom' }}
             >
