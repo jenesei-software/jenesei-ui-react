@@ -2,6 +2,7 @@ import { FC, useCallback, useMemo } from 'react'
 import { useTheme } from 'styled-components'
 
 import { Loading } from '@local/components/loading'
+import { Ripple } from '@local/main'
 
 import { CheckboxProps, CheckboxWrapper, StyledIcon } from '.'
 
@@ -40,6 +41,7 @@ export const Checkbox: FC<CheckboxProps> = props => {
       tabIndex={0}
       onClick={() => !props.isDisabled && handleOnClick(!props.checked)}
     >
+      {!props.isDisabled && <Ripple color={theme.colors.checkbox[props.genre].color.rest} />}
       {props.isOnlyLoading ? (
         props.isLoading ? (
           <Loading size={props.size} color={theme.colors.checkbox[props.genre].color.rest} />

@@ -16,7 +16,7 @@ export const CheckboxSizeConstructor = (props: IJeneseiThemeSize) => css`
   border-radius: ${props.radius + 12}px;
   gap: ${props.padding - 2}px;
   ${getFontSizeStyles(props.font, 700, 'Inter')};
-  padding: 0px ${props.padding - 4}px;
+  padding: ${props.padding - 4}px;
 `
 
 /****************************************** Genre *************************************************/
@@ -80,10 +80,13 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   overflow: hidden;
   isolation: isolate;
   user-select: none;
-  transition: all ${props => props.theme.transition.default};
+  transition:
+    all ${props => props.theme.transition.default},
+    outline 0s;
 
-  & {
+  & *:not(#Ripple):not(:has(a)):not(a) {
     user-select: none;
+    pointer-events: none;
   }
   cursor: pointer;
 
