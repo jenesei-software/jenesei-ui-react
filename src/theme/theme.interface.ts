@@ -271,3 +271,4 @@ export type JeneseiThemeVariablesKeys =
   | 'blueFocus'
   | 'blueBr'
   | 'amnezia'
+  | 'inherit'

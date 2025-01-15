@@ -1,39 +1,41 @@
-import { CSSProperties, PropsWithChildren, ReactNode } from 'react'
+import { CSSProperties, PropsWithChildren } from 'react'
 
-import { TooltipProps } from '@local/components/tooltip'
 import { JeneseiThemeVariablesKeys, TJeneseiDevice, TJeneseiFontFamily } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
-export interface TypographyDefaultProps extends PropsWithChildren {
+import { TooltipProps } from '../tooltip'
+
+export type TypographyDefaultProps = PropsWithChildren & {
   clamp?: number
   device?: TJeneseiDevice
-  color?: JeneseiThemeVariablesKeys
-  family?: TJeneseiFontFamily
-
   clampOrient?: CSSProperties['boxOrient']
   overflow?: CSSProperties['overflow']
+  color?: JeneseiThemeVariablesKeys
+  family?: TJeneseiFontFamily
   align?: CSSProperties['textAlign']
   decoration?: CSSProperties['textDecoration']
   transform?: CSSProperties['textTransform']
   wrap?: CSSProperties['textWrap']
   cursor?: CSSProperties['cursor']
   style?: CSSProperties
-
   className?: string
+  isParagraph?: boolean
+  isAnchor?: boolean
+  href?: string
   weight?: 100 | 300 | 400 | 500 | 700 | 900
   height?: number
   flex?: string
-
   onClick?: () => void
-
   isHoverUnderlining?: boolean
 }
 
-export interface TypographyDataProps extends TypographyDefaultProps {
+export type TypographyDataProps = TypographyDefaultProps & {
   size?: number
+  sizeMobile?: number
+  sizeTablet?: number
 }
 
-export interface TypographyVariantProps extends TypographyDefaultProps {
+export type TypographyVariantProps = TypographyDefaultProps & {
   variant: TypographyVariant
 }
 
@@ -62,13 +64,12 @@ export type TypographyCSSProps = Partial<
       | 'transform'
     > &
       Pick<TypographyVariantProps, 'variant'> &
-      Pick<TypographyDataProps, 'size'>
+      Pick<TypographyDataProps, 'size' | 'sizeMobile' | 'sizeTablet'>
   > &
     Pick<TypographyDefaultProps, 'className' | 'style' | 'onClick'>
 >
 
-export interface TypographyTooltipProps {
-  typography: Omit<TypographyProps, 'children'>
+export type TypographyTooltipProps = {
+  typography: Omit<TypographyDataProps, 'children'> | Omit<TypographyVariantProps, 'children'>
   tooltip: Omit<TooltipProps, 'children' | 'content'>
-  children: ReactNode
-}
+} & PropsWithChildren
