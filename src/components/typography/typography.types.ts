@@ -30,7 +30,7 @@ export type TypographyDefaultProps = PropsWithChildren & {
 }
 
 export type TypographyDataProps = TypographyDefaultProps & {
-  size: number
+  size?: number
   sizeMobile?: number
   sizeTablet?: number
 }
