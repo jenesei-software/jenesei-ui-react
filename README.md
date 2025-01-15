@@ -82,4 +82,5 @@ To work correctly you need to install the following dependencies:
 npm install react --save
 npm install react-dom --save
 npm install styled-components --save
+npm install @tanstack/react-router --save
 ```
