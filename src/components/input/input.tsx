@@ -57,7 +57,6 @@ export const Input = (props: InputProps) => {
             $genre={props.genre}
             $size={props.size}
             $isBold={props.isBold}
-            $isCustomIcon={props.isCustomIcon}
             $isDisabled={props.isDisabled}
             disabled={props.isDisabled}
             readOnly={props.isReadOnly}
@@ -191,11 +190,11 @@ export const InputPhone = (
   return (
     <Input
       {...props}
-      placeholder={formattedPhoneNumber?.placeholder ? undefined : props.placeholder}
+      placeholder={props.placeholder ?? formattedPhoneNumber?.placeholder ?? undefined}
       format={formattedPhoneNumber?.format}
-      isAllowEmptyFormatting
+      isAllowEmptyFormatting={false}
       mask="_"
-      isDisabled={!formattedPhoneNumber || props.isDisabled}
+      isDisabled={props.isDisabled}
       formatType="tel"
     />
   )

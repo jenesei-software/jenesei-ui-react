@@ -87,58 +87,22 @@ const TextAreaGenre = css<StyledTextAreaProps>`
     background: ${props.theme.colors.input[props.$genre].background.rest};
     border-color: ${props.theme.colors.input[props.$genre].border.rest};
     color: ${props.theme.colors.input[props.$genre].color.rest};
-    & span {
-      color: ${props.theme.colors.input[props.$genre].color.rest};
-    }
-    & path {
-      ${!props.$isCustomIcon &&
-      css`
-        fill: ${props.theme.colors.input[props.$genre].color.rest};
-      `}
-    }
+
     &:active {
       background: ${props.theme.colors.input[props.$genre].background.rest};
       border-color: ${props.theme.colors.input[props.$genre].border.rest};
       color: ${props.theme.colors.input[props.$genre].color.rest};
-      & span {
-        color: ${props.theme.colors.input[props.$genre].color.rest};
-      }
-      & path {
-        ${!props.$isCustomIcon &&
-        css`
-          fill: ${props.theme.colors.input[props.$genre].color.rest};
-        `}
-      }
     }
     &:hover {
       background: ${props.theme.colors.input[props.$genre].background.hover};
       border-color: ${props.theme.colors.input[props.$genre].border.hover};
       color: ${props.theme.colors.input[props.$genre].color.hover};
-      & span {
-        color: ${props.theme.colors.input[props.$genre].color.hover};
-      }
-      & path {
-        ${!props.$isCustomIcon &&
-        css`
-          fill: ${props.theme.colors.input[props.$genre].color.rest};
-        `}
-      }
     }
     &:focus-visible {
       outline: 1px solid ${props.theme.colors.focus};
       border-color: ${props.theme.colors.input[props.$genre].border.rest};
       background: ${props.theme.colors.input[props.$genre].background.rest};
-
       color: ${props.theme.colors.input[props.$genre].color.rest};
-      & span {
-        color: ${props.theme.colors.input[props.$genre].color.rest};
-      }
-      & path {
-        ${!props.$isCustomIcon &&
-        css`
-          fill: ${props.theme.colors.input[props.$genre].color.rest};
-        `}
-      }
     }
   `};
 `

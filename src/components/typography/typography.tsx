@@ -1,4 +1,5 @@
-import { Ref, forwardRef } from 'react'
+import { LinkProps, createLink } from '@tanstack/react-router'
+import { Ref, forwardRef, memo, useEffect, useRef, useState } from 'react'
 
 import {
   TitleAnchor,
@@ -14,10 +15,17 @@ import {
   TitleH9,
   TitleParagraph,
   TypographyCSSProps,
-  TypographyProps
+  TypographyDataProps,
+  TypographyProps,
+  TypographyTooltipProps,
+  TypographyVariantProps
 } from '.'
+import { Tooltip } from '../tooltip'
 
-export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefined, TypographyProps>((props, ref) => {
+export const TypographyWithRef = forwardRef<
+  HTMLElement | HTMLHeadingElement | HTMLAnchorElement | undefined,
+  TypographyProps
+>((props, ref) => {
   const cssProps: TypographyCSSProps = {
     $clamp: props.clamp,
     $clampOrient: props.clampOrient,
@@ -46,7 +54,7 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
   if ('variant' in props) {
     if (props.variant === 'h1') {
       return props.isAnchor ? (
-        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} {...cssProps}>
+        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
           {props.children}
         </TitleAnchor>
       ) : props.isParagraph ? (
@@ -60,7 +68,7 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
       )
     } else if (props.variant === 'h2') {
       return props.isAnchor ? (
-        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} {...cssProps}>
+        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
           {props.children}
         </TitleAnchor>
       ) : props.isParagraph ? (
@@ -74,7 +82,7 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
       )
     } else if (props.variant === 'h3') {
       return props.isAnchor ? (
-        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} {...cssProps}>
+        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
           {props.children}
         </TitleAnchor>
       ) : props.isParagraph ? (
@@ -88,7 +96,7 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
       )
     } else if (props.variant === 'h4') {
       return props.isAnchor ? (
-        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} {...cssProps}>
+        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
           {props.children}
         </TitleAnchor>
       ) : props.isParagraph ? (
@@ -102,7 +110,7 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
       )
     } else if (props.variant === 'h5') {
       return props.isAnchor ? (
-        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} {...cssProps}>
+        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
           {props.children}
         </TitleAnchor>
       ) : props.isParagraph ? (
@@ -116,7 +124,7 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
       )
     } else if (props.variant === 'h6') {
       return props.isAnchor ? (
-        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} {...cssProps}>
+        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
           {props.children}
         </TitleAnchor>
       ) : props.isParagraph ? (
@@ -130,7 +138,7 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
       )
     } else if (props.variant === 'h7') {
       return props.isAnchor ? (
-        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} {...cssProps}>
+        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
           {props.children}
         </TitleAnchor>
       ) : props.isParagraph ? (
@@ -144,7 +152,7 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
       )
     } else if (props.variant === 'h8') {
       return props.isAnchor ? (
-        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} {...cssProps}>
+        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
           {props.children}
         </TitleAnchor>
       ) : props.isParagraph ? (
@@ -158,7 +166,7 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
       )
     } else if (props.variant === 'h9') {
       return props.isAnchor ? (
-        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} {...cssProps}>
+        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
           {props.children}
         </TitleAnchor>
       ) : props.isParagraph ? (
@@ -173,15 +181,17 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
     }
   }
 
+  if (props.isAnchor) {
+    return (
+      <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
+        {props.children}
+      </TitleAnchor>
+    )
+  }
+
   if ('size' in props) {
     return (
-      <TitleFont
-        ref={ref as Ref<HTMLElement>}
-        {...cssProps}
-        $height={props.height}
-        $size={props.size}
-        $weight={props.weight}
-      >
+      <TitleFont ref={ref as Ref<HTMLElement>} {...cssProps}>
         {props.children}
       </TitleFont>
     )
@@ -194,4 +204,45 @@ export const Typography = forwardRef<HTMLElement | HTMLHeadingElement | undefine
   )
 })
 
-Typography.displayName = 'Typography'
+export const Typography = (props: TypographyProps) => {
+  return <TypographyWithRef {...props} />
+}
+
+const TypographyVariantIsAnchor = forwardRef<HTMLElement, TypographyVariantProps & LinkProps>((props, ref) => {
+  return <TypographyWithRef isAnchor {...props} ref={ref} href={props.href} />
+})
+
+const TypographySizeIsAnchor = forwardRef<HTMLElement, TypographyDataProps & LinkProps>((props, ref) => {
+  return <TypographyWithRef isAnchor {...props} ref={ref} href={props.href} />
+})
+
+export const TypographyLinkVariant = createLink(TypographyVariantIsAnchor)
+export const TypographyLinkSize = createLink(TypographySizeIsAnchor)
+
+export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
+  const [isOverflowing, setIsOverflowing] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const checkOverflow = () => {
+      if (contentRef.current) {
+        setIsOverflowing(contentRef.current.scrollWidth > contentRef.current.clientWidth)
+      }
+    }
+    checkOverflow()
+    window.addEventListener('resize', checkOverflow)
+    return () => window.removeEventListener('resize', checkOverflow)
+  }, [props.children])
+
+  return (
+    <Tooltip isDisabled={!isOverflowing} content={props.children} {...props.tooltip}>
+      <TypographyWithRef ref={contentRef} {...props.typography} style={{ position: 'relative' }}>
+        {props.children}
+      </TypographyWithRef>
+    </Tooltip>
+  )
+})
+
+TypographyTooltip.displayName = 'TypographyTooltip'
+TypographyWithRef.displayName = 'TypographyWithRef'
+TypographyVariantIsAnchor.displayName = 'TypographyVariantIsAnchor'
+TypographySizeIsAnchor.displayName = 'TypographySizeIsAnchor'

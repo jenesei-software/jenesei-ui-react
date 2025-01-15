@@ -389,7 +389,6 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                   isBold={props.optionProps?.isBold}
                   isError={props.optionProps?.isError}
                   isLoading={props.optionProps?.isLoading}
-                  isCustomIcon={props.optionProps?.isCustomIcon}
                   prefixChildren={props.optionProps?.prefixChildren}
                   postfixChildren={props.optionProps?.postfixChildren}
                   isShowDropdownOptionIcon={props.isShowDropdownOptionIcon}
@@ -438,7 +437,6 @@ const ContainerDropdownOptionComponent = (params: {
   onClick: () => void
   isError?: boolean
   isLoading?: boolean
-  isCustomIcon?: boolean
   isShowDropdownOptionIcon?: boolean
   isBold?: boolean
   postfixChildren?: InputChildrenProps
@@ -453,7 +451,6 @@ const ContainerDropdownOptionComponent = (params: {
       onClick={params.onClick}
       $isError={params.isError}
       $isLoading={params.isLoading}
-      $isCustomIcon={params.isCustomIcon}
       $postfixChildren={params.postfixChildren}
       $prefixChildren={params.prefixChildren}
       $genre={params.genre}

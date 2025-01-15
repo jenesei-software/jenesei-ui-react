@@ -126,22 +126,10 @@ export const DropdownOptionLayout = styled.div<SelectStyledOptionProps>`
   border-width: 1px;
   border-color: transparent;
   transition: all ${props => props.theme.transition.default};
-  & path {
-    transition: all ${props => props.theme.transition.default};
-  }
+
   &:hover {
     background: ${props => props.theme.colors.select[props.$genre].background.select};
     color: ${props => props.theme.colors.select[props.$genre].color.select};
-    & span {
-      color: ${props => props.theme.colors.select[props.$genre].color.select};
-    }
-    & path {
-      ${props =>
-        !props.$isCustomIcon &&
-        css`
-          fill: ${props.theme.colors.select[props.$genre].color.select};
-        `}
-    }
   }
   ${props =>
     props.$checked &&
@@ -149,15 +137,6 @@ export const DropdownOptionLayout = styled.div<SelectStyledOptionProps>`
       background: ${props.theme.colors.select[props.$genre].background.select};
       border-color: ${props.theme.colors.select[props.$genre].border.select};
       color: ${props.theme.colors.select[props.$genre].color.select};
-      & span {
-        color: ${props.theme.colors.select[props.$genre].color.select};
-      }
-      & path {
-        ${!props.$isCustomIcon &&
-        css`
-          fill: ${props.theme.colors.select[props.$genre].color.select};
-        `}
-      }
     `}
 `
 
@@ -178,14 +157,10 @@ export const DropdownOptionIcon = styled(Icon)<DropdownOptionIconProps>`
   ${props =>
     props.$checked
       ? css`
-          path {
-            fill: ${props.theme.colors.select[props.$genre].border.select};
-          }
+          color: ${props.theme.colors.select[props.$genre].border.select};
         `
       : css`
-          path {
-            fill: transparent;
-          }
+          color: transparent;
         `}
 `
 
@@ -198,14 +173,10 @@ export const SelectInputIcon = styled(Icon)<DropdownOptionIconProps>`
   ${props =>
     props.$checked
       ? css`
-          path {
-            fill: ${props.theme.colors.select[props.$genre].border.select};
-          }
+          color: ${props.theme.colors.select[props.$genre].border.select};
         `
       : css`
-          path {
-            fill: ${props.theme.colors.input[props.$genre].border.rest};
-          }
+          color: ${props.theme.colors.input[props.$genre].border.rest};
         `}
 `
 export const DropdownFooter = styled.li<SelectStyledFooterProps>`

@@ -3,7 +3,9 @@ import { CSSProperties, PropsWithChildren } from 'react'
 import { JeneseiThemeVariablesKeys, TJeneseiDevice, TJeneseiFontFamily } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
-export interface TypographyDefaultProps extends PropsWithChildren {
+import { TooltipProps } from '../tooltip'
+
+export type TypographyDefaultProps = PropsWithChildren & {
   clamp?: number
   device?: TJeneseiDevice
   clampOrient?: CSSProperties['boxOrient']
@@ -17,8 +19,9 @@ export interface TypographyDefaultProps extends PropsWithChildren {
   cursor?: CSSProperties['cursor']
   style?: CSSProperties
   className?: string
-  isAnchor?: boolean
   isParagraph?: boolean
+  isAnchor?: boolean
+  href?: string
   weight?: 100 | 300 | 400 | 500 | 700 | 900
   height?: number
   flex?: string
@@ -26,13 +29,13 @@ export interface TypographyDefaultProps extends PropsWithChildren {
   isHoverUnderlining?: boolean
 }
 
-export interface TypographyDataProps extends TypographyDefaultProps {
-  size?: number
+export type TypographyDataProps = TypographyDefaultProps & {
+  size: number
   sizeMobile?: number
   sizeTablet?: number
 }
 
-export interface TypographyVariantProps extends TypographyDefaultProps {
+export type TypographyVariantProps = TypographyDefaultProps & {
   variant: TypographyVariant
 }
 
@@ -65,3 +68,8 @@ export type TypographyCSSProps = Partial<
   > &
     Pick<TypographyDefaultProps, 'className' | 'style' | 'onClick'>
 >
+
+export type TypographyTooltipProps = {
+  typography: Omit<TypographyDataProps, 'children'> | Omit<TypographyVariantProps, 'children'>
+  tooltip: Omit<TooltipProps, 'children' | 'content'>
+} & PropsWithChildren
