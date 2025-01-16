@@ -22,7 +22,7 @@
     "declarationMap": true,
     "emitDeclarationOnly": true,
     "baseUrl": "./",
-    "outDir": "./dist",
+    "outDir": "./build",
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

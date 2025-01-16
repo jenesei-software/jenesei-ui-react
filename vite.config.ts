@@ -32,7 +32,7 @@ export default defineConfig(() => {
     publicDir: false,
     build: {
       sourcemap: true,
-      outDir: './dist',
+      outDir: './build',
       rootDir: './src',
       minify: 'terser',
       terserOptions: {

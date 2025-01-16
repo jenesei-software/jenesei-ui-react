@@ -6,13 +6,13 @@
     "type": "git",
     "url": "git+https://github.com/jenesei-software/jenesei-ui-react.git"
   },
-  "main": "./dist/jenesei-ui-react.umd.js",
-  "module": "./dist/jenesei-ui-react.es.js",
-  "types": "./dist/main.d.ts",
+  "main": "./build/jenesei-ui-react.umd.js",
+  "module": "./build/jenesei-ui-react.es.js",
+  "types": "./build/main.d.ts",
   "license": "MIT",
   "type": "module",
   "files": [
-    "dist"
+    "build"
   ],
   "keywords": [
     "react",
@@ -23,9 +23,9 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/jenesei-ui-react.es.js",
-      "require": "./dist/jenesei-ui-react.umd.js",
-      "types": "./dist/main.d.ts"
+      "import": "./build/jenesei-ui-react.es.js",
+      "require": "./build/jenesei-ui-react.umd.js",
+      "types": "./build/main.d.ts"
     }
   },
   "scripts": {
