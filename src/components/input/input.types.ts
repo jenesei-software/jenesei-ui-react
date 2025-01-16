@@ -44,8 +44,6 @@ export interface InputProps {
 
   isRequired?: boolean
 
-  isCustomIcon?: boolean
-
   isNoSpaces?: boolean
 
   onBlur?: FocusEventHandler<HTMLInputElement>
@@ -101,7 +99,6 @@ export type StyledInputProps = AddDollarSign<
     | 'postfixChildren'
     | 'prefixChildren'
     | 'isBold'
-    | 'isCustomIcon'
   >
 >
 

@@ -4,10 +4,10 @@ import { JeneseiThemeVariables } from '@local/theme/theme'
 
 import { TypographyCSSProps } from '.'
 
-const SpanFontCSS = css<TypographyCSSProps>`
+const TypographyCSS = css<TypographyCSSProps>`
   font-style: normal;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   text-overflow: ellipsis;
   overflow-wrap: anywhere;
   box-sizing: border-box;
@@ -22,26 +22,6 @@ const SpanFontCSS = css<TypographyCSSProps>`
     props.$cursor &&
     css`
       cursor: ${props.$cursor};
-    `};
-  ${props =>
-    props.$align &&
-    css`
-     text-align ${props.$align};
-    `};
-  ${props =>
-    props.$wrap &&
-    css`
-     text-wrap ${props.$wrap};
-    `};
-  ${props =>
-    props.$decoration &&
-    css`
-     text-decoration ${props.$decoration};
-    `};
-  ${props =>
-    props.$transform &&
-    css`
-     text-transform ${props.$transform};
     `};
   ${props =>
     props.$overflow &&
@@ -68,6 +48,12 @@ const SpanFontCSS = css<TypographyCSSProps>`
     props.$size &&
     css`
       font-size: ${props.$size}px;
+      @media (max-width: ${props => props.theme.screens.tablet.width}) {
+        font-size: ${props.$sizeTablet}px;
+      }
+      @media (max-width: ${props => props.theme.screens.mobile.width}) {
+        font-size: ${props.$sizeMobile}px;
+      }
     `};
   ${props =>
     props.$weight &&
@@ -84,7 +70,26 @@ const SpanFontCSS = css<TypographyCSSProps>`
     css`
       color: ${JeneseiThemeVariables[props.$color]};
     `};
-
+  ${props =>
+    props.$align &&
+    css`
+      text-align: ${props.$align};
+    `};
+  ${props =>
+    props.$wrap &&
+    css`
+      text-wrap: ${props.$wrap};
+    `};
+  ${props =>
+    props.$decoration &&
+    css`
+      text-decoration: ${props.$decoration};
+    `};
+  ${props =>
+    props.$transform &&
+    css`
+      text-transform: ${props.$transform};
+    `};
   ${props =>
     props.$isHoverUnderlining &&
     css`
@@ -94,12 +99,344 @@ const SpanFontCSS = css<TypographyCSSProps>`
     `};
 `
 
-export const SpanFont = styled.span<TypographyCSSProps>`
-  ${SpanFontCSS}
+export const TitleFont = styled.span<TypographyCSSProps>`
+  ${TypographyCSS}
+`
+
+export const TitleAnchor = styled.a<TypographyCSSProps>`
+  ${TypographyCSS}
+
+  ${props =>
+    props.$variant === 'h1'
+      ? css`
+          font-size: ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.default}px;
+          line-height: ${props => props.theme.font.lineHeight};
+          margin: 0;
+          @media (max-width: ${props => props.theme.screens.tablet.width}) {
+            font-size: ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.tablet}px;
+          }
+
+          @media (max-width: ${props => props.theme.screens.mobile.width}) {
+            font-size: ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.mobile}px;
+          }
+          ${props.$device &&
+          css`
+            font-size: ${props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault[props.$device]}px;
+          `}
+        `
+      : props.$variant === 'h2'
+        ? css`
+            font-size: ${props => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.default}px;
+            line-height: ${props => props.theme.font.lineHeight};
+            margin: 0;
+            @media (max-width: ${props => props.theme.screens.tablet.width}) {
+              font-size: ${props => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.tablet}px;
+            }
+
+            @media (max-width: ${props => props.theme.screens.mobile.width}) {
+              font-size: ${props => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.mobile}px;
+            }
+            ${props.$device &&
+            css`
+              font-size: ${props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault[props.$device]}px;
+            `}
+          `
+        : props.$variant === 'h3'
+          ? css`
+              font-size: ${props => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.default}px;
+              line-height: ${props => props.theme.font.lineHeight};
+              margin: 0;
+              @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                font-size: ${props => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.tablet}px;
+              }
+
+              @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                font-size: ${props => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.mobile}px;
+              }
+              ${props.$device &&
+              css`
+                font-size: ${props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault[props.$device]}px;
+              `}
+            `
+          : props.$variant === 'h4'
+            ? css`
+                font-size: ${props => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.default}px;
+                line-height: ${props => props.theme.font.lineHeight};
+                margin: 0;
+                @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                  font-size: ${props => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.tablet}px;
+                }
+
+                @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                  font-size: ${props => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.mobile}px;
+                }
+                ${props.$device &&
+                css`
+                  font-size: ${props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault[props.$device]}px;
+                `}
+              `
+            : props.$variant === 'h5'
+              ? css`
+                  font-size: ${props => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.default}px;
+                  line-height: ${props => props.theme.font.lineHeight};
+                  margin: 0;
+                  @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                    font-size: ${props => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.tablet}px;
+                  }
+
+                  @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                    font-size: ${props => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.mobile}px;
+                  }
+                  ${props.$device &&
+                  css`
+                    font-size: ${props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault[props.$device]}px;
+                  `}
+                `
+              : props.$variant === 'h6'
+                ? css`
+                    font-size: ${props => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.default}px;
+                    line-height: ${props => props.theme.font.lineHeight};
+                    margin: 0;
+                    @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                      font-size: ${props => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.tablet}px;
+                    }
+
+                    @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                      font-size: ${props => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.mobile}px;
+                    }
+                    ${props.$device &&
+                    css`
+                      font-size: ${props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault[props.$device]}px;
+                    `}
+                  `
+                : props.$variant === 'h7'
+                  ? css`
+                      font-size: ${props => props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.default}px;
+                      line-height: ${props => props.theme.font.lineHeight};
+                      margin: 0;
+                      @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                        font-size: ${props => props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.tablet}px;
+                      }
+
+                      @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                        font-size: ${props => props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.mobile}px;
+                      }
+                      ${props.$device &&
+                      css`
+                        font-size: ${props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault[props.$device]}px;
+                      `}
+                    `
+                  : props.$variant === 'h8'
+                    ? css`
+                        font-size: ${props => props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.default}px;
+                        line-height: ${props => props.theme.font.lineHeight};
+                        margin: 0;
+                        @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                          font-size: ${props =>
+                            props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.tablet}px;
+                        }
+
+                        @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                          font-size: ${props =>
+                            props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.mobile}px;
+                        }
+                        ${props.$device &&
+                        css`
+                          font-size: ${props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault[props.$device]}px;
+                        `}
+                      `
+                    : props.$variant === 'h9'
+                      ? css`
+                          font-size: ${props =>
+                            props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.default}px;
+                          line-height: ${props => props.theme.font.lineHeight};
+                          margin: 0;
+                          @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                            font-size: ${props =>
+                              props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.tablet}px;
+                          }
+
+                          @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                            font-size: ${props =>
+                              props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.mobile}px;
+                          }
+                          ${props.$device &&
+                          css`
+                            font-size: ${props.theme.font.sizeHeading.h9 *
+                            props.theme.font.sizeDefault[props.$device]}px;
+                          `}
+                        `
+                      : null}
+`
+
+export const TitleParagraph = styled.p<TypographyCSSProps>`
+  ${TypographyCSS}
+
+  ${props =>
+    props.$variant === 'h1'
+      ? css`
+          font-size: ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.default}px;
+          line-height: ${props => props.theme.font.lineHeight};
+          margin: 0;
+          @media (max-width: ${props => props.theme.screens.tablet.width}) {
+            font-size: ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.tablet}px;
+          }
+
+          @media (max-width: ${props => props.theme.screens.mobile.width}) {
+            font-size: ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.mobile}px;
+          }
+          ${props.$device &&
+          css`
+            font-size: ${props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault[props.$device]}px;
+          `}
+        `
+      : props.$variant === 'h2'
+        ? css`
+            font-size: ${props => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.default}px;
+            line-height: ${props => props.theme.font.lineHeight};
+            margin: 0;
+            @media (max-width: ${props => props.theme.screens.tablet.width}) {
+              font-size: ${props => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.tablet}px;
+            }
+
+            @media (max-width: ${props => props.theme.screens.mobile.width}) {
+              font-size: ${props => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.mobile}px;
+            }
+            ${props.$device &&
+            css`
+              font-size: ${props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault[props.$device]}px;
+            `}
+          `
+        : props.$variant === 'h3'
+          ? css`
+              font-size: ${props => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.default}px;
+              line-height: ${props => props.theme.font.lineHeight};
+              margin: 0;
+              @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                font-size: ${props => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.tablet}px;
+              }
+
+              @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                font-size: ${props => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.mobile}px;
+              }
+              ${props.$device &&
+              css`
+                font-size: ${props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault[props.$device]}px;
+              `}
+            `
+          : props.$variant === 'h4'
+            ? css`
+                font-size: ${props => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.default}px;
+                line-height: ${props => props.theme.font.lineHeight};
+                margin: 0;
+                @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                  font-size: ${props => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.tablet}px;
+                }
+
+                @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                  font-size: ${props => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.mobile}px;
+                }
+                ${props.$device &&
+                css`
+                  font-size: ${props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault[props.$device]}px;
+                `}
+              `
+            : props.$variant === 'h5'
+              ? css`
+                  font-size: ${props => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.default}px;
+                  line-height: ${props => props.theme.font.lineHeight};
+                  margin: 0;
+                  @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                    font-size: ${props => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.tablet}px;
+                  }
+
+                  @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                    font-size: ${props => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.mobile}px;
+                  }
+                  ${props.$device &&
+                  css`
+                    font-size: ${props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault[props.$device]}px;
+                  `}
+                `
+              : props.$variant === 'h6'
+                ? css`
+                    font-size: ${props => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.default}px;
+                    line-height: ${props => props.theme.font.lineHeight};
+                    margin: 0;
+                    @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                      font-size: ${props => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.tablet}px;
+                    }
+
+                    @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                      font-size: ${props => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.mobile}px;
+                    }
+                    ${props.$device &&
+                    css`
+                      font-size: ${props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault[props.$device]}px;
+                    `}
+                  `
+                : props.$variant === 'h7'
+                  ? css`
+                      font-size: ${props => props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.default}px;
+                      line-height: ${props => props.theme.font.lineHeight};
+                      margin: 0;
+                      @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                        font-size: ${props => props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.tablet}px;
+                      }
+
+                      @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                        font-size: ${props => props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.mobile}px;
+                      }
+                      ${props.$device &&
+                      css`
+                        font-size: ${props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault[props.$device]}px;
+                      `}
+                    `
+                  : props.$variant === 'h8'
+                    ? css`
+                        font-size: ${props => props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.default}px;
+                        line-height: ${props => props.theme.font.lineHeight};
+                        margin: 0;
+                        @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                          font-size: ${props =>
+                            props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.tablet}px;
+                        }
+
+                        @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                          font-size: ${props =>
+                            props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.mobile}px;
+                        }
+                        ${props.$device &&
+                        css`
+                          font-size: ${props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault[props.$device]}px;
+                        `}
+                      `
+                    : props.$variant === 'h9'
+                      ? css`
+                          font-size: ${props =>
+                            props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.default}px;
+                          line-height: ${props => props.theme.font.lineHeight};
+                          margin: 0;
+                          @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                            font-size: ${props =>
+                              props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.tablet}px;
+                          }
+
+                          @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                            font-size: ${props =>
+                              props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.mobile}px;
+                          }
+                          ${props.$device &&
+                          css`
+                            font-size: ${props.theme.font.sizeHeading.h9 *
+                            props.theme.font.sizeDefault[props.$device]}px;
+                          `}
+                        `
+                      : null}
 `
 
 export const TitleH1 = styled.h1<TypographyCSSProps>`
-  ${SpanFontCSS}
+  ${TypographyCSS}
   ${props =>
     props.$device &&
     css`
@@ -108,7 +445,7 @@ export const TitleH1 = styled.h1<TypographyCSSProps>`
 `
 
 export const TitleH2 = styled.h2<TypographyCSSProps>`
-  ${SpanFontCSS}
+  ${TypographyCSS}
   ${props =>
     props.$device &&
     css`
@@ -117,7 +454,7 @@ export const TitleH2 = styled.h2<TypographyCSSProps>`
 `
 
 export const TitleH3 = styled.h3<TypographyCSSProps>`
-  ${SpanFontCSS}
+  ${TypographyCSS}
   ${props =>
     props.$device &&
     css`
@@ -126,7 +463,7 @@ export const TitleH3 = styled.h3<TypographyCSSProps>`
 `
 
 export const TitleH4 = styled.h4<TypographyCSSProps>`
-  ${SpanFontCSS}
+  ${TypographyCSS}
   ${props =>
     props.$device &&
     css`
@@ -135,7 +472,7 @@ export const TitleH4 = styled.h4<TypographyCSSProps>`
 `
 
 export const TitleH5 = styled.h5<TypographyCSSProps>`
-  ${SpanFontCSS}
+  ${TypographyCSS}
   ${props =>
     props.$device &&
     css`
@@ -144,7 +481,7 @@ export const TitleH5 = styled.h5<TypographyCSSProps>`
 `
 
 export const TitleH6 = styled.h6<TypographyCSSProps>`
-  ${SpanFontCSS}
+  ${TypographyCSS}
   ${props =>
     props.$device &&
     css`
@@ -162,7 +499,7 @@ export const TitleH7 = styled.span<TypographyCSSProps>`
   @media (max-width: ${props => props.theme.screens.mobile.width}) {
     font-size: ${props => props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.mobile}px;
   }
-  ${SpanFontCSS};
+  ${TypographyCSS};
   ${props =>
     props.$device &&
     css`
@@ -180,7 +517,7 @@ export const TitleH8 = styled.span<TypographyCSSProps>`
   @media (max-width: ${props => props.theme.screens.mobile.width}) {
     font-size: ${props => props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.mobile}px;
   }
-  ${SpanFontCSS};
+  ${TypographyCSS};
   ${props =>
     props.$device &&
     css`
@@ -198,7 +535,7 @@ export const TitleH9 = styled.span<TypographyCSSProps>`
   @media (max-width: ${props => props.theme.screens.mobile.width}) {
     font-size: ${props => props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.mobile}px;
   }
-  ${SpanFontCSS};
+  ${TypographyCSS};
   ${props =>
     props.$device &&
     css`

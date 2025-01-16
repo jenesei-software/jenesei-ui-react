@@ -8,16 +8,16 @@ export const RippleContainer = styled.div<RippleContainerProps>`
   right: 0;
   bottom: 0;
   left: 0;
+`
 
-  & span {
-    transform: scale(0);
-    border-radius: 100%;
-    position: absolute;
-    opacity: 0.75;
-    background-color: ${props => props.$color};
-    animation-name: ripple;
-    animation-duration: ${props => props.$duration}ms;
-  }
+export const RippleSpan = styled.span<RippleContainerProps>`
+  transform: scale(0);
+  border-radius: 100%;
+  position: absolute;
+  opacity: 0.75;
+  background-color: ${props => props.$color};
+  animation-name: ripple;
+  animation-duration: ${props => props.$duration}ms;
 
   @keyframes ripple {
     to {

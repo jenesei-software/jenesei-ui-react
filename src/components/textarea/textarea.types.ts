@@ -44,8 +44,6 @@ export interface TextAreaProps {
 
   isRequired?: boolean
 
-  isCustomIcon?: boolean
-
   isNoSpaces?: boolean
 
   onBlur?: FocusEventHandler<HTMLTextAreaElement>
@@ -68,15 +66,7 @@ export type TTextAreaGenre = keyof TJeneseiThemeGenreTextArea
 export type StyledTextAreaProps = AddDollarSign<
   Pick<
     TextAreaProps,
-    | 'genre'
-    | 'size'
-    | 'isError'
-    | 'isLoading'
-    | 'isTextAreaEffect'
-    | 'isDisabled'
-    | 'isBold'
-    | 'isCustomIcon'
-    | 'isResize'
+    'genre' | 'size' | 'isError' | 'isLoading' | 'isTextAreaEffect' | 'isDisabled' | 'isBold' | 'isResize'
   >
 >
 

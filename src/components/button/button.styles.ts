@@ -13,13 +13,6 @@ const ButtonGenre = css<StyledDollarButtonProps>`
     background: ${props.theme.colors.button[props.$genre].background.rest};
     border-color: ${props.theme.colors.button[props.$genre].border.rest};
     color: ${props.theme.colors.button[props.$genre].color.rest};
-    & span {
-      color: ${props.theme.colors.button[props.$genre].color.rest};
-    }
-    & path {
-      fill: ${props.theme.colors.button[props.$genre].color.rest};
-    }
-
     &:focus-visible {
       outline: 1px solid ${props.theme.colors.focus};
     }
@@ -29,12 +22,6 @@ const ButtonGenre = css<StyledDollarButtonProps>`
         background: ${props.theme.colors.button[props.$genre].background.hover};
         border-color: ${props.theme.colors.button[props.$genre].border.hover};
         color: ${props.theme.colors.button[props.$genre].color.hover};
-        & span {
-          color: ${props.theme.colors.button[props.$genre].color.hover};
-        }
-        & path {
-          fill: ${props.theme.colors.button[props.$genre].color.hover};
-        }
       `}
     }
   `};
@@ -47,14 +34,7 @@ const ButtonDisabled = css<StyledDollarButtonProps>`
       ? css`
           opacity: 0.5;
           background: ${props.theme.colors.button[props.$genre].background.rest} !important;
-
           color: ${props.theme.colors.button[props.$genre].color.rest} !important;
-          & span {
-            color: ${props.theme.colors.button[props.$genre].color.rest} !important;
-          }
-          & path {
-            fill: ${props.theme.colors.button[props.$genre].color.rest} !important;
-          }
         `
       : css`
           opacity: 1;

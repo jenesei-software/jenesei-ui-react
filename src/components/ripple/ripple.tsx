@@ -1,6 +1,13 @@
 import React, { FC, useCallback, useLayoutEffect, useMemo, useState } from 'react'
 
-import { DEFAULT_RIPPLE_DURATION, DEFAULT_RIPPLE_ID, RippleArrayElement, RippleContainer, RippleProps } from '.'
+import {
+  DEFAULT_RIPPLE_DURATION,
+  DEFAULT_RIPPLE_ID,
+  RippleArrayElement,
+  RippleContainer,
+  RippleProps,
+  RippleSpan
+} from '.'
 
 const useDebouncedRippleCleanUp = (rippleCount: number, duration: number, cleanUpFunction: () => void) => {
   useLayoutEffect(() => {
@@ -59,7 +66,9 @@ export const Ripple: FC<RippleProps> = props => {
       {rippleArray.length > 0 &&
         rippleArray.map((ripple, index) => {
           return (
-            <span
+            <RippleSpan
+              $duration={duration}
+              $color={color}
               key={'span' + index}
               style={{
                 top: ripple.y,

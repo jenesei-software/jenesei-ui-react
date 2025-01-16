@@ -57,7 +57,6 @@ export default defineConfig(() => {
             react: 'React',
             'react-dom': 'ReactDOM',
             moment: 'moment',
-            'react-ripple-click': 'reactRippleClick',
             'react-loading': 'ReactLoading',
             gsap: 'gsap',
             'awesome-phonenumber': 'awesomePhonenumber',

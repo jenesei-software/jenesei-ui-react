@@ -8,6 +8,7 @@ import {
 } from '.'
 
 export const JeneseiThemeVariables: Record<JeneseiThemeVariablesKeys, string> = {
+  inherit: 'inherit',
   transparent: 'transparent',
   black100: '#000000;',
   black80: 'rgba(0 0 0 / 0.8)',

@@ -18,6 +18,7 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     font-weight: ${props => props.theme.font.weight};
     line-height: ${props => props.theme.font.lineHeight};
     transition: font-size ${props => props.theme.transition.default};
+    color: inherit;
   }
 
   body {
