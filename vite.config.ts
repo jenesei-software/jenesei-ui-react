@@ -32,7 +32,7 @@ export default defineConfig(() => {
     publicDir: false,
     build: {
       sourcemap: true,
-      outDir: './dist',
+      outDir: './build',
       rootDir: './src',
       minify: 'terser',
       terserOptions: {
@@ -65,7 +65,9 @@ export default defineConfig(() => {
             '@tanstack/react-virtual': 'reactVirtual',
             'react-toggle': 'ReactToggle',
             'react-helmet': 'reactHelmet',
-            'js-cookie': 'Cookies'
+            'js-cookie': 'Cookies',
+            '@tanstack/react-router': 'reactRouter',
+            'react-helmet-async': 'reactHelmetAsync'
           }
         }
       }
