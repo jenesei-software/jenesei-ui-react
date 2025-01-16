@@ -47,7 +47,6 @@ type SonnerElementDefaultProps = {
   isLastViewIndex: boolean
   buttonGenre: keyof TJeneseiThemeGenre
   isTop: boolean
-  iconColor: JeneseiThemeVariablesKeys
 } & Required<Pick<SonnerContentDefaultProps, 'genre'>>
 
 export type SonnerContentProps = SonnerContentContentProps | SonnerContentStandardProps

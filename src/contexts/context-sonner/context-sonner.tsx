@@ -176,7 +176,6 @@ export const ProviderSonner: FC<ProviderSonnerProps> = props => {
             const isMoreThanLastViewIndex = memoVisibleToasts ? index > memoVisibleToasts - 1 : false
             const isLastViewIndex = memoVisibleToasts ? index == memoVisibleToasts - 1 : false
             const localGenre = content.genre ?? memoDefaultGenre
-            const iconColor = theme.colors.sonner[localGenre].icon.color
             const buttonGenre = theme.colors.sonner[localGenre].button.genre
             const hidingMode = content.hidingMode ?? memoDefaultHidingMode
 
@@ -194,7 +193,6 @@ export const ProviderSonner: FC<ProviderSonnerProps> = props => {
                 icon={content.icon}
                 isLoading={content.isLoading}
                 index={index}
-                iconColor={iconColor}
                 buttonGenre={buttonGenre}
                 hidingMode={hidingMode}
                 isHovered={isHovered}
@@ -261,9 +259,9 @@ const SonnerElement = (props: SonnerElementProps) => {
         {(props.isLoading || props.icon) && (
           <SonnerIcon>
             {props.isLoading ? (
-              <Loading size={'medium'} color={JeneseiThemeVariables[props.iconColor]} />
+              <Loading size={'medium'} />
             ) : (
-              props.icon && <Icon primaryColor={props.iconColor} name={props.icon} type="curved" size={'medium'} />
+              props.icon && <Icon name={props.icon} type="curved" size={'medium'} />
             )}
           </SonnerIcon>
         )}
