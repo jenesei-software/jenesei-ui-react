@@ -66,6 +66,7 @@ export const SonnerLayout = styled.div<SonnerLayoutProps>`
 
 export const SonnerElementWrapper = styled.div<SonnerElementWrapperProps>`
   background: ${props => props.theme.colors.sonner[props.$genre].wrapper.background};
+  color: ${props => props.theme.colors.sonner[props.$genre].icon.color};
   border-radius: 12px;
   border-style: solid;
   border-color: ${props => props.theme.colors.sonner[props.$genre].wrapper.borderColor};
@@ -104,7 +105,9 @@ export const SonnerContent = styled.div`
   position: relative;
   overflow: hidden;
 `
-export const SonnerIcon = styled.div``
+export const SonnerIcon = styled.div`
+  display: contents;
+`
 export const SonnerContentTitle = styled.div<SonnerContentTitleProps>`
   ${getFontSizeStyles(12, 700, 'Inter')}
   color:  ${props => props.theme.colors.sonner[props.$genre].title.color};

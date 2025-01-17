@@ -102,7 +102,7 @@ export interface TJeneseiThemeGenreTypeSonner {
     boxShadowHover: string
   }
   icon: {
-    color: JeneseiThemeVariablesKeys
+    color: string
   }
   title: {
     color: string
@@ -272,3 +272,4 @@ export type JeneseiThemeVariablesKeys =
   | 'blueBr'
   | 'amnezia'
   | 'inherit'
+  | 'currentColor'

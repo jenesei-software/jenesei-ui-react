@@ -12,7 +12,7 @@ export const Icon = (props: LibraryIconItemProps) => {
         ? LibraryIconCheckboxJSON[props.name]
         : null
 
-  const primaryColor = JeneseiThemeVariables[props.primaryColor ?? 'grayKaren']
+  const primaryColor = JeneseiThemeVariables[props.primaryColor ?? 'currentColor']
   const secondColor = props.secondColor ? JeneseiThemeVariables[props.secondColor] : primaryColor
 
   if (!icon) {
@@ -23,7 +23,7 @@ export const Icon = (props: LibraryIconItemProps) => {
   const getFillColor = (fillType?: string): string | undefined => {
     if (fillType === 'primaryColor') return primaryColor
     if (fillType === 'secondColor') return secondColor
-    return undefined
+    return 'currentColor'
   }
 
   const renderPaths = () =>
@@ -34,7 +34,7 @@ export const Icon = (props: LibraryIconItemProps) => {
         d={path.d}
         clipRule="evenodd"
         fillRule="evenodd"
-        fill={'fill' in path ? getFillColor(path.fill as string) : undefined}
+        fill={'fill' in path ? getFillColor(path.fill as string) : 'currentColor'}
       />
     ))
 
