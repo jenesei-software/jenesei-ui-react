@@ -226,11 +226,11 @@
     "format": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "peerDependencies": {
+    "@tanstack/react-router": "^1.97.0",
     "react": "^17.0 || ^18.0",
     "react-dom": "^17.0 || ^18.0",
-    "styled-components": "^6.0",
-    "@tanstack/react-router": "^1.97.0",
-    "react-helmet-async": "^2.0.5"
+    "react-helmet-async": "^2.0.5",
+    "styled-components": "^6.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.9.0",
