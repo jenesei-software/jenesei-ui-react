@@ -21,10 +21,8 @@ Import `JeneseiTheme` and `JeneseiGlobalStyles` from our library and apply them 
 
 ```typescript
 // app.tsx
-import {
-  JeneseiGlobalStyles,
-  JeneseiTheme,
-} from '@jenesei-software/jenesei-ui-react'
+import { JeneseiGlobalStyles, JeneseiTheme } from '@jenesei-software/jenesei-ui-react/style-theme'
+
 
 import '@fontsource/inter/100.css'
 import '@fontsource/inter/300.css'
@@ -55,13 +53,16 @@ function App() {
 
 ```typescript
 //jenesei-ui-react.d.ts
-import '@jenesei-software/jenesei-ui-react'
+import '@jenesei-software/jenesei-ui-react/context-cookie'
+import '@jenesei-software/jenesei-ui-react/context-local-storage'
 
-declare module '@jenesei-software/jenesei-ui-react' {
+declare module '@jenesei-software/jenesei-ui-react/context-cookie' {
   export interface ValidCookieObject {
     access_token: string
     refresh_token: string
   }
+}
+declare module '@jenesei-software/jenesei-ui-react/context-local-storage' {
   export interface ValidLocalStorageObject {
     access_token: string
     refresh_token: string
@@ -70,7 +71,6 @@ declare module '@jenesei-software/jenesei-ui-react' {
 ```
 
 # IMPORTANT
-
 
 ## Installing dependencies
 
