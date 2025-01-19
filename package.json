@@ -6,9 +6,9 @@
     "type": "git",
     "url": "git+https://github.com/jenesei-software/jenesei-ui-react.git"
   },
+  "types": "./build/main.d.ts",
   "module": "./build/main.es.js",
   "main": "./build/main.cjs.js",
-  "types": "./build/main.d.ts",
   "license": "MIT",
   "type": "module",
   "files": [
@@ -23,164 +23,164 @@
   ],
   "exports": {
     "./area-outside": {
+      "types": "./build/area-outside.d.ts",
       "import": "./build/area-outside.es.js",
-      "require": "./build/area-outside.cjs.js",
-      "types": "./build/area-outside.d.ts"
+      "require": "./build/area-outside.cjs.js"
     },
     "./area-preview": {
+      "types": "./build/area-preview.d.ts",
       "import": "./build/area-preview.es.js",
-      "require": "./build/area-preview.cjs.js",
-      "types": "./build/area-preview.d.ts"
+      "require": "./build/area-preview.cjs.js"
     },
     "./area-scroll": {
+      "types": "./build/area-scroll.d.ts",
       "import": "./build/area-scroll.es.js",
-      "require": "./build/area-scroll.cjs.js",
-      "types": "./build/area-scroll.d.ts"
+      "require": "./build/area-scroll.cjs.js"
     },
     "./area-skeleton": {
+      "types": "./build/area-skeleton.d.ts",
       "import": "./build/area-skeleton.es.js",
-      "require": "./build/area-skeleton.cjs.js",
-      "types": "./build/area-skeleton.d.ts"
+      "require": "./build/area-skeleton.cjs.js"
     },
     "./area-smooth": {
+      "types": "./build/area-smooth.d.ts",
       "import": "./build/area-smooth.es.js",
-      "require": "./build/area-smooth.cjs.js",
-      "types": "./build/area-smooth.d.ts"
+      "require": "./build/area-smooth.cjs.js"
     },
     "./component-accordion": {
+      "types": "./build/component-accordion.d.ts",
       "import": "./build/component-accordion.es.js",
-      "require": "./build/component-accordion.cjs.js",
-      "types": "./build/component-accordion.d.ts"
+      "require": "./build/component-accordion.cjs.js"
     },
     "./component-button": {
+      "types": "./build/component-button.d.ts",
       "import": "./build/component-button.es.js",
-      "require": "./build/component-button.cjs.js",
-      "types": "./build/component-button.d.ts"
+      "require": "./build/component-button.cjs.js"
     },
     "./component-button-group": {
+      "types": "./build/component-button-group.d.ts",
       "import": "./build/component-button-group.es.js",
-      "require": "./build/component-button-group.cjs.js",
-      "types": "./build/component-button-group.d.ts"
+      "require": "./build/component-button-group.cjs.js"
     },
     "./component-checkbox": {
+      "types": "./build/component-checkbox.d.ts",
       "import": "./build/component-checkbox.es.js",
-      "require": "./build/component-checkbox.cjs.js",
-      "types": "./build/component-checkbox.d.ts"
+      "require": "./build/component-checkbox.cjs.js"
     },
     "./component-checkbox-group": {
+      "types": "./build/component-checkbox-group.d.ts",
       "import": "./build/component-checkbox-group.es.js",
-      "require": "./build/component-checkbox-group.cjs.js",
-      "types": "./build/component-checkbox-group.d.ts"
+      "require": "./build/component-checkbox-group.cjs.js"
     },
     "./component-date-picker": {
+      "types": "./build/component-date-picker.d.ts",
       "import": "./build/component-date-picker.es.js",
-      "require": "./build/component-date-picker.cjs.js",
-      "types": "./build/component-date-picker.d.ts"
+      "require": "./build/component-date-picker.cjs.js"
     },
     "./component-icon": {
+      "types": "./build/component-icon.d.ts",
       "import": "./build/component-icon.es.js",
-      "require": "./build/component-icon.cjs.js",
-      "types": "./build/component-icon.d.ts"
+      "require": "./build/component-icon.cjs.js"
     },
     "./component-image": {
+      "types": "./build/component-image.d.ts",
       "import": "./build/component-image.es.js",
-      "require": "./build/component-image.cjs.js",
-      "types": "./build/component-image.d.ts"
+      "require": "./build/component-image.cjs.js"
     },
     "./component-input": {
+      "types": "./build/component-input.d.ts",
       "import": "./build/component-input.es.js",
-      "require": "./build/component-input.cjs.js",
-      "types": "./build/component-input.d.ts"
+      "require": "./build/component-input.cjs.js"
     },
     "./component-loading": {
+      "types": "./build/component-loading.d.ts",
       "import": "./build/component-loading.es.js",
-      "require": "./build/component-loading.cjs.js",
-      "types": "./build/component-loading.d.ts"
+      "require": "./build/component-loading.cjs.js"
     },
     "./component-pagination": {
+      "types": "./build/component-pagination.d.ts",
       "import": "./build/component-pagination.es.js",
-      "require": "./build/component-pagination.cjs.js",
-      "types": "./build/component-pagination.d.ts"
+      "require": "./build/component-pagination.cjs.js"
     },
     "./component-ripple": {
+      "types": "./build/component-ripple.d.ts",
       "import": "./build/component-ripple.es.js",
-      "require": "./build/component-ripple.cjs.js",
-      "types": "./build/component-ripple.d.ts"
+      "require": "./build/component-ripple.cjs.js"
     },
     "./component-select": {
+      "types": "./build/component-select.d.ts",
       "import": "./build/component-select.es.js",
-      "require": "./build/component-select.cjs.js",
-      "types": "./build/component-select.d.ts"
+      "require": "./build/component-select.cjs.js"
     },
     "./component-separator": {
+      "types": "./build/component-separator.d.ts",
       "import": "./build/component-separator.es.js",
-      "require": "./build/component-separator.cjs.js",
-      "types": "./build/component-separator.d.ts"
+      "require": "./build/component-separator.cjs.js"
     },
     "./component-stack": {
+      "types": "./build/component-stack.d.ts",
       "import": "./build/component-stack.es.js",
-      "require": "./build/component-stack.cjs.js",
-      "types": "./build/component-stack.d.ts"
+      "require": "./build/component-stack.cjs.js"
     },
     "./component-textarea": {
+      "types": "./build/component-textarea.d.ts",
       "import": "./build/component-textarea.es.js",
-      "require": "./build/component-textarea.cjs.js",
-      "types": "./build/component-textarea.d.ts"
+      "require": "./build/component-textarea.cjs.js"
     },
     "./component-toggle": {
+      "types": "./build/component-toggle.d.ts",
       "import": "./build/component-toggle.es.js",
-      "require": "./build/component-toggle.cjs.js",
-      "types": "./build/component-toggle.d.ts"
+      "require": "./build/component-toggle.cjs.js"
     },
     "./component-tooltip": {
+      "types": "./build/component-tooltip.d.ts",
       "import": "./build/component-tooltip.es.js",
-      "require": "./build/component-tooltip.cjs.js",
-      "types": "./build/component-tooltip.d.ts"
+      "require": "./build/component-tooltip.cjs.js"
     },
     "./component-typography": {
+      "types": "./build/component-typography.d.ts",
       "import": "./build/component-typography.es.js",
-      "require": "./build/component-typography.cjs.js",
-      "types": "./build/component-typography.d.ts"
+      "require": "./build/component-typography.cjs.js"
     },
     "./context-app": {
+      "types": "./build/context-app.d.ts",
       "import": "./build/context-app.es.js",
-      "require": "./build/context-app.cjs.js",
-      "types": "./build/context-app.d.ts"
+      "require": "./build/context-app.cjs.js"
     },
     "./context-cookie": {
+      "types": "./build/context-cookie.d.ts",
       "import": "./build/context-cookie.es.js",
-      "require": "./build/context-cookie.cjs.js",
-      "types": "./build/context-cookie.d.ts"
+      "require": "./build/context-cookie.cjs.js"
     },
     "./context-dialog": {
+      "types": "./build/context-dialog.d.ts",
       "import": "./build/context-dialog.es.js",
-      "require": "./build/context-dialog.cjs.js",
-      "types": "./build/context-dialog.d.ts"
+      "require": "./build/context-dialog.cjs.js"
     },
     "./context-geolocation": {
+      "types": "./build/context-geolocation.d.ts",
       "import": "./build/context-geolocation.es.js",
-      "require": "./build/context-geolocation.cjs.js",
-      "types": "./build/context-geolocation.d.ts"
+      "require": "./build/context-geolocation.cjs.js"
     },
     "./context-local-storage": {
+      "types": "./build/context-local-storage.d.ts",
       "import": "./build/context-local-storage.es.js",
-      "require": "./build/context-local-storage.cjs.js",
-      "types": "./build/context-local-storage.d.ts"
+      "require": "./build/context-local-storage.cjs.js"
     },
     "./context-permission": {
+      "types": "./build/context-permission.d.ts",
       "import": "./build/context-permission.es.js",
-      "require": "./build/context-permission.cjs.js",
-      "types": "./build/context-permission.d.ts"
+      "require": "./build/context-permission.cjs.js"
     },
     "./context-screen-width": {
+      "types": "./build/context-screen-width.d.ts",
       "import": "./build/context-screen-width.es.js",
-      "require": "./build/context-screen-width.cjs.js",
-      "types": "./build/context-screen-width.d.ts"
+      "require": "./build/context-screen-width.cjs.js"
     },
     "./context-sonner": {
+      "types": "./build/context-sonner.d.ts",
       "import": "./build/context-sonner.es.js",
-      "require": "./build/context-sonner.cjs.js",
-      "types": "./build/context-sonner.d.ts"
+      "require": "./build/context-sonner.cjs.js"
     },
     "./layout-auth": {
       "import": "./build/layout-auth.es.js",
@@ -188,9 +188,9 @@
       "types": "./build/layout-auth.d.ts"
     },
     "./style-base": {
+      "types": "./build/style-base.d.ts",
       "import": "./build/style-base.es.js",
-      "require": "./build/style-base.cjs.js",
-      "types": "./build/style-base.d.ts"
+      "require": "./build/style-base.cjs.js"
     },
     "./style-theme": {
       "import": "./build/style-theme.es.js",
@@ -198,24 +198,24 @@
       "types": "./build/style-theme.d.ts"
     },
     "./consts": {
+      "types": "./build/consts.d.ts",
       "import": "./build/consts.es.js",
-      "require": "./build/consts.cjs.js",
-      "types": "./build/consts.d.ts"
+      "require": "./build/consts.cjs.js"
     },
     "./functions": {
+      "types": "./build/functions.d.ts",
       "import": "./build/functions.es.js",
-      "require": "./build/functions.cjs.js",
-      "types": "./build/functions.d.ts"
+      "require": "./build/functions.cjs.js"
     },
     "./types": {
+      "types": "./build/types.d.ts",
       "import": "./build/types.es.js",
-      "require": "./build/types.cjs.js",
-      "types": "./build/types.d.ts"
+      "require": "./build/types.cjs.js"
     },
     ".": {
+      "types": "./build/main.d.ts",
       "import": "./build/main.es.js",
-      "require": "./build/main.cjs.js",
-      "types": "./build/main.d.ts"
+      "require": "./build/main.cjs.js"
     }
   },
   "scripts": {
