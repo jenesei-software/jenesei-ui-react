@@ -8,14 +8,12 @@ To use themes in your application, create a declaration themes file and extend `
 
 ```typescript
 // styled-components.d.ts
-import { IJeneseiTheme } from '@jenesei-software/jenesei-ui-react'
+import { IJeneseiTheme } from '@jenesei-software/jenesei-ui-react/style-theme'
 import 'styled-components'
 
 declare module 'styled-components' {
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  export interface DefaultTheme extends IJeneseiTheme {
-    // Your additional theme properties
-  }
+  export interface DefaultTheme extends IJeneseiTheme {}
 }
 ```
 
