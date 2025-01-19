@@ -7,7 +7,7 @@ This is a frontend library for React from Jenesei Software. Test.
 To use themes in your application, create a declaration themes file and extend `styled-comments` as follows:
 
 ```typescript
-// styled.d.ts
+// styled-components.d.ts
 import { IJeneseiTheme } from '@jenesei-software/jenesei-ui-react'
 import 'styled-components'
 
