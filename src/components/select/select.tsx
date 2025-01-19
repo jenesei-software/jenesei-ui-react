@@ -1,13 +1,11 @@
 import { useVirtualizer } from '@tanstack/react-virtual'
-import { getExample } from 'awesome-phonenumber'
-import FullCountryList from 'country-list-with-dial-code-and-flag'
 import gsap from 'gsap'
 import moment from 'moment'
 import React, { FC, FocusEventHandler, ReactNode, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { Button } from '@local/components/button'
 import { InputChildrenProps, InputErrorMessage } from '@local/components/input'
-import { Typography, TypographyTooltip } from '@local/components/typography'
+import { Typography } from '@local/components/typography'
 import { ListLanguage } from '@local/consts'
 import { KEY_SIZE_DATA, TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
 
@@ -20,10 +18,8 @@ import {
   DropdownOptionIcon,
   DropdownOptionLayout,
   DropdownSelectAll,
-  ISelectCountryOption,
   ISelectItem,
   ISelectLanguageOption,
-  SelectCountryProps,
   SelectDateProps,
   SelectInputIcon,
   SelectLanguageProps,
@@ -486,109 +482,6 @@ const ContainerDropdownOptionComponent = (params: {
 }
 
 export const ContainerDropdownOption = memo(ContainerDropdownOptionComponent)
-
-const getNumberWithoutCountryDialCode = (countryCode: string, countryDialCode: string) => {
-  try {
-    const data = countryCode ? getExample(countryCode) : null
-    const numberWithoutCountryDialCode = (data?.number?.e164.replace(countryDialCode, '').trim() ?? '').replace(' ', '')
-    return numberWithoutCountryDialCode.length
-  } catch {
-    return 0
-  }
-}
-
-export const SelectCountry: FC<SelectCountryProps> = props => {
-  const countryListOption = FullCountryList.getAll()
-
-  const option = useMemo<ISelectCountryOption[]>(
-    () =>
-      countryListOption.map(e => ({
-        label: (
-          <>
-            <img
-              alt={e.name}
-              style={{
-                paddingRight: '6px',
-                width: '30px',
-                minWidth: '30px',
-                maxWidth: '30px',
-                display: 'inline-flex',
-                objectFit: 'cover',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-              src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${e.code}.svg`}
-            />
-            <TypographyTooltip
-              typography={{
-                wrap: 'nowrap'
-              }}
-              tooltip={{ size: 14, placement: 'bottom' }}
-            >
-              {e.name}
-              {', '}
-              {e.localName}
-            </TypographyTooltip>
-          </>
-        ),
-        value: e.code,
-        search: e.name + ', ' + e.localName + ', ' + e.dialCode + ', ' + e.code,
-        placeholder: e.name + ', ' + e.localName,
-        dialCode: e.dial_code,
-        lengthNumberWithoutCountryDialCode: getNumberWithoutCountryDialCode(e.code, e.dial_code)
-      })),
-    [countryListOption]
-  )
-
-  const [viewOption, setViewOption] = useState<ISelectCountryOption[]>(option)
-  const [query, setQuery] = useState<string>('')
-
-  const handleSelectChange = (value: ISelectCountryOption[]) => {
-    const countryCode = value[0]?.value.toString()
-    const countryDialCode = value[0]?.dialCode.toString()
-    const lengthNumberWithoutCountryDialCode = value[0]?.lengthNumberWithoutCountryDialCode
-
-    props.onChange({ countryCode, countryDialCode, lengthNumberWithoutCountryDialCode })
-    setQuery('')
-    setViewOption(option)
-  }
-  const handleQueryChange = useCallback(
-    (value: string) => {
-      setQuery(value)
-      props.onChange({ countryCode: '', countryDialCode: '', lengthNumberWithoutCountryDialCode: 0 })
-      if (value === '') return setViewOption(option)
-      const filteredOptions = option.filter(option =>
-        Object.values(option).some(field => field?.toString().toLowerCase().includes(value.toLowerCase()))
-      )
-      setViewOption(filteredOptions)
-    },
-    [option, props]
-  )
-
-  const [value, setValue] = useState<ISelectCountryOption | undefined>(option.find(e => e.value === props.value))
-
-  useEffect(() => {
-    if (value?.value !== props.value) setValue(option.find(e => e.value === props.value))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [option, props.value])
-
-  return (
-    <Select<ISelectCountryOption>
-      {...props}
-      option={viewOption}
-      minView={1}
-      maxView={8}
-      isOnClickOptionClose
-      value={value ? [value] : []}
-      onChange={handleSelectChange}
-      inputProps={{
-        ...props.inputProps,
-        value: (value?.placeholder as string) ?? query,
-        onChange: handleQueryChange
-      }}
-    />
-  )
-}
 
 export const SelectLanguage: FC<SelectLanguageProps> = props => {
   const option = ListLanguage

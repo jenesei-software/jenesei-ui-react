@@ -29,3 +29,4 @@ public/pictures/*
 *.sw?
 
 *storybook.log
+stats.html
