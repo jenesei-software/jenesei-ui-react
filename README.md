@@ -79,9 +79,9 @@ declare module '@jenesei-software/jenesei-ui-react' {
 To work correctly you need to install the following dependencies:
 
 ```bash
+npm install @tanstack/react-router --save
 npm install react --save
 npm install react-dom --save
-npm install styled-components --save
-npm install @tanstack/react-router --save
 npm install react-helmet-async --save
+npm install styled-components --save
 ```
