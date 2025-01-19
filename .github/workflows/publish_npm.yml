@@ -98,7 +98,7 @@ jobs:
       - name: Build
         if: env.publishGH == 'true' && env.publishNPM == 'true'
         run: |
-          npm run build
+          npm run build:prod
 
       - name: Publish to GitHub Packages
         if: env.publishGH == 'true' && env.publishNPM == 'true'

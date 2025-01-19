@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import react from '@vitejs/plugin-react'
 import path, { resolve } from 'path'
+import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import tsconfigPaths from 'vite-tsconfig-paths'
@@ -8,20 +9,29 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import { peerDependencies } from './package.json'
 
 export default defineConfig(() => {
-  // eslint-disable-next-line no-undef
-  const isStorybookBuild = process.env.BUILD_STORYBOOK === 'true'
+  const isStorybook = process.env.NODE_ENV === 'storybook'
+  const isDev = process.env.NODE_ENV === 'dev'
+
+  console.log('isStorybookBuild: ', String(isStorybook))
+  console.log('isDev: ', String(isDev))
 
   return {
     resolve: {
       alias: {
-        // eslint-disable-next-line no-undef
         '@local': path.resolve(__dirname, './src')
       }
     },
     plugins: [
       react(),
       tsconfigPaths(),
-      !isStorybookBuild &&
+      isDev &&
+        visualizer({
+          open: true,
+          filename: 'stats.html',
+          gzipSize: true,
+          brotliSize: true
+        }),
+      !isStorybook &&
         dts({
           include: ['src/'],
           exclude: ['src/declaration/styled.d.ts'],
@@ -96,7 +106,6 @@ export default defineConfig(() => {
           ['functions']: resolve(__dirname, 'src/functions.ts'),
           ['types']: resolve(__dirname, 'src/types.ts')
         },
-        // name: 'jenesei-ui-react',
         formats: ['es', 'cjs'],
         fileName: (format, name) => `${name}.${format}.js`
       },
@@ -111,7 +120,6 @@ export default defineConfig(() => {
             moment: 'moment',
             'react-loading': 'ReactLoading',
             gsap: 'gsap',
-            'awesome-phonenumber': 'awesomePhonenumber',
             'country-list-with-dial-code-and-flag': 'FullCountryList',
             'react-number-format': 'reactNumberFormat',
             '@tanstack/react-virtual': 'reactVirtual',
