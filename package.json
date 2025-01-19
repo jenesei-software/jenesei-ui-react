@@ -1,7 +1,7 @@
 {
   "author": "Cyril Strone",
   "name": "@jenesei-software/jenesei-ui-react",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jenesei-software/jenesei-ui-react.git"
@@ -27,7 +27,6 @@
       "require": "./build/main.cjs.js",
       "types": "./build/main.d.ts"
     },
-    
     "./area-outside": {
       "import": "./build/area-outside.es.js",
       "require": "./build/area-outside.cjs.js",
@@ -53,7 +52,6 @@
       "require": "./build/area-smooth.cjs.js",
       "types": "./build/area-smooth.d.ts"
     },
-
     "./component-accordion": {
       "import": "./build/component-accordion.es.js",
       "require": "./build/component-accordion.cjs.js",
@@ -149,7 +147,6 @@
       "require": "./build/component-typography.cjs.js",
       "types": "./build/component-typography.d.ts"
     },
-
     "./context-app": {
       "import": "./build/context-app.es.js",
       "require": "./build/context-app.cjs.js",
@@ -190,13 +187,11 @@
       "require": "./build/context-sonner.cjs.js",
       "types": "./build/context-sonner.d.ts"
     },
-
     "./layout-auth": {
       "import": "./build/layout-auth.es.js",
       "require": "./build/layout-auth.cjs.js",
       "types": "./build/layout-auth.d.ts"
     },
-
     "./style-base": {
       "import": "./build/style-base.es.js",
       "require": "./build/style-base.cjs.js",
@@ -207,7 +202,6 @@
       "require": "./build/style-theme.cjs.js",
       "types": "./build/style-theme.d.ts"
     },
-
     "./consts": {
       "import": "./build/consts.es.js",
       "require": "./build/consts.cjs.js",
