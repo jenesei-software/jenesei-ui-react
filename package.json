@@ -219,9 +219,12 @@
     }
   },
   "scripts": {
-    "build": "tsc && vite build",
+    "build:storybook": "cross-env NODE_ENV=storybook storybook build --quiet --disable-telemetry",
+    "build:test": "tsc && cross-env NODE_ENV=test vite build",
+    "build:prod": "tsc && cross-env NODE_ENV=prod vite build",
+    "build:dev": "tsc && cross-env NODE_ENV=dev vite build",
+    "build": "tsc && cross-env NODE_ENV=dev vite build",
     "storybook": "storybook dev -p 3030",
-    "build-storybook": "cross-env BUILD_STORYBOOK=true storybook build --quiet --disable-telemetry",
     "lint": "eslint \"src/**/*.{ts,tsx,js,jsx}\"",
     "format": "prettier --write \"src/**/*.{ts,tsx}\""
   },
@@ -264,6 +267,7 @@
     "path": "^0.12.7",
     "prettier": "^3.3.3",
     "react-docgen-typescript": "^2.2.2",
+    "rollup-plugin-visualizer": "^5.14.0",
     "storybook": "^8.3.6",
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.12.0",
@@ -276,8 +280,6 @@
     "@emotion/styled": "^11.13.0",
     "@gsap/react": "^2.1.1",
     "@tanstack/react-virtual": "^3.10.8",
-    "awesome-phonenumber": "^7.2.0",
-    "country-list-with-dial-code-and-flag": "^5.0.6",
     "framer-motion": "^11.13.1",
     "gsap": "^3.12.5",
     "js-cookie": "^3.0.5",

@@ -1,5 +1,3 @@
-import { getExample } from 'awesome-phonenumber'
-import FullCountryList from 'country-list-with-dial-code-and-flag'
 import { useCallback } from 'react'
 import { useTheme } from 'styled-components'
 
@@ -129,7 +127,7 @@ export const Input = (props: InputProps) => {
   )
 }
 
-function formatPhoneNumber(dialCode: string, international: string) {
+export function formatPhoneNumber(dialCode: string, international: string) {
   function isDigit(char: string): boolean {
     return /\d/.test(char)
   }
@@ -170,32 +168,4 @@ function formatPhoneNumber(dialCode: string, international: string) {
     format: formattedNumber,
     placeholder: placeholderNumber
   }
-}
-
-export const InputPhone = (
-  props: Omit<InputProps, 'format' | 'mask' | 'formatType'> & {
-    countryCode?: string
-    countryDialCode?: string
-  }
-) => {
-  const countryCode = props?.countryCode ?? null
-  const country = countryCode ? FullCountryList.findOneByCountryCode(countryCode) : null
-  const countryDialCode = props?.countryDialCode ?? country?.dial_code
-  const data = countryDialCode && countryCode ? getExample(countryCode) : null
-  const formattedPhoneNumber =
-    data && data.number?.international && countryDialCode
-      ? formatPhoneNumber(countryDialCode, data.number?.international)
-      : null
-
-  return (
-    <Input
-      {...props}
-      placeholder={props.placeholder ?? formattedPhoneNumber?.placeholder ?? undefined}
-      format={formattedPhoneNumber?.format}
-      isAllowEmptyFormatting={false}
-      mask="_"
-      isDisabled={props.isDisabled}
-      formatType="tel"
-    />
-  )
 }

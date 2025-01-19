@@ -51,33 +51,17 @@ export interface SelectProps<T extends ISelectItem> {
   }
 }
 
-export interface ISelectCountryOption extends ISelectItem {
-  search?: string
-  dialCode: string
-  placeholder: string
-  lengthNumberWithoutCountryDialCode: number
-}
-
-export type SelectCountryProps = Omit<SelectProps<ISelectCountryOption>, 'option' | 'value' | 'onChange'> & {
-  value: string
-  onChange: (props: {
-    countryCode: string
-    countryDialCode: string
-    lengthNumberWithoutCountryDialCode: number
-  }) => void
-}
-
 export interface ISelectLanguageOption extends ISelectItem {
   search?: string
   placeholder: string
 }
 
-export type SelectLanguageProps = Omit<SelectProps<ISelectCountryOption>, 'option' | 'value' | 'onChange'> & {
+export type SelectLanguageProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
   value: string
   onChange: (language: string) => void
 }
 
-export type SelectDateProps = Omit<SelectProps<ISelectCountryOption>, 'option' | 'value' | 'onChange'> & {
+export type SelectDateProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
   startDate?: number
   endDate?: number
   value: number
