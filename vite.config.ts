@@ -120,11 +120,9 @@ export default defineConfig(() => {
             moment: 'moment',
             'react-loading': 'ReactLoading',
             gsap: 'gsap',
-            'country-list-with-dial-code-and-flag': 'FullCountryList',
             'react-number-format': 'reactNumberFormat',
             '@tanstack/react-virtual': 'reactVirtual',
             'react-toggle': 'ReactToggle',
-            'react-helmet': 'reactHelmet',
             'js-cookie': 'Cookies',
             '@tanstack/react-router': 'reactRouter',
             'react-helmet-async': 'reactHelmetAsync'
