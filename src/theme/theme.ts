@@ -8,6 +8,7 @@ import {
 } from '.'
 
 export const JeneseiThemeVariables: Record<JeneseiThemeVariablesKeys, string> = {
+  currentColor: 'currentColor',
   inherit: 'inherit',
   transparent: 'transparent',
   black100: '#000000;',
@@ -447,7 +448,7 @@ const DefaultJeneseiThemeGenreSonner: TJeneseiThemeGenreSonner = {
       boxShadowHover: '0px 10px 30px 0px rgba(0, 0, 0, 0.5)'
     },
     icon: {
-      color: 'black100'
+      color: JeneseiThemeVariables.black100
     },
     title: {
       color: JeneseiThemeVariables.black100
@@ -467,7 +468,7 @@ const DefaultJeneseiThemeGenreSonner: TJeneseiThemeGenreSonner = {
       boxShadowHover: `0px 10px 30px 0px  ${JeneseiThemeVariables.green50}`
     },
     icon: {
-      color: 'green100'
+      color: JeneseiThemeVariables.green100
     },
     title: {
       color: JeneseiThemeVariables.green100
@@ -487,7 +488,7 @@ const DefaultJeneseiThemeGenreSonner: TJeneseiThemeGenreSonner = {
       boxShadowHover: `0px 10px 30px 0px  ${JeneseiThemeVariables.red50}`
     },
     icon: {
-      color: 'red100'
+      color: JeneseiThemeVariables.red100
     },
     title: {
       color: JeneseiThemeVariables.red100

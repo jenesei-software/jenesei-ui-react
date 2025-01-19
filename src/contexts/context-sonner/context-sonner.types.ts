@@ -1,7 +1,7 @@
 import { PropsWithChildren, ReactNode } from 'react'
 
 import { TLibraryIconCurvedNameString } from '@local/components/icon'
-import { IJeneseiTheme, JeneseiThemeVariablesKeys, TJeneseiThemeGenre } from '@local/theme/theme.interface'
+import { IJeneseiTheme, TJeneseiThemeGenre } from '@local/theme/theme.interface'
 import { AddDollarSign } from '@local/types'
 
 export type ProviderSonnerProps = PropsWithChildren & {
@@ -47,7 +47,6 @@ type SonnerElementDefaultProps = {
   isLastViewIndex: boolean
   buttonGenre: keyof TJeneseiThemeGenre
   isTop: boolean
-  iconColor: JeneseiThemeVariablesKeys
 } & Required<Pick<SonnerContentDefaultProps, 'genre'>>
 
 export type SonnerContentProps = SonnerContentContentProps | SonnerContentStandardProps
