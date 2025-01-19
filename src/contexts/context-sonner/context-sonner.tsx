@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from 'uuid'
 import { Button } from '@local/components/button'
 import { Icon } from '@local/components/icon'
 import { Loading } from '@local/components/loading'
-import { JeneseiThemeVariables } from '@local/theme'
 
 import {
   DEFAULT_PROVIDER_SONNER_BUTTON,

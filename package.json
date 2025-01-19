@@ -6,8 +6,8 @@
     "type": "git",
     "url": "git+https://github.com/jenesei-software/jenesei-ui-react.git"
   },
-  "main": "./build/jenesei-ui-react.umd.js",
-  "module": "./build/jenesei-ui-react.es.js",
+  "module": "./build/main.es.js",
+  "main": "./build/main.cjs.js",
   "types": "./build/main.d.ts",
   "license": "MIT",
   "type": "module",
@@ -23,9 +23,154 @@
   ],
   "exports": {
     ".": {
-      "import": "./build/jenesei-ui-react.es.js",
-      "require": "./build/jenesei-ui-react.umd.js",
+      "import": "./build/main.es.js",
+      "require": "./build/main.cjs.js",
       "types": "./build/main.d.ts"
+    },
+    "./area/outside": {
+      "import": "./build/area/outside.es.js",
+      "require": "./build/area/outside.cjs.js",
+      "types": "./build/area/outside.d.ts"
+    },
+    "./area/preview": {
+      "import": "./build/area/preview.es.js",
+      "require": "./build/area/preview.cjs.js",
+      "types": "./build/area/preview.d.ts"
+    },
+    "./area/scroll": {
+      "import": "./build/area/scroll.es.js",
+      "require": "./build/area/scroll.cjs.js",
+      "types": "./build/area/scroll.d.ts"
+    },
+    "./area/skeleton": {
+      "import": "./build/area/skeleton.es.js",
+      "require": "./build/area/skeleton.cjs.js",
+      "types": "./build/area/skeleton.d.ts"
+    },
+    "./area/smooth": {
+      "import": "./build/area/smooth.es.js",
+      "require": "./build/area/smooth.cjs.js",
+      "types": "./build/area/smooth.d.ts"
+    },
+    "./component/accordion": {
+      "import": "./build/component/accordion.es.js",
+      "require": "./build/component/accordion.cjs.js",
+      "types": "./build/component/accordion.d.ts"
+    },
+    "./component/button": {
+      "import": "./build/component/button.es.js",
+      "require": "./build/component/button.cjs.js",
+      "types": "./build/component/button.d.ts"
+    },
+    "./component/button-group": {
+      "import": "./build/component/button-group.es.js",
+      "require": "./build/component/button-group.cjs.js",
+      "types": "./build/component/button-group.d.ts"
+    },
+    "./component/checkbox": {
+      "import": "./build/component/checkbox.es.js",
+      "require": "./build/component/checkbox.cjs.js",
+      "types": "./build/component/checkbox.d.ts"
+    },
+    "./component/checkbox-group": {
+      "import": "./build/component/checkbox-group.es.js",
+      "require": "./build/component/checkbox-group.cjs.js",
+      "types": "./build/component/checkbox-group.d.ts"
+    },
+    "./component/date-picker": {
+      "import": "./build/component/date-picker.es.js",
+      "require": "./build/component/date-picker.cjs.js",
+      "types": "./build/component/date-picker.d.ts"
+    },
+    "./component/icon": {
+      "import": "./build/component/icon.es.js",
+      "require": "./build/component/icon.cjs.js",
+      "types": "./build/component/icon.d.ts"
+    },
+    "./component/image": {
+      "import": "./build/component/image.es.js",
+      "require": "./build/component/image.cjs.js",
+      "types": "./build/component/image.d.ts"
+    },
+    "./component/input": {
+      "import": "./build/component/input.es.js",
+      "require": "./build/component/input.cjs.js",
+      "types": "./build/component/input.d.ts"
+    },
+    "./component/loading": {
+      "import": "./build/component/loading.es.js",
+      "require": "./build/component/loading.cjs.js",
+      "types": "./build/component/loading.d.ts"
+    },
+    "./component/pagination": {
+      "import": "./build/component/pagination.es.js",
+      "require": "./build/component/pagination.cjs.js",
+      "types": "./build/component/pagination.d.ts"
+    },
+    "./component/ripple": {
+      "import": "./build/component/ripple.es.js",
+      "require": "./build/component/ripple.cjs.js",
+      "types": "./build/component/ripple.d.ts"
+    },
+    "./component/select": {
+      "import": "./build/component/select.es.js",
+      "require": "./build/component/select.cjs.js",
+      "types": "./build/component/select.d.ts"
+    },
+    "./component/separator": {
+      "import": "./build/component/separator.es.js",
+      "require": "./build/component/separator.cjs.js",
+      "types": "./build/component/separator.d.ts"
+    },
+    "./component/stack": {
+      "import": "./build/component/stack.es.js",
+      "require": "./build/component/stack.cjs.js",
+      "types": "./build/component/stack.d.ts"
+    },
+    "./component/toggle": {
+      "import": "./build/component/toggle.es.js",
+      "require": "./build/component/toggle.cjs.js",
+      "types": "./build/component/toggle.d.ts"
+    },
+    "./component/tooltip": {
+      "import": "./build/component/tooltip.es.js",
+      "require": "./build/component/tooltip.cjs.js",
+      "types": "./build/component/tooltip.d.ts"
+    },
+    "./component/typography": {
+      "import": "./build/component/typography.es.js",
+      "require": "./build/component/typography.cjs.js",
+      "types": "./build/component/typography.d.ts"
+    },
+    "./context/app": {
+      "import": "./build/context/app.es.js",
+      "require": "./build/context/app.cjs.js",
+      "types": "./build/context/app.d.ts"
+    },
+    "./style/base": {
+      "import": "./build/style/base.es.js",
+      "require": "./build/style/base.cjs.js",
+      "types": "./build/style/base.d.ts"
+    },
+    "./style/theme": {
+      "import": "./build/style/theme.es.js",
+      "require": "./build/style/theme.cjs.js",
+      "types": "./build/style/theme.d.ts"
+    },
+    "./consts": {
+      "import": "./build/consts.es.js",
+      "require": "./build/consts.cjs.js",
+      "types": "./build/consts.d.ts"
+    },
+    "./functions": {
+      "import": "./build/functions.es.js",
+      "require": "./build/functions.cjs.js",
+      "types": "./build/functions.d.ts"
+    },
+    "./types": {
+      "import": "./build/types.es.js",
+      "require": "./build/types.cjs.js",
+      "types": "./build/types.d.ts"
     }
   },
   "scripts": {
