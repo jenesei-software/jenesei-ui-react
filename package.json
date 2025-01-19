@@ -22,11 +22,6 @@
     "styled-components"
   ],
   "exports": {
-    ".": {
-      "import": "./build/main.es.js",
-      "require": "./build/main.cjs.js",
-      "types": "./build/main.d.ts"
-    },
     "./area-outside": {
       "import": "./build/area-outside.es.js",
       "require": "./build/area-outside.cjs.js",
@@ -216,6 +211,11 @@
       "import": "./build/types.es.js",
       "require": "./build/types.cjs.js",
       "types": "./build/types.d.ts"
+    },
+    ".": {
+      "import": "./build/main.es.js",
+      "require": "./build/main.cjs.js",
+      "types": "./build/main.d.ts"
     }
   },
   "scripts": {
