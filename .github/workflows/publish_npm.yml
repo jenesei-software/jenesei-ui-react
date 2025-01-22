@@ -90,7 +90,7 @@ jobs:
             echo "publishNPM=true" >> $GITHUB_ENV
           fi
 
-      - name: Install dependencies
+      - name: Install node modules
         if: env.publishGH == 'true' && env.publishNPM == 'true'
         run: |
           npm ci
