@@ -10,10 +10,8 @@ import { peerDependencies } from './package.json'
 
 export default defineConfig(() => {
   const isStorybook = process.env.NODE_ENV === 'storybook'
-  const isDev = process.env.NODE_ENV === 'dev'
 
   console.log('isStorybookBuild: ', String(isStorybook))
-  console.log('isDev: ', String(isDev))
 
   return {
     resolve: {
@@ -24,13 +22,6 @@ export default defineConfig(() => {
     plugins: [
       react(),
       tsconfigPaths(),
-      isDev &&
-        visualizer({
-          open: true,
-          filename: 'stats.html',
-          gzipSize: true,
-          brotliSize: true
-        }),
       !isStorybook &&
         dts({
           include: ['src/'],

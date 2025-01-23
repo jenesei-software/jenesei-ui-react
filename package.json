@@ -183,9 +183,9 @@
       "require": "./build/context-sonner.cjs.js"
     },
     "./layout-auth": {
+      "types": "./build/layout-auth.d.ts",
       "import": "./build/layout-auth.es.js",
-      "require": "./build/layout-auth.cjs.js",
-      "types": "./build/layout-auth.d.ts"
+      "require": "./build/layout-auth.cjs.js"
     },
     "./style-base": {
       "types": "./build/style-base.d.ts",
@@ -193,9 +193,9 @@
       "require": "./build/style-base.cjs.js"
     },
     "./style-theme": {
+      "types": "./build/style-theme.d.ts",
       "import": "./build/style-theme.es.js",
-      "require": "./build/style-theme.cjs.js",
-      "types": "./build/style-theme.d.ts"
+      "require": "./build/style-theme.cjs.js"
     },
     "./consts": {
       "types": "./build/consts.d.ts",
@@ -220,20 +220,10 @@
   },
   "scripts": {
     "build:storybook": "cross-env NODE_ENV=storybook storybook build --quiet --disable-telemetry",
-    "build:test": "tsc && cross-env NODE_ENV=test vite build",
-    "build:prod": "tsc && cross-env NODE_ENV=prod vite build",
-    "build:dev": "tsc && cross-env NODE_ENV=dev vite build",
-    "build": "tsc && cross-env NODE_ENV=dev vite build",
+    "build": "tsc && vite build",
     "storybook": "storybook dev -p 3030",
     "lint": "eslint \"src/**/*.{ts,tsx,js,jsx}\"",
     "format": "prettier --write \"src/**/*.{ts,tsx}\""
-  },
-  "peerDependencies": {
-    "@tanstack/react-router": "^1.97.0",
-    "react": "^17.0 || ^18.0",
-    "react-dom": "^17.0 || ^18.0",
-    "react-helmet-async": "^2.0.5",
-    "styled-components": "^6.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.9.0",
@@ -289,5 +279,11 @@
     "react-number-format": "^5.4.2",
     "styled-reset": "^4.5.2",
     "uuid": "^11.0.3"
+  },
+  "peerDependencies": {
+    "@tanstack/react-router": "^1.97.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "styled-components": "^6.0"
   }
 }
