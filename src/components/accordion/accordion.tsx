@@ -38,7 +38,7 @@ export const Accordion: FC<AccordionProps> = props => {
             <AccordionStyledIcon
               $expanded={props.expanded}
               onClick={onClickIcon}
-              name="ArrowDown"
+              name="Arrow1"
               primaryColor="black100"
               type="curved"
               size="large"
