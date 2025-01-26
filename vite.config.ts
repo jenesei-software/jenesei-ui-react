@@ -10,10 +10,8 @@ import { peerDependencies } from './package.json'
 
 export default defineConfig(() => {
   const isStorybook = process.env.NODE_ENV === 'storybook'
-  const isDev = process.env.NODE_ENV === 'dev'
 
   console.log('isStorybookBuild: ', String(isStorybook))
-  console.log('isDev: ', String(isDev))
 
   return {
     resolve: {
@@ -24,17 +22,10 @@ export default defineConfig(() => {
     plugins: [
       react(),
       tsconfigPaths(),
-      isDev &&
-        visualizer({
-          open: true,
-          filename: 'stats.html',
-          gzipSize: true,
-          brotliSize: true
-        }),
       !isStorybook &&
         dts({
           include: ['src/'],
-          exclude: ['src/declaration/styled.d.ts'],
+          exclude: ['src/declaration/styled-components.d.ts'],
           rollupTypes: true,
           insertTypesEntry: true,
           tsconfigPath: './tsconfig.json'
@@ -75,7 +66,6 @@ export default defineConfig(() => {
           ['component-image']: resolve(__dirname, 'src/components/image/index.ts'),
           ['component-input']: resolve(__dirname, 'src/components/input/index.ts'),
           // ['component-input-otp']: resolve(__dirname, 'src/components/input-otp/index.ts'),
-          ['component-loading']: resolve(__dirname, 'src/components/loading/index.ts'),
           ['component-pagination']: resolve(__dirname, 'src/components/pagination/index.ts'),
           ['component-ripple']: resolve(__dirname, 'src/components/ripple/index.ts'),
           ['component-select']: resolve(__dirname, 'src/components/select/index.ts'),
@@ -118,13 +108,10 @@ export default defineConfig(() => {
             react: 'React',
             'react-dom': 'ReactDOM',
             moment: 'moment',
-            'react-loading': 'ReactLoading',
             gsap: 'gsap',
-            'country-list-with-dial-code-and-flag': 'FullCountryList',
             'react-number-format': 'reactNumberFormat',
             '@tanstack/react-virtual': 'reactVirtual',
             'react-toggle': 'ReactToggle',
-            'react-helmet': 'reactHelmet',
             'js-cookie': 'Cookies',
             '@tanstack/react-router': 'reactRouter',
             'react-helmet-async': 'reactHelmetAsync'

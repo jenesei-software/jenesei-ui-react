@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion'
 import React, { CSSProperties, FC, MouseEventHandler, memo, useCallback, useMemo, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useTheme } from 'styled-components'
@@ -5,6 +6,7 @@ import { useTheme } from 'styled-components'
 import { Typography } from '@local/components/typography'
 
 import { TooltipArrow, TooltipBox, TooltipContainer, TooltipProps } from '.'
+import { DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT } from '@local/contexts/context-dialog'
 
 export const Tooltip: FC<TooltipProps> = memo(props => {
   // eslint-disable-next-line react/prop-types
@@ -120,103 +122,103 @@ export const TooltipContent: FC<TooltipProps> = props => {
     return style
   }, [arrowLength, props.placement, visible])
 
-  const styleArrow = useMemo(() => {
-    if (!refContainer.current && !visible) return {}
+  // const styleArrow = useMemo(() => {
+  //   if (!refContainer.current && !visible) return {}
 
-    const container = refContainer.current
+  //   const container = refContainer.current
 
-    if (!container) return {}
+  //   if (!container) return {}
 
-    const containerRect = container.children[0].getBoundingClientRect()
+  //   const containerRect = container.children[0].getBoundingClientRect()
 
-    const style: CSSProperties = {}
+  //   const style: CSSProperties = {}
 
-    switch (props.placement) {
-      case 'right':
-        style.left = `${containerRect.right}px`
-        style.top = `${containerRect.top + containerRect.height / 2 - 10}px`
-        style.borderWidth = `${arrowSizeString} ${arrowSizeString} ${arrowSizeString} 0`
-        style.borderColor = `transparent ${theme.palette.grayPatricia} transparent transparent`
-        break
-      case 'right-start':
-        style.left = `${containerRect.right}px`
-        style.top = `${containerRect.top + 5}px`
-        style.borderWidth = `${arrowSizeString} ${arrowSizeString} ${arrowSizeString} 0`
-        style.borderColor = `transparent ${theme.palette.grayPatricia} transparent transparent`
-        break
+  //   switch (props.placement) {
+  //     case 'right':
+  //       style.left = `${containerRect.right}px`
+  //       style.top = `${containerRect.top + containerRect.height / 2 - 10}px`
+  //       style.borderWidth = `${arrowSizeString} ${arrowSizeString} ${arrowSizeString} 0`
+  //       style.borderColor = `transparent ${theme.palette.grayPatricia} transparent transparent`
+  //       break
+  //     case 'right-start':
+  //       style.left = `${containerRect.right}px`
+  //       style.top = `${containerRect.top + 5}px`
+  //       style.borderWidth = `${arrowSizeString} ${arrowSizeString} ${arrowSizeString} 0`
+  //       style.borderColor = `transparent ${theme.palette.grayPatricia} transparent transparent`
+  //       break
 
-      case 'right-end':
-        style.left = `${containerRect.right}px`
-        style.top = `${containerRect.top + containerRect.height - 25}px`
-        style.borderWidth = `${arrowSizeString} ${arrowSizeString} ${arrowSizeString} 0`
-        style.borderColor = `transparent ${theme.palette.grayPatricia} transparent transparent`
-        break
-      case 'left':
-        style.left = `${containerRect.left - 10}px`
-        style.top = `${containerRect.top + containerRect.height / 2 - 10}px`
-        style.borderWidth = `${arrowSizeString} 0 ${arrowSizeString} ${arrowSizeString}`
-        style.borderColor = `transparent transparent transparent ${theme.palette.grayPatricia}`
-        break
+  //     case 'right-end':
+  //       style.left = `${containerRect.right}px`
+  //       style.top = `${containerRect.top + containerRect.height - 25}px`
+  //       style.borderWidth = `${arrowSizeString} ${arrowSizeString} ${arrowSizeString} 0`
+  //       style.borderColor = `transparent ${theme.palette.grayPatricia} transparent transparent`
+  //       break
+  //     case 'left':
+  //       style.left = `${containerRect.left - 10}px`
+  //       style.top = `${containerRect.top + containerRect.height / 2 - 10}px`
+  //       style.borderWidth = `${arrowSizeString} 0 ${arrowSizeString} ${arrowSizeString}`
+  //       style.borderColor = `transparent transparent transparent ${theme.palette.grayPatricia}`
+  //       break
 
-      case 'left-start':
-        style.left = `${containerRect.left - 10}px`
-        style.top = `${containerRect.top + 5}px`
-        style.borderWidth = `${arrowSizeString} 0 ${arrowSizeString} ${arrowSizeString}`
-        style.borderColor = `transparent transparent transparent ${theme.palette.grayPatricia}`
-        break
+  //     case 'left-start':
+  //       style.left = `${containerRect.left - 10}px`
+  //       style.top = `${containerRect.top + 5}px`
+  //       style.borderWidth = `${arrowSizeString} 0 ${arrowSizeString} ${arrowSizeString}`
+  //       style.borderColor = `transparent transparent transparent ${theme.palette.grayPatricia}`
+  //       break
 
-      case 'left-end':
-        style.left = `${containerRect.left - 10}px`
-        style.top = `${containerRect.top + containerRect.height - 25}px`
-        style.borderWidth = `${arrowSizeString} 0 ${arrowSizeString} ${arrowSizeString}`
-        style.borderColor = `transparent transparent transparent ${theme.palette.grayPatricia}`
-        break
-      case 'top':
-        style.left = `${containerRect.left + containerRect.width / 2 - 10}px`
-        style.top = `${containerRect.top - 10}px`
-        style.borderWidth = `${arrowSizeString} ${arrowSizeString} 0 ${arrowSizeString}`
-        style.borderColor = `${theme.palette.grayPatricia} transparent transparent transparent`
-        break
+  //     case 'left-end':
+  //       style.left = `${containerRect.left - 10}px`
+  //       style.top = `${containerRect.top + containerRect.height - 25}px`
+  //       style.borderWidth = `${arrowSizeString} 0 ${arrowSizeString} ${arrowSizeString}`
+  //       style.borderColor = `transparent transparent transparent ${theme.palette.grayPatricia}`
+  //       break
+  //     case 'top':
+  //       style.left = `${containerRect.left + containerRect.width / 2 - 10}px`
+  //       style.top = `${containerRect.top - 10}px`
+  //       style.borderWidth = `${arrowSizeString} ${arrowSizeString} 0 ${arrowSizeString}`
+  //       style.borderColor = `${theme.palette.grayPatricia} transparent transparent transparent`
+  //       break
 
-      case 'top-start':
-        style.left = `${containerRect.left + 10}px`
-        style.top = `${containerRect.top - 10}px`
-        style.borderWidth = `${arrowSizeString} ${arrowSizeString} 0 ${arrowSizeString}`
-        style.borderColor = `${theme.palette.grayPatricia} transparent transparent transparent`
-        break
+  //     case 'top-start':
+  //       style.left = `${containerRect.left + 10}px`
+  //       style.top = `${containerRect.top - 10}px`
+  //       style.borderWidth = `${arrowSizeString} ${arrowSizeString} 0 ${arrowSizeString}`
+  //       style.borderColor = `${theme.palette.grayPatricia} transparent transparent transparent`
+  //       break
 
-      case 'top-end':
-        style.left = `${containerRect.right - 30}px`
-        style.top = `${containerRect.top - 10}px`
-        style.borderWidth = `${arrowSizeString} ${arrowSizeString} 0 ${arrowSizeString}`
-        style.borderColor = `${theme.palette.grayPatricia} transparent transparent transparent`
-        break
-      case 'bottom':
-        style.left = `${containerRect.left + containerRect.width / 2 - 10}px`
-        style.top = `${containerRect.bottom}px`
-        style.borderWidth = `0 ${arrowSizeString} ${arrowSizeString} ${arrowSizeString}`
-        style.borderColor = `transparent transparent ${theme.palette.grayPatricia}  transparent`
-        break
+  //     case 'top-end':
+  //       style.left = `${containerRect.right - 30}px`
+  //       style.top = `${containerRect.top - 10}px`
+  //       style.borderWidth = `${arrowSizeString} ${arrowSizeString} 0 ${arrowSizeString}`
+  //       style.borderColor = `${theme.palette.grayPatricia} transparent transparent transparent`
+  //       break
+  //     case 'bottom':
+  //       style.left = `${containerRect.left + containerRect.width / 2 - 10}px`
+  //       style.top = `${containerRect.bottom}px`
+  //       style.borderWidth = `0 ${arrowSizeString} ${arrowSizeString} ${arrowSizeString}`
+  //       style.borderColor = `transparent transparent ${theme.palette.grayPatricia}  transparent`
+  //       break
 
-      case 'bottom-start':
-        style.left = `${containerRect.left + 10}px`
-        style.top = `${containerRect.bottom}px`
-        style.borderWidth = `0 ${arrowSizeString} ${arrowSizeString} ${arrowSizeString}`
-        style.borderColor = `transparent transparent ${theme.palette.grayPatricia}  transparent`
-        break
+  //     case 'bottom-start':
+  //       style.left = `${containerRect.left + 10}px`
+  //       style.top = `${containerRect.bottom}px`
+  //       style.borderWidth = `0 ${arrowSizeString} ${arrowSizeString} ${arrowSizeString}`
+  //       style.borderColor = `transparent transparent ${theme.palette.grayPatricia}  transparent`
+  //       break
 
-      case 'bottom-end':
-        style.left = `${containerRect.right - 30}px`
-        style.top = `${containerRect.bottom}px`
-        style.borderWidth = `0 ${arrowSizeString} ${arrowSizeString} ${arrowSizeString}`
-        style.borderColor = `transparent transparent ${theme.palette.grayPatricia}  transparent`
-        break
-      default:
-        break
-    }
+  //     case 'bottom-end':
+  //       style.left = `${containerRect.right - 30}px`
+  //       style.top = `${containerRect.bottom}px`
+  //       style.borderWidth = `0 ${arrowSizeString} ${arrowSizeString} ${arrowSizeString}`
+  //       style.borderColor = `transparent transparent ${theme.palette.grayPatricia}  transparent`
+  //       break
+  //     default:
+  //       break
+  //   }
 
-    return style
-  }, [arrowSizeString, props.placement, theme.palette.grayPatricia, visible])
+  //   return style
+  // }, [arrowSizeString, props.placement, theme.palette.grayPatricia, visible])
 
   return (
     <>
@@ -224,8 +226,8 @@ export const TooltipContent: FC<TooltipProps> = props => {
         {props.children}
       </TooltipContainer>
       {ReactDOM.createPortal(
-        <>
-          <TooltipArrow $visible={visible} style={styleArrow} />
+        <AnimatePresence>
+          {/* <TooltipArrow $visible={visible} style={styleArrow} /> */}
           <TooltipBox
             ref={refTooltip}
             $maxHeight={props.maxHeight}
@@ -235,10 +237,11 @@ export const TooltipContent: FC<TooltipProps> = props => {
             $visible={visible}
             onMouseLeave={handleMouseLeave}
             style={styleTooltip}
+            transition={{ type: 'spring', duration: DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT }}
           >
             {<Typography size={props.size ?? 14}>{props.content}</Typography>}
           </TooltipBox>
-        </>,
+        </AnimatePresence>,
         document.body
       )}
     </>

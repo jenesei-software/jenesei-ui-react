@@ -1,12 +1,12 @@
-import { ReactElement } from 'react'
+import { PropsWithChildren } from 'react'
 
 import { FlexShortStylesProps } from '@local/components/stack'
 import { AddDollarSign } from '@local/types'
 
 export interface AccordionProps {
   wrapperProps: FlexShortStylesProps
-  accordionSummary: ReactElement
-  accordionDetails: ReactElement
+  accordionSummary: PropsWithChildren
+  accordionDetails: PropsWithChildren
   expanded: boolean
   isAccordionIcon?: boolean
   onClickSummary?: () => void

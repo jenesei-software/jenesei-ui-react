@@ -14,6 +14,7 @@ type Story = StoryObj<typeof PreviewComponent>
 
 export const Preview: Story = {
   args: {
-    visible: true
+    visible: true,
+    content: 'Content'
   }
 }

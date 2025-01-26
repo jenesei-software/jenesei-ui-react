@@ -3,15 +3,17 @@ import styled, { css } from 'styled-components'
 import { FlexContainerAndItemAndBasic } from '@local/styles/base'
 import { KEY_SIZE_DATA } from '@local/theme'
 
-import { StyledLibraryIconCurvedItemProps } from '.'
+import { StyledLibraryIconIdItemProps } from '.'
 
-export const StyledSVG = styled.svg<StyledLibraryIconCurvedItemProps>`
+export const StyledSVG = styled.svg<StyledLibraryIconIdItemProps>`
+  color: ${props => (props.$color ? props.theme.palette[props.$color] : 'inherit')};
+
   ${props => css`
-    height: ${KEY_SIZE_DATA[props.$size].heightIcon + 4}px;
-    min-height: ${KEY_SIZE_DATA[props.$size].heightIcon + 4}px;
+    height: ${props.$size !== '100%' ? `${KEY_SIZE_DATA[props.$size].heightIcon}px` : '100%'};
+    min-height: ${props.$size !== '100%' ? `${KEY_SIZE_DATA[props.$size].heightIcon}px` : '100%'};
 
-    width: ${KEY_SIZE_DATA[props.$size].heightIcon + 4}px;
-    min-width: ${KEY_SIZE_DATA[props.$size].heightIcon + 4}px;
+    width: ${props.$size !== '100%' ? `${KEY_SIZE_DATA[props.$size].heightIcon}px` : '100%'};
+    min-width: ${props.$size !== '100%' ? `${KEY_SIZE_DATA[props.$size].heightIcon}px` : '100%'};
 
     transform: rotate(${props.$turn || 0}deg);
   `}
@@ -20,9 +22,9 @@ export const StyledSVG = styled.svg<StyledLibraryIconCurvedItemProps>`
     css`
       order: ${props.$order};
     `}
-  transition: all ${props => props.theme.transition.default};
+  transition: color ${props => props.theme.transition.icon};
   & path {
-    transition: all ${props => props.theme.transition.default};
+    transition: color ${props => props.theme.transition.icon};
   }
   ${FlexContainerAndItemAndBasic};
 `

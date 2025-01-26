@@ -1,8 +1,7 @@
 import { FC, useCallback, useMemo } from 'react'
 import { useTheme } from 'styled-components'
 
-import { Loading } from '@local/components/loading'
-import { Ripple } from '@local/main'
+import { Icon, Ripple } from '@local/main'
 
 import { CheckboxErrorMessage, CheckboxProps, CheckboxWrapper, StyledIcon } from '.'
 
@@ -30,6 +29,8 @@ export const Checkbox: FC<CheckboxProps> = props => {
     ),
     [props.checked, props.children, props.genre, props.iconOrder, props.size, props.sizeIcon, props.view]
   )
+  const LoadingComponent = <Icon size={props.size} type="loading" name="Line" />
+
   return (
     <>
       <CheckboxWrapper
@@ -54,14 +55,14 @@ export const Checkbox: FC<CheckboxProps> = props => {
         {!props.isDisabled && <Ripple color={theme.colors.checkbox[props.genre].color.rest} />}
         {props.isOnlyLoading ? (
           props.isLoading ? (
-            <Loading size={props.size} color={theme.colors.checkbox[props.genre].color.rest} />
+            LoadingComponent
           ) : (
             children
           )
         ) : (
           <>
             {children}
-            {props.isLoading && <Loading size={props.size} color={theme.colors.checkbox[props.genre].color.rest} />}
+            {props.isLoading && LoadingComponent}
           </>
         )}
       </CheckboxWrapper>

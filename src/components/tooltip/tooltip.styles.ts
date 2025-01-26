@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
 import { TooltipArrowProps, TooltipBoxProps } from '.'
@@ -6,7 +7,7 @@ export const TooltipContainer = styled.div`
   display: contents;
 `
 
-export const TooltipBox = styled.div<TooltipBoxProps>`
+export const TooltipBox = styled(motion.div)<TooltipBoxProps>`
   position: absolute;
   pointer-events: none;
   z-index: 9999;

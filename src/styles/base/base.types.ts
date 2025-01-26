@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react'
 
-import { JeneseiThemeVariablesKeys } from '@local/theme'
+import { JeneseiPaletteKeys } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export type DollarFlexContainerProps = AddDollarSign<FlexContainerProps>
@@ -46,8 +46,8 @@ export interface FlexBasicProps {
   maxTransition?: boolean
   bs?: CSSProperties['boxSizing']
   br?: string
-  bg?: JeneseiThemeVariablesKeys
-  color?: JeneseiThemeVariablesKeys
+  bg?: JeneseiPaletteKeys
+  color?: JeneseiPaletteKeys
 }
 
 export interface DollarFlexContainerAndItemProps extends DollarFlexContainerProps, DollarFlexItemProps {}

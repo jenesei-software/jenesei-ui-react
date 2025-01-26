@@ -7,9 +7,9 @@ import { ButtonGroupProps, ButtonGroupWrapper } from '.'
 export const ButtonGroup: FC<ButtonGroupProps> = props => {
   return (
     <ButtonGroupWrapper $position={props.position} className={props.className} id="jenesei-button-group">
-      {props.value?.map((button, id) => {
-        return <Button id="jenesei-button" key={id} {...button} width={props.width ?? 'auto'} />
-      })}
+      {props.value?.map((button, id) => (
+        <Button id="jenesei-button" key={id} {...button} width={props.width ?? 'auto'} />
+      ))}
     </ButtonGroupWrapper>
   )
 }

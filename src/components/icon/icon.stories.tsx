@@ -29,3 +29,12 @@ export const Checkbox: Story = {
     name: 'Radio'
   }
 }
+
+export const Loading: Story = {
+  args: {
+    primaryColor: 'blueGoogle',
+    size: 'large',
+    type: 'loading',
+    name: 'Circle'
+  }
+}

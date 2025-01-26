@@ -1,7 +1,6 @@
 import { PatternFormat } from 'react-number-format'
 import styled, { css } from 'styled-components'
 
-import { Loading } from '@local/components/loading'
 import { getFontSizeStyles } from '@local/components/typography'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
@@ -203,18 +202,18 @@ export const InputPostfixChildren = styled.div<StyledInputChildrenProps>`
 `
 
 /****************************************** Loading *************************************************/
-const InputStyledLoadingSize = css<StyledInputProps>`
-  ${props => InputStyledLoadingConstructor(KEY_SIZE_DATA[props.$size])};
-`
-const InputStyledLoadingConstructor = (props: IJeneseiThemeSize) => css`
-  padding: ${props.padding - 6}px ${props.padding}px ${props.padding - 4}px ${props.padding}px;
-`
+// const InputStyledLoadingSize = css<StyledInputProps>`
+//   ${props => InputStyledLoadingConstructor(KEY_SIZE_DATA[props.$size])};
+// `
+// const InputStyledLoadingConstructor = (props: IJeneseiThemeSize) => css`
+//   padding: ${props.padding - 6}px ${props.padding}px ${props.padding - 4}px ${props.padding}px;
+// `
 
-export const InputStyledLoading = styled(Loading)<StyledInputProps>`
-  ${InputStyledLoadingSize};
-  position: absolute;
-  display: flex;
-  align-items: center;
-  right: 0px;
-  box-sizing: content-box;
-`
+// // export const InputStyledLoading = styled(Loading)<StyledInputProps>`
+// //   ${InputStyledLoadingSize};
+// //   position: absolute;
+// //   display: flex;
+// //   align-items: center;
+// //   right: 0px;
+// //   box-sizing: content-box;
+// // `

@@ -1,23 +1,23 @@
 import React from 'react'
 
 import { DollarFlexContainerAndItemAndBasicProps } from '@local/styles/base'
-import { JeneseiThemeVariablesKeys, TJeneseiThemeSize } from '@local/theme'
+import { JeneseiPaletteKeys, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export interface BaseLibraryIconProps {
   className?: string
   onClick?: (event: React.MouseEvent<SVGSVGElement>) => void
-  size: TJeneseiThemeSize
-  primaryColor?: JeneseiThemeVariablesKeys
-  secondColor?: JeneseiThemeVariablesKeys
+  size: TJeneseiThemeSize | '100%'
+  primaryColor?: JeneseiPaletteKeys
+  secondColor?: JeneseiPaletteKeys
   styles?: DollarFlexContainerAndItemAndBasicProps
   turn?: number
   order?: number
 }
 
-export interface LibraryIconCurvedItemProps extends BaseLibraryIconProps {
+export interface LibraryIconIdItemProps extends BaseLibraryIconProps {
   type: 'curved'
-  name: TLibraryIconCurvedNameString
+  name: TLibraryIconIdNameString
 }
 
 export interface LibraryIconCheckboxItemProps extends BaseLibraryIconProps {
@@ -25,12 +25,17 @@ export interface LibraryIconCheckboxItemProps extends BaseLibraryIconProps {
   name: TLibraryIconCheckboxNameString
 }
 
-export type LibraryIconItemProps = LibraryIconCurvedItemProps | LibraryIconCheckboxItemProps
+export interface LibraryIconLoadingItemProps extends BaseLibraryIconProps {
+  type: 'loading'
+  name: TLibraryIconLoadingNameString
+}
 
-export type StyledLibraryIconCurvedItemProps = AddDollarSign<Pick<LibraryIconItemProps, 'size' | 'turn' | 'order'>> &
+export type LibraryIconItemProps = LibraryIconIdItemProps | LibraryIconCheckboxItemProps | LibraryIconLoadingItemProps
+
+export type StyledLibraryIconIdItemProps = AddDollarSign<Pick<LibraryIconItemProps, 'size' | 'turn' | 'order'>> &
   DollarFlexContainerAndItemAndBasicProps
 
-export enum LibraryIconCurvedName {
+export enum LibraryIconIdName {
   Biometry,
   QR,
   Search,
@@ -50,20 +55,21 @@ export enum LibraryIconCurvedName {
   PaperDownload,
   PaperUpload,
   Send,
-  Password,
+  PasswordMini,
   Swap,
   Work,
-  ArrowDownCircle,
-  ArrowDownSquare,
-  ArrowDown,
-  ArrowDown2,
-  ArrowDown3,
+  Arrow1,
+  Arrow2,
+  Arrow3,
+  Arrow4,
+  ArrowMini1,
+  ArrowMini2,
   Scan,
   Activity,
   Calendar,
   Message,
-  Plus,
-  Chart,
+  PlusMini,
+  ChartMini,
   Game,
   Bag1,
   Bag2,
@@ -72,16 +78,11 @@ export enum LibraryIconCurvedName {
   MoreSquare,
   Discount,
   Buy,
-  InfoSquare,
-  DangerSquare,
+  InfoMini,
+  DangerMini,
   DangerTriangle,
-  CloseSquare,
-  TickSquare,
-  ArrowRightCircle,
-  ArrowRightSquare,
-  ArrowRight,
-  ArrowRight2,
-  ArrowRight3,
+  CloseMini,
+  TickMini,
   Video,
   Discovery,
   Location,
@@ -104,17 +105,12 @@ export enum LibraryIconCurvedName {
   Logout,
   Download,
   Upload,
-  ArrowUpCircle,
-  ArrowUpSquare,
-  ArrowUp,
-  ArrowUp2,
-  ArrowUp3,
   Voice,
   Voice2,
   Delete,
   Edit,
   EditSquare,
-  Play,
+  PlayMini,
   ShieldDone,
   ShieldFail,
   Show,
@@ -128,17 +124,19 @@ export enum LibraryIconCurvedName {
   CallMissed,
   CallSilent,
   Lock,
-  Unlock,
-  ArrowLeftCircle,
-  ArrowLeftSquare,
-  ArrowLeft,
-  ArrowLeft2,
-  ArrowLeft3
+  Unlock
 }
 export enum LibraryIconCheckboxName {
   Radio,
   Square,
   Arrow
 }
-export type TLibraryIconCurvedNameString = keyof typeof LibraryIconCurvedName
+export enum LibraryIcoLoadingName {
+  Line,
+  Circle,
+  Blocks,
+  Balls
+}
+export type TLibraryIconIdNameString = keyof typeof LibraryIconIdName
 export type TLibraryIconCheckboxNameString = keyof typeof LibraryIconCheckboxName
+export type TLibraryIconLoadingNameString = keyof typeof LibraryIcoLoadingName
