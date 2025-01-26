@@ -522,7 +522,8 @@ export const JeneseiTheme: IJeneseiTheme = {
   transition: {
     duration: '0.3s',
     timingFunction: 'ease',
-    default: '0.3s ease'
+    default: '0.3s ease',
+    icon: '0.05s ease'
   },
   scrollbar: {
     width: 4,

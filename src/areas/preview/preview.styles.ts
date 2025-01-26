@@ -64,33 +64,10 @@ export const PreviewChildren = styled.div<{ $visible: boolean }>`
     transform ${props => props.theme.transition.default};
 `
 
-export const PreviewLoading = styled.div`
-  &:before,
-  &::after {
-    content: '';
-    box-sizing: border-box;
-    position: absolute;
-  }
-
-  &::before,
-  &::after {
-    width: 3vmin;
-    height: 3vmin;
-    background-color: ${props => props.theme.palette.blueFocus};
-  }
-
-  &::before {
-    top: calc(50% - 3vmin);
-    left: calc(50% - 3vmin);
-    animation: ${loader2} 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
-  }
-
-  &::after {
-    top: 50%;
-    left: 50%;
-    animation: ${loader1} 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
-  }
-  mation-delay: 0.12s;
+export const LoadingWrapper = styled.div`
+  position: absolute;
+  width: 8vmin;
+  height: 8vmin;
 `
 
 export const PreviewContent = styled.div`

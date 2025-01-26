@@ -1,7 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 
 import { LibraryIconItemProps, TLibraryIconIdNameString } from '@local/components/icon'
-import { LoadingProps } from '@local/components/loading'
 import { DollarFlexContainerAndItemProps, FlexContainerAndItemProps } from '@local/styles/base'
 import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
@@ -39,7 +38,7 @@ export interface ButtonProps extends PropsWithChildren {
 
   isLoading?: boolean
 
-  loadingOrder?: LoadingProps['order']
+  loadingOrder?: LibraryIconItemProps['order']
 
   isHiddenBorder?: boolean
 

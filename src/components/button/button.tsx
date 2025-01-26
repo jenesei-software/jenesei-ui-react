@@ -2,7 +2,6 @@ import { FC } from 'react'
 import { useTheme } from 'styled-components'
 
 import { Icon } from '@local/components/icon'
-import { Loading } from '@local/components/loading'
 import { Ripple } from '@local/components/ripple'
 
 import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.'
@@ -10,12 +9,12 @@ import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.'
 export const Button: FC<ButtonProps> = props => {
   const theme = useTheme()
 
-  const LoadingComponent = (
-    <Loading size={props.size} color={theme.colors.button[props.genre].color.rest} order={props.loadingOrder} />
-  )
+  const LoadingComponent = <Icon size={props.size} type="loading" name="Line" order={props.loadingOrder} />
+
   const IconComponent = props.iconName && (
     <Icon name={props.iconName} type="curved" size={props.size} turn={props.iconTurn} order={props.iconOrder} />
   )
+
   const handleClick: ButtonProps['onClick'] = event => {
     if (!props.isLoading && !props.isDisabled && props.onClick) {
       props.onClick(event)

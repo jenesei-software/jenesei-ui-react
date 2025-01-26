@@ -195,6 +195,7 @@ export interface IJeneseiTheme {
     duration: string
     timingFunction: string
     default: string
+    icon: string
   }
   scrollbar: {
     width: number

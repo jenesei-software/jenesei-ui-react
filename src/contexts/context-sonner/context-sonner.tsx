@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { Button } from '@local/components/button'
 import { Icon } from '@local/components/icon'
-import { Loading } from '@local/components/loading'
 
 import {
   DEFAULT_PROVIDER_SONNER_BUTTON,
@@ -257,7 +256,7 @@ const SonnerElement = (props: SonnerElementProps) => {
         {(props.isLoading || props.icon) && (
           <SonnerIcon>
             {props.isLoading ? (
-              <Loading size={'medium'} />
+              <Icon size="medium" type="loading" name="Line" />
             ) : (
               props.icon && <Icon name={props.icon} type="curved" size={'medium'} />
             )}

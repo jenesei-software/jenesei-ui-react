@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 
-import { Loading } from '@local/components/loading'
 import { getFontSizeStyles } from '@local/components/typography'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
@@ -169,21 +168,21 @@ export const StyledTextArea = styled.textarea<StyledTextAreaProps>`
   ${StyledTextAreaCSS};
 `
 
-/****************************************** Loading *************************************************/
-const TextAreaStyledLoadingSize = css<StyledTextAreaProps>`
-  ${props => TextAreaStyledLoadingConstructor(KEY_SIZE_DATA[props.$size])};
-`
-const TextAreaStyledLoadingConstructor = (props: IJeneseiThemeSize) => css`
-  padding: ${props.padding - 6}px ${props.padding}px ${props.padding - 4}px ${props.padding}px;
-`
+// /****************************************** Loading *************************************************/
+// const TextAreaStyledLoadingSize = css<StyledTextAreaProps>`
+//   ${props => TextAreaStyledLoadingConstructor(KEY_SIZE_DATA[props.$size])};
+// `
+// const TextAreaStyledLoadingConstructor = (props: IJeneseiThemeSize) => css`
+//   padding: ${props.padding - 6}px ${props.padding}px ${props.padding - 4}px ${props.padding}px;
+// `
 
-export const TextAreaStyledLoading = styled(Loading)<StyledTextAreaProps>`
-  ${TextAreaStyledLoadingSize};
-  position: absolute;
-  display: flex;
-  align-items: center;
-  right: 0px;
-  box-sizing: content-box;
-  backdrop-filter: blur(2px);
-  mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 0) 100%);
-`
+// export const TextAreaStyledLoading = styled(Loading)<StyledTextAreaProps>`
+//   ${TextAreaStyledLoadingSize};
+//   position: absolute;
+//   display: flex;
+//   align-items: center;
+//   right: 0px;
+//   box-sizing: content-box;
+//   backdrop-filter: blur(2px);
+//   mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 0) 100%);
+// `

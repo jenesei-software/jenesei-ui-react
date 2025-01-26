@@ -92,11 +92,6 @@
       "import": "./build/component-input.es.js",
       "require": "./build/component-input.cjs.js"
     },
-    "./component-loading": {
-      "types": "./build/component-loading.d.ts",
-      "import": "./build/component-loading.es.js",
-      "require": "./build/component-loading.cjs.js"
-    },
     "./component-pagination": {
       "types": "./build/component-pagination.d.ts",
       "import": "./build/component-pagination.es.js",
@@ -269,9 +264,7 @@
     "framer-motion": "^11.13.1",
     "gsap": "^3.12.5",
     "js-cookie": "^3.0.5",
-    "moment": "^2.30.1",
     "react-image-webp": "^0.8.0",
-    "react-loading": "^2.0.3",
     "react-number-format": "^5.4.2",
     "styled-reset": "^4.5.2",
     "uuid": "^11.0.3"
@@ -280,6 +273,7 @@
     "@tanstack/react-router": "^1.97.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "styled-components": "^6.0"
+    "styled-components": "^6.0",
+    "moment": "^2.30.1"
   }
 }

@@ -7,7 +7,7 @@ import { AddDollarSign } from '@local/types'
 export interface BaseLibraryIconProps {
   className?: string
   onClick?: (event: React.MouseEvent<SVGSVGElement>) => void
-  size: TJeneseiThemeSize
+  size: TJeneseiThemeSize | '100%'
   primaryColor?: JeneseiPaletteKeys
   secondColor?: JeneseiPaletteKeys
   styles?: DollarFlexContainerAndItemAndBasicProps
@@ -25,7 +25,12 @@ export interface LibraryIconCheckboxItemProps extends BaseLibraryIconProps {
   name: TLibraryIconCheckboxNameString
 }
 
-export type LibraryIconItemProps = LibraryIconIdItemProps | LibraryIconCheckboxItemProps
+export interface LibraryIconLoadingItemProps extends BaseLibraryIconProps {
+  type: 'loading'
+  name: TLibraryIconLoadingNameString
+}
+
+export type LibraryIconItemProps = LibraryIconIdItemProps | LibraryIconCheckboxItemProps | LibraryIconLoadingItemProps
 
 export type StyledLibraryIconIdItemProps = AddDollarSign<Pick<LibraryIconItemProps, 'size' | 'turn' | 'order'>> &
   DollarFlexContainerAndItemAndBasicProps
@@ -126,5 +131,12 @@ export enum LibraryIconCheckboxName {
   Square,
   Arrow
 }
+export enum LibraryIcoLoadingName {
+  Line,
+  Circle,
+  Blocks,
+  Balls
+}
 export type TLibraryIconIdNameString = keyof typeof LibraryIconIdName
 export type TLibraryIconCheckboxNameString = keyof typeof LibraryIconCheckboxName
+export type TLibraryIconLoadingNameString = keyof typeof LibraryIcoLoadingName

@@ -3,6 +3,7 @@ import { JeneseiPalette } from '@local/theme/theme'
 import { LibraryIconItemProps, StyledSVG } from '.'
 import LibraryIconCheckboxJSON from './icon-checkbox.json'
 import LibraryIconIdJSON from './icon-id.json'
+import LibraryIconLoadingJSON from './icon-loading.json'
 
 export const Icon = (props: LibraryIconItemProps) => {
   const icon =
@@ -10,10 +11,12 @@ export const Icon = (props: LibraryIconItemProps) => {
       ? LibraryIconIdJSON[props.name]
       : props.type === 'checkbox'
         ? LibraryIconCheckboxJSON[props.name]
-        : null
+        : props.type === 'loading'
+          ? LibraryIconLoadingJSON[props.name]
+          : null
 
-  const primaryColor = JeneseiPalette[props.primaryColor ?? 'currentColor']
-  const secondColor = props.secondColor ? JeneseiPalette[props.secondColor] : primaryColor
+  const primaryColor = props.primaryColor ? JeneseiPalette[props.primaryColor] : 'currentColor'
+  const secondColor = props.secondColor ? JeneseiPalette[props.secondColor] : 'currentColor'
 
   if (!icon) {
     console.warn(`Icon ${props.name} not found in the library.`)
@@ -26,17 +29,21 @@ export const Icon = (props: LibraryIconItemProps) => {
     return 'currentColor'
   }
 
-  const renderPaths = () =>
-    icon.paths.map((path, index) => (
-      <path
-        key={index}
-        id={'id' in path ? (path.id as string) : undefined}
-        d={path.d}
-        clipRule="evenodd"
-        fillRule="evenodd"
-        fill={'fill' in path ? getFillColor(path.fill as string) : 'currentColor'}
-      />
-    ))
+  const contentPaths =
+    (props.type == 'curved' || props.type === 'checkbox') && typeof icon === 'object' && 'paths' in icon
+      ? (icon.paths ?? []).map((path, index) => (
+          <path
+            key={index}
+            id={'id' in path ? (path.id as string) : undefined}
+            d={path.d}
+            clipRule="evenodd"
+            fillRule="evenodd"
+            fill={'fill' in path ? getFillColor(path.fill as string) : 'currentColor'}
+          />
+        ))
+      : null
+
+  const contentLoadings = props.type == 'loading' ? (icon as string) : null
 
   return (
     <StyledSVG
@@ -47,11 +54,13 @@ export const Icon = (props: LibraryIconItemProps) => {
       $size={props.size}
       $turn={props.turn}
       $order={props.order}
+      $color={props.primaryColor || undefined}
       className={props.className}
       onClick={props.onClick}
+      dangerouslySetInnerHTML={contentLoadings ? { __html: contentLoadings } : undefined}
       {...props.styles}
     >
-      {renderPaths()}
+      {contentPaths}
     </StyledSVG>
   )
 }
