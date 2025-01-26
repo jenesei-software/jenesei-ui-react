@@ -1,11 +1,11 @@
 import { LoadingType } from 'react-loading'
 
-import { JeneseiThemeVariablesKeys, TJeneseiThemeSize } from '@local/theme'
+import { JeneseiPaletteKeys, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export interface LoadingProps {
   type?: LoadingType
-  colorKey?: JeneseiThemeVariablesKeys
+  colorKey?: JeneseiPaletteKeys
   color?: string
   size: TJeneseiThemeSize
   className?: string

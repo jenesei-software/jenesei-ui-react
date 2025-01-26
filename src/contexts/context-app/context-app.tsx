@@ -1,7 +1,7 @@
 import { FC, createContext, useCallback, useEffect, useState } from 'react'
 
 import { Preview, PreviewAdditionalProps } from '@local/areas/preview'
-import { JeneseiThemeVariables, JeneseiThemeVariablesKeys } from '@local/theme'
+import { JeneseiPalette, JeneseiPaletteKeys } from '@local/theme'
 
 import {
   AppContextProps,
@@ -78,7 +78,7 @@ export const ProviderApp: FC<ProviderAppProps> = props => {
     >
       <title>{title}</title>
       <meta name="description" content={description} />
-      <meta name="theme-color" content={JeneseiThemeVariables[statusBarColor]} />
+      <meta name="theme-color" content={JeneseiPalette[statusBarColor]} />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       <meta name="mobile-web-app-capable" content="yes" />
       <Preview {...previewProps}>
@@ -132,13 +132,13 @@ const usePreview = (defaultPreview: ProviderAppProps['defaultPreview']) => {
 /**
  * Custom hook to manage background color state with history tracking.
  */
-const useBgColor = (defaultColor: JeneseiThemeVariablesKeys) => {
+const useBgColor = (defaultColor: JeneseiPaletteKeys) => {
   const [bgColor, setBgColor] = useState(defaultColor)
   const [bgColorHistory, setBgColorHistory] = useState([defaultColor])
   const [bgColorIndex, setBgColorIndex] = useState(0)
 
   const changeBgColor = useCallback(
-    (color: JeneseiThemeVariablesKeys) => {
+    (color: JeneseiPaletteKeys) => {
       setBgColor(color)
       setBgColorHistory(prev => {
         const newHistory = [...prev.slice(0, bgColorIndex + 1), color]
@@ -176,13 +176,13 @@ const useBgColor = (defaultColor: JeneseiThemeVariablesKeys) => {
 /**
  * Custom hook to manage the status bar color with history tracking.
  */
-const useStatusBarColor = (defaultColor: JeneseiThemeVariablesKeys) => {
+const useStatusBarColor = (defaultColor: JeneseiPaletteKeys) => {
   const [statusBarColor, setStatusBarColor] = useState(defaultColor)
   const [statusBarColorHistory, setStatusBarColorHistory] = useState([defaultColor])
   const [statusBarColorIndex, setStatusBarColorIndex] = useState(0)
 
   const changeStatusBarColor = useCallback(
-    (color: JeneseiThemeVariablesKeys) => {
+    (color: JeneseiPaletteKeys) => {
       setStatusBarColor(color)
       setStatusBarColorHistory(prev => {
         const newHistory = [...prev.slice(0, statusBarColorIndex + 1), color]

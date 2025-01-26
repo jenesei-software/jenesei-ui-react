@@ -1,23 +1,23 @@
 import React from 'react'
 
 import { DollarFlexContainerAndItemAndBasicProps } from '@local/styles/base'
-import { JeneseiThemeVariablesKeys, TJeneseiThemeSize } from '@local/theme'
+import { JeneseiPaletteKeys, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export interface BaseLibraryIconProps {
   className?: string
   onClick?: (event: React.MouseEvent<SVGSVGElement>) => void
   size: TJeneseiThemeSize
-  primaryColor?: JeneseiThemeVariablesKeys
-  secondColor?: JeneseiThemeVariablesKeys
+  primaryColor?: JeneseiPaletteKeys
+  secondColor?: JeneseiPaletteKeys
   styles?: DollarFlexContainerAndItemAndBasicProps
   turn?: number
   order?: number
 }
 
-export interface LibraryIconCurvedItemProps extends BaseLibraryIconProps {
+export interface LibraryIconIdItemProps extends BaseLibraryIconProps {
   type: 'curved'
-  name: TLibraryIconCurvedNameString
+  name: TLibraryIconIdNameString
 }
 
 export interface LibraryIconCheckboxItemProps extends BaseLibraryIconProps {
@@ -25,12 +25,12 @@ export interface LibraryIconCheckboxItemProps extends BaseLibraryIconProps {
   name: TLibraryIconCheckboxNameString
 }
 
-export type LibraryIconItemProps = LibraryIconCurvedItemProps | LibraryIconCheckboxItemProps
+export type LibraryIconItemProps = LibraryIconIdItemProps | LibraryIconCheckboxItemProps
 
-export type StyledLibraryIconCurvedItemProps = AddDollarSign<Pick<LibraryIconItemProps, 'size' | 'turn' | 'order'>> &
+export type StyledLibraryIconIdItemProps = AddDollarSign<Pick<LibraryIconItemProps, 'size' | 'turn' | 'order'>> &
   DollarFlexContainerAndItemAndBasicProps
 
-export enum LibraryIconCurvedName {
+export enum LibraryIconIdName {
   Biometry,
   QR,
   Search,
@@ -50,7 +50,7 @@ export enum LibraryIconCurvedName {
   PaperDownload,
   PaperUpload,
   Send,
-  Password,
+  PasswordMini,
   Swap,
   Work,
   Arrow1,
@@ -126,5 +126,5 @@ export enum LibraryIconCheckboxName {
   Square,
   Arrow
 }
-export type TLibraryIconCurvedNameString = keyof typeof LibraryIconCurvedName
+export type TLibraryIconIdNameString = keyof typeof LibraryIconIdName
 export type TLibraryIconCheckboxNameString = keyof typeof LibraryIconCheckboxName

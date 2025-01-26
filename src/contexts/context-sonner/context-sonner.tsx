@@ -137,8 +137,7 @@ export const ProviderSonner: FC<ProviderSonnerProps> = props => {
     <T,>(
       promise: Promise<T>,
       expectation: Omit<SonnerContentProps, 'index'>,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      localToast: (success: T | undefined, error: any | undefined) => Omit<SonnerContentProps, 'index'>
+      localToast: (success: T | undefined, error: unknown | undefined) => Omit<SonnerContentProps, 'index'>
     ) => {
       const id = uuidv4()
       toast({ ...expectation, id, isLoading: true })

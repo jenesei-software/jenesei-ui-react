@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 
-import { LibraryIconItemProps, TLibraryIconCurvedNameString } from '@local/components/icon'
+import { LibraryIconItemProps, TLibraryIconIdNameString } from '@local/components/icon'
 import { LoadingProps } from '@local/components/loading'
 import { DollarFlexContainerAndItemProps, FlexContainerAndItemProps } from '@local/styles/base'
 import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
@@ -21,7 +21,7 @@ export interface ButtonProps extends PropsWithChildren {
 
   genre: TButtonGenre
 
-  iconName?: TLibraryIconCurvedNameString
+  iconName?: TLibraryIconIdNameString
 
   iconOrder?: LibraryIconItemProps['order']
 

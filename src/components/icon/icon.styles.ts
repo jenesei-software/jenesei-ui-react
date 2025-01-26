@@ -3,15 +3,15 @@ import styled, { css } from 'styled-components'
 import { FlexContainerAndItemAndBasic } from '@local/styles/base'
 import { KEY_SIZE_DATA } from '@local/theme'
 
-import { StyledLibraryIconCurvedItemProps } from '.'
+import { StyledLibraryIconIdItemProps } from '.'
 
-export const StyledSVG = styled.svg<StyledLibraryIconCurvedItemProps>`
+export const StyledSVG = styled.svg<StyledLibraryIconIdItemProps>`
   ${props => css`
-    height: ${KEY_SIZE_DATA[props.$size].heightIcon + 4}px;
-    min-height: ${KEY_SIZE_DATA[props.$size].heightIcon + 4}px;
+    height: ${KEY_SIZE_DATA[props.$size].heightIcon}px;
+    min-height: ${KEY_SIZE_DATA[props.$size].heightIcon}px;
 
-    width: ${KEY_SIZE_DATA[props.$size].heightIcon + 4}px;
-    min-width: ${KEY_SIZE_DATA[props.$size].heightIcon + 4}px;
+    width: ${KEY_SIZE_DATA[props.$size].heightIcon}px;
+    min-width: ${KEY_SIZE_DATA[props.$size].heightIcon}px;
 
     transform: rotate(${props.$turn || 0}deg);
   `}

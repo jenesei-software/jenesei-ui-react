@@ -13,7 +13,9 @@ export const Button: FC<ButtonProps> = props => {
   const LoadingComponent = (
     <Loading size={props.size} color={theme.colors.button[props.genre].color.rest} order={props.loadingOrder} />
   )
-
+  const IconComponent = props.iconName && (
+    <Icon name={props.iconName} type="curved" size={props.size} turn={props.iconTurn} order={props.iconOrder} />
+  )
   const handleClick: ButtonProps['onClick'] = event => {
     if (!props.isLoading && !props.isDisabled && props.onClick) {
       props.onClick(event)
@@ -61,15 +63,7 @@ export const Button: FC<ButtonProps> = props => {
         ) : (
           <>
             <div style={{ order: 0, display: 'contents' }}>{props.children && props.children}</div>
-            {props.iconName && (
-              <Icon
-                name={props.iconName}
-                type="curved"
-                size={props.size}
-                turn={props.iconTurn}
-                order={props.iconOrder}
-              />
-            )}
+            {IconComponent}
           </>
         )
       ) : (
@@ -85,15 +79,7 @@ export const Button: FC<ButtonProps> = props => {
             ) : (
               <>
                 {props.isLoading && LoadingComponent}
-                {props.iconName && (
-                  <Icon
-                    name={props.iconName}
-                    type="curved"
-                    size={props.size}
-                    turn={props.iconTurn}
-                    order={props.iconOrder}
-                  />
-                )}
+                {IconComponent}
               </>
             )}
           </StyledButtonIconsWrapper>

@@ -226,17 +226,13 @@
     "format": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^1.9.0",
     "@eslint/js": "^9.13.0",
     "@fontsource/inter": "^5.1.0",
     "@fontsource/roboto": "^5.1.0",
-    "@storybook/addon-essentials": "^8.3.6",
+    "@storybook/addon-essentials": "^8.5.1",
     "@storybook/addon-links": "^8.3.6",
-    "@storybook/addon-onboarding": "^8.3.6",
-    "@storybook/blocks": "^8.3.6",
     "@storybook/react": "^8.3.6",
     "@storybook/react-vite": "^8.3.6",
-    "@storybook/test": "^8.3.6",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^22.8.2",

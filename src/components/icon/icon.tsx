@@ -1,19 +1,19 @@
-import { JeneseiThemeVariables } from '@local/theme/theme'
+import { JeneseiPalette } from '@local/theme/theme'
 
 import { LibraryIconItemProps, StyledSVG } from '.'
 import LibraryIconCheckboxJSON from './icon-checkbox.json'
-import LibraryIconCurvedJSON from './icon-curved.json'
+import LibraryIconIdJSON from './icon-id.json'
 
 export const Icon = (props: LibraryIconItemProps) => {
   const icon =
     props.type == 'curved'
-      ? LibraryIconCurvedJSON[props.name]
+      ? LibraryIconIdJSON[props.name]
       : props.type === 'checkbox'
         ? LibraryIconCheckboxJSON[props.name]
         : null
 
-  const primaryColor = JeneseiThemeVariables[props.primaryColor ?? 'currentColor']
-  const secondColor = props.secondColor ? JeneseiThemeVariables[props.secondColor] : primaryColor
+  const primaryColor = JeneseiPalette[props.primaryColor ?? 'currentColor']
+  const secondColor = props.secondColor ? JeneseiPalette[props.secondColor] : primaryColor
 
   if (!icon) {
     console.warn(`Icon ${props.name} not found in the library.`)

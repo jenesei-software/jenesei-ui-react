@@ -213,7 +213,7 @@ export interface IJeneseiTheme {
     input: string
     button: string
   }
-  palette: Record<JeneseiThemeVariablesKeys, string>
+  palette: Record<JeneseiPaletteKeys, string>
   colors: {
     focus: string
     white: string
@@ -229,7 +229,7 @@ export interface IJeneseiTheme {
   }
 }
 
-export type JeneseiThemeVariablesKeys =
+export type JeneseiPaletteKeys =
   | 'transparent'
   | 'black100'
   | 'black80'

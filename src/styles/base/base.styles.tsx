@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-import { JeneseiThemeVariables } from '@local/theme'
+import { JeneseiPalette } from '@local/theme'
 
 import {
   DollarFlexBasicProps,
@@ -195,12 +195,12 @@ const FlexBasic = css<DollarFlexBasicProps>`
   ${({ $bg }) =>
     $bg &&
     css`
-      background: ${JeneseiThemeVariables[$bg]};
+      background: ${JeneseiPalette[$bg]};
     `}
   ${({ $color }) =>
     $color &&
     css`
-      color: ${JeneseiThemeVariables[$color]};
+      color: ${JeneseiPalette[$color]};
     `}
 `
 

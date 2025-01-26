@@ -1,13 +1,13 @@
 import { PropsWithChildren, ReactElement } from 'react'
 
 import { PreviewAdditionalProps } from '@local/areas/preview'
-import { JeneseiThemeVariablesKeys } from '@local/theme'
+import { JeneseiPaletteKeys } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export interface ProviderAppProps extends PropsWithChildren {
   defaultPreview?: PreviewAdditionalProps
-  defaultBgColor: JeneseiThemeVariablesKeys
-  defaultStatusBarColor: JeneseiThemeVariablesKeys
+  defaultBgColor: JeneseiPaletteKeys
+  defaultStatusBarColor: JeneseiPaletteKeys
   defaultBgImage?: string
   defaultTitle: string
   defaultDescription: string
@@ -60,8 +60,8 @@ export interface ProviderAppProps extends PropsWithChildren {
 export interface AppContextProps {
   changePreview: (newPreviewProps: PreviewAdditionalProps) => void
 
-  changeStatusBarColor: (color: JeneseiThemeVariablesKeys) => void
-  changeBgColor: (color: JeneseiThemeVariablesKeys) => void
+  changeStatusBarColor: (color: JeneseiPaletteKeys) => void
+  changeBgColor: (color: JeneseiPaletteKeys) => void
   changeBgImage: (image: string) => void
   changeTitle: (title: string) => void
   changeDescription: (description: string) => void

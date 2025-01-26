@@ -1,6 +1,6 @@
 import { CSSProperties, PropsWithChildren } from 'react'
 
-import { JeneseiThemeVariablesKeys, TJeneseiDevice, TJeneseiFontFamily } from '@local/theme'
+import { JeneseiPaletteKeys, TJeneseiDevice, TJeneseiFontFamily } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 import { TooltipProps } from '../tooltip'
@@ -10,7 +10,7 @@ export type TypographyDefaultProps = PropsWithChildren & {
   device?: TJeneseiDevice
   clampOrient?: CSSProperties['boxOrient']
   overflow?: CSSProperties['overflow']
-  color?: JeneseiThemeVariablesKeys
+  color?: JeneseiPaletteKeys
   family?: TJeneseiFontFamily
   align?: CSSProperties['textAlign']
   decoration?: CSSProperties['textDecoration']

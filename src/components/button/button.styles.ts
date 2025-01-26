@@ -161,7 +161,7 @@ export const StyledButton = styled.button<StyledDollarButtonProps>`
   cursor: pointer;
   user-select: none;
 
-  & *:not(${DEFAULT_RIPPLE_ID}) {
+  & *:not(#${DEFAULT_RIPPLE_ID}) {
     user-select: none;
     pointer-events: none;
   }
