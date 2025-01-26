@@ -1,27 +1,18 @@
-import { ReactNode } from 'react'
+import { PropsWithChildren } from 'react'
 
 export interface PermissionContextProps {
+  pushNotificationSupported: boolean
+
+  isBiometricSupported: boolean
+
   // eslint-disable-next-line no-undef
   notificationPermission: NotificationPermission | null
+  isNotificationPermissionLoading: boolean
+  // eslint-disable-next-line no-undef
+  requestNotificationPermission: () => Promise<NotificationPermission | undefined>
   // eslint-disable-next-line no-undef
   geolocationPermission: PermissionState | null
-  pushNotificationSupported: boolean
-  serviceWorkerRegistered: boolean
-  isBiometricSupported: boolean
-  pushSubscription: PushSubscription | null
-  requestNotificationPermission: () => void
   requestGeolocationPermission: () => void
-  registerServiceWorker: () => Promise<void>
-  unregisterServiceWorker: () => Promise<void>
-  subscribeToPushNotifications: (vapidKey: string) => Promise<void>
-  unsubscribeToPushNotifications: () => Promise<void>
-  setupPushNotifications: (vapidKey: string) => Promise<void>
 }
 
-export interface ProviderPermissionProps {
-  children: ReactNode
-  serviceWorkerPath: string
-}
-
-export type UseServiceWorkerProps = Pick<ProviderPermissionProps, 'serviceWorkerPath'> &
-  Pick<PermissionContextProps, 'notificationPermission' | 'requestNotificationPermission'>
+export type ProviderPermissionProps = PropsWithChildren

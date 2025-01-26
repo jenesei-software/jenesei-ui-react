@@ -43,7 +43,7 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
           echo "@jenesei-software:registry=https://npm.pkg.github.com/" >> ~/.npmrc
 
-      - name: Install dependencies
+      - name: Install node modules
         env:
           NPM_CONFIG_USERCONFIG: ~/.npmrc
         run: |

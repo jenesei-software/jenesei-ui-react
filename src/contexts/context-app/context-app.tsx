@@ -1,8 +1,7 @@
 import { FC, createContext, useCallback, useEffect, useState } from 'react'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 import { Preview, PreviewAdditionalProps } from '@local/areas/preview'
-import { JeneseiThemeVariables, JeneseiThemeVariablesKeys } from '@local/theme'
+import { JeneseiPalette, JeneseiPaletteKeys } from '@local/theme'
 
 import {
   AppContextProps,
@@ -57,67 +56,59 @@ export const ProviderApp: FC<ProviderAppProps> = props => {
   const { changePreview, previewProps } = usePreview(props.defaultPreview)
 
   return (
-    <HelmetProvider>
-      <AppContext.Provider
-        value={{
-          changePreview,
-          changeStatusBarColor,
-          changeBgColor,
-          changeBgImage,
-          changeTitle,
-          changeDescription,
-          historyStatusBarColor,
-          historyBgColor,
-          historyBgImage,
-          historyTitle,
-          historyDescription,
-          setDefaultStatusBarColor,
-          setDefaultBgColor,
-          setDefaultBgImage,
-          setDefaultTitle,
-          setDefaultDescription
-        }}
-      >
-        <Helmet>
-          <title>{title}</title>
-          <meta name="description" content={description} />
-          <meta name="theme-color" content={JeneseiThemeVariables[statusBarColor]} />
-          <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-          <meta name="mobile-web-app-capable" content="yes" />
-        </Helmet>
-        <Preview {...previewProps}>
-          <ProviderAppWrapper $bgColor={bgColor} $bgImage={bgImage}>
-            <ProviderAppOutlet
-              $isScrollOutlet={props.isScrollOutlet}
-              $footer={props.footer}
-              $notification={props.notification}
-              $header={props.header}
-              $nav={props.nav}
-              $leftAside={props.leftAside}
-              $rightAside={props.rightAside}
-            >
-              <ProviderAppOutletNotification $notification={props.notification}>
-                {props.notification?.component || null}
-              </ProviderAppOutletNotification>
-              <ProviderAppOutletHeader $header={props.header}>
-                {props.header?.component || null}
-              </ProviderAppOutletHeader>
-              <ProviderAppOutletNav $nav={props.nav}>{props.nav?.component || null}</ProviderAppOutletNav>
-              <ProviderAppOutletLeftAside $leftAside={props.leftAside}>
-                {props.leftAside?.component || null}
-              </ProviderAppOutletLeftAside>
-              <ProviderAppOutletChildren>{props.children}</ProviderAppOutletChildren>
-              <ProviderAppOutletRightAside $rightAside={props.rightAside}>
-                {props.rightAside?.component || null}
-              </ProviderAppOutletRightAside>
-              <ProviderAppOutletFooter $footer={props.footer}>
-                {props.footer?.component || null}
-              </ProviderAppOutletFooter>
-            </ProviderAppOutlet>
-          </ProviderAppWrapper>{' '}
-        </Preview>
-      </AppContext.Provider>
-    </HelmetProvider>
+    <AppContext.Provider
+      value={{
+        changePreview,
+        changeStatusBarColor,
+        changeBgColor,
+        changeBgImage,
+        changeTitle,
+        changeDescription,
+        historyStatusBarColor,
+        historyBgColor,
+        historyBgImage,
+        historyTitle,
+        historyDescription,
+        setDefaultStatusBarColor,
+        setDefaultBgColor,
+        setDefaultBgImage,
+        setDefaultTitle,
+        setDefaultDescription
+      }}
+    >
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <meta name="theme-color" content={JeneseiPalette[statusBarColor]} />
+      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <Preview {...previewProps}>
+        <ProviderAppWrapper $bgColor={bgColor} $bgImage={bgImage}>
+          <ProviderAppOutlet
+            $isScrollOutlet={props.isScrollOutlet}
+            $footer={props.footer}
+            $notification={props.notification}
+            $header={props.header}
+            $nav={props.nav}
+            $leftAside={props.leftAside}
+            $rightAside={props.rightAside}
+          >
+            <ProviderAppOutletNotification $notification={props.notification}>
+              {props.notification?.component || null}
+            </ProviderAppOutletNotification>
+            <ProviderAppOutletHeader $header={props.header}>{props.header?.component || null}</ProviderAppOutletHeader>
+            <ProviderAppOutletNav $nav={props.nav}>{props.nav?.component || null}</ProviderAppOutletNav>
+            <ProviderAppOutletLeftAside $leftAside={props.leftAside}>
+              {props.leftAside?.component || null}
+            </ProviderAppOutletLeftAside>
+            <ProviderAppOutletChildren>{props.children}</ProviderAppOutletChildren>
+            <ProviderAppOutletRightAside $rightAside={props.rightAside}>
+              {props.rightAside?.component || null}
+            </ProviderAppOutletRightAside>
+            <ProviderAppOutletFooter $footer={props.footer}>{props.footer?.component || null}</ProviderAppOutletFooter>
+          </ProviderAppOutlet>
+        </ProviderAppWrapper>{' '}
+      </Preview>
+    </AppContext.Provider>
   )
 }
 
@@ -141,13 +132,13 @@ const usePreview = (defaultPreview: ProviderAppProps['defaultPreview']) => {
 /**
  * Custom hook to manage background color state with history tracking.
  */
-const useBgColor = (defaultColor: JeneseiThemeVariablesKeys) => {
+const useBgColor = (defaultColor: JeneseiPaletteKeys) => {
   const [bgColor, setBgColor] = useState(defaultColor)
   const [bgColorHistory, setBgColorHistory] = useState([defaultColor])
   const [bgColorIndex, setBgColorIndex] = useState(0)
 
   const changeBgColor = useCallback(
-    (color: JeneseiThemeVariablesKeys) => {
+    (color: JeneseiPaletteKeys) => {
       setBgColor(color)
       setBgColorHistory(prev => {
         const newHistory = [...prev.slice(0, bgColorIndex + 1), color]
@@ -185,13 +176,13 @@ const useBgColor = (defaultColor: JeneseiThemeVariablesKeys) => {
 /**
  * Custom hook to manage the status bar color with history tracking.
  */
-const useStatusBarColor = (defaultColor: JeneseiThemeVariablesKeys) => {
+const useStatusBarColor = (defaultColor: JeneseiPaletteKeys) => {
   const [statusBarColor, setStatusBarColor] = useState(defaultColor)
   const [statusBarColorHistory, setStatusBarColorHistory] = useState([defaultColor])
   const [statusBarColorIndex, setStatusBarColorIndex] = useState(0)
 
   const changeStatusBarColor = useCallback(
-    (color: JeneseiThemeVariablesKeys) => {
+    (color: JeneseiPaletteKeys) => {
       setStatusBarColor(color)
       setStatusBarColorHistory(prev => {
         const newHistory = [...prev.slice(0, statusBarColorIndex + 1), color]

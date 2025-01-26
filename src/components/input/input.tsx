@@ -6,7 +6,6 @@ import {
   InputPostfixChildren,
   InputPrefixChildren,
   InputProps,
-  InputStyledLoading,
   StyledInput,
   StyledInputFormat,
   StyledInputWrapper
@@ -109,14 +108,14 @@ export const Input = (props: InputProps) => {
             {props.postfixChildren.children}
           </InputPostfixChildren>
         )}
-        {props.isLoading && (
+        {/* {props.isLoading && (
           <InputStyledLoading
             $genre={props.genre}
             $size={props.size}
             size={props.size}
             color={theme.colors.input[props.genre].color.rest}
           />
-        )}
+        )} */}
       </StyledInputWrapper>
       {props.isError && props.errorMessage && (
         <InputErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.isErrorAbsolute}>

@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { Button } from '@local/components/button'
 import { Icon } from '@local/components/icon'
-import { Loading } from '@local/components/loading'
 
 import {
   DEFAULT_PROVIDER_SONNER_BUTTON,
@@ -137,8 +136,7 @@ export const ProviderSonner: FC<ProviderSonnerProps> = props => {
     <T,>(
       promise: Promise<T>,
       expectation: Omit<SonnerContentProps, 'index'>,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      localToast: (success: T | undefined, error: any | undefined) => Omit<SonnerContentProps, 'index'>
+      localToast: (success: T | undefined, error: unknown | undefined) => Omit<SonnerContentProps, 'index'>
     ) => {
       const id = uuidv4()
       toast({ ...expectation, id, isLoading: true })
@@ -258,7 +256,7 @@ const SonnerElement = (props: SonnerElementProps) => {
         {(props.isLoading || props.icon) && (
           <SonnerIcon>
             {props.isLoading ? (
-              <Loading size={'medium'} />
+              <Icon size="medium" type="loading" name="Line" />
             ) : (
               props.icon && <Icon name={props.icon} type="curved" size={'medium'} />
             )}

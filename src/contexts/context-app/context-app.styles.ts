@@ -1,6 +1,6 @@
 import { css, styled } from 'styled-components'
 
-import { JeneseiThemeVariables } from '@local/theme'
+import { JeneseiPalette } from '@local/theme'
 
 import { ProviderAppOutletProps, ProviderAppWrapperProps } from '.'
 
@@ -14,7 +14,7 @@ export const ProviderAppWrapper = styled.div<ProviderAppWrapperProps>`
   box-sizing: border-box;
   position: relative;
 
-  background-color: ${props => JeneseiThemeVariables[props.$bgColor]};
+  background-color: ${props => JeneseiPalette[props.$bgColor]};
   background-image: url(${props => props.$bgImage});
 `
 

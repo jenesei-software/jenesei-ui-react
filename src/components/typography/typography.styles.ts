@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { JeneseiThemeVariables } from '@local/theme/theme'
+import { JeneseiPalette } from '@local/theme/theme'
 
 import { TypographyCSSProps } from '.'
 
@@ -68,7 +68,7 @@ const TypographyCSS = css<TypographyCSSProps>`
   ${props =>
     props.$color &&
     css`
-      color: ${JeneseiThemeVariables[props.$color]};
+      color: ${JeneseiPalette[props.$color]};
     `};
   ${props =>
     props.$align &&

@@ -2,12 +2,12 @@ import {
   IJeneseiTheme,
   IJeneseiThemeSize,
   IJeneseiThemeSizeToggle,
-  JeneseiThemeVariablesKeys,
+  JeneseiPaletteKeys,
   TJeneseiThemeGenreSonner,
   TJeneseiThemeSize
 } from '.'
 
-export const JeneseiThemeVariables: Record<JeneseiThemeVariablesKeys, string> = {
+export const JeneseiPalette: Record<JeneseiPaletteKeys, string> = {
   currentColor: 'currentColor',
   inherit: 'inherit',
   transparent: 'transparent',
@@ -56,152 +56,152 @@ export const JeneseiThemeVariables: Record<JeneseiThemeVariablesKeys, string> = 
 const DefaultJeneseiThemeGenre = {
   white: {
     background: {
-      rest: JeneseiThemeVariables.whiteStandard,
-      hover: JeneseiThemeVariables.whiteStandard
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard
     },
     color: {
-      rest: JeneseiThemeVariables.black80,
-      hover: JeneseiThemeVariables.black60,
-      placeholder: JeneseiThemeVariables.black80
+      rest: JeneseiPalette.black80,
+      hover: JeneseiPalette.black60,
+      placeholder: JeneseiPalette.black80
     },
     border: {
-      rest: JeneseiThemeVariables.transparent,
-      hover: JeneseiThemeVariables.transparent
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
     }
   },
   product: {
     background: {
-      rest: JeneseiThemeVariables.blueRest,
-      hover: JeneseiThemeVariables.blueHover
+      rest: JeneseiPalette.blueRest,
+      hover: JeneseiPalette.blueHover
     },
     color: {
-      rest: JeneseiThemeVariables.whiteStandard,
-      hover: JeneseiThemeVariables.whiteStandard,
-      placeholder: JeneseiThemeVariables.whiteStandard
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard,
+      placeholder: JeneseiPalette.whiteStandard
     },
     border: {
-      rest: JeneseiThemeVariables.transparent,
-      hover: JeneseiThemeVariables.transparent
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
     }
   },
   productBorder: {
     background: {
-      rest: JeneseiThemeVariables.whiteStandard,
-      hover: JeneseiThemeVariables.whiteStandard
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard
     },
     color: {
-      rest: JeneseiThemeVariables.blueRest,
-      hover: JeneseiThemeVariables.blueHover,
-      placeholder: JeneseiThemeVariables.blueRest
+      rest: JeneseiPalette.blueRest,
+      hover: JeneseiPalette.blueHover,
+      placeholder: JeneseiPalette.blueRest
     },
     border: {
-      rest: JeneseiThemeVariables.blueRest,
-      hover: JeneseiThemeVariables.blueHover
+      rest: JeneseiPalette.blueRest,
+      hover: JeneseiPalette.blueHover
     }
   },
   gray: {
     background: {
-      rest: JeneseiThemeVariables.black10,
-      hover: JeneseiThemeVariables.graySandra
+      rest: JeneseiPalette.black10,
+      hover: JeneseiPalette.graySandra
     },
     color: {
-      rest: JeneseiThemeVariables.black60,
-      hover: JeneseiThemeVariables.black60,
-      placeholder: JeneseiThemeVariables.black80
+      rest: JeneseiPalette.black60,
+      hover: JeneseiPalette.black60,
+      placeholder: JeneseiPalette.black80
     },
     border: {
-      rest: JeneseiThemeVariables.transparent,
-      hover: JeneseiThemeVariables.transparent
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
     }
   },
   grayBorder: {
     background: {
-      rest: JeneseiThemeVariables.whiteStandard,
-      hover: JeneseiThemeVariables.whiteStandard
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard
     },
     color: {
-      rest: JeneseiThemeVariables.black60,
-      hover: JeneseiThemeVariables.black60,
-      placeholder: JeneseiThemeVariables.black80
+      rest: JeneseiPalette.black60,
+      hover: JeneseiPalette.black60,
+      placeholder: JeneseiPalette.black80
     },
     border: {
-      rest: JeneseiThemeVariables.black10,
-      hover: JeneseiThemeVariables.graySandra
+      rest: JeneseiPalette.black10,
+      hover: JeneseiPalette.graySandra
     }
   },
   black: {
     background: {
-      rest: JeneseiThemeVariables.black100,
-      hover: JeneseiThemeVariables.black60
+      rest: JeneseiPalette.black100,
+      hover: JeneseiPalette.black60
     },
     color: {
-      rest: JeneseiThemeVariables.whiteStandard,
-      hover: JeneseiThemeVariables.whiteStandard,
-      placeholder: JeneseiThemeVariables.whiteStandard
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard,
+      placeholder: JeneseiPalette.whiteStandard
     },
     border: {
-      rest: JeneseiThemeVariables.transparent,
-      hover: JeneseiThemeVariables.transparent
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
     }
   },
   blackBorder: {
     background: {
-      rest: JeneseiThemeVariables.whiteStandard,
-      hover: JeneseiThemeVariables.whiteStandard
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard
     },
     color: {
-      rest: JeneseiThemeVariables.black100,
-      hover: JeneseiThemeVariables.black60,
-      placeholder: JeneseiThemeVariables.black100
+      rest: JeneseiPalette.black100,
+      hover: JeneseiPalette.black60,
+      placeholder: JeneseiPalette.black100
     },
     border: {
-      rest: JeneseiThemeVariables.black100,
-      hover: JeneseiThemeVariables.black60
+      rest: JeneseiPalette.black100,
+      hover: JeneseiPalette.black60
     }
   },
   greenTransparent: {
     background: {
-      rest: JeneseiThemeVariables.green10,
-      hover: JeneseiThemeVariables.green25
+      rest: JeneseiPalette.green10,
+      hover: JeneseiPalette.green25
     },
     color: {
-      rest: JeneseiThemeVariables.green100,
-      hover: JeneseiThemeVariables.green100,
-      placeholder: JeneseiThemeVariables.green100
+      rest: JeneseiPalette.green100,
+      hover: JeneseiPalette.green100,
+      placeholder: JeneseiPalette.green100
     },
     border: {
-      rest: JeneseiThemeVariables.transparent,
-      hover: JeneseiThemeVariables.transparent
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
     }
   },
   yellowTransparent: {
     background: {
-      rest: JeneseiThemeVariables.yellow10,
-      hover: JeneseiThemeVariables.yellow25
+      rest: JeneseiPalette.yellow10,
+      hover: JeneseiPalette.yellow25
     },
     color: {
-      rest: JeneseiThemeVariables.yellow100,
-      hover: JeneseiThemeVariables.yellow100,
-      placeholder: JeneseiThemeVariables.yellow100
+      rest: JeneseiPalette.yellow100,
+      hover: JeneseiPalette.yellow100,
+      placeholder: JeneseiPalette.yellow100
     },
     border: {
-      rest: JeneseiThemeVariables.transparent,
-      hover: JeneseiThemeVariables.transparent
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
     }
   },
   redTransparent: {
     background: {
-      rest: JeneseiThemeVariables.red10,
-      hover: JeneseiThemeVariables.red25
+      rest: JeneseiPalette.red10,
+      hover: JeneseiPalette.red25
     },
     color: {
-      rest: JeneseiThemeVariables.red100,
-      hover: JeneseiThemeVariables.red100,
-      placeholder: JeneseiThemeVariables.red100
+      rest: JeneseiPalette.red100,
+      hover: JeneseiPalette.red100,
+      placeholder: JeneseiPalette.red100
     },
     border: {
-      rest: JeneseiThemeVariables.transparent,
-      hover: JeneseiThemeVariables.transparent
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
     }
   }
 }
@@ -209,102 +209,102 @@ const DefaultJeneseiThemeGenre = {
 const DefaultJeneseiThemeGenreInput = {
   gray: {
     background: {
-      rest: JeneseiThemeVariables.grayJanice,
-      hover: JeneseiThemeVariables.graySandra
+      rest: JeneseiPalette.grayJanice,
+      hover: JeneseiPalette.graySandra
     },
     color: {
-      rest: JeneseiThemeVariables.black60,
-      hover: JeneseiThemeVariables.black60,
-      placeholder: JeneseiThemeVariables.black80
+      rest: JeneseiPalette.black60,
+      hover: JeneseiPalette.black60,
+      placeholder: JeneseiPalette.black80
     },
     border: {
-      rest: JeneseiThemeVariables.transparent,
-      hover: JeneseiThemeVariables.transparent
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
     }
   },
   blackBorder: {
     background: {
-      rest: JeneseiThemeVariables.whiteStandard,
-      hover: JeneseiThemeVariables.whiteStandard
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard
     },
     color: {
-      rest: JeneseiThemeVariables.black80,
-      hover: JeneseiThemeVariables.black80,
-      placeholder: JeneseiThemeVariables.black40
+      rest: JeneseiPalette.black80,
+      hover: JeneseiPalette.black80,
+      placeholder: JeneseiPalette.black40
     },
     border: {
-      rest: JeneseiThemeVariables.black100,
-      hover: JeneseiThemeVariables.black80
+      rest: JeneseiPalette.black100,
+      hover: JeneseiPalette.black80
     }
   },
   grayBorder: {
     background: {
-      rest: JeneseiThemeVariables.whiteStandard,
-      hover: JeneseiThemeVariables.whiteStandard
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard
     },
     color: {
-      rest: JeneseiThemeVariables.black60,
-      hover: JeneseiThemeVariables.black60,
-      placeholder: JeneseiThemeVariables.black40
+      rest: JeneseiPalette.black60,
+      hover: JeneseiPalette.black60,
+      placeholder: JeneseiPalette.black40
     },
     border: {
-      rest: JeneseiThemeVariables.black10,
-      hover: JeneseiThemeVariables.graySandra
+      rest: JeneseiPalette.black10,
+      hover: JeneseiPalette.graySandra
     }
   }
 }
 const DefaultJeneseiThemeGenreInputSelect = {
   gray: {
     background: {
-      rest: JeneseiThemeVariables.grayJanice,
-      hover: JeneseiThemeVariables.graySandra,
+      rest: JeneseiPalette.grayJanice,
+      hover: JeneseiPalette.graySandra,
       select: ''
     },
     color: {
-      rest: JeneseiThemeVariables.black60,
-      hover: JeneseiThemeVariables.black60,
-      placeholder: JeneseiThemeVariables.black80,
+      rest: JeneseiPalette.black60,
+      hover: JeneseiPalette.black60,
+      placeholder: JeneseiPalette.black80,
       select: ''
     },
     border: {
-      rest: JeneseiThemeVariables.transparent,
-      hover: JeneseiThemeVariables.transparent,
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent,
       select: ''
     }
   },
   blackBorder: {
     background: {
-      rest: JeneseiThemeVariables.whiteStandard,
-      hover: JeneseiThemeVariables.whiteStandard,
-      select: JeneseiThemeVariables.blueActive
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard,
+      select: JeneseiPalette.blueActive
     },
     color: {
-      rest: JeneseiThemeVariables.black80,
-      hover: JeneseiThemeVariables.black80,
-      placeholder: JeneseiThemeVariables.black40,
-      select: JeneseiThemeVariables.black100
+      rest: JeneseiPalette.black80,
+      hover: JeneseiPalette.black80,
+      placeholder: JeneseiPalette.black40,
+      select: JeneseiPalette.black100
     },
     border: {
-      rest: JeneseiThemeVariables.black100,
-      hover: JeneseiThemeVariables.black80,
-      select: JeneseiThemeVariables.blueRest
+      rest: JeneseiPalette.black100,
+      hover: JeneseiPalette.black80,
+      select: JeneseiPalette.blueRest
     }
   },
   grayBorder: {
     background: {
-      rest: JeneseiThemeVariables.whiteStandard,
-      hover: JeneseiThemeVariables.whiteStandard,
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard,
       select: ''
     },
     color: {
-      rest: JeneseiThemeVariables.black60,
-      hover: JeneseiThemeVariables.black60,
-      placeholder: JeneseiThemeVariables.black40,
+      rest: JeneseiPalette.black60,
+      hover: JeneseiPalette.black60,
+      placeholder: JeneseiPalette.black40,
       select: ''
     },
     border: {
-      rest: JeneseiThemeVariables.black10,
-      hover: JeneseiThemeVariables.graySandra,
+      rest: JeneseiPalette.black10,
+      hover: JeneseiPalette.graySandra,
       select: ''
     }
   }
@@ -312,125 +312,125 @@ const DefaultJeneseiThemeGenreInputSelect = {
 const DefaultJeneseiThemeGenreDate = {
   blackBorder: {
     background: {
-      rest: JeneseiThemeVariables.whiteStandard,
-      hover: JeneseiThemeVariables.whiteStandard,
-      today: JeneseiThemeVariables.black80,
-      weekend: JeneseiThemeVariables.black10,
-      choice: JeneseiThemeVariables.graySarah,
-      line: JeneseiThemeVariables.whiteStandard
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard,
+      today: JeneseiPalette.black80,
+      weekend: JeneseiPalette.black10,
+      choice: JeneseiPalette.graySarah,
+      line: JeneseiPalette.whiteStandard
     },
     color: {
-      rest: JeneseiThemeVariables.black80,
-      hover: JeneseiThemeVariables.black80,
-      placeholder: JeneseiThemeVariables.black40,
-      today: JeneseiThemeVariables.whiteStandard,
-      weekend: JeneseiThemeVariables.black100,
-      choice: JeneseiThemeVariables.whiteStandard,
-      line: JeneseiThemeVariables.transparent
+      rest: JeneseiPalette.black80,
+      hover: JeneseiPalette.black80,
+      placeholder: JeneseiPalette.black40,
+      today: JeneseiPalette.whiteStandard,
+      weekend: JeneseiPalette.black100,
+      choice: JeneseiPalette.whiteStandard,
+      line: JeneseiPalette.transparent
     },
     border: {
-      rest: JeneseiThemeVariables.black10,
-      hover: JeneseiThemeVariables.graySandra,
-      today: JeneseiThemeVariables.transparent,
-      weekend: JeneseiThemeVariables.transparent,
-      choice: JeneseiThemeVariables.transparent,
-      line: JeneseiThemeVariables.transparent
+      rest: JeneseiPalette.black10,
+      hover: JeneseiPalette.graySandra,
+      today: JeneseiPalette.transparent,
+      weekend: JeneseiPalette.transparent,
+      choice: JeneseiPalette.transparent,
+      line: JeneseiPalette.transparent
     }
   },
   gray: {
     background: {
-      rest: JeneseiThemeVariables.grayJanice,
-      hover: JeneseiThemeVariables.graySandra,
-      today: JeneseiThemeVariables.graySarah,
-      weekend: JeneseiThemeVariables.black10,
-      choice: JeneseiThemeVariables.graySarah,
-      line: JeneseiThemeVariables.transparent
+      rest: JeneseiPalette.grayJanice,
+      hover: JeneseiPalette.graySandra,
+      today: JeneseiPalette.graySarah,
+      weekend: JeneseiPalette.black10,
+      choice: JeneseiPalette.graySarah,
+      line: JeneseiPalette.transparent
     },
     color: {
-      rest: JeneseiThemeVariables.black60,
-      hover: JeneseiThemeVariables.black60,
-      placeholder: JeneseiThemeVariables.black80,
-      today: JeneseiThemeVariables.whiteStandard,
-      weekend: JeneseiThemeVariables.grayJanice,
-      choice: JeneseiThemeVariables.whiteStandard,
-      line: JeneseiThemeVariables.transparent
+      rest: JeneseiPalette.black60,
+      hover: JeneseiPalette.black60,
+      placeholder: JeneseiPalette.black80,
+      today: JeneseiPalette.whiteStandard,
+      weekend: JeneseiPalette.grayJanice,
+      choice: JeneseiPalette.whiteStandard,
+      line: JeneseiPalette.transparent
     },
     border: {
-      rest: JeneseiThemeVariables.transparent,
-      hover: JeneseiThemeVariables.transparent,
-      today: JeneseiThemeVariables.transparent,
-      weekend: JeneseiThemeVariables.transparent,
-      choice: JeneseiThemeVariables.transparent,
-      line: JeneseiThemeVariables.transparent
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent,
+      today: JeneseiPalette.transparent,
+      weekend: JeneseiPalette.transparent,
+      choice: JeneseiPalette.transparent,
+      line: JeneseiPalette.transparent
     }
   },
   grayBorder: {
     background: {
-      rest: JeneseiThemeVariables.whiteStandard,
-      hover: JeneseiThemeVariables.whiteStandard,
-      today: JeneseiThemeVariables.black60,
-      weekend: JeneseiThemeVariables.black10,
-      line: JeneseiThemeVariables.transparent,
-      choice: JeneseiThemeVariables.black60
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard,
+      today: JeneseiPalette.black60,
+      weekend: JeneseiPalette.black10,
+      line: JeneseiPalette.transparent,
+      choice: JeneseiPalette.black60
     },
     color: {
-      rest: JeneseiThemeVariables.black60,
-      hover: JeneseiThemeVariables.black60,
-      placeholder: JeneseiThemeVariables.black80,
-      today: JeneseiThemeVariables.whiteStandard,
-      choice: JeneseiThemeVariables.whiteStandard,
-      weekend: JeneseiThemeVariables.black80,
-      line: JeneseiThemeVariables.transparent
+      rest: JeneseiPalette.black60,
+      hover: JeneseiPalette.black60,
+      placeholder: JeneseiPalette.black80,
+      today: JeneseiPalette.whiteStandard,
+      choice: JeneseiPalette.whiteStandard,
+      weekend: JeneseiPalette.black80,
+      line: JeneseiPalette.transparent
     },
     border: {
-      rest: JeneseiThemeVariables.black10,
-      hover: JeneseiThemeVariables.graySandra,
-      today: JeneseiThemeVariables.transparent,
-      weekend: JeneseiThemeVariables.black10,
-      line: JeneseiThemeVariables.transparent,
-      choice: JeneseiThemeVariables.transparent
+      rest: JeneseiPalette.black10,
+      hover: JeneseiPalette.graySandra,
+      today: JeneseiPalette.transparent,
+      weekend: JeneseiPalette.black10,
+      line: JeneseiPalette.transparent,
+      choice: JeneseiPalette.transparent
     }
   }
 }
 const DefaultJeneseiThemeGenreForm = {
   gray: {
-    background: JeneseiThemeVariables.whiteStandard,
-    color: JeneseiThemeVariables.black60,
-    border: JeneseiThemeVariables.transparent
+    background: JeneseiPalette.whiteStandard,
+    color: JeneseiPalette.black60,
+    border: JeneseiPalette.transparent
   },
   grayBorder: {
-    background: JeneseiThemeVariables.whiteStandard,
-    color: JeneseiThemeVariables.black60,
-    border: JeneseiThemeVariables.black10
+    background: JeneseiPalette.whiteStandard,
+    color: JeneseiPalette.black60,
+    border: JeneseiPalette.black10
   }
 }
 const DefaultJeneseiThemeGenreToggle = {
   product: {
     active: {
       rest: {
-        border: JeneseiThemeVariables.transparent,
-        track: JeneseiThemeVariables.blueRest,
-        thumb: JeneseiThemeVariables.whiteStandard,
+        border: JeneseiPalette.transparent,
+        track: JeneseiPalette.blueRest,
+        thumb: JeneseiPalette.whiteStandard,
         thumbBoxShadow: '0px 0px 10px 1px rgba(0, 0, 0, 0.1)'
       },
       hover: {
-        border: JeneseiThemeVariables.transparent,
-        track: JeneseiThemeVariables.blueHover,
-        thumb: JeneseiThemeVariables.whiteStandard,
+        border: JeneseiPalette.transparent,
+        track: JeneseiPalette.blueHover,
+        thumb: JeneseiPalette.whiteStandard,
         thumbBoxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.6)'
       }
     },
     unActive: {
       rest: {
-        border: JeneseiThemeVariables.transparent,
-        track: JeneseiThemeVariables.black10,
-        thumb: JeneseiThemeVariables.whiteStandard,
+        border: JeneseiPalette.transparent,
+        track: JeneseiPalette.black10,
+        thumb: JeneseiPalette.whiteStandard,
         thumbBoxShadow: '0px 0px 10px 1px rgba(0, 0, 0, 0.1)'
       },
       hover: {
-        border: JeneseiThemeVariables.transparent,
-        track: JeneseiThemeVariables.graySandra,
-        thumb: JeneseiThemeVariables.whiteStandard,
+        border: JeneseiPalette.transparent,
+        track: JeneseiPalette.graySandra,
+        thumb: JeneseiPalette.whiteStandard,
         thumbBoxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.6)'
       }
     }
@@ -442,19 +442,19 @@ const DefaultJeneseiThemeGenreSonner: TJeneseiThemeGenreSonner = {
       genre: 'black'
     },
     wrapper: {
-      background: JeneseiThemeVariables.whiteStandard,
-      borderColor: JeneseiThemeVariables.grayKaren,
+      background: JeneseiPalette.whiteStandard,
+      borderColor: JeneseiPalette.grayKaren,
       boxShadow: '0px 10px 30px 0px rgba(0, 0, 0, 0.2)',
       boxShadowHover: '0px 10px 30px 0px rgba(0, 0, 0, 0.5)'
     },
     icon: {
-      color: JeneseiThemeVariables.black100
+      color: JeneseiPalette.black100
     },
     title: {
-      color: JeneseiThemeVariables.black100
+      color: JeneseiPalette.black100
     },
     description: {
-      color: JeneseiThemeVariables.grayPatricia
+      color: JeneseiPalette.grayPatricia
     }
   },
   greenTransparent: {
@@ -462,19 +462,19 @@ const DefaultJeneseiThemeGenreSonner: TJeneseiThemeGenreSonner = {
       genre: 'greenTransparent'
     },
     wrapper: {
-      background: JeneseiThemeVariables.green10Background,
-      borderColor: JeneseiThemeVariables.green25,
-      boxShadow: `0px 10px 30px 0px ${JeneseiThemeVariables.green25}`,
-      boxShadowHover: `0px 10px 30px 0px  ${JeneseiThemeVariables.green50}`
+      background: JeneseiPalette.green10Background,
+      borderColor: JeneseiPalette.green25,
+      boxShadow: `0px 10px 30px 0px ${JeneseiPalette.green25}`,
+      boxShadowHover: `0px 10px 30px 0px  ${JeneseiPalette.green50}`
     },
     icon: {
-      color: JeneseiThemeVariables.green100
+      color: JeneseiPalette.green100
     },
     title: {
-      color: JeneseiThemeVariables.green100
+      color: JeneseiPalette.green100
     },
     description: {
-      color: JeneseiThemeVariables.greenGoogle
+      color: JeneseiPalette.greenGoogle
     }
   },
   redTransparent: {
@@ -482,19 +482,19 @@ const DefaultJeneseiThemeGenreSonner: TJeneseiThemeGenreSonner = {
       genre: 'redTransparent'
     },
     wrapper: {
-      background: JeneseiThemeVariables.red10Background,
-      borderColor: JeneseiThemeVariables.red25,
-      boxShadow: `0px 10px 30px 0px ${JeneseiThemeVariables.red25}`,
-      boxShadowHover: `0px 10px 30px 0px  ${JeneseiThemeVariables.red50}`
+      background: JeneseiPalette.red10Background,
+      borderColor: JeneseiPalette.red25,
+      boxShadow: `0px 10px 30px 0px ${JeneseiPalette.red25}`,
+      boxShadowHover: `0px 10px 30px 0px  ${JeneseiPalette.red50}`
     },
     icon: {
-      color: JeneseiThemeVariables.red100
+      color: JeneseiPalette.red100
     },
     title: {
-      color: JeneseiThemeVariables.red100
+      color: JeneseiPalette.red100
     },
     description: {
-      color: JeneseiThemeVariables.redGoogle
+      color: JeneseiPalette.redGoogle
     }
   },
   yellowTransparent: {
@@ -502,19 +502,19 @@ const DefaultJeneseiThemeGenreSonner: TJeneseiThemeGenreSonner = {
       genre: 'yellowTransparent'
     },
     wrapper: {
-      background: JeneseiThemeVariables.yellow10Background,
-      borderColor: JeneseiThemeVariables.yellow25,
-      boxShadow: `0px 10px 30px 0px ${JeneseiThemeVariables.yellow25}`,
-      boxShadowHover: `0px 10px 30px 0px  ${JeneseiThemeVariables.yellow50}`
+      background: JeneseiPalette.yellow10Background,
+      borderColor: JeneseiPalette.yellow25,
+      boxShadow: `0px 10px 30px 0px ${JeneseiPalette.yellow25}`,
+      boxShadowHover: `0px 10px 30px 0px  ${JeneseiPalette.yellow50}`
     },
     icon: {
       color: 'yellow100'
     },
     title: {
-      color: JeneseiThemeVariables.yellow100
+      color: JeneseiPalette.yellow100
     },
     description: {
-      color: JeneseiThemeVariables.yellowGoogle
+      color: JeneseiPalette.yellowGoogle
     }
   }
 }
@@ -522,13 +522,14 @@ export const JeneseiTheme: IJeneseiTheme = {
   transition: {
     duration: '0.3s',
     timingFunction: 'ease',
-    default: '0.3s ease'
+    default: '0.3s ease',
+    icon: '0.05s ease'
   },
   scrollbar: {
     width: 4,
-    background: JeneseiThemeVariables.black05,
-    thumb: JeneseiThemeVariables.black10,
-    thumbBorder: JeneseiThemeVariables.black05
+    background: JeneseiPalette.black05,
+    thumb: JeneseiPalette.black10,
+    thumbBorder: JeneseiPalette.black05
   },
   font: {
     family: 'Inter',
@@ -560,11 +561,11 @@ export const JeneseiTheme: IJeneseiTheme = {
     input: 'inset 0px 0px 4px rgba(0, 0, 0, 0.20)',
     button: '0px 0px 4px 0px rgba(0, 0, 0, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25)'
   },
-  palette: JeneseiThemeVariables,
+  palette: JeneseiPalette,
   colors: {
-    white: JeneseiThemeVariables.whiteStandard,
-    focus: JeneseiThemeVariables.black60,
-    danger: JeneseiThemeVariables.redGoogle,
+    white: JeneseiPalette.whiteStandard,
+    focus: JeneseiPalette.black60,
+    danger: JeneseiPalette.redGoogle,
     sonner: DefaultJeneseiThemeGenreSonner,
     form: DefaultJeneseiThemeGenreForm,
     button: DefaultJeneseiThemeGenre,
@@ -578,35 +579,35 @@ export const JeneseiTheme: IJeneseiTheme = {
 export const KEY_SIZE_DATA: Record<TJeneseiThemeSize, IJeneseiThemeSize> = {
   large: {
     height: 46,
-    heightIcon: 20,
+    heightIcon: 24,
     radius: 6,
     padding: 16,
     font: 20
   },
   largeMedium: {
     height: 42,
-    heightIcon: 18,
+    heightIcon: 22,
     radius: 6,
     padding: 14,
     font: 18
   },
   medium: {
     height: 38,
-    heightIcon: 16,
+    heightIcon: 20,
     radius: 6,
     padding: 12,
     font: 16
   },
   mediumSmall: {
     height: 34,
-    heightIcon: 14,
+    heightIcon: 18,
     radius: 6,
     padding: 10,
     font: 14
   },
   small: {
     height: 30,
-    heightIcon: 12,
+    heightIcon: 16,
     radius: 8,
     padding: 8,
     font: 12

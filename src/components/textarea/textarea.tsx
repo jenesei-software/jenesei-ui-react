@@ -3,7 +3,7 @@ import { useTheme } from 'styled-components'
 
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 
-import { StyledTextArea, StyledTextAreaWrapper, TextAreaErrorMessage, TextAreaProps, TextAreaStyledLoading } from '.'
+import { StyledTextArea, StyledTextAreaWrapper, TextAreaErrorMessage, TextAreaProps } from '.'
 
 export const TextArea = (props: TextAreaProps) => {
   const theme = useTheme()
@@ -98,14 +98,14 @@ export const TextArea = (props: TextAreaProps) => {
           name={props.name}
           id={props.id}
         />
-        {props.isLoading && (
+        {/* {props.isLoading && (
           <TextAreaStyledLoading
             $genre={props.genre}
             $size={props.size}
             size={props.size}
             color={theme.colors.input[props.genre].color.rest}
           />
-        )}
+        )} */}
       </StyledTextAreaWrapper>
       {props.isError && props.errorMessage && (
         <TextAreaErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.isErrorAbsolute}>

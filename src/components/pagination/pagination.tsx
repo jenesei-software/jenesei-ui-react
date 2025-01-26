@@ -66,8 +66,9 @@ export const Pagination: FC<PaginationProps> = props => {
         onClick={handlePrevious}
         size={size}
         genre={props.genre}
-        iconName="ArrowLeft2"
+        iconName="Arrow2"
         iconOrder={-1}
+        iconTurn={90}
       >
         Previous
       </Button>
@@ -92,7 +93,8 @@ export const Pagination: FC<PaginationProps> = props => {
         onClick={handleNext}
         size={size}
         genre={props.genre}
-        iconName="ArrowRight2"
+        iconName="Arrow2"
+        iconTurn={-90}
       >
         Next
       </Button>

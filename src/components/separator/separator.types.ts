@@ -1,4 +1,4 @@
-import { JeneseiThemeVariablesKeys } from '@local/theme'
+import { JeneseiPaletteKeys } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export interface SeparatorProps {
@@ -6,7 +6,7 @@ export interface SeparatorProps {
   height?: string
   radius?: string
   type?: 'horizontal' | 'vertical'
-  color?: JeneseiThemeVariablesKeys
+  color?: JeneseiPaletteKeys
 }
 
 export type SeparatorWrapperProps = AddDollarSign<Pick<SeparatorProps, 'width' | 'height' | 'radius' | 'color'>>
