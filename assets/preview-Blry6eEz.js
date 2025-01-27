@@ -1,0 +1,9 @@
+import{j as i,o as h,b}from"./theme-DVxtux_W.js";import{r as o}from"./index-CnY36iC1.js";import{g as l}from"./index-DaYL4gH5.js";import{P as g}from"./context-permission-BqbAZgqt.js";import{J as N}from"./theme.global-wZO4Grut.js";/*!
+ * @gsap/react 2.1.2
+ * https://gsap.com
+ *
+ * Copyright 2008-2025, GreenSock. All rights reserved.
+ * Subject to the terms at https://gsap.com/standard-license or for
+ * Club GSAP members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/let c=typeof document<"u"?o.useLayoutEffect:o.useEffect,d=e=>e&&!Array.isArray(e)&&typeof e=="object",u=[],w={},p=l;const s=(e,r=u)=>{let t=w;d(e)?(t=e,e=null,r="dependencies"in t?t.dependencies:u):d(r)&&(t=r,r="dependencies"in t?t.dependencies:u),e&&typeof e!="function"&&console.warn("First parameter must be a function or config object");const{scope:f,revertOnUpdate:x}=t,m=o.useRef(!1),n=o.useRef(p.context(()=>{},f)),j=o.useRef(y=>n.current.add(null,y)),a=r&&r.length&&!x;return a&&c(()=>(m.current=!0,()=>n.current.revert()),u),c(()=>{if(e&&n.current.add(e,f),!a||!m.current)return()=>n.current.revert()},r),{context:n.current,contextSafe:j.current}};s.register=e=>{p=e};s.headless=!0;l.registerPlugin(s);const A={decorators:[e=>i.jsxDEV(g,{children:i.jsxDEV(h,{theme:b,children:[i.jsxDEV(N,{},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/.storybook/preview.tsx",lineNumber:31,columnNumber:13},void 0),i.jsxDEV(e,{},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/.storybook/preview.tsx",lineNumber:32,columnNumber:13},void 0)]},void 0,!0,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/.storybook/preview.tsx",lineNumber:30,columnNumber:11},void 0)},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/.storybook/preview.tsx",lineNumber:29,columnNumber:9},void 0)],parameters:{controls:{matchers:{color:/(background|color)$/i,date:/Date$/i}}}};export{A as default};
