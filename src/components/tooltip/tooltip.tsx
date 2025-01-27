@@ -1,12 +1,11 @@
 import { AnimatePresence } from 'framer-motion'
-import React, { CSSProperties, FC, MouseEventHandler, memo, useCallback, useMemo, useRef, useState } from 'react'
+import React, { FC, MouseEventHandler, memo, useCallback, useMemo, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
-import { useTheme } from 'styled-components'
 
 import { Typography } from '@local/components/typography'
-
-import { TooltipArrow, TooltipBox, TooltipContainer, TooltipProps } from '.'
 import { DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT } from '@local/contexts/context-dialog'
+
+import { TooltipBox, TooltipContainer, TooltipProps } from '.'
 
 export const Tooltip: FC<TooltipProps> = memo(props => {
   // eslint-disable-next-line react/prop-types
@@ -16,13 +15,13 @@ export const Tooltip: FC<TooltipProps> = memo(props => {
 })
 
 export const TooltipContent: FC<TooltipProps> = props => {
-  const theme = useTheme()
+  // const theme = useTheme()
 
   const [visible, setVisible] = useState(false)
 
   const arrowSize = useMemo(() => 10, [])
-  const arrowSizeString = useMemo(() => `${arrowSize}px`, [])
-  const arrowLength = useMemo(() => arrowSize, [])
+  // const arrowSizeString = useMemo(() => `${arrowSize}px`, [])
+  const arrowLength = useMemo(() => arrowSize, [arrowSize])
 
   const refTooltip = useRef<HTMLDivElement>(null)
   const refContainer = useRef<HTMLDivElement>(null)
