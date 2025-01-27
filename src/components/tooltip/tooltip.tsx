@@ -1,7 +1,6 @@
 import { AnimatePresence } from 'framer-motion'
 import React, { FC, MouseEventHandler, memo, useCallback, useMemo, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
-import { useTheme } from 'styled-components'
 
 import { Typography } from '@local/components/typography'
 import { DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT } from '@local/contexts/context-dialog'
@@ -22,7 +21,7 @@ export const TooltipContent: FC<TooltipProps> = props => {
 
   const arrowSize = useMemo(() => 10, [])
   // const arrowSizeString = useMemo(() => `${arrowSize}px`, [])
-  const arrowLength = useMemo(() => arrowSize, [])
+  const arrowLength = useMemo(() => arrowSize, [arrowSize])
 
   const refTooltip = useRef<HTMLDivElement>(null)
   const refContainer = useRef<HTMLDivElement>(null)
