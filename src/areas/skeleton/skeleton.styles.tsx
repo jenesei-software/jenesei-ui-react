@@ -18,21 +18,33 @@ export const StyledSkeleton = styled(Stack)<StyledSkeletonProps>`
   transition: background ${props => props.theme.transition.default};
 
   ${props => css`
-    ${props.$visible &&
+    ${!props.$visible &&
     css`
-      background: rgba(130, 130, 130, 0.2);
-      background: linear-gradient(
-        to right,
-        rgba(130, 130, 130, 0.2) 8%,
-        rgba(130, 130, 130, 0.3) 18%,
-        rgba(130, 130, 130, 0.2) 33%
-      );
+      ${props.$type === 'secondary'
+        ? css`
+            background: rgba(130, 130, 130, 0.4);
+            background: linear-gradient(
+              to right,
+              rgba(130, 130, 130, 0.4) 8%,
+              rgba(130, 130, 130, 0.5) 18%,
+              rgba(130, 130, 130, 0.4) 33%
+            );
+          `
+        : css`
+            background: rgba(130, 130, 130, 0.2);
+            background: linear-gradient(
+              to right,
+              rgba(130, 130, 130, 0.2) 8%,
+              rgba(130, 130, 130, 0.3) 18%,
+              rgba(130, 130, 130, 0.2) 33%
+            );
+          `}
       background-size: 800px 100px;
       animation: ${shimmer} 2s infinite ease-out;
     `}
   `}
   & > * {
-    opacity: ${props => (props.$visible ? 0 : 1)};
+    opacity: ${props => (!props.$visible ? 0 : 1)};
     transition: opacity ${props => props.theme.transition.default};
   }
 `

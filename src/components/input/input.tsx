@@ -1,5 +1,4 @@
 import { useCallback } from 'react'
-import { useTheme } from 'styled-components'
 
 import {
   InputErrorMessage,
@@ -12,8 +11,6 @@ import {
 } from '.'
 
 export const Input = (props: InputProps) => {
-  const theme = useTheme()
-
   const handleOnChange = useCallback(
     (value: string) => {
       if (props.isNoSpaces) {

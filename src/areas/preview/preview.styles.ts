@@ -1,40 +1,4 @@
-import styled, { keyframes } from 'styled-components'
-
-const loader1 = keyframes`
-  	0%, 100% {
-		transform: none;
-	}
-	
-	25% {
-		transform: translateX(-100%);
-	}
-	
-	50% {
-		transform: translateX(-100%) translateY(-100%);
-	}
-	
-	75% {
-		transform: translateY(-100%);
-	}
-`
-
-const loader2 = keyframes`
-  0%, 100% {
-		transform: none;
-	}
-	
-	25% {
-		transform: translateX(100%);
-	}
-	
-	50% {
-		transform: translateX(100%) translateY(100%);
-	}
-	
-	75% {
-		transform: translateY(100%);
-	}
-`
+import styled from 'styled-components'
 
 export const PreviewWrapper = styled.div<{ $visible: boolean }>`
   background-color: ${props => props.theme.palette.whiteStandard};

@@ -79,7 +79,7 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
             justifyContent: 'space-between'
           },
           children: 'Third',
-          iconName: 'ArrowDown',
+          iconName: 'Arrow1',
           width: 'auto',
           type: 'button',
           genre: 'grayBorder',
@@ -124,7 +124,7 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
             justifyContent: 'space-between'
           },
           children: 'Third',
-          iconName: 'ArrowDownCircle',
+          iconName: 'Arrow2',
           width: 'auto',
           type: 'button',
           genre: 'redTransparent',
