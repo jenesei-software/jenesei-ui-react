@@ -4,9 +4,10 @@ import moment from 'moment'
 import React, { FC, FocusEventHandler, ReactNode, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { Button } from '@local/components/button'
-import { InputChildrenProps, InputErrorMessage } from '@local/components/input'
+import { InputChildrenProps } from '@local/components/input'
 import { Typography } from '@local/components/typography'
 import { ListLanguage } from '@local/consts'
+import { ErrorMessage } from '@local/styles/base'
 import { KEY_SIZE_DATA, TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
 
 import {
@@ -323,7 +324,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           $genre={props.genre}
           $size={props.size}
           placeholder={props.placeholder}
-          $isError={props?.inputProps?.isError}
+          $isError={props?.isError}
           $isLoading={props?.inputProps?.isLoading}
           $postfixChildren={props?.inputProps?.postfixChildren}
           $prefixChildren={props.inputProps?.prefixChildren}
@@ -418,10 +419,10 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           </DropdownList>
         </DropdownListParent>
       </SelectWrapper>
-      {props?.inputProps?.isError && props?.inputProps.errorMessage && (
-        <InputErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.inputProps.isErrorAbsolute}>
-          {props.inputProps.errorMessage}
-        </InputErrorMessage>
+      {props?.isError && props?.errorMessage && (
+        <ErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props?.isErrorAbsolute}>
+          {props.errorMessage}
+        </ErrorMessage>
       )}
     </>
   )

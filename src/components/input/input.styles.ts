@@ -2,15 +2,10 @@ import { PatternFormat } from 'react-number-format'
 import styled, { css } from 'styled-components'
 
 import { getFontSizeStyles } from '@local/components/typography'
+import { addError, addOutline, addTransition } from '@local/styles/base'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
-import {
-  InputErrorMessageProps,
-  InputProps,
-  StyledInputChildrenProps,
-  StyledInputProps,
-  StyledInputWrapperProps
-} from '.'
+import { StyledInputChildrenProps, StyledInputProps, StyledInputWrapperProps } from '.'
 
 /****************************************** Wrapper *************************************************/
 export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
@@ -21,48 +16,6 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
   justify-content: center;
   flex-direction: column;
   width: ${props => props.$width ?? '100%'};
-`
-
-/****************************************** Error Size*************************************************/
-export const InputErrorMessageSize = css<InputErrorMessageProps>`
-  ${props =>
-    InputErrorMessageSizeConstructor({ ...KEY_SIZE_DATA[props.$size], $isErrorAbsolute: props.$isErrorAbsolute })};
-`
-export const InputErrorMessageSizeConstructor = (
-  props: IJeneseiThemeSize & { $isErrorAbsolute: InputProps['isErrorAbsolute'] }
-) => css`
-  ${props.$isErrorAbsolute
-    ? css`
-        position: absolute;
-        padding-top: 6px;
-        padding-left: ${props.padding}px;
-        color: ${props => props.theme.colors.danger};
-      `
-    : css`
-        position: static;
-        padding: 0px ${props.padding}px;
-        color: ${props => props.theme.colors.danger};
-      `}
-`
-
-/****************************************** Error *************************************************/
-export const InputErrorMessage = styled.div<InputErrorMessageProps>`
-  ${getFontSizeStyles(12, 400, 'Inter')};
-  width: ${props => props.$width ?? '100%'};
-  ${InputErrorMessageSize}
-`
-
-export const InputIsErrorBorder = css<StyledInputProps>`
-  ${props =>
-    props.$isError &&
-    css`
-      border-color: ${props => props.theme.colors.danger};
-      &:focus,
-      &:active,
-      &:focus-visible {
-        border-color: ${props => props.theme.colors.danger};
-      }
-    `}
 `
 
 /****************************************** Placeholder *************************************************/
@@ -99,10 +52,8 @@ const InputGenre = css<StyledInputProps>`
       color: ${props.theme.colors.input[props.$genre].color.hover};
     }
     &:focus-visible {
-      outline: 1px solid ${props.theme.colors.focus};
       border-color: ${props.theme.colors.input[props.$genre].border.rest};
       background: ${props.theme.colors.input[props.$genre].background.rest};
-
       color: ${props.theme.colors.input[props.$genre].color.rest};
     }
   `};
@@ -137,26 +88,24 @@ export const InputIsInputEffect = css<Pick<StyledInputProps, '$isInputEffect'>>`
 export const StyledInputCSS = css<StyledInputProps>`
   resize: none;
   overflow: hidden;
-  box-sizing: border-box;
   width: 100%;
   border: 1px inset;
-  transition:
-    all ${props => props.theme.transition.default},
-    outline 0s;
+
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  outline: none;
-
   ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
   line-height: ${props => props.theme.font.lineHeight};
 
   ${InputSize};
   ${InputGenre};
-  ${InputIsErrorBorder};
   ${InputPlaceholder};
   ${InputHidden};
   ${InputIsInputEffect};
+  ${addOutline};
+  ${addTransition};
+  ${addError};
+
   ${props =>
     props.$prefixChildren &&
     css`
@@ -185,9 +134,7 @@ export const InputPrefixChildren = styled.div<StyledInputChildrenProps>`
   width: ${props => props.$width};
   opacity: ${props => (props.$isDisabled ? 0.5 : 1)};
   height: 100%;
-  transition:
-    all ${props => props.theme.transition.default},
-    outline 0s;
+  ${addTransition};
 `
 
 export const InputPostfixChildren = styled.div<StyledInputChildrenProps>`
@@ -196,9 +143,7 @@ export const InputPostfixChildren = styled.div<StyledInputChildrenProps>`
   width: ${props => props.$width};
   opacity: ${props => (props.$isDisabled ? 0.5 : 1)};
   height: 100%;
-  transition:
-    all ${props => props.theme.transition.default},
-    outline 0s;
+  ${addTransition};
 `
 
 /****************************************** Loading *************************************************/

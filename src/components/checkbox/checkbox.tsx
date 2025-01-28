@@ -2,8 +2,9 @@ import { FC, useCallback, useMemo } from 'react'
 import { useTheme } from 'styled-components'
 
 import { Icon, Ripple } from '@local/main'
+import { ErrorMessage } from '@local/styles/base'
 
-import { CheckboxErrorMessage, CheckboxProps, CheckboxWrapper, StyledIcon } from '.'
+import { CheckboxProps, CheckboxWrapper, StyledIcon } from '.'
 
 export const Checkbox: FC<CheckboxProps> = props => {
   const handleOnClick = useCallback(
@@ -67,9 +68,9 @@ export const Checkbox: FC<CheckboxProps> = props => {
         )}
       </CheckboxWrapper>
       {props.isError && props.errorMessage && (
-        <CheckboxErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.isErrorAbsolute}>
+        <ErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.isErrorAbsolute}>
           {props.errorMessage}
-        </CheckboxErrorMessage>
+        </ErrorMessage>
       )}
     </>
   )

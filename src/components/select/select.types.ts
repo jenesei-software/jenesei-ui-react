@@ -21,10 +21,25 @@ export interface SelectProps<T extends ISelectItem> {
   width?: string
   placeholder?: string
   isDisabled?: boolean
+  isError?: boolean
+  isErrorAbsolute?: boolean
+  errorMessage?: string
   isShowDropdownOptionIcon?: boolean
   isShowSelectInputIcon?: boolean
   isOnClickOptionClose?: boolean
-  inputProps?: Omit<InputProps, 'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'>
+  inputProps?: Omit<
+    InputProps,
+    | 'isDisabled'
+    | 'isError'
+    | 'errorMessage'
+    | 'isErrorAbsolute'
+    | 'name'
+    | 'id'
+    | 'genre'
+    | 'size'
+    | 'placeholder'
+    | 'width'
+  >
   optionProps?: Omit<InputProps, 'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'>
   isMulti?: boolean
   option: T[]

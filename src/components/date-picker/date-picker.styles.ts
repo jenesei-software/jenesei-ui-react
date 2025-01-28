@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { InputIsInputEffect, StyledInput } from '@local/components/input'
 import { getFontSizeStyles } from '@local/components/typography'
-import { removeScrollbar } from '@local/styles/base'
+import { addOutline, addTransition, removeScrollbar } from '@local/styles/base'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 import { IJeneseiThemeSize } from '@local/theme/theme.interface'
 
@@ -17,16 +17,9 @@ import {
 export const DateWrapper = styled.div<DateWrapperProps>`
   width: ${props => props.$width ?? '100%'};
   position: relative;
-
-  outline: none !important;
-
-  &:focus-visible {
-    outline: none !important;
-  }
 `
 
 export const DateDropdownListParent = styled.div<DateStyledListProps>`
-  outline: none;
   display: none;
 
   height: 0px;
@@ -41,8 +34,6 @@ export const DateDropdownListParent = styled.div<DateStyledListProps>`
   margin: 0;
   padding: 0;
   margin-top: 6px;
-
-  box-sizing: border-box;
 
   ${removeScrollbar};
 `
@@ -98,7 +89,6 @@ export const DateDropdownDaySize = css<DateDropdownDayProps>`
   background: ${props => props.theme.colors.date[props.$genre].background.rest};
   border-color: ${props => props.theme.colors.date[props.$genre].border.rest};
   color: ${props => props.theme.colors.date[props.$genre].color.rest};
-  outline: 1px solid transparent;
   border: 1px solid transparent;
   grid-row: ${props => props.$row};
   grid-column: ${props => props.$column};
@@ -115,9 +105,7 @@ export const DateDropdownDaySize = css<DateDropdownDayProps>`
       color: ${props.theme.colors.date[props.$genre].color.hover};
     `}
   }
-  transition:
-    all ${props => props.theme.transition.default},
-    outline 0s;
+  ${addTransition};
 
   ${props =>
     props.$isWeekend &&
@@ -145,7 +133,8 @@ export const DateDropdownDaySize = css<DateDropdownDayProps>`
     css`
       opacity: 0.5;
     `}
-  ${getFontSizeStyles(12, 700, 'Inter')}
+  ${getFontSizeStyles(12, 700, 'Inter')};
+  ${addOutline};
 `
 export const DateDropdownDaySizeConstructor = (props: IJeneseiThemeSize) => css`
   border-radius: ${props.radius}px;

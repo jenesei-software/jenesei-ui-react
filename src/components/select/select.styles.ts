@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { StyledInput, StyledInputCSS } from '@local/components/input'
-import { removeScrollbar } from '@local/styles/base'
+import { addTransition, removeScrollbar } from '@local/styles/base'
 import { IJeneseiThemeSize } from '@local/theme'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 
@@ -30,10 +30,11 @@ export const SelectWrapper = styled.div<SelectWrapperProps>`
           left: -1px;
           bottom: -1px;
           right: -1px;
-          border: 1px ${props.theme.colors.focus} solid;
+          outline: 2px ${props.theme.colors.focus} solid;
+          outline-offset: 1px;
           border-radius: ${`${props.$radius + 1}px`};
           pointer-events: none;
-          height: calc(100% + var(--after-height));
+          height: calc(100% + var(--after-height) + 2px);
         }
       }
     `}
@@ -66,8 +67,6 @@ export const DropdownListParent = styled.div<SelectStyledListProps>`
 
   margin: 0;
   padding: 0;
-
-  box-sizing: border-box;
 
   background: ${props => props.theme.colors.input[props.$genre].background.rest};
   border: solid 1px ${props => props.theme.colors.input[props.$genre].border.rest};
@@ -125,7 +124,8 @@ export const DropdownOptionLayout = styled.div<SelectStyledOptionProps>`
   border-style: solid;
   border-width: 1px;
   border-color: transparent;
-  transition: all ${props => props.theme.transition.default};
+
+  ${addTransition};
 
   &:hover {
     background: ${props => props.theme.colors.select[props.$genre].background.select};
@@ -204,10 +204,4 @@ export const DropdownSelectAll = styled.div`
   height: 100%;
 `
 
-export const SelectStyledInput = styled(StyledInput)<SelectStyledInputProps>`
-  ${props =>
-    !props.$isError &&
-    css`
-      outline: none !important;
-    `}
-`
+export const SelectStyledInput = styled(StyledInput)<SelectStyledInputProps>``

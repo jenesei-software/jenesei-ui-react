@@ -71,5 +71,3 @@ export type StyledTextAreaProps = AddDollarSign<
 >
 
 export type StyledTextAreaWrapperProps = AddDollarSign<Pick<TextAreaProps, 'isDisabled' | 'isTextAreaEffect' | 'width'>>
-
-export type TextAreaErrorMessageProps = AddDollarSign<Pick<TextAreaProps, 'isErrorAbsolute' | 'width' | 'size'>>

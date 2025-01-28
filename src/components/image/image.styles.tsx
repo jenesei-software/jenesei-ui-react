@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { addTransition } from '@local/styles/base'
+
 import { ImageIMGProps } from '.'
 
 export const ImageIMG = styled.img<ImageIMGProps>`
@@ -8,5 +10,5 @@ export const ImageIMG = styled.img<ImageIMGProps>`
   height: 100%;
   object-fit: cover;
   opacity: ${props => (props.$isPending ? 0 : 1)};
-  transition: all ${props => props.theme.transition.default};
+  ${addTransition};
 `

@@ -10,7 +10,6 @@ const TypographyCSS = css<TypographyCSSProps>`
   overflow: visible;
   text-overflow: ellipsis;
   overflow-wrap: anywhere;
-  box-sizing: border-box;
   line-height: ${props => props.theme.font.lineHeight};
 
   ${props =>

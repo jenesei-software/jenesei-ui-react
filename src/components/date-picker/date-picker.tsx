@@ -4,10 +4,10 @@ import { FocusEventHandler, useCallback, useEffect, useMemo, useRef, useState } 
 import { useTheme } from 'styled-components'
 
 import { Button } from '@local/components/button'
-import { InputErrorMessage } from '@local/components/input'
 import { Ripple } from '@local/components/ripple'
 import { SelectMonth, SelectYear } from '@local/components/select'
 import { Stack } from '@local/components/stack'
+import { ErrorMessage } from '@local/styles/base'
 import { KEY_SIZE_DATA } from '@local/theme'
 
 import {
@@ -345,7 +345,6 @@ export const DatePicker = (props: DateProps) => {
         $genre={props.genre}
         $width={props.width}
         $isDisabled={props?.isDisabled}
-        tabIndex={0}
         $radius={radius}
         $parentListHeight={height}
         onFocus={handleOnFocus}
@@ -488,9 +487,9 @@ export const DatePicker = (props: DateProps) => {
         </DateDropdownListParent>
       </DateWrapper>
       {props?.inputProps?.isError && props?.inputProps?.errorMessage && (
-        <InputErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.inputProps?.isErrorAbsolute}>
+        <ErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.inputProps?.isErrorAbsolute}>
           {props.inputProps?.errorMessage}
-        </InputErrorMessage>
+        </ErrorMessage>
       )}
     </>
   )
