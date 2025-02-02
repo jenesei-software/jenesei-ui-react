@@ -23,7 +23,7 @@ export interface SelectProps<T extends ISelectItem> {
   isDisabled?: boolean
   isError?: boolean
   isErrorAbsolute?: boolean
-  errorMessage?: string
+  ErrorMessage?: string
   isShowDropdownOptionIcon?: boolean
   isShowSelectInputIcon?: boolean
   isOnClickOptionClose?: boolean
@@ -31,7 +31,7 @@ export interface SelectProps<T extends ISelectItem> {
     InputProps,
     | 'isDisabled'
     | 'isError'
-    | 'errorMessage'
+    | 'ErrorMessage'
     | 'isErrorAbsolute'
     | 'name'
     | 'id'

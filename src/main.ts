@@ -4,6 +4,9 @@
 export { JeneseiGlobalStyles, JeneseiTheme } from './theme'
 export type { IJeneseiTheme } from './theme'
 
+// Export other styles
+export * from './styles/base'
+
 // Export types
 export * from './types'
 

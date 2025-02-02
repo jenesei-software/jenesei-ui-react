@@ -7,7 +7,7 @@ import LibraryIconLoadingJSON from './icon-loading.json'
 
 export const Icon = (props: LibraryIconItemProps) => {
   const icon =
-    props.type == 'curved'
+    props.type == 'id'
       ? LibraryIconIdJSON[props.name]
       : props.type === 'checkbox'
         ? LibraryIconCheckboxJSON[props.name]
@@ -30,7 +30,7 @@ export const Icon = (props: LibraryIconItemProps) => {
   }
 
   const contentPaths =
-    (props.type == 'curved' || props.type === 'checkbox') && typeof icon === 'object' && 'paths' in icon
+    (props.type == 'id' || props.type === 'checkbox') && typeof icon === 'object' && 'paths' in icon
       ? (icon.paths ?? []).map((path, index) => (
           <path
             key={index}

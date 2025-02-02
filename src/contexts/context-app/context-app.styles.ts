@@ -1,6 +1,6 @@
 import { css, styled } from 'styled-components'
 
-import { addGridTransition, addTransition } from '@local/styles/base'
+import { addGridTransition, addTransition } from '@local/styles/add'
 import { JeneseiPalette } from '@local/theme'
 
 import { ProviderAppOutletProps, ProviderAppWrapperProps } from '.'

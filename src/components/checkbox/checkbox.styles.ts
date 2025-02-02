@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { Icon } from '@local/components/icon'
 import { getFontSizeStyles } from '@local/components/typography'
-import { addError, addOutline, addTransition } from '@local/styles/base'
+import { addError, addOutline, addTransition } from '@local/styles/add'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledCheckboxProps, StyledIconProps } from '.'

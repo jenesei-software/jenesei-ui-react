@@ -9,7 +9,9 @@ import {
   DollarFlexContainerAndItemAndBasicProps,
   DollarFlexContainerAndItemProps,
   DollarFlexContainerProps,
-  DollarFlexItemProps
+  DollarFlexItemProps,
+  ErrorMessageProps,
+  ErrorMessagePropsDollar
 } from '.'
 
 const FlexContainer = css<DollarFlexContainerProps>`
@@ -216,103 +218,10 @@ export const FlexContainerAndItemAndBasic = css<DollarFlexContainerAndItemAndBas
   ${FlexBasic}
 `
 
-export const removeScrollbar = css`
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  &::-webkit-scrollbar-horizontal {
-    display: none;
-  }
-
-  &::-webkit-scrollbar-vertical {
-    display: none;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    display: none;
-  }
-`
-
-export const addTransition = css`
-  transition:
-    outline 0s,
-    opacity ${props => props.theme.transition.default},
-    transform ${props => props.theme.transition.default},
-    background-color ${props => props.theme.transition.default},
-    height ${props => props.theme.transition.default},
-    max-height ${props => props.theme.transition.default},
-    width ${props => props.theme.transition.default},
-    color ${props => props.theme.transition.default},
-    visibility ${props => props.theme.transition.default},
-    box-shadow ${props => props.theme.transition.default},
-    border-color ${props => props.theme.transition.default},
-    left ${props => props.theme.transition.default},
-    right ${props => props.theme.transition.default},
-    grid-template-areas ${props => props.theme.transition.default},
-    grid-template-rows ${props => props.theme.transition.default},
-    grid-template-columns ${props => props.theme.transition.default};
-`
-
-export const addGridTransition = css`
-  transition:
-    grid-template-areas ${props => props.theme.transition.default},
-    grid-template-rows ${props => props.theme.transition.default},
-    grid-template-columns ${props => props.theme.transition.default};
-`
-
-export const addColorTransition = css`
-  transition:
-    outline 0s,
-    opacity ${props => props.theme.transition.default},
-    background-color ${props => props.theme.transition.default},
-    color ${props => props.theme.transition.default},
-    box-shadow ${props => props.theme.transition.default},
-    border-color ${props => props.theme.transition.default};
-`
-
-export const addOutline = css`
-  outline: 2px solid transparent;
-  outline-offset: 1px;
-  &:focus-visible {
-    outline: 2px solid ${props => props.theme.colors.focus};
-  }
-`
-
-export const addError = css<{ $isError?: boolean }>`
-  ${props =>
-    props.$isError &&
-    css`
-      border-color: ${props => props.theme.colors.danger};
-      &:focus,
-      &:active,
-      &:hover,
-      &:focus-visible {
-        border-color: ${props => props.theme.colors.danger};
-      }
-    `};
-`
-
-type ErrorMessagePropsDollar = AddDollarSign<ErrorMessageProps>
-type ErrorMessageProps = {
-  errorMessage?: string
-
-  isError?: boolean
-
-  isErrorAbsolute?: boolean
-
-  size: TJeneseiThemeSize
-
-  width?: string
-}
-
-export const ErrorMessageSize = css<ErrorMessagePropsDollar>`
+const ErrorMessageSize = css<ErrorMessagePropsDollar>`
   ${props => ErrorMessageSizeConstructor({ ...KEY_SIZE_DATA[props.$size], $isErrorAbsolute: props.$isErrorAbsolute })};
 `
-export const ErrorMessageSizeConstructor = (
+const ErrorMessageSizeConstructor = (
   props: IJeneseiThemeSize & { $isErrorAbsolute: ErrorMessageProps['isErrorAbsolute'] }
 ) => css`
   ${props.$isErrorAbsolute

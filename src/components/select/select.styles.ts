@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { StyledInput, StyledInputCSS } from '@local/components/input'
-import { addTransition, removeScrollbar } from '@local/styles/base'
+import { addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
 import { IJeneseiThemeSize } from '@local/theme'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 
@@ -72,7 +72,7 @@ export const DropdownListParent = styled.div<SelectStyledListProps>`
   border: solid 1px ${props => props.theme.colors.input[props.$genre].border.rest};
   border-top: 0px !important;
   ${DropdownListParentSize};
-  ${props => !props.$isShowScroll && removeScrollbar};
+  ${props => !props.$isShowScroll && addRemoveScrollbar};
 `
 
 export const DropdownList = styled.ul`
@@ -204,4 +204,6 @@ export const DropdownSelectAll = styled.div`
   height: 100%;
 `
 
-export const SelectStyledInput = styled(StyledInput)<SelectStyledInputProps>``
+export const SelectStyledInput = styled(StyledInput)<SelectStyledInputProps>`
+  ${addRemoveOutline};
+`

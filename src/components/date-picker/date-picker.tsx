@@ -486,9 +486,9 @@ export const DatePicker = (props: DateProps) => {
           </DateDropdownList>
         </DateDropdownListParent>
       </DateWrapper>
-      {props?.inputProps?.isError && props?.inputProps?.errorMessage && (
+      {props?.inputProps?.isError && props?.inputProps?.ErrorMessage && (
         <ErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.inputProps?.isErrorAbsolute}>
-          {props.inputProps?.errorMessage}
+          {props.inputProps?.ErrorMessage}
         </ErrorMessage>
       )}
     </>

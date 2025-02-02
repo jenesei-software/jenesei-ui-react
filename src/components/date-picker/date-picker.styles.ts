@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { InputIsInputEffect, StyledInput } from '@local/components/input'
 import { getFontSizeStyles } from '@local/components/typography'
-import { addOutline, addTransition, removeScrollbar } from '@local/styles/base'
+import { addOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 import { IJeneseiThemeSize } from '@local/theme/theme.interface'
 
@@ -35,7 +35,7 @@ export const DateDropdownListParent = styled.div<DateStyledListProps>`
   padding: 0;
   margin-top: 6px;
 
-  ${removeScrollbar};
+  ${addRemoveScrollbar};
 `
 
 /****************************************** Size *************************************************/

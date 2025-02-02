@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { addTransition } from '@local/styles/base'
+import { addTransition } from '@local/styles/add'
 
 import { ImageIMGProps } from '.'
 

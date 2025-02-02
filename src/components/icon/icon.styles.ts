@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
-import { FlexContainerAndItemAndBasic, addColorTransition } from '@local/styles/base'
+import { addColorTransition } from '@local/styles/add'
+import { FlexContainerAndItemAndBasic } from '@local/styles/base'
 import { KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledLibraryIconIdItemProps } from '.'

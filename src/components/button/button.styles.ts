@@ -2,7 +2,8 @@ import styled, { css } from 'styled-components'
 
 import { ComponentWithRipple } from '@local/components/ripple'
 import { getFontSizeStyles } from '@local/components/typography'
-import { FlexContainerAndItem, addOutline, addTransition } from '@local/styles/base'
+import { addOutline, addTransition } from '@local/styles/add'
+import { FlexContainerAndItem } from '@local/styles/base'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledDollarButtonIconsWrapperProps, StyledDollarButtonProps } from '.'

@@ -319,6 +319,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         ref={wrapperRef}
       >
         <SelectStyledInput
+          tabIndex={undefined}
           id={props.id}
           name={props.name}
           $genre={props.genre}
@@ -345,7 +346,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         {props.isShowSelectInputIcon && (
           <SelectInputIcon
             size={props.size}
-            type="curved"
+            type="id"
             name="Select"
             $genre={props.genre}
             $checked={isOpen}
@@ -419,9 +420,9 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           </DropdownList>
         </DropdownListParent>
       </SelectWrapper>
-      {props?.isError && props?.errorMessage && (
+      {props?.isError && props?.ErrorMessage && (
         <ErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props?.isErrorAbsolute}>
-          {props.errorMessage}
+          {props.ErrorMessage}
         </ErrorMessage>
       )}
     </>

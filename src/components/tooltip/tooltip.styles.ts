@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-import { addTransition } from '@local/styles/base'
+import { addTransition } from '@local/styles/add'
 
 import { TooltipArrowProps, TooltipBoxProps } from '.'
 

@@ -25,7 +25,7 @@ export interface CheckboxProps extends PropsWithChildren {
 
   isError?: boolean
 
-  errorMessage?: string
+  ErrorMessage?: string
 
   isErrorAbsolute?: boolean
 

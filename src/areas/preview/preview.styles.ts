@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { addTransition } from '@local/styles/base'
+import { addTransition } from '@local/styles/add'
 
 export const PreviewWrapper = styled.div<{ $visible: boolean }>`
   background-color: ${props => props.theme.palette.whiteStandard};

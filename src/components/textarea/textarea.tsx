@@ -108,9 +108,9 @@ export const TextArea = (props: TextAreaProps) => {
           />
         )} */}
       </StyledTextAreaWrapper>
-      {props.isError && props.errorMessage && (
+      {props.isError && props.ErrorMessage && (
         <ErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.isErrorAbsolute}>
-          {props.errorMessage}
+          {props.ErrorMessage}
         </ErrorMessage>
       )}
     </>

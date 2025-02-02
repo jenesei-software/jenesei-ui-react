@@ -18,7 +18,7 @@ export interface InputProps {
 
   defaultValue?: string
 
-  errorMessage?: string
+  ErrorMessage?: string
 
   isError?: boolean
 

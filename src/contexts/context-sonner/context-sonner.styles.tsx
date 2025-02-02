@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { getFontSizeStyles } from '@local/components/typography'
-import { addTransition, removeScrollbar } from '@local/styles/base'
+import { addRemoveScrollbar, addTransition } from '@local/styles/add'
 
 import { SonnerContentDescriptionProps, SonnerContentTitleProps, SonnerElementWrapperProps, SonnerLayoutProps } from '.'
 
@@ -15,7 +15,7 @@ export const SonnerLayout = styled.div<SonnerLayoutProps>`
   box-sizing: content-box;
   overflow-y: visible;
   overflow-x: visible;
-  ${removeScrollbar}
+  ${addRemoveScrollbar}
   ${props =>
     props.$position === 'bottom-center'
       ? css`

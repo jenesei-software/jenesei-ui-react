@@ -1,7 +1,7 @@
 import styled, { css, keyframes } from 'styled-components'
 
 import { Stack } from '@local/components/stack'
-import { addTransition } from '@local/styles/base'
+import { addTransition } from '@local/styles/add'
 
 import { StyledSkeletonProps } from '.'
 

@@ -17,8 +17,8 @@ type Story = StoryObj<typeof SkeletonComponent>
 
 const SkeletonWrapper: FC<SkeletonProps> = props => {
   return (
-    <SkeletonComponent {...props} w="300px" h="300px" p="12px" br="12px">
-      <Stack bg="whiteStandard" h="100%" w="100%" br="6px">
+    <SkeletonComponent {...props} w="300px" h="300px" br="12px">
+      <Stack p="12px" bg="whiteStandard" h="100%" w="100%" br="6px">
         <Typography variant="h7">One</Typography>
       </Stack>
     </SkeletonComponent>
@@ -27,35 +27,49 @@ const SkeletonWrapper: FC<SkeletonProps> = props => {
 
 export const SkeletonOne: Story = {
   render: args => <SkeletonWrapper {...args} />,
-  args: { visible: true }
+  args: { visible: true, isHover: true }
 }
 
 const SkeletonManyWrapper: FC<SkeletonProps> = props => {
   return (
     <Stack flexDirection="row" gap="12px">
       <Stack flexDirection="column" gap="12px">
-        <SkeletonComponent {...props} w="300px" h="300px" p="12px" br="12px">
-          <Stack bg="whiteStandard" h="100%" w="100%" br="6px">
+        <SkeletonComponent {...props} w="300px" h="300px" br="12px">
+          <Stack p="12px" bg="whiteStandard" h="100%" w="100%" br="6px">
             <Typography variant="h7">One</Typography>
           </Stack>
         </SkeletonComponent>
-        <SkeletonComponent {...props} w="300px" h="50px" p="12px" br="12px" type="secondary">
-          <Stack bg="whiteStandard" h="100%" w="100%" br="6px">
-            <Typography variant="h7">One</Typography>
-          </Stack>
-        </SkeletonComponent>
+        <Stack flexDirection="row" gap="12px">
+          <SkeletonComponent {...props} w="50" h="50px" br="100%" type="secondary">
+            <Stack p="12px" bg="whiteStandard" h="100%" w="100%" br="6px">
+              <Typography variant="h7">One</Typography>
+            </Stack>
+          </SkeletonComponent>
+          <SkeletonComponent {...props} flexGrow={1} h="50px" br="12px" type="secondary">
+            <Stack p="12px" bg="whiteStandard" h="100%" w="100%" br="6px">
+              <Typography variant="h7">One</Typography>
+            </Stack>
+          </SkeletonComponent>
+        </Stack>
       </Stack>
       <Stack flexDirection="column" gap="12px">
-        <SkeletonComponent {...props} w="300px" h="300px" p="12px" br="12px">
-          <Stack bg="whiteStandard" h="100%" w="100%" br="6px">
+        <SkeletonComponent {...props} w="300px" h="300px" br="12px">
+          <Stack p="12px" bg="whiteStandard" h="100%" w="100%" br="6px">
             <Typography variant="h7">One</Typography>
           </Stack>
         </SkeletonComponent>
-        <SkeletonComponent {...props} w="300px" h="50px" p="12px" br="12px" type="secondary">
-          <Stack bg="whiteStandard" h="100%" w="100%" br="6px">
-            <Typography variant="h7">One</Typography>
-          </Stack>
-        </SkeletonComponent>
+        <Stack flexDirection="row" gap="12px">
+          <SkeletonComponent {...props} w="50" h="50px" br="100%" type="secondary">
+            <Stack p="12px" bg="whiteStandard" h="100%" w="100%" br="6px">
+              <Typography variant="h7">One</Typography>
+            </Stack>
+          </SkeletonComponent>
+          <SkeletonComponent {...props} flexGrow={1} h="50px" br="12px" type="secondary">
+            <Stack p="12px" bg="whiteStandard" h="100%" w="100%" br="6px">
+              <Typography variant="h7">One</Typography>
+            </Stack>
+          </SkeletonComponent>
+        </Stack>
       </Stack>
     </Stack>
   )
@@ -64,6 +78,7 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
 export const SkeletonMany: Story = {
   render: args => <SkeletonManyWrapper {...args} />,
   args: {
-    time: 2000
+    visible: true,
+    isHover: true
   }
 }
