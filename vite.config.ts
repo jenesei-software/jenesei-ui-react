@@ -1,9 +1,9 @@
 import react from '@vitejs/plugin-react'
 import path, { resolve } from 'path'
+import process from 'process'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import process from 'process'
 
 import { peerDependencies } from './package.json'
 
