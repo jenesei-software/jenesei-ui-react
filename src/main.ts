@@ -6,6 +6,8 @@ export type { IJeneseiTheme } from './theme'
 
 // Export other styles
 export * from './styles/base'
+export * from './styles/add'
+export * from './styles/error'
 
 // Export types
 export * from './types'

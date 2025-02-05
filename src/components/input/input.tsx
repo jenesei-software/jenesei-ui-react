@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-import { ErrorMessage } from '@local/styles/base'
+import { ErrorMessage } from '@local/styles/error'
 
 import {
   InputPostfixChildren,
@@ -115,11 +115,13 @@ export const Input = (props: InputProps) => {
           />
         )} */}
       </StyledInputWrapper>
-      {props.isError && props.ErrorMessage && (
-        <ErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.isErrorAbsolute}>
-          {props.ErrorMessage}
-        </ErrorMessage>
-      )}
+      <ErrorMessage
+        isError={props.isError}
+        errorMessage={props.errorMessage}
+        size={props.size}
+        width={props.width}
+        isErrorAbsolute={props.isErrorAbsolute}
+      />
     </>
   )
 }

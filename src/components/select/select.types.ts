@@ -23,10 +23,14 @@ export interface SelectProps<T extends ISelectItem> {
   isDisabled?: boolean
   isError?: boolean
   isErrorAbsolute?: boolean
-  ErrorMessage?: string
+  errorMessage?: string
   isShowDropdownOptionIcon?: boolean
   isShowSelectInputIcon?: boolean
   isOnClickOptionClose?: boolean
+
+  isEmptyOption?: boolean
+  labelEmptyOption?: string
+
   inputProps?: Omit<
     InputProps,
     | 'isDisabled'
@@ -103,7 +107,11 @@ export type SelectStyledOptionProps = AddDollarSign<{
 }> &
   StyledInputProps
 
-export type DropdownOptionIconProps = AddDollarSign<{ checked?: boolean; genre: TInputSelect; size: TJeneseiThemeSize }>
+export type DropdownOptionIconProps = AddDollarSign<{
+  checked?: boolean
+  genre: TInputSelect
+  size: TJeneseiThemeSize
+}>
 
 export type SelectStyledListProps = AddDollarSign<
   Pick<InputProps, 'genre' | 'size'> & {

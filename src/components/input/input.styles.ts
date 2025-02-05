@@ -22,16 +22,14 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
 export const InputPlaceholder = css<StyledInputProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
-    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
+    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter', props.theme.font.lineHeight)};
     color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
-    line-height: ${props => props.theme.font.lineHeight};
   }
   &:-ms-input-placeholder {
-    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
+    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter', props.theme.font.lineHeight)};
     color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
-    line-height: ${props => props.theme.font.lineHeight};
   }
 `
 
@@ -46,11 +44,14 @@ const InputGenre = css<StyledInputProps>`
       border-color: ${props.theme.colors.input[props.$genre].border.rest};
       color: ${props.theme.colors.input[props.$genre].color.rest};
     }
-    &:hover {
-      background: ${props.theme.colors.input[props.$genre].background.hover};
-      border-color: ${props.theme.colors.input[props.$genre].border.hover};
-      color: ${props.theme.colors.input[props.$genre].color.hover};
-    }
+    ${!props.$isNotShowHoverStyle &&
+    css`
+      &:hover {
+        background: ${props.theme.colors.input[props.$genre].background.hover};
+        border-color: ${props.theme.colors.input[props.$genre].border.hover};
+        color: ${props.theme.colors.input[props.$genre].color.hover};
+      }
+    `}
     &:focus-visible {
       border-color: ${props.theme.colors.input[props.$genre].border.rest};
       background: ${props.theme.colors.input[props.$genre].background.rest};
@@ -94,8 +95,7 @@ export const StyledInputCSS = css<StyledInputProps>`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
-  line-height: ${props => props.theme.font.lineHeight};
+  ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter', props.theme.font.lineHeight)};
 
   ${InputSize};
   ${InputGenre};

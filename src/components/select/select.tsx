@@ -7,7 +7,7 @@ import { Button } from '@local/components/button'
 import { InputChildrenProps } from '@local/components/input'
 import { Typography } from '@local/components/typography'
 import { ListLanguage } from '@local/consts'
-import { ErrorMessage } from '@local/styles/base'
+import { ErrorMessage } from '@local/styles/error'
 import { KEY_SIZE_DATA, TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
 
 import {
@@ -33,6 +33,7 @@ import {
 const DEFAULT_MAX_VIEW = 5
 const DEFAULT_MIN_VIEW = 5
 const DEFAULT_OVERSCAN = 1
+const DEFAULT_LABEL_EMPTY_OPTION = 'No options'
 
 export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -371,28 +372,48 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
               minHeight: `${height}px`
             }}
           >
-            {listVirtualizer.getVirtualItems().map(virtualRow => {
-              const item = props.option[virtualRow.index]
-              const checked = isSelectedItem(item)
-              return (
-                <ContainerDropdownOption
-                  checked={checked}
-                  onClick={() => handleOptionOnClick(item)}
-                  key={virtualRow.index}
-                  virtualRowSize={virtualRow.size}
-                  virtualRowStart={virtualRow.start}
-                  label={item.label}
-                  genre={props.genre}
-                  size={props.size}
-                  isBold={props.optionProps?.isBold}
-                  isError={props.optionProps?.isError}
-                  isLoading={props.optionProps?.isLoading}
-                  prefixChildren={props.optionProps?.prefixChildren}
-                  postfixChildren={props.optionProps?.postfixChildren}
-                  isShowDropdownOptionIcon={props.isShowDropdownOptionIcon}
-                />
-              )
-            })}
+            {!props.isEmptyOption ? (
+              listVirtualizer.getVirtualItems().map(virtualRow => {
+                const item = props.option[virtualRow.index]
+                const checked = isSelectedItem(item)
+                return (
+                  <ContainerDropdownOption
+                    checked={checked}
+                    onClick={() => handleOptionOnClick(item)}
+                    key={virtualRow.index}
+                    virtualRowSize={virtualRow.size}
+                    virtualRowStart={virtualRow.start}
+                    label={item.label}
+                    genre={props.genre}
+                    size={props.size}
+                    isBold={props.optionProps?.isBold}
+                    isError={props.optionProps?.isError}
+                    isLoading={props.optionProps?.isLoading}
+                    prefixChildren={props.optionProps?.prefixChildren}
+                    postfixChildren={props.optionProps?.postfixChildren}
+                    isShowDropdownOptionIcon={props.isShowDropdownOptionIcon}
+                  />
+                )
+              })
+            ) : (
+              <ContainerDropdownOption
+                isNotShowHoverStyle
+                checked={false}
+                onClick={() => {}}
+                key={0}
+                virtualRowSize={props?.getEstimateSize?.(0) ?? sizeHeight}
+                virtualRowStart={0}
+                label={props.labelEmptyOption ?? DEFAULT_LABEL_EMPTY_OPTION}
+                genre={props.genre}
+                size={props.size}
+                isBold={props.optionProps?.isBold}
+                isError={props.optionProps?.isError}
+                isLoading={props.optionProps?.isLoading}
+                prefixChildren={props.optionProps?.prefixChildren}
+                postfixChildren={props.optionProps?.postfixChildren}
+                isShowDropdownOptionIcon={props.isShowDropdownOptionIcon}
+              />
+            )}
             {isFooter && (
               <DropdownFooter $isErase={isErase} $isSelectAll={isSelectAll} $genre={props.genre} $size={props.size}>
                 {props.footer!.selectAll && (
@@ -420,11 +441,13 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           </DropdownList>
         </DropdownListParent>
       </SelectWrapper>
-      {props?.isError && props?.ErrorMessage && (
-        <ErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props?.isErrorAbsolute}>
-          {props.ErrorMessage}
-        </ErrorMessage>
-      )}
+      <ErrorMessage
+        isError={props.isError}
+        errorMessage={props.errorMessage}
+        size={props.size}
+        width={props.width}
+        isErrorAbsolute={props.isErrorAbsolute}
+      />
     </>
   )
 }
@@ -435,6 +458,7 @@ const ContainerDropdownOptionComponent = (params: {
   onClick: () => void
   isError?: boolean
   isLoading?: boolean
+  isNotShowHoverStyle?: boolean
   isShowDropdownOptionIcon?: boolean
   isBold?: boolean
   postfixChildren?: InputChildrenProps
@@ -448,6 +472,7 @@ const ContainerDropdownOptionComponent = (params: {
     <DropdownOption
       onClick={params.onClick}
       $isError={params.isError}
+      $isNotShowHoverStyle={params.isNotShowHoverStyle}
       $isLoading={params.isLoading}
       $postfixChildren={params.postfixChildren}
       $prefixChildren={params.prefixChildren}
@@ -473,6 +498,7 @@ const ContainerDropdownOptionComponent = (params: {
           />
         )}
         <DropdownOptionLayout
+          $isNotShowHoverStyle={params.isNotShowHoverStyle}
           $genre={params.genre}
           $size={params.size}
           $isBold={params.isBold}
@@ -490,6 +516,8 @@ export const SelectLanguage: FC<SelectLanguageProps> = props => {
 
   const [viewOption, setViewOption] = useState<ISelectLanguageOption[]>(option)
   const [query, setQuery] = useState<string>('')
+  const [isEmptyOption, setIsEmptyOption] = useState<boolean>(false)
+
   const handleSelectChange = (option: ISelectLanguageOption[]) => {
     props.onChange(option[0]?.value.toString())
     setQuery('')
@@ -498,11 +526,16 @@ export const SelectLanguage: FC<SelectLanguageProps> = props => {
     (value: string) => {
       setQuery(value)
       props.onChange('')
-      if (value === '') return setViewOption(option)
-      const filteredOptions = option.filter(option =>
-        Object.values(option).some(field => field?.toString().toLowerCase().includes(value.toLowerCase()))
-      )
-      setViewOption(filteredOptions)
+      if (value === '') {
+        setIsEmptyOption(option.length === 0)
+        setViewOption(option)
+      } else {
+        const filteredOptions = option.filter(option =>
+          Object.values(option).some(field => field?.toString().toLowerCase().includes(value.toLowerCase()))
+        )
+        setViewOption(filteredOptions)
+        setIsEmptyOption(filteredOptions.length === 0)
+      }
     },
     [option, props]
   )
@@ -517,7 +550,8 @@ export const SelectLanguage: FC<SelectLanguageProps> = props => {
     <Select<ISelectLanguageOption>
       {...props}
       option={viewOption}
-      minView={1}
+      isEmptyOption={isEmptyOption}
+      minView={2}
       maxView={8}
       isOnClickOptionClose
       value={value ? [value] : []}
@@ -532,11 +566,11 @@ export const SelectLanguage: FC<SelectLanguageProps> = props => {
 }
 
 export const SelectMonth: FC<SelectDateProps> = props => {
-  const { value, onChange, lang, startDate, endDate } = props
+  const { value, onChange, startDate, endDate } = props
 
   const year = moment(value).utc().year()
   const months = useMemo(() => {
-    const format = lang === 'ru' ? 'MMMM' : 'MMMM'
+    const format = 'MMMM'
     return moment.months().map((_month, index) => {
       const monthMoment = moment().utc().year(year).month(index).startOf('month')
       const isDisabled =
@@ -551,7 +585,7 @@ export const SelectMonth: FC<SelectDateProps> = props => {
         isDisabled: isDisabled
       }
     })
-  }, [year, lang, startDate, endDate])
+  }, [year, startDate, endDate])
 
   const handleSelectChange = (option: ISelectLanguageOption[]) => {
     const selectedValue = Number(option[0]?.value)

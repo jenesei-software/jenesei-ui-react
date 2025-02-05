@@ -127,10 +127,14 @@ export const DropdownOptionLayout = styled.div<SelectStyledOptionProps>`
 
   ${addTransition};
 
-  &:hover {
-    background: ${props => props.theme.colors.select[props.$genre].background.select};
-    color: ${props => props.theme.colors.select[props.$genre].color.select};
-  }
+  ${props =>
+    !props.$isNotShowHoverStyle &&
+    css`
+      &:hover {
+        background: ${props.theme.colors.select[props.$genre].background.select};
+        color: ${props.theme.colors.select[props.$genre].color.select};
+      }
+    `}
   ${props =>
     props.$checked &&
     css`

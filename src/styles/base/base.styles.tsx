@@ -1,17 +1,13 @@
-import styled, { css } from 'styled-components'
+import { css } from 'styled-components'
 
-import { getFontSizeStyles } from '@local/components/typography'
-import { IJeneseiThemeSize, JeneseiPalette, KEY_SIZE_DATA, TJeneseiThemeSize } from '@local/theme'
-import { AddDollarSign } from '@local/types'
+import { JeneseiPalette } from '@local/theme'
 
 import {
   DollarFlexBasicProps,
   DollarFlexContainerAndItemAndBasicProps,
   DollarFlexContainerAndItemProps,
   DollarFlexContainerProps,
-  DollarFlexItemProps,
-  ErrorMessageProps,
-  ErrorMessagePropsDollar
+  DollarFlexItemProps
 } from '.'
 
 const FlexContainer = css<DollarFlexContainerProps>`
@@ -216,30 +212,4 @@ export const FlexContainerAndItem = css<DollarFlexContainerAndItemProps>`
 export const FlexContainerAndItemAndBasic = css<DollarFlexContainerAndItemAndBasicProps>`
   ${FlexContainerAndItem}
   ${FlexBasic}
-`
-
-const ErrorMessageSize = css<ErrorMessagePropsDollar>`
-  ${props => ErrorMessageSizeConstructor({ ...KEY_SIZE_DATA[props.$size], $isErrorAbsolute: props.$isErrorAbsolute })};
-`
-const ErrorMessageSizeConstructor = (
-  props: IJeneseiThemeSize & { $isErrorAbsolute: ErrorMessageProps['isErrorAbsolute'] }
-) => css`
-  ${props.$isErrorAbsolute
-    ? css`
-        position: absolute;
-        padding-top: 6px;
-        padding-left: ${props.padding}px;
-        color: ${props => props.theme.colors.danger};
-      `
-    : css`
-        position: static;
-        padding: 0px ${props.padding}px;
-        color: ${props => props.theme.colors.danger};
-      `}
-`
-
-export const ErrorMessage = styled.div<ErrorMessagePropsDollar>`
-  ${getFontSizeStyles(12, 400, 'Inter')};
-  width: ${props => props.$width ?? '100%'};
-  ${ErrorMessageSize}
 `

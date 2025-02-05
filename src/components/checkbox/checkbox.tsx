@@ -2,7 +2,7 @@ import { FC, useCallback, useMemo } from 'react'
 import { useTheme } from 'styled-components'
 
 import { Icon, Ripple } from '@local/main'
-import { ErrorMessage } from '@local/styles/base'
+import { ErrorMessage } from '@local/styles/error'
 
 import { CheckboxProps, CheckboxWrapper, StyledIcon } from '.'
 
@@ -53,7 +53,7 @@ export const Checkbox: FC<CheckboxProps> = props => {
         tabIndex={0}
         onClick={() => !props.isDisabled && handleOnClick(!props.checked)}
       >
-        {!props.isDisabled && <Ripple color={theme.colors.checkbox[props.genre].color.rest} />}
+        <Ripple color={theme.colors.checkbox[props.genre].color.rest} isDisabled={props.isDisabled} />
         {props.isOnlyLoading ? (
           props.isLoading ? (
             LoadingComponent
@@ -67,11 +67,13 @@ export const Checkbox: FC<CheckboxProps> = props => {
           </>
         )}
       </CheckboxWrapper>
-      {props.isError && props.ErrorMessage && (
-        <ErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.isErrorAbsolute}>
-          {props.ErrorMessage}
-        </ErrorMessage>
-      )}
+      <ErrorMessage
+        isError={props.isError}
+        errorMessage={props.errorMessage}
+        size={props.size}
+        width={props.width}
+        isErrorAbsolute={props.isErrorAbsolute}
+      />
     </>
   )
 }

@@ -55,7 +55,11 @@ export const Button: FC<ButtonProps> = props => {
       $alignSelf={props.customStyles?.alignSelf}
       $gap={props.customStyles?.gap}
     >
-      {!props.isHidden && <Ripple color={theme.colors.button[props.genre].color.rest} />}
+      <Ripple
+        color={theme.colors.checkbox[props.genre].color.rest}
+        isDisabled={props.isDisabled}
+        isHidden={props.isHidden}
+      />
       {props.isOnlyLoading ? (
         props.isLoading ? (
           LoadingComponent

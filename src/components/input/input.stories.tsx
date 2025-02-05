@@ -34,7 +34,7 @@ export const Password: Story = {
   args: {
     ...defaultArgs,
     type: 'password',
-    ErrorMessage: 'Error',
+    errorMessage: 'Error',
     isErrorAbsolute: true,
     placeholder: 'Password'
   }

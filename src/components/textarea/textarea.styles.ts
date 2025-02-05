@@ -26,16 +26,14 @@ export const StyledTextAreaWrapper = styled.div<StyledTextAreaWrapperProps>`
 export const TextAreaPlaceholder = css<StyledTextAreaProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
-    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
+    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter', props.theme.font.lineHeight)};
     color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
-    line-height: ${props => props.theme.font.lineHeight};
   }
   &:-ms-input-placeholder {
-    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
+    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter', props.theme.font.lineHeight)};
     color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
-    line-height: ${props => props.theme.font.lineHeight};
   }
 `
 
@@ -103,8 +101,7 @@ export const StyledTextAreaCSS = css<StyledTextAreaProps>`
   text-overflow: ellipsis;
   text-wrap: auto;
 
-  ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
-  line-height: ${props => props.theme.font.lineHeight};
+  ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter', props.theme.font.lineHeight)};
 
   ${addTransition};
   ${addOutline};

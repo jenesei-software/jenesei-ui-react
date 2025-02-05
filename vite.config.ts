@@ -89,6 +89,9 @@ export default defineConfig(() => {
           ['layout-auth']: resolve(__dirname, 'src/layouts/auth/index.ts'),
 
           ['style-base']: resolve(__dirname, 'src/styles/base/index.ts'),
+          ['style-add']: resolve(__dirname, 'src/styles/add/index.ts'),
+          ['style-error']: resolve(__dirname, 'src/styles/error/index.ts'),
+
           ['style-theme']: resolve(__dirname, 'src/theme/index.ts'),
 
           ['consts']: resolve(__dirname, 'src/consts.ts'),

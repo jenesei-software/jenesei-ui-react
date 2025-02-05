@@ -35,7 +35,7 @@ export const Default: Story = {
   render: args => <TextAreaStringWrapper {...args} />,
   args: {
     ...defaultArgs,
-    ErrorMessage: 'Error',
+    errorMessage: 'Error',
     isErrorAbsolute: true,
     placeholder: 'Default'
   }

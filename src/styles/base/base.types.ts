@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react'
 
-import { JeneseiPaletteKeys, TJeneseiThemeSize } from '@local/theme'
+import { JeneseiPaletteKeys } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export type DollarFlexContainerProps = AddDollarSign<FlexContainerProps>
@@ -58,16 +58,3 @@ export interface DollarFlexContainerAndItemAndBasicProps
     DollarFlexBasicProps {}
 
 export interface FlexContainerAndItemProps extends FlexContainerProps, FlexItemProps {}
-
-export type ErrorMessagePropsDollar = AddDollarSign<ErrorMessageProps>
-export type ErrorMessageProps = {
-  ErrorMessage?: string
-
-  isError?: boolean
-
-  isErrorAbsolute?: boolean
-
-  size: TJeneseiThemeSize
-
-  width?: string
-}

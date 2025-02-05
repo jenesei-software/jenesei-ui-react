@@ -12,7 +12,7 @@ export interface TextAreaProps {
 
   defaultValue?: string
 
-  ErrorMessage?: string
+  errorMessage?: string
 
   isErrorAbsolute?: boolean
 

@@ -18,9 +18,11 @@ export interface InputProps {
 
   defaultValue?: string
 
-  ErrorMessage?: string
+  errorMessage?: string
 
   isError?: boolean
+
+  isNotShowHoverStyle?: boolean
 
   isErrorAbsolute?: boolean
 
@@ -99,6 +101,7 @@ export type StyledInputProps = AddDollarSign<
     | 'postfixChildren'
     | 'prefixChildren'
     | 'isBold'
+    | 'isNotShowHoverStyle'
   >
 >
 
