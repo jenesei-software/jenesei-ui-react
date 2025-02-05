@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { getFontSizeStyles } from '@local/components/typography'
-import { addError, addOutline, addTransition } from '@local/styles/add'
+import { addError, addOutline, addTransitionWithoutSize } from '@local/styles/add'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledTextAreaProps, StyledTextAreaWrapperProps } from '.'
@@ -103,7 +103,7 @@ export const StyledTextAreaCSS = css<StyledTextAreaProps>`
 
   ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter', props.theme.font.lineHeight)};
 
-  ${addTransition};
+  ${addTransitionWithoutSize};
   ${addOutline};
   ${addError};
   ${TextAreaIsResize};

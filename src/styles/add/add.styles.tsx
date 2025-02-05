@@ -43,6 +43,23 @@ export const addTransition = css`
     grid-template-columns ${props => props.theme.transition.default};
 `
 
+export const addTransitionWithoutSize = css`
+  transition:
+    outline 0s,
+    opacity ${props => props.theme.transition.default},
+    transform ${props => props.theme.transition.default},
+    background-color ${props => props.theme.transition.default},
+    color ${props => props.theme.transition.default},
+    visibility ${props => props.theme.transition.default},
+    box-shadow ${props => props.theme.transition.default},
+    border-color ${props => props.theme.transition.default},
+    left ${props => props.theme.transition.default},
+    right ${props => props.theme.transition.default},
+    grid-template-areas ${props => props.theme.transition.default},
+    grid-template-rows ${props => props.theme.transition.default},
+    grid-template-columns ${props => props.theme.transition.default};
+`
+
 export const addGridTransition = css`
   transition:
     grid-template-areas ${props => props.theme.transition.default},
