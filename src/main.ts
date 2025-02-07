@@ -1,8 +1,7 @@
 'use client'
 
-// Export styles and themes
-export { JeneseiGlobalStyles, JeneseiTheme } from './theme'
-export type { IJeneseiTheme } from './theme'
+// Export themes
+export * from './theme'
 
 // Export other styles
 export * from './styles/base'
