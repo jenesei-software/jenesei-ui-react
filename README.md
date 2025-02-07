@@ -79,8 +79,8 @@ To work correctly you need to install the following dependencies:
 
 ```bash
 npm install @tanstack/react-router --save
+npm install moment --save
 npm install react --save
 npm install react-dom --save
 npm install styled-components --save
-npm install moment --save
 ```
