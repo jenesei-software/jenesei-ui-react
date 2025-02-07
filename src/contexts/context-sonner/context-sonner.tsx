@@ -258,7 +258,7 @@ const SonnerElement = (props: SonnerElementProps) => {
             {props.isLoading ? (
               <Icon size="medium" type="loading" name="Line" />
             ) : (
-              props.icon && <Icon name={props.icon} type="curved" size={'medium'} />
+              props.icon && <Icon name={props.icon} type="id" size={'medium'} />
             )}
           </SonnerIcon>
         )}

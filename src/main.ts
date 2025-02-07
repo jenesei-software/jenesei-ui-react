@@ -4,6 +4,11 @@
 export { JeneseiGlobalStyles, JeneseiTheme } from './theme'
 export type { IJeneseiTheme } from './theme'
 
+// Export other styles
+export * from './styles/base'
+export * from './styles/add'
+export * from './styles/error'
+
 // Export types
 export * from './types'
 
@@ -25,11 +30,11 @@ export { Icon } from './components/icon'
 export { Input } from './components/input'
 export { Select, SelectLanguage, SelectMonth, SelectYear } from './components/select'
 export { Toggle } from './components/toggle'
-export { Tooltip } from './components/tooltip'
 export { Typography } from './components/typography'
 export { Separator } from './components/separator'
 export { Ripple } from './components/ripple'
 export { Image } from './components/image'
+export { Tooltip } from './components/tooltip'
 
 export { useRemovePreviewLoader, Preview } from './areas/preview'
 

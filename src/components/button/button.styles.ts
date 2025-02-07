@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components'
 
+import { ComponentWithRipple } from '@local/components/ripple'
 import { getFontSizeStyles } from '@local/components/typography'
+import { addOutline, addTransition } from '@local/styles/add'
 import { FlexContainerAndItem } from '@local/styles/base'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledDollarButtonIconsWrapperProps, StyledDollarButtonProps } from '.'
-import { DEFAULT_RIPPLE_ID } from '../ripple'
 
 /****************************************** Genre *************************************************/
 const ButtonGenre = css<StyledDollarButtonProps>`
@@ -13,9 +14,6 @@ const ButtonGenre = css<StyledDollarButtonProps>`
     background: ${props.theme.colors.button[props.$genre].background.rest};
     border-color: ${props.theme.colors.button[props.$genre].border.rest};
     color: ${props.theme.colors.button[props.$genre].color.rest};
-    &:focus-visible {
-      outline: 1px solid ${props.theme.colors.focus};
-    }
     &:hover {
       ${!props.$isHidden &&
       css`
@@ -133,7 +131,6 @@ export const ButtonSizeConstructor = (
 `
 /****************************************** Border *************************************************/
 const ButtonBorder = css`
-  outline: 1px solid transparent;
   border: 1px solid transparent;
 `
 
@@ -146,25 +143,13 @@ const ButtonFlex = css<StyledDollarButtonProps>`
 `
 /****************************************** Styled *************************************************/
 export const StyledButton = styled.button<StyledDollarButtonProps>`
-  outline: 1px solid transparent;
-  border: 1px solid transparent;
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  transition:
-    all ${props => props.theme.transition.default},
-    outline 0s;
-  box-sizing: border-box;
   overflow: hidden;
   text-overflow: ellipsis;
 
   cursor: pointer;
   user-select: none;
 
-  & *:not(#${DEFAULT_RIPPLE_ID}) {
-    user-select: none;
-    pointer-events: none;
-  }
+  ${ComponentWithRipple};
   ${ButtonFlex};
   ${ButtonBorder};
   ${ButtonSize};
@@ -173,6 +158,9 @@ export const StyledButton = styled.button<StyledDollarButtonProps>`
   ${ButtonIsHiddenBorder};
   ${ButtonIsRadius};
   ${ButtonIsPlaystationEffect};
+  ${addTransition};
+  ${addOutline};
+
   font-family: ${props => props.$customFontFamily};
   font-size: ${props => props.$customFontSize};
   font-weight: ${props => props.$customFontWeight};

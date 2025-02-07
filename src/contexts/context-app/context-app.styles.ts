@@ -1,5 +1,6 @@
 import { css, styled } from 'styled-components'
 
+import { addGridTransition, addTransition } from '@local/styles/add'
 import { JeneseiPalette } from '@local/theme'
 
 import { ProviderAppOutletProps, ProviderAppWrapperProps } from '.'
@@ -11,7 +12,6 @@ export const ProviderAppWrapper = styled.div<ProviderAppWrapperProps>`
   min-height: 100dvh;
   width: 100%;
   overflow: hidden;
-  box-sizing: border-box;
   position: relative;
 
   background-color: ${props => JeneseiPalette[props.$bgColor]};
@@ -46,10 +46,7 @@ export const ProviderAppOutlet = styled.div<ProviderAppOutletProps>`
   min-height: 100dvh;
   max-height: none;
 
-  transition:
-    grid-template-areas ${props => props.theme.transition.default},
-    grid-template-rows ${props => props.theme.transition.default},
-    grid-template-columns ${props => props.theme.transition.default};
+  ${addGridTransition};
 
   ${props => `
     grid-template-areas: ${generateGridTemplateAreas(props)};
@@ -87,18 +84,13 @@ export const ProviderAppOutlet = styled.div<ProviderAppOutletProps>`
 const hiddenStyles = css`
   opacity: 0;
   visibility: hidden;
-  transition:
-    opacity ${props => props.theme.transition.default},
-    visibility ${props => props.theme.transition.default};
+  ${addTransition};
 `
 
 const visibleStyles = css`
   opacity: 1;
   visibility: visible;
-  transition:
-    height ${props => props.theme.transition.default},
-    opacity ${props => props.theme.transition.default},
-    visibility ${props => props.theme.transition.default};
+  ${addTransition};
 `
 
 export const ProviderAppOutletChildren = styled.main`

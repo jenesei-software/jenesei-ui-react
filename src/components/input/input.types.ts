@@ -20,6 +20,10 @@ export interface InputProps {
 
   errorMessage?: string
 
+  isError?: boolean
+
+  isNotShowHoverStyle?: boolean
+
   isErrorAbsolute?: boolean
 
   autocomplete?: HTMLInputAutoCompleteAttribute
@@ -33,8 +37,6 @@ export interface InputProps {
   width?: string
 
   isDisabled?: boolean
-
-  isError?: boolean
 
   isLoading?: boolean
 
@@ -99,9 +101,8 @@ export type StyledInputProps = AddDollarSign<
     | 'postfixChildren'
     | 'prefixChildren'
     | 'isBold'
+    | 'isNotShowHoverStyle'
   >
 >
 
 export type StyledInputWrapperProps = AddDollarSign<Pick<InputProps, 'isDisabled' | 'isInputEffect' | 'width'>>
-
-export type InputErrorMessageProps = AddDollarSign<Pick<InputProps, 'isErrorAbsolute' | 'width' | 'size'>>

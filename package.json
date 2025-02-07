@@ -187,6 +187,16 @@
       "import": "./build/style-base.es.js",
       "require": "./build/style-base.cjs.js"
     },
+    "./style-add": {
+      "types": "./build/style-add.d.ts",
+      "import": "./build/style-add.es.js",
+      "require": "./build/style-add.cjs.js"
+    },
+    "./style-error": {
+      "types": "./build/style-error.d.ts",
+      "import": "./build/style-error.es.js",
+      "require": "./build/style-error.cjs.js"
+    },
     "./style-theme": {
       "types": "./build/style-theme.d.ts",
       "import": "./build/style-theme.es.js",

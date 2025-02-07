@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 
+import { addColorTransition } from '@local/styles/add'
 import { FlexContainerAndItemAndBasic } from '@local/styles/base'
 import { KEY_SIZE_DATA } from '@local/theme'
 
@@ -21,10 +22,10 @@ export const StyledSVG = styled.svg<StyledLibraryIconIdItemProps>`
     props.$order ||
     css`
       order: ${props.$order};
-    `}
-  transition: color ${props => props.theme.transition.icon};
+    `};
+  ${addColorTransition};
   & path {
-    transition: color ${props => props.theme.transition.icon};
+    ${addColorTransition};
   }
   ${FlexContainerAndItemAndBasic};
 `

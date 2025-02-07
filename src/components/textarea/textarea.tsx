@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useRef } from 'react'
 import { useTheme } from 'styled-components'
 
+import { ErrorMessage } from '@local/styles/error'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 
-import { StyledTextArea, StyledTextAreaWrapper, TextAreaErrorMessage, TextAreaProps } from '.'
+import { StyledTextArea, StyledTextAreaWrapper, TextAreaProps } from '.'
 
 export const TextArea = (props: TextAreaProps) => {
   const theme = useTheme()
@@ -107,11 +108,13 @@ export const TextArea = (props: TextAreaProps) => {
           />
         )} */}
       </StyledTextAreaWrapper>
-      {props.isError && props.errorMessage && (
-        <TextAreaErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.isErrorAbsolute}>
-          {props.errorMessage}
-        </TextAreaErrorMessage>
-      )}
+      <ErrorMessage
+        isError={props.isError}
+        errorMessage={props.errorMessage}
+        size={props.size}
+        width={props.width}
+        isErrorAbsolute={props.isErrorAbsolute}
+      />
     </>
   )
 }

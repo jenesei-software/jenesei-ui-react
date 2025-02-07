@@ -1,6 +1,6 @@
-/* eslint-disable no-undef */
 import react from '@vitejs/plugin-react'
 import path, { resolve } from 'path'
+import process from 'process'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import tsconfigPaths from 'vite-tsconfig-paths'
@@ -89,6 +89,9 @@ export default defineConfig(() => {
           ['layout-auth']: resolve(__dirname, 'src/layouts/auth/index.ts'),
 
           ['style-base']: resolve(__dirname, 'src/styles/base/index.ts'),
+          ['style-add']: resolve(__dirname, 'src/styles/add/index.ts'),
+          ['style-error']: resolve(__dirname, 'src/styles/error/index.ts'),
+
           ['style-theme']: resolve(__dirname, 'src/theme/index.ts'),
 
           ['consts']: resolve(__dirname, 'src/consts.ts'),

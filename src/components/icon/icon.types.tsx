@@ -16,7 +16,7 @@ export interface BaseLibraryIconProps {
 }
 
 export interface LibraryIconIdItemProps extends BaseLibraryIconProps {
-  type: 'curved'
+  type: 'id'
   name: TLibraryIconIdNameString
 }
 

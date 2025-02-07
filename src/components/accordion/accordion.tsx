@@ -40,7 +40,7 @@ export const Accordion: FC<AccordionProps> = props => {
               onClick={onClickIcon}
               name="Arrow1"
               primaryColor="black100"
-              type="curved"
+              type="id"
               size="large"
             />
           )}
