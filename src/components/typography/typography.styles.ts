@@ -47,9 +47,17 @@ const TypographyCSS = css<TypographyCSSProps>`
     props.$size &&
     css`
       font-size: ${props.$size}px;
+    `};
+  ${props =>
+    props.$sizeTablet &&
+    css`
       @media (max-width: ${props => props.theme.screens.tablet.width}) {
         font-size: ${props.$sizeTablet}px;
       }
+    `};
+  ${props =>
+    props.$sizeMobile &&
+    css`
       @media (max-width: ${props => props.theme.screens.mobile.width}) {
         font-size: ${props.$sizeMobile}px;
       }
