@@ -16,7 +16,7 @@ export const DialogLayout = styled(motion.div)<DialogLayoutProps>`
   overflow: hidden;
 `
 
-export const DialogElementWrapper = styled(motion.div)<DialogElementWrapperProps>`
+export const DialogElementWrapper = styled(motion.dialog)<DialogElementWrapperProps>`
   max-width: ${props => props.$maxWidth};
   max-height: ${props => props.$maxHeight};
   width: 100%;
