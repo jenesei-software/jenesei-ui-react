@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { StyledInput, StyledInputCSS } from '@local/components/input'
-import { addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
+import { addBorder, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
 import { IJeneseiThemeSize } from '@local/theme'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 
@@ -96,7 +96,12 @@ export const DropdownOption = styled.li<SelectStyledOptionProps>`
   align-items: center;
   border-radius: 0;
   opacity: 1;
-  border: 0px;
+  ${addRemoveOutline};
+  ${addBorder};
+  &:last-child {
+    border-radius: 0px 0px ${props => KEY_SIZE_DATA[props.$size].radius}px
+      ${props => KEY_SIZE_DATA[props.$size].radius}px;
+  }
   cursor: pointer;
   position: absolute;
   top: 0;
@@ -158,14 +163,10 @@ export const DropdownOptionIcon = styled(Icon)<DropdownOptionIconProps>`
   height: 100%;
   align-items: center;
   ${DropdownOptionIconSize};
-  ${props =>
+  color: ${props =>
     props.$checked
-      ? css`
-          color: ${props.theme.colors.select[props.$genre].border.select};
-        `
-      : css`
-          color: transparent;
-        `}
+      ? props.theme.colors.select[props.$genre].border.select
+      : props.theme.colors.input[props.$genre].border.rest};
 `
 
 export const SelectInputIcon = styled(Icon)<DropdownOptionIconProps>`
@@ -174,14 +175,10 @@ export const SelectInputIcon = styled(Icon)<DropdownOptionIconProps>`
   top: 0;
   align-items: center;
   ${DropdownOptionIconSize};
-  ${props =>
+  color: ${props =>
     props.$checked
-      ? css`
-          color: ${props.theme.colors.select[props.$genre].border.select};
-        `
-      : css`
-          color: ${props.theme.colors.input[props.$genre].border.rest};
-        `}
+      ? props.theme.colors.select[props.$genre].border.select
+      : props.theme.colors.input[props.$genre].border.rest};
 `
 export const DropdownFooter = styled.li<SelectStyledFooterProps>`
   ${StyledInputCSS};

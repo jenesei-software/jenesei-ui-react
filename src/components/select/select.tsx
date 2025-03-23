@@ -139,9 +139,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const handleOnBlurEasy = useCallback(() => {
     if (isAnimating) return
     if (!isOpen) return
-
     setIsAnimating(true)
-
     gsap.to(parentListRef.current, {
       duration: 0.2,
       onComplete: () => {
@@ -153,6 +151,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const handleOnBlur: FocusEventHandler<HTMLInputElement> = useCallback(
     event => {
       if (props?.isDisabled) return
+      if (event.relatedTarget && parentListRef.current?.contains(event.relatedTarget as Node)) return
       if (props.onBlur && event) props.onBlur(event)
       handleOnBlurEasy()
     },
@@ -311,7 +310,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
       <SelectWrapper
         $genre={props.genre}
         $width={props.width}
-        tabIndex={0}
+        // tabIndex={0}
         $radius={radius}
         $isDisabled={props?.isDisabled}
         $parentListHeight={isOpen ? height : 0}
@@ -320,7 +319,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         ref={wrapperRef}
       >
         <SelectStyledInput
-          tabIndex={undefined}
+          tabIndex={0}
           id={props.id}
           name={props.name}
           $genre={props.genre}
@@ -352,6 +351,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
             $genre={props.genre}
             $checked={isOpen}
             $size={props.size}
+            tabIndex={-1}
           />
         )}
         <DropdownListParent
@@ -468,9 +468,16 @@ const ContainerDropdownOptionComponent = (params: {
   virtualRowStart: number
   label: ReactNode
 }) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLLIElement>) => {
+    if (event.key === 'Enter') {
+      params.onClick()
+    }
+  }
   return (
     <DropdownOption
+      tabIndex={0}
       onClick={params.onClick}
+      onKeyDown={handleKeyDown}
       $isError={params.isError}
       $isNotShowHoverStyle={params.isNotShowHoverStyle}
       $isLoading={params.isLoading}
@@ -485,10 +492,11 @@ const ContainerDropdownOptionComponent = (params: {
         transform: `translateY(${params.virtualRowStart}px)`
       }}
     >
-      <div style={{ position: 'relative', display: 'contents' }}>
+      <div style={{ position: 'relative', display: 'contents' }} tabIndex={-1} aria-hidden="true" aria-readonly="true">
         {params.label}
         {params.isShowDropdownOptionIcon && (
           <DropdownOptionIcon
+            tabIndex={-1}
             size={params.size}
             type="checkbox"
             name="Arrow"
@@ -551,13 +559,14 @@ export const SelectLanguage: FC<SelectLanguageProps> = props => {
       {...props}
       option={viewOption}
       isEmptyOption={isEmptyOption}
-      minView={2}
+      minView={1}
       maxView={8}
       isOnClickOptionClose
       value={value ? [value] : []}
       onChange={handleSelectChange}
       inputProps={{
         ...props.inputProps,
+        isReadOnly: true,
         value: (value?.placeholder as string) ?? query,
         onChange: handleQueryChange
       }}

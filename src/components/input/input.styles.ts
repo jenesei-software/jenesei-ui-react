@@ -15,7 +15,18 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: ${props => props.$width ?? '100%'};
+  ${props =>
+    props.$width === 'asHeight'
+      ? css`
+          width: ${KEY_SIZE_DATA[props.$size].height}px;
+          min-width: ${KEY_SIZE_DATA[props.$size].height}px;
+          & input {
+            text-align: center;
+          }
+        `
+      : css`
+          width: ${props.$width ?? '100%'};
+        `};
 `
 
 /****************************************** Placeholder *************************************************/
@@ -53,8 +64,8 @@ const InputGenre = css<StyledInputProps>`
       }
     `}
     &:focus-visible {
-      border-color: ${props.theme.colors.input[props.$genre].border.rest};
       background: ${props.theme.colors.input[props.$genre].background.rest};
+      border-color: ${props.theme.colors.input[props.$genre].border.rest};
       color: ${props.theme.colors.input[props.$genre].color.rest};
     }
   `};

@@ -26,8 +26,6 @@ export const JeneseiGlobalStyles = createGlobalStyle`
   }
 
   html, body, #root {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     font-synthesis: none;
     touch-action: manipulation; 
     -ms-touch-action: manipulation; 
