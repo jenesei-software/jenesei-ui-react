@@ -13,10 +13,11 @@ export interface BaseLibraryIconProps {
   styles?: DollarFlexContainerAndItemAndBasicProps
   turn?: number
   order?: number
+  tabIndex?: number
 }
 
 export interface LibraryIconIdItemProps extends BaseLibraryIconProps {
-  type: 'curved'
+  type: 'id'
   name: TLibraryIconIdNameString
 }
 

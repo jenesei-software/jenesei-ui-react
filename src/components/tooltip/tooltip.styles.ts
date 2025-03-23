@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
+import { addTransition } from '@local/styles/add'
+
 import { TooltipArrowProps, TooltipBoxProps } from '.'
 
 export const TooltipContainer = styled.div`
@@ -25,7 +27,7 @@ export const TooltipBox = styled(motion.div)<TooltipBoxProps>`
   max-height: ${props => props.$maxHeight ?? '200px'};
 
   opacity: ${props => (props.$visible ? '1' : '0')};
-  transition: opacity ${props => props.theme.transition.default};
+  ${addTransition};
 `
 
 export const TooltipArrow = styled.div<TooltipArrowProps>`
@@ -37,5 +39,5 @@ export const TooltipArrow = styled.div<TooltipArrowProps>`
   padding: 0.1px;
 
   opacity: ${props => (props.$visible ? '1' : '0')};
-  transition: opacity ${props => props.theme.transition.default};
+  ${addTransition};
 `

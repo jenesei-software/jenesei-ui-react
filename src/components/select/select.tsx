@@ -4,9 +4,10 @@ import moment from 'moment'
 import React, { FC, FocusEventHandler, ReactNode, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { Button } from '@local/components/button'
-import { InputChildrenProps, InputErrorMessage } from '@local/components/input'
+import { InputChildrenProps } from '@local/components/input'
 import { Typography } from '@local/components/typography'
 import { ListLanguage } from '@local/consts'
+import { ErrorMessage } from '@local/styles/error'
 import { KEY_SIZE_DATA, TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
 
 import {
@@ -32,6 +33,7 @@ import {
 const DEFAULT_MAX_VIEW = 5
 const DEFAULT_MIN_VIEW = 5
 const DEFAULT_OVERSCAN = 1
+const DEFAULT_LABEL_EMPTY_OPTION = 'No options'
 
 export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -137,9 +139,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const handleOnBlurEasy = useCallback(() => {
     if (isAnimating) return
     if (!isOpen) return
-
     setIsAnimating(true)
-
     gsap.to(parentListRef.current, {
       duration: 0.2,
       onComplete: () => {
@@ -151,6 +151,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const handleOnBlur: FocusEventHandler<HTMLInputElement> = useCallback(
     event => {
       if (props?.isDisabled) return
+      if (event.relatedTarget && parentListRef.current?.contains(event.relatedTarget as Node)) return
       if (props.onBlur && event) props.onBlur(event)
       handleOnBlurEasy()
     },
@@ -307,9 +308,10 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   return (
     <>
       <SelectWrapper
+        $size={props.size}
         $genre={props.genre}
         $width={props.width}
-        tabIndex={0}
+        // tabIndex={0}
         $radius={radius}
         $isDisabled={props?.isDisabled}
         $parentListHeight={isOpen ? height : 0}
@@ -318,12 +320,13 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         ref={wrapperRef}
       >
         <SelectStyledInput
+          tabIndex={0}
           id={props.id}
           name={props.name}
           $genre={props.genre}
           $size={props.size}
           placeholder={props.placeholder}
-          $isError={props?.inputProps?.isError}
+          $isError={props?.isError}
           $isLoading={props?.inputProps?.isLoading}
           $postfixChildren={props?.inputProps?.postfixChildren}
           $prefixChildren={props.inputProps?.prefixChildren}
@@ -344,11 +347,12 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         {props.isShowSelectInputIcon && (
           <SelectInputIcon
             size={props.size}
-            type="curved"
+            type="id"
             name="Select"
             $genre={props.genre}
             $checked={isOpen}
             $size={props.size}
+            tabIndex={-1}
           />
         )}
         <DropdownListParent
@@ -369,28 +373,48 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
               minHeight: `${height}px`
             }}
           >
-            {listVirtualizer.getVirtualItems().map(virtualRow => {
-              const item = props.option[virtualRow.index]
-              const checked = isSelectedItem(item)
-              return (
-                <ContainerDropdownOption
-                  checked={checked}
-                  onClick={() => handleOptionOnClick(item)}
-                  key={virtualRow.index}
-                  virtualRowSize={virtualRow.size}
-                  virtualRowStart={virtualRow.start}
-                  label={item.label}
-                  genre={props.genre}
-                  size={props.size}
-                  isBold={props.optionProps?.isBold}
-                  isError={props.optionProps?.isError}
-                  isLoading={props.optionProps?.isLoading}
-                  prefixChildren={props.optionProps?.prefixChildren}
-                  postfixChildren={props.optionProps?.postfixChildren}
-                  isShowDropdownOptionIcon={props.isShowDropdownOptionIcon}
-                />
-              )
-            })}
+            {!props.isEmptyOption ? (
+              listVirtualizer.getVirtualItems().map(virtualRow => {
+                const item = props.option[virtualRow.index]
+                const checked = isSelectedItem(item)
+                return (
+                  <ContainerDropdownOption
+                    checked={checked}
+                    onClick={() => handleOptionOnClick(item)}
+                    key={virtualRow.index}
+                    virtualRowSize={virtualRow.size}
+                    virtualRowStart={virtualRow.start}
+                    label={item.label}
+                    genre={props.genre}
+                    size={props.size}
+                    isBold={props.optionProps?.isBold}
+                    isError={props.optionProps?.isError}
+                    isLoading={props.optionProps?.isLoading}
+                    prefixChildren={props.optionProps?.prefixChildren}
+                    postfixChildren={props.optionProps?.postfixChildren}
+                    isShowDropdownOptionIcon={props.isShowDropdownOptionIcon}
+                  />
+                )
+              })
+            ) : (
+              <ContainerDropdownOption
+                isNotShowHoverStyle
+                checked={false}
+                onClick={() => {}}
+                key={0}
+                virtualRowSize={props?.getEstimateSize?.(0) ?? sizeHeight}
+                virtualRowStart={0}
+                label={props.labelEmptyOption ?? DEFAULT_LABEL_EMPTY_OPTION}
+                genre={props.genre}
+                size={props.size}
+                isBold={props.optionProps?.isBold}
+                isError={props.optionProps?.isError}
+                isLoading={props.optionProps?.isLoading}
+                prefixChildren={props.optionProps?.prefixChildren}
+                postfixChildren={props.optionProps?.postfixChildren}
+                isShowDropdownOptionIcon={props.isShowDropdownOptionIcon}
+              />
+            )}
             {isFooter && (
               <DropdownFooter $isErase={isErase} $isSelectAll={isSelectAll} $genre={props.genre} $size={props.size}>
                 {props.footer!.selectAll && (
@@ -418,11 +442,13 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           </DropdownList>
         </DropdownListParent>
       </SelectWrapper>
-      {props?.inputProps?.isError && props?.inputProps.errorMessage && (
-        <InputErrorMessage $size={props.size} $width={props.width} $isErrorAbsolute={props.inputProps.isErrorAbsolute}>
-          {props.inputProps.errorMessage}
-        </InputErrorMessage>
-      )}
+      <ErrorMessage
+        isError={props.isError}
+        errorMessage={props.errorMessage}
+        size={props.size}
+        width={props.width}
+        isErrorAbsolute={props.isErrorAbsolute}
+      />
     </>
   )
 }
@@ -433,6 +459,7 @@ const ContainerDropdownOptionComponent = (params: {
   onClick: () => void
   isError?: boolean
   isLoading?: boolean
+  isNotShowHoverStyle?: boolean
   isShowDropdownOptionIcon?: boolean
   isBold?: boolean
   postfixChildren?: InputChildrenProps
@@ -442,10 +469,18 @@ const ContainerDropdownOptionComponent = (params: {
   virtualRowStart: number
   label: ReactNode
 }) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLLIElement>) => {
+    if (event.key === 'Enter') {
+      params.onClick()
+    }
+  }
   return (
     <DropdownOption
+      tabIndex={0}
       onClick={params.onClick}
+      onKeyDown={handleKeyDown}
       $isError={params.isError}
+      $isNotShowHoverStyle={params.isNotShowHoverStyle}
       $isLoading={params.isLoading}
       $postfixChildren={params.postfixChildren}
       $prefixChildren={params.prefixChildren}
@@ -458,10 +493,11 @@ const ContainerDropdownOptionComponent = (params: {
         transform: `translateY(${params.virtualRowStart}px)`
       }}
     >
-      <div style={{ position: 'relative', display: 'contents' }}>
+      <div style={{ position: 'relative', display: 'contents' }} tabIndex={-1} aria-hidden="true" aria-readonly="true">
         {params.label}
         {params.isShowDropdownOptionIcon && (
           <DropdownOptionIcon
+            tabIndex={-1}
             size={params.size}
             type="checkbox"
             name="Arrow"
@@ -471,6 +507,7 @@ const ContainerDropdownOptionComponent = (params: {
           />
         )}
         <DropdownOptionLayout
+          $isNotShowHoverStyle={params.isNotShowHoverStyle}
           $genre={params.genre}
           $size={params.size}
           $isBold={params.isBold}
@@ -488,6 +525,8 @@ export const SelectLanguage: FC<SelectLanguageProps> = props => {
 
   const [viewOption, setViewOption] = useState<ISelectLanguageOption[]>(option)
   const [query, setQuery] = useState<string>('')
+  const [isEmptyOption, setIsEmptyOption] = useState<boolean>(false)
+
   const handleSelectChange = (option: ISelectLanguageOption[]) => {
     props.onChange(option[0]?.value.toString())
     setQuery('')
@@ -496,11 +535,16 @@ export const SelectLanguage: FC<SelectLanguageProps> = props => {
     (value: string) => {
       setQuery(value)
       props.onChange('')
-      if (value === '') return setViewOption(option)
-      const filteredOptions = option.filter(option =>
-        Object.values(option).some(field => field?.toString().toLowerCase().includes(value.toLowerCase()))
-      )
-      setViewOption(filteredOptions)
+      if (value === '') {
+        setIsEmptyOption(option.length === 0)
+        setViewOption(option)
+      } else {
+        const filteredOptions = option.filter(option =>
+          Object.values(option).some(field => field?.toString().toLowerCase().includes(value.toLowerCase()))
+        )
+        setViewOption(filteredOptions)
+        setIsEmptyOption(filteredOptions.length === 0)
+      }
     },
     [option, props]
   )
@@ -515,6 +559,7 @@ export const SelectLanguage: FC<SelectLanguageProps> = props => {
     <Select<ISelectLanguageOption>
       {...props}
       option={viewOption}
+      isEmptyOption={isEmptyOption}
       minView={1}
       maxView={8}
       isOnClickOptionClose
@@ -522,6 +567,7 @@ export const SelectLanguage: FC<SelectLanguageProps> = props => {
       onChange={handleSelectChange}
       inputProps={{
         ...props.inputProps,
+        isReadOnly: true,
         value: (value?.placeholder as string) ?? query,
         onChange: handleQueryChange
       }}
@@ -530,11 +576,11 @@ export const SelectLanguage: FC<SelectLanguageProps> = props => {
 }
 
 export const SelectMonth: FC<SelectDateProps> = props => {
-  const { value, onChange, lang, startDate, endDate } = props
+  const { value, onChange, startDate, endDate } = props
 
   const year = moment(value).utc().year()
   const months = useMemo(() => {
-    const format = lang === 'ru' ? 'MMMM' : 'MMMM'
+    const format = 'MMMM'
     return moment.months().map((_month, index) => {
       const monthMoment = moment().utc().year(year).month(index).startOf('month')
       const isDisabled =
@@ -549,7 +595,7 @@ export const SelectMonth: FC<SelectDateProps> = props => {
         isDisabled: isDisabled
       }
     })
-  }, [year, lang, startDate, endDate])
+  }, [year, startDate, endDate])
 
   const handleSelectChange = (option: ISelectLanguageOption[]) => {
     const selectedValue = Number(option[0]?.value)

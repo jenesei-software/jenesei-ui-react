@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components'
 
 import { getFontSizeStyles } from '@local/components/typography'
+import { addError, addOutline, addTransitionWithoutSize } from '@local/styles/add'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
-import { StyledTextAreaProps, StyledTextAreaWrapperProps, TextAreaErrorMessageProps, TextAreaProps } from '.'
+import { StyledTextAreaProps, StyledTextAreaWrapperProps } from '.'
 
 /****************************************** Wrapper *************************************************/
 export const StyledTextAreaWrapper = styled.div<StyledTextAreaWrapperProps>`
@@ -21,62 +22,18 @@ export const StyledTextAreaWrapper = styled.div<StyledTextAreaWrapperProps>`
     `}
 `
 
-/****************************************** Error Size*************************************************/
-export const TextAreaErrorMessageSize = css<TextAreaErrorMessageProps>`
-  ${props =>
-    TextAreaErrorMessageSizeConstructor({ ...KEY_SIZE_DATA[props.$size], $isErrorAbsolute: props.$isErrorAbsolute })};
-`
-export const TextAreaErrorMessageSizeConstructor = (
-  props: IJeneseiThemeSize & { $isErrorAbsolute: TextAreaProps['isErrorAbsolute'] }
-) => css`
-  ${props.$isErrorAbsolute
-    ? css`
-        position: absolute;
-        padding-top: 6px;
-        padding-left: ${props.padding}px;
-        color: ${props => props.theme.colors.danger};
-      `
-    : css`
-        position: static;
-        padding: 0px ${props.padding}px;
-        color: ${props => props.theme.colors.danger};
-      `}
-`
-
-/****************************************** Error *************************************************/
-export const TextAreaErrorMessage = styled.div<TextAreaErrorMessageProps>`
-  ${getFontSizeStyles(12, 400, 'Inter')};
-  width: ${props => props.$width ?? '100%'};
-  ${TextAreaErrorMessageSize}
-`
-
-export const TextAreaIsErrorBorder = css<StyledTextAreaProps>`
-  ${props =>
-    props.$isError &&
-    css`
-      border-color: ${props => props.theme.colors.danger};
-      &:focus,
-      &:active,
-      &:focus-visible {
-        border-color: ${props => props.theme.colors.danger};
-      }
-    `}
-`
-
 /****************************************** Placeholder *************************************************/
 export const TextAreaPlaceholder = css<StyledTextAreaProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
-    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
+    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter', props.theme.font.lineHeight)};
     color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
-    line-height: ${props => props.theme.font.lineHeight};
   }
   &:-ms-input-placeholder {
-    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
+    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter', props.theme.font.lineHeight)};
     color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
-    line-height: ${props => props.theme.font.lineHeight};
   }
 `
 
@@ -98,7 +55,6 @@ const TextAreaGenre = css<StyledTextAreaProps>`
       color: ${props.theme.colors.input[props.$genre].color.hover};
     }
     &:focus-visible {
-      outline: 1px solid ${props.theme.colors.focus};
       border-color: ${props.theme.colors.input[props.$genre].border.rest};
       background: ${props.theme.colors.input[props.$genre].background.rest};
       color: ${props.theme.colors.input[props.$genre].color.rest};
@@ -139,26 +95,20 @@ const TextAreaIsResize = css<Pick<StyledTextAreaProps, '$isResize'>>`
 /****************************************** Default *************************************************/
 export const StyledTextAreaCSS = css<StyledTextAreaProps>`
   overflow-x: hidden;
-  box-sizing: border-box;
   width: 100% !important;
   border: 1px inset;
-  transition:
-    color,
-    border,
-    background-color ${props => props.theme.transition.default},
-    outline 0s;
   white-space: nowrap;
   text-overflow: ellipsis;
-  outline: none;
   text-wrap: auto;
 
-  ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter')};
-  line-height: ${props => props.theme.font.lineHeight};
+  ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter', props.theme.font.lineHeight)};
 
+  ${addTransitionWithoutSize};
+  ${addOutline};
+  ${addError};
   ${TextAreaIsResize};
   ${TextAreaSize};
   ${TextAreaGenre};
-  ${TextAreaIsErrorBorder};
   ${TextAreaPlaceholder};
   ${TextAreaHidden};
   ${TextAreaIsTextAreaEffect};

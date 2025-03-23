@@ -1,6 +1,7 @@
 import styled, { css, keyframes } from 'styled-components'
 
 import { Stack } from '@local/components/stack'
+import { addTransition } from '@local/styles/add'
 
 import { StyledSkeletonProps } from '.'
 
@@ -14,8 +15,7 @@ const shimmer = keyframes`
 `
 
 export const StyledSkeleton = styled(Stack)<StyledSkeletonProps>`
-  background: transition;
-  transition: background ${props => props.theme.transition.default};
+  background: transparent;
 
   ${props => css`
     ${!props.$visible &&
@@ -43,8 +43,9 @@ export const StyledSkeleton = styled(Stack)<StyledSkeletonProps>`
       animation: ${shimmer} 2s infinite ease-out;
     `}
   `}
+  ${addTransition};
   & > * {
     opacity: ${props => (!props.$visible ? 0 : 1)};
-    transition: opacity ${props => props.theme.transition.default};
+    ${addTransition};
   }
 `

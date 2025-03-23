@@ -14,6 +14,7 @@ export const Image: FC<ImageProps> = props => {
       {!isError ? props.loading || <Skeleton visible w="100%" h="100%" /> : null}
       {!isError && (
         <ImageIMG
+          loading="lazy"
           $isPending={isPending}
           src={props.src}
           alt={props.alt}

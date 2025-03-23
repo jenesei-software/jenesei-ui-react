@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { getFontSizeStyles } from '@local/components/typography'
-import { removeScrollbar } from '@local/styles/base'
+import { addRemoveScrollbar, addTransition } from '@local/styles/add'
 
 import { SonnerContentDescriptionProps, SonnerContentTitleProps, SonnerElementWrapperProps, SonnerLayoutProps } from '.'
 
@@ -15,7 +15,7 @@ export const SonnerLayout = styled.div<SonnerLayoutProps>`
   box-sizing: content-box;
   overflow-y: visible;
   overflow-x: visible;
-  ${removeScrollbar}
+  ${addRemoveScrollbar}
   ${props =>
     props.$position === 'bottom-center'
       ? css`
@@ -85,13 +85,10 @@ export const SonnerElementWrapper = styled.div<SonnerElementWrapperProps>`
   transform-origin: center center;
   box-shadow: ${props => props.theme.colors.sonner[props.$genre].wrapper.boxShadow};
   overflow: visible;
-  transition:
-    background-color ${props => props.theme.transition.default},
-    box-shadow ${props => props.theme.transition.default},
-    border-color ${props => props.theme.transition.default};
   &:hover {
     box-shadow: ${props => props.theme.colors.sonner[props.$genre].wrapper.boxShadowHover};
   }
+  ${addTransition};
 `
 export const SonnerContent = styled.div`
   display: flex;

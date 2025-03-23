@@ -61,6 +61,7 @@ export const Ripple: FC<RippleProps> = props => {
     [rippleArray]
   )
 
+  if (props.isDisabled || props.isHidden) return null
   return (
     <RippleContainer id={DEFAULT_RIPPLE_ID} $duration={duration} $color={color} onMouseDown={addRipple}>
       {rippleArray.length > 0 &&

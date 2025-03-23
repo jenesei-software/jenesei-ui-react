@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 
+import { addTransition } from '@local/styles/add'
+
 import { PaginationQuantityWrapperProps } from '.'
 
 export const PaginationQuantityWrapper = styled.div<PaginationQuantityWrapperProps>`
   position: relative;
   width: ${props => props.$width};
   overflow: hidden;
-  transition:
-    width ${props => props.theme.transition.default},
-    outline 0s;
+  ${addTransition};
 `
 
 export const PaginationQuantityButtons = styled.div<PaginationQuantityWrapperProps>`
@@ -19,7 +19,5 @@ export const PaginationQuantityButtons = styled.div<PaginationQuantityWrapperPro
   justify-content: flex-start;
   width: 100%;
   left: ${props => props.$left};
-  transition:
-    left ${props => props.theme.transition.default},
-    outline 0s;
+  ${addTransition};
 `

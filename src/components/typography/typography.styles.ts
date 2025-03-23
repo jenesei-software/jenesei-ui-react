@@ -10,7 +10,6 @@ const TypographyCSS = css<TypographyCSSProps>`
   overflow: visible;
   text-overflow: ellipsis;
   overflow-wrap: anywhere;
-  box-sizing: border-box;
   line-height: ${props => props.theme.font.lineHeight};
 
   ${props =>
@@ -48,9 +47,17 @@ const TypographyCSS = css<TypographyCSSProps>`
     props.$size &&
     css`
       font-size: ${props.$size}px;
+    `};
+  ${props =>
+    props.$sizeTablet &&
+    css`
       @media (max-width: ${props => props.theme.screens.tablet.width}) {
         font-size: ${props.$sizeTablet}px;
       }
+    `};
+  ${props =>
+    props.$sizeMobile &&
+    css`
       @media (max-width: ${props => props.theme.screens.mobile.width}) {
         font-size: ${props.$sizeMobile}px;
       }

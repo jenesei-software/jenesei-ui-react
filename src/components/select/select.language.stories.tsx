@@ -26,7 +26,15 @@ const SelectLanguageWrapper: FC<SelectLanguageProps> = props => {
     setValue(value)
   }
 
-  return <SelectLanguage {...props} placeholder="Choice language..." value={value} onChange={handleSelectChange} />
+  return (
+    <SelectLanguage
+      {...props}
+      labelEmptyOption="No language options"
+      placeholder="Choice language..."
+      value={value}
+      onChange={handleSelectChange}
+    />
+  )
 }
 
 export const Language: Story = {

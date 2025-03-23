@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { Icon } from '@local/components/icon'
+import { addTransition } from '@local/styles/add'
 
 import { AccordionDetailsProps, AccordionStyledIconProps, AccordionSummaryContentProps } from '.'
 
@@ -29,9 +30,7 @@ export const AccordionDetails = styled.div<AccordionDetailsProps>`
   height: ${props => (props.$expanded ? '100%' : '0')};
   opacity: ${props => (props.$expanded ? 1 : 0)};
   overflow: hidden;
-  transition-property: max-height, opacity, height;
-  transition-duration: 0.3s;
-  transition-timing-function: easy;
+  ${addTransition};
 `
 export const AccordionStyledIcon = styled(Icon)<AccordionStyledIconProps>`
   padding: 4px;

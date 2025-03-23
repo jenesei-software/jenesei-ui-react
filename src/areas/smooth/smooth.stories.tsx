@@ -24,18 +24,18 @@ const SmoothWrapper: FC<FlexShortStylesProps> = props => {
   }
 
   return (
-    <SmoothComponent {...props} flexDirection="column" bg="black40" p="12px" bs="content-box">
+    <SmoothComponent {...props} gap="4px" flexDirection="column" bg="black40" p="12px">
       <Button onClick={toggleContent} size={'small'} genre={'gray'}>
         Toggle Content
       </Button>
-      <Stack bg="whiteStandard" h="100px">
+      <Stack bg="whiteStandard" h="100px" minH="100px">
         <Typography variant="h7">One</Typography>
       </Stack>
-      {content && (
+      {content ? (
         <Stack bg="whiteStandard" h="100px">
           <Typography variant="h7">Two</Typography>
         </Stack>
-      )}
+      ) : null}
     </SmoothComponent>
   )
 }

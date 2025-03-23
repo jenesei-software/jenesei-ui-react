@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-import { RippleContainerProps } from '.'
+import { DEFAULT_RIPPLE_ID, RippleContainerProps } from '.'
 
 export const RippleContainer = styled.div<RippleContainerProps>`
   position: absolute;
@@ -24,5 +24,16 @@ export const RippleSpan = styled.span<RippleContainerProps>`
       opacity: 0;
       transform: scale(2);
     }
+  }
+`
+
+export const ComponentWithRipple = css`
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  & *:not(#${DEFAULT_RIPPLE_ID}) {
+    user-select: none;
+    pointer-events: none;
   }
 `

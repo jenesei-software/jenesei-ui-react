@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
+import { addError, addTransition } from '@local/styles/add'
 import { IJeneseiThemeSizeToggle, KEY_SIZE_DATA_TOGGLE } from '@local/theme'
 
 import { StyledToggleProps } from '.'
@@ -35,11 +36,7 @@ export const ToggleWrapper = styled(motion.div)<StyledToggleProps>`
   display: flex;
   align-items: center;
 
-  transition:
-    border-color ${props => props.theme.transition.default},
-    background-color ${props => props.theme.transition.default},
-    opacity ${props => props.theme.transition.default},
-    outline 0s;
+  ${addTransition};
 
   &:focus-visible {
     outline: 1px solid ${props => props.theme.colors.focus};
@@ -74,22 +71,12 @@ export const ToggleWrapper = styled(motion.div)<StyledToggleProps>`
           }
         `};
 
-  ${props =>
-    props.$isError &&
-    css`
-      border-color: ${props.theme.colors.danger};
-      &:focus,
-      &:active,
-      &:focus-visible {
-        border-color: ${props.theme.colors.danger};
-      }
-    `};
+  ${addError};
 `
 
 export const ToggleCenter = styled(motion.div)<StyledToggleProps>`
   ${ToggleCenterSize};
-
-  transition: box-shadow ${props => props.theme.transition.default};
+  ${addTransition};
 
   ${props =>
     props.$value

@@ -15,6 +15,6 @@ export const getFontSizeStyles = (
   font-weight: ${weight};
   ${height &&
   css`
-    line-height: ${height}px;
+    line-height: ${height};
   `}
 `

@@ -67,5 +67,3 @@ export type StyledCheckboxProps = AddDollarSign<
 export type TCheckboxGenre = keyof TJeneseiThemeGenre
 
 export type StyledIconProps = AddDollarSign<Pick<CheckboxProps, 'genre' | 'checked'>>
-
-export type CheckboxErrorMessageProps = AddDollarSign<Pick<CheckboxProps, 'isErrorAbsolute' | 'width' | 'size'>>

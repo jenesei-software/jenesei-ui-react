@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { StyledInput, StyledInputCSS } from '@local/components/input'
-import { removeScrollbar } from '@local/styles/base'
+import { addBorder, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
 import { IJeneseiThemeSize } from '@local/theme'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 
@@ -30,10 +30,11 @@ export const SelectWrapper = styled.div<SelectWrapperProps>`
           left: -1px;
           bottom: -1px;
           right: -1px;
-          border: 1px ${props.theme.colors.focus} solid;
+          outline: 2px ${props.theme.colors.focus} solid;
+          outline-offset: 1px;
           border-radius: ${`${props.$radius + 1}px`};
           pointer-events: none;
-          height: calc(100% + var(--after-height));
+          height: calc(100% + var(--after-height) + 2px);
         }
       }
     `}
@@ -67,13 +68,11 @@ export const DropdownListParent = styled.div<SelectStyledListProps>`
   margin: 0;
   padding: 0;
 
-  box-sizing: border-box;
-
   background: ${props => props.theme.colors.input[props.$genre].background.rest};
   border: solid 1px ${props => props.theme.colors.input[props.$genre].border.rest};
   border-top: 0px !important;
   ${DropdownListParentSize};
-  ${props => !props.$isShowScroll && removeScrollbar};
+  ${props => !props.$isShowScroll && addRemoveScrollbar};
 `
 
 export const DropdownList = styled.ul`
@@ -97,7 +96,12 @@ export const DropdownOption = styled.li<SelectStyledOptionProps>`
   align-items: center;
   border-radius: 0;
   opacity: 1;
-  border: 0px;
+  ${addRemoveOutline};
+  ${addBorder};
+  &:last-child {
+    border-radius: 0px 0px ${props => KEY_SIZE_DATA[props.$size].radius}px
+      ${props => KEY_SIZE_DATA[props.$size].radius}px;
+  }
   cursor: pointer;
   position: absolute;
   top: 0;
@@ -125,12 +129,17 @@ export const DropdownOptionLayout = styled.div<SelectStyledOptionProps>`
   border-style: solid;
   border-width: 1px;
   border-color: transparent;
-  transition: all ${props => props.theme.transition.default};
 
-  &:hover {
-    background: ${props => props.theme.colors.select[props.$genre].background.select};
-    color: ${props => props.theme.colors.select[props.$genre].color.select};
-  }
+  ${addTransition};
+
+  ${props =>
+    !props.$isNotShowHoverStyle &&
+    css`
+      &:hover {
+        background: ${props.theme.colors.select[props.$genre].background.select};
+        color: ${props.theme.colors.select[props.$genre].color.select};
+      }
+    `}
   ${props =>
     props.$checked &&
     css`
@@ -154,14 +163,10 @@ export const DropdownOptionIcon = styled(Icon)<DropdownOptionIconProps>`
   height: 100%;
   align-items: center;
   ${DropdownOptionIconSize};
-  ${props =>
+  color: ${props =>
     props.$checked
-      ? css`
-          color: ${props.theme.colors.select[props.$genre].border.select};
-        `
-      : css`
-          color: transparent;
-        `}
+      ? props.theme.colors.select[props.$genre].border.select
+      : props.theme.colors.input[props.$genre].border.rest};
 `
 
 export const SelectInputIcon = styled(Icon)<DropdownOptionIconProps>`
@@ -170,14 +175,10 @@ export const SelectInputIcon = styled(Icon)<DropdownOptionIconProps>`
   top: 0;
   align-items: center;
   ${DropdownOptionIconSize};
-  ${props =>
+  color: ${props =>
     props.$checked
-      ? css`
-          color: ${props.theme.colors.select[props.$genre].border.select};
-        `
-      : css`
-          color: ${props.theme.colors.input[props.$genre].border.rest};
-        `}
+      ? props.theme.colors.select[props.$genre].border.select
+      : props.theme.colors.input[props.$genre].border.rest};
 `
 export const DropdownFooter = styled.li<SelectStyledFooterProps>`
   ${StyledInputCSS};
@@ -205,9 +206,5 @@ export const DropdownSelectAll = styled.div`
 `
 
 export const SelectStyledInput = styled(StyledInput)<SelectStyledInputProps>`
-  ${props =>
-    !props.$isError &&
-    css`
-      outline: none !important;
-    `}
+  ${addRemoveOutline};
 `

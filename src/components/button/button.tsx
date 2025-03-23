@@ -12,7 +12,7 @@ export const Button: FC<ButtonProps> = props => {
   const LoadingComponent = <Icon size={props.size} type="loading" name="Line" order={props.loadingOrder} />
 
   const IconComponent = props.iconName && (
-    <Icon name={props.iconName} type="curved" size={props.size} turn={props.iconTurn} order={props.iconOrder} />
+    <Icon name={props.iconName} type="id" size={props.size} turn={props.iconTurn} order={props.iconOrder} />
   )
 
   const handleClick: ButtonProps['onClick'] = event => {
@@ -55,7 +55,11 @@ export const Button: FC<ButtonProps> = props => {
       $alignSelf={props.customStyles?.alignSelf}
       $gap={props.customStyles?.gap}
     >
-      {!props.isHidden && <Ripple color={theme.colors.button[props.genre].color.rest} />}
+      <Ripple
+        color={theme.colors.checkbox[props.genre].color.rest}
+        isDisabled={props.isDisabled}
+        isHidden={props.isHidden}
+      />
       {props.isOnlyLoading ? (
         props.isLoading ? (
           LoadingComponent
