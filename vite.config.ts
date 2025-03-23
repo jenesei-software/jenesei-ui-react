@@ -64,7 +64,7 @@ export default defineConfig(() => {
           ['component-icon']: resolve(__dirname, 'src/components/icon/index.ts'),
           ['component-image']: resolve(__dirname, 'src/components/image/index.ts'),
           ['component-input']: resolve(__dirname, 'src/components/input/index.ts'),
-          // ['component-input-otp']: resolve(__dirname, 'src/components/input-otp/index.ts'),
+          ['component-input-otp']: resolve(__dirname, 'src/components/input-otp/index.ts'),
           ['component-pagination']: resolve(__dirname, 'src/components/pagination/index.ts'),
           ['component-ripple']: resolve(__dirname, 'src/components/ripple/index.ts'),
           ['component-select']: resolve(__dirname, 'src/components/select/index.ts'),

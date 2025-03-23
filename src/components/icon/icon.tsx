@@ -57,6 +57,7 @@ export const Icon = (props: LibraryIconItemProps) => {
       $color={props.primaryColor || undefined}
       className={props.className}
       onClick={props.onClick}
+      tabIndex={props.tabIndex}
       dangerouslySetInnerHTML={contentLoadings ? { __html: contentLoadings } : undefined}
       {...props.styles}
     >

@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { forwardRef, useCallback } from 'react'
 
 import { ErrorMessage } from '@local/styles/error'
 
@@ -11,7 +11,7 @@ import {
   StyledInputWrapper
 } from '.'
 
-export const Input = (props: InputProps) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const handleOnChange = useCallback(
     (value: string) => {
       if (props.isNoSpaces) {
@@ -31,6 +31,7 @@ export const Input = (props: InputProps) => {
         className={props.className}
         $isDisabled={props.isDisabled}
         $width={props.width}
+        $size={props.size}
       >
         {props.prefixChildren && (
           <InputPrefixChildren
@@ -68,9 +69,18 @@ export const Input = (props: InputProps) => {
             type={props.formatType}
             name={props.name}
             id={props.id}
+            onKeyDown={props.onKeyDown}
+            inputMode={props.inputMode}
+            maxLength={props.maxLength}
+            minLength={props.minLength}
+            tabIndex={props.tabIndex}
           />
         ) : (
           <StyledInput
+            inputMode={props.inputMode}
+            maxLength={props.maxLength}
+            minLength={props.minLength}
+            ref={ref}
             $isError={props.isError}
             $isInputEffect={props.isInputEffect}
             $isLoading={props.isLoading}
@@ -93,6 +103,8 @@ export const Input = (props: InputProps) => {
             onFocus={props.onFocus}
             name={props.name}
             id={props.id}
+            tabIndex={props.tabIndex}
+            onKeyDown={props.onKeyDown}
           />
         )}
 
@@ -124,7 +136,9 @@ export const Input = (props: InputProps) => {
       />
     </>
   )
-}
+})
+
+Input.displayName = 'Input'
 
 export function formatPhoneNumber(dialCode: string, international: string) {
   function isDigit(char: string): boolean {
