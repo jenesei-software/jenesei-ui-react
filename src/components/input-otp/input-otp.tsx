@@ -46,7 +46,7 @@ export const InputOTP = (props: InputOTPProps) => {
     }
   }
   return (
-    <InputOTPWrapper>
+    <InputOTPWrapper $size={props.size}>
       {otp.map((digit, index) => (
         <Input
           width="asHeight"
