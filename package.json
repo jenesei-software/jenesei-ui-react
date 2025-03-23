@@ -92,6 +92,11 @@
       "import": "./build/component-input.es.js",
       "require": "./build/component-input.cjs.js"
     },
+    "./component-input-otp": {
+      "types": "./build/component-input-otp.d.ts",
+      "import": "./build/component-input-otp.es.js",
+      "require": "./build/component-input-otp.cjs.js"
+    },
     "./component-pagination": {
       "types": "./build/component-pagination.d.ts",
       "import": "./build/component-pagination.es.js",

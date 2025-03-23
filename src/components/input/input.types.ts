@@ -34,7 +34,9 @@ export interface InputProps {
 
   size: TJeneseiThemeSize
 
-  width?: string
+  tabIndex?: number
+
+  width?: string | 'asHeight'
 
   isDisabled?: boolean
 
@@ -72,6 +74,11 @@ export interface InputProps {
 
   formatType?: 'text' | 'tel' | 'password'
 
+  inputMode?: 'text' | 'none' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search'
+
+  maxLength?: number
+  minLength?: number
+
   mask?: string | string[]
 }
 
@@ -105,4 +112,4 @@ export type StyledInputProps = AddDollarSign<
   >
 >
 
-export type StyledInputWrapperProps = AddDollarSign<Pick<InputProps, 'isDisabled' | 'isInputEffect' | 'width'>>
+export type StyledInputWrapperProps = AddDollarSign<Pick<InputProps, 'isDisabled' | 'isInputEffect' | 'width' | 'size'>>

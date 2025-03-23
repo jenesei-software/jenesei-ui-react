@@ -40,7 +40,7 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
           </Stack>
         </SkeletonComponent>
         <Stack flexDirection="row" gap="12px">
-          <SkeletonComponent {...props} w="50" h="50px" br="100%" type="secondary">
+          <SkeletonComponent {...props} w="50px" h="50px" br="100%" type="secondary">
             <Stack p="12px" bg="whiteStandard" h="100%" w="100%" br="6px">
               <Typography variant="h7">One</Typography>
             </Stack>
@@ -59,7 +59,7 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
           </Stack>
         </SkeletonComponent>
         <Stack flexDirection="row" gap="12px">
-          <SkeletonComponent {...props} w="50" h="50px" br="100%" type="secondary">
+          <SkeletonComponent {...props} w="50px" h="50px" br="100%" type="secondary">
             <Stack p="12px" bg="whiteStandard" h="100%" w="100%" br="6px">
               <Typography variant="h7">One</Typography>
             </Stack>

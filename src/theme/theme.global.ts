@@ -12,35 +12,30 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  html {
+  #root {
+    display: flex;
+    overflow-x: hidden;
+    max-width: 100dvw;
+    min-height: 100dvh;
+    height: 100%;
     font-size: ${props => props.theme.font.sizeDefault.default}px;
     font-family: ${props => props.theme.font.family}, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-weight: ${props => props.theme.font.weight};
     line-height: ${props => props.theme.font.lineHeight};
     transition: font-size ${props => props.theme.transition.default};
-    color: inherit;
   }
 
-  body {
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  html, body, #root {
     font-synthesis: none;
-    max-width: 100dvw;
-    height: 100%;
-  }
-
-  html, body {
     touch-action: manipulation; 
     -ms-touch-action: manipulation; 
     overscroll-behavior: none; 
+    text-rendering: optimizeLegibility;
     margin: 0;
     padding: 0;
+    color: inherit;
   } 
 
-  html, body, #root {
-    -webkit-overflow-scrolling: auto;
-  }
 
   @media screen and (max-width: 1024px) {
     body:has(.LayoutModal) {
