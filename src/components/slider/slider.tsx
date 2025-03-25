@@ -3,6 +3,7 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 
 import { SliderDot, SliderImage, SliderProps } from '.'
 import { Button } from '../button'
+import { Image } from '../image'
 import { Stack } from '../stack'
 
 export const Slider: FC<SliderProps> = props => {
@@ -61,7 +62,8 @@ export const Slider: FC<SliderProps> = props => {
           <SliderImage
             key={activeImageId}
             style={{
-              backgroundImage: `url(${props.images[activeImageIndex]?.imageSrc})`,
+              // backgroundImage: `url(${props.images[activeImageIndex]?.imageSrc})`,
+              overflow: 'hidden',
               borderRadius: props.propsStack?.br
             }}
             custom={direction}
@@ -75,6 +77,18 @@ export const Slider: FC<SliderProps> = props => {
             dragElastic={1}
             onDragEnd={(_, dragInfo) => dragEndHandler(dragInfo)}
           >
+            <Image
+              propsStack={{
+                w: '100%',
+                h: '100%',
+                style: {
+                  position: 'absolute',
+                  pointerEvents: 'none'
+                }
+              }}
+              alt={props.images[activeImageIndex]?.imageSrc}
+              src={props.images[activeImageIndex]?.imageSrc}
+            />
             {props.images[activeImageIndex]?.children}
           </SliderImage>
         </AnimatePresence>
