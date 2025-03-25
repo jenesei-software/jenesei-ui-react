@@ -16,7 +16,15 @@ export interface FlexShortStylesProps extends FlexContainerProps, FlexItemProps,
   onClick?: () => void
 }
 
-export type FlexShortStylesMotionProps = FlexShortStylesProps & LayoutProps & AnimationProps & DraggableProps
+export type FlexShortStylesMotionProps = FlexShortStylesProps &
+  LayoutProps &
+  AnimationProps &
+  DraggableProps & {
+    style?: CSSProperties
+    className?: string
+    isHover?: boolean
+    onClick?: () => void
+  }
 
 export type StyledStackProps = DollarFlexContainerAndItemAndBasicProps &
   AddDollarSign<Pick<FlexShortStylesProps, 'isHover'>>
