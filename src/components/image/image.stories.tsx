@@ -15,7 +15,6 @@ export const Image: Story = {
   args: {
     src: 'https://wallpapercat.com/w/full/1/d/5/1412415-3840x2160-desktop-4k-los-angeles-skyline-wallpaper-photo.jpg',
     alt: 'Los Angeles',
-    styleImage: { width: '100%', height: '100%' },
-    styleStack: { width: '200px', height: '200px', borderRadius: '12px' }
+    propsStack: { w: '200px', h: '200px', br: '12px' }
   }
 }

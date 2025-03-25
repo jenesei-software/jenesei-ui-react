@@ -74,6 +74,7 @@ export default defineConfig(() => {
           ['component-toggle']: resolve(__dirname, 'src/components/toggle/index.ts'),
           ['component-tooltip']: resolve(__dirname, 'src/components/tooltip/index.ts'),
           ['component-typography']: resolve(__dirname, 'src/components/typography/index.ts'),
+          ['component-slider']: resolve(__dirname, 'src/components/slider/index.ts'),
 
           ['context-app']: resolve(__dirname, 'src/contexts/context-app/index.ts'),
           // ['context-breadcrumb']: resolve(__dirname, 'src/contexts/context-breadcrumb/index.ts'),

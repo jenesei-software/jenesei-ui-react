@@ -69,7 +69,7 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
           <Accordion
             accordionSummary={
               <Button
-                customStyles={{
+                styleCustom={{
                   justifyContent: 'space-between'
                 }}
                 iconTurn={expandedTwo ? 180 : 0}
@@ -84,7 +84,7 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
             accordionDetails={
               <Stack gap="10px" flexDirection="column" pt="6px">
                 <Button
-                  customStyles={{
+                  styleCustom={{
                     justifyContent: 'flex-start'
                   }}
                   genre={'gray'}
@@ -94,7 +94,7 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                   First
                 </Button>
                 <Button
-                  customStyles={{
+                  styleCustom={{
                     justifyContent: 'flex-start'
                   }}
                   genre={'black'}
@@ -104,7 +104,7 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                   Second
                 </Button>
                 <Button
-                  customStyles={{
+                  styleCustom={{
                     justifyContent: 'flex-start'
                   }}
                   genre={'greenTransparent'}
@@ -123,7 +123,7 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
           <Accordion
             accordionSummary={
               <Button
-                customStyles={{
+                styleCustom={{
                   justifyContent: 'flex-start'
                 }}
                 genre={'grayBorder'}
@@ -136,7 +136,7 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
             accordionDetails={
               <Stack gap="10px" flexDirection="column" pt="6px">
                 <Button
-                  customStyles={{
+                  styleCustom={{
                     justifyContent: 'flex-start'
                   }}
                   genre={'gray'}
@@ -146,7 +146,7 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                   First
                 </Button>
                 <Button
-                  customStyles={{
+                  styleCustom={{
                     justifyContent: 'flex-start'
                   }}
                   genre={'black'}
@@ -156,7 +156,7 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                   Second
                 </Button>
                 <Button
-                  customStyles={{
+                  styleCustom={{
                     justifyContent: 'flex-start'
                   }}
                   genre={'greenTransparent'}
@@ -202,7 +202,7 @@ const OneLevelAccordionWrapper: FC<AccordionProps> = props => {
       accordionDetails={
         <Stack gap="10px" flexDirection="column" pt="6px">
           <Button
-            customStyles={{
+            styleCustom={{
               justifyContent: 'flex-start'
             }}
             genre={'gray'}
@@ -212,7 +212,7 @@ const OneLevelAccordionWrapper: FC<AccordionProps> = props => {
             First
           </Button>
           <Button
-            customStyles={{
+            styleCustom={{
               justifyContent: 'flex-start'
             }}
             genre={'black'}
@@ -222,7 +222,7 @@ const OneLevelAccordionWrapper: FC<AccordionProps> = props => {
             Second
           </Button>
           <Button
-            customStyles={{
+            styleCustom={{
               justifyContent: 'flex-start'
             }}
             genre={'greenTransparent'}
