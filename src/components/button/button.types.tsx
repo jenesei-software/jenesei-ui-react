@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React, { CSSProperties, PropsWithChildren } from 'react'
 
 import { LibraryIconItemProps, TLibraryIconIdNameString } from '@local/components/icon'
 import { DollarFlexContainerAndItemProps, FlexContainerAndItemProps } from '@local/styles/base'
@@ -62,7 +62,9 @@ export interface ButtonProps extends PropsWithChildren {
 
   isFullSize?: boolean
 
-  customStyles?: FlexContainerAndItemProps
+  styleCustom?: FlexContainerAndItemProps
+
+  styleCSS?: CSSProperties
 }
 
 export type StyledDollarButtonProps = AddDollarSign<

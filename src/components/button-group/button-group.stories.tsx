@@ -19,7 +19,7 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
       {...props}
       value={[
         {
-          customStyles: {
+          styleCustom: {
             justifyContent: 'flex-start'
           },
           children: 'First',
@@ -33,7 +33,7 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
           isLoading: true
         },
         {
-          customStyles: {
+          styleCustom: {
             justifyContent: 'space-between'
           },
           children: 'Third',
@@ -47,7 +47,7 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
           isLoading: true
         },
         {
-          customStyles: {
+          styleCustom: {
             justifyContent: 'space-between'
           },
           children: 'Second',
@@ -64,7 +64,7 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
         },
 
         {
-          customStyles: {
+          styleCustom: {
             justifyContent: 'space-between'
           },
           children: 'Third',
@@ -75,7 +75,7 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
           size: 'medium'
         },
         {
-          customStyles: {
+          styleCustom: {
             justifyContent: 'space-between'
           },
           children: 'Third',
@@ -86,7 +86,7 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
           size: 'medium'
         },
         {
-          customStyles: {
+          styleCustom: {
             justifyContent: 'space-between'
           },
           children: 'Third',
@@ -98,7 +98,7 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
         },
 
         {
-          customStyles: {
+          styleCustom: {
             justifyContent: 'space-between'
           },
           children: 'Third',
@@ -109,7 +109,7 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
           size: 'medium'
         },
         {
-          customStyles: {
+          styleCustom: {
             justifyContent: 'space-between'
           },
           children: 'Third',
@@ -120,7 +120,7 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
           size: 'medium'
         },
         {
-          customStyles: {
+          styleCustom: {
             justifyContent: 'space-between'
           },
           children: 'Third',

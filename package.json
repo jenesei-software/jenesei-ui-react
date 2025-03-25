@@ -142,6 +142,11 @@
       "import": "./build/component-typography.es.js",
       "require": "./build/component-typography.cjs.js"
     },
+    "./component-slider": {
+      "types": "./build/component-slider.d.ts",
+      "import": "./build/component-slider.es.js",
+      "require": "./build/component-slider.cjs.js"
+    },
     "./context-app": {
       "types": "./build/context-app.d.ts",
       "import": "./build/context-app.es.js",

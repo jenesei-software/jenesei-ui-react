@@ -1,12 +1,14 @@
 import { CSSProperties, ReactNode } from 'react'
 
+import { FlexShortStylesMotionProps } from '../stack'
+
 export interface ImageProps {
   src: string
   alt: string
   fallback?: ReactNode
   loading?: ReactNode
-  styleImage?: CSSProperties
-  styleStack?: CSSProperties
+  propsImage?: CSSProperties
+  propsStack?: FlexShortStylesMotionProps
 }
 
 export interface ImageIMGProps {
