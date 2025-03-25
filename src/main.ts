@@ -35,6 +35,7 @@ export { Ripple } from './components/ripple'
 export { Image } from './components/image'
 export { Tooltip } from './components/tooltip'
 export { InputOTP } from './components/input-otp'
+export { Slider } from './components/slider'
 
 export { useRemovePreviewLoader, Preview } from './areas/preview'
 

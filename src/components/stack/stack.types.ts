@@ -1,4 +1,4 @@
-import { AnimationProps, LayoutProps } from 'framer-motion'
+import { AnimationProps, DraggableProps, LayoutProps } from 'framer-motion'
 import { CSSProperties, PropsWithChildren } from 'react'
 
 import {
@@ -16,7 +16,7 @@ export interface FlexShortStylesProps extends FlexContainerProps, FlexItemProps,
   onClick?: () => void
 }
 
-export type FlexShortStylesMotionProps = FlexShortStylesProps & LayoutProps & AnimationProps
+export type FlexShortStylesMotionProps = FlexShortStylesProps & LayoutProps & AnimationProps & DraggableProps
 
 export type StyledStackProps = DollarFlexContainerAndItemAndBasicProps &
   AddDollarSign<Pick<FlexShortStylesProps, 'isHover'>>
