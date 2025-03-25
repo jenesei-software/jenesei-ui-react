@@ -92,6 +92,8 @@ export const Slider: FC<SliderProps> = props => {
             {props.images[activeImageIndex]?.children}
           </SliderImage>
         </AnimatePresence>
+        {props?.children}
+
         <Button
           styleCSS={{
             position: 'absolute',
