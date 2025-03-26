@@ -16,12 +16,12 @@ import {
   ProviderDialogProps
 } from '.'
 
-export const DialogContext = createContext<DialogContextProps | null>(null)
+export const DialogContext = createContext<DialogContextProps<object> | null>(null)
 
 export const ProviderDialog: FC<ProviderDialogProps> = props => {
-  const [dialogHistory, setDialogHistory] = useState<DialogContentProps[]>([])
+  const [dialogHistory, setDialogHistory] = useState<DialogContentProps<object>[]>([])
 
-  const remove: DialogContextProps['remove'] = useCallback(id => {
+  const remove: DialogContextProps<object>['remove'] = useCallback(id => {
     setDialogHistory(prev => {
       const itemToRemove = prev.find(item => item.id === id)
 
@@ -40,7 +40,18 @@ export const ProviderDialog: FC<ProviderDialogProps> = props => {
     })
   }, [])
 
-  const add: DialogContextProps['add'] = useCallback(dialog => {
+  const update: DialogContextProps<object>['update'] = useCallback(dialog => {
+    setDialogHistory(prev => {
+      return prev.map(item => {
+        if (item.id === dialog.id) {
+          return { ...item, ...dialog }
+        }
+        return item
+      })
+    })
+  }, [])
+
+  const add: DialogContextProps<object>['add'] = useCallback(dialog => {
     const id = dialog.id
 
     setDialogHistory(prev => {
@@ -76,7 +87,7 @@ export const ProviderDialog: FC<ProviderDialogProps> = props => {
   )
 
   return (
-    <DialogContext.Provider value={{ add, remove, dialogHistory }}>
+    <DialogContext.Provider value={{ add, remove, update, dialogHistory }}>
       <AnimatePresence>
         {dialogHistoryLength && (
           <DialogLayout
@@ -96,12 +107,14 @@ export const ProviderDialog: FC<ProviderDialogProps> = props => {
               const index = dialog.index
               const content = dialog.content
               const id = dialog.id
+              const props = dialog.props
               const maxWidth = dialog.maxWidth || memoDefaultMaxWidth || DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_WIDTH
               const maxHeight = dialog.maxHeight || memoDefaultMaxHeight || DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_HEIGHT
               return (
                 <MemoizedDialogElement
                   index={index}
                   content={content}
+                  props={props}
                   key={id}
                   id={id}
                   maxWidth={maxWidth}
@@ -143,7 +156,7 @@ const DialogElement = (props: DialogElementProps) => {
         $maxHeight={props.maxHeight}
         $maxWidth={props.maxWidth}
       >
-        {props.content}
+        {props.content?.(props.props, props.remove)}
       </DialogElementWrapper>
     </Outside>
   )

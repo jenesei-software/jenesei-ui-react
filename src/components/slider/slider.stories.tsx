@@ -81,7 +81,7 @@ export const Slider: Story = {
     },
     children: (
       <Stack justifyContent="flex-end" p="5px" flexGrow={1}>
-        <Button isHiddenBorder genre="productBorder" width="asHeight" size="medium" iconName="Location" />
+        <Button isHiddenBorder genre="productBorder" width="asHeight" size="medium" iconName="Heart" />
       </Stack>
     ),
     propsStack: {

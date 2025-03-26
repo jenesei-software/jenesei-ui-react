@@ -19,8 +19,8 @@ export const DialogLayout = styled(motion.div)<DialogLayoutProps>`
 export const DialogElementWrapper = styled(motion.dialog)<DialogElementWrapperProps>`
   max-width: ${props => props.$maxWidth};
   max-height: ${props => props.$maxHeight};
-  width: 100%;
-  height: fit-content;
+  width: max-content;
+  height: max-content;
   background: ${props => props.theme.palette.whiteStandard};
   border-radius: 12px;
   border-style: solid;
