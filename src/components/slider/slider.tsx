@@ -5,6 +5,7 @@ import { SliderDot, SliderImage, SliderProps } from '.'
 import { Button } from '../button'
 import { Image } from '../image'
 import { Stack } from '../stack'
+import { Typography } from '../typography'
 
 export const Slider: FC<SliderProps> = props => {
   const { onIndexChange } = props
@@ -62,7 +63,6 @@ export const Slider: FC<SliderProps> = props => {
           <SliderImage
             key={activeImageId}
             style={{
-              // backgroundImage: `url(${props.images[activeImageIndex]?.imageSrc})`,
               overflow: 'hidden',
               borderRadius: props.propsStack?.br
             }}
@@ -81,6 +81,9 @@ export const Slider: FC<SliderProps> = props => {
               propsStack={{
                 w: '100%',
                 h: '100%',
+                alignItems: 'center',
+                justifyContent: 'center',
+                bg: 'black10',
                 style: {
                   position: 'absolute',
                   pointerEvents: 'none'
@@ -88,6 +91,7 @@ export const Slider: FC<SliderProps> = props => {
               }}
               alt={props.images[activeImageIndex]?.imageSrc}
               src={props.images[activeImageIndex]?.imageSrc}
+              fallback={<Typography variant="h6">Не удалось загрузить изображение</Typography>}
             />
             {props.images[activeImageIndex]?.children}
           </SliderImage>
