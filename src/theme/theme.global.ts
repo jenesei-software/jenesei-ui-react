@@ -12,7 +12,7 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  #root {
+  html {
     display: flex;
     overflow-x: hidden;
     max-width: 100dvw;

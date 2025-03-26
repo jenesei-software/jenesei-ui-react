@@ -18,35 +18,36 @@ const IMAGES: SliderProps['images'] = [
     children: (
       <Stack justifyContent="flex-start" p="5px" flexGrow={1}>
         <Button isHiddenBorder isDisabled genre="productBorder" size="medium">
-          Открыл рот
+          Los Angeles
         </Button>
       </Stack>
     ),
     imageSrc:
-      'https://images.pexels.com/photos/210922/pexels-photo-210922.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+      'https://drupal-prod.visitcalifornia.com/sites/default/files/styles/fluid_1920/public/2020-06/VC_PlacesToVisit_LosAngelesCounty_RF_1170794243.jpg.webp?itok=46pJYz8v'
   },
   {
     id: 1,
     children: (
       <Stack justifyContent="flex-start" p="5px" flexGrow={1}>
         <Button isHiddenBorder isDisabled genre="productBorder" size="medium">
-          Держит гитару
+          Los Angeles
         </Button>
       </Stack>
     ),
     imageSrc:
-      'https://images.pexels.com/photos/164758/pexels-photo-164758.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+      'https://images.unsplash.com/flagged/photo-1575555201693-7cd442b8023f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bG9zJTIwYW5nZWxlc3xlbnwwfHwwfHx8MA%3D%3D'
   },
   {
     id: 2,
     children: (
       <Stack justifyContent="flex-start" p="5px" flexGrow={1}>
         <Button isHiddenBorder isDisabled genre="productBorder" size="medium">
-          Смотрит на Бога
+          Los Angeles
         </Button>
       </Stack>
     ),
-    imageSrc: 'https://images.pexels.com/photos/3430143/pexels-photo-3430143.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
+    imageSrc:
+      'https://img.goodfon.com/original/2048x1319/8/29/ssha-kaliforniia-los-andzheles-los-angeles-doma-neboskreby-s.jpg'
   },
   {
     id: 3,
