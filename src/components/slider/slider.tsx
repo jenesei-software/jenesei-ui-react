@@ -1,10 +1,12 @@
 import { AnimatePresence, PanInfo, Variants } from 'framer-motion'
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 
+import { useDialog } from '@local/contexts/context-dialog'
+
 import { SliderDot, SliderImage, SliderProps } from '.'
 import { Button } from '../button'
 import { Image } from '../image'
-import { Stack } from '../stack'
+import { Stack, StackMotion } from '../stack'
 import { Typography } from '../typography'
 
 export const Slider: FC<SliderProps> = props => {
@@ -56,8 +58,155 @@ export const Slider: FC<SliderProps> = props => {
   useEffect(() => {
     onIndexChange?.(activeImageId)
   }, [activeImageId, onIndexChange])
+
+  const { add } = useDialog<{
+    br?: string
+    dragEndHandler: (dragInfo: PanInfo) => void
+    images: SliderProps['images']
+    children?: SliderProps['children']
+    activeImageIndex: number
+    activeImageId: number
+    swipeToImage: (swipeDirection: number) => void
+    skipToImage: (imageId: number) => void
+    direction: number
+  }>({
+    br: props.propsStack?.br,
+    dragEndHandler: dragEndHandler,
+    images: props.images,
+    children: props.children,
+    activeImageIndex: activeImageIndex,
+    activeImageId: activeImageId,
+    swipeToImage: swipeToImage,
+    skipToImage: skipToImage,
+    direction: direction
+  })
+
+  const handleAdd = useCallback(() => {
+    add({
+      content: (params, remove) => (
+        <Stack
+          style={{ position: 'relative', overflow: 'hidden', aspectRatio: '900 / 600' }}
+          w="900px"
+          maxW="90dvw"
+          h="auto"
+          maxH="90dvh"
+          br={params?.br}
+        >
+          <AnimatePresence initial={false} custom={params?.direction}>
+            <SliderImage
+              key={params?.activeImageId}
+              style={{
+                overflow: 'hidden',
+                borderRadius: params?.br
+              }}
+              custom={params?.direction}
+              variants={sliderVariants}
+              initial="initial"
+              animate="active"
+              exit="exit"
+              transition={sliderTransition}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={1}
+              onDragEnd={(_, dragInfo) => params?.dragEndHandler?.(dragInfo)}
+            >
+              <Image
+                propsStack={{
+                  w: '100%',
+                  h: '100%',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  bg: 'black10',
+                  style: {
+                    position: 'absolute',
+                    pointerEvents: 'none'
+                  }
+                }}
+                propsImage={{
+                  objectFit: 'contain'
+                }}
+                alt={(params?.images ?? [])?.[params?.activeImageIndex ?? 0]?.imageSrc}
+                src={(params?.images ?? [])?.[params?.activeImageIndex ?? 0]?.imageSrc}
+                fallback={<Typography variant="h6">Не удалось загрузить изображение</Typography>}
+              />
+              {(params?.images ?? [])?.[params?.activeImageIndex ?? 0]?.children}
+            </SliderImage>
+          </AnimatePresence>
+          {params?.children}
+
+          <Button
+            styleCSS={{
+              position: 'absolute',
+              top: '50%',
+              left: 5,
+              transform: 'translateY(-50%)'
+            }}
+            genre="productBorder"
+            size="small"
+            iconName="Arrow4"
+            width="asHeight"
+            iconTurn={90}
+            isHiddenBorder
+            isRadius
+            onClick={() => params?.swipeToImage?.(-1)}
+          />
+          <Button
+            styleCSS={{
+              position: 'absolute',
+              top: '50%',
+              right: 5,
+              transform: 'translateY(-50%)'
+            }}
+            genre="productBorder"
+            size="small"
+            iconName="Arrow4"
+            width="asHeight"
+            isHiddenBorder
+            iconTurn={-90}
+            isRadius
+            onClick={() => params?.swipeToImage?.(1)}
+          />
+          <Button
+            styleCSS={{
+              position: 'absolute',
+              bottom: 5,
+              right: 5
+            }}
+            genre="productBorder"
+            size="small"
+            iconName="Arrow4"
+            width="asHeight"
+            isHiddenBorder
+            isRadius
+            onClick={() => remove?.()}
+          />
+          <Stack
+            style={{
+              position: 'absolute',
+              bottom: 5,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              gap: '4px'
+            }}
+          >
+            {(params?.images ?? [])?.map(i => (
+              <SliderDot
+                onClick={() => params?.skipToImage?.(i.id)}
+                key={i.id}
+                initial={false}
+                animate={{
+                  scale: params?.activeImageId === i.id ? 1.5 : 1,
+                  opacity: params?.activeImageId === i.id ? 1 : 0.5
+                }}
+              />
+            ))}
+          </Stack>
+        </Stack>
+      )
+    })
+  }, [add])
   return (
-    <Stack flexDirection="column" alignItems="center" style={{ overflow: 'hidden' }} {...props.propsStack}>
+    <StackMotion flexDirection="column" alignItems="center" style={{ overflow: 'hidden' }} {...props.propsStack}>
       <Stack style={{ position: 'relative', overflow: 'hidden' }} w="100%" h="100%">
         <AnimatePresence initial={false} custom={direction}>
           <SliderImage
@@ -68,7 +217,7 @@ export const Slider: FC<SliderProps> = props => {
             }}
             custom={direction}
             variants={sliderVariants}
-            initial="incoming"
+            initial="initial"
             animate="active"
             exit="exit"
             transition={sliderTransition}
@@ -130,6 +279,20 @@ export const Slider: FC<SliderProps> = props => {
           isRadius
           onClick={() => swipeToImage(1)}
         />
+        <Button
+          styleCSS={{
+            position: 'absolute',
+            bottom: 5,
+            right: 5
+          }}
+          genre="productBorder"
+          size="small"
+          iconName="Activity"
+          width="asHeight"
+          isHiddenBorder
+          isRadius
+          onClick={() => handleAdd()}
+        />
         <Stack
           style={{
             position: 'absolute',
@@ -152,11 +315,11 @@ export const Slider: FC<SliderProps> = props => {
           ))}
         </Stack>
       </Stack>
-    </Stack>
+    </StackMotion>
   )
 }
 const sliderVariants: Variants = {
-  incoming: direction => ({
+  initial: direction => ({
     x: direction > 0 ? '100%' : '-100%',
     scale: 1,
     opacity: 0

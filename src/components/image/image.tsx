@@ -11,7 +11,7 @@ export const Image: FC<ImageProps> = props => {
 
   return (
     <Stack {...props.propsStack} style={{ position: 'relative', overflow: 'hidden', ...props.propsStack?.style }}>
-      {!isError ? props.loading || <Skeleton visible w="100%" h="100%" /> : null}
+      {!isError ? props.loading || isPending ? <Skeleton visible w="100%" h="100%" /> : null : null}
       {!isError && (
         <ImageIMG
           loading="lazy"

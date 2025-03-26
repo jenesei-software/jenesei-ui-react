@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
 import { InputIsInputEffect, StyledInput } from '@local/components/input'
@@ -19,7 +20,7 @@ export const DateWrapper = styled.div<DateWrapperProps>`
   position: relative;
 `
 
-export const DateDropdownListParent = styled.div<DateStyledListProps>`
+export const DateDropdownListParent = styled(motion.div)<DateStyledListProps>`
   display: none;
 
   height: 0px;

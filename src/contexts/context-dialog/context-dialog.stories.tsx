@@ -29,11 +29,13 @@ const ProviderDialogWrapperDouble: FC = () => {
 
   const handleAdd = () => {
     add({
-      content: (
-        <Stack>
-          <Typography variant="h6">test</Typography>
-        </Stack>
-      )
+      content: () => {
+        return (
+          <Stack>
+            <Typography variant="h6">test</Typography>
+          </Stack>
+        )
+      }
     })
   }
   return (
