@@ -76,9 +76,6 @@ const IMAGES: SliderProps['images'] = [
 export const Slider: Story = {
   args: {
     images: IMAGES,
-    onIndexChange(index) {
-      console.log('Index changed to', index)
-    },
     children: (
       <Stack justifyContent="flex-end" p="5px" flexGrow={1}>
         <Button isHiddenBorder genre="productBorder" width="asHeight" size="medium" iconName="Heart" />

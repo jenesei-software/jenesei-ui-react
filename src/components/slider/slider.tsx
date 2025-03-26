@@ -123,9 +123,6 @@ export const Slider: FC<SliderProps> = props => {
                   }
                 }}
                 propsImage={{
-                  width: '900px',
-                  maxWidth: '70dvw',
-                  height: '100%',
                   objectFit: 'contain'
                 }}
                 alt={(params?.images ?? [])?.[params?.activeImageIndex ?? 0]?.imageSrc}

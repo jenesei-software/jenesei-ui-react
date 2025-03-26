@@ -43,8 +43,5 @@ export const useDialog = <T extends object>(props?: T): DialogContextItemProps<T
     }
   }, [id, propsMemo, update])
 
-  useEffect(() => {
-    console.log('propsMemo', propsMemo)
-  }, [propsMemo])
   return { add: localAdd, remove: localRemove, id }
 }
