@@ -1,13 +1,76 @@
 import { AnimatePresence, PanInfo, Variants } from 'framer-motion'
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 
+import { useDialog } from '@local/contexts/context-dialog'
+
 import { SliderDot, SliderImage, SliderProps } from '.'
 import { Button } from '../button'
 import { Image } from '../image'
-import { Stack } from '../stack'
+import { Stack, StackMotion } from '../stack'
 import { Typography } from '../typography'
 
 export const Slider: FC<SliderProps> = props => {
+  const { add, remove } = useDialog()
+
+  const handleAdd = () => {
+    add({
+      content: (
+        <StackMotion
+          flexDirection="column"
+          alignItems="center"
+          style={{ overflow: 'hidden' }}
+          w="70dvw"
+          maxW="900px"
+          h="100%"
+          maxH="90dvh"
+        >
+          <Stack style={{ position: 'relative', overflow: 'hidden' }} w="100%" h="100%">
+            <SliderImage
+              layoutId={`slider-image-${activeImageId}`}
+              key={activeImageId}
+              style={{
+                overflow: 'hidden',
+                borderRadius: props.propsStack?.br
+              }}
+            >
+              <Image
+                propsStack={{
+                  w: '100%',
+                  h: '100%',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  bg: 'black10',
+                  style: {
+                    position: 'absolute',
+                    pointerEvents: 'none'
+                  }
+                }}
+                alt={props.images[activeImageIndex]?.imageSrc}
+                src={props.images[activeImageIndex]?.imageSrc}
+                fallback={<Typography variant="h6">Не удалось загрузить изображение</Typography>}
+              />
+              {props.images[activeImageIndex]?.children}
+            </SliderImage>
+            {props?.children}
+            <Button
+              styleCSS={{
+                position: 'absolute',
+                bottom: 5,
+                right: 5
+              }}
+              genre="productBorder"
+              size="small"
+              iconName="Arrow4"
+              width="asHeight"
+              isHiddenBorder
+              isRadius
+              onClick={() => remove()}
+            />
+          </Stack>
+        </StackMotion>
+      )
+    })
+  }
   const { onIndexChange } = props
   const [{ activeImageId, direction }, setActiveImage] = useState({
     activeImageId: props.images[0].id,
@@ -57,10 +120,11 @@ export const Slider: FC<SliderProps> = props => {
     onIndexChange?.(activeImageId)
   }, [activeImageId, onIndexChange])
   return (
-    <Stack flexDirection="column" alignItems="center" style={{ overflow: 'hidden' }} {...props.propsStack}>
+    <StackMotion flexDirection="column" alignItems="center" style={{ overflow: 'hidden' }} {...props.propsStack}>
       <Stack style={{ position: 'relative', overflow: 'hidden' }} w="100%" h="100%">
         <AnimatePresence initial={false} custom={direction}>
           <SliderImage
+            layoutId={`slider-image-${activeImageId}`}
             key={activeImageId}
             style={{
               overflow: 'hidden',
@@ -68,7 +132,7 @@ export const Slider: FC<SliderProps> = props => {
             }}
             custom={direction}
             variants={sliderVariants}
-            initial="incoming"
+            initial="initial"
             animate="active"
             exit="exit"
             transition={sliderTransition}
@@ -130,6 +194,20 @@ export const Slider: FC<SliderProps> = props => {
           isRadius
           onClick={() => swipeToImage(1)}
         />
+        <Button
+          styleCSS={{
+            position: 'absolute',
+            bottom: 5,
+            right: 5
+          }}
+          genre="productBorder"
+          size="small"
+          iconName="Arrow4"
+          width="asHeight"
+          isHiddenBorder
+          isRadius
+          onClick={() => handleAdd()}
+        />
         <Stack
           style={{
             position: 'absolute',
@@ -152,11 +230,11 @@ export const Slider: FC<SliderProps> = props => {
           ))}
         </Stack>
       </Stack>
-    </Stack>
+    </StackMotion>
   )
 }
 const sliderVariants: Variants = {
-  incoming: direction => ({
+  initial: direction => ({
     x: direction > 0 ? '100%' : '-100%',
     scale: 1,
     opacity: 0

@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, useEffect, useRef } from 'react'
 
 interface OutsideProps extends PropsWithChildren {
-  onOutsideClick: () => void
+  onOutsideClick: (event: MouseEvent) => void
 }
 
 export const Outside: FC<OutsideProps> = props => {
@@ -10,7 +10,7 @@ export const Outside: FC<OutsideProps> = props => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (elementRef.current && !elementRef.current.contains(event.target as Node)) {
-        props.onOutsideClick()
+        props.onOutsideClick(event)
       }
     }
 

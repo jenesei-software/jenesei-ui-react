@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 
+import { ProviderDialog } from '../src/contexts/context-dialog'
 import { ProviderPermission } from '../src/contexts/context-permission'
 import { JeneseiGlobalStyles, JeneseiTheme } from '../src/theme/index'
 
@@ -29,7 +30,9 @@ const preview: Preview = {
         <ProviderPermission>
           <ThemeProvider theme={JeneseiTheme}>
             <JeneseiGlobalStyles />
-            <Story />
+            <ProviderDialog default={{ maxHeight: 'max-content', maxWidth: 'max-content' }} zIndex={1000}>
+              <Story />
+            </ProviderDialog>
           </ThemeProvider>
         </ProviderPermission>
       )

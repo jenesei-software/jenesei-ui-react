@@ -1,12 +1,13 @@
-import gsap from 'gsap'
+import { AnimatePresence } from 'framer-motion'
 import moment from 'moment'
-import { FocusEventHandler, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTheme } from 'styled-components'
 
 import { Button } from '@local/components/button'
 import { Ripple } from '@local/components/ripple'
 import { SelectMonth, SelectYear } from '@local/components/select'
 import { Stack } from '@local/components/stack'
+import { Outside } from '@local/main'
 import { ErrorMessage } from '@local/styles/error'
 import { KEY_SIZE_DATA } from '@local/theme'
 
@@ -17,7 +18,7 @@ import {
   DateDropdownDays,
   DateDropdownList,
   DateDropdownListParent,
-  DateProps,
+  DatePickerProps,
   DateStyledInput,
   DateWrapper
 } from '.'
@@ -30,7 +31,7 @@ function countSevens(number: number) {
   return remainder > 0 ? count + 1 : count
 }
 
-export const DatePicker = (props: DateProps) => {
+export const DatePicker = (props: DatePickerProps) => {
   const theme = useTheme()
 
   const [unixValue, setUnixValue] = useState(props.value ? moment(props.value).utc() : moment.utc())
@@ -125,22 +126,7 @@ export const DatePicker = (props: DateProps) => {
     setCurrentYear(newDate.year())
   }
 
-  useEffect(() => {
-    if (props.value) {
-      const newDate = moment(props.value).utc()
-      setCurrentDay(newDate.date())
-      setCurrentMonth(newDate.month())
-      setCurrentYear(newDate.year())
-    }
-  }, [props.value])
-
   const [isOpen, setIsOpen] = useState(false)
-  const [isAnimating, setIsAnimating] = useState(false)
-
-  const listRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
-  const parentListRef = useRef<HTMLDivElement>(null)
-  const wrapperRef = useRef<HTMLDivElement>(null)
 
   const rows = useMemo(() => countSevens(daysInMonth.length) + 1, [daysInMonth])
 
@@ -151,105 +137,12 @@ export const DatePicker = (props: DateProps) => {
 
   const radius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size])
 
-  const handleListOptionOpenEffect = useCallback(() => {
-    const list = listRef.current
-    if (!list) return
-
-    setIsAnimating(false)
+  const handleOnOpen = useCallback(() => {
     setIsOpen(true)
   }, [])
-
-  const handleListOptionCloseEffect = useCallback(() => {
-    const list = listRef.current
-    if (!list) return
-
-    gsap.to(inputRef.current, {
-      duration: 0.1
-    })
-    gsap.to(parentListRef.current, {
-      height: '0px',
-      display: 'none',
-      zIndex: 'auto',
-      duration: 0.1,
-      ease: 'power2.out',
-      onComplete: () => {
-        setIsAnimating(false)
-        setIsOpen(false)
-        wrapperRef.current?.blur()
-        inputRef.current?.blur()
-      }
-    })
+  const handleOnClose = useCallback(() => {
+    setIsOpen(false)
   }, [])
-
-  const handleOnOpen = useCallback(() => {
-    gsap.to(inputRef.current, {
-      duration: 0.1,
-      onComplete: () => {
-        gsap.to(parentListRef.current, {
-          height: `${height}px`,
-          display: 'flex',
-          zIndex: '1',
-          duration: 0.1,
-          onComplete: () => {
-            handleListOptionOpenEffect()
-          }
-        })
-      }
-    })
-  }, [handleListOptionOpenEffect, height])
-
-  const handleOnFocusEasy = useCallback(() => {
-    if (isAnimating) return
-    if (isOpen) return
-
-    setIsAnimating(true)
-
-    handleOnOpen()
-  }, [handleOnOpen, isAnimating, isOpen])
-
-  const handleOnFocus: FocusEventHandler<HTMLInputElement> = useCallback(
-    event => {
-      if (props?.isDisabled) return
-      if (props.onFocus) props.onFocus(event)
-      handleOnFocusEasy()
-    },
-    [handleOnFocusEasy, props]
-  )
-
-  useEffect(() => {
-    if (isOpen) handleOnOpen()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [height])
-
-  const handleOnBlurEasy = useCallback(() => {
-    if (isAnimating) return
-    if (!isOpen) return
-
-    setIsAnimating(true)
-
-    gsap.to(parentListRef.current, {
-      duration: 0.2,
-      onComplete: () => {
-        handleListOptionCloseEffect()
-      }
-    })
-  }, [handleListOptionCloseEffect, isAnimating, isOpen])
-
-  const handleOnBlur: FocusEventHandler<HTMLInputElement> = useCallback(
-    event => {
-      if (props?.isDisabled) return
-      if (props.onBlur && event) props.onBlur(event)
-      handleOnBlurEasy()
-    },
-    [handleOnBlurEasy, props]
-  )
-
-  const handleMouseDown = useCallback((event: MouseEvent) => {
-    if (parentListRef.current && parentListRef.current.contains(event.target as Node)) {
-      event.preventDefault()
-    }
-  }, [])
-
   const isBlockIncreaseMonth = useMemo(() => {
     const nextMonth = moment
       .utc()
@@ -276,38 +169,6 @@ export const DatePicker = (props: DateProps) => {
     return isAfterStartDate
   }, [currentYear, currentMonth, currentDay, props.startDate])
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleMouseDown)
-    return () => {
-      document.removeEventListener('mousedown', handleMouseDown)
-    }
-  }, [handleMouseDown])
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        parentListRef.current &&
-        inputRef.current &&
-        !parentListRef.current.contains(event.target as Node) &&
-        !inputRef.current.contains(event.target as Node)
-      ) {
-        handleOnBlurEasy()
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [handleOnBlurEasy])
-
-  useEffect(() => {
-    if (isOpen) {
-      handleListOptionOpenEffect()
-    }
-  }, [handleListOptionOpenEffect, isOpen])
-
   const updateDateFromTimestamp = useCallback(
     (timestamp: number, isDay?: boolean) => {
       const newDate = moment(timestamp).utc()
@@ -316,10 +177,10 @@ export const DatePicker = (props: DateProps) => {
       setCurrentMonth(newDate.month())
       setCurrentYear(newDate.year())
       if (props.isOnClickClose && isDay) {
-        handleOnBlurEasy()
+        handleOnClose()
       }
     },
-    [handleOnBlurEasy, props]
+    [handleOnClose, props]
   )
 
   useEffect(() => {
@@ -339,8 +200,22 @@ export const DatePicker = (props: DateProps) => {
     }
   }, [props.endDate, props.startDate, props.value, updateDateFromTimestamp])
 
+  useEffect(() => {
+    if (props.value) {
+      const newDate = moment(props.value).utc()
+      setCurrentDay(newDate.date())
+      setCurrentMonth(newDate.month())
+      setCurrentYear(newDate.year())
+    }
+  }, [props.value])
+
   return (
-    <>
+    <Outside
+      onOutsideClick={event => {
+        props?.onBlur?.(event)
+        handleOnClose()
+      }}
+    >
       <DateWrapper
         $size={props.size}
         $genre={props.genre}
@@ -348,9 +223,11 @@ export const DatePicker = (props: DateProps) => {
         $isDisabled={props?.isDisabled}
         $radius={radius}
         $parentListHeight={height}
-        onFocus={handleOnFocus}
-        onBlur={handleOnBlur}
-        ref={wrapperRef}
+        onFocus={event => {
+          if (props?.isDisabled) return
+          if (props.onFocus) props.onFocus?.(event)
+          handleOnOpen()
+        }}
       >
         <DateStyledInput
           id={props.id}
@@ -374,118 +251,134 @@ export const DatePicker = (props: DateProps) => {
           onChange={event => props.inputProps?.onChange && props.inputProps?.onChange(event.target.value)}
           onBlur={props?.inputProps?.onBlur}
           onFocus={props?.inputProps?.onFocus}
-          onClick={handleOnFocusEasy}
-          ref={inputRef}
+          onClick={handleOnOpen}
         />
 
-        <DateDropdownListParent
-          ref={parentListRef}
-          $genre={props.genre}
-          $size={props.size}
-          style={{
-            height: `${height}px`
-          }}
-        >
-          <DateDropdownList $isInputEffect={props.isInputEffect} $genre={props.genre} $size={props.size} ref={listRef}>
-            <Stack justifyContent="space-between" alignItems="center">
-              <Button
-                type="button"
-                isRadius
-                iconName="Arrow2"
-                iconTurn={90}
-                width="asHeight"
-                genre={props.genre}
-                size={'small'}
-                onClick={() => !isBlockDecreaseMonth && decreaseMonth()}
-                isHidden={isBlockDecreaseMonth}
-              />
-              <Stack gap="8px">
-                <SelectMonth
-                  genre={props.genre}
-                  size={'small'}
-                  inputProps={undefined}
-                  value={moment
-                    .utc()
-                    .year(currentYear)
-                    .month(currentMonth)
-                    .date(currentDay)
-                    .startOf('day')
-                    .utc()
-                    .valueOf()}
-                  onChange={updateDateFromTimestamp}
-                  startDate={props.startDate}
-                  endDate={props.endDate}
-                  lang={'ru'}
-                  width="90px"
-                />
-                <SelectYear
-                  genre={props.genre}
-                  size={'small'}
-                  value={moment
-                    .utc()
-                    .year(currentYear)
-                    .month(currentMonth)
-                    .date(currentDay)
-                    .startOf('day')
-                    .utc()
-                    .valueOf()}
-                  onChange={updateDateFromTimestamp}
-                  startDate={props.startDate}
-                  endDate={props.endDate}
-                  lang={'ru'}
-                  width="70px"
-                />
-              </Stack>
-              <Button
-                type="button"
-                onClick={() => !isBlockIncreaseMonth && increaseMonth()}
-                width="asHeight"
-                isRadius
-                iconName="Arrow2"
-                iconTurn={-90}
-                genre={props.genre}
-                size={'small'}
-                isHidden={isBlockIncreaseMonth}
-              />
-            </Stack>
-            <DateDropdownDays $rows={rows}>
-              {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((e, index) => (
-                <DateDropdownDayOfWeek
-                  $isToday={false}
-                  $isWeekend={false}
-                  type="button"
-                  $genre={props.genre}
-                  $size={props.size}
-                  $row={daysInMonth[0].weekOfMonth - 1}
-                  $column={index + 1}
-                  key={index}
-                >
-                  {e}
-                </DateDropdownDayOfWeek>
-              ))}
-              {daysInMonth.map(day =>
-                !day.isDisabled ? (
-                  <DateDropdownDay
+        <AnimatePresence>
+          {isOpen ? (
+            <DateDropdownListParent
+              initial={{ opacity: 0, height: 0 }}
+              animate={{
+                height: `${height}px`,
+                display: 'flex',
+                opacity: 1,
+                zIndex: '1'
+              }}
+              exit={{
+                height: '0px',
+                display: 'none',
+                opacity: 0,
+                zIndex: 'auto'
+              }}
+              transition={{ duration: 0.2 }}
+              $genre={props.genre}
+              $size={props.size}
+              style={{
+                height: `${height}px`
+              }}
+            >
+              <DateDropdownList $isInputEffect={props.isInputEffect} $genre={props.genre} $size={props.size}>
+                <Stack justifyContent="space-between" alignItems="center">
+                  <Button
                     type="button"
-                    $genre={props.genre}
-                    $size={props.size}
-                    $row={day.weekOfMonth + 1}
-                    $column={day.dayOfWeek}
-                    key={day.value}
-                    onClick={() => updateDateFromTimestamp(day.value, true)}
-                    $isToday={day.isToday}
-                    $isWeekend={day.isWeekend}
-                    $isChoice={day.value === unixValue.valueOf()}
-                    $isCurrentMonth={day.isCurrentMonth}
-                  >
-                    <Ripple color={theme.colors.date[props.genre].color.rest} />
-                    {day.labelNumber}
-                  </DateDropdownDay>
-                ) : null
-              )}
-            </DateDropdownDays>
-          </DateDropdownList>
-        </DateDropdownListParent>
+                    isRadius
+                    iconName="Arrow2"
+                    iconTurn={90}
+                    width="asHeight"
+                    genre={props.genre}
+                    size={'small'}
+                    onClick={() => !isBlockDecreaseMonth && decreaseMonth()}
+                    isHidden={isBlockDecreaseMonth}
+                  />
+                  <Stack gap="8px">
+                    <SelectMonth
+                      genre={props.genre}
+                      size={'small'}
+                      inputProps={undefined}
+                      value={moment
+                        .utc()
+                        .year(currentYear)
+                        .month(currentMonth)
+                        .date(currentDay)
+                        .startOf('day')
+                        .utc()
+                        .valueOf()}
+                      onChange={updateDateFromTimestamp}
+                      startDate={props.startDate}
+                      endDate={props.endDate}
+                      lang={'ru'}
+                      width="90px"
+                    />
+                    <SelectYear
+                      genre={props.genre}
+                      size={'small'}
+                      value={moment
+                        .utc()
+                        .year(currentYear)
+                        .month(currentMonth)
+                        .date(currentDay)
+                        .startOf('day')
+                        .utc()
+                        .valueOf()}
+                      onChange={updateDateFromTimestamp}
+                      startDate={props.startDate}
+                      endDate={props.endDate}
+                      lang={'ru'}
+                      width="70px"
+                    />
+                  </Stack>
+                  <Button
+                    type="button"
+                    onClick={() => !isBlockIncreaseMonth && increaseMonth()}
+                    width="asHeight"
+                    isRadius
+                    iconName="Arrow2"
+                    iconTurn={-90}
+                    genre={props.genre}
+                    size={'small'}
+                    isHidden={isBlockIncreaseMonth}
+                  />
+                </Stack>
+                <DateDropdownDays $rows={rows}>
+                  {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((e, index) => (
+                    <DateDropdownDayOfWeek
+                      $isToday={false}
+                      $isWeekend={false}
+                      type="button"
+                      $genre={props.genre}
+                      $size={props.size}
+                      $row={daysInMonth[0].weekOfMonth - 1}
+                      $column={index + 1}
+                      key={index}
+                    >
+                      {e}
+                    </DateDropdownDayOfWeek>
+                  ))}
+                  {daysInMonth.map(day =>
+                    !day.isDisabled ? (
+                      <DateDropdownDay
+                        type="button"
+                        $genre={props.genre}
+                        $size={props.size}
+                        $row={day.weekOfMonth + 1}
+                        $column={day.dayOfWeek}
+                        key={day.value}
+                        onClick={() => updateDateFromTimestamp(day.value, true)}
+                        $isToday={day.isToday}
+                        $isWeekend={day.isWeekend}
+                        $isChoice={day.value === unixValue.valueOf()}
+                        $isCurrentMonth={day.isCurrentMonth}
+                      >
+                        <Ripple color={theme.colors.date[props.genre].color.rest} />
+                        {day.labelNumber}
+                      </DateDropdownDay>
+                    ) : null
+                  )}
+                </DateDropdownDays>
+              </DateDropdownList>
+            </DateDropdownListParent>
+          ) : null}
+        </AnimatePresence>
       </DateWrapper>
       <ErrorMessage
         isError={props?.inputProps?.isError}
@@ -494,6 +387,6 @@ export const DatePicker = (props: DateProps) => {
         width={props.width}
         isErrorAbsolute={props?.inputProps?.isErrorAbsolute}
       />
-    </>
+    </Outside>
   )
 }

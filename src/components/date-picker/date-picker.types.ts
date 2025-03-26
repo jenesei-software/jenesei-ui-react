@@ -1,4 +1,4 @@
-import { FocusEventHandler } from 'react'
+import { FocusEvent } from 'react'
 
 import { InputProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
 import { TJeneseiThemeGenreDate, TJeneseiThemeSize } from '@local/theme'
@@ -20,7 +20,7 @@ export interface DateDayProps {
   isCurrentMonth: boolean
   isDisabled: boolean
 }
-export interface DateProps {
+export interface DatePickerProps {
   name?: string
   id?: string
 
@@ -44,8 +44,8 @@ export interface DateProps {
   isDisabled?: boolean
 
   onChange: (timestamp: number) => void
-  onFocus?: FocusEventHandler<HTMLInputElement>
-  onBlur?: FocusEventHandler<HTMLInputElement>
+  onFocus?: (event: FocusEvent<HTMLDivElement, Element>) => void
+  onBlur?: (event: MouseEvent) => void
 }
 
 export type DateWrapperProps = AddDollarSign<
@@ -66,7 +66,9 @@ export type DateStyledOptionProps = AddDollarSign<{
 
 export type DateStyledListProps = AddDollarSign<Pick<InputProps, 'genre' | 'size'>>
 
-export type DateDropdownListProps = AddDollarSign<Pick<DateProps, 'isInputEffect'> & Pick<InputProps, 'genre' | 'size'>>
+export type DateDropdownListProps = AddDollarSign<
+  Pick<DatePickerProps, 'isInputEffect'> & Pick<InputProps, 'genre' | 'size'>
+>
 
 export type DateDropdownDayProps = AddDollarSign<
   Pick<InputProps, 'genre' | 'size'> &
