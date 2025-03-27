@@ -1,0 +1,31 @@
+import{j as c,d as g}from"./theme-DVxtux_W.js";import{r as o}from"./index-CnY36iC1.js";import{c as L}from"./add.styles-B_8-z0Fm.js";import{m as h}from"./proxy-BgqLTuwE.js";import{A as j}from"./index-Blb9MfSb.js";const x=e=>{const a=o.useRef(null);return o.useEffect(()=>{const l=u=>{a.current&&!a.current.contains(u.target)&&e.onOutsideClick(u)};return document.addEventListener("mousedown",l),()=>{document.removeEventListener("mousedown",l)}},[e]),c.jsxDEV("div",{style:{display:"contents"},ref:a,children:e.children},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/areas/outside/outside.tsx",lineNumber:23,columnNumber:5},void 0)};try{x.displayName="Outside",x.__docgenInfo={description:"",displayName:"Outside",props:{onOutsideClick:{defaultValue:null,description:"",name:"onOutsideClick",required:!0,type:{name:"(event: MouseEvent) => void"}}}}}catch{}const f=o.createContext(null),y=e=>{const[a,l]=o.useState([]),u=o.useCallback(t=>{l(r=>{const i=r.find(n=>n.id===t);if(!i)return r;const d=i.index;return r.filter(n=>n.id!==t).map(n=>({...n,index:n.index>d?n.index-1:n.index}))})},[]),N=o.useCallback(t=>{l(r=>r.map(i=>i.id===t.id?{...i,...t}:i))},[]),b=o.useCallback(t=>{const r=t.id;l(i=>{const d=i.findIndex(n=>n.id===r);let s;if(d!==-1)s=[...i],s[d]={...t,id:r,index:i[d].index};else{s=i.map(m=>({...m,index:m.index+1}));const n={...t,id:r,index:0};s.unshift(n)}return s})},[]),I=o.useMemo(()=>a.length,[a.length]),A=o.useMemo(()=>e.zIndex,[e.zIndex]);return c.jsxDEV(f.Provider,{value:{add:b,remove:u,update:N,dialogHistory:a},children:[c.jsxDEV(j,{children:I&&c.jsxDEV(p,{$zIndex:A,initial:{opacity:0},exit:{opacity:0},animate:{opacity:1},transition:{type:"spring",duration:E},children:a.map(t=>{const r=t.index,i=t.content,d=t.id,s=t.props,n=t.maxWidth||$,m=t.maxHeight||w,R=t.borderRadius||C,O=t.padding||W,T=t.background||H;return c.jsxDEV(V,{index:r,content:i,props:s,id:d,maxWidth:n,maxHeight:m,borderRadius:R,background:T,padding:O,remove:()=>u(d)},d,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context-dialog.tsx",lineNumber:111,columnNumber:17},void 0)})},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context-dialog.tsx",lineNumber:87,columnNumber:11},void 0)},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context-dialog.tsx",lineNumber:85,columnNumber:7},void 0),e.children]},void 0,!0,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context-dialog.tsx",lineNumber:84,columnNumber:5},void 0)},k=e=>{var a;return c.jsxDEV(x,{onOutsideClick:()=>e.remove(),children:c.jsxDEV(_,{initial:{opacity:0,scale:.8},animate:{opacity:1,scale:1},transition:{type:"spring",duration:v,delay:E},style:{zIndex:-e.index},$maxHeight:e.maxHeight,$maxWidth:e.maxWidth,$borderRadius:e.borderRadius,$padding:e.padding,$background:e.background,children:(a=e.content)==null?void 0:a.call(e,e.props,e.remove)},e.id,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context-dialog.tsx",lineNumber:138,columnNumber:7},void 0)},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context-dialog.tsx",lineNumber:137,columnNumber:5},void 0)},V=o.memo(k);try{f.displayName="DialogContext",f.__docgenInfo={description:"",displayName:"DialogContext",props:{}}}catch{}try{y.displayName="ProviderDialog",y.__docgenInfo={description:"",displayName:"ProviderDialog",props:{zIndex:{defaultValue:null,description:"",name:"zIndex",required:!0,type:{name:"number"}}}}}catch{}const p=g(h.div)`
+  position: fixed;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  background-color: ${e=>e.theme.palette.black50};
+  z-index: ${e=>e.$zIndex};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+`,_=g(h.dialog)`
+  ${L};
+  max-width: ${e=>e.$maxWidth};
+  max-height: ${e=>e.$maxHeight};
+  border-radius: ${e=>e.$borderRadius};
+  background: ${e=>e.$background&&e.theme.palette[e.$background]};
+  padding: ${e=>e.$padding};
+  width: max-content;
+  height: max-content;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+`,D=g(h.div)``;try{p.displayName="DialogLayout",p.__docgenInfo={description:"",displayName:"DialogLayout",props:{theme:{defaultValue:null,description:"",name:"theme",required:!1,type:{name:"DefaultTheme"}},as:{defaultValue:null,description:"",name:"as",required:!1,type:{name:"void | WebTarget"}},forwardedAs:{defaultValue:null,description:"",name:"forwardedAs",required:!1,type:{name:"void | WebTarget"}}}}}catch{}try{_.displayName="DialogElementWrapper",_.__docgenInfo={description:"",displayName:"DialogElementWrapper",props:{theme:{defaultValue:null,description:"",name:"theme",required:!1,type:{name:"DefaultTheme"}},as:{defaultValue:null,description:"",name:"as",required:!1,type:{name:"void | WebTarget"}},forwardedAs:{defaultValue:null,description:"",name:"forwardedAs",required:!1,type:{name:"void | WebTarget"}}}}}catch{}try{D.displayName="DialogContent",D.__docgenInfo={description:"",displayName:"DialogContent",props:{theme:{defaultValue:null,description:"",name:"theme",required:!1,type:{name:"DefaultTheme"}},as:{defaultValue:null,description:"",name:"as",required:!1,type:{name:"void | WebTarget"}},forwardedAs:{defaultValue:null,description:"",name:"forwardedAs",required:!1,type:{name:"void | WebTarget"}}}}}catch{}const v=.3,E=.4,w="max-content",$="max-content",C="12px",W="20px",H="whiteStandard";export{f as D,x as O,y as P,E as a};
