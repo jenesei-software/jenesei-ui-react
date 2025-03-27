@@ -30,7 +30,7 @@ const preview: Preview = {
         <ProviderPermission>
           <ThemeProvider theme={JeneseiTheme}>
             <JeneseiGlobalStyles />
-            <ProviderDialog default={{ maxHeight: 'max-content', maxWidth: 'max-content' }} zIndex={1000}>
+            <ProviderDialog zIndex={1000}>
               <Story />
             </ProviderDialog>
           </ThemeProvider>

@@ -6,11 +6,7 @@ export const SliderImage = styled(motion.div)`
   position: absolute;
   height: 100%;
   width: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  will-change: transform, opacity;
-
+  touch-action: pan-y;
   &:hover {
     cursor: grab;
   }

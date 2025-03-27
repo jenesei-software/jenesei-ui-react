@@ -29,20 +29,20 @@ export const Slider: FC<SliderProps> = props => {
     },
     [activeImageId, props.images]
   )
-
   const dragEndHandler = useCallback(
     (dragInfo: PanInfo) => {
-      const draggedDistance = dragInfo.offset.x
+      const { offset, velocity } = dragInfo
       const swipeThreshold = 50
-      if (draggedDistance > swipeThreshold) {
+      const swipePower = Math.abs(offset.x) * velocity.x // Скорость влияет на свайп
+
+      if (swipePower > 500 || offset.x > swipeThreshold) {
         swipeToImage(-1)
-      } else if (draggedDistance < -swipeThreshold) {
+      } else if (swipePower < -500 || offset.x < -swipeThreshold) {
         swipeToImage(1)
       }
     },
     [swipeToImage]
   )
-
   const skipToImage = useCallback(
     (imageId: number) => {
       const currentIndex = props.images.findIndex(img => img.id === activeImageId)
@@ -83,13 +83,15 @@ export const Slider: FC<SliderProps> = props => {
 
   const handleAdd = useCallback(() => {
     add({
+      borderRadius: props.propsStack?.br,
+      padding: '0',
+      background: 'whiteStandard',
       content: (params, remove) => (
         <Stack
           style={{ position: 'relative', overflow: 'hidden', aspectRatio: '900 / 600' }}
-          w="900px"
+          w="auto"
           maxW="90dvw"
-          h="auto"
-          maxH="90dvh"
+          h="85dvh"
           br={params?.br}
         >
           <AnimatePresence initial={false} custom={params?.direction}>
@@ -107,7 +109,7 @@ export const Slider: FC<SliderProps> = props => {
               transition={sliderTransition}
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={1}
+              dragElastic={0.5}
               onDragEnd={(_, dragInfo) => params?.dragEndHandler?.(dragInfo)}
             >
               <Image
@@ -133,44 +135,36 @@ export const Slider: FC<SliderProps> = props => {
             </SliderImage>
           </AnimatePresence>
           {params?.children}
+          <Stack style={{ position: 'absolute', bottom: 15, left: 15 }} gap="8px">
+            <Button
+              genre="productBorder"
+              size="small"
+              iconName="Arrow4"
+              width="asHeight"
+              iconTurn={90}
+              isHiddenBorder
+              isPlaystationEffect
+              isRadius
+              onClick={() => params?.swipeToImage?.(-1)}
+            />
+            <Button
+              genre="productBorder"
+              size="small"
+              iconName="Arrow4"
+              width="asHeight"
+              isHiddenBorder
+              iconTurn={-90}
+              isPlaystationEffect
+              isRadius
+              onClick={() => params?.swipeToImage?.(1)}
+            />
+          </Stack>
 
           <Button
             styleCSS={{
               position: 'absolute',
-              top: '50%',
-              left: 5,
-              transform: 'translateY(-50%)'
-            }}
-            genre="productBorder"
-            size="small"
-            iconName="Arrow4"
-            width="asHeight"
-            iconTurn={90}
-            isHiddenBorder
-            isRadius
-            onClick={() => params?.swipeToImage?.(-1)}
-          />
-          <Button
-            styleCSS={{
-              position: 'absolute',
-              top: '50%',
-              right: 5,
-              transform: 'translateY(-50%)'
-            }}
-            genre="productBorder"
-            size="small"
-            iconName="Arrow4"
-            width="asHeight"
-            isHiddenBorder
-            iconTurn={-90}
-            isRadius
-            onClick={() => params?.swipeToImage?.(1)}
-          />
-          <Button
-            styleCSS={{
-              position: 'absolute',
-              bottom: 5,
-              right: 5
+              bottom: 15,
+              right: 15
             }}
             genre="productBorder"
             size="small"
@@ -183,7 +177,7 @@ export const Slider: FC<SliderProps> = props => {
           <Stack
             style={{
               position: 'absolute',
-              bottom: 5,
+              bottom: 15,
               left: '50%',
               transform: 'translateX(-50%)',
               gap: '4px'
@@ -223,7 +217,7 @@ export const Slider: FC<SliderProps> = props => {
             transition={sliderTransition}
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={1}
+            dragElastic={0.5}
             onDragEnd={(_, dragInfo) => dragEndHandler(dragInfo)}
           >
             <Image
@@ -332,6 +326,6 @@ const sliderVariants: Variants = {
   })
 }
 const sliderTransition = {
-  duration: 1,
+  duration: 0.3,
   ease: [0.56, 0.03, 0.12, 1.04]
 }
