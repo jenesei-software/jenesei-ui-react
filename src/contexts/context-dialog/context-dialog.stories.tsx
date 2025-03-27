@@ -17,12 +17,8 @@ export default meta
 
 type Story = StoryObj<typeof ProviderDialog>
 
-const ProviderDialogWrapper: FC<ProviderDialogProps> = props => {
-  return (
-    <ProviderDialog {...props}>
-      <ProviderDialogWrapperDouble />
-    </ProviderDialog>
-  )
+const ProviderDialogWrapper: FC<ProviderDialogProps> = () => {
+  return <ProviderDialogWrapperDouble />
 }
 const ProviderDialogWrapperDouble: FC = () => {
   const { add, remove } = useDialog()

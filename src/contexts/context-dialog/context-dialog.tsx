@@ -6,8 +6,11 @@ import { Outside } from '@local/areas/outside'
 import {
   DEFAULT_PROVIDER_DIALOG_DURATION_ELEMENT,
   DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT,
+  DEFAULT_PROVIDER_DIALOG_ELEMENT_BACKGROUND,
+  DEFAULT_PROVIDER_DIALOG_ELEMENT_BORDER_RADIUS,
   DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_HEIGHT,
   DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_WIDTH,
+  DEFAULT_PROVIDER_DIALOG_ELEMENT_PADDING,
   DialogContentProps,
   DialogContextProps,
   DialogElementProps,
@@ -77,15 +80,6 @@ export const ProviderDialog: FC<ProviderDialogProps> = props => {
   const dialogHistoryLength = useMemo(() => dialogHistory.length, [dialogHistory.length])
   const zIndex = useMemo(() => props.zIndex, [props.zIndex])
 
-  const memoDefaultMaxHeight: ProviderDialogProps['default']['maxHeight'] = useMemo(
-    () => props?.default?.maxHeight,
-    [props?.default?.maxHeight]
-  )
-  const memoDefaultMaxWidth: ProviderDialogProps['default']['maxWidth'] = useMemo(
-    () => props?.default?.maxWidth,
-    [props?.default?.maxWidth]
-  )
-
   return (
     <DialogContext.Provider value={{ add, remove, update, dialogHistory }}>
       <AnimatePresence>
@@ -108,8 +102,11 @@ export const ProviderDialog: FC<ProviderDialogProps> = props => {
               const content = dialog.content
               const id = dialog.id
               const props = dialog.props
-              const maxWidth = dialog.maxWidth || memoDefaultMaxWidth || DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_WIDTH
-              const maxHeight = dialog.maxHeight || memoDefaultMaxHeight || DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_HEIGHT
+              const maxWidth = dialog.maxWidth || DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_WIDTH
+              const maxHeight = dialog.maxHeight || DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_HEIGHT
+              const borderRadius = dialog.borderRadius || DEFAULT_PROVIDER_DIALOG_ELEMENT_BORDER_RADIUS
+              const padding = dialog.padding || DEFAULT_PROVIDER_DIALOG_ELEMENT_PADDING
+              const background = dialog.background || DEFAULT_PROVIDER_DIALOG_ELEMENT_BACKGROUND
               return (
                 <MemoizedDialogElement
                   index={index}
@@ -119,6 +116,9 @@ export const ProviderDialog: FC<ProviderDialogProps> = props => {
                   id={id}
                   maxWidth={maxWidth}
                   maxHeight={maxHeight}
+                  borderRadius={borderRadius}
+                  background={background}
+                  padding={padding}
                   remove={() => remove(id)}
                 />
               )
@@ -155,6 +155,9 @@ const DialogElement = (props: DialogElementProps) => {
         }}
         $maxHeight={props.maxHeight}
         $maxWidth={props.maxWidth}
+        $borderRadius={props.borderRadius}
+        $padding={props.padding}
+        $background={props.background}
       >
         {props.content?.(props.props, props.remove)}
       </DialogElementWrapper>

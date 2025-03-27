@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
+import { addOutline } from '@local/styles/add'
+
 import { DialogElementWrapperProps, DialogLayoutProps } from '.'
 
 export const DialogLayout = styled(motion.div)<DialogLayoutProps>`
@@ -17,16 +19,15 @@ export const DialogLayout = styled(motion.div)<DialogLayoutProps>`
 `
 
 export const DialogElementWrapper = styled(motion.dialog)<DialogElementWrapperProps>`
+  ${addOutline};
   max-width: ${props => props.$maxWidth};
   max-height: ${props => props.$maxHeight};
+  border-radius: ${props => props.$borderRadius};
+  background: ${props => props.$background && props.theme.palette[props.$background]};
+  padding: ${props => props.$padding};
   width: max-content;
   height: max-content;
-  background: ${props => props.theme.palette.whiteStandard};
-  border-radius: 12px;
-  border-style: solid;
-  border-color: ${props => props.theme.palette.grayKaren};
-  border-width: 1px;
-  padding: 20px;
+  border: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
