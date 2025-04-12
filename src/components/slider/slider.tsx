@@ -33,7 +33,7 @@ export const Slider: FC<SliderProps> = props => {
     (dragInfo: PanInfo) => {
       const { offset, velocity } = dragInfo
       const swipeThreshold = 50
-      const swipePower = Math.abs(offset.x) * velocity.x // Скорость влияет на свайп
+      const swipePower = Math.abs(offset.x) * velocity.x
 
       if (swipePower > 500 || offset.x > swipeThreshold) {
         swipeToImage(-1)
@@ -198,7 +198,7 @@ export const Slider: FC<SliderProps> = props => {
         </Stack>
       )
     })
-  }, [add])
+  }, [add, props.propsStack?.br])
   return (
     <StackMotion flexDirection="column" alignItems="center" style={{ overflow: 'hidden' }} {...props.propsStack}>
       <Stack style={{ position: 'relative', overflow: 'hidden' }} w="100%" h="100%">

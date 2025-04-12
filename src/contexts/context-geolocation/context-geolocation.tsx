@@ -13,24 +13,27 @@ export const ProviderGeolocation: FC<ProviderGeolocationProps> = props => {
   const [error, setError] = useState<GeolocationPositionError | null>(null)
 
   useEffect(() => {
-    const handleSuccess = (position: GeolocationPosition) => {
-      setLocation(position)
-    }
+    if (props.isAskEntrance) {
+      const handleSuccess = (position: GeolocationPosition) => {
+        setLocation(position)
+      }
 
-    const handleError = (error: GeolocationPositionError) => {
-      setError(error)
-    }
+      const handleError = (error: GeolocationPositionError) => {
+        setError(error)
+      }
 
-    if (geolocationPermission === 'granted') {
-      navigator.geolocation.getCurrentPosition(handleSuccess, handleError)
-    } else {
-      requestGeolocationPermission()
+      if (geolocationPermission === 'granted') {
+        navigator.geolocation.getCurrentPosition(handleSuccess, handleError)
+      } else {
+        requestGeolocationPermission()
+      }
     }
-  }, [geolocationPermission, requestGeolocationPermission])
+  }, [geolocationPermission, props.isAskEntrance, requestGeolocationPermission])
 
   return (
     <GeolocationContext.Provider
       value={{
+        requestGeolocationPermission,
         geolocationPermission,
         location,
         error

@@ -5,6 +5,7 @@ import React from 'react'
 import { ThemeProvider } from 'styled-components'
 
 import { ProviderDialog } from '../src/contexts/context-dialog'
+import { ProviderGeolocation } from '../src/contexts/context-geolocation'
 import { ProviderPermission } from '../src/contexts/context-permission'
 import { JeneseiGlobalStyles, JeneseiTheme } from '../src/theme/index'
 
@@ -28,12 +29,14 @@ const preview: Preview = {
     Story => {
       return (
         <ProviderPermission>
-          <ThemeProvider theme={JeneseiTheme}>
-            <JeneseiGlobalStyles />
-            <ProviderDialog zIndex={1000}>
-              <Story />
-            </ProviderDialog>
-          </ThemeProvider>
+          <ProviderGeolocation>
+            <ThemeProvider theme={JeneseiTheme}>
+              <JeneseiGlobalStyles />
+              <ProviderDialog zIndex={1000}>
+                <Story />
+              </ProviderDialog>
+            </ThemeProvider>
+          </ProviderGeolocation>
         </ProviderPermission>
       )
     }
