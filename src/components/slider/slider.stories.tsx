@@ -12,7 +12,7 @@ const meta: Meta<typeof SliderComponent> = {
 
 export default meta
 type Story = StoryObj<typeof SliderComponent>
-const IMAGES: SliderProps['images'] = [
+export const IMAGES: SliderProps['images'] = [
   {
     id: 0,
     children: (

@@ -1,14 +1,12 @@
-import { Map as LeafletMap } from 'leaflet'
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 
-import { DEFAULT_MAP_ZOOM, MapProps } from '.'
+import { DEFAULT_MAP_ZOOM, MapProps, MarkerClusterGroup } from '.'
 
 import 'leaflet/dist/leaflet.css'
 
 export const Map: FC<MapProps> = props => {
   const [theme, setTheme] = useState(props.theme)
-
   useEffect(() => {
     setTheme(props.theme)
   }, [props.theme])
@@ -27,6 +25,7 @@ export const Map: FC<MapProps> = props => {
         wheelPxPerZoomLevel={150}
       >
         <TileLayer url={theme.url} attribution={theme.attribution} />
+        <MarkerClusterGroup markers={props.markers} />
         {props.center && (
           <Marker position={props.center}>
             <Popup>Это popup!</Popup>
