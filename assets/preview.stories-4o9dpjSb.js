@@ -1,0 +1,12 @@
+import{j as t}from"./theme-DVxtux_W.js";import"./theme.global-C_7ReLae.js";import"./base.styles-D8Oz2lRG.js";import"./add.styles-B_8-z0Fm.js";import"./error.styles-C-xkUJAX.js";import"./select.styles-CBcCgp1S.js";import"./accordion.styles-B80UfCJm.js";import"./button-DbiJRbRc.js";import"./button-group-CokXQLxD.js";import{P as c}from"./context-local-storage-3Lpp7snh.js";import{S as u}from"./stack-C50cpo_N.js";import"./icon.styles-iJHhMYxF.js";import"./input.styles-CWQQ3XqK.js";import"./toggle.styles-DBgWRba7.js";import"./typography-eKbfPWa3.js";import"./separator.styles-DNlp2CZD.js";import"./index-CnY36iC1.js";import"./context-dialog.constants-Blzdygk7.js";import"./scroll-BxiouqjD.js";import"./skeleton-eyiTgI8D.js";import"./smooth-n4F7muX8.js";import"./context-geolocation-BUDzeBbM.js";import"./context-sonner.constants-W4v6zmES.js";import"./typography.functions-CWlWgfdK.js";import"./index-Dyxk8dpP.js";import"./index-DaYL4gH5.js";import"./proxy-BgqLTuwE.js";import"./jsx-runtime-uV6E1Fxi.js";import"./context-dialog.hooks-sLwdnK9w.js";import"./v4-C6aID195.js";import"./index-Blb9MfSb.js";import"./tiny-invariant-DKC21gSL.js";const J={component:c,title:"Area/Preview"},e={args:{visible:!0,content:"Content"}},d=i=>t.jsxDEV(u,{style:{position:"relative"},w:"200px",h:"200px",bg:"blueFocus",br:"8px",children:t.jsxDEV(c,{...i},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/areas/preview/preview.stories.tsx",lineNumber:23,columnNumber:7},void 0)},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/areas/preview/preview.stories.tsx",lineNumber:20,columnNumber:10},void 0),r={render:i=>t.jsxDEV(d,{...i},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/areas/preview/preview.stories.tsx",lineNumber:27,columnNumber:19},void 0),args:{time:2e3,content:"Loading..."}};var o,n,s;e.parameters={...e.parameters,docs:{...(o=e.parameters)==null?void 0:o.docs,source:{originalSource:`{
+  args: {
+    visible: true,
+    content: 'Content'
+  }
+}`,...(s=(n=e.parameters)==null?void 0:n.docs)==null?void 0:s.source}}};var m,a,p;r.parameters={...r.parameters,docs:{...(m=r.parameters)==null?void 0:m.docs,source:{originalSource:`{
+  render: args => <PreviewStackWrapper {...args} />,
+  args: {
+    time: 2000,
+    content: 'Loading...'
+  }
+}`,...(p=(a=r.parameters)==null?void 0:a.docs)==null?void 0:p.source}}};const K=["PreviewMax","PreviewStack"];export{e as PreviewMax,r as PreviewStack,K as __namedExportsOrder,J as default};
