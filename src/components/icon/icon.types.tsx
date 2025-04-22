@@ -37,6 +37,7 @@ export type StyledLibraryIconIdItemProps = AddDollarSign<Pick<LibraryIconItemPro
   DollarFlexContainerAndItemAndBasicProps
 
 export enum LibraryIconIdName {
+  Close,
   Biometry,
   QR,
   Search,
