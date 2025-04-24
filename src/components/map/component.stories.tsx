@@ -7,8 +7,7 @@ import { useGeolocation } from '@local/contexts/context-geolocation'
 import { DEFAULT_MAP_CENTER, DEFAULT_MAP_THEME, DEFAULT_MAP_THEME_LIST, Map, MapProps } from '.'
 import { Button } from '../button'
 import { ButtonGroup } from '../button-group'
-import { Slider } from '../slider'
-import { IMAGES } from '../slider/slider.stories'
+import { IMAGES, Slider } from '../slider'
 import { Stack } from '../stack'
 
 const meta: Meta<typeof Map> = {
@@ -41,16 +40,22 @@ const PopupContent: FC = () => {
         br: '10px'
       }}
     >
-      <Stack justifyContent="flex-end" p="5px" flexGrow={1}>
-        <Button
-          isHiddenBorder
-          genre="productBorder"
-          width="asHeight"
-          size="small"
-          iconName="Close"
-          onClick={handleClose}
-        />
-      </Stack>
+      {({ isDialog }) =>
+        isDialog ? (
+          <></>
+        ) : (
+          <Stack justifyContent="flex-end" p="5px" flexGrow={1}>
+            <Button
+              isHiddenBorder
+              genre="productBorder"
+              width="asHeight"
+              size="small"
+              iconName="Close"
+              onClick={handleClose}
+            />
+          </Stack>
+        )
+      }
     </Slider>
   )
 }

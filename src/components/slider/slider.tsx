@@ -134,7 +134,7 @@ export const Slider: FC<SliderProps> = props => {
               {(params?.images ?? [])?.[params?.activeImageIndex ?? 0]?.children}
             </SliderImage>
           </AnimatePresence>
-          {params?.children}
+          {typeof params?.children === 'function' ? params?.children?.({ isDialog: true }) : params?.children}
           <Stack style={{ position: 'absolute', bottom: 15, left: 15 }} gap="8px">
             <Button
               genre="productBorder"
@@ -239,7 +239,7 @@ export const Slider: FC<SliderProps> = props => {
             {props.images[activeImageIndex]?.children}
           </SliderImage>
         </AnimatePresence>
-        {props?.children}
+        {typeof props?.children === 'function' ? props?.children?.({ isDialog: false }) : props?.children}
 
         <Button
           styleCSS={{
