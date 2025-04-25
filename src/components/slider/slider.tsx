@@ -137,7 +137,7 @@ export const Slider: FC<SliderProps> = props => {
           {typeof params?.children === 'function' ? params?.children?.({ isDialog: true }) : params?.children}
           <Stack style={{ position: 'absolute', bottom: 15, left: 15 }} gap="8px">
             <Button
-              genre="productBorder"
+              genre="realebail-white"
               size="small"
               iconName="Arrow4"
               width="asHeight"
@@ -148,7 +148,7 @@ export const Slider: FC<SliderProps> = props => {
               onClick={() => params?.swipeToImage?.(-1)}
             />
             <Button
-              genre="productBorder"
+              genre="realebail-white"
               size="small"
               iconName="Arrow4"
               width="asHeight"
@@ -166,7 +166,7 @@ export const Slider: FC<SliderProps> = props => {
               bottom: 15,
               right: 15
             }}
-            genre="productBorder"
+            genre="realebail-white"
             size="small"
             iconName="Arrow4"
             width="asHeight"
@@ -248,7 +248,7 @@ export const Slider: FC<SliderProps> = props => {
             left: 5,
             transform: 'translateY(-50%)'
           }}
-          genre="productBorder"
+          genre="realebail-white"
           size="small"
           iconName="Arrow4"
           width="asHeight"
@@ -264,7 +264,7 @@ export const Slider: FC<SliderProps> = props => {
             right: 5,
             transform: 'translateY(-50%)'
           }}
-          genre="productBorder"
+          genre="realebail-white"
           size="small"
           iconName="Arrow4"
           width="asHeight"
@@ -279,7 +279,7 @@ export const Slider: FC<SliderProps> = props => {
             bottom: 5,
             right: 5
           }}
-          genre="productBorder"
+          genre="realebail-white"
           size="small"
           iconName="Activity"
           width="asHeight"

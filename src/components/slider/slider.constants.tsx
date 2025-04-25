@@ -9,7 +9,7 @@ export const IMAGES: SliderProps['images'] = [
     id: 0,
     children: (
       <Stack justifyContent="flex-start" p="5px" flexGrow={1}>
-        <Button isHiddenBorder isDisabled genre="productBorder" size="medium">
+        <Button isHiddenBorder isDisabled genre="realebail-white" size="medium" customFontWeight={400}>
           Los Angeles
         </Button>
       </Stack>
@@ -21,7 +21,7 @@ export const IMAGES: SliderProps['images'] = [
     id: 1,
     children: (
       <Stack justifyContent="flex-start" p="5px" flexGrow={1}>
-        <Button isHiddenBorder isDisabled genre="productBorder" size="medium">
+        <Button isHiddenBorder isDisabled genre="realebail-white" size="medium" customFontWeight={400}>
           Los Angeles
         </Button>
       </Stack>
@@ -33,7 +33,7 @@ export const IMAGES: SliderProps['images'] = [
     id: 2,
     children: (
       <Stack justifyContent="flex-start" p="5px" flexGrow={1}>
-        <Button isHiddenBorder isDisabled genre="productBorder" size="medium">
+        <Button isHiddenBorder isDisabled genre="realebail-white" size="medium" customFontWeight={400}>
           Los Angeles
         </Button>
       </Stack>
@@ -45,7 +45,7 @@ export const IMAGES: SliderProps['images'] = [
     id: 3,
     children: (
       <Stack justifyContent="flex-start" p="5px" flexGrow={1}>
-        <Button isHiddenBorder isDisabled genre="productBorder" size="medium">
+        <Button isHiddenBorder isDisabled genre="realebail-white" size="medium" customFontWeight={400}>
           Смотрит на Бога, но с другой стороны
         </Button>
       </Stack>
@@ -56,7 +56,7 @@ export const IMAGES: SliderProps['images'] = [
     id: 4,
     children: (
       <Stack justifyContent="flex-start" p="5px" flexGrow={1}>
-        <Button isHiddenBorder isDisabled genre="productBorder" size="medium">
+        <Button isHiddenBorder isDisabled genre="realebail-white" size="medium" customFontWeight={400}>
           Дует в трубу
         </Button>
       </Stack>

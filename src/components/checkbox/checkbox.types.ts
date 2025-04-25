@@ -33,7 +33,7 @@ export interface CheckboxProps extends PropsWithChildren {
 
   onChange?: (checked: boolean) => void
 
-  width?: string
+  width?: string | 'asHeight'
 
   size: TJeneseiThemeSize
 

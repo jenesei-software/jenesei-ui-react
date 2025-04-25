@@ -51,6 +51,8 @@ export enum LibraryIconIdName {
   Chat,
   Heart,
   Paper,
+  Plus,
+  Minus,
   PaperPlus,
   PaperNegative,
   PaperFail,
@@ -131,7 +133,8 @@ export enum LibraryIconIdName {
 export enum LibraryIconCheckboxName {
   Radio,
   Square,
-  Arrow
+  Arrow,
+  Heart
 }
 export enum LibraryIcoLoadingName {
   Line,

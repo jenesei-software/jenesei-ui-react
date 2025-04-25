@@ -9,10 +9,18 @@ import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.'
 export const Button: FC<ButtonProps> = props => {
   const theme = useTheme()
 
-  const LoadingComponent = <Icon size={props.size} type="loading" name="Line" order={props.loadingOrder} />
+  const LoadingComponent = (
+    <Icon size={props.iconSize ?? props.size} type="loading" name="Line" order={props.loadingOrder} />
+  )
 
   const IconComponent = props.iconName && (
-    <Icon name={props.iconName} type="id" size={props.size} turn={props.iconTurn} order={props.iconOrder} />
+    <Icon
+      name={props.iconName}
+      type="id"
+      size={props.iconSize ?? props.size}
+      turn={props.iconTurn}
+      order={props.iconOrder}
+    />
   )
 
   const handleClick: ButtonProps['onClick'] = event => {

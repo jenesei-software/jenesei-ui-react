@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, useMap } from 'react-leaflet'
 import 'react-leaflet-markercluster/styles'
 
+import { useDebouncedCallback } from '@local/hooks/use-debounced-callback'
+
 import { DEFAULT_MAP_ZOOM, MapProps, MapWrapper, MarkerCluster } from '.'
 import { Button } from '../button'
 
@@ -26,9 +28,6 @@ export const Map = <T extends object>(props: MapProps<T>) => {
           maxZoom={18}
           attributionControl={false}
           style={{ height: '100%', width: '100%' }}
-          scrollWheelZoom={true}
-          wheelDebounceTime={100}
-          wheelPxPerZoomLevel={150}
         >
           <CustomZoomControl />
           <TileLayer url={theme.url} attribution={theme.attribution} />
@@ -41,8 +40,8 @@ export const Map = <T extends object>(props: MapProps<T>) => {
 function CustomZoomControl() {
   const map = useMap()
 
-  const handleZoomIn = () => map.zoomIn()
-  const handleZoomOut = () => map.zoomOut()
+  const handleZoomOut = useDebouncedCallback(() => map.zoomOut(), 400)
+  const handleZoomIn = useDebouncedCallback(() => map.zoomIn(), 400)
 
   return (
     <div
@@ -59,30 +58,22 @@ function CustomZoomControl() {
     >
       <Button
         isHiddenBorder
-        genre="product"
+        genre="realebail-product"
         width="asHeight"
         size="small"
-        styleCSS={{
-          fontSize: '22px'
-        }}
-        isPlaystationEffect
+        iconSize="medium"
+        iconName="Plus"
         onClick={handleZoomIn}
-      >
-        +
-      </Button>
+      />
       <Button
         isHiddenBorder
-        styleCSS={{
-          fontSize: '22px'
-        }}
-        isPlaystationEffect
-        genre="product"
+        genre="realebail-product"
         width="asHeight"
         size="small"
+        iconSize="medium"
+        iconName="Minus"
         onClick={handleZoomOut}
-      >
-        -
-      </Button>
+      />
     </div>
   )
 }
