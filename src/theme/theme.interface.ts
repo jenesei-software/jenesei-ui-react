@@ -129,6 +129,9 @@ export interface TJeneseiThemeGenre {
   greenTransparent: TJeneseiThemeGenreType
   redTransparent: TJeneseiThemeGenreType
   yellowTransparent: TJeneseiThemeGenreType
+  'realebail-product': TJeneseiThemeGenreType
+  'realebail-gray': TJeneseiThemeGenreType
+  'realebail-white': TJeneseiThemeGenreType
 }
 
 export interface TJeneseiThemeGenreToggle {
@@ -183,7 +186,7 @@ export type IJeneseiThemeScreens = Record<TJeneseiDevice, { width: string }>
 
 export type TJeneseiThemeSize = 'large' | 'largeMedium' | 'medium' | 'mediumSmall' | 'small'
 
-export type TJeneseiFontFamily = 'Inter' | 'Roboto'
+export type TJeneseiFontFamily = 'Inter' | 'Roboto' | 'Work Sans'
 
 export type TJeneseiTypographyHeading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9'
 export type TJeneseiTypographyWeight = 100 | 300 | 400 | 500 | 700 | 900
@@ -239,6 +242,7 @@ export type JeneseiPaletteKeys =
   | 'black40'
   | 'black10'
   | 'black05'
+  | 'blackHelena'
   | 'grayJanice'
   | 'grayKaren'
   | 'grayMonica'
@@ -246,6 +250,7 @@ export type JeneseiPaletteKeys =
   | 'grayPatricia'
   | 'graySarah'
   | 'grayStassie'
+  | 'grayAdriana'
   | 'greenGoogle'
   | 'green100'
   | 'green50'
@@ -253,6 +258,7 @@ export type JeneseiPaletteKeys =
   | 'green10'
   | 'green10Background'
   | 'whiteStandard'
+  | 'whiteJanice'
   | 'yellowGoogle'
   | 'yellow100'
   | 'yellow50'
@@ -271,6 +277,8 @@ export type JeneseiPaletteKeys =
   | 'blueHover'
   | 'blueFocus'
   | 'blueBr'
+  | 'blueKaren'
+  | 'blueMonica'
   | 'amnezia'
   | 'inherit'
   | 'currentColor'

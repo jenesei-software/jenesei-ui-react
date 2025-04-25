@@ -8,7 +8,7 @@ export const getFontSizeStyles = (
   family: TypographyCSSProps['$family'],
   height?: TypographyCSSProps['$height']
 ) => css`
-  font-family: ${family};
+  font-family: ${family ? family : 'inherit'};
   font-style: normal;
   line-height: ${props => props.theme.font.lineHeight};
   font-size: ${size}px;

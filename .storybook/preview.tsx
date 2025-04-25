@@ -21,6 +21,12 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import '@fontsource/roboto/900.css'
+import '@fontsource/work-sans/100.css'
+import '@fontsource/work-sans/300.css'
+import '@fontsource/work-sans/400.css'
+import '@fontsource/work-sans/500.css'
+import '@fontsource/work-sans/700.css'
+import '@fontsource/work-sans/900.css'
 
 gsap.registerPlugin(useGSAP)
 

@@ -22,6 +22,8 @@ export interface ButtonProps extends PropsWithChildren {
 
   iconName?: TLibraryIconIdNameString
 
+  iconSize?: TJeneseiThemeSize
+
   iconOrder?: LibraryIconItemProps['order']
 
   iconTurn?: LibraryIconItemProps['turn']

@@ -9,15 +9,30 @@ import { StyledCheckboxProps, StyledIconProps } from '.'
 
 /****************************************** Size *************************************************/
 export const CheckboxSize = css<StyledCheckboxProps>`
-  ${props => CheckboxSizeConstructor(KEY_SIZE_DATA[props.$size])};
+  ${props => CheckboxSizeConstructor({ ...KEY_SIZE_DATA[props.$size], $width: props.$width })};
 `
-export const CheckboxSizeConstructor = (props: IJeneseiThemeSize) => css`
+export const CheckboxSizeConstructor = (
+  props: IJeneseiThemeSize & {
+    $width?: string
+  }
+) => css`
   height: ${props.height}px;
   min-height: ${props.height}px;
   border-radius: ${props.radius}px;
   gap: ${props.padding - 2}px;
   ${getFontSizeStyles(props.font, 700, 'Inter')};
   padding: ${props.padding - 4}px;
+  ${props.$width === 'asHeight'
+    ? css`
+        width: ${props.height}px;
+        min-width: ${props.height}px;
+        padding: 0px;
+        justify-content: center;
+      `
+    : css`
+        width: ${props.$width ?? 'max-content'};
+        min-width: ${props.$width ? `${props.$width}px` : 'max-content'};
+      `};
 `
 
 /****************************************** Genre *************************************************/
@@ -86,8 +101,6 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   font-family: ${props => props.$customFontFamily};
   font-size: ${props => props.$customFontSize};
   font-weight: ${props => props.$customFontWeight};
-  width: ${props => props.$width ?? 'max-content'};
-  min-width: ${props => props.$width ?? 'max-content'};
   background-color: ${props => props.$isNotBackground && 'transparent'};
 `
 
@@ -97,7 +110,7 @@ export const StyledIcon = styled(Icon)<StyledIconProps>`
     props.$checked
       ? css`
           & #check {
-            color: ${props.theme.colors.checkbox[props.$genre].color.rest};
+            color: inherit;
           }
           & #uncheck {
             color: transparent;
@@ -108,7 +121,7 @@ export const StyledIcon = styled(Icon)<StyledIconProps>`
             color: transparent;
           }
           & #uncheck {
-            color: ${props.theme.colors.checkbox[props.$genre].color.rest};
+            color: inherit;
           }
         `}
 `
