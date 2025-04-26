@@ -1,3 +1,3 @@
-export * from './accordion'
-export * from './accordion.styles'
-export * from './accordion.types'
+export * from './component'
+export * from './component.styles'
+export * from './component.types'

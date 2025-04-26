@@ -1,6 +1,6 @@
 import { AddDollarSign } from '@local/types'
 
-import { InputProps } from '../input/input.types'
+import { InputProps } from '../input/component.types'
 
 export type InputOTPProps = {
   length: number

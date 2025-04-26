@@ -1,3 +1,3 @@
-export * from './context-screen-width'
-export * from './context-screen-width.types'
-export * from './context-screen-width.hooks'
+export * from './context'
+export * from './context.types'
+export * from './context.hooks'

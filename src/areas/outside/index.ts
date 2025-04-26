@@ -1,1 +1,1 @@
-export * from './outside'
+export * from './area'

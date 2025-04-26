@@ -1,3 +1,3 @@
-export * from './skeleton.styles'
-export * from './skeleton'
-export * from './skeleton.types'
+export * from './area.styles'
+export * from './area'
+export * from './area.types'

@@ -1,3 +1,3 @@
-export * from './input-otp'
-export * from './input-otp.styles'
-export * from './input-otp.types'
+export * from './component'
+export * from './component.styles'
+export * from './component.types'

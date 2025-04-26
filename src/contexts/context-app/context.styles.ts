@@ -94,6 +94,7 @@ const visibleStyles = css`
 `
 
 export const ProviderAppOutletChildren = styled.main`
+  display: flex;
   grid-area: children;
   max-width: 100%;
   max-height: 100%;

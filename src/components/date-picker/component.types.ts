@@ -67,11 +67,11 @@ export type DateStyledOptionProps = AddDollarSign<{
 export type DateStyledListProps = AddDollarSign<Pick<InputProps, 'genre' | 'size'>>
 
 export type DateDropdownListProps = AddDollarSign<
-  Pick<DatePickerProps, 'isInputEffect'> & Pick<InputProps, 'genre' | 'size'>
+  Pick<DatePickerProps, 'isInputEffect'> & Pick<DatePickerProps, 'genre' | 'size'>
 >
 
 export type DateDropdownDayProps = AddDollarSign<
-  Pick<InputProps, 'genre' | 'size'> &
+  Pick<DatePickerProps, 'genre' | 'size'> &
     Pick<DateDayProps, 'isToday' | 'isWeekend'> & {
       row: number
       column: number

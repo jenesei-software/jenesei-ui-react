@@ -1,3 +1,3 @@
-export * from './separator'
-export * from './separator.styles'
-export * from './separator.types'
+export * from './component'
+export * from './component.styles'
+export * from './component.types'

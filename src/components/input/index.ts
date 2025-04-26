@@ -1,3 +1,3 @@
-export * from './input'
-export * from './input.styles'
-export * from './input.types'
+export * from './component'
+export * from './component.styles'
+export * from './component.types'
