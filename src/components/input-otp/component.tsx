@@ -1,8 +1,7 @@
 import { FocusEvent, KeyboardEvent, useCallback, useRef, useState } from 'react'
 
-import { Input } from '@local/main'
-
 import { InputOTPProps, InputOTPWrapper } from '.'
+import { Input } from '../input'
 
 export const InputOTP = (props: InputOTPProps) => {
   const [otp, setOtp] = useState<string[]>(new Array(props.length).fill(''))

@@ -6,9 +6,6 @@
     "type": "git",
     "url": "git+https://github.com/jenesei-software/jenesei-ui-react.git"
   },
-  "types": "./build/main.d.ts",
-  "module": "./build/main.es.js",
-  "main": "./build/main.cjs.js",
   "license": "MIT",
   "type": "module",
   "files": [
@@ -241,11 +238,6 @@
       "types": "./build/context-sonner.d.ts",
       "import": "./build/context-sonner.es.js",
       "require": "./build/context-sonner.cjs.js"
-    },
-    ".": {
-      "types": "./build/main.d.ts",
-      "import": "./build/main.es.js",
-      "require": "./build/main.cjs.js"
     }
   },
   "scripts": {

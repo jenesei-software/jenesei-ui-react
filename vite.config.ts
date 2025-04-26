@@ -38,7 +38,6 @@ export default defineConfig(() => {
       minify: 'esbuild',
       lib: {
         entry: {
-          main: resolve(__dirname, 'src/main.ts'),
           ['style-theme']: resolve(__dirname, 'src/theme/index.ts'),
 
           ['style-base']: resolve(__dirname, 'src/styles/base/index.ts'),
