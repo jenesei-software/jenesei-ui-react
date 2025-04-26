@@ -35,7 +35,7 @@ export default defineConfig(() => {
       sourcemap: true,
       outDir: './build',
       rootDir: './src',
-      minify: 'esbuild',
+      minify: 'terser',
       lib: {
         entry: {
           ['style-theme']: resolve(__dirname, 'src/theme/index.ts'),
