@@ -1,4 +1,4 @@
-import { FC, createContext, useCallback, useEffect, useState } from 'react'
+import { FC, createContext, useCallback, useEffect, useMemo, useState } from 'react'
 
 import { Preview, PreviewAdditionalProps } from '@local/areas/preview'
 import { JeneseiPalette, JeneseiPaletteKeys } from '@local/theme'
@@ -126,7 +126,7 @@ const usePreview = (defaultPreview: ProviderAppProps['defaultPreview']) => {
     if (defaultPreview) setPreviewProps(defaultPreview)
   }, [defaultPreview])
 
-  return { previewProps, changePreview }
+  return useMemo(() => ({ previewProps, changePreview }), [previewProps, changePreview])
 }
 
 /**
@@ -170,7 +170,10 @@ const useBgColor = (defaultColor: JeneseiPaletteKeys) => {
     setBgColor(defaultColor)
   }, [defaultColor])
 
-  return { bgColor, changeBgColor, historyBgColor, setDefaultBgColor }
+  return useMemo(
+    () => ({ bgColor, changeBgColor, historyBgColor, setDefaultBgColor }),
+    [bgColor, changeBgColor, historyBgColor, setDefaultBgColor]
+  )
 }
 
 /**
@@ -214,7 +217,10 @@ const useStatusBarColor = (defaultColor: JeneseiPaletteKeys) => {
     setStatusBarColor(defaultColor)
   }, [defaultColor])
 
-  return { statusBarColor, changeStatusBarColor, historyStatusBarColor, setDefaultStatusBarColor }
+  return useMemo(
+    () => ({ statusBarColor, changeStatusBarColor, historyStatusBarColor, setDefaultStatusBarColor }),
+    [statusBarColor, changeStatusBarColor, historyStatusBarColor, setDefaultStatusBarColor]
+  )
 }
 
 /**
@@ -258,7 +264,10 @@ const useBgImage = (defaultImage: string | null) => {
     setBgImage(defaultImage)
   }, [defaultImage])
 
-  return { bgImage, changeBgImage, historyBgImage, setDefaultBgImage }
+  return useMemo(
+    () => ({ bgImage, changeBgImage, historyBgImage, setDefaultBgImage }),
+    [bgImage, changeBgImage, historyBgImage, setDefaultBgImage]
+  )
 }
 
 /**
@@ -302,7 +311,10 @@ const useTitle = (defaultTitle: string | null) => {
     setTitle(defaultTitle)
   }, [defaultTitle])
 
-  return { title, changeTitle, historyTitle, setDefaultTitle }
+  return useMemo(
+    () => ({ title, changeTitle, historyTitle, setDefaultTitle }),
+    [title, changeTitle, historyTitle, setDefaultTitle]
+  )
 }
 
 /**
@@ -346,5 +358,8 @@ const useDescription = (defaultDescription: string) => {
     setDescription(defaultDescription)
   }, [defaultDescription])
 
-  return { description, changeDescription, historyDescription, setDefaultDescription }
+  return useMemo(
+    () => ({ description, changeDescription, historyDescription, setDefaultDescription }),
+    [description, changeDescription, historyDescription, setDefaultDescription]
+  )
 }
