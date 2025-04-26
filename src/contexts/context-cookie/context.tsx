@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-import { FC, createContext, useCallback, useEffect, useMemo, useState } from 'react'
+import { FC, createContext, useCallback, useEffect, useState } from 'react'
 
 import { CookieAttributes, CookieContextProps, ProviderCookieProps, ValidCookieObject } from '.'
 
@@ -122,8 +122,5 @@ const useProviderCookie = (props: ProviderCookieProps) => {
     checkCookie()
   }, [checkCookie])
 
-  return useMemo(
-    () => ({ getCookie, setCookie: changeCookie, removeCookieValue, removeCookieValues, checkCookie, cookieValues }),
-    [changeCookie, checkCookie, cookieValues, getCookie, removeCookieValue, removeCookieValues]
-  )
+  return { getCookie, setCookie: changeCookie, removeCookieValue, removeCookieValues, checkCookie, cookieValues }
 }
