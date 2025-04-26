@@ -36,6 +36,9 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     color: inherit;
   } 
 
+  body {
+    flex:1;
+  }
 
   @media screen and (max-width: 1024px) {
     body:has(.LayoutModal) {
