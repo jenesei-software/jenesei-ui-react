@@ -16,6 +16,7 @@ export type TypographyDefaultProps = PropsWithChildren & {
   decoration?: CSSProperties['textDecoration']
   transform?: CSSProperties['textTransform']
   wrap?: CSSProperties['textWrap']
+  letterSpacing?: CSSProperties['letterSpacing']
   cursor?: CSSProperties['cursor']
   style?: CSSProperties
   className?: string
@@ -56,6 +57,7 @@ export type TypographyCSSProps = Partial<
       | 'wrap'
       | 'flex'
       | 'isHoverUnderlining'
+      | 'letterSpacing'
       | 'cursor'
       | 'weight'
       | 'height'
