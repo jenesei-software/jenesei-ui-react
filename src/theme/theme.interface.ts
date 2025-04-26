@@ -147,6 +147,7 @@ export interface TJeneseiThemeGenreInput {
   gray: TJeneseiThemeGenreType
   grayBorder: TJeneseiThemeGenreType
   blackBorder: TJeneseiThemeGenreType
+  'realebail-white': TJeneseiThemeGenreType
 }
 export interface TJeneseiThemeGenreSelect {
   gray: TJeneseiThemeGenreTypeSelect
@@ -252,6 +253,7 @@ export type JeneseiPaletteKeys =
   | 'grayStassie'
   | 'grayAdriana'
   | 'greenGoogle'
+  | 'grayBarbara'
   | 'green100'
   | 'green50'
   | 'green25'

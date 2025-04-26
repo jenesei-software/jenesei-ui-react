@@ -27,6 +27,7 @@ export const JeneseiPalette: Record<JeneseiPaletteKeys, string> = {
   graySarah: '#737373',
   grayStassie: '#8D8D8F',
   grayAdriana: '#909090',
+  grayBarbara: '#EBEEEA',
   whiteStandard: '#ffffff',
   whiteJanice: '#F7FAFF',
   greenGoogle: '#34a853',
@@ -257,6 +258,21 @@ const DefaultJeneseiThemeGenre = {
 }
 
 const DefaultJeneseiThemeGenreInput = {
+  'realebail-white': {
+    background: {
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard
+    },
+    color: {
+      rest: JeneseiPalette.black80,
+      hover: JeneseiPalette.black80,
+      placeholder: JeneseiPalette.grayAdriana
+    },
+    border: {
+      rest: JeneseiPalette.grayBarbara,
+      hover: JeneseiPalette.grayBarbara
+    }
+  },
   gray: {
     background: {
       rest: JeneseiPalette.grayJanice,
