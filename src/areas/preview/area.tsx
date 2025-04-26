@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react'
 
-import { Icon } from '@local/main'
+import { Icon } from '@local/components/icon'
 
 import { LoadingWrapper, PreviewChildren, PreviewContent, PreviewProps, PreviewWrapper } from '.'
 

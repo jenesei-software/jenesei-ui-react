@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FC } from 'react'
 import 'styled-components'
 
+import { Typography } from '@local/components/typography'
 import { ProviderScreenWidth } from '@local/contexts/context-screen-width'
-import { Typography } from '@local/main'
 
 import { AuthLayout, AuthLayoutProps } from '../layouts/auth'
 

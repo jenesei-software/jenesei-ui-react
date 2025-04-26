@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 
+import { Skeleton } from '@local/areas/skeleton'
 import { Stack } from '@local/components/stack'
-import { Skeleton } from '@local/main'
 
 import { ImageIMG, ImageProps } from '.'
 
