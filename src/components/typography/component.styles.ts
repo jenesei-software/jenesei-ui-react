@@ -13,6 +13,11 @@ const TypographyCSS = css<TypographyCSSProps>`
   line-height: ${props => props.theme.font.lineHeight};
 
   ${props =>
+    props.$letterSpacing &&
+    css`
+      letter-spacing: ${props.$letterSpacing};
+    `};
+  ${props =>
     props.$flex &&
     css`
       flex: ${props.$flex};
