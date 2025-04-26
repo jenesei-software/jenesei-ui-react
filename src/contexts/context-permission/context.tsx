@@ -1,4 +1,4 @@
-import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
+import { createContext, useCallback, useEffect, useState } from 'react'
 
 import { PermissionContextProps, ProviderPermissionProps } from '.'
 
@@ -52,7 +52,7 @@ const useBiometricSupported = () => {
     checkBiometricAvailability()
   }, [])
 
-  return useMemo(() => ({ isBiometricSupported }), [isBiometricSupported])
+  return { isBiometricSupported }
 }
 
 const useGeolocationPermission = () => {
@@ -81,10 +81,7 @@ const useGeolocationPermission = () => {
     }
   }, [])
 
-  return useMemo(
-    () => ({ geolocationPermission, requestGeolocationPermission }),
-    [geolocationPermission, requestGeolocationPermission]
-  )
+  return { geolocationPermission, requestGeolocationPermission }
 }
 
 const useNotificationPermission = () => {
@@ -116,10 +113,7 @@ const useNotificationPermission = () => {
     }
   }, [])
 
-  return useMemo(
-    () => ({ notificationPermission, requestNotificationPermission, isNotificationPermissionLoading }),
-    [isNotificationPermissionLoading, notificationPermission, requestNotificationPermission]
-  )
+  return { notificationPermission, requestNotificationPermission, isNotificationPermissionLoading }
 }
 
 const usePushNotificationSupported = () => {
@@ -131,5 +125,5 @@ const usePushNotificationSupported = () => {
     }
   }, [])
 
-  return useMemo(() => ({ pushNotificationSupported }), [pushNotificationSupported])
+  return { pushNotificationSupported }
 }

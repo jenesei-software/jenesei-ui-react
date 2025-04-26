@@ -1,4 +1,4 @@
-import { FC, createContext, useCallback, useEffect, useMemo, useState } from 'react'
+import { FC, createContext, useCallback, useEffect, useState } from 'react'
 
 import { Preview, PreviewAdditionalProps } from '@local/areas/preview'
 import { JeneseiPalette, JeneseiPaletteKeys } from '@local/theme'
@@ -49,7 +49,7 @@ export const ProviderApp: FC<ProviderAppProps> = props => {
     props.defaultStatusBarColor
   )
   const { bgImage, changeBgImage, historyBgImage, setDefaultBgImage } = useBgImage(props.defaultBgImage || null)
-  const { title, changeTitle, historyTitle, setDefaultTitle } = useTitle(props.defaultTitle || null)
+  const { title, changeTitle, setHistoryTitle, setDefaultTitle } = useTitle(props.defaultTitle || null)
   const { description, changeDescription, historyDescription, setDefaultDescription } = useDescription(
     props.defaultDescription
   )
@@ -67,7 +67,7 @@ export const ProviderApp: FC<ProviderAppProps> = props => {
         historyStatusBarColor,
         historyBgColor,
         historyBgImage,
-        historyTitle,
+        setHistoryTitle,
         historyDescription,
         setDefaultStatusBarColor,
         setDefaultBgColor,
@@ -126,240 +126,335 @@ const usePreview = (defaultPreview: ProviderAppProps['defaultPreview']) => {
     if (defaultPreview) setPreviewProps(defaultPreview)
   }, [defaultPreview])
 
-  return useMemo(() => ({ previewProps, changePreview }), [previewProps, changePreview])
+  return { previewProps, changePreview }
 }
 
 /**
  * Custom hook to manage background color state with history tracking.
  */
-const useBgColor = (defaultColor: JeneseiPaletteKeys) => {
-  const [bgColor, setBgColor] = useState(defaultColor)
-  const [bgColorHistory, setBgColorHistory] = useState([defaultColor])
-  const [bgColorIndex, setBgColorIndex] = useState(0)
+type BgColorState = {
+  bgColor: JeneseiPaletteKeys
+  bgColorHistory: JeneseiPaletteKeys[]
+  bgColorIndex: number
+}
 
-  const changeBgColor = useCallback(
-    (color: JeneseiPaletteKeys) => {
-      setBgColor(color)
-      setBgColorHistory(prev => {
-        const newHistory = [...prev.slice(0, bgColorIndex + 1), color]
-        setBgColorIndex(newHistory.length - 1)
-        return newHistory
-      })
-    },
-    [bgColorIndex]
-  )
+export const useBgColor = (defaultColor: JeneseiPaletteKeys) => {
+  const [state, setState] = useState<BgColorState>({
+    bgColor: defaultColor,
+    bgColorHistory: [defaultColor],
+    bgColorIndex: 0
+  })
 
-  const historyBgColor = useCallback(
-    (steps: number) => {
-      const newIndex = bgColorIndex + steps
-      if (newIndex >= 0 && newIndex < bgColorHistory.length) {
-        setBgColor(bgColorHistory[newIndex])
-        setBgColorIndex(newIndex)
+  const changeBgColor = useCallback((color: JeneseiPaletteKeys) => {
+    setState(prev => {
+      const newHistory = [...prev.bgColorHistory.slice(0, prev.bgColorIndex + 1), color]
+      return {
+        bgColor: color,
+        bgColorHistory: newHistory,
+        bgColorIndex: newHistory.length - 1
       }
-    },
-    [bgColorHistory, bgColorIndex]
-  )
+    })
+  }, [])
+
+  const historyBgColor = useCallback((steps: number) => {
+    setState(prev => {
+      const newIndex = prev.bgColorIndex + steps
+      if (newIndex >= 0 && newIndex < prev.bgColorHistory.length) {
+        return {
+          ...prev,
+          bgColor: prev.bgColorHistory[newIndex],
+          bgColorIndex: newIndex
+        }
+      }
+      return prev
+    })
+  }, [])
 
   const setDefaultBgColor = useCallback(() => {
-    setBgColor(defaultColor)
-    setBgColorHistory([defaultColor])
-    setBgColorIndex(0)
+    setState({
+      bgColor: defaultColor,
+      bgColorHistory: [defaultColor],
+      bgColorIndex: 0
+    })
   }, [defaultColor])
 
   useEffect(() => {
-    setBgColor(defaultColor)
+    setState({
+      bgColor: defaultColor,
+      bgColorHistory: [defaultColor],
+      bgColorIndex: 0
+    })
   }, [defaultColor])
 
-  return useMemo(
-    () => ({ bgColor, changeBgColor, historyBgColor, setDefaultBgColor }),
-    [bgColor, changeBgColor, historyBgColor, setDefaultBgColor]
-  )
+  return {
+    bgColor: state.bgColor,
+    changeBgColor,
+    historyBgColor,
+    setDefaultBgColor,
+    bgColorIndex: state.bgColorIndex
+  }
 }
 
 /**
  * Custom hook to manage the status bar color with history tracking.
  */
-const useStatusBarColor = (defaultColor: JeneseiPaletteKeys) => {
-  const [statusBarColor, setStatusBarColor] = useState(defaultColor)
-  const [statusBarColorHistory, setStatusBarColorHistory] = useState([defaultColor])
-  const [statusBarColorIndex, setStatusBarColorIndex] = useState(0)
+type StatusBarColorState = {
+  statusBarColor: JeneseiPaletteKeys
+  statusBarColorHistory: JeneseiPaletteKeys[]
+  statusBarColorIndex: number
+}
 
-  const changeStatusBarColor = useCallback(
-    (color: JeneseiPaletteKeys) => {
-      setStatusBarColor(color)
-      setStatusBarColorHistory(prev => {
-        const newHistory = [...prev.slice(0, statusBarColorIndex + 1), color]
-        setStatusBarColorIndex(newHistory.length - 1)
-        return newHistory
-      })
-    },
-    [statusBarColorIndex]
-  )
+export const useStatusBarColor = (defaultColor: JeneseiPaletteKeys) => {
+  const [state, setState] = useState<StatusBarColorState>({
+    statusBarColor: defaultColor,
+    statusBarColorHistory: [defaultColor],
+    statusBarColorIndex: 0
+  })
 
-  const historyStatusBarColor = useCallback(
-    (steps: number) => {
-      const newIndex = statusBarColorIndex + steps
-      if (newIndex >= 0 && newIndex < statusBarColorHistory.length) {
-        setStatusBarColor(statusBarColorHistory[newIndex])
-        setStatusBarColorIndex(newIndex)
+  const changeStatusBarColor = useCallback((color: JeneseiPaletteKeys) => {
+    setState(prev => {
+      const newHistory = [...prev.statusBarColorHistory.slice(0, prev.statusBarColorIndex + 1), color]
+      return {
+        statusBarColor: color,
+        statusBarColorHistory: newHistory,
+        statusBarColorIndex: newHistory.length - 1
       }
-    },
-    [statusBarColorHistory, statusBarColorIndex]
-  )
+    })
+  }, [])
+
+  const historyStatusBarColor = useCallback((steps: number) => {
+    setState(prev => {
+      const newIndex = prev.statusBarColorIndex + steps
+      if (newIndex >= 0 && newIndex < prev.statusBarColorHistory.length) {
+        return {
+          ...prev,
+          statusBarColor: prev.statusBarColorHistory[newIndex],
+          statusBarColorIndex: newIndex
+        }
+      }
+      return prev
+    })
+  }, [])
 
   const setDefaultStatusBarColor = useCallback(() => {
-    setStatusBarColor(defaultColor)
-    setStatusBarColorHistory([defaultColor])
-    setStatusBarColorIndex(0)
+    setState({
+      statusBarColor: defaultColor,
+      statusBarColorHistory: [defaultColor],
+      statusBarColorIndex: 0
+    })
   }, [defaultColor])
 
   useEffect(() => {
-    setStatusBarColor(defaultColor)
+    setState({
+      statusBarColor: defaultColor,
+      statusBarColorHistory: [defaultColor],
+      statusBarColorIndex: 0
+    })
   }, [defaultColor])
 
-  return useMemo(
-    () => ({ statusBarColor, changeStatusBarColor, historyStatusBarColor, setDefaultStatusBarColor }),
-    [statusBarColor, changeStatusBarColor, historyStatusBarColor, setDefaultStatusBarColor]
-  )
+  return {
+    statusBarColor: state.statusBarColor,
+    changeStatusBarColor,
+    historyStatusBarColor,
+    setDefaultStatusBarColor,
+    statusBarColorIndex: state.statusBarColorIndex
+  }
 }
 
 /**
  * Custom hook to manage background images with history.
  */
-const useBgImage = (defaultImage: string | null) => {
-  const [bgImage, setBgImage] = useState<string | null>(defaultImage)
-  const [bgImageHistory, setBgImageHistory] = useState<(string | null)[]>([defaultImage])
-  const [bgImageIndex, setBgImageIndex] = useState(0)
+type BgImageState = {
+  bgImage: string | null
+  bgImageHistory: (string | null)[]
+  bgImageIndex: number
+}
 
-  const changeBgImage = useCallback(
-    (image: string | null) => {
-      setBgImage(image)
-      setBgImageHistory(prev => {
-        const newHistory = [...prev.slice(0, bgImageIndex + 1), image]
-        setBgImageIndex(newHistory.length - 1)
-        return newHistory
-      })
-    },
-    [bgImageIndex]
-  )
+export const useBgImage = (defaultImage: string | null) => {
+  const [state, setState] = useState<BgImageState>({
+    bgImage: defaultImage,
+    bgImageHistory: [defaultImage],
+    bgImageIndex: 0
+  })
 
-  const historyBgImage = useCallback(
-    (steps: number) => {
-      const newIndex = bgImageIndex + steps
-      if (newIndex >= 0 && newIndex < bgImageHistory.length) {
-        setBgImage(bgImageHistory[newIndex])
-        setBgImageIndex(newIndex)
+  const changeBgImage = useCallback((image: string | null) => {
+    setState(prev => {
+      const newHistory = [...prev.bgImageHistory.slice(0, prev.bgImageIndex + 1), image]
+      return {
+        bgImage: image,
+        bgImageHistory: newHistory,
+        bgImageIndex: newHistory.length - 1
       }
-    },
-    [bgImageHistory, bgImageIndex]
-  )
+    })
+  }, [])
+
+  const historyBgImage = useCallback((steps: number) => {
+    setState(prev => {
+      const newIndex = prev.bgImageIndex + steps
+      if (newIndex >= 0 && newIndex < prev.bgImageHistory.length) {
+        return {
+          ...prev,
+          bgImage: prev.bgImageHistory[newIndex],
+          bgImageIndex: newIndex
+        }
+      }
+      return prev
+    })
+  }, [])
 
   const setDefaultBgImage = useCallback(() => {
-    setBgImage(defaultImage)
-    setBgImageHistory([defaultImage])
-    setBgImageIndex(0)
+    setState({
+      bgImage: defaultImage,
+      bgImageHistory: [defaultImage],
+      bgImageIndex: 0
+    })
   }, [defaultImage])
 
   useEffect(() => {
-    setBgImage(defaultImage)
+    setState({
+      bgImage: defaultImage,
+      bgImageHistory: [defaultImage],
+      bgImageIndex: 0
+    })
   }, [defaultImage])
 
-  return useMemo(
-    () => ({ bgImage, changeBgImage, historyBgImage, setDefaultBgImage }),
-    [bgImage, changeBgImage, historyBgImage, setDefaultBgImage]
-  )
+  return {
+    bgImage: state.bgImage,
+    changeBgImage,
+    historyBgImage,
+    setDefaultBgImage,
+    bgImageIndex: state.bgImageIndex
+  }
 }
 
+type TitleState = {
+  title: string | null
+  titleHistory: (string | null)[]
+  titleIndex: number
+}
 /**
  * Custom hook to manage the document title with history tracking.
  */
 const useTitle = (defaultTitle: string | null) => {
-  const [title, setTitle] = useState(defaultTitle)
-  const [titleHistory, setTitleHistory] = useState([defaultTitle])
-  const [titleIndex, setTitleIndex] = useState(0)
+  const [state, setState] = useState<TitleState>({
+    title: defaultTitle,
+    titleHistory: [defaultTitle],
+    titleIndex: 0
+  })
 
-  const changeTitle = useCallback(
-    (newTitle: string | null) => {
-      setTitle(newTitle)
-      setTitleHistory(prev => {
-        const newHistory = [...prev.slice(0, titleIndex + 1), newTitle]
-        setTitleIndex(newHistory.length - 1)
-        return newHistory
-      })
-    },
-    [titleIndex]
-  )
-
-  const historyTitle = useCallback(
-    (steps: number) => {
-      const newIndex = titleIndex + steps
-      if (newIndex >= 0 && newIndex < titleHistory.length) {
-        setTitle(titleHistory[newIndex])
-        setTitleIndex(newIndex)
+  const changeTitle = useCallback((newTitle: string | null) => {
+    setState(prev => {
+      const newHistory = [...prev.titleHistory.slice(0, prev.titleIndex + 1), newTitle]
+      return {
+        title: newTitle,
+        titleHistory: newHistory,
+        titleIndex: newHistory.length - 1
       }
-    },
-    [titleHistory, titleIndex]
-  )
+    })
+  }, [])
+
+  const setHistoryTitle = useCallback((steps: number) => {
+    setState(prev => {
+      const newIndex = prev.titleIndex + steps
+      if (newIndex >= 0 && newIndex < prev.titleHistory.length) {
+        return {
+          ...prev,
+          title: prev.titleHistory[newIndex],
+          titleIndex: newIndex
+        }
+      }
+      return prev
+    })
+  }, [])
 
   const setDefaultTitle = useCallback(() => {
-    setTitle(defaultTitle)
-    setTitleHistory([defaultTitle])
-    setTitleIndex(0)
+    setState({
+      title: defaultTitle,
+      titleHistory: [defaultTitle],
+      titleIndex: 0
+    })
   }, [defaultTitle])
 
   useEffect(() => {
-    setTitle(defaultTitle)
+    setState({
+      title: defaultTitle,
+      titleHistory: [defaultTitle],
+      titleIndex: 0
+    })
   }, [defaultTitle])
 
-  return useMemo(
-    () => ({ title, changeTitle, historyTitle, setDefaultTitle }),
-    [title, changeTitle, historyTitle, setDefaultTitle]
-  )
+  return {
+    title: state.title,
+    titleIndex: state.titleIndex,
+    titleHistory: state.titleHistory,
+    changeTitle,
+    setHistoryTitle,
+    setDefaultTitle
+  }
 }
 
 /**
  * Custom hook to manage a description with history tracking.
  */
-const useDescription = (defaultDescription: string) => {
-  const [description, setDescription] = useState(defaultDescription)
-  const [descriptionHistory, setDescriptionHistory] = useState([defaultDescription])
-  const [descriptionIndex, setDescriptionIndex] = useState(0)
+type DescriptionState = {
+  description: string
+  descriptionHistory: string[]
+  descriptionIndex: number
+}
 
-  const changeDescription = useCallback(
-    (newDescription: string) => {
-      setDescription(newDescription)
-      setDescriptionHistory(prev => {
-        const newHistory = [...prev.slice(0, descriptionIndex + 1), newDescription]
-        setDescriptionIndex(newHistory.length - 1)
-        return newHistory
-      })
-    },
-    [descriptionIndex]
-  )
+export const useDescription = (defaultDescription: string) => {
+  const [state, setState] = useState<DescriptionState>({
+    description: defaultDescription,
+    descriptionHistory: [defaultDescription],
+    descriptionIndex: 0
+  })
 
-  const historyDescription = useCallback(
-    (steps: number) => {
-      const newIndex = descriptionIndex + steps
-      if (newIndex >= 0 && newIndex < descriptionHistory.length) {
-        setDescription(descriptionHistory[newIndex])
-        setDescriptionIndex(newIndex)
+  const changeDescription = useCallback((newDescription: string) => {
+    setState(prev => {
+      const newHistory = [...prev.descriptionHistory.slice(0, prev.descriptionIndex + 1), newDescription]
+      return {
+        description: newDescription,
+        descriptionHistory: newHistory,
+        descriptionIndex: newHistory.length - 1
       }
-    },
-    [descriptionHistory, descriptionIndex]
-  )
+    })
+  }, [])
+
+  const historyDescription = useCallback((steps: number) => {
+    setState(prev => {
+      const newIndex = prev.descriptionIndex + steps
+      if (newIndex >= 0 && newIndex < prev.descriptionHistory.length) {
+        return {
+          ...prev,
+          description: prev.descriptionHistory[newIndex],
+          descriptionIndex: newIndex
+        }
+      }
+      return prev
+    })
+  }, [])
 
   const setDefaultDescription = useCallback(() => {
-    setDescription(defaultDescription)
-    setDescriptionHistory([defaultDescription])
-    setDescriptionIndex(0)
+    setState({
+      description: defaultDescription,
+      descriptionHistory: [defaultDescription],
+      descriptionIndex: 0
+    })
   }, [defaultDescription])
 
   useEffect(() => {
-    setDescription(defaultDescription)
+    setState({
+      description: defaultDescription,
+      descriptionHistory: [defaultDescription],
+      descriptionIndex: 0
+    })
   }, [defaultDescription])
 
-  return useMemo(
-    () => ({ description, changeDescription, historyDescription, setDefaultDescription }),
-    [description, changeDescription, historyDescription, setDefaultDescription]
-  )
+  return {
+    description: state.description,
+    changeDescription,
+    historyDescription,
+    setDefaultDescription,
+    descriptionIndex: state.descriptionIndex
+  }
 }

@@ -1,4 +1,4 @@
-import { FC, createContext, useCallback, useEffect, useMemo, useState } from 'react'
+import { FC, createContext, useCallback, useEffect, useState } from 'react'
 
 import { LocalStorageContextProps, ProviderLocalStorageProps, ValidLocalStorageObject } from '.'
 
@@ -127,22 +127,12 @@ const useProviderLocalStorage = (props: ProviderLocalStorageProps) => {
     checkLocalStorage()
   }, [checkLocalStorage])
 
-  return useMemo(
-    () => ({
-      getLocalStorage,
-      setLocalStorage: changeLocalStorage,
-      removeLocalStorageValue,
-      removeLocalStorageValues,
-      checkLocalStorage,
-      localStorageValues
-    }),
-    [
-      changeLocalStorage,
-      checkLocalStorage,
-      getLocalStorage,
-      localStorageValues,
-      removeLocalStorageValue,
-      removeLocalStorageValues
-    ]
-  )
+  return {
+    getLocalStorage,
+    setLocalStorage: changeLocalStorage,
+    removeLocalStorageValue,
+    removeLocalStorageValues,
+    checkLocalStorage,
+    localStorageValues
+  }
 }
