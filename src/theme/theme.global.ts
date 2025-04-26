@@ -12,14 +12,14 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  #root {
+  html {
     display: flex;
     overflow-x: hidden;
     max-width: 100dvw;
     min-height: 100dvh;
     height: 100%;
     font-size: ${props => props.theme.font.sizeDefault.default}px;
-    font-family: ${props => props.theme.font.family}, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: ${props => props.theme.font.family}, Inter, system-ui, sans-serif;
     font-weight: ${props => props.theme.font.weight};
     line-height: ${props => props.theme.font.lineHeight};
     transition: font-size ${props => props.theme.transition.default};

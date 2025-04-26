@@ -4,6 +4,8 @@ import gsap from 'gsap'
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 
+import { ProviderDialog } from '../src/contexts/context-dialog'
+import { ProviderGeolocation } from '../src/contexts/context-geolocation'
 import { ProviderPermission } from '../src/contexts/context-permission'
 import { JeneseiGlobalStyles, JeneseiTheme } from '../src/theme/index'
 
@@ -19,6 +21,12 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import '@fontsource/roboto/900.css'
+import '@fontsource/work-sans/100.css'
+import '@fontsource/work-sans/300.css'
+import '@fontsource/work-sans/400.css'
+import '@fontsource/work-sans/500.css'
+import '@fontsource/work-sans/700.css'
+import '@fontsource/work-sans/900.css'
 
 gsap.registerPlugin(useGSAP)
 
@@ -27,10 +35,14 @@ const preview: Preview = {
     Story => {
       return (
         <ProviderPermission>
-          <ThemeProvider theme={JeneseiTheme}>
-            <JeneseiGlobalStyles />
-            <Story />
-          </ThemeProvider>
+          <ProviderGeolocation>
+            <ThemeProvider theme={JeneseiTheme}>
+              <JeneseiGlobalStyles />
+              <ProviderDialog zIndex={1000}>
+                <Story />
+              </ProviderDialog>
+            </ThemeProvider>
+          </ProviderGeolocation>
         </ProviderPermission>
       )
     }

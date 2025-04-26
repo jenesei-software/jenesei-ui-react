@@ -1,1 +1,1 @@
-export * from './smooth'
+export * from './component'

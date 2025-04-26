@@ -1,3 +1,3 @@
-export * from './pagination'
-export * from './pagination.styles'
-export * from './pagination.types'
+export * from './component'
+export * from './component.styles'
+export * from './component.types'

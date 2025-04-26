@@ -1,3 +1,3 @@
-export * from './context-geolocation'
-export * from './context-geolocation.types'
-export * from './context-geolocation.hooks'
+export * from './context'
+export * from './context.types'
+export * from './context.hooks'

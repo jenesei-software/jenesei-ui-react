@@ -1,2 +1,2 @@
-export * from './base.types'
-export * from './base.styles'
+export * from './style.types'
+export * from './style'

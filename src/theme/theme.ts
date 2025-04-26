@@ -18,6 +18,7 @@ export const JeneseiPalette: Record<JeneseiPaletteKeys, string> = {
   black40: 'rgba(0 0 0 / 0.4)',
   black10: 'rgba(0 0 0 / 0.1)',
   black05: 'rgba(0 0 0 / 0.05)',
+  blackHelena: '#181818',
   grayJanice: '#f2f2f7',
   grayKaren: '#e5e5ea',
   grayMonica: '#c7c7cc',
@@ -25,7 +26,10 @@ export const JeneseiPalette: Record<JeneseiPaletteKeys, string> = {
   grayPatricia: '#484848',
   graySarah: '#737373',
   grayStassie: '#8D8D8F',
+  grayAdriana: '#909090',
+  grayBarbara: '#EBEEEA',
   whiteStandard: '#ffffff',
+  whiteJanice: '#F7FAFF',
   greenGoogle: '#34a853',
   green100: '#34a853',
   green25: 'rgba(52 168 83 / 0.25)',
@@ -50,10 +54,57 @@ export const JeneseiPalette: Record<JeneseiPaletteKeys, string> = {
   blueHover: 'rgba(23 105 165 / 0.8)',
   blueFocus: '#1769a5',
   blueBr: '#0975a6',
+  blueKaren: '#2A77EE',
+  blueMonica: '#174899',
   amnezia: '#222224'
 }
 
 const DefaultJeneseiThemeGenre = {
+  'realebail-white': {
+    background: {
+      rest: JeneseiPalette.whiteJanice,
+      hover: JeneseiPalette.whiteJanice
+    },
+    color: {
+      rest: JeneseiPalette.blueKaren,
+      hover: JeneseiPalette.blueMonica,
+      placeholder: JeneseiPalette.blueKaren
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
+    }
+  },
+  'realebail-product': {
+    background: {
+      rest: JeneseiPalette.blueKaren,
+      hover: JeneseiPalette.blueMonica
+    },
+    color: {
+      rest: JeneseiPalette.whiteJanice,
+      hover: JeneseiPalette.whiteJanice,
+      placeholder: JeneseiPalette.whiteJanice
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
+    }
+  },
+  'realebail-gray': {
+    background: {
+      rest: JeneseiPalette.grayAdriana,
+      hover: JeneseiPalette.graySarah
+    },
+    color: {
+      rest: JeneseiPalette.blackHelena,
+      hover: JeneseiPalette.blackHelena,
+      placeholder: JeneseiPalette.blackHelena
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
+    }
+  },
   white: {
     background: {
       rest: JeneseiPalette.whiteStandard,
@@ -207,6 +258,21 @@ const DefaultJeneseiThemeGenre = {
 }
 
 const DefaultJeneseiThemeGenreInput = {
+  'realebail-white': {
+    background: {
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard
+    },
+    color: {
+      rest: JeneseiPalette.black80,
+      hover: JeneseiPalette.black80,
+      placeholder: JeneseiPalette.grayAdriana
+    },
+    border: {
+      rest: JeneseiPalette.grayBarbara,
+      hover: JeneseiPalette.grayBarbara
+    }
+  },
   gray: {
     background: {
       rest: JeneseiPalette.grayJanice,
@@ -254,6 +320,24 @@ const DefaultJeneseiThemeGenreInput = {
   }
 }
 const DefaultJeneseiThemeGenreInputSelect = {
+  'realebail-white': {
+    background: {
+      rest: JeneseiPalette.whiteJanice,
+      hover: JeneseiPalette.whiteJanice,
+      select: ''
+    },
+    color: {
+      rest: JeneseiPalette.blueKaren,
+      hover: JeneseiPalette.blueMonica,
+      placeholder: JeneseiPalette.blueKaren,
+      select: ''
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent,
+      select: ''
+    }
+  },
   gray: {
     background: {
       rest: JeneseiPalette.grayJanice,

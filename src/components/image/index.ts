@@ -1,3 +1,3 @@
-export * from './image'
-export * from './image.types'
-export * from './image.styles'
+export * from './component'
+export * from './component.types'
+export * from './component.styles'
