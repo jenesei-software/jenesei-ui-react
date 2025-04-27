@@ -170,9 +170,9 @@ export const DatePicker = (props: DatePickerProps) => {
   }, [currentYear, currentMonth, currentDay, props.startDate])
 
   const updateDateFromTimestamp = useCallback(
-    (timestamp: number, isDay?: boolean) => {
+    (timestamp: number, isDay?: boolean, isChange?: boolean) => {
       const newDate = moment(timestamp).utc()
-      props.onChange(newDate.valueOf())
+      if (isChange) props.onChange(newDate.valueOf())
       setCurrentDay(newDate.date())
       setCurrentMonth(newDate.month())
       setCurrentYear(newDate.year())
@@ -189,16 +189,14 @@ export const DatePicker = (props: DatePickerProps) => {
   }, [props.value])
 
   useEffect(() => {
-    if (props.value) {
-      const momentValue = props.value ? moment(props.value).utc() : moment.utc()
-      const momentStartDate = props.startDate ? moment(props.startDate).utc() : null
-      const momentEndDate = props.endDate ? moment(props.endDate).utc() : null
+    const momentValue = props.value ? moment(props.value).utc() : moment.utc()
+    const momentStartDate = props.startDate ? moment(props.startDate).utc() : null
+    const momentEndDate = props.endDate ? moment(props.endDate).utc() : null
 
-      if (momentStartDate && momentValue.isBefore(momentStartDate, 'day')) {
-        updateDateFromTimestamp(momentStartDate.startOf('day').valueOf())
-      } else if (momentEndDate && momentValue.isAfter(momentEndDate, 'day')) {
-        updateDateFromTimestamp(momentEndDate.startOf('day').valueOf())
-      }
+    if (momentStartDate && momentValue.isBefore(momentStartDate, 'day')) {
+      updateDateFromTimestamp(momentStartDate.startOf('day').valueOf(), false, !!props.value)
+    } else if (momentEndDate && momentValue.isAfter(momentEndDate, 'day')) {
+      updateDateFromTimestamp(momentEndDate.startOf('day').valueOf(), false, !!props.value)
     }
   }, [props.endDate, props.startDate, props.value, updateDateFromTimestamp])
 
@@ -305,7 +303,9 @@ export const DatePicker = (props: DatePickerProps) => {
                         .startOf('day')
                         .utc()
                         .valueOf()}
-                      onChange={updateDateFromTimestamp}
+                      onChange={(timestamp: number) => {
+                        updateDateFromTimestamp(timestamp, false, true)
+                      }}
                       startDate={props.startDate}
                       endDate={props.endDate}
                       lang={'ru'}
@@ -322,7 +322,9 @@ export const DatePicker = (props: DatePickerProps) => {
                         .startOf('day')
                         .utc()
                         .valueOf()}
-                      onChange={updateDateFromTimestamp}
+                      onChange={(timestamp: number) => {
+                        updateDateFromTimestamp(timestamp, false, true)
+                      }}
                       startDate={props.startDate}
                       endDate={props.endDate}
                       lang={'ru'}
@@ -365,7 +367,7 @@ export const DatePicker = (props: DatePickerProps) => {
                         $row={day.weekOfMonth + 1}
                         $column={day.dayOfWeek}
                         key={day.value}
-                        onClick={() => updateDateFromTimestamp(day.value, true)}
+                        onClick={() => updateDateFromTimestamp(day.value, true, true)}
                         $isToday={day.isToday}
                         $isWeekend={day.isWeekend}
                         $isChoice={day.value === unixValue.valueOf()}
