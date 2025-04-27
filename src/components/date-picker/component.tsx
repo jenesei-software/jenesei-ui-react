@@ -177,6 +177,7 @@ export const DatePicker = (props: DatePickerProps) => {
       setCurrentMonth(newDate.month())
       setCurrentYear(newDate.year())
       if (props.isOnClickClose && isDay) {
+        props.onBlur?.()
         handleOnClose()
       }
     },
