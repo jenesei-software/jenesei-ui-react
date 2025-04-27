@@ -55,7 +55,7 @@ export const LastHundredYear18YearsAgo: Story = {
     width: '300px',
     startDate: LastHundredYear18YearsAgoStartDate,
     endDate: LastHundredYear18YearsAgoEndDate,
-    value: null
+    value: LastHundredYear18YearsAgoValue
   }
 }
 
