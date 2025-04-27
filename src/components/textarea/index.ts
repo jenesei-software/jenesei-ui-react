@@ -1,3 +1,3 @@
-export * from './textarea'
-export * from './textarea.styles'
-export * from './textarea.types'
+export * from './component'
+export * from './component.styles'
+export * from './component.types'

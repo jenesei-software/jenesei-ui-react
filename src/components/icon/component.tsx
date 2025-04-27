@@ -1,9 +1,9 @@
 import { JeneseiPalette } from '@local/theme/theme'
 
 import { LibraryIconItemProps, StyledSVG } from '.'
-import LibraryIconCheckboxJSON from './icon-checkbox.json'
-import LibraryIconIdJSON from './icon-id.json'
-import LibraryIconLoadingJSON from './icon-loading.json'
+import LibraryIconCheckboxJSON from './component-checkbox.json'
+import LibraryIconIdJSON from './component-id.json'
+import LibraryIconLoadingJSON from './component-loading.json'
 
 export const Icon = (props: LibraryIconItemProps) => {
   const icon =

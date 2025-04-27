@@ -1,10 +1,11 @@
 import { FC, useCallback, useMemo } from 'react'
 import { useTheme } from 'styled-components'
 
-import { Icon, Ripple } from '@local/main'
 import { ErrorMessage } from '@local/styles/error'
 
 import { CheckboxProps, CheckboxWrapper, StyledIcon } from '.'
+import { Icon } from '../icon'
+import { Ripple } from '../ripple'
 
 export const Checkbox: FC<CheckboxProps> = props => {
   const handleOnClick = useCallback(

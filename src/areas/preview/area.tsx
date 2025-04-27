@@ -1,29 +1,32 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useMemo, useState } from 'react'
 
-import { Icon } from '@local/main'
+import { Icon } from '@local/components/icon'
 
 import { LoadingWrapper, PreviewChildren, PreviewContent, PreviewProps, PreviewWrapper } from '.'
 
 export const Preview: FC<PreviewProps> = props => {
   const [visible, setVisible] = useState(props.defaultVisible ?? false)
 
+  const propsVisible = useMemo(() => ('visible' in props ? props.visible : null), [props])
+  const propsTime = useMemo(() => ('time' in props ? props.time : null), [props])
+
   useEffect(() => {
-    if ('time' in props) {
+    if (propsTime !== null) {
       const timer = setTimeout(() => {
         setVisible(true)
-      }, props.time)
+      }, propsTime)
 
       return () => {
         clearTimeout(timer)
       }
     }
-  }, [props])
+  }, [propsTime])
 
   useEffect(() => {
-    if ('visible' in props) {
-      setVisible(!props.visible)
+    if (propsVisible !== null) {
+      setVisible(!propsVisible)
     }
-  }, [props])
+  }, [propsVisible])
 
   return (
     <>

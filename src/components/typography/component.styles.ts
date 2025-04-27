@@ -13,6 +13,11 @@ const TypographyCSS = css<TypographyCSSProps>`
   line-height: ${props => props.theme.font.lineHeight};
 
   ${props =>
+    props.$letterSpacing &&
+    css`
+      letter-spacing: ${props.$letterSpacing};
+    `};
+  ${props =>
     props.$flex &&
     css`
       flex: ${props.$flex};
@@ -25,7 +30,7 @@ const TypographyCSS = css<TypographyCSSProps>`
   ${props =>
     props.$overflow &&
     css`
-     overflow ${props.$overflow};
+      overflow: ${props.$overflow};
     `};
   ${props =>
     props.$clamp &&

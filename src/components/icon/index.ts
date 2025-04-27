@@ -1,3 +1,3 @@
-export * from './icon'
-export * from './icon.types'
-export * from './icon.styles'
+export * from './component'
+export * from './component.types'
+export * from './component.styles'

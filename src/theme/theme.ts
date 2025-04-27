@@ -320,6 +320,24 @@ const DefaultJeneseiThemeGenreInput = {
   }
 }
 const DefaultJeneseiThemeGenreInputSelect = {
+  'realebail-white': {
+    background: {
+      rest: JeneseiPalette.whiteJanice,
+      hover: JeneseiPalette.whiteJanice,
+      select: ''
+    },
+    color: {
+      rest: JeneseiPalette.blueKaren,
+      hover: JeneseiPalette.blueMonica,
+      placeholder: JeneseiPalette.blueKaren,
+      select: ''
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent,
+      select: ''
+    }
+  },
   gray: {
     background: {
       rest: JeneseiPalette.grayJanice,

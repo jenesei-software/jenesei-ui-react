@@ -3,11 +3,11 @@ import moment from 'moment'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTheme } from 'styled-components'
 
+import { Outside } from '@local/areas/outside'
 import { Button } from '@local/components/button'
 import { Ripple } from '@local/components/ripple'
 import { SelectMonth, SelectYear } from '@local/components/select'
 import { Stack } from '@local/components/stack'
-import { Outside } from '@local/main'
 import { ErrorMessage } from '@local/styles/error'
 import { KEY_SIZE_DATA } from '@local/theme'
 

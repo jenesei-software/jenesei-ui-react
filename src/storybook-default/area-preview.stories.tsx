@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FC } from 'react'
 import 'styled-components'
 
-import { Stack } from '@local/main'
+import { Stack } from '@local/components/stack'
 
 import { PreviewProps } from '../areas/preview'
-import { Preview as PreviewComponent } from '../areas/preview/preview'
+import { Preview as PreviewComponent } from '../areas/preview/area'
 
 const meta: Meta<typeof PreviewComponent> = {
   component: PreviewComponent,

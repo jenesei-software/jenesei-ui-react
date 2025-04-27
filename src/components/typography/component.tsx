@@ -35,6 +35,7 @@ const TypographyWithRef = forwardRef<HTMLElement | HTMLHeadingElement | HTMLAnch
       $decoration: props.decoration,
       $transform: props.transform,
       $weight: props.weight,
+      $letterSpacing: props.letterSpacing,
       $height: props.height,
       $flex: props.flex,
       $cursor: props.cursor,

@@ -72,7 +72,7 @@ export interface AppContextProps {
   setDefaultDescription: () => void
   historyStatusBarColor: (step: number) => void
   historyBgColor: (step: number) => void
-  historyTitle: (step: number) => void
+  setHistoryTitle: (step: number) => void
   historyBgImage: (step: number) => void
   historyDescription: (step: number) => void
 }

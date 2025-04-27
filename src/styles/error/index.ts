@@ -1,2 +1,2 @@
-export * from './error.types'
-export * from './error.styles'
+export * from './style.types'
+export * from './style'

@@ -22,6 +22,7 @@ export const PreviewWrapper = styled.div<{ $visible: boolean }>`
 `
 
 export const PreviewChildren = styled.div<{ $visible: boolean }>`
+  display: contents;
   opacity: ${props => (props.$visible ? 1 : 0)};
   ${addTransition};
 `

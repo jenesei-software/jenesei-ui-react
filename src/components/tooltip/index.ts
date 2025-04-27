@@ -1,3 +1,3 @@
-export * from './tooltip.types'
-export * from './tooltip.styles'
-export * from './tooltip'
+export * from './component.types'
+export * from './component.styles'
+export * from './component'

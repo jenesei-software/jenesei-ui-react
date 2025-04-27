@@ -44,22 +44,18 @@ export const Ripple: FC<RippleProps> = props => {
     setRippleArray([])
   })
 
-  const addRipple = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      const rippleContainer = event.currentTarget.getBoundingClientRect()
-      const size = rippleContainer.width > rippleContainer.height ? rippleContainer.width : rippleContainer.height
-      const x = event.pageX - rippleContainer.x - size / 2
-      const y = event.pageY - rippleContainer.y - size / 2
-      const newRipple = {
-        x,
-        y,
-        size
-      }
-
-      setRippleArray([...rippleArray, newRipple])
-    },
-    [rippleArray]
-  )
+  const addRipple = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+    if (!event.isTrusted) return
+    const rippleContainer = event.currentTarget.getBoundingClientRect()
+    const size = rippleContainer.width > rippleContainer.height ? rippleContainer.width : rippleContainer.height
+    const x = event.pageX - rippleContainer.x - size / 2
+    const y = event.pageY - rippleContainer.y - size / 2
+    const newRipple = { x, y, size }
+    setRippleArray([])
+    setTimeout(() => {
+      setRippleArray([newRipple])
+    }, 0)
+  }, [])
 
   if (props.isDisabled || props.isHidden) return null
   return (

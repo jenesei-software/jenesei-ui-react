@@ -98,7 +98,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             placeholder={props.placeholder}
             type={props.type}
             autoComplete={props.autocomplete}
-            onChange={event => handleOnChange(event.target.value)}
+            onInput={event => {
+              const input = event.target as HTMLInputElement
+              handleOnChange(input.value)
+            }}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
             name={props.name}

@@ -15,7 +15,7 @@ const ErrorMessageSizeConstructor = (
   ${props.$isErrorAbsolute
     ? css`
         position: absolute;
-        padding-top: 6px;
+        top: calc(100% + 4px);
         padding-left: ${props.padding}px;
         color: ${props => props.theme.colors.danger};
       `
@@ -27,7 +27,7 @@ const ErrorMessageSizeConstructor = (
 `
 
 export const ErrorMessageComponent = styled.div<ErrorMessagePropsDollar>`
-  ${getFontSizeStyles(12, 400, 'Inter')};
+  ${props => getFontSizeStyles(12, 400, props.theme.font.family)};
   width: ${props => props.$width ?? '100%'};
   ${ErrorMessageSize}
 `

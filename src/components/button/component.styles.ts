@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { ComponentWithRipple } from '@local/components/ripple'
 import { getFontSizeStyles } from '@local/components/typography'
-import { addOutline, addTransition } from '@local/styles/add'
+import { addCustomFont, addOutline, addTransition } from '@local/styles/add'
 import { FlexContainerAndItem } from '@local/styles/base'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
@@ -100,7 +100,7 @@ export const ButtonSizeConstructor = (
   min-height: ${props.height}px;
   border-radius: ${props.radius}px;
   gap: ${props.padding - 2}px;
-  ${getFontSizeStyles(props.font, 700, 'Inter')};
+  ${params => getFontSizeStyles(props.font, 700, params.theme.font.family)};
   padding: 0px ${props.padding}px;
 
   ${() =>
@@ -122,7 +122,7 @@ export const ButtonSizeConstructor = (
       `
     : css`
         width: ${props.$width ?? 'max-content'};
-        min-width: ${props.$width ? `${props.$width}px` : 'max-content'};
+        min-width: ${props.$width ? `${props.$width}` : 'max-content'};
       `};
   ${props.$minWidth === 'asHeight' &&
   css`
@@ -160,8 +160,5 @@ export const StyledButton = styled.button<StyledDollarButtonProps>`
   ${ButtonIsPlaystationEffect};
   ${addTransition};
   ${addOutline};
-
-  font-family: ${props => props.$customFontFamily};
-  font-size: ${props => props.$customFontSize};
-  font-weight: ${props => props.$customFontWeight};
+  ${addCustomFont};
 `

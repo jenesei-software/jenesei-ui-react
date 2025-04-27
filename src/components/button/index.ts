@@ -1,3 +1,3 @@
-export * from './button.types'
-export * from './button.styles'
-export * from './button'
+export * from './component.types'
+export * from './component.styles'
+export * from './component'

@@ -39,7 +39,7 @@ export interface CheckboxProps extends PropsWithChildren {
 
   customFontFamily?: TJeneseiFontFamily
 
-  customFontSize?: number
+  customFontSize?: number | string
 
   customFontWeight?: number
 

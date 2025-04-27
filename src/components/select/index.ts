@@ -1,3 +1,3 @@
-export * from './select'
-export * from './select.styles'
-export * from './select.types'
+export * from './component'
+export * from './component.styles'
+export * from './component.types'

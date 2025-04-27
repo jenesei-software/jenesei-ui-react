@@ -19,7 +19,8 @@ export const Product: Story = {
     type: 'button',
     genre: 'realebail-product',
     size: 'medium',
-    customFontWeight: 400
+    customFontWeight: 400,
+    customFontFamily: 'Work Sans'
   }
 }
 export const Gray: Story = {
