@@ -1,4 +1,4 @@
-import { FocusEvent, KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react'
+import { FocusEvent, KeyboardEvent, useCallback, useRef, useState } from 'react'
 
 import { ErrorMessage } from '@local/styles/error'
 
@@ -9,12 +9,6 @@ export const InputOTP = (props: InputOTPProps) => {
   const [otp, setOtp] = useState<string[]>(new Array(props.length).fill(''))
   const inputsRef = useRef<(HTMLInputElement | null)[]>([])
   const wrapperRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    if (props.value) {
-      setOtp(props.value.split(''))
-    }
-  }, [props.value])
 
   const handleChange = useCallback(
     (index: number, value: string) => {
@@ -29,7 +23,7 @@ export const InputOTP = (props: InputOTPProps) => {
         }
 
         if (newOtp.every(char => char !== '')) {
-          props.onComplete(newOtp.join(''))
+          props.onComplete?.(newOtp.join(''))
         }
 
         if (value && index < prevOtp.length - 1) {
