@@ -189,14 +189,16 @@ export const DatePicker = (props: DatePickerProps) => {
   }, [props.value])
 
   useEffect(() => {
-    const momentValue = props.value ? moment(props.value).utc() : moment.utc()
-    const momentStartDate = props.startDate ? moment(props.startDate).utc() : null
-    const momentEndDate = props.endDate ? moment(props.endDate).utc() : null
+    if (props.value) {
+      const momentValue = props.value ? moment(props.value).utc() : moment.utc()
+      const momentStartDate = props.startDate ? moment(props.startDate).utc() : null
+      const momentEndDate = props.endDate ? moment(props.endDate).utc() : null
 
-    if (momentStartDate && momentValue.isBefore(momentStartDate, 'day')) {
-      updateDateFromTimestamp(momentStartDate.startOf('day').valueOf())
-    } else if (momentEndDate && momentValue.isAfter(momentEndDate, 'day')) {
-      updateDateFromTimestamp(momentEndDate.startOf('day').valueOf())
+      if (momentStartDate && momentValue.isBefore(momentStartDate, 'day')) {
+        updateDateFromTimestamp(momentStartDate.startOf('day').valueOf())
+      } else if (momentEndDate && momentValue.isAfter(momentEndDate, 'day')) {
+        updateDateFromTimestamp(momentEndDate.startOf('day').valueOf())
+      }
     }
   }, [props.endDate, props.startDate, props.value, updateDateFromTimestamp])
 
