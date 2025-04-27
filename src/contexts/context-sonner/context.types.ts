@@ -8,10 +8,11 @@ export type ProviderSonnerProps = PropsWithChildren & {
   gap: number
   position: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'bottom-center' | 'top-center'
   visibleToasts?: number
+  zIndex?: number
   default: Omit<SonnerContentStandardProps, 'index'>
 }
 
-export type SonnerLayoutProps = Required<AddDollarSign<Pick<ProviderSonnerProps, 'position' | 'gap'>>>
+export type SonnerLayoutProps = Required<AddDollarSign<Pick<ProviderSonnerProps, 'position' | 'gap' | 'zIndex'>>>
 export type SonnerElementWrapperProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre'>>>
 export type SonnerContentTitleProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre'>>>
 export type SonnerContentDescriptionProps = Required<AddDollarSign<Pick<SonnerContentStandardProps, 'genre'>>>
