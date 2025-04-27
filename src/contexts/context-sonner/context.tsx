@@ -235,12 +235,12 @@ const SonnerElement = (props: SonnerElementProps) => {
           ? props.isHovered || props.index === 0
             ? `0px`
             : `-${DEFAULT_PROVIDER_SONNER_MARGIN_BOTTOM}px`
-          : 'initial',
+          : '0px',
         marginBottom: !props.isTop
           ? props.isHovered || props.index === 0
             ? `0px`
             : `-${DEFAULT_PROVIDER_SONNER_MARGIN_BOTTOM}px`
-          : 'initial'
+          : '0px'
       }}
       style={{
         zIndex: -props.index
