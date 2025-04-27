@@ -110,17 +110,17 @@ export const addCustomFont = css<{
   ${props =>
     props.$customFontFamily &&
     css`
-     font-family ${props.$customFontFamily};
+      font-family: ${props.$customFontFamily};
     `};
   ${props =>
     props.$customFontSize &&
     css`
-     font-size ${props.$customFontSize};
+      font-size: ${props.$customFontSize};
     `};
   ${props =>
     props.$customFontWeight &&
     css`
-     font-weight ${props.$customFontWeight};
+      font-weight: ${props.$customFontWeight};
     `};
 `
 

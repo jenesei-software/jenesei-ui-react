@@ -100,7 +100,7 @@ export const ButtonSizeConstructor = (
   min-height: ${props.height}px;
   border-radius: ${props.radius}px;
   gap: ${props.padding - 2}px;
-  ${getFontSizeStyles(props.font, 700, 'Inter')};
+  ${params => getFontSizeStyles(props.font, 700, params.theme.font.family)};
   padding: 0px ${props.padding}px;
 
   ${() =>
@@ -122,7 +122,7 @@ export const ButtonSizeConstructor = (
       `
     : css`
         width: ${props.$width ?? 'max-content'};
-        min-width: ${props.$width ? `${props.$width}px` : 'max-content'};
+        min-width: ${props.$width ? `${props.$width}` : 'max-content'};
       `};
   ${props.$minWidth === 'asHeight' &&
   css`

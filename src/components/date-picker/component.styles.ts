@@ -134,12 +134,13 @@ export const DateDropdownDaySize = css<DateDropdownDayProps>`
     css`
       opacity: 0.5;
     `}
-  ${getFontSizeStyles(12, 700, 'Inter')};
+  ${params => getFontSizeStyles(12, 700, params.theme.font.family)};
+
   ${addOutline};
 `
 export const DateDropdownDaySizeConstructor = (props: IJeneseiThemeSize) => css`
   border-radius: ${props.radius}px;
-  ${getFontSizeStyles(12, 700, 'Inter')};
+  ${params => getFontSizeStyles(12, 700, params.theme.font.family)};
 `
 
 export const DateDropdownDay = styled.button<DateDropdownDayProps>`

@@ -20,7 +20,7 @@ export const CheckboxSizeConstructor = (
   min-height: ${props.height}px;
   border-radius: ${props.radius}px;
   gap: ${props.padding - 2}px;
-  ${getFontSizeStyles(props.font, 700, 'Inter')};
+  ${params => getFontSizeStyles(props.font, 700, params.theme.font.family)};
   padding: ${props.padding - 4}px;
   ${props.$width === 'asHeight'
     ? css`
@@ -31,7 +31,7 @@ export const CheckboxSizeConstructor = (
       `
     : css`
         width: ${props.$width ?? 'max-content'};
-        min-width: ${props.$width ? `${props.$width}px` : 'max-content'};
+        min-width: ${props.$width ? `${props.$width}` : 'max-content'};
       `};
 `
 

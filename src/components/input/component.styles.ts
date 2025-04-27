@@ -33,12 +33,12 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
 export const InputPlaceholder = css<StyledInputProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
-    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter', props.theme.font.lineHeight)};
+    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
     color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
   }
   &:-ms-input-placeholder {
-    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter', props.theme.font.lineHeight)};
+    ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
     color: ${props => props.theme.colors.input[props.$genre].color.placeholder};
     opacity: 1;
   }
@@ -106,7 +106,7 @@ export const StyledInputCSS = css<StyledInputProps>`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, 'Inter', props.theme.font.lineHeight)};
+  ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
 
   ${InputSize};
   ${InputGenre};
