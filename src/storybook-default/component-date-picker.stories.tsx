@@ -23,7 +23,7 @@ const DatePickerWrapper: FC<DatePickerProps> = props => {
     setValue(props.value)
   }, [props.value])
 
-  return <DatePicker {...props} placeholder="Month" value={value} onChange={handleSelectChange} />
+  return <DatePicker {...props} value={value} onChange={handleSelectChange} />
 }
 
 const PastHundredYearsStartDate = moment.utc().subtract(100, 'years').startOf('year').valueOf()
@@ -38,7 +38,8 @@ export const PastHundredYears: Story = {
     width: '300px',
     startDate: PastHundredYearsStartDate,
     endDate: PastHundredYearsEndDate,
-    value: PastHundredYearsValue
+    value: PastHundredYearsValue,
+    placeholder: 'Placeholder'
   }
 }
 

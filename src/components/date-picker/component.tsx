@@ -33,15 +33,15 @@ function countSevens(number: number) {
 
 export const DatePicker = (props: DatePickerProps) => {
   const theme = useTheme()
-
+  const isNullValue = useMemo(() => props.value === null || props.value === undefined, [props.value])
   const [unixValue, setUnixValue] = useState(props.value ? moment(props.value).utc() : moment.utc())
   const [currentMonth, setCurrentMonth] = useState(unixValue.clone().month())
   const [currentYear, setCurrentYear] = useState(unixValue.clone().year())
   const [currentDay, setCurrentDay] = useState(unixValue.clone().date())
 
   const currentDateLabel = useMemo(() => {
-    return props.value ? moment(props.value).utc().format('D MMMM YYYY') : ''
-  }, [props.value])
+    return isNullValue ? '' : props.value ? moment(props.value).utc().format('D MMMM YYYY') : ''
+  }, [isNullValue, props.value])
 
   const daysInMonth: DateDayProps[] = useMemo(() => {
     const today = moment.utc()
