@@ -7,6 +7,7 @@ import { SonnerContentDescriptionProps, SonnerContentTitleProps, SonnerElementWr
 
 export const SonnerLayout = styled.div<SonnerLayoutProps>`
   position: fixed;
+  z-index: ${props => props.$zIndex};
   max-height: calc(100dvh - 20px);
   width: 320px;
   display: flex;
