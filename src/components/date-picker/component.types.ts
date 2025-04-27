@@ -45,7 +45,7 @@ export interface DatePickerProps {
 
   onChange: (timestamp: number) => void
   onFocus?: (event: FocusEvent<HTMLDivElement, Element>) => void
-  onBlur?: (event: MouseEvent) => void
+  onBlur?: (event?: MouseEvent) => void
 }
 
 export type DateWrapperProps = AddDollarSign<

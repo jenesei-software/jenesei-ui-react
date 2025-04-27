@@ -42,7 +42,8 @@ export const PastHundredYears: Story = {
     onBlur(event) {
       console.log('onBlur', event)
     },
-    placeholder: 'Placeholder'
+    placeholder: 'Placeholder',
+    isOnClickClose: true
   }
 }
 
