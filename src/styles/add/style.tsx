@@ -1,5 +1,7 @@
 import { css } from 'styled-components'
 
+import { TJeneseiFontFamily } from '@local/theme'
+
 import { addErrorProps } from '.'
 
 export const addRemoveScrollbar = css`
@@ -98,6 +100,28 @@ export const addRemoveOutline = css`
   &:focus-visible {
     outline: 0px solid ${props => props.theme.colors.focus};
   }
+`
+
+export const addCustomFont = css<{
+  $customFontFamily?: TJeneseiFontFamily
+  $customFontSize?: number | string
+  $customFontWeight?: number
+}>`
+  ${props =>
+    props.$customFontFamily &&
+    css`
+     font-family ${props.$customFontFamily};
+    `};
+  ${props =>
+    props.$customFontSize &&
+    css`
+     font-size ${props.$customFontSize};
+    `};
+  ${props =>
+    props.$customFontWeight &&
+    css`
+     font-weight ${props.$customFontWeight};
+    `};
 `
 
 export const addError = css<addErrorProps>`

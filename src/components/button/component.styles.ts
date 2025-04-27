@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { ComponentWithRipple } from '@local/components/ripple'
 import { getFontSizeStyles } from '@local/components/typography'
-import { addOutline, addTransition } from '@local/styles/add'
+import { addCustomFont, addOutline, addTransition } from '@local/styles/add'
 import { FlexContainerAndItem } from '@local/styles/base'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
@@ -160,8 +160,5 @@ export const StyledButton = styled.button<StyledDollarButtonProps>`
   ${ButtonIsPlaystationEffect};
   ${addTransition};
   ${addOutline};
-
-  font-family: ${props => props.$customFontFamily};
-  font-size: ${props => props.$customFontSize};
-  font-weight: ${props => props.$customFontWeight};
+  ${addCustomFont};
 `
