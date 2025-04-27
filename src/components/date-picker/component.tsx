@@ -212,7 +212,7 @@ export const DatePicker = (props: DatePickerProps) => {
   return (
     <Outside
       onOutsideClick={event => {
-        props?.onBlur?.(event)
+        if (isOpen) props?.onBlur?.(event)
         handleOnClose()
       }}
     >
