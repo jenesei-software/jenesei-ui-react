@@ -101,7 +101,7 @@ export const StyledInputCSS = css<StyledInputProps>`
   resize: none;
   overflow: hidden;
   width: 100%;
-  border: 1px inset;
+  border: 1px solid;
 
   white-space: nowrap;
   text-overflow: ellipsis;

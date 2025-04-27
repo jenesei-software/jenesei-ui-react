@@ -96,7 +96,7 @@ const TextAreaIsResize = css<Pick<StyledTextAreaProps, '$isResize'>>`
 export const StyledTextAreaCSS = css<StyledTextAreaProps>`
   overflow-x: hidden;
   width: 100% !important;
-  border: 1px inset;
+  border: 1px solid;
   white-space: nowrap;
   text-overflow: ellipsis;
   text-wrap: auto;
