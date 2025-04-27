@@ -1,4 +1,6 @@
-import { FocusEvent, KeyboardEvent, useCallback, useRef, useState } from 'react'
+import { FocusEvent, KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react'
+
+import { ErrorMessage } from '@local/styles/error'
 
 import { InputOTPProps, InputOTPWrapper } from '.'
 import { Input } from '../input'
@@ -6,6 +8,13 @@ import { Input } from '../input'
 export const InputOTP = (props: InputOTPProps) => {
   const [otp, setOtp] = useState<string[]>(new Array(props.length).fill(''))
   const inputsRef = useRef<(HTMLInputElement | null)[]>([])
+  const wrapperRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    if (props.value) {
+      setOtp(props.value.split(''))
+    }
+  }, [props.value])
 
   const handleChange = useCallback(
     (index: number, value: string) => {
@@ -14,6 +23,10 @@ export const InputOTP = (props: InputOTPProps) => {
       setOtp(prevOtp => {
         const newOtp = [...prevOtp]
         newOtp[index] = value.slice(-1)
+
+        if (props.onChange) {
+          props.onChange(newOtp.join(''))
+        }
 
         if (newOtp.every(char => char !== '')) {
           props.onComplete(newOtp.join(''))
@@ -71,30 +84,52 @@ export const InputOTP = (props: InputOTPProps) => {
     }
   }
 
-  const handleFocus = useCallback((e: FocusEvent<HTMLInputElement>) => {
+  const handleFocusInput = useCallback((e: FocusEvent<HTMLInputElement>) => {
     setTimeout(() => e.target.setSelectionRange(0, e.target.value.length), 0)
   }, [])
   return (
-    <InputOTPWrapper $size={props.size}>
-      {otp.map((digit, index) => (
-        <Input
-          width="asHeight"
-          key={index}
-          tabIndex={index + 1}
-          ref={el => {
-            inputsRef.current[index] = el
-          }}
-          type="text"
-          inputMode="numeric"
-          maxLength={1}
-          value={digit}
-          onFocus={handleFocus}
-          onChange={value => handleChange(index, value)}
-          onKeyDown={e => handleKeyDown(index, e)}
-          genre={props.genre}
-          size={props.size}
-        />
-      ))}
-    </InputOTPWrapper>
+    <>
+      <InputOTPWrapper
+        $isError={props.isError}
+        $size={props.size}
+        id={props.id}
+        ref={wrapperRef}
+        onBlur={e => {
+          setTimeout(() => {
+            if (wrapperRef.current && !wrapperRef.current.contains(document.activeElement)) {
+              props.onBlur?.(e)
+            }
+          }, 0)
+        }}
+        $width={props.width}
+      >
+        {otp.map((digit, index) => (
+          <Input
+            width="asHeight"
+            key={index}
+            tabIndex={index + 1}
+            ref={el => {
+              inputsRef.current[index] = el
+            }}
+            type="text"
+            inputMode="numeric"
+            maxLength={1}
+            value={digit}
+            onFocus={handleFocusInput}
+            onChange={value => handleChange(index, value)}
+            onKeyDown={e => handleKeyDown(index, e)}
+            genre={props.genre}
+            size={props.size}
+          />
+        ))}
+      </InputOTPWrapper>
+      <ErrorMessage
+        isError={props.isError}
+        errorMessage={props.errorMessage}
+        size={props.size}
+        width={props.width}
+        isErrorAbsolute={props.isErrorAbsolute}
+      />
+    </>
   )
 }

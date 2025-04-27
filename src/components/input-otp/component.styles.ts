@@ -6,13 +6,16 @@ import { InputOTPWrapperProps } from '.'
 
 /****************************************** Size *************************************************/
 export const InputOTPSize = css<InputOTPWrapperProps>`
-  ${props => InputOTPSizeConstructor(KEY_SIZE_DATA[props.$size])};
+  ${props => InputOTPSizeConstructor({ ...KEY_SIZE_DATA[props.$size], ...props })};
 `
-export const InputOTPSizeConstructor = (props: IJeneseiThemeSize) => css`
+export const InputOTPSizeConstructor = (props: IJeneseiThemeSize & InputOTPWrapperProps) => css`
   gap: ${props.padding - 2}px;
+  width: ${props.$width ?? '100%'};
 `
 
 export const InputOTPWrapper = styled.div<InputOTPWrapperProps>`
   display: flex;
+  justify-content: space-between;
+  border: 1px solid transparent;
   ${InputOTPSize};
 `

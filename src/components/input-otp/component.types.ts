@@ -1,3 +1,5 @@
+import { FocusEventHandler } from 'react'
+
 import { AddDollarSign } from '@local/types'
 
 import { InputProps } from '../input/component.types'
@@ -5,6 +7,10 @@ import { InputProps } from '../input/component.types'
 export type InputOTPProps = {
   length: number
   onComplete: (otp: string) => void
-} & Pick<InputProps, 'size' | 'genre'>
+  onBlur?: FocusEventHandler<HTMLDivElement>
+} & Pick<
+  InputProps,
+  'size' | 'genre' | 'id' | 'width' | 'isError' | 'errorMessage' | 'isErrorAbsolute' | 'value' | 'onChange'
+>
 
-export type InputOTPWrapperProps = AddDollarSign<Pick<InputOTPProps, 'size'>>
+export type InputOTPWrapperProps = AddDollarSign<Pick<InputOTPProps, 'size' | 'width' | 'isError'>>
