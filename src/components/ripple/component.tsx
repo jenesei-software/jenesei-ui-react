@@ -50,13 +50,11 @@ export const Ripple: FC<RippleProps> = props => {
     const size = rippleContainer.width > rippleContainer.height ? rippleContainer.width : rippleContainer.height
     const x = event.pageX - rippleContainer.x - size / 2
     const y = event.pageY - rippleContainer.y - size / 2
-    const newRipple = {
-      x,
-      y,
-      size
-    }
-
-    setRippleArray(prev => [...prev, newRipple])
+    const newRipple = { x, y, size }
+    setRippleArray([])
+    setTimeout(() => {
+      setRippleArray([newRipple])
+    }, 0)
   }, [])
 
   if (props.isDisabled || props.isHidden) return null
