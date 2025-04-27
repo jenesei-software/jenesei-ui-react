@@ -21,6 +21,9 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     font-size: ${props => props.theme.font.sizeDefault.default}px;
     font-family: ${props => props.theme.font.family}, Inter, system-ui, sans-serif;
     font-weight: ${props => props.theme.font.weight};
+    font-feature-settings: 'kern' normal;
+    font-kerning: auto;
+    font-optical-sizing: auto;
     line-height: ${props => props.theme.font.lineHeight};
     transition: font-size ${props => props.theme.transition.default};
   }
