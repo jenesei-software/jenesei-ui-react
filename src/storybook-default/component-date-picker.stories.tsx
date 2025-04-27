@@ -87,6 +87,6 @@ export const NextThreeMonths: Story = {
     width: '300px',
     startDate: NextThreeMonthsStartDate,
     endDate: NextThreeMonthsEndDate,
-    value: NextThreeMonthsValue
+    value: null
   }
 }
