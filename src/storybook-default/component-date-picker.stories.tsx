@@ -39,6 +39,9 @@ export const PastHundredYears: Story = {
     startDate: PastHundredYearsStartDate,
     endDate: PastHundredYearsEndDate,
     value: PastHundredYearsValue,
+    onBlur(event) {
+      console.log('onBlur', event)
+    },
     placeholder: 'Placeholder'
   }
 }
