@@ -103,6 +103,8 @@ export const ProviderAppOutletChildren = styled.main`
 
 export const ProviderAppOutletNotification = styled.section<ProviderAppOutletProps>`
   grid-area: notification;
+  display: flex;
+
   ${props =>
     props.$notification?.isFixed &&
     css`
@@ -131,6 +133,7 @@ export const ProviderAppOutletNotification = styled.section<ProviderAppOutletPro
 
 export const ProviderAppOutletHeader = styled.header<ProviderAppOutletProps>`
   grid-area: header;
+  display: flex;
 
   ${props => (props.$header?.height ? visibleStyles : hiddenStyles)}
 
@@ -145,6 +148,7 @@ export const ProviderAppOutletHeader = styled.header<ProviderAppOutletProps>`
 
 export const ProviderAppOutletFooter = styled.footer<ProviderAppOutletProps>`
   grid-area: footer;
+  display: flex;
 
   ${props => (props.$footer?.height ? visibleStyles : hiddenStyles)}
 
@@ -159,6 +163,7 @@ export const ProviderAppOutletFooter = styled.footer<ProviderAppOutletProps>`
 
 export const ProviderAppOutletNav = styled.nav<ProviderAppOutletProps>`
   grid-area: nav;
+  display: flex;
 
   ${props => (props.$nav?.height ? visibleStyles : hiddenStyles)}
 
@@ -173,6 +178,7 @@ export const ProviderAppOutletNav = styled.nav<ProviderAppOutletProps>`
 
 export const ProviderAppOutletLeftAside = styled.aside<ProviderAppOutletProps>`
   grid-area: leftAside;
+  display: flex;
 
   ${props => (props.$leftAside?.width ? visibleStyles : hiddenStyles)}
 
@@ -187,6 +193,7 @@ export const ProviderAppOutletLeftAside = styled.aside<ProviderAppOutletProps>`
 
 export const ProviderAppOutletRightAside = styled.aside<ProviderAppOutletProps>`
   grid-area: rightAside;
+  display: flex;
 
   ${props => (props.$rightAside?.width ? visibleStyles : hiddenStyles)}
 
