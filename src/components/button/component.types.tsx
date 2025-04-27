@@ -58,7 +58,7 @@ export interface ButtonProps extends PropsWithChildren {
 
   customFontFamily?: TJeneseiFontFamily
 
-  customFontSize?: number
+  customFontSize?: number | string
 
   customFontWeight?: number
 
