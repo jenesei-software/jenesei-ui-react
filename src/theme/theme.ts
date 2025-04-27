@@ -393,7 +393,35 @@ const DefaultJeneseiThemeGenreInputSelect = {
     }
   }
 }
+
 const DefaultJeneseiThemeGenreDate = {
+  'realebail-white': {
+    background: {
+      rest: JeneseiPalette.whiteJanice,
+      hover: JeneseiPalette.whiteJanice,
+      today: JeneseiPalette.black80,
+      weekend: JeneseiPalette.black10,
+      choice: JeneseiPalette.graySarah,
+      line: JeneseiPalette.whiteJanice
+    },
+    color: {
+      rest: JeneseiPalette.blueKaren,
+      hover: JeneseiPalette.blueMonica,
+      placeholder: JeneseiPalette.blueKaren,
+      today: JeneseiPalette.whiteJanice,
+      weekend: JeneseiPalette.black100,
+      choice: JeneseiPalette.whiteJanice,
+      line: JeneseiPalette.transparent
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent,
+      today: JeneseiPalette.transparent,
+      weekend: JeneseiPalette.transparent,
+      choice: JeneseiPalette.transparent,
+      line: JeneseiPalette.transparent
+    }
+  },
   blackBorder: {
     background: {
       rest: JeneseiPalette.whiteStandard,
