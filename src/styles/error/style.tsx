@@ -15,7 +15,7 @@ const ErrorMessageSizeConstructor = (
   ${props.$isErrorAbsolute
     ? css`
         position: absolute;
-        padding-top: 6px;
+        top: calc(100% + 4px);
         padding-left: ${props.padding}px;
         color: ${props => props.theme.colors.danger};
       `
