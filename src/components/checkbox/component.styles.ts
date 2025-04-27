@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { Icon } from '@local/components/icon'
 import { getFontSizeStyles } from '@local/components/typography'
-import { addError, addOutline, addTransition } from '@local/styles/add'
+import { addCustomFont, addError, addOutline, addTransition } from '@local/styles/add'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledCheckboxProps, StyledIconProps } from '.'
@@ -20,7 +20,7 @@ export const CheckboxSizeConstructor = (
   min-height: ${props.height}px;
   border-radius: ${props.radius}px;
   gap: ${props.padding - 2}px;
-  ${getFontSizeStyles(props.font, 700, 'Inter')};
+  ${params => getFontSizeStyles(props.font, 700, params.theme.font.family)};
   padding: ${props.padding - 4}px;
   ${props.$width === 'asHeight'
     ? css`
@@ -31,7 +31,7 @@ export const CheckboxSizeConstructor = (
       `
     : css`
         width: ${props.$width ?? 'max-content'};
-        min-width: ${props.$width ? `${props.$width}px` : 'max-content'};
+        min-width: ${props.$width ? `${props.$width}` : 'max-content'};
       `};
 `
 
@@ -97,10 +97,7 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   ${CheckboxSize};
   ${addOutline};
   ${addError};
-
-  font-family: ${props => props.$customFontFamily};
-  font-size: ${props => props.$customFontSize};
-  font-weight: ${props => props.$customFontWeight};
+  ${addCustomFont};
   background-color: ${props => props.$isNotBackground && 'transparent'};
 `
 

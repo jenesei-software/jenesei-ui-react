@@ -11,7 +11,7 @@ export const CheckboxGroupSize = css<CheckboxGroupWrapperProps>`
 `
 export const CheckboxGroupSizeConstructor = (props: IJeneseiThemeSize) => css`
   gap: ${props.padding - 2}px;
-  ${getFontSizeStyles(props.font, 700, 'Inter')};
+  ${params => getFontSizeStyles(props.font, 700, params.theme.font.family)};
 `
 
 /****************************************** Default *************************************************/

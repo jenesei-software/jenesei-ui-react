@@ -30,7 +30,7 @@ const TypographyCSS = css<TypographyCSSProps>`
   ${props =>
     props.$overflow &&
     css`
-     overflow ${props.$overflow};
+      overflow: ${props.$overflow};
     `};
   ${props =>
     props.$clamp &&

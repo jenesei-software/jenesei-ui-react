@@ -56,9 +56,9 @@ export const ProviderAppOutlet = styled.div<ProviderAppOutletProps>`
     props.$isScrollOutlet &&
     css`
       max-height: 100dvh;
-    `}
+    `};
 
-    grid-template-columns: ${props =>
+  grid-template-columns: ${props =>
     `${props.$leftAside ? props.$leftAside.width : '0px'} 1fr ${props.$rightAside ? props.$rightAside.width : '0px'}`};
 
   grid-template-rows: ${props =>

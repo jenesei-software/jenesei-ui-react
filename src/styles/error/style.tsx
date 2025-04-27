@@ -27,7 +27,7 @@ const ErrorMessageSizeConstructor = (
 `
 
 export const ErrorMessageComponent = styled.div<ErrorMessagePropsDollar>`
-  ${getFontSizeStyles(12, 400, 'Inter')};
+  ${props => getFontSizeStyles(12, 400, props.theme.font.family)};
   width: ${props => props.$width ?? '100%'};
   ${ErrorMessageSize}
 `
