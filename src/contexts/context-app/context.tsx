@@ -100,13 +100,13 @@ export const ProviderApp: FC<ProviderAppProps> = props => {
             <ProviderAppOutletLeftAside $leftAside={props.leftAside}>
               {props.leftAside?.component || null}
             </ProviderAppOutletLeftAside>
-            <ProviderAppOutletChildren>{props.children}</ProviderAppOutletChildren>
+            <ProviderAppOutletChildren $main={props.main}>{props.children}</ProviderAppOutletChildren>
             <ProviderAppOutletRightAside $rightAside={props.rightAside}>
               {props.rightAside?.component || null}
             </ProviderAppOutletRightAside>
             <ProviderAppOutletFooter $footer={props.footer}>{props.footer?.component || null}</ProviderAppOutletFooter>
           </ProviderAppOutlet>
-        </ProviderAppWrapper>{' '}
+        </ProviderAppWrapper>
       </Preview>
     </AppContext.Provider>
   )
