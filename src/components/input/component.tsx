@@ -64,6 +64,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             allowEmptyFormatting={props.isAllowEmptyFormatting}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
+            onPaste={props.onPaste}
             format={props.format}
             mask={props.mask}
             type={props.formatType}
@@ -104,6 +105,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             }}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
+            onPaste={props.onPaste}
             name={props.name}
             id={props.id}
             tabIndex={props.tabIndex}
