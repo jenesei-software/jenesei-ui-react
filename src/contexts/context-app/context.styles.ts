@@ -97,7 +97,7 @@ export const ProviderAppOutletChildren = styled.main<ProviderAppOutletChildrenPr
   ${props =>
     props.$main?.zIndex !== undefined &&
     css`
-      z-index: props.$main.zIndex;
+      z-index: ${props.$main.zIndex};
     `};
   display: flex;
   grid-area: children;
@@ -110,7 +110,7 @@ export const ProviderAppOutletNotification = styled.section<ProviderAppOutletPro
   ${props =>
     props.$notification?.zIndex !== undefined &&
     css`
-      z-index: props.$notification.zIndex;
+      z-index: ${props.$notification.zIndex};
     `};
 
   grid-area: notification;
@@ -146,7 +146,7 @@ export const ProviderAppOutletHeader = styled.header<ProviderAppOutletProps>`
   ${props =>
     props.$header?.zIndex !== undefined &&
     css`
-      z-index: props.$header.zIndex;
+      z-index: ${props.$header.zIndex};
     `};
 
   grid-area: header;
@@ -167,7 +167,7 @@ export const ProviderAppOutletFooter = styled.footer<ProviderAppOutletProps>`
   ${props =>
     props.$footer?.zIndex !== undefined &&
     css`
-      z-index: props.$footer.zIndex;
+      z-index: ${props.$footer.zIndex};
     `};
 
   grid-area: footer;
@@ -188,7 +188,7 @@ export const ProviderAppOutletNav = styled.nav<ProviderAppOutletProps>`
   ${props =>
     props.$nav?.zIndex !== undefined &&
     css`
-      z-index: props.$nav.zIndex;
+      z-index: ${props.$nav.zIndex};
     `};
 
   grid-area: nav;
@@ -209,7 +209,7 @@ export const ProviderAppOutletLeftAside = styled.aside<ProviderAppOutletProps>`
   ${props =>
     props.$leftAside?.zIndex !== undefined &&
     css`
-      z-index: props.$leftAside.zIndex;
+      z-index: ${props.$leftAside.zIndex};
     `};
 
   grid-area: leftAside;
@@ -230,7 +230,7 @@ export const ProviderAppOutletRightAside = styled.aside<ProviderAppOutletProps>`
   ${props =>
     props.$rightAside?.zIndex !== undefined &&
     css`
-      z-index: props.$rightAside.zIndex;
+      z-index: ${props.$rightAside.zIndex};
     `};
 
   grid-area: rightAside;
