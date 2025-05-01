@@ -3,7 +3,7 @@ import moment from 'moment'
 import { FC, useEffect, useState } from 'react'
 import 'styled-components'
 
-import { DatePicker, DatePickerProps } from '../components/date-picker'
+import { DatePicker, DatePickerProps, MonthItem, WeekItem } from '../components/date-picker'
 
 const meta: Meta<typeof DatePicker> = {
   component: DatePicker,
@@ -13,6 +13,105 @@ const meta: Meta<typeof DatePicker> = {
 export default meta
 type Story = StoryObj<typeof DatePicker>
 
+export const localeMonths: MonthItem[] = [
+  {
+    localeLong: 'Январь',
+    localeShort: 'Янв',
+    value: 'january'
+  },
+  {
+    localeLong: 'February',
+    localeShort: 'Feb',
+    value: 'february'
+  },
+  {
+    localeLong: 'March',
+    localeShort: 'Mar',
+    value: 'march'
+  },
+  {
+    localeLong: 'April',
+    localeShort: 'Apr',
+    value: 'april'
+  },
+  {
+    localeLong: 'May',
+    localeShort: 'May',
+    value: 'may'
+  },
+  {
+    localeLong: 'June',
+    localeShort: 'Jun',
+    value: 'june'
+  },
+  {
+    localeLong: 'July',
+    localeShort: 'Jul',
+    value: 'july'
+  },
+  {
+    localeLong: 'August',
+    localeShort: 'Aug',
+    value: 'august'
+  },
+  {
+    localeLong: 'September',
+    localeShort: 'Sep',
+    value: 'september'
+  },
+  {
+    localeLong: 'October',
+    localeShort: 'Oct',
+    value: 'october'
+  },
+  {
+    localeLong: 'November',
+    localeShort: 'Nov',
+    value: 'november'
+  },
+  {
+    localeLong: 'December',
+    localeShort: 'Dec',
+    value: 'december'
+  }
+]
+export const localeWeeks: WeekItem[] = [
+  {
+    localeLong: 'Monday',
+    localeShort: 'Пн',
+    value: 'mo'
+  },
+  {
+    localeLong: 'Tuesday',
+    localeShort: 'Tue',
+    value: 'tu'
+  },
+  {
+    localeLong: 'Wednesday',
+    localeShort: 'Wed',
+    value: 'we'
+  },
+  {
+    localeLong: 'Thursday',
+    localeShort: 'Thu',
+    value: 'th'
+  },
+  {
+    localeLong: 'Friday',
+    localeShort: 'Fri',
+    value: 'fr'
+  },
+  {
+    localeLong: 'Saturday',
+    localeShort: 'Sat',
+    value: 'sa'
+  },
+  {
+    localeLong: 'Sunday',
+    localeShort: 'Sun',
+    value: 'su'
+  }
+]
 const DatePickerWrapper: FC<DatePickerProps> = props => {
   const [value, setValue] = useState<number | null>(props.value)
   const handleSelectChange = (value: number) => {
@@ -33,6 +132,10 @@ const PastHundredYearsValue = moment.utc().startOf('day').valueOf()
 export const PastHundredYears: Story = {
   render: args => <DatePickerWrapper {...args} />,
   args: {
+    locale: {
+      months: localeMonths,
+      weeks: localeWeeks
+    },
     size: 'medium',
     genre: 'gray',
     width: '300px',
@@ -54,6 +157,10 @@ const LastHundredYear18YearsAgoValue = moment.utc().subtract(18, 'years').startO
 export const LastHundredYear18YearsAgo: Story = {
   render: args => <DatePickerWrapper {...args} />,
   args: {
+    locale: {
+      months: localeMonths,
+      weeks: localeWeeks
+    },
     size: 'medium',
     genre: 'gray',
     width: '300px',
@@ -70,6 +177,10 @@ const LastHundredYear21YearsAgoValue = moment.utc().subtract(21, 'years').startO
 export const LastHundredYear21YearsAgo: Story = {
   render: args => <DatePickerWrapper {...args} />,
   args: {
+    locale: {
+      months: localeMonths,
+      weeks: localeWeeks
+    },
     size: 'medium',
     genre: 'gray',
     width: '300px',
@@ -86,6 +197,10 @@ const NextThreeMonthsValue = moment.utc().startOf('day').valueOf()
 export const NextThreeMonths: Story = {
   render: args => <DatePickerWrapper {...args} />,
   args: {
+    locale: {
+      months: localeMonths,
+      weeks: localeWeeks
+    },
     size: 'medium',
     genre: 'gray',
     width: '300px',

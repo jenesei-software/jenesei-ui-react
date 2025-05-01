@@ -17,7 +17,8 @@ const defaultArgs: Partial<SelectLanguageProps> = {
   genre: 'gray',
   width: '300px',
   isShowDropdownOptionIcon: true,
-  isShowSelectInputIcon: true
+  isShowSelectInputIcon: true,
+  placeholder: 'Choice language...'
 }
 
 const SelectLanguageWrapper: FC<SelectLanguageProps> = props => {

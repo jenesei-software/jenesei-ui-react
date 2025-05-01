@@ -20,7 +20,8 @@ import {
   DateDropdownListParent,
   DatePickerProps,
   DateStyledInput,
-  DateWrapper
+  DateWrapper,
+  WeekItem
 } from '.'
 
 function countSevens(number: number) {
@@ -40,8 +41,28 @@ export const DatePicker = (props: DatePickerProps) => {
   const [currentDay, setCurrentDay] = useState(unixValue.clone().date())
 
   const currentDateLabel = useMemo(() => {
-    return isNullValue ? '' : props.value ? moment(props.value).utc().format('D MMMM YYYY') : ''
-  }, [isNullValue, props.value])
+    if (isNullValue) return '' // Если значение null, то пустая строка
+
+    if (props.value) {
+      const monthIndex = moment(props.value).utc().month() // Получаем индекс месяца
+      const momentMonth = moment().month(monthIndex).format('MMMM').toLowerCase() // Месяц в нижнем регистре
+
+      // Находим локализованный месяц в массиве
+      const localizedMonth = props.locale.months.find(
+        month => month.value.toLowerCase() === momentMonth // Сравниваем в нижнем регистре
+      )?.localeLong
+
+      // Если локализованный месяц найден, используем его, если нет - стандартный месяц
+      const monthToDisplay = localizedMonth || moment(props.value).utc().format('MMMM')
+
+      const day = moment(props.value).utc().format('D')
+      const year = moment(props.value).utc().format('YYYY')
+
+      return `${day} ${monthToDisplay} ${year}`
+    }
+
+    return '' // Если нет значения, возвращаем пустую строку
+  }, [isNullValue, props.value, props.locale.months])
 
   const daysInMonth: DateDayProps[] = useMemo(() => {
     const today = moment.utc()
@@ -210,6 +231,17 @@ export const DatePicker = (props: DatePickerProps) => {
     }
   }, [props.value])
 
+  const weekDays = useMemo(() => {
+    const weekOrder: WeekItem['value'][] = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su']
+
+    return weekOrder.map((key, index) => {
+      const found = props.locale.weeks.find(w => w.value === key)
+      return {
+        index,
+        label: found?.localeShort ?? key.toUpperCase()
+      }
+    })
+  }, [props.locale.weeks])
   return (
     <Outside
       onOutsideClick={event => {
@@ -293,6 +325,7 @@ export const DatePicker = (props: DatePickerProps) => {
                   />
                   <Stack gap="8px">
                     <SelectMonth
+                      monthsLocale={props.locale.months}
                       genre={props.genre}
                       size={'small'}
                       inputProps={undefined}
@@ -345,7 +378,7 @@ export const DatePicker = (props: DatePickerProps) => {
                   />
                 </Stack>
                 <DateDropdownDays $rows={rows}>
-                  {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((e, index) => (
+                  {weekDays.map((e, index) => (
                     <DateDropdownDayOfWeek
                       $isToday={false}
                       $isWeekend={false}
@@ -356,7 +389,7 @@ export const DatePicker = (props: DatePickerProps) => {
                       $column={index + 1}
                       key={index}
                     >
-                      {e}
+                      {e.label}
                     </DateDropdownDayOfWeek>
                   ))}
                   {daysInMonth.map(day =>

@@ -301,14 +301,14 @@
     "uuid": "^11.0.3"
   },
   "peerDependencies": {
+    "@tanstack/react-router": ">=1.97.0",
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
-    "react-leaflet": "^5.0.0",
-    "react-leaflet-markercluster": "^5.0.0-rc.0",
-    "@tanstack/react-router": ">=1.97.0",
     "moment": ">=2.30.1",
     "react": ">=19.0.0",
     "react-dom": ">=19.0.0",
+    "react-leaflet": "^5.0.0",
+    "react-leaflet-markercluster": "^5.0.0-rc.0",
     "styled-components": ">=6.0"
   }
 }

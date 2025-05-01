@@ -90,7 +90,7 @@ export const Slider: FC<SliderProps> = props => {
         <Stack
           style={{ position: 'relative', overflow: 'hidden', aspectRatio: '900 / 600' }}
           w="auto"
-          maxW="90dvw"
+          maxW="70dvw"
           h="85dvh"
           br={params?.br}
         >

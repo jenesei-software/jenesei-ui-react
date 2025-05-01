@@ -4,6 +4,11 @@ import reset from 'styled-reset'
 export const JeneseiGlobalStyles = createGlobalStyle`
   ${reset};
   
+  #storybook-root {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
   .sb-show-main.sb-main-padded {
     padding:0;
   }

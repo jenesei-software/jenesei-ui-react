@@ -399,18 +399,18 @@ const DefaultJeneseiThemeGenreDate = {
     background: {
       rest: JeneseiPalette.whiteJanice,
       hover: JeneseiPalette.whiteJanice,
-      today: JeneseiPalette.black80,
-      weekend: JeneseiPalette.black10,
-      choice: JeneseiPalette.graySarah,
+      today: JeneseiPalette.blueKaren,
+      weekend: JeneseiPalette.whiteJanice,
+      choice: JeneseiPalette.blueKaren,
       line: JeneseiPalette.whiteJanice
     },
     color: {
       rest: JeneseiPalette.blueKaren,
       hover: JeneseiPalette.blueMonica,
       placeholder: JeneseiPalette.blueKaren,
-      today: JeneseiPalette.whiteJanice,
-      weekend: JeneseiPalette.black100,
-      choice: JeneseiPalette.whiteJanice,
+      today: JeneseiPalette.whiteStandard,
+      weekend: JeneseiPalette.blueMonica,
+      choice: JeneseiPalette.whiteStandard,
       line: JeneseiPalette.transparent
     },
     border: {
