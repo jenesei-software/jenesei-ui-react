@@ -576,26 +576,29 @@ export const SelectLanguage: FC<SelectLanguageProps> = props => {
 }
 
 export const SelectMonth: FC<SelectDateProps> = props => {
-  const { value, onChange, startDate, endDate } = props
+  const { value, onChange, startDate, endDate, monthsLocale } = props
 
   const year = moment(value).utc().year()
+
   const months = useMemo(() => {
-    const format = 'MMMM'
-    return moment.months().map((_month, index) => {
-      const monthMoment = moment().utc().year(year).month(index).startOf('month')
+    return monthsLocale.map(monthItem => {
+      const monthIndex = moment().month(monthItem.value).month()
+
+      const monthMoment = moment.utc().year(year).month(monthIndex).startOf('month')
       const isDisabled =
         (startDate && monthMoment.isBefore(moment.utc(startDate), 'month')) ||
         (endDate && monthMoment.isAfter(moment.utc(endDate), 'month'))
 
       return {
         value: monthMoment.valueOf(),
-        label: <Typography>{monthMoment.format(format)}</Typography>,
-        placeholder: monthMoment.format(format),
-        search: `${monthMoment.format(format).toLowerCase()}, ${index + 1}`,
-        isDisabled: isDisabled
+        label: <Typography>{monthItem.localeLong}</Typography>,
+        placeholder: monthItem.localeLong,
+        search: `${monthItem.localeLong.toLowerCase()}, ${monthIndex + 1}`,
+        isDisabled,
+        monthValue: monthItem.value
       }
     })
-  }, [year, startDate, endDate])
+  }, [year, startDate, endDate, monthsLocale])
 
   const handleSelectChange = (option: ISelectLanguageOption[]) => {
     const selectedValue = Number(option[0]?.value)

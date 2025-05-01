@@ -47,6 +47,7 @@ const PopupContent: FC = () => {
     <Slider
       images={IMAGES}
       propsStack={{
+        maxW: '80dvw',
         h: '350px',
         w: '500px',
         br: '10px'
@@ -119,7 +120,7 @@ const MapWrapper: FC<MapProps<object>> = props => {
   }, [])
   const isDisabledButton = geolocationPermission === 'denied' || geolocationPermission === 'granted'
   return (
-    <Stack flexDirection="column" gap="10px">
+    <Stack w="100%" h="100%" alignItems="center" flexDirection="column" flexGrow={1} style={{ overflow: 'hidden' }}>
       <Button
         size={'small'}
         genre={'gray'}
@@ -154,7 +155,7 @@ const MapWrapper: FC<MapProps<object>> = props => {
           'Los Angeles, CA ?'
         )}
       </Stack>
-      <Stack w="700px" h="500px">
+      <Stack w="100%" h="100%" alignItems="center" flexDirection="column" flexGrow={1} style={{ overflow: 'hidden' }}>
         <MapComponent<MarkerItemProps>
           {...props}
           center={center}

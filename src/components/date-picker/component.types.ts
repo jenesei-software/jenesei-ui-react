@@ -4,6 +4,8 @@ import { InputProps, StyledInputProps, StyledInputWrapperProps } from '@local/co
 import { TJeneseiThemeGenreDate, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
+import { SelectDateProps } from '../select'
+
 export type TDateGenre = keyof TJeneseiThemeGenreDate
 
 export interface DateDayProps {
@@ -24,6 +26,10 @@ export interface DatePickerProps {
   name?: string
   id?: string
 
+  locale: {
+    months: SelectDateProps['monthsLocale']
+    weeks: WeekItem[]
+  }
   startDate?: number
   endDate?: number
 
@@ -79,3 +85,26 @@ export type DateDropdownDayProps = AddDollarSign<
       isCurrentMonth?: boolean
     }
 >
+
+export type MonthItem = {
+  value:
+    | 'january'
+    | 'february'
+    | 'march'
+    | 'april'
+    | 'may'
+    | 'june'
+    | 'july'
+    | 'august'
+    | 'september'
+    | 'october'
+    | 'november'
+    | 'december'
+  localeLong: string
+  localeShort: string
+}
+export type WeekItem = {
+  value: 'mo' | 'tu' | 'we' | 'th' | 'fr' | 'sa' | 'su'
+  localeLong: string
+  localeShort: string
+}

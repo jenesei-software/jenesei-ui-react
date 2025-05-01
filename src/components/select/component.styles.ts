@@ -18,7 +18,7 @@ import { Icon } from '../icon'
 export const SelectWrapper = styled.div<SelectWrapperProps>`
   width: ${props => props.$width ?? '100%'};
   position: relative;
-
+  height: fit-content;
   ${props =>
     !props.$isDisabled &&
     css`
@@ -171,6 +171,8 @@ export const DropdownOptionIcon = styled(Icon)<DropdownOptionIconProps>`
 
 export const SelectInputIcon = styled(Icon)<DropdownOptionIconProps>`
   position: absolute;
+  user-select: none;
+  pointer-events: none;
   right: 0;
   top: 0;
   align-items: center;

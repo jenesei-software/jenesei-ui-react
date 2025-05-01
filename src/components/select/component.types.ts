@@ -4,6 +4,8 @@ import { InputProps, StyledInputProps, StyledInputWrapperProps } from '@local/co
 import { TJeneseiThemeGenreSelect, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
+import { MonthItem } from '../date-picker'
+
 export type TInputSelect = keyof TJeneseiThemeGenreSelect
 
 export interface ISelectItem {
@@ -79,16 +81,16 @@ export type SelectLanguageProps = Omit<SelectProps<ISelectItem>, 'option' | 'val
   value: string
   onChange: (language: string) => void
 }
-
 export type SelectDateProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
   startDate?: number
   endDate?: number
   value: number
   onChange: (timestamp: number) => void
   lang: 'ru' | 'en'
+  monthsLocale: MonthItem[]
 }
 
-export type SelectYearProps = SelectDateProps & {
+export type SelectYearProps = Omit<SelectDateProps, 'monthsLocale'> & {
   startDate?: number
   endDate?: number
   sortOrder?: 'asc' | 'desc'
