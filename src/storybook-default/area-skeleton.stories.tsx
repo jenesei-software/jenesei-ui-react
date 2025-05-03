@@ -17,8 +17,27 @@ type Story = StoryObj<typeof SkeletonComponent>
 
 const SkeletonWrapper: FC<SkeletonProps> = props => {
   return (
-    <SkeletonComponent {...props} w="300px" h="300px" br="12px">
-      <Stack p="12px" bg="whiteStandard" h="100%" w="100%" br="6px">
+    <SkeletonComponent
+      {...props}
+      sx={{
+        default: {
+          width: '300px',
+          height: '300px',
+          borderRadius: '12px'
+        }
+      }}
+    >
+      <Stack
+        sx={theme => ({
+          default: {
+            width: '100%',
+            height: '100%',
+            padding: '12px',
+            borderRadius: '6px',
+            backgroundColor: theme.palette.whiteStandard
+          }
+        })}
+      >
         <Typography variant="h7">One</Typography>
       </Stack>
     </SkeletonComponent>
@@ -32,40 +51,193 @@ export const SkeletonOne: Story = {
 
 const SkeletonManyWrapper: FC<SkeletonProps> = props => {
   return (
-    <Stack flexDirection="row" gap="12px">
-      <Stack flexDirection="column" gap="12px">
-        <SkeletonComponent {...props} w="300px" h="300px" br="12px">
-          <Stack p="12px" bg="whiteStandard" h="100%" w="100%" br="6px">
+    <Stack
+      sx={{
+        default: {
+          flexDirection: 'row',
+          gap: '12px'
+        }
+      }}
+    >
+      <Stack
+        sx={{
+          default: {
+            flexDirection: 'column',
+            gap: '12px'
+          }
+        }}
+      >
+        <SkeletonComponent
+          {...props}
+          sx={() => ({
+            default: {
+              width: '300px',
+              height: '300px',
+              padding: '12px'
+            }
+          })}
+        >
+          <Stack
+            sx={theme => ({
+              default: {
+                width: '100%',
+                height: '100%',
+                padding: '12px',
+                borderRadius: '6px',
+                backgroundColor: theme.palette.whiteStandard
+              }
+            })}
+          >
             <Typography variant="h7">One</Typography>
           </Stack>
         </SkeletonComponent>
-        <Stack flexDirection="row" gap="12px">
-          <SkeletonComponent {...props} w="50px" h="50px" br="100%" type="secondary">
-            <Stack p="12px" bg="whiteStandard" h="100%" w="100%" br="6px">
+        <Stack
+          sx={{
+            default: {
+              flexDirection: 'row',
+              gap: '12px'
+            }
+          }}
+        >
+          <SkeletonComponent
+            {...props}
+            sx={() => ({
+              default: {
+                width: '50px',
+                height: '50px',
+                borderRadius: '100%'
+              }
+            })}
+            type="secondary"
+          >
+            <Stack
+              sx={theme => ({
+                default: {
+                  width: '100%',
+                  height: '100%',
+                  padding: '12px',
+                  borderRadius: '6px',
+                  backgroundColor: theme.palette.whiteStandard
+                }
+              })}
+            >
               <Typography variant="h7">One</Typography>
             </Stack>
           </SkeletonComponent>
-          <SkeletonComponent {...props} flexGrow={1} h="50px" br="12px" type="secondary">
-            <Stack p="12px" bg="whiteStandard" h="100%" w="100%" br="6px">
+          <SkeletonComponent
+            {...props}
+            sx={() => ({
+              default: {
+                height: '50px',
+                borderRadius: '6px',
+                flexGrow: 1
+              }
+            })}
+            type="secondary"
+          >
+            <Stack
+              sx={theme => ({
+                default: {
+                  width: '100%',
+                  height: '100%',
+                  padding: '12px',
+                  borderRadius: '6px',
+                  backgroundColor: theme.palette.whiteStandard
+                }
+              })}
+            >
               <Typography variant="h7">One</Typography>
             </Stack>
           </SkeletonComponent>
         </Stack>
       </Stack>
-      <Stack flexDirection="column" gap="12px">
-        <SkeletonComponent {...props} w="300px" h="300px" br="12px">
-          <Stack p="12px" bg="whiteStandard" h="100%" w="100%" br="6px">
+      <Stack
+        sx={{
+          default: {
+            flexDirection: 'column',
+            gap: '12px'
+          }
+        }}
+      >
+        <SkeletonComponent
+          {...props}
+          sx={() => ({
+            default: {
+              width: '300px',
+              height: '300px',
+              padding: '12px'
+            }
+          })}
+        >
+          <Stack
+            sx={theme => ({
+              default: {
+                width: '100%',
+                height: '100%',
+                padding: '12px',
+                borderRadius: '6px',
+                backgroundColor: theme.palette.whiteStandard
+              }
+            })}
+          >
             <Typography variant="h7">One</Typography>
           </Stack>
         </SkeletonComponent>
-        <Stack flexDirection="row" gap="12px">
-          <SkeletonComponent {...props} w="50px" h="50px" br="100%" type="secondary">
-            <Stack p="12px" bg="whiteStandard" h="100%" w="100%" br="6px">
+        <Stack
+          sx={{
+            default: {
+              flexDirection: 'row',
+              gap: '12px'
+            }
+          }}
+        >
+          <SkeletonComponent
+            {...props}
+            sx={() => ({
+              default: {
+                width: '50px',
+                height: '50px',
+                borderRadius: '100%'
+              }
+            })}
+            type="secondary"
+          >
+            <Stack
+              sx={theme => ({
+                default: {
+                  width: '100%',
+                  height: '100%',
+                  padding: '12px',
+                  borderRadius: '6px',
+                  backgroundColor: theme.palette.whiteStandard
+                }
+              })}
+            >
               <Typography variant="h7">One</Typography>
             </Stack>
           </SkeletonComponent>
-          <SkeletonComponent {...props} flexGrow={1} h="50px" br="12px" type="secondary">
-            <Stack p="12px" bg="whiteStandard" h="100%" w="100%" br="6px">
+          <SkeletonComponent
+            {...props}
+            sx={() => ({
+              default: {
+                height: '50px',
+                borderRadius: '6px',
+                flexGrow: 1
+              }
+            })}
+            type="secondary"
+          >
+            <Stack
+              sx={theme => ({
+                default: {
+                  width: '100%',
+                  height: '100%',
+                  padding: '12px',
+                  borderRadius: '6px',
+                  backgroundColor: theme.palette.whiteStandard
+                }
+              })}
+            >
               <Typography variant="h7">One</Typography>
             </Stack>
           </SkeletonComponent>

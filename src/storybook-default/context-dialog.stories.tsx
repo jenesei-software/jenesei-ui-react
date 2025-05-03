@@ -35,7 +35,14 @@ const ProviderDialogWrapperDouble: FC = () => {
     })
   }
   return (
-    <Stack p="12px" gap="8px">
+    <Stack
+      sx={{
+        default: {
+          padding: '12px',
+          gap: '8px'
+        }
+      }}
+    >
       <Button onClick={handleAdd} genre="black" size="medium">
         Add Dialog!
       </Button>

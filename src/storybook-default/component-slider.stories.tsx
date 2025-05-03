@@ -17,14 +17,26 @@ export const Slider: Story = {
   args: {
     images: IMAGES,
     children: () => (
-      <Stack justifyContent="flex-end" p="5px" flexGrow={1}>
+      <Stack
+        sx={{
+          default: {
+            justifyContent: 'flex-end',
+            padding: '5px',
+            flexGrow: 1
+          }
+        }}
+      >
         <Button isHiddenBorder genre="productBorder" width="asHeight" size="medium" iconName="Heart" />
       </Stack>
     ),
     propsStack: {
-      h: '350px',
-      w: '500px',
-      br: '10px'
+      sx: {
+        default: {
+          height: '350px',
+          width: '500px',
+          borderRadius: '10px'
+        }
+      }
     }
   }
 }

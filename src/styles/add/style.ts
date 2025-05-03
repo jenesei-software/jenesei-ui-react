@@ -2,8 +2,6 @@ import { css } from 'styled-components'
 
 import { TJeneseiFontFamily } from '@local/theme'
 
-import { addErrorProps } from '.'
-
 export const addRemoveScrollbar = css`
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -121,19 +119,5 @@ export const addCustomFont = css<{
     props.$customFontWeight &&
     css`
       font-weight: ${props.$customFontWeight};
-    `};
-`
-
-export const addError = css<addErrorProps>`
-  ${props =>
-    props.$isError &&
-    css`
-      border-color: ${props => props.theme.colors.danger};
-      &:focus,
-      &:active,
-      &:hover,
-      &:focus-visible {
-        border-color: ${props => props.theme.colors.danger};
-      }
     `};
 `

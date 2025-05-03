@@ -65,12 +65,22 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
       onClickSummary={onClickSummary}
       onClickIcon={onClickIcon}
       accordionDetails={
-        <Stack gap="10px" flexDirection="column" pt="6px">
+        <Stack
+          sx={() => ({
+            default: {
+              gap: '10px',
+              flexDirection: 'column',
+              paddingTop: '6px'
+            }
+          })}
+        >
           <Accordion
             accordionSummary={
               <Button
-                styleCustom={{
-                  justifyContent: 'space-between'
+                sx={{
+                  default: {
+                    justifyContent: 'space-between'
+                  }
                 }}
                 iconTurn={expandedTwo ? 180 : 0}
                 genre={'productBorder'}
@@ -82,10 +92,20 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
               </Button>
             }
             accordionDetails={
-              <Stack gap="10px" flexDirection="column" pt="6px">
+              <Stack
+                sx={() => ({
+                  default: {
+                    gap: '10px',
+                    flexDirection: 'column',
+                    paddingTop: '6px'
+                  }
+                })}
+              >
                 <Button
-                  styleCustom={{
-                    justifyContent: 'flex-start'
+                  sx={{
+                    default: {
+                      justifyContent: 'flex-start'
+                    }
                   }}
                   genre={'gray'}
                   size={'medium'}
@@ -94,8 +114,10 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                   First
                 </Button>
                 <Button
-                  styleCustom={{
-                    justifyContent: 'flex-start'
+                  sx={{
+                    default: {
+                      justifyContent: 'flex-start'
+                    }
                   }}
                   genre={'black'}
                   size={'medium'}
@@ -104,8 +126,10 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                   Second
                 </Button>
                 <Button
-                  styleCustom={{
-                    justifyContent: 'flex-start'
+                  sx={{
+                    default: {
+                      justifyContent: 'flex-start'
+                    }
                   }}
                   genre={'greenTransparent'}
                   size={'medium'}
@@ -118,13 +142,22 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
             expanded={expandedTwo}
             onClickSummary={onClickSummaryTwo}
             onClickIcon={onClickIconTwo}
-            wrapperProps={{ p: '0px', w: '100%' }}
+            wrapperProps={{
+              sx: {
+                default: {
+                  padding: '0px',
+                  width: '100%'
+                }
+              }
+            }}
           />
           <Accordion
             accordionSummary={
               <Button
-                styleCustom={{
-                  justifyContent: 'flex-start'
+                sx={{
+                  default: {
+                    justifyContent: 'flex-start'
+                  }
                 }}
                 genre={'grayBorder'}
                 size={'medium'}
@@ -134,10 +167,20 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
               </Button>
             }
             accordionDetails={
-              <Stack gap="10px" flexDirection="column" pt="6px">
+              <Stack
+                sx={() => ({
+                  default: {
+                    gap: '10px',
+                    flexDirection: 'column',
+                    paddingTop: '6px'
+                  }
+                })}
+              >
                 <Button
-                  styleCustom={{
-                    justifyContent: 'flex-start'
+                  sx={{
+                    default: {
+                      justifyContent: 'flex-start'
+                    }
                   }}
                   genre={'gray'}
                   size={'medium'}
@@ -146,8 +189,10 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                   First
                 </Button>
                 <Button
-                  styleCustom={{
-                    justifyContent: 'flex-start'
+                  sx={{
+                    default: {
+                      justifyContent: 'flex-start'
+                    }
                   }}
                   genre={'black'}
                   size={'medium'}
@@ -156,8 +201,10 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                   Second
                 </Button>
                 <Button
-                  styleCustom={{
-                    justifyContent: 'flex-start'
+                  sx={{
+                    default: {
+                      justifyContent: 'flex-start'
+                    }
                   }}
                   genre={'greenTransparent'}
                   size={'medium'}
@@ -170,7 +217,14 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
             expanded={expandedThree}
             onClickSummary={onClickSummaryThree}
             onClickIcon={onClickIconThree}
-            wrapperProps={{ p: '0px', w: '100%' }}
+            wrapperProps={{
+              sx: {
+                default: {
+                  padding: '0px',
+                  width: '100%'
+                }
+              }
+            }}
           />
         </Stack>
       }
@@ -200,10 +254,20 @@ const OneLevelAccordionWrapper: FC<AccordionProps> = props => {
       onClickSummary={onClickSummary}
       onClickIcon={onClickIcon}
       accordionDetails={
-        <Stack gap="10px" flexDirection="column" pt="6px">
+        <Stack
+          sx={() => ({
+            default: {
+              gap: '10px',
+              flexDirection: 'column',
+              paddingTop: '6px'
+            }
+          })}
+        >
           <Button
-            styleCustom={{
-              justifyContent: 'flex-start'
+            sx={{
+              default: {
+                justifyContent: 'flex-start'
+              }
             }}
             genre={'gray'}
             size={'medium'}
@@ -212,8 +276,10 @@ const OneLevelAccordionWrapper: FC<AccordionProps> = props => {
             First
           </Button>
           <Button
-            styleCustom={{
-              justifyContent: 'flex-start'
+            sx={{
+              default: {
+                justifyContent: 'flex-start'
+              }
             }}
             genre={'black'}
             size={'medium'}
@@ -222,8 +288,10 @@ const OneLevelAccordionWrapper: FC<AccordionProps> = props => {
             Second
           </Button>
           <Button
-            styleCustom={{
-              justifyContent: 'flex-start'
+            sx={{
+              default: {
+                justifyContent: 'flex-start'
+              }
             }}
             genre={'greenTransparent'}
             size={'medium'}
@@ -242,15 +310,28 @@ export const OneLevel: Story = {
   args: {
     isAccordionIcon: true,
     accordionSummary: (
-      <Stack p="10px" w="200px" style={{ cursor: 'pointer' }}>
+      <Stack
+        sx={{
+          default: {
+            padding: '10px',
+            width: '200px',
+            cursor: 'pointer'
+          }
+        }}
+      >
         <Typography isHoverUnderlining variant="h4">
           Show
         </Typography>
       </Stack>
     ),
     wrapperProps: {
-      p: '10px',
-      w: '200px'
+      sx: {
+        default: {
+          padding: '0px',
+          width: '100%',
+          maxWidth: '300px'
+        }
+      }
     }
   }
 }
@@ -260,15 +341,28 @@ export const MultiLevel: Story = {
   args: {
     isAccordionIcon: true,
     accordionSummary: (
-      <Stack p="10px" w="200px" style={{ cursor: 'pointer' }}>
+      <Stack
+        sx={{
+          default: {
+            padding: '10px',
+            width: '200px',
+            cursor: 'pointer'
+          }
+        }}
+      >
         <Typography isHoverUnderlining variant="h4">
           MultiLevel
         </Typography>
       </Stack>
     ),
     wrapperProps: {
-      p: '10px',
-      w: '200px'
+      sx: {
+        default: {
+          padding: '0px',
+          width: '100%',
+          maxWidth: '300px'
+        }
+      }
     }
   }
 }

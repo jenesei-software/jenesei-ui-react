@@ -1,6 +1,6 @@
 import { CSSProperties, ReactNode } from 'react'
 
-import { FlexShortStylesProps } from '../stack'
+import { StackProps } from '../stack'
 
 export interface ImageProps {
   src: string
@@ -8,7 +8,7 @@ export interface ImageProps {
   fallback?: ReactNode
   loading?: ReactNode
   propsImage?: CSSProperties
-  propsStack?: FlexShortStylesProps
+  propsStack?: StackProps
 }
 
 export interface ImageIMGProps {

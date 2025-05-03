@@ -16,6 +16,6 @@ export const InputOTPSizeConstructor = (props: IJeneseiThemeSize & InputOTPWrapp
 export const InputOTPWrapper = styled.div<InputOTPWrapperProps>`
   display: flex;
   justify-content: space-between;
-  border: 1px solid transparent;
+  align-items: flex-start;
   ${InputOTPSize};
 `

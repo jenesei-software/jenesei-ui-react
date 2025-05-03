@@ -2,7 +2,8 @@ import { PatternFormat } from 'react-number-format'
 import styled, { css } from 'styled-components'
 
 import { getFontSizeStyles } from '@local/components/typography'
-import { addError, addOutline, addTransition } from '@local/styles/add'
+import { addOutline, addTransition } from '@local/styles/add'
+import { addError } from '@local/styles/error'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledInputChildrenProps, StyledInputProps, StyledInputWrapperProps } from '.'
@@ -12,8 +13,7 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
   width: max-content;
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   ${props =>
     props.$width === 'asHeight'

@@ -1,8 +1,8 @@
 import { FC } from 'react'
 
-import { FlexShortStylesProps, StackMotion } from '@local/components/stack'
+import { StackMotion, StackProps } from '@local/components/stack'
 
-export const Smooth: FC<FlexShortStylesProps> = props => {
+export const Smooth: FC<StackProps> = props => {
   return (
     <StackMotion transition={{ duration: 0.3, ease: 'easeOut' }} layout {...props}>
       {props.children}

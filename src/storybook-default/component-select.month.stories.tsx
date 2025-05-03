@@ -3,8 +3,9 @@ import moment from 'moment'
 import { FC, useState } from 'react'
 import 'styled-components'
 
+import { localeMonths } from '@local/consts'
+
 import { SelectDateProps, SelectMonth } from '../components/select'
-import { localeMonths } from './component-date-picker.stories'
 
 const meta: Meta<typeof SelectMonth> = {
   component: SelectMonth,

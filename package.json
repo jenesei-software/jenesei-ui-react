@@ -24,11 +24,6 @@
       "import": "./build/style-theme.es.js",
       "require": "./build/style-theme.cjs.js"
     },
-    "./style-base": {
-      "types": "./build/style-base.d.ts",
-      "import": "./build/style-base.es.js",
-      "require": "./build/style-base.cjs.js"
-    },
     "./style-add": {
       "types": "./build/style-add.d.ts",
       "import": "./build/style-add.es.js",
