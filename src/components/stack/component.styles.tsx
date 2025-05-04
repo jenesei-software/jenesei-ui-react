@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
-import { FlexContainerAndItemAndBasic } from '@local/styles/base'
+import { addSX } from '@local/styles/sx'
 
 import { StyledStackProps } from '.'
 
 export const StyledStack = styled.div<StyledStackProps>`
-  ${FlexContainerAndItemAndBasic}
+  display: flex;
+  ${addSX}
 
   ${props =>
     props.$isHover &&
@@ -21,7 +22,7 @@ export const StyledStack = styled.div<StyledStackProps>`
 `
 
 export const StyledStackMotion = styled(motion.div)<StyledStackProps>`
-  ${FlexContainerAndItemAndBasic}
+  ${addSX}
 
   ${props =>
     props.$isHover &&

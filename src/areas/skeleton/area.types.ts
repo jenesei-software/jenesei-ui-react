@@ -1,4 +1,4 @@
-import { FlexShortStylesProps } from '@local/components/stack'
+import { StackProps } from '@local/components/stack'
 import { AddDollarSign } from '@local/types'
 
 type SkeletonDefaultProps = {
@@ -14,6 +14,6 @@ interface SkeletonTimeProps extends SkeletonDefaultProps {
   time: number
 }
 
-export type SkeletonProps = FlexShortStylesProps & (SkeletonIsShowProps | SkeletonTimeProps)
-export type StyledSkeletonProps = FlexShortStylesProps &
+export type SkeletonProps = StackProps & (SkeletonIsShowProps | SkeletonTimeProps)
+export type StyledSkeletonProps = StackProps &
   AddDollarSign<Pick<SkeletonIsShowProps & SkeletonTimeProps, 'visible' | 'type'>>

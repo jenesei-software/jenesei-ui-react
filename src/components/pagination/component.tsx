@@ -59,7 +59,7 @@ export const Pagination: FC<PaginationProps> = props => {
   const width = useMemo(() => `${props.viewQuantity * 30 + (props.viewQuantity - 1) * 12}px`, [props.viewQuantity])
 
   return (
-    <Stack gap={gapString}>
+    <Stack sx={{ default: { gap: gapString } }}>
       <Button
         isDisabled={isDisabledPrevious}
         isHidden={isDisabledPrevious}

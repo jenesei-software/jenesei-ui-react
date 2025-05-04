@@ -3,6 +3,8 @@ import moment from 'moment'
 import { FC, useState } from 'react'
 import 'styled-components'
 
+import { localeMonths } from '@local/consts'
+
 import { SelectDateProps, SelectMonth } from '../components/select'
 
 const meta: Meta<typeof SelectMonth> = {
@@ -16,7 +18,8 @@ type Story = StoryObj<typeof SelectMonth>
 const defaultArgs: Partial<SelectDateProps> = {
   size: 'medium',
   genre: 'gray',
-  width: '300px'
+  width: '300px',
+  monthsLocale: localeMonths
 }
 
 const SelectMonthWrapper: FC<SelectDateProps> = props => {

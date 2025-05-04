@@ -23,7 +23,13 @@ const PaginationWrapper: FC<PaginationProps> = props => {
     setIndex(props.index)
   }, [props.index])
   return (
-    <Stack p="10px">
+    <Stack
+      sx={{
+        default: {
+          padding: '10px'
+        }
+      }}
+    >
       <Pagination {...props} index={index} changeIndex={index => setIndex(index)} />
     </Stack>
   )

@@ -3,7 +3,7 @@ import { css, styled } from 'styled-components'
 import { addGridTransition, addTransition } from '@local/styles/add'
 import { JeneseiPalette } from '@local/theme'
 
-import { ProviderAppOutletProps, ProviderAppWrapperProps } from '.'
+import { ProviderAppOutletChildrenProps, ProviderAppOutletProps, ProviderAppWrapperProps } from '.'
 
 export const ProviderAppWrapper = styled.div<ProviderAppWrapperProps>`
   display: flex;
@@ -93,7 +93,12 @@ const visibleStyles = css`
   ${addTransition};
 `
 
-export const ProviderAppOutletChildren = styled.main`
+export const ProviderAppOutletChildren = styled.main<ProviderAppOutletChildrenProps>`
+  ${props =>
+    props.$main?.zIndex !== undefined &&
+    css`
+      z-index: ${props.$main.zIndex};
+    `};
   display: flex;
   grid-area: children;
   max-width: 100%;
@@ -102,7 +107,15 @@ export const ProviderAppOutletChildren = styled.main`
 `
 
 export const ProviderAppOutletNotification = styled.section<ProviderAppOutletProps>`
+  ${props =>
+    props.$notification?.zIndex !== undefined &&
+    css`
+      z-index: ${props.$notification.zIndex};
+    `};
+
   grid-area: notification;
+  display: flex;
+
   ${props =>
     props.$notification?.isFixed &&
     css`
@@ -130,7 +143,14 @@ export const ProviderAppOutletNotification = styled.section<ProviderAppOutletPro
 `
 
 export const ProviderAppOutletHeader = styled.header<ProviderAppOutletProps>`
+  ${props =>
+    props.$header?.zIndex !== undefined &&
+    css`
+      z-index: ${props.$header.zIndex};
+    `};
+
   grid-area: header;
+  display: flex;
 
   ${props => (props.$header?.height ? visibleStyles : hiddenStyles)}
 
@@ -144,7 +164,14 @@ export const ProviderAppOutletHeader = styled.header<ProviderAppOutletProps>`
 `
 
 export const ProviderAppOutletFooter = styled.footer<ProviderAppOutletProps>`
+  ${props =>
+    props.$footer?.zIndex !== undefined &&
+    css`
+      z-index: ${props.$footer.zIndex};
+    `};
+
   grid-area: footer;
+  display: flex;
 
   ${props => (props.$footer?.height ? visibleStyles : hiddenStyles)}
 
@@ -158,7 +185,14 @@ export const ProviderAppOutletFooter = styled.footer<ProviderAppOutletProps>`
 `
 
 export const ProviderAppOutletNav = styled.nav<ProviderAppOutletProps>`
+  ${props =>
+    props.$nav?.zIndex !== undefined &&
+    css`
+      z-index: ${props.$nav.zIndex};
+    `};
+
   grid-area: nav;
+  display: flex;
 
   ${props => (props.$nav?.height ? visibleStyles : hiddenStyles)}
 
@@ -172,7 +206,14 @@ export const ProviderAppOutletNav = styled.nav<ProviderAppOutletProps>`
 `
 
 export const ProviderAppOutletLeftAside = styled.aside<ProviderAppOutletProps>`
+  ${props =>
+    props.$leftAside?.zIndex !== undefined &&
+    css`
+      z-index: ${props.$leftAside.zIndex};
+    `};
+
   grid-area: leftAside;
+  display: flex;
 
   ${props => (props.$leftAside?.width ? visibleStyles : hiddenStyles)}
 
@@ -186,7 +227,14 @@ export const ProviderAppOutletLeftAside = styled.aside<ProviderAppOutletProps>`
 `
 
 export const ProviderAppOutletRightAside = styled.aside<ProviderAppOutletProps>`
+  ${props =>
+    props.$rightAside?.zIndex !== undefined &&
+    css`
+      z-index: ${props.$rightAside.zIndex};
+    `};
+
   grid-area: rightAside;
+  display: flex;
 
   ${props => (props.$rightAside?.width ? visibleStyles : hiddenStyles)}
 

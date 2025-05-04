@@ -24,15 +24,42 @@ const ScrollWrapper: FC<ScrollProps> = props => {
   }
 
   return (
-    <ScrollComponent {...props} w="300px" bg="black40" p="12px" bs="content-box">
+    <ScrollComponent
+      {...props}
+      sx={theme => ({
+        default: {
+          width: '300px',
+          padding: '12px',
+          boxSizing: 'content-box',
+          backgroundColor: theme.palette.black40
+        }
+      })}
+    >
       <Button onClick={toggleContent} size={'small'} genre={'gray'}>
         Toggle Content
       </Button>
-      <Stack bg="whiteStandard" h="100px" w="100px">
+      <Stack
+        sx={theme => ({
+          default: {
+            width: '100px',
+            height: '100px',
+            backgroundColor: theme.palette.whiteStandard
+          }
+        })}
+      >
         <Typography variant="h7">One</Typography>
       </Stack>
       {content && (
-        <Stack minW="1000px" bg="whiteStandard" h="100px" w="1000px">
+        <Stack
+          sx={theme => ({
+            default: {
+              width: '1000px',
+              minWidth: '1000px',
+              height: '100px',
+              backgroundColor: theme.palette.whiteStandard
+            }
+          })}
+        >
           <Typography variant="h7">Two</Typography>
         </Stack>
       )}

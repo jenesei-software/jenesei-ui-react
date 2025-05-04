@@ -1,10 +1,10 @@
 import { ReactNode } from 'react'
 
-import { FlexShortStylesProps } from '@local/components/stack'
+import { StackProps } from '@local/components/stack'
 import { AddDollarSign } from '@local/types'
 
 export interface AccordionProps {
-  wrapperProps: FlexShortStylesProps
+  wrapperProps: StackProps
   accordionSummary: ReactNode
   accordionDetails: ReactNode
   expanded: boolean

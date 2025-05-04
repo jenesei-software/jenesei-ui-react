@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { ComponentWithRipple } from '@local/components/ripple'
 import { getFontSizeStyles } from '@local/components/typography'
 import { addCustomFont, addOutline, addTransition } from '@local/styles/add'
-import { FlexContainerAndItem } from '@local/styles/base'
+import { addSX } from '@local/styles/sx'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledDollarButtonIconsWrapperProps, StyledDollarButtonProps } from '.'
@@ -139,7 +139,7 @@ const ButtonFlex = css<StyledDollarButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${FlexContainerAndItem};
+  ${addSX};
 `
 /****************************************** Styled *************************************************/
 export const StyledButton = styled.button<StyledDollarButtonProps>`

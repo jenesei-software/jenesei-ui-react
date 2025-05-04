@@ -18,24 +18,28 @@ export interface ProviderAppProps extends PropsWithChildren {
     heightMobile?: string
     heightTablet?: string
     isFixed?: boolean
+    zIndex?: number
   }
   header?: {
     component: ReactElement
     height?: string
     heightMobile?: string
     heightTablet?: string
+    zIndex?: number
   }
   nav?: {
     component: ReactElement
     height?: string
     heightMobile?: string
     heightTablet?: string
+    zIndex?: number
   }
   footer?: {
     component: ReactElement
     height?: string
     heightMobile?: string
     heightTablet?: string
+    zIndex?: number
   }
   leftAside?: {
     component: ReactElement
@@ -45,6 +49,7 @@ export interface ProviderAppProps extends PropsWithChildren {
     isTopHeader?: boolean
     isTopFooter?: boolean
     isTopNav?: boolean
+    zIndex?: number
   }
   rightAside?: {
     component: ReactElement
@@ -54,6 +59,10 @@ export interface ProviderAppProps extends PropsWithChildren {
     isTopHeader?: boolean
     isTopFooter?: boolean
     isTopNav?: boolean
+    zIndex?: number
+  }
+  main?: {
+    zIndex?: number
   }
 }
 
@@ -87,3 +96,5 @@ export type ProviderAppOutletProps = Partial<
     Pick<ProviderAppProps, 'isScrollOutlet' | 'notification' | 'header' | 'nav' | 'footer' | 'leftAside' | 'rightAside'>
   >
 >
+
+export type ProviderAppOutletChildrenProps = AddDollarSign<Pick<ProviderAppProps, 'main'>>

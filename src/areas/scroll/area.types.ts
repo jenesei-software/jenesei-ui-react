@@ -1,4 +1,4 @@
-import { FlexShortStylesProps } from '@local/components/stack'
+import { StackProps } from '@local/components/stack'
 import { AddDollarSign } from '@local/types'
 
 type DefaultScrollProps = {
@@ -8,5 +8,5 @@ type DefaultScrollProps = {
   isAlwaysHorizontal?: boolean
 }
 
-export type ScrollProps = FlexShortStylesProps & DefaultScrollProps
-export type StyledScrollProps = FlexShortStylesProps & AddDollarSign<DefaultScrollProps>
+export type ScrollProps = StackProps & DefaultScrollProps
+export type StyledScrollProps = StackProps & AddDollarSign<DefaultScrollProps>

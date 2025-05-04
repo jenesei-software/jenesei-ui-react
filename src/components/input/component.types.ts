@@ -1,4 +1,5 @@
 import {
+  ClipboardEventHandler,
   FocusEventHandler,
   HTMLInputAutoCompleteAttribute,
   HTMLInputTypeAttribute,
@@ -53,6 +54,8 @@ export interface InputProps {
   onBlur?: FocusEventHandler<HTMLInputElement>
 
   onChange?: (value: string) => void
+
+  onPaste?: ClipboardEventHandler<HTMLInputElement>
 
   onFocus?: FocusEventHandler<HTMLInputElement>
 

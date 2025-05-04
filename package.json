@@ -1,7 +1,7 @@
 {
   "author": "Cyril Strone",
   "name": "@jenesei-software/jenesei-ui-react",
-  "version": "0.6.2",
+  "version": "0.6.27",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jenesei-software/jenesei-ui-react.git"
@@ -23,11 +23,6 @@
       "types": "./build/style-theme.d.ts",
       "import": "./build/style-theme.es.js",
       "require": "./build/style-theme.cjs.js"
-    },
-    "./style-base": {
-      "types": "./build/style-base.d.ts",
-      "import": "./build/style-base.es.js",
-      "require": "./build/style-base.cjs.js"
     },
     "./style-add": {
       "types": "./build/style-add.d.ts",
@@ -290,25 +285,23 @@
   },
   "dependencies": {
     "@emotion/styled": "^11.13.0",
-    "@gsap/react": "^2.1.1",
     "@tanstack/react-virtual": "^3.10.8",
     "framer-motion": "^11.13.1",
-    "gsap": "^3.12.5",
     "js-cookie": "^3.0.5",
-    "leaflet": "^1.9.4",
-    "leaflet.markercluster": "^1.5.3",
     "react-image-webp": "^0.8.0",
-    "react-leaflet": "^5.0.0",
-    "react-leaflet-markercluster": "^5.0.0-rc.0",
     "react-number-format": "^5.4.2",
     "styled-reset": "^4.5.2",
     "uuid": "^11.0.3"
   },
   "peerDependencies": {
     "@tanstack/react-router": ">=1.97.0",
+    "leaflet": "^1.9.4",
+    "leaflet.markercluster": "^1.5.3",
     "moment": ">=2.30.1",
     "react": ">=19.0.0",
     "react-dom": ">=19.0.0",
+    "react-leaflet": "^5.0.0",
+    "react-leaflet-markercluster": "^5.0.0-rc.0",
     "styled-components": ">=6.0"
   }
 }

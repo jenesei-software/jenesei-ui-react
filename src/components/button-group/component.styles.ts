@@ -7,7 +7,7 @@ const ButtonGroupWrapperPositionHorizontal = css`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-
+  align-content: flex-start;
   & #jenesei-button {
     &:not(:only-child) {
       &:first-child {

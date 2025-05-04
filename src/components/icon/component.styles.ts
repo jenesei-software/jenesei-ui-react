@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { addColorTransition } from '@local/styles/add'
-import { FlexContainerAndItemAndBasic } from '@local/styles/base'
+import { addSX } from '@local/styles/sx'
 import { KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledLibraryIconIdItemProps } from '.'
@@ -27,5 +27,5 @@ export const StyledSVG = styled.svg<StyledLibraryIconIdItemProps>`
   & path {
     ${addColorTransition};
   }
-  ${FlexContainerAndItemAndBasic};
+  ${addSX};
 `

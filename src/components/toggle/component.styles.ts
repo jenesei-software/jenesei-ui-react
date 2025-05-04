@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
-import { addError, addTransition } from '@local/styles/add'
+import { addTransition } from '@local/styles/add'
+import { addError } from '@local/styles/error'
 import { IJeneseiThemeSizeToggle, KEY_SIZE_DATA_TOGGLE } from '@local/theme'
 
 import { StyledToggleProps } from '.'

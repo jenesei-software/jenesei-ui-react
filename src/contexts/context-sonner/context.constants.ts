@@ -2,6 +2,7 @@ import { IJeneseiTheme } from '@local/theme'
 
 import { ProviderSonnerProps } from '.'
 
+export const DEFAULT_PROVIDER_SONNER_Z_INDEX = 100
 export const DEFAULT_PROVIDER_SONNER_SCALE = 0.04
 export const DEFAULT_PROVIDER_SONNER_Y = 100
 export const DEFAULT_PROVIDER_SONNER_DURATION = 0.3

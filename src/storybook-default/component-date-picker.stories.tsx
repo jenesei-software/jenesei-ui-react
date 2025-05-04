@@ -3,6 +3,8 @@ import moment from 'moment'
 import { FC, useEffect, useState } from 'react'
 import 'styled-components'
 
+import { localeMonths, localeWeeks } from '@local/consts'
+
 import { DatePicker, DatePickerProps } from '../components/date-picker'
 
 const meta: Meta<typeof DatePicker> = {
@@ -23,7 +25,7 @@ const DatePickerWrapper: FC<DatePickerProps> = props => {
     setValue(props.value)
   }, [props.value])
 
-  return <DatePicker {...props} placeholder="Month" value={value} onChange={handleSelectChange} />
+  return <DatePicker {...props} value={value} onChange={handleSelectChange} />
 }
 
 const PastHundredYearsStartDate = moment.utc().subtract(100, 'years').startOf('year').valueOf()
@@ -33,12 +35,21 @@ const PastHundredYearsValue = moment.utc().startOf('day').valueOf()
 export const PastHundredYears: Story = {
   render: args => <DatePickerWrapper {...args} />,
   args: {
+    locale: {
+      months: localeMonths,
+      weeks: localeWeeks
+    },
     size: 'medium',
     genre: 'gray',
     width: '300px',
     startDate: PastHundredYearsStartDate,
     endDate: PastHundredYearsEndDate,
-    value: PastHundredYearsValue
+    value: PastHundredYearsValue,
+    onBlur(event) {
+      console.log('onBlur', event)
+    },
+    placeholder: 'Placeholder',
+    isOnClickClose: true
   }
 }
 
@@ -49,6 +60,10 @@ const LastHundredYear18YearsAgoValue = moment.utc().subtract(18, 'years').startO
 export const LastHundredYear18YearsAgo: Story = {
   render: args => <DatePickerWrapper {...args} />,
   args: {
+    locale: {
+      months: localeMonths,
+      weeks: localeWeeks
+    },
     size: 'medium',
     genre: 'gray',
     width: '300px',
@@ -65,6 +80,10 @@ const LastHundredYear21YearsAgoValue = moment.utc().subtract(21, 'years').startO
 export const LastHundredYear21YearsAgo: Story = {
   render: args => <DatePickerWrapper {...args} />,
   args: {
+    locale: {
+      months: localeMonths,
+      weeks: localeWeeks
+    },
     size: 'medium',
     genre: 'gray',
     width: '300px',
@@ -81,6 +100,10 @@ const NextThreeMonthsValue = moment.utc().startOf('day').valueOf()
 export const NextThreeMonths: Story = {
   render: args => <DatePickerWrapper {...args} />,
   args: {
+    locale: {
+      months: localeMonths,
+      weeks: localeWeeks
+    },
     size: 'medium',
     genre: 'gray',
     width: '300px',

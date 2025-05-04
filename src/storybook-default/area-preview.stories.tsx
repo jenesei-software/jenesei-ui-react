@@ -25,7 +25,17 @@ export const PreviewMax: Story = {
 
 const PreviewStackWrapper: FC<PreviewProps> = props => {
   return (
-    <Stack style={{ position: 'relative' }} w="200px" h="200px" bg="blueFocus" br="8px">
+    <Stack
+      sx={theme => ({
+        default: {
+          position: 'relative',
+          width: '200px',
+          height: '200px',
+          backgroundColor: theme.palette.blueFocus,
+          borderRadius: '8px'
+        }
+      })}
+    >
       <PreviewComponent {...props} />
     </Stack>
   )

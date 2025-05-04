@@ -1,57 +1,16 @@
 import { FC } from 'react'
 
-import { FlexShortStylesMotionProps, FlexShortStylesProps, StyledStack, StyledStackMotion } from '.'
+import { StackMotionProps, StackProps, StyledStack, StyledStackMotion } from '.'
 
-export const Stack: FC<FlexShortStylesProps> = props => {
+export const Stack: FC<StackProps> = props => {
   return (
-    <StyledStack
-      onClick={props.onClick}
-      className={props.className}
-      $flexDirection={props.flexDirection}
-      $flexWrap={props.flexWrap}
-      $justifyContent={props.justifyContent}
-      $alignItems={props.alignItems}
-      $alignContent={props.alignContent}
-      $order={props.order}
-      $flexGrow={props.flexGrow}
-      $flexShrink={props.flexShrink}
-      $flexBasis={props.flexBasis}
-      $alignSelf={props.alignSelf}
-      $gap={props.gap}
-      $m={props.m}
-      $mt={props.mt}
-      $mr={props.mr}
-      $mb={props.mb}
-      $ml={props.ml}
-      $br={props.br}
-      $bs={props.bs}
-      $maxTransition={props.maxTransition}
-      $mx={props.mx}
-      $my={props.my}
-      $p={props.p}
-      $pt={props.pt}
-      $pr={props.pr}
-      $pb={props.pb}
-      $pl={props.pl}
-      $px={props.px}
-      $py={props.py}
-      $w={props.w}
-      $h={props.h}
-      $minW={props.minW}
-      $maxW={props.maxW}
-      $minH={props.minH}
-      $maxH={props.maxH}
-      $bg={props.bg}
-      $color={props.color}
-      $isHover={props.isHover}
-      style={props.style}
-    >
+    <StyledStack onClick={props.onClick} className={props.className} $sx={props.sx} $isHover={props.isHover}>
       {props.children}
     </StyledStack>
   )
 }
 
-export const StackMotion: FC<FlexShortStylesMotionProps> = props => {
+export const StackMotion: FC<StackMotionProps> = props => {
   return (
     <StyledStackMotion
       layout={props.layout}
@@ -61,44 +20,8 @@ export const StackMotion: FC<FlexShortStylesMotionProps> = props => {
       transition={props.transition}
       onClick={props.onClick}
       className={props.className}
-      $flexDirection={props.flexDirection}
-      $flexWrap={props.flexWrap}
-      $justifyContent={props.justifyContent}
-      $alignItems={props.alignItems}
-      $alignContent={props.alignContent}
-      $order={props.order}
-      $flexGrow={props.flexGrow}
-      $flexShrink={props.flexShrink}
-      $flexBasis={props.flexBasis}
-      $alignSelf={props.alignSelf}
-      $gap={props.gap}
-      $m={props.m}
-      $mt={props.mt}
-      $mr={props.mr}
-      $mb={props.mb}
-      $ml={props.ml}
-      $br={props.br}
-      $bs={props.bs}
-      $maxTransition={props.maxTransition}
-      $mx={props.mx}
-      $my={props.my}
-      $p={props.p}
-      $pt={props.pt}
-      $pr={props.pr}
-      $pb={props.pb}
-      $pl={props.pl}
-      $px={props.px}
-      $py={props.py}
-      $w={props.w}
-      $h={props.h}
-      $minW={props.minW}
-      $maxW={props.maxW}
-      $minH={props.minH}
-      $maxH={props.maxH}
-      $bg={props.bg}
-      $color={props.color}
+      $sx={props.sx}
       $isHover={props.isHover}
-      style={props.style}
     >
       {props.children}
     </StyledStackMotion>

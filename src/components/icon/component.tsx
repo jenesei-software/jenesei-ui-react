@@ -55,11 +55,11 @@ export const Icon = (props: LibraryIconItemProps) => {
       $turn={props.turn}
       $order={props.order}
       $color={props.primaryColor || undefined}
+      $sx={props.sx}
       className={props.className}
       onClick={props.onClick}
       tabIndex={props.tabIndex}
       dangerouslySetInnerHTML={contentLoadings ? { __html: contentLoadings } : undefined}
-      {...props.styles}
     >
       {contentPaths}
     </StyledSVG>

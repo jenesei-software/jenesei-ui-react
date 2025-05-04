@@ -13,6 +13,7 @@ import {
   DEFAULT_PROVIDER_SONNER_MARGIN_BOTTOM,
   DEFAULT_PROVIDER_SONNER_SCALE,
   DEFAULT_PROVIDER_SONNER_Y,
+  DEFAULT_PROVIDER_SONNER_Z_INDEX,
   ProviderSonnerProps,
   SonnerButtonWrapper,
   SonnerContent,
@@ -161,6 +162,7 @@ export const ProviderSonner: FC<ProviderSonnerProps> = props => {
   return (
     <SonnerContext.Provider value={{ toast, promise, remove, contentHistory }}>
       <SonnerLayout
+        $zIndex={props.zIndex ?? DEFAULT_PROVIDER_SONNER_Z_INDEX}
         $position={props.position}
         $gap={props.gap}
         onMouseEnter={handleMouseEnter}
@@ -235,12 +237,12 @@ const SonnerElement = (props: SonnerElementProps) => {
           ? props.isHovered || props.index === 0
             ? `0px`
             : `-${DEFAULT_PROVIDER_SONNER_MARGIN_BOTTOM}px`
-          : 'initial',
+          : '0px',
         marginBottom: !props.isTop
           ? props.isHovered || props.index === 0
             ? `0px`
             : `-${DEFAULT_PROVIDER_SONNER_MARGIN_BOTTOM}px`
-          : 'initial'
+          : '0px'
       }}
       style={{
         zIndex: -props.index

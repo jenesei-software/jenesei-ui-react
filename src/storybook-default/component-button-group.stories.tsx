@@ -19,8 +19,8 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
       {...props}
       value={[
         {
-          styleCustom: {
-            justifyContent: 'flex-start'
+          sx: {
+            default: { justifyContent: 'flex-start' }
           },
           children: 'First',
           iconName: 'CallMissed',
@@ -33,8 +33,8 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
           isLoading: true
         },
         {
-          styleCustom: {
-            justifyContent: 'space-between'
+          sx: {
+            default: { justifyContent: 'space-between' }
           },
           children: 'Third',
           iconOrder: -1,
@@ -47,8 +47,8 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
           isLoading: true
         },
         {
-          styleCustom: {
-            justifyContent: 'space-between'
+          sx: {
+            default: { justifyContent: 'space-between' }
           },
           children: 'Second',
           iconOrder: 2,
@@ -64,8 +64,8 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
         },
 
         {
-          styleCustom: {
-            justifyContent: 'space-between'
+          sx: {
+            default: { justifyContent: 'space-between' }
           },
           children: 'Third',
           iconName: 'Heart',
@@ -75,8 +75,8 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
           size: 'medium'
         },
         {
-          styleCustom: {
-            justifyContent: 'space-between'
+          sx: {
+            default: { justifyContent: 'space-between' }
           },
           children: 'Third',
           iconName: 'Arrow1',
@@ -86,8 +86,8 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
           size: 'medium'
         },
         {
-          styleCustom: {
-            justifyContent: 'space-between'
+          sx: {
+            default: { justifyContent: 'space-between' }
           },
           children: 'Third',
           iconName: 'Folder',
@@ -98,8 +98,8 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
         },
 
         {
-          styleCustom: {
-            justifyContent: 'space-between'
+          sx: {
+            default: { justifyContent: 'space-between' }
           },
           children: 'Third',
           iconName: 'Folder',
@@ -109,8 +109,8 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
           size: 'medium'
         },
         {
-          styleCustom: {
-            justifyContent: 'space-between'
+          sx: {
+            default: { justifyContent: 'space-between' }
           },
           children: 'Third',
           iconName: 'Scan',
@@ -120,8 +120,8 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
           size: 'medium'
         },
         {
-          styleCustom: {
-            justifyContent: 'space-between'
+          sx: {
+            default: { justifyContent: 'space-between' }
           },
           children: 'Third',
           iconName: 'Arrow2',

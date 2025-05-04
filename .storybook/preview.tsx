@@ -1,6 +1,4 @@
-import { useGSAP } from '@gsap/react'
 import type { Preview } from '@storybook/react'
-import gsap from 'gsap'
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 
@@ -27,8 +25,6 @@ import '@fontsource/work-sans/400.css'
 import '@fontsource/work-sans/500.css'
 import '@fontsource/work-sans/700.css'
 import '@fontsource/work-sans/900.css'
-
-gsap.registerPlugin(useGSAP)
 
 const preview: Preview = {
   decorators: [

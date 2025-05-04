@@ -13,3 +13,6 @@ export type ErrorMessageProps = {
 
   width?: string
 }
+export interface addErrorProps {
+  $isError?: boolean
+}

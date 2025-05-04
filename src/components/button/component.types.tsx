@@ -1,13 +1,13 @@
-import React, { CSSProperties, PropsWithChildren } from 'react'
+import React, { PropsWithChildren } from 'react'
 
 import { LibraryIconItemProps, TLibraryIconIdNameString } from '@local/components/icon'
-import { DollarFlexContainerAndItemProps, FlexContainerAndItemProps } from '@local/styles/base'
+import { addSXProps } from '@local/styles/sx'
 import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export type TButtonGenre = keyof TJeneseiThemeGenre
 
-export interface ButtonProps extends PropsWithChildren {
+export type ButtonProps = PropsWithChildren & {
   isIconGroup?: boolean
 
   size: TJeneseiThemeSize
@@ -63,11 +63,7 @@ export interface ButtonProps extends PropsWithChildren {
   customFontWeight?: number
 
   isFullSize?: boolean
-
-  styleCustom?: FlexContainerAndItemProps
-
-  styleCSS?: CSSProperties
-}
+} & addSXProps
 
 export type StyledDollarButtonProps = AddDollarSign<
   Pick<
@@ -88,7 +84,7 @@ export type StyledDollarButtonProps = AddDollarSign<
     | 'minWidth'
   >
 > &
-  DollarFlexContainerAndItemProps
+  AddDollarSign<addSXProps>
 
 export type StyledDollarButtonIconsWrapperProps = AddDollarSign<
   Pick<ButtonProps, 'isIconGroup' | 'size' | 'iconGroupOrder'>

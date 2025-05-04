@@ -40,7 +40,6 @@ export default defineConfig(() => {
         entry: {
           ['style-theme']: resolve(__dirname, 'src/theme/index.ts'),
 
-          ['style-base']: resolve(__dirname, 'src/styles/base/index.ts'),
           ['style-add']: resolve(__dirname, 'src/styles/add/index.ts'),
           ['style-error']: resolve(__dirname, 'src/styles/error/index.ts'),
 
@@ -104,7 +103,6 @@ export default defineConfig(() => {
             react: 'React',
             'react-dom': 'ReactDOM',
             moment: 'moment',
-            gsap: 'gsap',
             'react-number-format': 'reactNumberFormat',
             '@tanstack/react-virtual': 'reactVirtual',
             'js-cookie': 'Cookies',

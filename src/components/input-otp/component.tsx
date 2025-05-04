@@ -1,4 +1,4 @@
-import { FocusEvent, KeyboardEvent, useCallback, useRef, useState } from 'react'
+import { ClipboardEvent, FocusEvent, KeyboardEvent, useCallback, useRef, useState } from 'react'
 
 import { ErrorMessage } from '@local/styles/error'
 
@@ -9,6 +9,47 @@ export const InputOTP = (props: InputOTPProps) => {
   const [otp, setOtp] = useState<string[]>(new Array(props.length).fill(''))
   const inputsRef = useRef<(HTMLInputElement | null)[]>([])
   const wrapperRef = useRef<HTMLDivElement | null>(null)
+
+  const handlePaste = useCallback(
+    (index: number, e: ClipboardEvent<HTMLInputElement>) => {
+      e.preventDefault()
+
+      const pasteData = e.clipboardData.getData('Text')
+      const digits = pasteData.replace(/\D/g, '').split('')
+
+      if (!digits.length) return
+
+      setOtp(prevOtp => {
+        const newOtp = [...prevOtp]
+        let currentIndex = index
+
+        for (let i = 0; i < digits.length && currentIndex < newOtp.length; i++) {
+          newOtp[currentIndex] = digits[i]
+          currentIndex++
+        }
+
+        const joined = newOtp.join('')
+
+        props.onChange?.(joined)
+
+        if (newOtp.every(char => char !== '')) {
+          props.onComplete?.(joined)
+        }
+
+        setTimeout(() => {
+          const firstEmpty = newOtp.findIndex(char => char === '')
+          if (firstEmpty !== -1) {
+            inputsRef.current[firstEmpty]?.focus()
+          } else if (currentIndex < newOtp.length) {
+            inputsRef.current[currentIndex]?.focus()
+          }
+        }, 0)
+
+        return newOtp
+      })
+    },
+    [props]
+  )
 
   const handleChange = useCallback(
     (index: number, value: string) => {
@@ -110,6 +151,7 @@ export const InputOTP = (props: InputOTPProps) => {
             maxLength={1}
             value={digit}
             onFocus={handleFocusInput}
+            onPaste={e => handlePaste(index, e)}
             onChange={value => handleChange(index, value)}
             onKeyDown={e => handleKeyDown(index, e)}
             genre={props.genre}
