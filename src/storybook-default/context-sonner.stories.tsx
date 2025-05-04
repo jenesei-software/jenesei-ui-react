@@ -89,7 +89,14 @@ const ProviderSonnerWrapperDouble: FC = () => {
     })
   }
   return (
-    <Stack p="12px" gap="8px">
+    <Stack
+      sx={{
+        default: {
+          padding: '12px',
+          gap: '8px'
+        }
+      }}
+    >
       <Button onClick={handlePromise} genre="black" size="medium">
         Promise Toast!
       </Button>

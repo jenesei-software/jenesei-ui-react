@@ -1,5 +1,5 @@
 import { useVirtualizer } from '@tanstack/react-virtual'
-import gsap from 'gsap'
+import { AnimatePresence } from 'framer-motion'
 import moment from 'moment'
 import React, { FC, FocusEventHandler, ReactNode, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
@@ -39,7 +39,6 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
   const [isAll, setIsAll] = useState(props?.footer?.selectAll?.defaultValue ?? false)
-  const listRef = useRef<HTMLUListElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const parentListRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -107,46 +106,11 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     [isAll, props]
   )
 
-  const handleListOptionCloseEffect = useCallback(() => {
-    const list = listRef.current
-    if (!list) return
-
-    gsap.to(inputRef.current, {
-      duration: 0.1,
-      borderBottomLeftRadius: `${radius}px`,
-      borderBottomRightRadius: `${radius}px`
-    })
-    gsap.to(wrapperRef.current, {
-      duration: 0.1,
-      '--after-height': `0px`,
-      zIndex: 'auto'
-    })
-    gsap.to(parentListRef.current, {
-      height: '0px',
-      zIndex: 'auto',
-      display: 'none',
-      duration: 0.1,
-      ease: 'power2.out',
-      onComplete: () => {
-        setIsAnimating(false)
-        setIsOpen(false)
-        wrapperRef?.current?.blur()
-        inputRef?.current?.blur()
-      }
-    })
-  }, [radius])
-
   const handleOnBlurEasy = useCallback(() => {
-    if (isAnimating) return
-    if (!isOpen) return
-    setIsAnimating(true)
-    gsap.to(parentListRef.current, {
-      duration: 0.2,
-      onComplete: () => {
-        handleListOptionCloseEffect()
-      }
-    })
-  }, [handleListOptionCloseEffect, isAnimating, isOpen])
+    setIsOpen(false)
+    wrapperRef?.current?.blur()
+    inputRef?.current?.blur()
+  }, [])
 
   const handleOnBlur: FocusEventHandler<HTMLInputElement> = useCallback(
     event => {
@@ -193,36 +157,14 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   )
 
   const handleListOptionOpenEffect = useCallback(() => {
-    const list = listRef.current
-    if (!list) return
-
     setIsAnimating(false)
     setIsOpen(true)
   }, [])
 
   const handleOnOpen = useCallback(() => {
-    gsap.to(inputRef.current, {
-      duration: 0.1,
-      borderBottomLeftRadius: `0px`,
-      borderBottomRightRadius: `0px`,
-      onComplete: () => {
-        gsap.to(wrapperRef.current, {
-          duration: 0.1,
-          zIndex: '10',
-          '--after-height': `${height + 1}px`
-        })
-        gsap.to(parentListRef.current, {
-          height: `${height + 1}px`,
-          display: 'flex',
-          zIndex: '1',
-          duration: 0.1,
-          onComplete: () => {
-            handleListOptionOpenEffect()
-          }
-        })
-      }
-    })
-  }, [handleListOptionOpenEffect, height])
+    setIsAnimating(false)
+    setIsOpen(true)
+  }, [])
 
   const handleOnFocusEasy = useCallback(() => {
     if (isAnimating) return
@@ -318,6 +260,11 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
         ref={wrapperRef}
+        animate={{
+          zIndex: isOpen ? '10' : 'auto',
+          '--after-height': isOpen ? `${height + 1}px` : `0px`
+        }}
+        transition={{ duration: 0.2 }}
       >
         <SelectStyledInput
           tabIndex={0}
@@ -342,6 +289,11 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           onBlur={props?.inputProps?.onBlur}
           onFocus={props?.inputProps?.onFocus}
           onClick={handleOnFocusEasy}
+          animate={{
+            borderBottomLeftRadius: isOpen ? `0px` : `${radius}px`,
+            borderBottomRightRadius: isOpen ? `0px` : `${radius}px`
+          }}
+          transition={{ duration: 0.2 }}
           ref={inputRef}
         />
         {props.isShowSelectInputIcon && (
@@ -355,36 +307,71 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
             tabIndex={-1}
           />
         )}
-        <DropdownListParent
-          ref={parentListRef}
-          $genre={props.genre}
-          $isShowScroll={optionsLength > maxViewLength}
-          $isFooter={isFooter}
-          $size={props.size}
-          onScroll={e => handleFetchNextPage(e.target as HTMLDivElement)}
-          style={{
-            maxHeight: `${height + 1}px`
-          }}
-        >
-          <DropdownList
-            ref={listRef}
-            style={{
-              height: `${listVirtualizer.getTotalSize()}px`,
-              minHeight: `${height}px`
-            }}
-          >
-            {!props.isEmptyOption ? (
-              listVirtualizer.getVirtualItems().map(virtualRow => {
-                const item = props.option[virtualRow.index]
-                const checked = isSelectedItem(item)
-                return (
+        <AnimatePresence>
+          {isOpen ? (
+            <DropdownListParent
+              ref={parentListRef}
+              $genre={props.genre}
+              $isShowScroll={optionsLength > maxViewLength}
+              $isFooter={isFooter}
+              $size={props.size}
+              onScroll={e => handleFetchNextPage(e.target as HTMLDivElement)}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{
+                height: `${height + 1}px`,
+                display: 'flex',
+                opacity: 1,
+                zIndex: '1'
+              }}
+              exit={{
+                height: '0px',
+                display: 'none',
+                opacity: 0,
+                zIndex: 'auto'
+              }}
+              transition={{ duration: 0.2 }}
+              style={{
+                maxHeight: `${height + 1}px`
+              }}
+            >
+              <DropdownList
+                style={{
+                  height: `${listVirtualizer.getTotalSize()}px`,
+                  minHeight: `${height}px`
+                }}
+              >
+                {!props.isEmptyOption ? (
+                  listVirtualizer.getVirtualItems().map(virtualRow => {
+                    const item = props.option[virtualRow.index]
+                    const checked = isSelectedItem(item)
+                    return (
+                      <ContainerDropdownOption
+                        checked={checked}
+                        onClick={() => handleOptionOnClick(item)}
+                        key={virtualRow.index}
+                        virtualRowSize={virtualRow.size}
+                        virtualRowStart={virtualRow.start}
+                        label={item.label}
+                        genre={props.genre}
+                        size={props.size}
+                        isBold={props.optionProps?.isBold}
+                        isError={props.optionProps?.isError}
+                        isLoading={props.optionProps?.isLoading}
+                        prefixChildren={props.optionProps?.prefixChildren}
+                        postfixChildren={props.optionProps?.postfixChildren}
+                        isShowDropdownOptionIcon={props.isShowDropdownOptionIcon}
+                      />
+                    )
+                  })
+                ) : (
                   <ContainerDropdownOption
-                    checked={checked}
-                    onClick={() => handleOptionOnClick(item)}
-                    key={virtualRow.index}
-                    virtualRowSize={virtualRow.size}
-                    virtualRowStart={virtualRow.start}
-                    label={item.label}
+                    isNotShowHoverStyle
+                    checked={false}
+                    onClick={() => {}}
+                    key={0}
+                    virtualRowSize={props?.getEstimateSize?.(0) ?? sizeHeight}
+                    virtualRowStart={0}
+                    label={props.labelEmptyOption ?? DEFAULT_LABEL_EMPTY_OPTION}
                     genre={props.genre}
                     size={props.size}
                     isBold={props.optionProps?.isBold}
@@ -394,53 +381,41 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                     postfixChildren={props.optionProps?.postfixChildren}
                     isShowDropdownOptionIcon={props.isShowDropdownOptionIcon}
                   />
-                )
-              })
-            ) : (
-              <ContainerDropdownOption
-                isNotShowHoverStyle
-                checked={false}
-                onClick={() => {}}
-                key={0}
-                virtualRowSize={props?.getEstimateSize?.(0) ?? sizeHeight}
-                virtualRowStart={0}
-                label={props.labelEmptyOption ?? DEFAULT_LABEL_EMPTY_OPTION}
-                genre={props.genre}
-                size={props.size}
-                isBold={props.optionProps?.isBold}
-                isError={props.optionProps?.isError}
-                isLoading={props.optionProps?.isLoading}
-                prefixChildren={props.optionProps?.prefixChildren}
-                postfixChildren={props.optionProps?.postfixChildren}
-                isShowDropdownOptionIcon={props.isShowDropdownOptionIcon}
-              />
-            )}
-            {isFooter && (
-              <DropdownFooter $isErase={isErase} $isSelectAll={isSelectAll} $genre={props.genre} $size={props.size}>
-                {props.footer!.selectAll && (
-                  <DropdownSelectAll>
-                    <Button
-                      isFullSize
-                      genre={props.genre}
-                      onClick={handleSelectAllOnClick}
-                      size={'medium'}
-                      isHiddenBorder
-                    >
-                      {props.footer!.selectAll.label}
-                    </Button>
-                  </DropdownSelectAll>
                 )}
-                {props.footer!.erase && (
-                  <DropdownErase>
-                    <Button isFullSize genre={props.genre} onClick={handleEraseOnClick} size={'medium'} isHiddenBorder>
-                      {props.footer!.erase.label}
-                    </Button>
-                  </DropdownErase>
+                {isFooter && (
+                  <DropdownFooter $isErase={isErase} $isSelectAll={isSelectAll} $genre={props.genre} $size={props.size}>
+                    {props.footer!.selectAll && (
+                      <DropdownSelectAll>
+                        <Button
+                          isFullSize
+                          genre={props.genre}
+                          onClick={handleSelectAllOnClick}
+                          size={'medium'}
+                          isHiddenBorder
+                        >
+                          {props.footer!.selectAll.label}
+                        </Button>
+                      </DropdownSelectAll>
+                    )}
+                    {props.footer!.erase && (
+                      <DropdownErase>
+                        <Button
+                          isFullSize
+                          genre={props.genre}
+                          onClick={handleEraseOnClick}
+                          size={'medium'}
+                          isHiddenBorder
+                        >
+                          {props.footer!.erase.label}
+                        </Button>
+                      </DropdownErase>
+                    )}
+                  </DropdownFooter>
                 )}
-              </DropdownFooter>
-            )}
-          </DropdownList>
-        </DropdownListParent>
+              </DropdownList>
+            </DropdownListParent>
+          ) : null}
+        </AnimatePresence>
       </SelectWrapper>
       <ErrorMessage
         isError={props.isError}

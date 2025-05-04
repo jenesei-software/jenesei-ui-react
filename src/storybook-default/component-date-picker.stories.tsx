@@ -3,7 +3,9 @@ import moment from 'moment'
 import { FC, useEffect, useState } from 'react'
 import 'styled-components'
 
-import { DatePicker, DatePickerProps, MonthItem, WeekItem } from '../components/date-picker'
+import { localeMonths, localeWeeks } from '@local/consts'
+
+import { DatePicker, DatePickerProps } from '../components/date-picker'
 
 const meta: Meta<typeof DatePicker> = {
   component: DatePicker,
@@ -13,105 +15,6 @@ const meta: Meta<typeof DatePicker> = {
 export default meta
 type Story = StoryObj<typeof DatePicker>
 
-export const localeMonths: MonthItem[] = [
-  {
-    localeLong: 'Январь',
-    localeShort: 'Янв',
-    value: 'january'
-  },
-  {
-    localeLong: 'February',
-    localeShort: 'Feb',
-    value: 'february'
-  },
-  {
-    localeLong: 'March',
-    localeShort: 'Mar',
-    value: 'march'
-  },
-  {
-    localeLong: 'April',
-    localeShort: 'Apr',
-    value: 'april'
-  },
-  {
-    localeLong: 'May',
-    localeShort: 'May',
-    value: 'may'
-  },
-  {
-    localeLong: 'June',
-    localeShort: 'Jun',
-    value: 'june'
-  },
-  {
-    localeLong: 'July',
-    localeShort: 'Jul',
-    value: 'july'
-  },
-  {
-    localeLong: 'August',
-    localeShort: 'Aug',
-    value: 'august'
-  },
-  {
-    localeLong: 'September',
-    localeShort: 'Sep',
-    value: 'september'
-  },
-  {
-    localeLong: 'October',
-    localeShort: 'Oct',
-    value: 'october'
-  },
-  {
-    localeLong: 'November',
-    localeShort: 'Nov',
-    value: 'november'
-  },
-  {
-    localeLong: 'December',
-    localeShort: 'Dec',
-    value: 'december'
-  }
-]
-export const localeWeeks: WeekItem[] = [
-  {
-    localeLong: 'Monday',
-    localeShort: 'Пн',
-    value: 'mo'
-  },
-  {
-    localeLong: 'Tuesday',
-    localeShort: 'Tue',
-    value: 'tu'
-  },
-  {
-    localeLong: 'Wednesday',
-    localeShort: 'Wed',
-    value: 'we'
-  },
-  {
-    localeLong: 'Thursday',
-    localeShort: 'Thu',
-    value: 'th'
-  },
-  {
-    localeLong: 'Friday',
-    localeShort: 'Fri',
-    value: 'fr'
-  },
-  {
-    localeLong: 'Saturday',
-    localeShort: 'Sat',
-    value: 'sa'
-  },
-  {
-    localeLong: 'Sunday',
-    localeShort: 'Sun',
-    value: 'su'
-  }
-]
 const DatePickerWrapper: FC<DatePickerProps> = props => {
   const [value, setValue] = useState<number | null>(props.value)
   const handleSelectChange = (value: number) => {

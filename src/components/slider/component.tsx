@@ -1,5 +1,6 @@
 import { AnimatePresence, PanInfo, Variants } from 'framer-motion'
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
+import { useTheme } from 'styled-components'
 
 import { useDialog } from '@local/contexts/context-dialog'
 
@@ -59,6 +60,19 @@ export const Slider: FC<SliderProps> = props => {
     onIndexChange?.(activeImageId)
   }, [activeImageId, onIndexChange])
 
+  const theme = useTheme()
+  const br = useMemo(
+    () =>
+      String(
+        (props.propsStack?.sx
+          ? typeof props.propsStack?.sx === 'function'
+            ? props.propsStack?.sx(theme).default.borderRadius
+            : props.propsStack?.sx.default.borderRadius
+          : '0px') ?? '0px'
+      ),
+    [props.propsStack, theme]
+  )
+
   const { add } = useDialog<{
     br?: string
     dragEndHandler: (dragInfo: PanInfo) => void
@@ -70,7 +84,7 @@ export const Slider: FC<SliderProps> = props => {
     skipToImage: (imageId: number) => void
     direction: number
   }>({
-    br: props.propsStack?.br,
+    br: br,
     dragEndHandler: dragEndHandler,
     images: props.images,
     children: props.children,
@@ -80,19 +94,27 @@ export const Slider: FC<SliderProps> = props => {
     skipToImage: skipToImage,
     direction: direction
   })
-
   const handleAdd = useCallback(() => {
     add({
-      borderRadius: props.propsStack?.br,
+      borderRadius: br,
       padding: '0',
       background: 'whiteStandard',
       content: (params, remove) => (
         <Stack
-          style={{ position: 'relative', overflow: 'hidden', aspectRatio: '900 / 600' }}
-          w="auto"
-          maxW="70dvw"
-          h="85dvh"
-          br={params?.br}
+          sx={{
+            default: {
+              position: 'relative',
+              overflow: 'hidden',
+              aspectRatio: '900 / 600',
+              width: 'auto',
+              maxWidth: '70dvw',
+              height: '85dvh',
+              borderRadius: params?.br
+            },
+            tablet: {
+              maxWidth: '95dvw'
+            }
+          }}
         >
           <AnimatePresence initial={false} custom={params?.direction}>
             <SliderImage
@@ -114,15 +136,17 @@ export const Slider: FC<SliderProps> = props => {
             >
               <Image
                 propsStack={{
-                  w: '100%',
-                  h: '100%',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  bg: 'black10',
-                  style: {
-                    position: 'absolute',
-                    pointerEvents: 'none'
-                  }
+                  sx: theme => ({
+                    default: {
+                      width: '100%',
+                      height: '100%',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      backgroundColor: theme.palette.black10,
+                      position: 'absolute',
+                      pointerEvents: 'none'
+                    }
+                  })
                 }}
                 propsImage={{
                   objectFit: 'contain'
@@ -135,7 +159,16 @@ export const Slider: FC<SliderProps> = props => {
             </SliderImage>
           </AnimatePresence>
           {typeof params?.children === 'function' ? params?.children?.({ isDialog: true }) : params?.children}
-          <Stack style={{ position: 'absolute', bottom: 15, left: 15 }} gap="8px">
+          <Stack
+            sx={{
+              default: {
+                position: 'absolute',
+                bottom: 15,
+                left: 15,
+                gap: '8px'
+              }
+            }}
+          >
             <Button
               genre="realebail-white"
               size="small"
@@ -161,10 +194,12 @@ export const Slider: FC<SliderProps> = props => {
           </Stack>
 
           <Button
-            styleCSS={{
-              position: 'absolute',
-              bottom: 15,
-              right: 15
+            sx={{
+              default: {
+                position: 'absolute',
+                bottom: 15,
+                right: 15
+              }
             }}
             genre="realebail-white"
             size="small"
@@ -175,12 +210,14 @@ export const Slider: FC<SliderProps> = props => {
             onClick={() => remove?.()}
           />
           <Stack
-            style={{
-              position: 'absolute',
-              bottom: 15,
-              left: '50%',
-              transform: 'translateX(-50%)',
-              gap: '4px'
+            sx={{
+              default: {
+                position: 'absolute',
+                bottom: 15,
+                left: '50%',
+                transform: 'translateX(-50%)',
+                gap: '4px'
+              }
             }}
           >
             {(params?.images ?? [])?.map(i => (
@@ -198,16 +235,51 @@ export const Slider: FC<SliderProps> = props => {
         </Stack>
       )
     })
-  }, [add, props.propsStack?.br])
+  }, [add, br])
   return (
-    <StackMotion flexDirection="column" alignItems="center" style={{ overflow: 'hidden' }} {...props.propsStack}>
-      <Stack style={{ position: 'relative', overflow: 'hidden' }} w="100%" h="100%">
+    <StackMotion
+      {...props.propsStack}
+      sx={theme => ({
+        ...props.propsStack?.sx,
+        default: {
+          flexDirection: 'column',
+          alignItems: 'center',
+          overflow: 'hidden',
+          width: 'auto',
+          maxWidth: '70dvw',
+          height: '85dvh',
+          ...(props.propsStack?.sx
+            ? typeof props.propsStack?.sx === 'function'
+              ? props.propsStack?.sx(theme).default
+              : props.propsStack?.sx.default
+            : {})
+        },
+        tablet: {
+          maxWidth: '95dvw',
+          ...(props.propsStack?.sx
+            ? typeof props.propsStack?.sx === 'function'
+              ? props.propsStack?.sx(theme).tablet
+              : props.propsStack?.sx.tablet
+            : {})
+        }
+      })}
+    >
+      <Stack
+        sx={{
+          default: {
+            width: '100%',
+            height: '100%',
+            position: 'relative',
+            overflow: 'hidden'
+          }
+        }}
+      >
         <AnimatePresence initial={false} custom={direction}>
           <SliderImage
             key={activeImageId}
             style={{
               overflow: 'hidden',
-              borderRadius: props.propsStack?.br
+              borderRadius: br
             }}
             custom={direction}
             variants={sliderVariants}
@@ -222,15 +294,17 @@ export const Slider: FC<SliderProps> = props => {
           >
             <Image
               propsStack={{
-                w: '100%',
-                h: '100%',
-                alignItems: 'center',
-                justifyContent: 'center',
-                bg: 'black10',
-                style: {
-                  position: 'absolute',
-                  pointerEvents: 'none'
-                }
+                sx: theme => ({
+                  default: {
+                    width: '100%',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: theme.palette.black10,
+                    position: 'absolute',
+                    pointerEvents: 'none'
+                  }
+                })
               }}
               alt={props.images[activeImageIndex]?.imageSrc}
               src={props.images[activeImageIndex]?.imageSrc}
@@ -242,11 +316,13 @@ export const Slider: FC<SliderProps> = props => {
         {typeof props?.children === 'function' ? props?.children?.({ isDialog: false }) : props?.children}
 
         <Button
-          styleCSS={{
-            position: 'absolute',
-            top: '50%',
-            left: 5,
-            transform: 'translateY(-50%)'
+          sx={{
+            default: {
+              position: 'absolute',
+              top: '50%',
+              left: 5,
+              transform: 'translateY(-50%)'
+            }
           }}
           genre="realebail-white"
           size="small"
@@ -258,11 +334,13 @@ export const Slider: FC<SliderProps> = props => {
           onClick={() => swipeToImage(-1)}
         />
         <Button
-          styleCSS={{
-            position: 'absolute',
-            top: '50%',
-            right: 5,
-            transform: 'translateY(-50%)'
+          sx={{
+            default: {
+              position: 'absolute',
+              top: '50%',
+              right: 5,
+              transform: 'translateY(-50%)'
+            }
           }}
           genre="realebail-white"
           size="small"
@@ -274,10 +352,12 @@ export const Slider: FC<SliderProps> = props => {
           onClick={() => swipeToImage(1)}
         />
         <Button
-          styleCSS={{
-            position: 'absolute',
-            bottom: 5,
-            right: 5
+          sx={{
+            default: {
+              position: 'absolute',
+              bottom: 5,
+              right: 5
+            }
           }}
           genre="realebail-white"
           size="small"
@@ -288,12 +368,14 @@ export const Slider: FC<SliderProps> = props => {
           onClick={() => handleAdd()}
         />
         <Stack
-          style={{
-            position: 'absolute',
-            bottom: 5,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            gap: '4px'
+          sx={{
+            default: {
+              position: 'absolute',
+              bottom: 5,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              gap: '4px'
+            }
           }}
         >
           {props.images.map(i => (

@@ -18,7 +18,15 @@ const defaultArgs: Partial<SeparatorProps> = {}
 
 const SeparatorWrapper: FC<SeparatorProps> = props => {
   return (
-    <Stack h="100px" w="100px" p="10px">
+    <Stack
+      sx={{
+        default: {
+          width: '100%',
+          height: '100%',
+          padding: '10px'
+        }
+      }}
+    >
       <Separator {...props} />
     </Stack>
   )

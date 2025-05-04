@@ -10,8 +10,34 @@ export const Image: FC<ImageProps> = props => {
   const [isError, setIsError] = useState(false)
 
   return (
-    <Stack {...props.propsStack} style={{ position: 'relative', overflow: 'hidden', ...props.propsStack?.style }}>
-      {!isError ? props.loading || isPending ? <Skeleton visible w="100%" h="100%" /> : null : null}
+    <Stack
+      {...props.propsStack}
+      sx={theme => ({
+        ...props.propsStack?.sx,
+        default: {
+          position: 'relative',
+          overflow: 'hidden',
+          ...(props.propsStack?.sx
+            ? typeof props.propsStack?.sx === 'function'
+              ? props.propsStack?.sx(theme).default
+              : props.propsStack?.sx.default
+            : {})
+        }
+      })}
+    >
+      {!isError ? (
+        props.loading || isPending ? (
+          <Skeleton
+            visible
+            sx={{
+              default: {
+                width: '100%',
+                height: '100%'
+              }
+            }}
+          />
+        ) : null
+      ) : null}
       {!isError && (
         <ImageIMG
           loading="lazy"

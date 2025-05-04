@@ -1,6 +1,7 @@
+import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
-import { StyledInput, StyledInputCSS } from '@local/components/input'
+import { StyledInput, StyledInputCSS, StyledMotionInput } from '@local/components/input'
 import { addBorder, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
 import { IJeneseiThemeSize } from '@local/theme'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
@@ -15,7 +16,7 @@ import {
 } from '.'
 import { Icon } from '../icon'
 
-export const SelectWrapper = styled.div<SelectWrapperProps>`
+export const SelectWrapper = styled(motion.div)<SelectWrapperProps>`
   width: ${props => props.$width ?? '100%'};
   position: relative;
   height: fit-content;
@@ -53,7 +54,7 @@ export const DropdownListParentSizeConstructor = (props: IJeneseiThemeSize) => c
   border-radius: 0px 0px ${props.radius}px ${props.radius}px;
 `
 
-export const DropdownListParent = styled.div<SelectStyledListProps>`
+export const DropdownListParent = styled(motion.div)<SelectStyledListProps>`
   outline: none;
   display: none;
 
@@ -207,6 +208,6 @@ export const DropdownSelectAll = styled.div`
   height: 100%;
 `
 
-export const SelectStyledInput = styled(StyledInput)<SelectStyledInputProps>`
+export const SelectStyledInput = styled(StyledMotionInput)<SelectStyledInputProps>`
   ${addRemoveOutline};
 `

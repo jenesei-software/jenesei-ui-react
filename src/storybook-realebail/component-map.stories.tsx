@@ -7,13 +7,7 @@ import { useGeolocation } from '@local/contexts/context-geolocation'
 
 import { Button } from '../components/button'
 import { ButtonGroup } from '../components/button-group'
-import {
-  DEFAULT_MAP_CENTER,
-  DEFAULT_MAP_THEME,
-  DEFAULT_MAP_THEME_LIST,
-  Map as MapComponent,
-  MapProps
-} from '../components/map'
+import { DEFAULT_MAP_THEME, DEFAULT_MAP_THEME_LIST, Map as MapComponent, MapProps } from '../components/map'
 import { IMAGES, Slider } from '../components/slider'
 import { Stack } from '../components/stack'
 
@@ -47,15 +41,28 @@ const PopupContent: FC = () => {
     <Slider
       images={IMAGES}
       propsStack={{
-        maxW: '80dvw',
-        h: '350px',
-        w: '500px',
-        br: '10px'
+        sx: {
+          default: {
+            maxWidth: '80dvw',
+            height: '350px',
+            width: '500px',
+            borderRadius: '10px'
+          }
+        }
       }}
     >
       {({ isDialog }) =>
         !isDialog ? (
-          <Stack justifyContent="flex-end" gap="4px" p="5px" flexGrow={1}>
+          <Stack
+            sx={{
+              default: {
+                justifyContent: 'flex-end',
+                gap: '4px',
+                padding: '5px',
+                flexGrow: 1
+              }
+            }}
+          >
             <Button
               isHiddenBorder
               genre="realebail-white"
@@ -67,7 +74,16 @@ const PopupContent: FC = () => {
             />
           </Stack>
         ) : (
-          <Stack justifyContent="flex-end" gap="4px" p="5px" flexGrow={1}>
+          <Stack
+            sx={{
+              default: {
+                justifyContent: 'flex-end',
+                gap: '4px',
+                padding: '5px',
+                flexGrow: 1
+              }
+            }}
+          >
             <Checkbox
               width="asHeight"
               genre="realebail-white"
@@ -88,16 +104,14 @@ const MapWrapper: FC<MapProps<object>> = props => {
   const [theme, setTheme] = useState<MapProps<MarkerItemProps>['theme']>(DEFAULT_MAP_THEME)
   const [markers, setMarkers] = useState<MapProps<MarkerItemProps>['markers']>([])
   useEffect(() => {
-    if (location) {
+    if (location && location.coords) {
       setCenter([location.coords.latitude, location.coords.longitude])
-    } else {
-      setCenter(DEFAULT_MAP_CENTER)
     }
   }, [location])
 
   useEffect(() => {
     const markers: MapProps<MarkerItemProps>['markers'] = []
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 1000; i++) {
       markers.push({
         id: `marker-${i}`,
         popupContent: <PopupContent />,
@@ -120,7 +134,18 @@ const MapWrapper: FC<MapProps<object>> = props => {
   }, [])
   const isDisabledButton = geolocationPermission === 'denied' || geolocationPermission === 'granted'
   return (
-    <Stack w="100%" h="100%" alignItems="center" flexDirection="column" flexGrow={1} style={{ overflow: 'hidden' }}>
+    <Stack
+      sx={{
+        default: {
+          width: '100%',
+          height: '100%',
+          alignItems: 'center',
+          flexDirection: 'column',
+          flexGrow: 1,
+          overflow: 'hidden'
+        }
+      }}
+    >
       <Button
         size={'small'}
         genre={'gray'}
@@ -155,7 +180,18 @@ const MapWrapper: FC<MapProps<object>> = props => {
           'Los Angeles, CA ?'
         )}
       </Stack>
-      <Stack w="100%" h="100%" alignItems="center" flexDirection="column" flexGrow={1} style={{ overflow: 'hidden' }}>
+      <Stack
+        sx={{
+          default: {
+            width: '100%',
+            height: '100%',
+            alignItems: 'center',
+            flexDirection: 'column',
+            flexGrow: 1,
+            overflow: 'hidden'
+          }
+        }}
+      >
         <MapComponent<MarkerItemProps>
           {...props}
           center={center}

@@ -311,7 +311,14 @@ export const DatePicker = (props: DatePickerProps) => {
               }}
             >
               <DateDropdownList $isInputEffect={props.isInputEffect} $genre={props.genre} $size={props.size}>
-                <Stack justifyContent="space-between" alignItems="center">
+                <Stack
+                  sx={{
+                    default: {
+                      justifyContent: 'space-between',
+                      alignItems: 'center'
+                    }
+                  }}
+                >
                   <Button
                     type="button"
                     isRadius
@@ -323,7 +330,7 @@ export const DatePicker = (props: DatePickerProps) => {
                     onClick={() => !isBlockDecreaseMonth && decreaseMonth()}
                     isHidden={isBlockDecreaseMonth}
                   />
-                  <Stack gap="8px">
+                  <Stack sx={{ default: { gap: '8px' } }}>
                     <SelectMonth
                       monthsLocale={props.locale.months}
                       genre={props.genre}

@@ -51,18 +51,7 @@ export const Button: FC<ButtonProps> = props => {
       type={props.type ?? 'button'}
       className={props.className}
       onClick={handleClick}
-      $flexDirection={props.styleCustom?.flexDirection}
-      $flexWrap={props.styleCustom?.flexWrap}
-      $justifyContent={props.styleCustom?.justifyContent}
-      $alignItems={props.styleCustom?.alignItems}
-      $alignContent={props.styleCustom?.alignContent}
-      $order={props.styleCustom?.order}
-      $flexGrow={props.styleCustom?.flexGrow}
-      $flexShrink={props.styleCustom?.flexShrink}
-      $flexBasis={props.styleCustom?.flexBasis}
-      $alignSelf={props.styleCustom?.alignSelf}
-      $gap={props.styleCustom?.gap}
-      style={props.styleCSS}
+      $sx={props.sx}
     >
       <Ripple
         color={theme.colors.checkbox[props.genre].color.rest}

@@ -1,20 +1,19 @@
 import React from 'react'
 
-import { DollarFlexContainerAndItemAndBasicProps } from '@local/styles/base'
+import { addSXProps } from '@local/styles/sx'
 import { JeneseiPaletteKeys, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
-export interface BaseLibraryIconProps {
+export type BaseLibraryIconProps = {
   className?: string
   onClick?: (event: React.MouseEvent<SVGSVGElement>) => void
   size: TJeneseiThemeSize | '100%'
   primaryColor?: JeneseiPaletteKeys
   secondColor?: JeneseiPaletteKeys
-  styles?: DollarFlexContainerAndItemAndBasicProps
   turn?: number
   order?: number
   tabIndex?: number
-}
+} & addSXProps
 
 export interface LibraryIconIdItemProps extends BaseLibraryIconProps {
   type: 'id'
@@ -33,8 +32,10 @@ export interface LibraryIconLoadingItemProps extends BaseLibraryIconProps {
 
 export type LibraryIconItemProps = LibraryIconIdItemProps | LibraryIconCheckboxItemProps | LibraryIconLoadingItemProps
 
-export type StyledLibraryIconIdItemProps = AddDollarSign<Pick<LibraryIconItemProps, 'size' | 'turn' | 'order'>> &
-  DollarFlexContainerAndItemAndBasicProps
+export type StyledLibraryIconIdItemProps = AddDollarSign<
+  Pick<LibraryIconItemProps, 'size' | 'turn' | 'order'> & { color?: JeneseiPaletteKeys }
+> &
+  AddDollarSign<addSXProps>
 
 export enum LibraryIconIdName {
   Close,
