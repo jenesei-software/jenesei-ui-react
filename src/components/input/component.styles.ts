@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { PatternFormat } from 'react-number-format'
 import styled, { css } from 'styled-components'
 
@@ -131,6 +132,10 @@ export const StyledInputCSS = css<StyledInputProps>`
 `
 
 export const StyledInput = styled.input<StyledInputProps>`
+  ${StyledInputCSS};
+`
+
+export const StyledMotionInput = styled(motion.input)<StyledInputProps>`
   ${StyledInputCSS};
 `
 

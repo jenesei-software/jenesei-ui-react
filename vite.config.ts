@@ -103,7 +103,6 @@ export default defineConfig(() => {
             react: 'React',
             'react-dom': 'ReactDOM',
             moment: 'moment',
-            gsap: 'gsap',
             'react-number-format': 'reactNumberFormat',
             '@tanstack/react-virtual': 'reactVirtual',
             'js-cookie': 'Cookies',

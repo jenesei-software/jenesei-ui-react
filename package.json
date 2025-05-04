@@ -285,10 +285,8 @@
   },
   "dependencies": {
     "@emotion/styled": "^11.13.0",
-    "@gsap/react": "^2.1.1",
     "@tanstack/react-virtual": "^3.10.8",
     "framer-motion": "^11.13.1",
-    "gsap": "^3.12.5",
     "js-cookie": "^3.0.5",
     "react-image-webp": "^0.8.0",
     "react-number-format": "^5.4.2",
