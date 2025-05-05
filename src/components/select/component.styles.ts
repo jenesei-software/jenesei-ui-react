@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
-import { StyledInput, StyledInputCSS, StyledMotionInput } from '@local/components/input'
+import { StyledInputCSS, StyledMotionInput } from '@local/components/input'
 import { addBorder, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
 import { IJeneseiThemeSize } from '@local/theme'
 import { KEY_SIZE_DATA } from '@local/theme/theme'

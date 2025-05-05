@@ -30,7 +30,7 @@ export const Map = <T extends object>(props: MapProps<T>) => {
     theme && (
       <MapWrapper style={props.style}>
         <MapContainer
-          // zoomControl={false}
+          zoomControl={false}
           center={center}
           zoom={props.zoom ?? DEFAULT_MAP_ZOOM}
           maxZoom={18}
