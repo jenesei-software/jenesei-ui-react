@@ -42,6 +42,7 @@ export default defineConfig(() => {
 
           ['style-add']: resolve(__dirname, 'src/styles/add/index.ts'),
           ['style-error']: resolve(__dirname, 'src/styles/error/index.ts'),
+          ['style-sx']: resolve(__dirname, 'src/styles/sx/index.ts'),
 
           ['types']: resolve(__dirname, 'src/types.ts'),
 

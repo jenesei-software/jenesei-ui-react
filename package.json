@@ -29,6 +29,11 @@
       "import": "./build/style-add.es.js",
       "require": "./build/style-add.cjs.js"
     },
+    "./style-sx": {
+      "types": "./build/style-sx.d.ts",
+      "import": "./build/style-sx.es.js",
+      "require": "./build/style-sx.cjs.js"
+    },
     "./style-error": {
       "types": "./build/style-error.d.ts",
       "import": "./build/style-error.es.js",
