@@ -1,13 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 
-import {
-  IconTypeMap,
-  LibraryIconItemProps,
-  TLibraryIcoRealEbailNameNameString,
-  TLibraryIconCheckboxNameString,
-  TLibraryIconIdNameString,
-  TLibraryIconLoadingNameString
-} from '@local/components/icon'
+import { IconTypeMap, LibraryIconItemProps } from '@local/components/icon'
 import { addSXProps } from '@local/styles/sx'
 import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
