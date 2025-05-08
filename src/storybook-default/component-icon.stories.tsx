@@ -38,3 +38,12 @@ export const Loading: Story = {
     name: 'Circle'
   }
 }
+
+export const RealEbail: Story = {
+  args: {
+    primaryColor: 'blueGoogle',
+    size: 'large',
+    type: 'realebail',
+    name: 'HomeLikes'
+  }
+}

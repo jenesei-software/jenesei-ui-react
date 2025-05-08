@@ -322,8 +322,11 @@ export const DatePicker = (props: DatePickerProps) => {
                   <Button
                     type="button"
                     isRadius
-                    iconName="Arrow2"
-                    iconTurn={90}
+                    icon={{
+                      name: 'Arrow2',
+                      type: 'id',
+                      turn: 90
+                    }}
                     width="asHeight"
                     genre={props.genre}
                     size={'small'}
@@ -377,8 +380,11 @@ export const DatePicker = (props: DatePickerProps) => {
                     onClick={() => !isBlockIncreaseMonth && increaseMonth()}
                     width="asHeight"
                     isRadius
-                    iconName="Arrow2"
-                    iconTurn={-90}
+                    icon={{
+                      name: 'Arrow2',
+                      type: 'id',
+                      turn: -90
+                    }}
                     genre={props.genre}
                     size={'small'}
                     isHidden={isBlockIncreaseMonth}

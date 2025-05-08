@@ -68,8 +68,11 @@ const PopupContent: FC = () => {
               genre="realebail-white"
               width="asHeight"
               size="small"
-              iconSize="medium"
-              iconName="Close"
+              icon={{
+                type: 'id',
+                name: 'Close',
+                size: 'medium'
+              }}
               onClick={handleClose}
             />
           </Stack>

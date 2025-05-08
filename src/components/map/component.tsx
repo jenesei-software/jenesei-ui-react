@@ -82,8 +82,11 @@ function CustomZoomControl() {
         genre="realebail-product"
         width="asHeight"
         size="small"
-        iconSize="medium"
-        iconName="Plus"
+        icon={{
+          name: 'Plus',
+          type: 'id',
+          size: 'medium'
+        }}
         onClick={handleZoomIn}
       />
       <Button
@@ -91,8 +94,11 @@ function CustomZoomControl() {
         genre="realebail-product"
         width="asHeight"
         size="small"
-        iconSize="medium"
-        iconName="Minus"
+        icon={{
+          name: 'Minus',
+          type: 'id',
+          size: 'medium'
+        }}
         onClick={handleZoomOut}
       />
     </div>
