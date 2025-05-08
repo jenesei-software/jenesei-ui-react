@@ -26,8 +26,11 @@ export const Icon: Story = {
   args: {
     width: 'asHeight',
     type: 'button',
-    iconName: 'Heart',
-    iconOrder: -1,
+    icon: {
+      type: 'id',
+      name: 'Heart',
+      order: -1
+    },
     genre: 'gray',
     size: 'medium'
   }

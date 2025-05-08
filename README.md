@@ -78,13 +78,13 @@ declare module '@jenesei-software/jenesei-ui-react/context-local-storage' {
 To work correctly you need to install the following dependencies:
 
 ```bash
+npm install @tanstack/react-router --save
 npm install leaflet --save
 npm install leaflet.markercluster --save
-npm install react-leaflet --save
-npm install react-leaflet-markercluster --save
-npm install @tanstack/react-router --save
 npm install moment --save
 npm install react --save
 npm install react-dom --save
+npm install react-leaflet --save
+npm install react-leaflet-markercluster --save
 npm install styled-components --save
 ```

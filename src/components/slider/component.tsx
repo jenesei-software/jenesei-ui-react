@@ -172,9 +172,12 @@ export const Slider: FC<SliderProps> = props => {
             <Button
               genre="realebail-white"
               size="small"
-              iconName="Arrow4"
+              icon={{
+                type: 'id',
+                name: 'Arrow4',
+                turn: 90
+              }}
               width="asHeight"
-              iconTurn={90}
               isHiddenBorder
               isPlaystationEffect
               isRadius
@@ -183,10 +186,13 @@ export const Slider: FC<SliderProps> = props => {
             <Button
               genre="realebail-white"
               size="small"
-              iconName="Arrow4"
+              icon={{
+                type: 'id',
+                name: 'Arrow4',
+                turn: -90
+              }}
               width="asHeight"
               isHiddenBorder
-              iconTurn={-90}
               isPlaystationEffect
               isRadius
               onClick={() => params?.swipeToImage?.(1)}
@@ -203,7 +209,10 @@ export const Slider: FC<SliderProps> = props => {
             }}
             genre="realebail-white"
             size="small"
-            iconName="Arrow4"
+            icon={{
+              type: 'id',
+              name: 'Arrow4'
+            }}
             width="asHeight"
             isHiddenBorder
             isRadius
@@ -326,9 +335,12 @@ export const Slider: FC<SliderProps> = props => {
           }}
           genre="realebail-white"
           size="small"
-          iconName="Arrow4"
+          icon={{
+            type: 'id',
+            name: 'Arrow4',
+            turn: 90
+          }}
           width="asHeight"
-          iconTurn={90}
           isHiddenBorder
           isRadius
           onClick={() => swipeToImage(-1)}
@@ -344,10 +356,13 @@ export const Slider: FC<SliderProps> = props => {
           }}
           genre="realebail-white"
           size="small"
-          iconName="Arrow4"
+          icon={{
+            type: 'id',
+            name: 'Arrow4',
+            turn: -90
+          }}
           width="asHeight"
           isHiddenBorder
-          iconTurn={-90}
           isRadius
           onClick={() => swipeToImage(1)}
         />
@@ -361,7 +376,10 @@ export const Slider: FC<SliderProps> = props => {
           }}
           genre="realebail-white"
           size="small"
-          iconName="Activity"
+          icon={{
+            type: 'id',
+            name: 'Activity'
+          }}
           width="asHeight"
           isHiddenBorder
           isRadius

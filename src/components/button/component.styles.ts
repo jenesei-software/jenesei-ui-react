@@ -150,7 +150,6 @@ export const StyledButton = styled.button<StyledDollarButtonProps>`
   user-select: none;
 
   ${ComponentWithRipple};
-  ${ButtonFlex};
   ${ButtonBorder};
   ${ButtonSize};
   ${ButtonGenre};
@@ -161,4 +160,5 @@ export const StyledButton = styled.button<StyledDollarButtonProps>`
   ${addTransition};
   ${addOutline};
   ${addCustomFont};
+  ${ButtonFlex};
 `

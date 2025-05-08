@@ -23,8 +23,11 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
             default: { justifyContent: 'flex-start' }
           },
           children: 'First',
-          iconName: 'CallMissed',
-          iconOrder: -1,
+          icon: {
+            type: 'id',
+            name: 'CallMissed',
+            order: -1
+          },
           loadingOrder: -2,
           width: 'auto',
           type: 'button',
@@ -37,9 +40,12 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
             default: { justifyContent: 'space-between' }
           },
           children: 'Third',
-          iconOrder: -1,
+          icon: {
+            type: 'id',
+            name: 'Filter2',
+            order: -1
+          },
           loadingOrder: 1,
-          iconName: 'Filter2',
           width: 'auto',
           type: 'button',
           genre: 'gray',
@@ -51,9 +57,12 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
             default: { justifyContent: 'space-between' }
           },
           children: 'Second',
-          iconOrder: 2,
+          icon: {
+            type: 'id',
+            name: 'Graph',
+            order: 1
+          },
           loadingOrder: 1,
-          iconName: 'Graph',
           width: 'auto',
           type: 'button',
           genre: 'blackBorder',
@@ -68,7 +77,10 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
             default: { justifyContent: 'space-between' }
           },
           children: 'Third',
-          iconName: 'Heart',
+          icon: {
+            type: 'id',
+            name: 'Heart'
+          },
           width: 'auto',
           type: 'button',
           genre: 'greenTransparent',
@@ -79,7 +91,10 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
             default: { justifyContent: 'space-between' }
           },
           children: 'Third',
-          iconName: 'Arrow1',
+          icon: {
+            type: 'id',
+            name: 'Arrow1'
+          },
           width: 'auto',
           type: 'button',
           genre: 'grayBorder',
@@ -90,7 +105,10 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
             default: { justifyContent: 'space-between' }
           },
           children: 'Third',
-          iconName: 'Folder',
+          icon: {
+            type: 'id',
+            name: 'Folder'
+          },
           width: 'auto',
           type: 'button',
           genre: 'product',
@@ -102,7 +120,10 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
             default: { justifyContent: 'space-between' }
           },
           children: 'Third',
-          iconName: 'Folder',
+          icon: {
+            type: 'id',
+            name: 'Folder'
+          },
           width: 'auto',
           type: 'button',
           genre: 'white',
@@ -113,7 +134,10 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
             default: { justifyContent: 'space-between' }
           },
           children: 'Third',
-          iconName: 'Scan',
+          icon: {
+            type: 'id',
+            name: 'Scan'
+          },
           width: 'auto',
           type: 'button',
           genre: 'productBorder',
@@ -124,7 +148,10 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
             default: { justifyContent: 'space-between' }
           },
           children: 'Third',
-          iconName: 'Arrow2',
+          icon: {
+            type: 'id',
+            name: 'Arrow2'
+          },
           width: 'auto',
           type: 'button',
           genre: 'redTransparent',
