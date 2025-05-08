@@ -4,16 +4,19 @@ import { LibraryIconItemProps, StyledSVG } from '.'
 import LibraryIconCheckboxJSON from './component-checkbox.json'
 import LibraryIconIdJSON from './component-id.json'
 import LibraryIconLoadingJSON from './component-loading.json'
+import LibraryIconRealEbailJSON from './component-realebail.json'
 
 export const Icon = (props: LibraryIconItemProps) => {
   const icon =
     props.type == 'id'
       ? LibraryIconIdJSON[props.name]
-      : props.type === 'checkbox'
-        ? LibraryIconCheckboxJSON[props.name]
-        : props.type === 'loading'
-          ? LibraryIconLoadingJSON[props.name]
-          : null
+      : props.type == 'realebail'
+        ? LibraryIconRealEbailJSON[props.name]
+        : props.type === 'checkbox'
+          ? LibraryIconCheckboxJSON[props.name]
+          : props.type === 'loading'
+            ? LibraryIconLoadingJSON[props.name]
+            : null
 
   const primaryColor = props.primaryColor ? JeneseiPalette[props.primaryColor] : 'currentColor'
   const secondColor = props.secondColor ? JeneseiPalette[props.secondColor] : 'currentColor'
@@ -30,7 +33,9 @@ export const Icon = (props: LibraryIconItemProps) => {
   }
 
   const contentPaths =
-    (props.type == 'id' || props.type === 'checkbox') && typeof icon === 'object' && 'paths' in icon
+    (props.type == 'id' || props.type === 'checkbox' || props.type === 'realebail') &&
+    typeof icon === 'object' &&
+    'paths' in icon
       ? (icon.paths ?? []).map((path, index) => (
           <path
             key={index}

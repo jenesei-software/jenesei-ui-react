@@ -1,7 +1,13 @@
 import { FC } from 'react'
 import { useTheme } from 'styled-components'
 
-import { Icon } from '@local/components/icon'
+import {
+  Icon,
+  TLibraryIcoRealEbailNameNameString,
+  TLibraryIconCheckboxNameString,
+  TLibraryIconIdNameString,
+  TLibraryIconLoadingNameString
+} from '@local/components/icon'
 import { Ripple } from '@local/components/ripple'
 
 import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.'
@@ -10,18 +16,44 @@ export const Button: FC<ButtonProps> = props => {
   const theme = useTheme()
 
   const LoadingComponent = (
-    <Icon size={props.iconSize ?? props.size} type="loading" name="Line" order={props.loadingOrder} />
+    <Icon size={props.icon?.size ?? props.size} type="loading" name="Line" order={props.loadingOrder} />
   )
 
-  const IconComponent = props.iconName && (
-    <Icon
-      name={props.iconName}
-      type="id"
-      size={props.iconSize ?? props.size}
-      turn={props.iconTurn}
-      order={props.iconOrder}
-    />
-  )
+  const IconComponent =
+    props.icon &&
+    (props.icon?.type === 'id' ? (
+      <Icon
+        name={props.icon?.name as TLibraryIconIdNameString}
+        type="id"
+        size={props.icon?.size ?? props.size}
+        turn={props.icon.turn}
+        order={props.icon.order}
+      />
+    ) : props.icon?.type === 'checkbox' ? (
+      <Icon
+        name={props.icon?.name as TLibraryIconCheckboxNameString}
+        type="checkbox"
+        size={props.icon?.size ?? props.size}
+        turn={props.icon.turn}
+        order={props.icon.order}
+      />
+    ) : props.icon?.type === 'loading' ? (
+      <Icon
+        name={props.icon?.name as TLibraryIconLoadingNameString}
+        type="loading"
+        size={props.icon?.size ?? props.size}
+        turn={props.icon.turn}
+        order={props.icon.order}
+      />
+    ) : props.icon?.type === 'realebail' ? (
+      <Icon
+        name={props.icon?.name as TLibraryIcoRealEbailNameNameString}
+        type="realebail"
+        size={props.icon?.size ?? props.size}
+        turn={props.icon.turn}
+        order={props.icon.order}
+      />
+    ) : null)
 
   const handleClick: ButtonProps['onClick'] = event => {
     if (!props.isLoading && !props.isDisabled && props.onClick) {

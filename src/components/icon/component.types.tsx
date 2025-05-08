@@ -29,8 +29,15 @@ export interface LibraryIconLoadingItemProps extends BaseLibraryIconProps {
   type: 'loading'
   name: TLibraryIconLoadingNameString
 }
-
-export type LibraryIconItemProps = LibraryIconIdItemProps | LibraryIconCheckboxItemProps | LibraryIconLoadingItemProps
+export interface LibraryIconRealEbailItemProps extends BaseLibraryIconProps {
+  type: 'realebail'
+  name: TLibraryIcoRealEbailNameNameString
+}
+export type LibraryIconItemProps =
+  | LibraryIconIdItemProps
+  | LibraryIconCheckboxItemProps
+  | LibraryIconLoadingItemProps
+  | LibraryIconRealEbailItemProps
 
 export type StyledLibraryIconIdItemProps = AddDollarSign<
   Pick<LibraryIconItemProps, 'size' | 'turn' | 'order'> & { color?: JeneseiPaletteKeys }
@@ -143,6 +150,21 @@ export enum LibraryIcoLoadingName {
   Blocks,
   Balls
 }
+export enum LibraryIcoRealEbailName {
+  Map,
+  HomeLikes,
+  HomeManagement,
+  UserSettings,
+  User
+}
 export type TLibraryIconIdNameString = keyof typeof LibraryIconIdName
 export type TLibraryIconCheckboxNameString = keyof typeof LibraryIconCheckboxName
 export type TLibraryIconLoadingNameString = keyof typeof LibraryIcoLoadingName
+export type TLibraryIcoRealEbailNameNameString = keyof typeof LibraryIcoRealEbailName
+
+export type IconTypeMap = {
+  id: TLibraryIconIdNameString
+  checkbox: TLibraryIconCheckboxNameString
+  loading: TLibraryIconLoadingNameString
+  realebail: TLibraryIcoRealEbailNameNameString
+}

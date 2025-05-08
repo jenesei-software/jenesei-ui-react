@@ -82,11 +82,14 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                     justifyContent: 'space-between'
                   }
                 }}
-                iconTurn={expandedTwo ? 180 : 0}
                 genre={'productBorder'}
                 size={'medium'}
                 width="100%"
-                iconName="Folder"
+                icon={{
+                  type: 'id',
+                  name: 'Folder',
+                  turn: expandedTwo ? 180 : 0
+                }}
               >
                 Show more
               </Button>
