@@ -161,3 +161,10 @@ export type TLibraryIconIdNameString = keyof typeof LibraryIconIdName
 export type TLibraryIconCheckboxNameString = keyof typeof LibraryIconCheckboxName
 export type TLibraryIconLoadingNameString = keyof typeof LibraryIcoLoadingName
 export type TLibraryIcoRealEbailNameNameString = keyof typeof LibraryIcoRealEbailName
+
+export type IconTypeMap = {
+  id: TLibraryIconIdNameString
+  checkbox: TLibraryIconCheckboxNameString
+  loading: TLibraryIconLoadingNameString
+  realebail: TLibraryIcoRealEbailNameNameString
+}
