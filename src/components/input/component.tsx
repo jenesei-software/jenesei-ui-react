@@ -123,14 +123,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             {props.postfixChildren.children}
           </InputPostfixChildren>
         )}
-        {/* {props.isLoading && (
-          <InputStyledLoading
-            $genre={props.genre}
-            $size={props.size}
-            size={props.size}
-            color={theme.colors.input[props.genre].color.rest}
-          />
-        )} */}
       </StyledInputWrapper>
       <ErrorMessage
         isError={props.isError}
