@@ -1,7 +1,7 @@
 import { MapTheme } from '.'
 
 export const DEFAULT_MAP_ZOOM = 13
-export const DEFAULT_MAP_CENTER: [number, number] = [34.052235, -118.243683]
+export const DEFAULT_MAP_CENTER: [number, number] = [-8.409518, 115.188919]
 export const DEFAULT_MAP_THEME_LIST: MapTheme[] = [
   {
     name: 'Light CARTO',

@@ -7,7 +7,15 @@ import { useGeolocation } from '@local/contexts/context-geolocation'
 
 import { Button } from '../components/button'
 import { ButtonGroup } from '../components/button-group'
-import { DEFAULT_MAP_THEME, DEFAULT_MAP_THEME_LIST, Map, MapDot, MapDotProps, MapProps } from '../components/map'
+import {
+  DEFAULT_MAP_CENTER,
+  DEFAULT_MAP_THEME,
+  DEFAULT_MAP_THEME_LIST,
+  Map,
+  MapDot,
+  MapDotProps,
+  MapProps
+} from '../components/map'
 import { IMAGES, Slider } from '../components/slider'
 import { Stack } from '../components/stack'
 
@@ -284,7 +292,7 @@ export const Dot: StoryDot = {
   args: {
     ...defaultArgs,
     zoom: 10,
-    center: [-8.409518, 115.188919],
+    center: DEFAULT_MAP_CENTER,
     onSelect(coords) {
       console.log('onSelect', coords)
     }

@@ -13,6 +13,9 @@ export interface MapProps<T extends object> {
     popupContent?: Styles<object>
   }
 }
+export interface UpdateMapCenterProps {
+  center: [number, number]
+}
 export interface MapDotProps {
   center?: [number, number]
   onSelect: (coords: [number, number]) => void
