@@ -104,15 +104,15 @@ export const StyledTextAreaCSS = css<StyledTextAreaProps>`
 
   ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
 
-  ${addTransitionWithoutSize};
-  ${addOutline};
-  ${addError};
   ${TextAreaIsResize};
   ${TextAreaSize};
   ${TextAreaGenre};
   ${TextAreaPlaceholder};
   ${TextAreaHidden};
   ${TextAreaIsTextAreaEffect};
+  ${addTransitionWithoutSize};
+  ${addOutline};
+  ${addError};
 `
 
 export const StyledTextArea = styled.textarea<StyledTextAreaProps>`
