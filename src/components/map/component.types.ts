@@ -13,7 +13,13 @@ export interface MapProps<T extends object> {
     popupContent?: Styles<object>
   }
 }
-
+export interface MapDotProps {
+  center?: [number, number]
+  onSelect: (coords: [number, number]) => void
+  coords?: [number, number] | null
+  theme: MapTheme
+  zoom?: number
+}
 export interface MapTheme {
   name: string
   url: string

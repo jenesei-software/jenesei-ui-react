@@ -7,17 +7,17 @@ import { useGeolocation } from '@local/contexts/context-geolocation'
 
 import { Button } from '../components/button'
 import { ButtonGroup } from '../components/button-group'
-import { DEFAULT_MAP_THEME, DEFAULT_MAP_THEME_LIST, Map as MapComponent, MapProps } from '../components/map'
+import { DEFAULT_MAP_THEME, DEFAULT_MAP_THEME_LIST, Map, MapDot, MapDotProps, MapProps } from '../components/map'
 import { IMAGES, Slider } from '../components/slider'
 import { Stack } from '../components/stack'
 
-const meta: Meta<typeof MapComponent> = {
-  component: MapComponent,
+const meta: Meta<typeof Map> = {
+  component: Map,
   title: 'RealEbail/Map'
 }
 
 export default meta
-type Story = StoryObj<typeof MapComponent>
+type Story = StoryObj<typeof Map>
 
 const defaultArgs: Partial<MapProps<object>> = {
   zoom: 14
@@ -101,7 +101,7 @@ const PopupContent: FC = () => {
     </Slider>
   )
 }
-const MapWrapper: FC<MapProps<object>> = props => {
+const MapDefaultWrapper: FC<MapProps<object>> = props => {
   const { location, geolocationPermission, requestGeolocationPermission } = useGeolocation()
   const [center, setCenter] = useState<MapProps<MarkerItemProps>['center']>()
   const [theme, setTheme] = useState<MapProps<MarkerItemProps>['theme']>(DEFAULT_MAP_THEME)
@@ -195,7 +195,7 @@ const MapWrapper: FC<MapProps<object>> = props => {
           }
         }}
       >
-        <MapComponent<MarkerItemProps>
+        <Map<MarkerItemProps>
           {...props}
           center={center}
           theme={theme}
@@ -222,9 +222,71 @@ const MapWrapper: FC<MapProps<object>> = props => {
   )
 }
 
-export const Map: Story = {
-  render: args => <MapWrapper {...args} />,
+export const Default: Story = {
+  render: args => <MapDefaultWrapper {...args} />,
   args: {
     ...defaultArgs
+  }
+}
+const MapDotWrapper: FC<MapDotProps> = props => {
+  const [center, setCenter] = useState<MapDotProps['center']>(props.center)
+  const [theme] = useState<MapDotProps['theme']>(DEFAULT_MAP_THEME)
+  const [coords, setCoords] = useState<MapDotProps['coords']>(props.coords ?? null)
+  useEffect(() => {
+    setCoords(props.coords)
+  }, [props.coords])
+  useEffect(() => {
+    setCenter(props.center)
+  }, [props.center])
+  return (
+    <Stack
+      sx={{
+        default: {
+          width: '100%',
+          height: '100%',
+          alignItems: 'center',
+          flexDirection: 'column',
+          flexGrow: 1,
+          overflow: 'hidden'
+        }
+      }}
+    >
+      <Stack
+        sx={{
+          default: {
+            width: '100%',
+            height: '100%',
+            alignItems: 'center',
+            flexDirection: 'column',
+            flexGrow: 1,
+            overflow: 'hidden'
+          }
+        }}
+      >
+        <MapDot
+          {...props}
+          center={center}
+          theme={theme}
+          coords={coords}
+          onSelect={coords => {
+            setCoords(coords)
+            props.onSelect(coords)
+          }}
+        />
+      </Stack>
+    </Stack>
+  )
+}
+type StoryDot = StoryObj<typeof MapDot>
+
+export const Dot: StoryDot = {
+  render: args => <MapDotWrapper {...args} />,
+  args: {
+    ...defaultArgs,
+    zoom: 10,
+    center: [-8.409518, 115.188919],
+    onSelect(coords) {
+      console.log('onSelect', coords)
+    }
   }
 }
