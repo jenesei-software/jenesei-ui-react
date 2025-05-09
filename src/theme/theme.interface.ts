@@ -159,6 +159,7 @@ export interface TJeneseiThemeGenreTextArea {
   gray: TJeneseiThemeGenreType
   grayBorder: TJeneseiThemeGenreType
   blackBorder: TJeneseiThemeGenreType
+  'realebail-white': TJeneseiThemeGenreType
 }
 export interface TJeneseiThemeGenreDate {
   gray: TJeneseiThemeGenreTypeDate
