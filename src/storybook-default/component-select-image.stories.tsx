@@ -19,6 +19,18 @@ export const SelectImage: Story = {
     onChange(images) {
       console.log('Selected images:', images)
     },
+    imageSettings: {
+      maxSize: 5 * 1024 * 1024,
+      maxCount: 5,
+      width: 200,
+      height: 200
+    },
+    locale: {
+      textFallbackImage: 'Fallback image',
+      textAddImage: 'Add image',
+      textResetImage: 'Reset image',
+      dragAndDrop: 'Drag and drop your files here'
+    },
     images: [
       {
         id: 0,
