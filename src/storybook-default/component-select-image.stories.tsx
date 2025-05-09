@@ -31,6 +31,7 @@ export const SelectImage: Story = {
       textResetImage: 'Reset image',
       dragAndDrop: 'Drag and drop your files here'
     },
+    defaultImages: [],
     images: [
       {
         id: 0,
