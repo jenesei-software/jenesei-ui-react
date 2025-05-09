@@ -31,6 +31,7 @@ export type SelectImageProps = {
     width: number
     height: number
   }
+  defaultImages: SelectImageItemProps[]
   images: SelectImageItemProps[]
 } & Pick<InputProps, 'isError' | 'errorMessage' | 'isErrorAbsolute'>
 

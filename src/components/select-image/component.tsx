@@ -73,8 +73,8 @@ export const SelectImage = (props: SelectImageProps) => {
     inputRef.current?.click()
   }
   const resetImages = () => {
-    setImages(props.images || [])
-    onChange?.(props.images || [])
+    setImages(props.defaultImages || [])
+    onChange?.(props.defaultImages || [])
   }
 
   useEffect(() => {
