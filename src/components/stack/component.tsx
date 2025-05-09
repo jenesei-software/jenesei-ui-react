@@ -4,7 +4,14 @@ import { StackMotionProps, StackProps, StyledStack, StyledStackMotion } from '.'
 
 export const Stack: FC<StackProps> = props => {
   return (
-    <StyledStack onClick={props.onClick} className={props.className} $sx={props.sx} $isHover={props.isHover}>
+    <StyledStack
+      onClick={props.onClick}
+      onDrop={props.onDrop}
+      onDragOver={props.onDragOver}
+      className={props.className}
+      $sx={props.sx}
+      $isHover={props.isHover}
+    >
       {props.children}
     </StyledStack>
   )
