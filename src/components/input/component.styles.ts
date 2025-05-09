@@ -146,6 +146,7 @@ export const StyledInputFormat = styled(PatternFormat)<StyledInputProps>`
 /****************************************** Children *************************************************/
 export const InputPrefixChildren = styled.div<StyledInputChildrenProps>`
   position: absolute;
+  display: flex;
   left: ${props => props.$left};
   width: ${props => props.$width};
   opacity: ${props => (props.$isDisabled ? 0.5 : 1)};
@@ -155,26 +156,10 @@ export const InputPrefixChildren = styled.div<StyledInputChildrenProps>`
 
 export const InputPostfixChildren = styled.div<StyledInputChildrenProps>`
   position: absolute;
+  display: flex;
   right: ${props => props.$right};
   width: ${props => props.$width};
   opacity: ${props => (props.$isDisabled ? 0.5 : 1)};
   height: 100%;
   ${addTransition};
 `
-
-/****************************************** Loading *************************************************/
-// const InputStyledLoadingSize = css<StyledInputProps>`
-//   ${props => InputStyledLoadingConstructor(KEY_SIZE_DATA[props.$size])};
-// `
-// const InputStyledLoadingConstructor = (props: IJeneseiThemeSize) => css`
-//   padding: ${props.padding - 6}px ${props.padding}px ${props.padding - 4}px ${props.padding}px;
-// `
-
-// // export const InputStyledLoading = styled(Loading)<StyledInputProps>`
-// //   ${InputStyledLoadingSize};
-// //   position: absolute;
-// //   display: flex;
-// //   align-items: center;
-// //   right: 0px;
-// //   box-sizing: content-box;
-// // `
