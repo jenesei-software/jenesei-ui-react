@@ -64,6 +64,7 @@ export default defineConfig(() => {
           ['component-pagination']: resolve(__dirname, 'src/components/pagination/index.ts'),
           ['component-ripple']: resolve(__dirname, 'src/components/ripple/index.ts'),
           ['component-select']: resolve(__dirname, 'src/components/select/index.ts'),
+          ['component-select-image']: resolve(__dirname, 'src/components/select-image/index.ts'),
           ['component-separator']: resolve(__dirname, 'src/components/separator/index.ts'),
           ['component-slider']: resolve(__dirname, 'src/components/slider/index.ts'),
           ['component-stack']: resolve(__dirname, 'src/components/stack/index.ts'),

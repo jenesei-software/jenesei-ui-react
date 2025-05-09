@@ -124,6 +124,11 @@
       "import": "./build/component-select.es.js",
       "require": "./build/component-select.cjs.js"
     },
+    "./component-select-image": {
+      "types": "./build/component-select-image.d.ts",
+      "import": "./build/component-select-image.es.js",
+      "require": "./build/component-select-image.cjs.js"
+    },
     "./component-separator": {
       "types": "./build/component-separator.d.ts",
       "import": "./build/component-separator.es.js",
