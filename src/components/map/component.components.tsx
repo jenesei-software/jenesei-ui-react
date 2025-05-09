@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useMap } from 'react-leaflet'
 
-import { useDebouncedCallback } from '@local/hooks/use-debounced-callback'
 import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize'
 
 import { UpdateMapCenterProps } from '.'
