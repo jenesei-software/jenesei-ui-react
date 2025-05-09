@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { MapProps } from '.'
 
-export const MapWrapper = styled.div<{ style: MapProps<object>['style'] }>`
+export const MapWrapper = styled.div<{ style?: MapProps<object>['style'] }>`
   display: contents;
   .leaflet-popup-content-wrapper {
     ${props => props.style?.popupWrapper && css(props.style.popupWrapper)}

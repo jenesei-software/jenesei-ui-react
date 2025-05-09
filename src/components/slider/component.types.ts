@@ -8,3 +8,4 @@ export type SliderProps = {
   onIndexChange?: (index: number) => void
   propsStack?: StackProps
 }
+export type SliderImageProps = { id: number; imageSrc: string; children?: ReactNode }

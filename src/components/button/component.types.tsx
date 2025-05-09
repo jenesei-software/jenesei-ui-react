@@ -1,17 +1,19 @@
 import React, { PropsWithChildren } from 'react'
 
-import {
-  LibraryIconItemProps,
-  TLibraryIcoRealEbailNameNameString,
-  TLibraryIconCheckboxNameString,
-  TLibraryIconIdNameString,
-  TLibraryIconLoadingNameString
-} from '@local/components/icon'
+import { IconTypeMap, LibraryIconItemProps } from '@local/components/icon'
 import { addSXProps } from '@local/styles/sx'
 import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export type TButtonGenre = keyof TJeneseiThemeGenre
+
+type IconPropsByType<T extends keyof IconTypeMap> = {
+  type: T
+  name: IconTypeMap[T]
+  size?: TJeneseiThemeSize
+  order?: LibraryIconItemProps['order']
+  turn?: LibraryIconItemProps['turn']
+}
 
 export type ButtonProps = PropsWithChildren & {
   isIconGroup?: boolean
@@ -26,16 +28,7 @@ export type ButtonProps = PropsWithChildren & {
 
   genre: TButtonGenre
 
-  icon?: {
-    size?: TJeneseiThemeSize
-    order?: LibraryIconItemProps['order']
-    turn?: LibraryIconItemProps['turn']
-  } & (
-    | { type: 'id'; name: TLibraryIconIdNameString }
-    | { type: 'checkbox'; name: TLibraryIconCheckboxNameString }
-    | { type: 'loading'; name: TLibraryIconLoadingNameString }
-    | { type: 'realebail'; name: TLibraryIcoRealEbailNameNameString }
-  )
+  icon?: IconPropsByType<'id'> | IconPropsByType<'checkbox'> | IconPropsByType<'loading'> | IconPropsByType<'realebail'>
 
   isDisabled?: boolean
 
