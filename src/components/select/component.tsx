@@ -542,6 +542,7 @@ export const SelectLanguage: FC<SelectLanguageProps> = props => {
       onChange={handleSelectChange}
       inputProps={{
         ...props.inputProps,
+        variety: 'standard',
         isReadOnly: true,
         value: (value?.placeholder as string) ?? query,
         onChange: handleQueryChange
@@ -612,6 +613,7 @@ export const SelectMonth: FC<SelectDateProps> = props => {
       onChange={handleSelectChange}
       inputProps={{
         ...props.inputProps,
+        variety: 'standard',
         value: selectedMonth?.placeholder ?? props.placeholder,
         isReadOnly: true
       }}
@@ -677,6 +679,7 @@ export const SelectYear: FC<SelectYearProps> = props => {
       onChange={handleSelectChange}
       inputProps={{
         ...props.inputProps,
+        variety: 'standard',
         value: selectedYear?.placeholder ?? props.placeholder,
         isReadOnly: true
       }}
