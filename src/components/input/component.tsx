@@ -1,4 +1,5 @@
 import { forwardRef, useCallback } from 'react'
+import { NumberFormatValues } from 'react-number-format'
 
 import { ErrorMessage } from '@local/styles/error'
 
@@ -7,18 +8,24 @@ import {
   InputPrefixChildren,
   InputProps,
   StyledInput,
-  StyledInputFormat,
+  StyledInputNumeric,
+  StyledInputPattern,
   StyledInputWrapper
 } from '.'
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const handleOnChange = useCallback(
-    (value: string) => {
-      if (props.isNoSpaces) {
-        const valueWithoutSpaces = value.replace(/\s+/g, '')
-        props.onChange?.(valueWithoutSpaces)
-      } else {
-        props.onChange?.(value)
+    (input: string | NumberFormatValues) => {
+      if (props.variety === 'standard') {
+        const value = typeof input === 'string' ? input : input.value
+        const cleaned = props.isNoSpaces ? value.replace(/\s+/g, '') : value
+        props.onChange?.(cleaned)
+      }
+
+      if (props.variety === 'pattern' || props.variety === 'numeric') {
+        if (typeof input !== 'string') {
+          props.onChange?.(input)
+        }
       }
     },
     [props]
@@ -43,8 +50,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             {props.prefixChildren.children}
           </InputPrefixChildren>
         )}
-        {props.format ? (
-          <StyledInputFormat
+        {props.variety === 'pattern' ? (
+          <StyledInputPattern
             $isInputEffect={props.isInputEffect}
             $isError={props?.isError}
             $isLoading={props.isLoading}
@@ -60,14 +67,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             defaultValue={props.defaultValue}
             value={props.value ?? ''}
             placeholder={props.placeholder}
-            onValueChange={({ value }) => handleOnChange(value)}
-            allowEmptyFormatting={props.isAllowEmptyFormatting}
+            onValueChange={props => handleOnChange(props)}
             onBlur={props.onBlur}
             onFocus={props.onFocus}
             onPaste={props.onPaste}
-            format={props.format}
-            mask={props.mask}
-            type={props.formatType}
             name={props.name}
             id={props.id}
             onKeyDown={props.onKeyDown}
@@ -75,6 +78,37 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             maxLength={props.maxLength}
             minLength={props.minLength}
             tabIndex={props.tabIndex}
+            {...props.propsPattern}
+          />
+        ) : props.variety === 'numeric' ? (
+          <StyledInputNumeric
+            $isInputEffect={props.isInputEffect}
+            $isError={props?.isError}
+            $isLoading={props.isLoading}
+            $postfixChildren={props?.postfixChildren}
+            $prefixChildren={props?.prefixChildren}
+            $genre={props.genre}
+            $size={props.size}
+            $isBold={props.isBold}
+            $isDisabled={props.isDisabled}
+            disabled={props.isDisabled}
+            readOnly={props.isReadOnly}
+            required={props.isRequired}
+            defaultValue={props.defaultValue}
+            value={props.value ?? ''}
+            placeholder={props.placeholder}
+            onValueChange={props => handleOnChange(props)}
+            onBlur={props.onBlur}
+            onFocus={props.onFocus}
+            onPaste={props.onPaste}
+            name={props.name}
+            id={props.id}
+            onKeyDown={props.onKeyDown}
+            inputMode={props.inputMode}
+            maxLength={props.maxLength}
+            minLength={props.minLength}
+            tabIndex={props.tabIndex}
+            {...props.propsNumeric}
           />
         ) : (
           <StyledInput
@@ -110,6 +144,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             id={props.id}
             tabIndex={props.tabIndex}
             onKeyDown={props.onKeyDown}
+            min={props.min}
+            max={props.max}
+            step={props.step}
           />
         )}
 

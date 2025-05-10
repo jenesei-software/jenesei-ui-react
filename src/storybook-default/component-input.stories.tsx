@@ -26,13 +26,17 @@ const defaultArgs: Partial<InputProps> = {
 const InputStringWrapper: FC<InputProps> = props => {
   const [value, setValue] = useState<string>('')
 
-  return <Input {...props} value={value} onChange={newValue => setValue(newValue)} />
+  return <Input {...props} value={value} variety="standard" onChange={newValue => setValue(newValue)} />
 }
 
 export const Password: Story = {
   render: args => <InputStringWrapper {...args} />,
   args: {
     ...defaultArgs,
+    onChange(value) {
+      console.log(value)
+    },
+    variety: 'standard',
     type: 'password',
     errorMessage: 'Error',
     isErrorAbsolute: true,
@@ -41,12 +45,17 @@ export const Password: Story = {
 }
 
 export const Phone: Story = {
-  render: args => <InputStringWrapper {...args} />,
   args: {
     ...defaultArgs,
-    format: '+7 (9##) ###-##-##',
-    mask: '_',
-    formatType: 'tel',
+    onChange(value) {
+      console.log(value)
+    },
+    variety: 'pattern',
+    propsPattern: {
+      format: '+7 (9##) ###-##-##',
+      mask: '_',
+      type: 'tel'
+    },
     placeholder: 'Phone'
   }
 }
@@ -54,19 +63,58 @@ export const Phone: Story = {
 export const INN: Story = {
   args: {
     ...defaultArgs,
-    format: '### ### ### ###',
-    placeholder: 'INN',
-    mask: '',
-    formatType: 'text'
+    variety: 'pattern',
+    onChange(value) {
+      console.log(value)
+    },
+    propsPattern: {
+      format: '### ### ### ###',
+      mask: '',
+      type: 'text'
+    },
+    placeholder: 'INN'
   }
 }
 
 export const Code: Story = {
   args: {
     ...defaultArgs,
-    format: '# # # #',
+    onChange(value) {
+      console.log(value)
+    },
     placeholder: 'Code',
-    mask: '_',
-    formatType: 'text'
+    variety: 'pattern',
+    propsPattern: {
+      format: '# # # #',
+      mask: '_',
+      type: 'text'
+    }
+  }
+}
+
+export const Cost: Story = {
+  args: {
+    ...defaultArgs,
+    placeholder: 'Cost',
+    variety: 'numeric',
+    onChange(value) {
+      console.log(value)
+    },
+    propsNumeric: {
+      allowLeadingZeros: false,
+      thousandSeparator: ' ',
+      allowNegative: false,
+      allowedDecimalSeparators: ['.'],
+      decimalScale: 2,
+      decimalSeparator: ',',
+      fixedDecimalScale: true,
+      prefix: '$',
+      suffix: ' USD',
+      thousandsGroupStyle: 'thousand',
+      isAllowed: values => {
+        const { floatValue } = values
+        return (floatValue ?? 0) >= 0 && (floatValue ?? 0) <= 10000
+      }
+    }
   }
 }

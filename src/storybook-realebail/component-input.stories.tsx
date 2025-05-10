@@ -26,13 +26,17 @@ const defaultArgs: Partial<InputProps> = {
 const InputStringWrapper: FC<InputProps> = props => {
   const [value, setValue] = useState<string>('')
 
-  return <Input {...props} value={value} onChange={newValue => setValue(newValue)} />
+  return <Input {...props} value={value} variety="standard" onChange={newValue => setValue(newValue)} />
 }
 
 export const Password: Story = {
   render: args => <InputStringWrapper {...args} />,
   args: {
     ...defaultArgs,
+    onChange(value) {
+      console.log(value)
+    },
+    variety: 'standard',
     type: 'password',
     errorMessage: 'Error',
     isErrorAbsolute: true,

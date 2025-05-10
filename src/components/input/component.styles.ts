@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { PatternFormat } from 'react-number-format'
+import { NumericFormat, PatternFormat } from 'react-number-format'
 import styled, { css } from 'styled-components'
 
 import { getFontSizeStyles } from '@local/components/typography'
@@ -139,7 +139,10 @@ export const StyledMotionInput = styled(motion.input)<StyledInputProps>`
   ${StyledInputCSS};
 `
 
-export const StyledInputFormat = styled(PatternFormat)<StyledInputProps>`
+export const StyledInputPattern = styled(PatternFormat)<StyledInputProps>`
+  ${StyledInputCSS};
+`
+export const StyledInputNumeric = styled(NumericFormat)<StyledInputProps>`
   ${StyledInputCSS};
 `
 

@@ -1,6 +1,6 @@
 import { FocusEvent } from 'react'
 
-import { InputProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
+import { InputProps, InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
 import { TJeneseiThemeGenreDate, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
@@ -39,7 +39,7 @@ export interface DatePickerProps {
   placeholder?: string
 
   isOnClickClose?: boolean
-  isInputEffect?: InputProps['isInputEffect']
+  isInputEffect?: InputStandardProps['isInputEffect']
   inputProps: Omit<
     InputProps,
     'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width' | 'value' | 'isInputEffect'
@@ -55,7 +55,7 @@ export interface DatePickerProps {
 }
 
 export type DateWrapperProps = AddDollarSign<
-  Pick<InputProps, 'genre' | 'isDisabled'> & {
+  Pick<InputStandardProps, 'genre' | 'isDisabled'> & {
     parentListHeight: number
     radius: number
   }
@@ -70,7 +70,7 @@ export type DateStyledOptionProps = AddDollarSign<{
 }> &
   StyledInputProps
 
-export type DateStyledListProps = AddDollarSign<Pick<InputProps, 'genre' | 'size'>>
+export type DateStyledListProps = AddDollarSign<Pick<InputStandardProps, 'genre' | 'size'>>
 
 export type DateDropdownListProps = AddDollarSign<
   Pick<DatePickerProps, 'isInputEffect'> & Pick<DatePickerProps, 'genre' | 'size'>

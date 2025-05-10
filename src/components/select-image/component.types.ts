@@ -1,7 +1,7 @@
 import { TJeneseiThemeGenreSelectImage, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
-import { InputProps } from '../input/component.types'
+import { InputStandardProps } from '../input/component.types'
 
 export type TSelectImageGenre = keyof TJeneseiThemeGenreSelectImage
 
@@ -33,6 +33,6 @@ export type SelectImageProps = {
   }
   defaultImages: SelectImageItemProps[]
   images: SelectImageItemProps[]
-} & Pick<InputProps, 'isError' | 'errorMessage' | 'isErrorAbsolute'>
+} & Pick<InputStandardProps, 'isError' | 'errorMessage' | 'isErrorAbsolute'>
 
 export type SelectImageWrapperProps = AddDollarSign<Pick<SelectImageProps, 'size' | 'width' | 'isError' | 'genre'>>
