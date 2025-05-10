@@ -65,7 +65,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             readOnly={props.isReadOnly}
             required={props.isRequired}
             defaultValue={props.defaultValue}
-            value={props.value ?? ''}
+            value={props.value}
             placeholder={props.placeholder}
             onValueChange={props => handleOnChange(props)}
             onBlur={props.onBlur}
@@ -95,7 +95,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             readOnly={props.isReadOnly}
             required={props.isRequired}
             defaultValue={props.defaultValue}
-            value={props.value ?? ''}
+            value={props.value}
             placeholder={props.placeholder}
             onValueChange={props => handleOnChange(props)}
             onBlur={props.onBlur}
