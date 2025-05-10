@@ -1,6 +1,6 @@
 import { FocusEventHandler, ReactNode } from 'react'
 
-import { InputProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
+import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
 import { TJeneseiThemeGenreSelect, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
@@ -34,7 +34,7 @@ export interface SelectProps<T extends ISelectItem> {
   labelEmptyOption?: string
 
   inputProps?: Omit<
-    InputProps,
+    InputStandardProps,
     | 'isDisabled'
     | 'isError'
     | 'ErrorMessage'
@@ -46,7 +46,7 @@ export interface SelectProps<T extends ISelectItem> {
     | 'placeholder'
     | 'width'
   >
-  optionProps?: Omit<InputProps, 'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'>
+  optionProps?: Omit<InputStandardProps, 'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'>
   isMulti?: boolean
   option: T[]
   value: T[]
@@ -97,7 +97,7 @@ export type SelectYearProps = Omit<SelectDateProps, 'monthsLocale'> & {
 }
 
 export type SelectWrapperProps = AddDollarSign<
-  Pick<InputProps, 'genre'> & { parentListHeight: number; radius: number }
+  Pick<InputStandardProps, 'genre'> & { parentListHeight: number; radius: number }
 > &
   StyledInputWrapperProps
 
@@ -116,7 +116,7 @@ export type DropdownOptionIconProps = AddDollarSign<{
 }>
 
 export type SelectStyledListProps = AddDollarSign<
-  Pick<InputProps, 'genre' | 'size'> & {
+  Pick<InputStandardProps, 'genre' | 'size'> & {
     isShowScroll?: boolean
     isFooter?: boolean
   }

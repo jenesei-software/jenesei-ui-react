@@ -6,11 +6,12 @@ import {
   KeyboardEventHandler,
   PropsWithChildren
 } from 'react'
+import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'react-number-format'
 
 import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
-export interface InputProps {
+interface InputDefaultProps {
   name?: string
 
   id?: string
@@ -53,8 +54,6 @@ export interface InputProps {
 
   onBlur?: FocusEventHandler<HTMLInputElement>
 
-  onChange?: (value: string) => void
-
   onPaste?: ClipboardEventHandler<HTMLInputElement>
 
   onFocus?: FocusEventHandler<HTMLInputElement>
@@ -69,21 +68,48 @@ export interface InputProps {
 
   prefixChildren?: InputChildrenProps
 
-  type?: HTMLInputTypeAttribute
-
-  value?: string | null
-
-  format?: string
-
-  formatType?: 'text' | 'tel' | 'password'
+  value?: string | null | number
 
   inputMode?: 'text' | 'none' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search'
 
   maxLength?: number
   minLength?: number
-
-  mask?: string | string[]
 }
+export type InputStandardProps = InputDefaultProps & {
+  variety: 'standard'
+  onChange?: (value: string) => void
+  type?: HTMLInputTypeAttribute
+  min?: number
+  max?: number
+  step?: number
+}
+export type InputPatternProps = InputDefaultProps & {
+  variety: 'pattern'
+  onChange?: (value: NumberFormatValues) => void
+  propsPattern: Pick<
+    PatternFormatProps,
+    'format' | 'mask' | 'allowEmptyFormatting' | 'patternChar' | 'valueIsNumericString' | 'type'
+  >
+}
+export type InputNumericProps = InputDefaultProps & {
+  variety: 'numeric'
+  onChange?: (value: NumberFormatValues) => void
+  propsNumeric: Pick<
+    NumericFormatProps,
+    | 'allowLeadingZeros'
+    | 'thousandSeparator'
+    | 'allowNegative'
+    | 'allowedDecimalSeparators'
+    | 'decimalScale'
+    | 'decimalSeparator'
+    | 'fixedDecimalScale'
+    | 'prefix'
+    | 'thousandsGroupStyle'
+    | 'isAllowed'
+    | 'suffix'
+  >
+}
+export type InputProps = InputStandardProps | InputPatternProps | InputNumericProps
 
 export interface InputChildrenProps extends PropsWithChildren {
   left: string

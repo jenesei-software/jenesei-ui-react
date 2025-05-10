@@ -146,6 +146,7 @@ export const InputOTP = (props: InputOTPProps) => {
             ref={el => {
               inputsRef.current[index] = el
             }}
+            variety="standard"
             type="text"
             inputMode="numeric"
             maxLength={1}
