@@ -1,6 +1,6 @@
 import { FocusEvent } from 'react'
 
-import { InputProps, InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
+import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
 import { TJeneseiThemeGenreDate, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
@@ -41,7 +41,7 @@ export interface DatePickerProps {
   isOnClickClose?: boolean
   isInputEffect?: InputStandardProps['isInputEffect']
   inputProps: Omit<
-    InputProps,
+    InputStandardProps,
     'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width' | 'value' | 'isInputEffect'
   >
 
