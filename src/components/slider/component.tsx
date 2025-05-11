@@ -6,30 +6,30 @@ import { useDialog } from '@local/contexts/context-dialog'
 
 import { SliderDot, SliderImage, SliderProps } from '.'
 import { Button } from '../button'
+import { Icon } from '../icon'
 import { Image } from '../image'
 import { Stack, StackMotion } from '../stack'
 import { Typography } from '../typography'
 
 export const Slider: FC<SliderProps> = props => {
   const { onIndexChange } = props
+  const images = useMemo(() => props.images, [props.images])
   const [{ activeImageId, direction }, setActiveImage] = useState({
-    activeImageId: props.images[0].id,
+    activeImageId: images?.[0]?.id ?? null,
     direction: 0
   })
-  const isLengthOne = useMemo(() => props.images.length === 1, [props.images])
+  const isLengthOne = useMemo(() => images?.length === 1, [images])
+  const isLengthZero = useMemo(() => images?.length === 0, [images])
 
-  const activeImageIndex = useMemo(
-    () => props.images.findIndex(img => img.id === activeImageId),
-    [activeImageId, props.images]
-  )
+  const activeImageIndex = useMemo(() => images.findIndex(img => img.id === activeImageId), [activeImageId, images])
 
   const swipeToImage = useCallback(
     (swipeDirection: number) => {
-      const currentIndex = props.images.findIndex(img => img.id === activeImageId)
-      const nextIndex = (currentIndex + swipeDirection + props.images.length) % props.images.length
-      setActiveImage({ activeImageId: props.images[nextIndex].id, direction: swipeDirection })
+      const currentIndex = images.findIndex(img => img.id === activeImageId)
+      const nextIndex = (currentIndex + swipeDirection + images.length) % images.length
+      setActiveImage({ activeImageId: images[nextIndex].id, direction: swipeDirection })
     },
-    [activeImageId, props.images]
+    [activeImageId, images]
   )
   const dragEndHandler = useCallback(
     (dragInfo: PanInfo) => {
@@ -47,18 +47,18 @@ export const Slider: FC<SliderProps> = props => {
   )
   const skipToImage = useCallback(
     (imageId: number) => {
-      const currentIndex = props.images.findIndex(img => img.id === activeImageId)
-      const newIndex = props.images.findIndex(img => img.id === imageId)
+      const currentIndex = images.findIndex(img => img.id === activeImageId)
+      const newIndex = images.findIndex(img => img.id === imageId)
       if (newIndex === -1 || newIndex === currentIndex) return
 
       const direction = newIndex > currentIndex ? 1 : -1
       setActiveImage({ activeImageId: imageId, direction })
     },
-    [activeImageId, props.images]
+    [activeImageId, images]
   )
 
   useEffect(() => {
-    onIndexChange?.(activeImageId)
+    if (activeImageId) onIndexChange?.(activeImageId)
   }, [activeImageId, onIndexChange])
 
   const theme = useTheme()
@@ -80,14 +80,14 @@ export const Slider: FC<SliderProps> = props => {
     images: SliderProps['images']
     children?: SliderProps['children']
     activeImageIndex: number
-    activeImageId: number
+    activeImageId: number | null
     swipeToImage: (swipeDirection: number) => void
     skipToImage: (imageId: number) => void
     direction: number
   }>({
     br: br,
     dragEndHandler: dragEndHandler,
-    images: props.images,
+    images: images,
     children: props.children,
     activeImageIndex: activeImageIndex,
     activeImageId: activeImageId,
@@ -158,7 +158,7 @@ export const Slider: FC<SliderProps> = props => {
                 }}
                 alt={(params?.images ?? [])?.[params?.activeImageIndex ?? 0]?.imageSrc}
                 src={(params?.images ?? [])?.[params?.activeImageIndex ?? 0]?.imageSrc}
-                fallback={<Typography variant="h6">Не удалось загрузить изображение</Typography>}
+                fallback={<Typography variant="h6">{props.locales.failedToLoad}</Typography>}
               />
               {(params?.images ?? [])?.[params?.activeImageIndex ?? 0]?.children}
             </SliderImage>
@@ -253,7 +253,7 @@ export const Slider: FC<SliderProps> = props => {
         </Stack>
       )
     })
-  }, [add, br, isLengthOne])
+  }, [add, br, isLengthOne, props.locales.failedToLoad])
   return (
     <StackMotion
       {...props.propsStack}
@@ -282,151 +282,185 @@ export const Slider: FC<SliderProps> = props => {
         }
       })}
     >
-      <Stack
-        sx={{
-          default: {
-            width: '100%',
-            height: '100%',
-            position: 'relative',
-            overflow: 'hidden'
-          }
-        }}
-      >
-        <AnimatePresence initial={false} custom={direction}>
-          <SliderImage
-            key={activeImageId}
-            style={{
-              overflow: 'hidden',
-              borderRadius: br
-            }}
-            custom={direction}
-            variants={sliderVariants}
-            initial="initial"
-            animate="active"
-            exit="exit"
-            transition={sliderTransition}
-            {...(!isLengthOne
-              ? {
-                  drag: 'x',
-                  dragConstraints: { left: 0, right: 0 },
-                  dragElastic: 0.5,
-                  onDragEnd: (_, dragInfo) => dragEndHandler(dragInfo)
-                }
-              : {})}
-          >
-            <Image
-              propsStack={{
-                sx: theme => ({
-                  default: {
-                    width: '100%',
-                    height: '100%',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: theme.palette.black10,
-                    position: 'absolute',
-                    pointerEvents: 'none'
-                  }
-                })
-              }}
-              alt={props.images[activeImageIndex]?.imageSrc}
-              src={props.images[activeImageIndex]?.imageSrc}
-              fallback={<Typography variant="h6">Не удалось загрузить изображение</Typography>}
-            />
-            {props.images[activeImageIndex]?.children}
-          </SliderImage>
-        </AnimatePresence>
-        {typeof props?.children === 'function' ? props?.children?.({ isDialog: false }) : props?.children}
-
-        {!isLengthOne && (
-          <>
-            <Button
-              sx={{
-                default: {
-                  position: 'absolute',
-                  top: '50%',
-                  left: 5,
-                  transform: 'translateY(-50%)'
-                }
-              }}
-              genre="realebail-white"
-              size="small"
-              icon={{
-                type: 'id',
-                name: 'Arrow4',
-                turn: 90
-              }}
-              width="asHeight"
-              isHiddenBorder
-              isRadius
-              onClick={() => swipeToImage(-1)}
-            />
-            <Button
-              sx={{
-                default: {
-                  position: 'absolute',
-                  top: '50%',
-                  right: 5,
-                  transform: 'translateY(-50%)'
-                }
-              }}
-              genre="realebail-white"
-              size="small"
-              icon={{
-                type: 'id',
-                name: 'Arrow4',
-                turn: -90
-              }}
-              width="asHeight"
-              isHiddenBorder
-              isRadius
-              onClick={() => swipeToImage(1)}
-            />
-            <Stack
-              sx={{
-                default: {
-                  position: 'absolute',
-                  bottom: 5,
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  gap: '4px'
-                }
-              }}
-            >
-              {props.images.map(i => (
-                <SliderDot
-                  onClick={() => skipToImage(i.id)}
-                  key={i.id}
-                  initial={false}
-                  animate={{
-                    scale: activeImageId === i.id ? 1.5 : 1,
-                    opacity: activeImageId === i.id ? 1 : 0.5
-                  }}
-                />
-              ))}
-            </Stack>
-          </>
-        )}
-
-        <Button
+      {props.isLoading ? (
+        <Stack
           sx={{
             default: {
-              position: 'absolute',
-              bottom: 5,
-              right: 5
+              width: '100%',
+              height: '100%',
+              position: 'relative',
+              overflow: 'hidden',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
             }
           }}
-          genre="realebail-white"
-          size="small"
-          icon={{
-            type: 'id',
-            name: 'Activity'
+        >
+          <Icon size="large" type="loading" primaryColor="blueFocus" name="Line" />
+        </Stack>
+      ) : !isLengthZero ? (
+        <Stack
+          sx={{
+            default: {
+              width: '100%',
+              height: '100%',
+              position: 'relative',
+              overflow: 'hidden'
+            }
           }}
-          width="asHeight"
-          isHiddenBorder
-          isRadius
-          onClick={() => handleAdd()}
-        />
-      </Stack>
+        >
+          <AnimatePresence initial={false} custom={direction}>
+            <SliderImage
+              key={activeImageId}
+              style={{
+                overflow: 'hidden',
+                borderRadius: br
+              }}
+              custom={direction}
+              variants={sliderVariants}
+              initial="initial"
+              animate="active"
+              exit="exit"
+              transition={sliderTransition}
+              {...(!isLengthOne
+                ? {
+                    drag: 'x',
+                    dragConstraints: { left: 0, right: 0 },
+                    dragElastic: 0.5,
+                    onDragEnd: (_, dragInfo) => dragEndHandler(dragInfo)
+                  }
+                : {})}
+            >
+              <Image
+                propsStack={{
+                  sx: theme => ({
+                    default: {
+                      width: '100%',
+                      height: '100%',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      backgroundColor: theme.palette.black10,
+                      position: 'absolute',
+                      pointerEvents: 'none'
+                    }
+                  })
+                }}
+                alt={images[activeImageIndex]?.imageSrc}
+                src={images[activeImageIndex]?.imageSrc}
+                fallback={<Typography variant="h6">{props.locales.failedToLoad}</Typography>}
+              />
+              {images[activeImageIndex]?.children}
+            </SliderImage>
+          </AnimatePresence>
+          {typeof props?.children === 'function' ? props?.children?.({ isDialog: false }) : props?.children}
+
+          {!isLengthOne && (
+            <>
+              <Button
+                sx={{
+                  default: {
+                    position: 'absolute',
+                    top: '50%',
+                    left: 5,
+                    transform: 'translateY(-50%)'
+                  }
+                }}
+                genre="realebail-white"
+                size="small"
+                icon={{
+                  type: 'id',
+                  name: 'Arrow4',
+                  turn: 90
+                }}
+                width="asHeight"
+                isHiddenBorder
+                isRadius
+                onClick={() => swipeToImage(-1)}
+              />
+              <Button
+                sx={{
+                  default: {
+                    position: 'absolute',
+                    top: '50%',
+                    right: 5,
+                    transform: 'translateY(-50%)'
+                  }
+                }}
+                genre="realebail-white"
+                size="small"
+                icon={{
+                  type: 'id',
+                  name: 'Arrow4',
+                  turn: -90
+                }}
+                width="asHeight"
+                isHiddenBorder
+                isRadius
+                onClick={() => swipeToImage(1)}
+              />
+              <Stack
+                sx={{
+                  default: {
+                    position: 'absolute',
+                    bottom: 5,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    gap: '4px'
+                  }
+                }}
+              >
+                {images.map(i => (
+                  <SliderDot
+                    onClick={() => skipToImage(i.id)}
+                    key={i.id}
+                    initial={false}
+                    animate={{
+                      scale: activeImageId === i.id ? 1.5 : 1,
+                      opacity: activeImageId === i.id ? 1 : 0.5
+                    }}
+                  />
+                ))}
+              </Stack>
+            </>
+          )}
+
+          <Button
+            sx={{
+              default: {
+                position: 'absolute',
+                bottom: 5,
+                right: 5
+              }
+            }}
+            genre="realebail-white"
+            size="small"
+            icon={{
+              type: 'id',
+              name: 'Activity'
+            }}
+            width="asHeight"
+            isHiddenBorder
+            isRadius
+            onClick={() => handleAdd()}
+          />
+        </Stack>
+      ) : (
+        <Stack
+          sx={{
+            default: {
+              width: '100%',
+              height: '100%',
+              position: 'relative',
+              overflow: 'hidden',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }
+          }}
+        >
+          <Typography variant="h6">{props.locales.noImagesAvailable}</Typography>
+        </Stack>
+      )}
     </StackMotion>
   )
 }

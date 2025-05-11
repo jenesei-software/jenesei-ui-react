@@ -7,5 +7,10 @@ export type SliderProps = {
   children?: (props: { isDialog: boolean }) => ReactNode | ReactNode
   onIndexChange?: (index: number) => void
   propsStack?: StackProps
+  isLoading?: boolean
+  locales: {
+    failedToLoad: string
+    noImagesAvailable: string
+  }
 }
 export type SliderImageProps = { id: number; imageSrc: string; children?: ReactNode }
