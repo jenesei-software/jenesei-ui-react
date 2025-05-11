@@ -21,7 +21,6 @@ const RangeWrapper: FC<RangeProps> = props => {
       {...props}
       values={value}
       onChange={newValue => {
-        console.log('onChange', newValue)
         setValue(newValue)
       }}
     />
@@ -33,9 +32,9 @@ export const Default: Story = {
   args: {
     genre: 'realebail-white',
     size: 'medium',
-    values: [20, 50],
+    values: [0, 100000],
     min: 0,
-    max: 100,
-    step: 1
+    max: 100000,
+    step: 1000
   }
 }
