@@ -10,6 +10,7 @@ export const InputOTPSize = css<RangeWrapperProps>`
 `
 export const InputOTPSizeConstructor = (props: IJeneseiThemeSize & RangeWrapperProps) => css`
   width: ${props.$width ?? '100%'};
+  padding: ${props.padding}px;
 `
 
 export const RangeWrapper = styled.div<RangeWrapperProps>`
@@ -17,55 +18,47 @@ export const RangeWrapper = styled.div<RangeWrapperProps>`
   display: flex;
   width: 100%;
   box-sizing: border-box;
-  height: 10px;
-  margin-top: 30px;
+  align-items: center;
+  height: 20px;
   ${InputOTPSize};
 `
 
 export const RangeTrack = styled.div<RangeComponentProps>`
   position: absolute;
-  top: 50%;
-  left: 0;
-  height: 4px;
-  width: 100%;
+  height: 3px;
+  width: calc(100% - 20px);
   background: #ccc;
-  transform: translateY(-50%);
   border-radius: 2px;
 `
 export const RangeThumb = styled.input<RangeComponentProps>`
   position: absolute;
   width: 100%;
+  outline: none !important;
   pointer-events: none;
   -webkit-appearance: none;
   background: transparent;
-
+  left: 0;
+  margin: 0;
   &::-webkit-slider-thumb {
     pointer-events: all;
     width: 16px;
     height: 16px;
+    margin: 0;
+    padding: 0;
     border-radius: 50%;
-    background: #007bff;
-    border: 2px solid black;
+    background: #f7faff;
+    border: 3px #2a77ee solid;
     cursor: pointer;
     -webkit-appearance: none;
-    margin-top: -6px;
-  }
-  &::-moz-range-thumb {
-    pointer-events: all;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #007bff;
-    border: 8px solid black;
-    cursor: pointer;
+    margin-top: 0px;
   }
 `
 export const RangeMarker = styled.div<RangeComponentProps>`
   position: absolute;
-  top: -100%;
+  top: -20px;
   width: 12px;
   height: 12px;
-  background: #007bff;
+  background: #2a77ee;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;

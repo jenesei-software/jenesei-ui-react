@@ -6,11 +6,12 @@ import { InputStandardProps } from '../input/component.types'
 
 export type RangeProps = {
   values: number[]
-  colors: string[]
+  // colors: string[]
   onChange: (values: number[]) => void
   step: number
   min: number
   max: number
+  isShowMarker?: boolean
   onBlur?: FocusEventHandler<HTMLDivElement>
 } & Pick<InputStandardProps, 'size' | 'genre' | 'id' | 'width' | 'isError' | 'errorMessage' | 'isErrorAbsolute'>
 
