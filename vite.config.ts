@@ -50,6 +50,7 @@ export default defineConfig(() => {
 
           ['consts']: resolve(__dirname, 'src/consts.ts'),
 
+          ['component-range']: resolve(__dirname, 'src/components/range/index.ts'),
           ['component-accordion']: resolve(__dirname, 'src/components/accordion/index.ts'),
           ['component-button']: resolve(__dirname, 'src/components/button/index.ts'),
           ['component-button-group']: resolve(__dirname, 'src/components/button-group/index.ts'),
