@@ -16,6 +16,7 @@ export const Slider: FC<SliderProps> = props => {
     activeImageId: props.images[0].id,
     direction: 0
   })
+  const isLengthOne = useMemo(() => props.images.length === 1, [props.images])
 
   const activeImageIndex = useMemo(
     () => props.images.findIndex(img => img.id === activeImageId),
@@ -129,10 +130,14 @@ export const Slider: FC<SliderProps> = props => {
               animate="active"
               exit="exit"
               transition={sliderTransition}
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.5}
-              onDragEnd={(_, dragInfo) => params?.dragEndHandler?.(dragInfo)}
+              {...(!isLengthOne
+                ? {
+                    drag: 'x',
+                    dragConstraints: { left: 0, right: 0 },
+                    dragElastic: 0.5,
+                    onDragEnd: (_, dragInfo) => params?.dragEndHandler(dragInfo)
+                  }
+                : {})}
             >
               <Image
                 propsStack={{
@@ -159,45 +164,6 @@ export const Slider: FC<SliderProps> = props => {
             </SliderImage>
           </AnimatePresence>
           {typeof params?.children === 'function' ? params?.children?.({ isDialog: true }) : params?.children}
-          <Stack
-            sx={{
-              default: {
-                position: 'absolute',
-                bottom: 15,
-                left: 15,
-                gap: '8px'
-              }
-            }}
-          >
-            <Button
-              genre="realebail-white"
-              size="small"
-              icon={{
-                type: 'id',
-                name: 'Arrow4',
-                turn: 90
-              }}
-              width="asHeight"
-              isHiddenBorder
-              isPlaystationEffect
-              isRadius
-              onClick={() => params?.swipeToImage?.(-1)}
-            />
-            <Button
-              genre="realebail-white"
-              size="small"
-              icon={{
-                type: 'id',
-                name: 'Arrow4',
-                turn: -90
-              }}
-              width="asHeight"
-              isHiddenBorder
-              isPlaystationEffect
-              isRadius
-              onClick={() => params?.swipeToImage?.(1)}
-            />
-          </Stack>
 
           <Button
             sx={{
@@ -218,33 +184,76 @@ export const Slider: FC<SliderProps> = props => {
             isRadius
             onClick={() => remove?.()}
           />
-          <Stack
-            sx={{
-              default: {
-                position: 'absolute',
-                bottom: 15,
-                left: '50%',
-                transform: 'translateX(-50%)',
-                gap: '4px'
-              }
-            }}
-          >
-            {(params?.images ?? [])?.map(i => (
-              <SliderDot
-                onClick={() => params?.skipToImage?.(i.id)}
-                key={i.id}
-                initial={false}
-                animate={{
-                  scale: params?.activeImageId === i.id ? 1.5 : 1,
-                  opacity: params?.activeImageId === i.id ? 1 : 0.5
+          {!isLengthOne ? (
+            <>
+              <Stack
+                sx={{
+                  default: {
+                    position: 'absolute',
+                    bottom: 15,
+                    left: 15,
+                    gap: '8px'
+                  }
                 }}
-              />
-            ))}
-          </Stack>
+              >
+                <Button
+                  genre="realebail-white"
+                  size="small"
+                  icon={{
+                    type: 'id',
+                    name: 'Arrow4',
+                    turn: 90
+                  }}
+                  width="asHeight"
+                  isHiddenBorder
+                  isPlaystationEffect
+                  isRadius
+                  onClick={() => params?.swipeToImage?.(-1)}
+                />
+                <Button
+                  genre="realebail-white"
+                  size="small"
+                  icon={{
+                    type: 'id',
+                    name: 'Arrow4',
+                    turn: -90
+                  }}
+                  width="asHeight"
+                  isHiddenBorder
+                  isPlaystationEffect
+                  isRadius
+                  onClick={() => params?.swipeToImage?.(1)}
+                />
+              </Stack>
+              <Stack
+                sx={{
+                  default: {
+                    position: 'absolute',
+                    bottom: 15,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    gap: '4px'
+                  }
+                }}
+              >
+                {(params?.images ?? [])?.map(i => (
+                  <SliderDot
+                    onClick={() => params?.skipToImage?.(i.id)}
+                    key={i.id}
+                    initial={false}
+                    animate={{
+                      scale: params?.activeImageId === i.id ? 1.5 : 1,
+                      opacity: params?.activeImageId === i.id ? 1 : 0.5
+                    }}
+                  />
+                ))}
+              </Stack>
+            </>
+          ) : null}
         </Stack>
       )
     })
-  }, [add, br])
+  }, [add, br, isLengthOne])
   return (
     <StackMotion
       {...props.propsStack}
@@ -296,10 +305,14 @@ export const Slider: FC<SliderProps> = props => {
             animate="active"
             exit="exit"
             transition={sliderTransition}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.5}
-            onDragEnd={(_, dragInfo) => dragEndHandler(dragInfo)}
+            {...(!isLengthOne
+              ? {
+                  drag: 'x',
+                  dragConstraints: { left: 0, right: 0 },
+                  dragElastic: 0.5,
+                  onDragEnd: (_, dragInfo) => dragEndHandler(dragInfo)
+                }
+              : {})}
           >
             <Image
               propsStack={{
@@ -324,48 +337,76 @@ export const Slider: FC<SliderProps> = props => {
         </AnimatePresence>
         {typeof props?.children === 'function' ? props?.children?.({ isDialog: false }) : props?.children}
 
-        <Button
-          sx={{
-            default: {
-              position: 'absolute',
-              top: '50%',
-              left: 5,
-              transform: 'translateY(-50%)'
-            }
-          }}
-          genre="realebail-white"
-          size="small"
-          icon={{
-            type: 'id',
-            name: 'Arrow4',
-            turn: 90
-          }}
-          width="asHeight"
-          isHiddenBorder
-          isRadius
-          onClick={() => swipeToImage(-1)}
-        />
-        <Button
-          sx={{
-            default: {
-              position: 'absolute',
-              top: '50%',
-              right: 5,
-              transform: 'translateY(-50%)'
-            }
-          }}
-          genre="realebail-white"
-          size="small"
-          icon={{
-            type: 'id',
-            name: 'Arrow4',
-            turn: -90
-          }}
-          width="asHeight"
-          isHiddenBorder
-          isRadius
-          onClick={() => swipeToImage(1)}
-        />
+        {!isLengthOne && (
+          <>
+            <Button
+              sx={{
+                default: {
+                  position: 'absolute',
+                  top: '50%',
+                  left: 5,
+                  transform: 'translateY(-50%)'
+                }
+              }}
+              genre="realebail-white"
+              size="small"
+              icon={{
+                type: 'id',
+                name: 'Arrow4',
+                turn: 90
+              }}
+              width="asHeight"
+              isHiddenBorder
+              isRadius
+              onClick={() => swipeToImage(-1)}
+            />
+            <Button
+              sx={{
+                default: {
+                  position: 'absolute',
+                  top: '50%',
+                  right: 5,
+                  transform: 'translateY(-50%)'
+                }
+              }}
+              genre="realebail-white"
+              size="small"
+              icon={{
+                type: 'id',
+                name: 'Arrow4',
+                turn: -90
+              }}
+              width="asHeight"
+              isHiddenBorder
+              isRadius
+              onClick={() => swipeToImage(1)}
+            />
+            <Stack
+              sx={{
+                default: {
+                  position: 'absolute',
+                  bottom: 5,
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  gap: '4px'
+                }
+              }}
+            >
+              {props.images.map(i => (
+                <SliderDot
+                  onClick={() => skipToImage(i.id)}
+                  key={i.id}
+                  initial={false}
+                  animate={{
+                    scale: activeImageId === i.id ? 1.5 : 1,
+                    opacity: activeImageId === i.id ? 1 : 0.5
+                  }}
+                />
+              ))}
+            </Stack>
+          </>
+        )}
+
         <Button
           sx={{
             default: {
@@ -385,29 +426,6 @@ export const Slider: FC<SliderProps> = props => {
           isRadius
           onClick={() => handleAdd()}
         />
-        <Stack
-          sx={{
-            default: {
-              position: 'absolute',
-              bottom: 5,
-              left: '50%',
-              transform: 'translateX(-50%)',
-              gap: '4px'
-            }
-          }}
-        >
-          {props.images.map(i => (
-            <SliderDot
-              onClick={() => skipToImage(i.id)}
-              key={i.id}
-              initial={false}
-              animate={{
-                scale: activeImageId === i.id ? 1.5 : 1,
-                opacity: activeImageId === i.id ? 1 : 0.5
-              }}
-            />
-          ))}
-        </Stack>
       </Stack>
     </StackMotion>
   )

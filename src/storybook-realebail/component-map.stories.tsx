@@ -4,6 +4,7 @@ import { useMap } from 'react-leaflet'
 
 import { Checkbox } from '@local/components/checkbox'
 import { SelectMapTheme } from '@local/components/select'
+import { Typography } from '@local/components/typography'
 
 import { Button } from '../components/button'
 import { DEFAULT_MAP_THEME, Map, MapDot, MapDotProps, MapProps } from '../components/map'
@@ -44,68 +45,80 @@ const PopupContent: FC = () => {
     setChecked(!checked)
   }
   return (
-    <Slider
-      images={IMAGES}
-      propsStack={{
-        sx: {
-          default: {
-            maxWidth: '80dvw',
-            height: '350px',
-            width: '500px',
-            borderRadius: '10px'
-          }
-        }
-      }}
+    <Stack
+      sx={{ default: { flexDirection: 'column', gap: '10px', height: '400px', width: '360px', maxWidth: '80dvw' } }}
     >
-      {({ isDialog }) =>
-        !isDialog ? (
-          <Stack
-            sx={{
-              default: {
-                justifyContent: 'flex-end',
-                gap: '4px',
-                padding: '5px',
-                flexGrow: 1
-              }
-            }}
-          >
-            <Button
-              isHiddenBorder
-              genre="realebail-white"
-              width="asHeight"
-              size="small"
-              icon={{
-                type: 'id',
-                name: 'Close',
-                size: 'medium'
+      <Slider
+        images={IMAGES}
+        propsStack={{
+          sx: {
+            default: {
+              height: '194px',
+              width: '100%',
+              borderRadius: '10px'
+            }
+          }
+        }}
+      >
+        {({ isDialog }) =>
+          !isDialog ? (
+            <Stack
+              sx={{
+                default: {
+                  justifyContent: 'flex-end',
+                  gap: '4px',
+                  padding: '5px',
+                  flexGrow: 1
+                }
               }}
-              onClick={handleClose}
-            />
-          </Stack>
-        ) : (
-          <Stack
-            sx={{
-              default: {
-                justifyContent: 'flex-end',
-                gap: '4px',
-                padding: '5px',
-                flexGrow: 1
-              }
-            }}
-          >
-            <Checkbox
-              width="asHeight"
-              genre="realebail-white"
-              checked={checked}
-              onChange={() => handleChange()}
-              view="Heart"
-              size="small"
-            />
-          </Stack>
-        )
-      }
-    </Slider>
+            >
+              <Button
+                isHiddenBorder
+                genre="realebail-white"
+                width="asHeight"
+                size="small"
+                icon={{
+                  type: 'id',
+                  name: 'Close',
+                  size: 'medium'
+                }}
+                onClick={handleClose}
+              />
+            </Stack>
+          ) : (
+            <Stack
+              sx={{
+                default: {
+                  justifyContent: 'flex-end',
+                  gap: '4px',
+                  padding: '5px',
+                  flexGrow: 1
+                }
+              }}
+            >
+              <Checkbox
+                width="asHeight"
+                genre="realebail-white"
+                checked={checked}
+                onChange={() => handleChange()}
+                view="Heart"
+                size="small"
+              />
+            </Stack>
+          )
+        }
+      </Slider>
+      <Stack sx={{ default: { flexDirection: 'column' } }}>
+        <Typography weight={500} variant="h7">
+          Описание:
+        </Typography>
+        <Typography variant="h6">Это описание</Typography>
+      </Stack>
+    </Stack>
   )
+}
+function getRandomArbitrary(min: number, max: number) {
+  return Math.random() * (max - min) + min
 }
 const MapDefaultWrapper: FC<MapProps<object>> = props => {
   const [theme, setTheme] = useState<MapProps<MarkerItemProps>['theme']>(DEFAULT_MAP_THEME)
@@ -122,13 +135,13 @@ const MapDefaultWrapper: FC<MapProps<object>> = props => {
         },
         popupProps: {
           autoPanPadding: [10, 10],
-          maxHeight: 350,
-          maxWidth: 500,
+          maxHeight: 400,
+          maxWidth: 360,
           closeButton: false
         },
         position: {
-          lng: -122.673447 + Math.random() * 200.0,
-          lat: 45.5225581 - 60 + Math.random() * 80
+          lng: getRandomArbitrary(114.4, 115.7),
+          lat: getRandomArbitrary(-9.2, -8.0)
         }
       })
     }
