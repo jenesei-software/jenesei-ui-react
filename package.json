@@ -54,6 +54,11 @@
       "import": "./build/consts.es.js",
       "require": "./build/consts.cjs.js"
     },
+    "./component-range": {
+      "types": "./build/component-range.d.ts",
+      "import": "./build/component-range.es.js",
+      "require": "./build/component-range.cjs.js"
+    },
     "./component-accordion": {
       "types": "./build/component-accordion.d.ts",
       "import": "./build/component-accordion.es.js",
