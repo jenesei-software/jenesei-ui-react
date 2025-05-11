@@ -3,10 +3,10 @@ import { FC, useEffect, useState } from 'react'
 import { useMap } from 'react-leaflet'
 
 import { Checkbox } from '@local/components/checkbox'
+import { SelectMapTheme } from '@local/components/select'
 
 import { Button } from '../components/button'
-import { ButtonGroup } from '../components/button-group'
-import { DEFAULT_MAP_THEME, DEFAULT_MAP_THEME_LIST, Map, MapDot, MapDotProps, MapProps } from '../components/map'
+import { DEFAULT_MAP_THEME, Map, MapDot, MapDotProps, MapProps } from '../components/map'
 import { IMAGES, Slider } from '../components/slider'
 import { Stack } from '../components/stack'
 
@@ -147,17 +147,24 @@ const MapDefaultWrapper: FC<MapProps<object>> = props => {
         }
       }}
     >
-      <ButtonGroup
-        position="horizontal"
-        value={DEFAULT_MAP_THEME_LIST.map(e => ({
-          genre: e.name === theme.name ? 'white' : 'black',
-          size: 'small',
-          children: e.name,
-          onClick() {
-            setTheme(e)
+      <Stack
+        sx={{
+          default: {
+            padding: '10px',
+            zIndex: 10,
+            alignItems: 'center',
+            flexDirection: 'column',
+            flexGrow: 1
           }
-        }))}
-      />
+        }}
+      >
+        <SelectMapTheme
+          size="medium"
+          value={theme}
+          genre="realebail-white"
+          onChange={value => value && setTheme(value)}
+        />
+      </Stack>
       <Stack
         sx={{
           default: {
@@ -166,6 +173,7 @@ const MapDefaultWrapper: FC<MapProps<object>> = props => {
             alignItems: 'center',
             flexDirection: 'column',
             flexGrow: 1,
+            zIndex: 0,
             overflow: 'hidden'
           }
         }}

@@ -6,7 +6,7 @@ import React, { FC, FocusEventHandler, ReactNode, memo, useCallback, useEffect, 
 import { Button } from '@local/components/button'
 import { InputChildrenProps } from '@local/components/input'
 import { Typography } from '@local/components/typography'
-import { ListLanguage } from '@local/consts'
+import { ListLanguage, MapThemeList } from '@local/consts'
 import { ErrorMessage } from '@local/styles/error'
 import { KEY_SIZE_DATA, TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
 
@@ -21,9 +21,11 @@ import {
   DropdownSelectAll,
   ISelectItem,
   ISelectLanguageOption,
+  ISelectMapThemeOption,
   SelectDateProps,
   SelectInputIcon,
   SelectLanguageProps,
+  SelectMapThemeProps,
   SelectProps,
   SelectStyledInput,
   SelectWrapper,
@@ -682,6 +684,73 @@ export const SelectYear: FC<SelectYearProps> = props => {
         variety: 'standard',
         value: selectedYear?.placeholder ?? props.placeholder,
         isReadOnly: true
+      }}
+    />
+  )
+}
+
+export const SelectMapTheme: FC<SelectMapThemeProps> = props => {
+  const options = useMemo(() => MapThemeList, [])
+  const optionsNormalize = useMemo(
+    () => MapThemeList.map(e => ({ label: e.name, value: e.name, placeholder: e.name })),
+    []
+  )
+
+  const [viewOption, setViewOption] = useState<ISelectMapThemeOption[]>(optionsNormalize)
+  const [query, setQuery] = useState<string>('')
+  const [isEmptyOption, setIsEmptyOption] = useState<boolean>(false)
+
+  const handleSelectChange = (option: ISelectMapThemeOption[]) => {
+    const findOption = options.find(e => e.name === option[0].value)
+    if (findOption) {
+      props.onChange(findOption)
+    } else {
+      props.onChange(null)
+    }
+    setQuery('')
+  }
+  const handleQueryChange = useCallback(
+    (value: string) => {
+      setQuery(value)
+      props.onChange(null)
+      if (value === '') {
+        setIsEmptyOption(optionsNormalize.length === 0)
+        setViewOption(optionsNormalize)
+      } else {
+        const filteredOptions = optionsNormalize.filter(option =>
+          Object.values(option).some(field => field?.toString().toLowerCase().includes(value.toLowerCase()))
+        )
+        setViewOption(filteredOptions)
+        setIsEmptyOption(filteredOptions.length === 0)
+      }
+    },
+    [optionsNormalize, props]
+  )
+
+  const [value, setValue] = useState<ISelectMapThemeOption | undefined>(
+    optionsNormalize.find(e => e.value === props.value.name)
+  )
+  useEffect(() => {
+    if (value?.value !== props.value.name) setValue(optionsNormalize.find(e => e.value === props.value.name))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [options, props.value])
+
+  return (
+    <Select<ISelectMapThemeOption>
+      {...props}
+      option={viewOption}
+      isEmptyOption={isEmptyOption}
+      minView={1}
+      maxView={8}
+      isOnClickOptionClose
+      value={value ? [value] : []}
+      onChange={handleSelectChange}
+      inputProps={{
+        ...props.inputProps,
+        variety: 'standard',
+        isReadOnly: true,
+        value: (value?.placeholder as string) ?? query,
+        onChange: handleQueryChange
       }}
     />
   )
