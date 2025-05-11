@@ -46,7 +46,7 @@ const PopupContent: FC = () => {
   }
   return (
     <Stack
-      sx={{ default: { flexDirection: 'column', gap: '10px', height: '400px', width: '360px', maxWidth: '80dvw' } }}
+      sx={{ default: { flexDirection: 'column', gap: '10px', height: '400px', width: '310px', maxWidth: '80dvw' } }}
     >
       <Slider
         locales={{
