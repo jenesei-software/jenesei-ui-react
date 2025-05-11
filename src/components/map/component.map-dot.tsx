@@ -4,11 +4,13 @@ import 'react-leaflet-markercluster/styles'
 
 import {
   CustomZoomControl,
+  DEFAULT_MAP_MAX_ZOOM,
+  DEFAULT_MAP_MIN_ZOOM,
   DEFAULT_MAP_THEME,
   DEFAULT_MAP_ZOOM,
   MapDotProps,
   MapWrapper,
-  UpdateMapCenter,
+  UpdateMapSettings,
   customDefaultIcon
 } from '.'
 
@@ -53,19 +55,19 @@ export const MapDot = (props: MapDotProps) => {
     center && (
       <MapWrapper>
         <MapContainer
-          center={center}
           zoom={props.zoom ?? DEFAULT_MAP_ZOOM}
-          style={{ height: '100%', width: '100%' }}
-          maxZoom={18}
+          minZoom={props.minZoom ?? DEFAULT_MAP_MIN_ZOOM}
+          maxZoom={props.maxZoom ?? DEFAULT_MAP_MAX_ZOOM}
           zoomControl={false}
           attributionControl={false}
+          style={{ height: '100%', width: '100%' }}
         >
           <TileLayer
             url={theme?.url ?? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'}
             attribution={theme?.attribution}
           />
           <CustomZoomControl />
-          <UpdateMapCenter center={center} />
+          <UpdateMapSettings center={center} maxBounds={props.maxBounds} zoom={props.zoom} />
           <MapClickHandler />
           {position && <Marker position={position} icon={customDefaultIcon()} />}
         </MapContainer>

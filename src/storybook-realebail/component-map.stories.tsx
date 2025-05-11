@@ -3,19 +3,10 @@ import { FC, useEffect, useState } from 'react'
 import { useMap } from 'react-leaflet'
 
 import { Checkbox } from '@local/components/checkbox'
-import { useGeolocation } from '@local/contexts/context-geolocation'
 
 import { Button } from '../components/button'
 import { ButtonGroup } from '../components/button-group'
-import {
-  DEFAULT_MAP_CENTER,
-  DEFAULT_MAP_THEME,
-  DEFAULT_MAP_THEME_LIST,
-  Map,
-  MapDot,
-  MapDotProps,
-  MapProps
-} from '../components/map'
+import { DEFAULT_MAP_THEME, DEFAULT_MAP_THEME_LIST, Map, MapDot, MapDotProps, MapProps } from '../components/map'
 import { IMAGES, Slider } from '../components/slider'
 import { Stack } from '../components/stack'
 
@@ -28,7 +19,14 @@ export default meta
 type Story = StoryObj<typeof Map>
 
 const defaultArgs: Partial<MapProps<object>> = {
-  zoom: 14
+  zoom: 9,
+  minZoom: 9,
+  center: [-8.5, 115.2],
+  maxBounds: [
+    [-9.2, 114.4],
+    [-8.0, 115.7]
+  ],
+  maxBoundsViscosity: 1.0
 }
 
 interface MarkerItemProps {
@@ -110,15 +108,8 @@ const PopupContent: FC = () => {
   )
 }
 const MapDefaultWrapper: FC<MapProps<object>> = props => {
-  const { location, geolocationPermission, requestGeolocationPermission } = useGeolocation()
-  const [center, setCenter] = useState<MapProps<MarkerItemProps>['center']>()
   const [theme, setTheme] = useState<MapProps<MarkerItemProps>['theme']>(DEFAULT_MAP_THEME)
   const [markers, setMarkers] = useState<MapProps<MarkerItemProps>['markers']>([])
-  useEffect(() => {
-    if (location && location.coords) {
-      setCenter([location.coords.latitude, location.coords.longitude])
-    }
-  }, [location])
 
   useEffect(() => {
     const markers: MapProps<MarkerItemProps>['markers'] = []
@@ -143,7 +134,6 @@ const MapDefaultWrapper: FC<MapProps<object>> = props => {
     }
     setMarkers(markers)
   }, [])
-  const isDisabledButton = geolocationPermission === 'denied' || geolocationPermission === 'granted'
   return (
     <Stack
       sx={{
@@ -157,19 +147,6 @@ const MapDefaultWrapper: FC<MapProps<object>> = props => {
         }
       }}
     >
-      <Button
-        size={'small'}
-        genre={'gray'}
-        isHidden={isDisabledButton}
-        isDisabled={isDisabledButton}
-        onClick={() => requestGeolocationPermission()}
-      >
-        {geolocationPermission === 'prompt'
-          ? 'Request geolocation permission'
-          : geolocationPermission === 'granted'
-            ? 'Geolocation permission granted'
-            : 'Geolocation permission denied'}
-      </Button>
       <ButtonGroup
         position="horizontal"
         value={DEFAULT_MAP_THEME_LIST.map(e => ({
@@ -181,16 +158,6 @@ const MapDefaultWrapper: FC<MapProps<object>> = props => {
           }
         }))}
       />
-      <Stack>
-        Your location:
-        {location ? (
-          <Stack>
-            {location.coords.latitude}, {location.coords.longitude}
-          </Stack>
-        ) : (
-          'Los Angeles, CA ?'
-        )}
-      </Stack>
       <Stack
         sx={{
           default: {
@@ -205,7 +172,6 @@ const MapDefaultWrapper: FC<MapProps<object>> = props => {
       >
         <Map<MarkerItemProps>
           {...props}
-          center={center}
           theme={theme}
           markers={markers}
           getCustomClusterLabel={markers => {
@@ -237,15 +203,11 @@ export const Default: Story = {
   }
 }
 const MapDotWrapper: FC<MapDotProps> = props => {
-  const [center, setCenter] = useState<MapDotProps['center']>(props.center)
   const [theme] = useState<MapDotProps['theme']>(DEFAULT_MAP_THEME)
   const [coords, setCoords] = useState<MapDotProps['coords']>(props.coords ?? null)
   useEffect(() => {
     setCoords(props.coords)
   }, [props.coords])
-  useEffect(() => {
-    setCenter(props.center)
-  }, [props.center])
   return (
     <Stack
       sx={{
@@ -273,7 +235,6 @@ const MapDotWrapper: FC<MapDotProps> = props => {
       >
         <MapDot
           {...props}
-          center={center}
           theme={theme}
           coords={coords}
           onSelect={coords => {
@@ -291,8 +252,6 @@ export const Dot: StoryDot = {
   render: args => <MapDotWrapper {...args} />,
   args: {
     ...defaultArgs,
-    zoom: 10,
-    center: DEFAULT_MAP_CENTER,
     onSelect(coords) {
       console.log('onSelect', coords)
     }
