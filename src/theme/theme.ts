@@ -327,7 +327,7 @@ const DefaultJeneseiThemeGenreInput = {
     color: {
       rest: JeneseiPalette.black80,
       hover: JeneseiPalette.black80,
-      placeholder: JeneseiPalette.grayAdriana
+      placeholder: JeneseiPalette.black40
     },
     border: {
       rest: JeneseiPalette.grayBarbara,
