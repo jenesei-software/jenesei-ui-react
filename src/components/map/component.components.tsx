@@ -12,7 +12,6 @@ export function UpdateMapSettings(props: UpdateMapSettingsProps) {
 
   useEffect(() => {
     if (propsMemo.center && propsMemo.maxBounds && propsMemo.zoom) {
-      console.log('UpdateMapSettings', propsMemo.center, propsMemo.maxBounds, propsMemo.zoom)
       map.setMaxBounds(propsMemo.maxBounds)
       map.setView(propsMemo.center, propsMemo.zoom)
     } else {
