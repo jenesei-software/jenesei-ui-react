@@ -8,9 +8,9 @@ export const MapWrapper = styled.div<{ style?: MapProps<object>['style'] }>`
     ${props => props.style?.popupWrapper && css(props.style.popupWrapper)}
   }
   .leaflet-popup-content {
-    ${props => props.style?.popupContent && css(props.style.popupContent)}
     max-width: fit-content;
-    width: 100% !important;
+    width: 100%;
+    ${props => props.style?.popupContent && css(props.style.popupContent)}
   }
   .leaflet-div-icon {
     background: none;
