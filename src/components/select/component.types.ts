@@ -5,6 +5,7 @@ import { TJeneseiThemeGenreSelect, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 import { MonthItem } from '../date-picker'
+import { MapTheme } from '../map'
 
 export type TInputSelect = keyof TJeneseiThemeGenreSelect
 
@@ -80,6 +81,15 @@ export interface ISelectLanguageOption extends ISelectItem {
 export type SelectLanguageProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
   value: string
   onChange: (language: string) => void
+}
+
+export interface ISelectMapThemeOption extends ISelectItem {
+  search?: string
+  placeholder: string
+}
+export type SelectMapThemeProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
+  value: MapTheme
+  onChange: (theme: MapTheme | null) => void
 }
 export type SelectDateProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
   startDate?: number
