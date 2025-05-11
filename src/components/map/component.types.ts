@@ -8,13 +8,19 @@ export interface MapProps<T extends object> {
   theme: MapTheme
   markers: MarkerProps<T>[]
   getCustomClusterLabel?: (markers: T[]) => string
+  maxBounds?: [[number, number], [number, number]]
+  maxBoundsViscosity?: number
+  maxZoom?: number
+  minZoom?: number
   style?: {
     popupWrapper?: Styles<object>
     popupContent?: Styles<object>
   }
 }
-export interface UpdateMapCenterProps {
-  center: [number, number]
+export interface UpdateMapSettingsProps {
+  maxBounds?: [[number, number], [number, number]]
+  center?: [number, number]
+  zoom?: number
 }
 export interface MapDotProps {
   center?: [number, number]
@@ -22,6 +28,10 @@ export interface MapDotProps {
   coords?: [number, number] | null
   theme: MapTheme
   zoom?: number
+  maxBounds?: [[number, number], [number, number]]
+  maxBoundsViscosity?: number
+  maxZoom?: number
+  minZoom?: number
 }
 export interface MapTheme {
   name: string

@@ -5,11 +5,13 @@ import 'react-leaflet-markercluster/styles'
 import {
   CustomZoomControl,
   DEFAULT_MAP_CENTER,
+  DEFAULT_MAP_MAX_ZOOM,
+  DEFAULT_MAP_MIN_ZOOM,
   DEFAULT_MAP_ZOOM,
   MapProps,
   MapWrapper,
   MarkerCluster,
-  UpdateMapCenter
+  UpdateMapSettings
 } from '.'
 
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css'
@@ -35,17 +37,17 @@ export const Map = <T extends object>(props: MapProps<T>) => {
     theme && (
       <MapWrapper style={props.style}>
         <MapContainer
-          zoomControl={false}
-          center={center}
           zoom={props.zoom ?? DEFAULT_MAP_ZOOM}
-          maxZoom={18}
+          minZoom={props.minZoom ?? DEFAULT_MAP_MIN_ZOOM}
+          maxZoom={props.maxZoom ?? DEFAULT_MAP_MAX_ZOOM}
           attributionControl={false}
+          zoomControl={false}
           style={{ height: '100%', width: '100%' }}
         >
           <CustomZoomControl />
           <TileLayer url={theme.url} attribution={theme.attribution} />
           <MarkerCluster getCustomClusterLabel={props.getCustomClusterLabel} markers={props.markers} />
-          <UpdateMapCenter center={center} />
+          <UpdateMapSettings center={center} maxBounds={props.maxBounds} zoom={props.zoom} />
         </MapContainer>
       </MapWrapper>
     )

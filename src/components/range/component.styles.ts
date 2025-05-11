@@ -10,7 +10,6 @@ export const InputOTPSize = css<RangeWrapperProps>`
 `
 export const InputOTPSizeConstructor = (props: IJeneseiThemeSize & RangeWrapperProps) => css`
   width: ${props.$width ?? '100%'};
-  padding: ${props.padding}px;
 `
 
 export const RangeWrapper = styled.div<RangeWrapperProps>`
@@ -26,7 +25,8 @@ export const RangeWrapper = styled.div<RangeWrapperProps>`
 export const RangeTrack = styled.div<RangeComponentProps>`
   position: absolute;
   height: 3px;
-  width: calc(100% - 20px);
+  width: 100%;
+  padding: 0px 10px;
   background: #ccc;
   border-radius: 2px;
 `

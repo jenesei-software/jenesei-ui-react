@@ -3,18 +3,24 @@ import { useMap } from 'react-leaflet'
 
 import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize'
 
-import { UpdateMapCenterProps } from '.'
+import { UpdateMapSettingsProps } from '.'
 import { Button } from '../button'
 
-export function UpdateMapCenter(props: UpdateMapCenterProps) {
+export function UpdateMapSettings(props: UpdateMapSettingsProps) {
   const map = useMap()
-  const center = useDeepCompareMemoize(props.center)
+  const propsMemo = useDeepCompareMemoize(props)
 
   useEffect(() => {
-    if (center) {
-      map.setView(center)
+    if (propsMemo.center && propsMemo.maxBounds && propsMemo.zoom) {
+      console.log('UpdateMapSettings', propsMemo.center, propsMemo.maxBounds, propsMemo.zoom)
+      map.setMaxBounds(propsMemo.maxBounds)
+      map.setView(propsMemo.center, propsMemo.zoom)
+    } else {
+      if (propsMemo.center) {
+        map.setView(propsMemo.center, propsMemo.zoom)
+      }
     }
-  }, [center, map])
+  }, [map, propsMemo])
 
   return null
 }

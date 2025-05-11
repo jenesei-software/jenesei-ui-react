@@ -1,5 +1,7 @@
 import { MapTheme } from '.'
 
+export const DEFAULT_MAP_MAX_ZOOM = 20
+export const DEFAULT_MAP_MIN_ZOOM = 2
 export const DEFAULT_MAP_ZOOM = 13
 export const DEFAULT_MAP_CENTER: [number, number] = [-8.409518, 115.188919]
 export const DEFAULT_MAP_THEME_LIST: MapTheme[] = [
