@@ -26,7 +26,7 @@ export const JeneseiPalette: Record<JeneseiPaletteKeys, string> = {
   grayPatricia: '#484848',
   graySarah: '#737373',
   grayStassie: '#8D8D8F',
-  grayAdriana: '#909090',
+  grayAdriana: '#90909033',
   grayBarbara: '#EBEEEA',
   whiteStandard: '#ffffff',
   whiteJanice: '#F7FAFF',
