@@ -38,6 +38,10 @@ export const Slider: Story = {
         />
       </Stack>
     ),
+    locales: {
+      failedToLoad: 'Failed to load image',
+      noImagesAvailable: 'No images available'
+    },
     propsStack: {
       sx: {
         default: {

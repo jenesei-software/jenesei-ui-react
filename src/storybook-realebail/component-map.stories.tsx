@@ -49,6 +49,10 @@ const PopupContent: FC = () => {
       sx={{ default: { flexDirection: 'column', gap: '10px', height: '400px', width: '360px', maxWidth: '80dvw' } }}
     >
       <Slider
+        locales={{
+          failedToLoad: 'Не удалось загрузить изображение',
+          noImagesAvailable: 'Нет доступных изображений'
+        }}
         images={IMAGES}
         propsStack={{
           sx: {
