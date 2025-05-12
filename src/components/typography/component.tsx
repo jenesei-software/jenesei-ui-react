@@ -42,8 +42,6 @@ const TypographyWithRef = forwardRef<HTMLElement | HTMLHeadingElement | HTMLAnch
       $isHoverUnderlining: props.isHoverUnderlining,
       $device: props.device,
       $size: 'size' in props ? props.size : undefined,
-      $sizeMobile: 'sizeMobile' in props ? props.sizeMobile : undefined,
-      $sizeTablet: 'sizeTablet' in props ? props.sizeTablet : undefined,
       $variant: 'variant' in props ? props.variant : undefined,
       className: props.className,
       style: props.style,

@@ -45,17 +45,11 @@ type ButtonPropsDefault = PropsWithChildren & {
 
   isPlaystationEffect?: boolean
 
+  isFullSize?: boolean
+
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 
   type?: 'button' | 'submit' | 'reset'
-
-  customFontFamily?: TJeneseiFontFamily
-
-  customFontSize?: number | string
-
-  customFontWeight?: number
-
-  isFullSize?: boolean
 } & addSXProps
 
 export type ButtonPropsStandard = ButtonPropsDefault & {

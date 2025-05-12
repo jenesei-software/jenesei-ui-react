@@ -1,6 +1,13 @@
 import { CSSProperties, PropsWithChildren } from 'react'
+import { DefaultTheme } from 'styled-components'
 
-import { JeneseiPaletteKeys, TJeneseiDevice, TJeneseiFontFamily } from '@local/theme'
+import {
+  JeneseiPaletteKeys,
+  TJeneseiDevice,
+  TJeneseiFontFamily,
+  TJeneseiTypographyHeading,
+  TJeneseiTypographyWeight
+} from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 import { TooltipProps } from '../tooltip'
@@ -23,7 +30,7 @@ export type TypographyDefaultProps = PropsWithChildren & {
   isParagraph?: boolean
   isAnchor?: boolean
   href?: string
-  weight?: 100 | 300 | 400 | 500 | 700 | 900
+  weight?: TJeneseiTypographyWeight
   height?: number
   flex?: string
   onClick?: () => void
@@ -32,46 +39,31 @@ export type TypographyDefaultProps = PropsWithChildren & {
 
 export type TypographyDataProps = TypographyDefaultProps & {
   size?: number
-  sizeMobile?: number
-  sizeTablet?: number
 }
 
 export type TypographyVariantProps = TypographyDefaultProps & {
-  variant: TypographyVariant
+  variant: TJeneseiTypographyHeading
 }
 
 export type TypographyProps = TypographyDataProps | TypographyVariantProps
+export interface addSXTypographyProps {
+  sx?:
+    | ({
+        default: TypographyProps
+      } & {
+        [K in TJeneseiDevice]?: TypographyProps
+      })
+    | ((theme: DefaultTheme) => {
+        default: TypographyProps
+      } & {
+        [K in TJeneseiDevice]?: TypographyProps
+      })
+}
+export type styledAddSXTypographyProps = AddDollarSign<addSXTypographyProps>
 
-type TypographyVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9'
-
-export type TypographyCSSProps = Partial<
-  AddDollarSign<
-    Pick<
-      TypographyDefaultProps,
-      | 'clamp'
-      | 'clampOrient'
-      | 'overflow'
-      | 'color'
-      | 'family'
-      | 'align'
-      | 'wrap'
-      | 'flex'
-      | 'isHoverUnderlining'
-      | 'letterSpacing'
-      | 'cursor'
-      | 'weight'
-      | 'height'
-      | 'device'
-      | 'decoration'
-      | 'transform'
-    > &
-      Pick<TypographyVariantProps, 'variant'> &
-      Pick<TypographyDataProps, 'size' | 'sizeMobile' | 'sizeTablet'>
-  > &
-    Pick<TypographyDefaultProps, 'className' | 'style' | 'onClick'>
->
+export type TypographyCSSProps = styledAddSXTypographyProps
 
 export type TypographyTooltipProps = {
-  typography: Omit<TypographyDataProps, 'children'> | Omit<TypographyVariantProps, 'children'>
+  typography: styledAddSXTypographyProps
   tooltip: Omit<TooltipProps, 'children' | 'content'>
 } & PropsWithChildren
