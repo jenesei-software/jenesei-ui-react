@@ -15,34 +15,15 @@ import {
   TitleH9,
   TitleParagraph,
   TypographyCSSProps,
-  TypographyDataProps,
   TypographyProps,
-  TypographyTooltipProps,
-  TypographyVariantProps
+  TypographyTooltipProps
 } from '.'
 import { Tooltip } from '../tooltip'
 
 const TypographyWithRef = forwardRef<HTMLElement | HTMLHeadingElement | HTMLAnchorElement | undefined, TypographyProps>(
   (props, ref) => {
-    const cssProps: TypographyCSSProps = {
-      $clamp: props.clamp,
-      $clampOrient: props.clampOrient,
-      $color: props.color,
-      $family: props.family,
-      $overflow: props.overflow,
-      $align: props.align,
-      $wrap: props.wrap,
-      $decoration: props.decoration,
-      $transform: props.transform,
-      $weight: props.weight,
-      $letterSpacing: props.letterSpacing,
-      $height: props.height,
-      $flex: props.flex,
-      $cursor: props.cursor,
-      $isHoverUnderlining: props.isHoverUnderlining,
-      $device: props.device,
-      $size: 'size' in props ? props.size : undefined,
-      $variant: 'variant' in props ? props.variant : undefined,
+    const cssProps: TypographyCSSProps & Pick<TypographyProps, 'onClick' | 'className' | 'style'> = {
+      $sx: props.sx,
       className: props.className,
       style: props.style,
       onClick: props.onClick ? props.onClick : () => {}
@@ -206,16 +187,11 @@ export const Typography = (props: TypographyProps) => {
   return <TypographyWithRef {...props} />
 }
 
-const TypographyVariantIsAnchor = forwardRef<HTMLElement, TypographyVariantProps & LinkProps>((props, ref) => {
+const TypographySizeIsAnchor = forwardRef<HTMLElement, TypographyProps & LinkProps>((props, ref) => {
   return <TypographyWithRef isAnchor {...props} ref={ref} href={props.href} />
 })
 
-const TypographySizeIsAnchor = forwardRef<HTMLElement, TypographyDataProps & LinkProps>((props, ref) => {
-  return <TypographyWithRef isAnchor {...props} ref={ref} href={props.href} />
-})
-
-export const TypographyLinkVariant = createLink(TypographyVariantIsAnchor)
-export const TypographyLinkSize = createLink(TypographySizeIsAnchor)
+export const TypographyLink = createLink(TypographySizeIsAnchor)
 
 export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
   const [isOverflowing, setIsOverflowing] = useState(false)
@@ -242,5 +218,4 @@ export const TypographyTooltip = memo((props: TypographyTooltipProps) => {
 
 TypographyTooltip.displayName = 'TypographyTooltip'
 TypographyWithRef.displayName = 'TypographyWithRef'
-TypographyVariantIsAnchor.displayName = 'TypographyVariantIsAnchor'
 TypographySizeIsAnchor.displayName = 'TypographySizeIsAnchor'

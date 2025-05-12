@@ -12,7 +12,8 @@ import { AddDollarSign } from '@local/types'
 
 import { TooltipProps } from '../tooltip'
 
-export type TypographyDefaultProps = PropsWithChildren & {
+type TypographyDefaultProps = {
+  weight?: TJeneseiTypographyWeight
   clamp?: number
   device?: TJeneseiDevice
   clampOrient?: CSSProperties['boxOrient']
@@ -25,41 +26,38 @@ export type TypographyDefaultProps = PropsWithChildren & {
   wrap?: CSSProperties['textWrap']
   letterSpacing?: CSSProperties['letterSpacing']
   cursor?: CSSProperties['cursor']
-  style?: CSSProperties
-  className?: string
-  isParagraph?: boolean
-  isAnchor?: boolean
-  href?: string
-  weight?: TJeneseiTypographyWeight
   height?: number
   flex?: string
-  onClick?: () => void
   isHoverUnderlining?: boolean
 }
 
-export type TypographyDataProps = TypographyDefaultProps & {
+type TypographyDataProps = TypographyDefaultProps & {
   size?: number
 }
 
-export type TypographyVariantProps = TypographyDefaultProps & {
+type TypographyVariantProps = TypographyDefaultProps & {
   variant: TJeneseiTypographyHeading
 }
 
-export type TypographyProps = TypographyDataProps | TypographyVariantProps
-export interface addSXTypographyProps {
-  sx?:
-    | ({
-        default: TypographyProps
-      } & {
-        [K in TJeneseiDevice]?: TypographyProps
-      })
-    | ((theme: DefaultTheme) => {
-        default: TypographyProps
-      } & {
-        [K in TJeneseiDevice]?: TypographyProps
-      })
+export type TypographyAllProps = TypographyDataProps | TypographyVariantProps
+
+export type TypographyProps = PropsWithChildren & {
+  onClick?: () => void
+  style?: CSSProperties
+  className?: string
+
+  href?: string
+
+  isParagraph?: boolean
+  isAnchor?: boolean
+
+  sx?: {
+    default: TypographyAllProps
+  } & {
+    [K in TJeneseiDevice]?: TypographyAllProps
+  }
 }
-export type styledAddSXTypographyProps = AddDollarSign<addSXTypographyProps>
+export type styledAddSXTypographyProps = AddDollarSign<Pick<TypographyProps, 'sx'>>
 
 export type TypographyCSSProps = styledAddSXTypographyProps
 
