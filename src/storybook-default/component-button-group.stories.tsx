@@ -23,138 +23,47 @@ const ButtonGroupWrapper: FC<ButtonGroupProps> = props => {
             default: { justifyContent: 'flex-start' }
           },
           children: 'First',
-          icon: {
-            type: 'id',
-            name: 'CallMissed',
-            order: -1
-          },
-          loadingOrder: -2,
-          width: 'auto',
+          icons: [
+            {
+              type: 'id',
+              name: 'CallMissed',
+              order: -1
+            }
+          ],
           type: 'button',
           genre: 'black',
-          size: 'medium',
-          isLoading: true
+          size: 'medium'
         },
         {
           sx: {
             default: { justifyContent: 'space-between' }
           },
           children: 'Third',
-          icon: {
-            type: 'id',
-            name: 'Filter2',
-            order: -1
-          },
-          loadingOrder: 1,
-          width: 'auto',
+          icons: [
+            {
+              type: 'id',
+              name: 'Filter2',
+              order: -1
+            }
+          ],
           type: 'button',
           genre: 'gray',
-          size: 'medium',
-          isLoading: true
+          size: 'medium'
         },
         {
           sx: {
             default: { justifyContent: 'space-between' }
           },
           children: 'Second',
-          icon: {
-            type: 'id',
-            name: 'Graph',
-            order: 1
-          },
-          loadingOrder: 1,
-          width: 'auto',
+          icons: [
+            {
+              type: 'id',
+              name: 'Graph',
+              order: 1
+            }
+          ],
           type: 'button',
           genre: 'blackBorder',
-          size: 'medium',
-          isLoading: true,
-          isIconGroup: true,
-          isOnlyLoadingWithGroup: false
-        },
-
-        {
-          sx: {
-            default: { justifyContent: 'space-between' }
-          },
-          children: 'Third',
-          icon: {
-            type: 'id',
-            name: 'Heart'
-          },
-          width: 'auto',
-          type: 'button',
-          genre: 'greenTransparent',
-          size: 'medium'
-        },
-        {
-          sx: {
-            default: { justifyContent: 'space-between' }
-          },
-          children: 'Third',
-          icon: {
-            type: 'id',
-            name: 'Arrow1'
-          },
-          width: 'auto',
-          type: 'button',
-          genre: 'grayBorder',
-          size: 'medium'
-        },
-        {
-          sx: {
-            default: { justifyContent: 'space-between' }
-          },
-          children: 'Third',
-          icon: {
-            type: 'id',
-            name: 'Folder'
-          },
-          width: 'auto',
-          type: 'button',
-          genre: 'product',
-          size: 'medium'
-        },
-
-        {
-          sx: {
-            default: { justifyContent: 'space-between' }
-          },
-          children: 'Third',
-          icon: {
-            type: 'id',
-            name: 'Folder'
-          },
-          width: 'auto',
-          type: 'button',
-          genre: 'white',
-          size: 'medium'
-        },
-        {
-          sx: {
-            default: { justifyContent: 'space-between' }
-          },
-          children: 'Third',
-          icon: {
-            type: 'id',
-            name: 'Scan'
-          },
-          width: 'auto',
-          type: 'button',
-          genre: 'productBorder',
-          size: 'medium'
-        },
-        {
-          sx: {
-            default: { justifyContent: 'space-between' }
-          },
-          children: 'Third',
-          icon: {
-            type: 'id',
-            name: 'Arrow2'
-          },
-          width: 'auto',
-          type: 'button',
-          genre: 'redTransparent',
           size: 'medium'
         }
       ]}
@@ -172,7 +81,6 @@ export const Horizontal: Story = {
 export const Vertical: Story = {
   render: args => <ButtonGroupWrapper {...args} />,
   args: {
-    position: 'vertical',
-    width: '200px'
+    position: 'vertical'
   }
 }

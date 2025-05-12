@@ -83,17 +83,13 @@ export const ButtonSize = css<StyledDollarButtonProps>`
     ButtonSizeConstructor({
       ...KEY_SIZE_DATA[props.$size],
       isFullSize: props.$isFullSize,
-      $width: props.$width,
-      $flex: props.$flex,
-      $minWidth: props.$minWidth
+      isWidthAsHeight: props.$isWidthAsHeight
     })};
 `
 export const ButtonSizeConstructor = (
   props: IJeneseiThemeSize & {
     isFullSize?: boolean
-    $width?: string
-    $flex?: string
-    $minWidth?: string
+    isWidthAsHeight?: boolean
   }
 ) => css`
   height: ${props.height}px;
@@ -107,27 +103,15 @@ export const ButtonSizeConstructor = (
     props.isFullSize &&
     css`
       height: 100%;
+      width: 100%;
       border-radius: 0px;
     `};
-  ${() =>
-    props.$flex &&
-    css`
-      flex: ${props.$flex};
-    `};
-  ${props.$width === 'asHeight'
-    ? css`
-        width: ${props.height}px;
-        min-width: ${props.height}px;
-        padding: 0px;
-      `
-    : css`
-        width: ${props.$width ?? 'max-content'};
-        min-width: ${props.$width ? `${props.$width}` : 'max-content'};
-      `};
-  ${props.$minWidth === 'asHeight' &&
+  ${props.isWidthAsHeight &&
   css`
+    width: ${props.height}px;
     min-width: ${props.height}px;
-  `}
+    padding: 0px;
+  `};
 `
 /****************************************** Border *************************************************/
 const ButtonBorder = css`
@@ -139,7 +123,6 @@ const ButtonFlex = css<StyledDollarButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${addSX};
 `
 /****************************************** Styled *************************************************/
 export const StyledButton = styled.button<StyledDollarButtonProps>`
@@ -161,4 +144,5 @@ export const StyledButton = styled.button<StyledDollarButtonProps>`
   ${addOutline};
   ${addCustomFont};
   ${ButtonFlex};
+  ${addSX};
 `

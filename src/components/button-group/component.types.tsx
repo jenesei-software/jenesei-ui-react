@@ -1,11 +1,11 @@
 import { ButtonProps } from '@local/components/button'
+import { addSXProps } from '@local/styles/sx'
 import { AddDollarSign } from '@local/types'
 
-export interface ButtonGroupProps {
+export type ButtonGroupProps = {
   value: ButtonProps[]
   className?: string
   position: 'horizontal' | 'vertical'
-  width?: ButtonProps['width']
-}
+} & addSXProps
 
-export type StyledButtonGroupProps = AddDollarSign<Pick<ButtonGroupProps, 'position'>>
+export type StyledButtonGroupProps = AddDollarSign<Pick<ButtonGroupProps, 'position'>> & AddDollarSign<addSXProps>

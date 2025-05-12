@@ -13,36 +13,33 @@ type IconPropsByType<T extends keyof IconTypeMap> = {
   size?: TJeneseiThemeSize
   order?: LibraryIconItemProps['order']
   turn?: LibraryIconItemProps['turn']
+  isHidden?: boolean
 }
 
-export type ButtonProps = PropsWithChildren & {
-  isIconGroup?: boolean
-
+type ButtonPropsDefault = PropsWithChildren & {
   size: TJeneseiThemeSize
-
-  iconGroupOrder?: number
+  genre: TButtonGenre
 
   id?: string
 
   className?: string
 
-  genre: TButtonGenre
-
-  icon?: IconPropsByType<'id'> | IconPropsByType<'checkbox'> | IconPropsByType<'loading'> | IconPropsByType<'realebail'>
+  icons?: (
+    | IconPropsByType<'id'>
+    | IconPropsByType<'checkbox'>
+    | IconPropsByType<'loading'>
+    | IconPropsByType<'realebail'>
+  )[]
 
   isDisabled?: boolean
 
   isHidden?: boolean
 
-  isOnlyLoading?: boolean
+  isOnlyIcon?: boolean
 
-  isOnlyLoadingWithGroup?: boolean
+  isWidthAsHeight?: boolean
 
   isRadius?: boolean
-
-  isLoading?: boolean
-
-  loadingOrder?: LibraryIconItemProps['order']
 
   isHiddenBorder?: boolean
 
@@ -51,12 +48,6 @@ export type ButtonProps = PropsWithChildren & {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 
   type?: 'button' | 'submit' | 'reset'
-
-  width?: string | 'asHeight'
-
-  minWidth?: string | 'asHeight'
-
-  flex?: string
 
   customFontFamily?: TJeneseiFontFamily
 
@@ -67,27 +58,34 @@ export type ButtonProps = PropsWithChildren & {
   isFullSize?: boolean
 } & addSXProps
 
+export type ButtonPropsStandard = ButtonPropsDefault & {
+  isIconGroup?: false
+}
+export type ButtonPropsIconGroup = ButtonPropsDefault & {
+  isIconGroup?: true
+  iconGroupOrder?: number
+}
+
+export type ButtonProps = ButtonPropsStandard | ButtonPropsIconGroup
 export type StyledDollarButtonProps = AddDollarSign<
   Pick<
     ButtonProps,
     | 'genre'
     | 'isDisabled'
     | 'isHidden'
+    | 'isWidthAsHeight'
     | 'isRadius'
     | 'isHiddenBorder'
     | 'isPlaystationEffect'
-    | 'width'
-    | 'flex'
     | 'size'
     | 'customFontFamily'
     | 'customFontSize'
     | 'customFontWeight'
     | 'isFullSize'
-    | 'minWidth'
   >
 > &
   AddDollarSign<addSXProps>
 
 export type StyledDollarButtonIconsWrapperProps = AddDollarSign<
-  Pick<ButtonProps, 'isIconGroup' | 'size' | 'iconGroupOrder'>
+  Pick<ButtonProps, 'isIconGroup' | 'size'> & Pick<ButtonPropsIconGroup, 'iconGroupOrder'>
 >

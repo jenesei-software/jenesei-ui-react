@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useMemo } from 'react'
 import { useTheme } from 'styled-components'
 
 import {
@@ -15,48 +15,55 @@ import { ButtonProps, StyledButton, StyledButtonIconsWrapper } from '.'
 export const Button: FC<ButtonProps> = props => {
   const theme = useTheme()
 
-  const LoadingComponent = (
-    <Icon size={props.icon?.size ?? props.size} type="loading" name="Line" order={props.loadingOrder} />
+  const iconComponents = useMemo(
+    () =>
+      props.icons?.map((icon, index) =>
+        icon?.type === 'id' ? (
+          <Icon
+            key={index}
+            name={icon?.name as TLibraryIconIdNameString}
+            type="id"
+            size={icon?.size ?? props.size}
+            turn={icon.turn}
+            order={icon.order}
+            sx={{
+              default: {}
+            }}
+          />
+        ) : icon?.type === 'checkbox' ? (
+          <Icon
+            key={index}
+            name={icon?.name as TLibraryIconCheckboxNameString}
+            type="checkbox"
+            size={icon?.size ?? props.size}
+            turn={icon.turn}
+            order={icon.order}
+          />
+        ) : icon?.type === 'loading' ? (
+          <Icon
+            key={index}
+            name={icon?.name as TLibraryIconLoadingNameString}
+            type="loading"
+            size={icon?.size ?? props.size}
+            turn={icon.turn}
+            order={icon.order}
+          />
+        ) : icon?.type === 'realebail' ? (
+          <Icon
+            key={index}
+            name={icon?.name as TLibraryIcoRealEbailNameNameString}
+            type="realebail"
+            size={icon?.size ?? props.size}
+            turn={icon.turn}
+            order={icon.order}
+          />
+        ) : null
+      ),
+    [props.icons, props.size]
   )
 
-  const IconComponent =
-    props.icon &&
-    (props.icon?.type === 'id' ? (
-      <Icon
-        name={props.icon?.name as TLibraryIconIdNameString}
-        type="id"
-        size={props.icon?.size ?? props.size}
-        turn={props.icon.turn}
-        order={props.icon.order}
-      />
-    ) : props.icon?.type === 'checkbox' ? (
-      <Icon
-        name={props.icon?.name as TLibraryIconCheckboxNameString}
-        type="checkbox"
-        size={props.icon?.size ?? props.size}
-        turn={props.icon.turn}
-        order={props.icon.order}
-      />
-    ) : props.icon?.type === 'loading' ? (
-      <Icon
-        name={props.icon?.name as TLibraryIconLoadingNameString}
-        type="loading"
-        size={props.icon?.size ?? props.size}
-        turn={props.icon.turn}
-        order={props.icon.order}
-      />
-    ) : props.icon?.type === 'realebail' ? (
-      <Icon
-        name={props.icon?.name as TLibraryIcoRealEbailNameNameString}
-        type="realebail"
-        size={props.icon?.size ?? props.size}
-        turn={props.icon.turn}
-        order={props.icon.order}
-      />
-    ) : null)
-
   const handleClick: ButtonProps['onClick'] = event => {
-    if (!props.isLoading && !props.isDisabled && props.onClick) {
+    if (!props.isDisabled && props.onClick) {
       props.onClick(event)
     }
   }
@@ -67,11 +74,9 @@ export const Button: FC<ButtonProps> = props => {
       tabIndex={0}
       $isFullSize={props.isFullSize}
       $genre={props.genre}
-      $width={props.width}
-      $minWidth={props.minWidth}
-      $flex={props.flex}
       $size={props.size}
       $isDisabled={props.isDisabled}
+      $isWidthAsHeight={props.isWidthAsHeight}
       $isRadius={props.isRadius}
       $isHidden={props.isHidden}
       $isPlaystationEffect={props.isPlaystationEffect}
@@ -90,34 +95,16 @@ export const Button: FC<ButtonProps> = props => {
         isDisabled={props.isDisabled}
         isHidden={props.isHidden}
       />
-      {props.isOnlyLoading ? (
-        props.isLoading ? (
-          LoadingComponent
-        ) : (
-          <>
-            <div style={{ order: 0, display: 'contents' }}>{props.children && props.children}</div>
-            {IconComponent}
-          </>
-        )
-      ) : (
-        <>
-          <div style={{ order: 0, display: 'contents' }}>{props.children && props.children}</div>
-          <StyledButtonIconsWrapper
-            $size={props.size}
-            $isIconGroup={props.isIconGroup}
-            $iconGroupOrder={props.iconGroupOrder}
-          >
-            {props.isOnlyLoadingWithGroup ? (
-              <>{props.isLoading && LoadingComponent}</>
-            ) : (
-              <>
-                {props.isLoading && LoadingComponent}
-                {IconComponent}
-              </>
-            )}
-          </StyledButtonIconsWrapper>
-        </>
-      )}
+      <>
+        {!props.isOnlyIcon && <div style={{ order: 0, display: 'contents' }}>{props.children && props.children}</div>}
+        <StyledButtonIconsWrapper
+          $size={props.size}
+          $isIconGroup={props.isIconGroup}
+          $iconGroupOrder={'iconGroupOrder' in props ? props.iconGroupOrder : undefined}
+        >
+          {iconComponents}
+        </StyledButtonIconsWrapper>
+      </>
     </StyledButton>
   )
 }

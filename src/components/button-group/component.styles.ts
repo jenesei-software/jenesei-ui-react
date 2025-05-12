@@ -1,5 +1,7 @@
 import { css, styled } from 'styled-components'
 
+import { addSX } from '@local/styles/sx'
+
 import { StyledButtonGroupProps } from '.'
 
 /****************************************** Position *************************************************/
@@ -8,8 +10,10 @@ const ButtonGroupWrapperPositionHorizontal = css`
   flex-direction: row;
   flex-wrap: wrap;
   align-content: flex-start;
+  justify-content: space-between;
   & #jenesei-button {
     &:not(:only-child) {
+      flex-grow: 1;
       &:first-child {
         border-bottom-right-radius: 0;
         border-top-right-radius: 0;
@@ -54,5 +58,6 @@ export const ButtonGroupWrapper = styled.div<StyledButtonGroupProps>`
     }
   }
   ${props =>
-    props.$position === 'horizontal' ? ButtonGroupWrapperPositionHorizontal : ButtonGroupWrapperPositionVertical}
+    props.$position === 'horizontal' ? ButtonGroupWrapperPositionHorizontal : ButtonGroupWrapperPositionVertical};
+  ${addSX};
 `
