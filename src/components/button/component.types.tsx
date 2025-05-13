@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react'
 
 import { IconTypeMap, LibraryIconItemProps } from '@local/components/icon'
 import { addSXProps } from '@local/styles/sx'
-import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
+import { TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export type TButtonGenre = keyof TJeneseiThemeGenre
@@ -72,9 +72,6 @@ export type StyledDollarButtonProps = AddDollarSign<
     | 'isHiddenBorder'
     | 'isPlaystationEffect'
     | 'size'
-    | 'customFontFamily'
-    | 'customFontSize'
-    | 'customFontWeight'
     | 'isFullSize'
   >
 > &

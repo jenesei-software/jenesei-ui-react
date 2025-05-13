@@ -74,15 +74,17 @@ export function CustomZoomControl() {
       <Button
         isHiddenBorder
         genre="realebail-product"
-        width="asHeight"
+        isWidthAsHeight
         isHidden={!canZoomIn}
         isDisabled={!canZoomIn}
         size="small"
-        icon={{
-          name: 'Plus',
-          type: 'id',
-          size: 'medium'
-        }}
+        icons={[
+          {
+            name: 'Plus',
+            type: 'id',
+            size: 'medium'
+          }
+        ]}
         sx={{
           default: {
             pointerEvents: 'all'
@@ -93,15 +95,17 @@ export function CustomZoomControl() {
       <Button
         isHiddenBorder
         genre="realebail-product"
-        width="asHeight"
         isHidden={!canZoomOut}
         isDisabled={!canZoomOut}
+        isWidthAsHeight
         size="small"
-        icon={{
-          name: 'Minus',
-          type: 'id',
-          size: 'medium'
-        }}
+        icons={[
+          {
+            name: 'Minus',
+            type: 'id',
+            size: 'medium'
+          }
+        ]}
         sx={{
           default: {
             pointerEvents: 'all'

@@ -8,10 +8,11 @@ import {
 } from 'react'
 import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'react-number-format'
 
+import { addNewErrorProps } from '@local/styles/error'
 import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
-interface InputDefaultProps {
+type InputDefaultProps = addNewErrorProps & {
   name?: string
 
   id?: string
@@ -20,13 +21,7 @@ interface InputDefaultProps {
 
   defaultValue?: string
 
-  errorMessage?: string
-
-  isError?: boolean
-
   isNotShowHoverStyle?: boolean
-
-  isErrorAbsolute?: boolean
 
   autocomplete?: HTMLInputAutoCompleteAttribute
 
@@ -38,7 +33,9 @@ interface InputDefaultProps {
 
   tabIndex?: number
 
-  width?: string | 'asHeight'
+  width?: string
+
+  isWidthAsHeight?: boolean
 
   isDisabled?: boolean
 
@@ -130,7 +127,7 @@ export type StyledInputProps = AddDollarSign<
     InputProps,
     | 'genre'
     | 'size'
-    | 'isError'
+    | 'error'
     | 'isLoading'
     | 'isInputEffect'
     | 'isDisabled'
@@ -141,4 +138,6 @@ export type StyledInputProps = AddDollarSign<
   >
 >
 
-export type StyledInputWrapperProps = AddDollarSign<Pick<InputProps, 'isDisabled' | 'isInputEffect' | 'width' | 'size'>>
+export type StyledInputWrapperProps = AddDollarSign<
+  Pick<InputProps, 'isDisabled' | 'isInputEffect' | 'width' | 'size' | 'isWidthAsHeight'>
+>

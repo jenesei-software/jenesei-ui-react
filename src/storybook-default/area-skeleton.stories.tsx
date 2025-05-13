@@ -38,7 +38,15 @@ const SkeletonWrapper: FC<SkeletonProps> = props => {
           }
         })}
       >
-        <Typography variant="h7">One</Typography>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h7'
+            }
+          }}
+        >
+          One
+        </Typography>
       </Stack>
     </SkeletonComponent>
   )
@@ -88,7 +96,15 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
               }
             })}
           >
-            <Typography variant="h7">One</Typography>
+            <Typography
+              sx={{
+                default: {
+                  variant: 'h7'
+                }
+              }}
+            >
+              One
+            </Typography>
           </Stack>
         </SkeletonComponent>
         <Stack
@@ -121,7 +137,15 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
                 }
               })}
             >
-              <Typography variant="h7">One</Typography>
+              <Typography
+                sx={{
+                  default: {
+                    variant: 'h7'
+                  }
+                }}
+              >
+                One
+              </Typography>
             </Stack>
           </SkeletonComponent>
           <SkeletonComponent
@@ -146,7 +170,15 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
                 }
               })}
             >
-              <Typography variant="h7">One</Typography>
+              <Typography
+                sx={{
+                  default: {
+                    variant: 'h7'
+                  }
+                }}
+              >
+                One
+              </Typography>
             </Stack>
           </SkeletonComponent>
         </Stack>
@@ -180,7 +212,15 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
               }
             })}
           >
-            <Typography variant="h7">One</Typography>
+            <Typography
+              sx={{
+                default: {
+                  variant: 'h7'
+                }
+              }}
+            >
+              One
+            </Typography>
           </Stack>
         </SkeletonComponent>
         <Stack
@@ -213,7 +253,15 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
                 }
               })}
             >
-              <Typography variant="h7">One</Typography>
+              <Typography
+                sx={{
+                  default: {
+                    variant: 'h7'
+                  }
+                }}
+              >
+                One
+              </Typography>
             </Stack>
           </SkeletonComponent>
           <SkeletonComponent
@@ -238,7 +286,15 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
                 }
               })}
             >
-              <Typography variant="h7">One</Typography>
+              <Typography
+                sx={{
+                  default: {
+                    variant: 'h7'
+                  }
+                }}
+              >
+                One
+              </Typography>
             </Stack>
           </SkeletonComponent>
         </Stack>

@@ -79,17 +79,19 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
               <Button
                 sx={{
                   default: {
-                    justifyContent: 'space-between'
+                    justifyContent: 'space-between',
+                    width: '100%'
                   }
                 }}
                 genre={'productBorder'}
                 size={'medium'}
-                width="100%"
-                icon={{
-                  type: 'id',
-                  name: 'Folder',
-                  turn: expandedTwo ? 180 : 0
-                }}
+                icons={[
+                  {
+                    type: 'id',
+                    name: 'Folder',
+                    turn: expandedTwo ? 180 : 0
+                  }
+                ]}
               >
                 Show more
               </Button>
@@ -107,36 +109,36 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                 <Button
                   sx={{
                     default: {
-                      justifyContent: 'flex-start'
+                      justifyContent: 'flex-start',
+                      width: '100%'
                     }
                   }}
                   genre={'gray'}
                   size={'medium'}
-                  width="100%"
                 >
                   First
                 </Button>
                 <Button
                   sx={{
                     default: {
-                      justifyContent: 'flex-start'
+                      justifyContent: 'flex-start',
+                      width: '100%'
                     }
                   }}
                   genre={'black'}
                   size={'medium'}
-                  width="100%"
                 >
                   Second
                 </Button>
                 <Button
                   sx={{
                     default: {
-                      justifyContent: 'flex-start'
+                      justifyContent: 'flex-start',
+                      width: '100%'
                     }
                   }}
                   genre={'greenTransparent'}
                   size={'medium'}
-                  width="100%"
                 >
                   Third
                 </Button>
@@ -159,12 +161,12 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
               <Button
                 sx={{
                   default: {
-                    justifyContent: 'flex-start'
+                    justifyContent: 'flex-start',
+                    width: '100%'
                   }
                 }}
                 genre={'grayBorder'}
                 size={'medium'}
-                width="100%"
               >
                 Show more more
               </Button>
@@ -182,36 +184,36 @@ const MultiLevelAccordionWrapper: FC<AccordionProps> = props => {
                 <Button
                   sx={{
                     default: {
-                      justifyContent: 'flex-start'
+                      justifyContent: 'flex-start',
+                      width: '100%'
                     }
                   }}
                   genre={'gray'}
                   size={'medium'}
-                  width="100%"
                 >
                   First
                 </Button>
                 <Button
                   sx={{
                     default: {
-                      justifyContent: 'flex-start'
+                      justifyContent: 'flex-start',
+                      width: '100%'
                     }
                   }}
                   genre={'black'}
                   size={'medium'}
-                  width="100%"
                 >
                   Second
                 </Button>
                 <Button
                   sx={{
                     default: {
-                      justifyContent: 'flex-start'
+                      justifyContent: 'flex-start',
+                      width: '100%'
                     }
                   }}
                   genre={'greenTransparent'}
                   size={'medium'}
-                  width="100%"
                 >
                   Third
                 </Button>
@@ -269,36 +271,36 @@ const OneLevelAccordionWrapper: FC<AccordionProps> = props => {
           <Button
             sx={{
               default: {
-                justifyContent: 'flex-start'
+                justifyContent: 'flex-start',
+                width: '100%'
               }
             }}
             genre={'gray'}
             size={'medium'}
-            width="100%"
           >
             First
           </Button>
           <Button
             sx={{
               default: {
-                justifyContent: 'flex-start'
+                justifyContent: 'flex-start',
+                width: '100%'
               }
             }}
             genre={'black'}
             size={'medium'}
-            width="100%"
           >
             Second
           </Button>
           <Button
             sx={{
               default: {
-                justifyContent: 'flex-start'
+                justifyContent: 'flex-start',
+                width: '100%'
               }
             }}
             genre={'greenTransparent'}
             size={'medium'}
-            width="100%"
           >
             Third
           </Button>
@@ -322,7 +324,14 @@ export const OneLevel: Story = {
           }
         }}
       >
-        <Typography isHoverUnderlining variant="h4">
+        <Typography
+          sx={{
+            default: {
+              variant: 'h4',
+              isHoverUnderlining: true
+            }
+          }}
+        >
           Show
         </Typography>
       </Stack>
@@ -353,7 +362,14 @@ export const MultiLevel: Story = {
           }
         }}
       >
-        <Typography isHoverUnderlining variant="h4">
+        <Typography
+          sx={{
+            default: {
+              variant: 'h4',
+              isHoverUnderlining: true
+            }
+          }}
+        >
           MultiLevel
         </Typography>
       </Stack>

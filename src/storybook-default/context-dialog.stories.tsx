@@ -28,7 +28,15 @@ const ProviderDialogWrapperDouble: FC = () => {
       content: () => {
         return (
           <Stack>
-            <Typography variant="h6">test</Typography>
+            <Typography
+              sx={{
+                default: {
+                  variant: 'h6'
+                }
+              }}
+            >
+              test
+            </Typography>
           </Stack>
         )
       }

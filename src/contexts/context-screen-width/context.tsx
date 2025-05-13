@@ -7,15 +7,27 @@ export const ScreenWidthContext = createContext<ScreenWidthContextProps | null>(
 
 export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = props => {
   const theme = useTheme()
-  const [screenWidth, setScreenWidth] = useState<Screens | 'other'>('other')
+  const [screenWidth, setScreenWidth] = useState<Screens>('default')
 
-  const isTabletMobile = useMemo(() => screenWidth === 'mobile' || screenWidth === 'tablet', [screenWidth])
+  const screens: ScreenWidthContextProps['screens'] = useMemo(() => {
+    const allSizes = Object.entries(theme.screens).map(([key]) => {
+      return {
+        isScreen: screenWidth === key,
+        value: key as Screens
+      }
+    })
+    return allSizes
+  }, [screenWidth, theme.screens])
 
-  const isTablet = useMemo(() => screenWidth === 'tablet', [screenWidth])
-
-  const isMobile = useMemo(() => screenWidth === 'mobile', [screenWidth])
-
-  const isOther = useMemo(() => screenWidth === 'other', [screenWidth])
+  const screenActual: ScreenWidthContextProps['screenActual'] = useMemo(() => {
+    const find = screens.find(item => item.isScreen)
+    return (
+      find ?? {
+        isScreen: true,
+        value: 'default'
+      }
+    )
+  }, [screens])
 
   useEffect(() => {
     const handleResize = () => {
@@ -23,9 +35,9 @@ export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = props => {
       const screenSizes = Object.entries(theme.screens).sort(
         ([, a], [, b]) => +(a as { width: string }).width.slice(0, -2) - +(b as { width: string }).width.slice(0, -2)
       )
-      const screenSize: Screens | 'other' =
+      const screenSize: Screens =
         (screenSizes.find(([, size]) => width <= +(size as { width: string }).width.slice(0, -2))?.[0] as Screens) ||
-        'other'
+        'default'
       setScreenWidth(screenSize)
     }
 
@@ -38,10 +50,8 @@ export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = props => {
   return (
     <ScreenWidthContext.Provider
       value={{
-        isTabletMobile,
-        isTablet,
-        isMobile,
-        isOther,
+        screens,
+        screenActual,
         screenWidth
       }}
     >

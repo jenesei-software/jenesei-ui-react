@@ -158,7 +158,17 @@ export const Slider: FC<SliderProps> = props => {
                 }}
                 alt={(params?.images ?? [])?.[params?.activeImageIndex ?? 0]?.imageSrc}
                 src={(params?.images ?? [])?.[params?.activeImageIndex ?? 0]?.imageSrc}
-                fallback={<Typography variant="h6">{props.locales.failedToLoad}</Typography>}
+                fallback={
+                  <Typography
+                    sx={{
+                      default: {
+                        variant: 'h6'
+                      }
+                    }}
+                  >
+                    {props.locales.failedToLoad}
+                  </Typography>
+                }
               />
               {(params?.images ?? [])?.[params?.activeImageIndex ?? 0]?.children}
             </SliderImage>
@@ -175,11 +185,13 @@ export const Slider: FC<SliderProps> = props => {
             }}
             genre="realebail-white"
             size="small"
-            icon={{
-              type: 'id',
-              name: 'Arrow4'
-            }}
-            width="asHeight"
+            icons={[
+              {
+                type: 'id',
+                name: 'Arrow4'
+              }
+            ]}
+            isWidthAsHeight
             isHiddenBorder
             isRadius
             onClick={() => remove?.()}
@@ -199,12 +211,14 @@ export const Slider: FC<SliderProps> = props => {
                 <Button
                   genre="realebail-white"
                   size="small"
-                  icon={{
-                    type: 'id',
-                    name: 'Arrow4',
-                    turn: 90
-                  }}
-                  width="asHeight"
+                  icons={[
+                    {
+                      type: 'id',
+                      name: 'Arrow4',
+                      turn: 90
+                    }
+                  ]}
+                  isWidthAsHeight
                   isHiddenBorder
                   isPlaystationEffect
                   isRadius
@@ -213,12 +227,14 @@ export const Slider: FC<SliderProps> = props => {
                 <Button
                   genre="realebail-white"
                   size="small"
-                  icon={{
-                    type: 'id',
-                    name: 'Arrow4',
-                    turn: -90
-                  }}
-                  width="asHeight"
+                  icons={[
+                    {
+                      type: 'id',
+                      name: 'Arrow4',
+                      turn: -90
+                    }
+                  ]}
+                  isWidthAsHeight
                   isHiddenBorder
                   isPlaystationEffect
                   isRadius
@@ -347,7 +363,17 @@ export const Slider: FC<SliderProps> = props => {
                 }}
                 alt={images[activeImageIndex]?.imageSrc}
                 src={images[activeImageIndex]?.imageSrc}
-                fallback={<Typography variant="h6">{props.locales.failedToLoad}</Typography>}
+                fallback={
+                  <Typography
+                    sx={{
+                      default: {
+                        variant: 'h6'
+                      }
+                    }}
+                  >
+                    {props.locales.failedToLoad}
+                  </Typography>
+                }
               />
               {images[activeImageIndex]?.children}
             </SliderImage>
@@ -367,12 +393,14 @@ export const Slider: FC<SliderProps> = props => {
                 }}
                 genre="realebail-white"
                 size="small"
-                icon={{
-                  type: 'id',
-                  name: 'Arrow4',
-                  turn: 90
-                }}
-                width="asHeight"
+                icons={[
+                  {
+                    type: 'id',
+                    name: 'Arrow4',
+                    turn: 90
+                  }
+                ]}
+                isWidthAsHeight
                 isHiddenBorder
                 isRadius
                 onClick={() => swipeToImage(-1)}
@@ -388,12 +416,14 @@ export const Slider: FC<SliderProps> = props => {
                 }}
                 genre="realebail-white"
                 size="small"
-                icon={{
-                  type: 'id',
-                  name: 'Arrow4',
-                  turn: -90
-                }}
-                width="asHeight"
+                icons={[
+                  {
+                    type: 'id',
+                    name: 'Arrow4',
+                    turn: -90
+                  }
+                ]}
+                isWidthAsHeight
                 isHiddenBorder
                 isRadius
                 onClick={() => swipeToImage(1)}
@@ -434,11 +464,13 @@ export const Slider: FC<SliderProps> = props => {
             }}
             genre="realebail-white"
             size="small"
-            icon={{
-              type: 'id',
-              name: 'Activity'
-            }}
-            width="asHeight"
+            icons={[
+              {
+                type: 'id',
+                name: 'Activity'
+              }
+            ]}
+            isWidthAsHeight
             isHiddenBorder
             isRadius
             onClick={() => handleAdd()}
@@ -458,7 +490,15 @@ export const Slider: FC<SliderProps> = props => {
             }
           }}
         >
-          <Typography variant="h6">{props.locales.noImagesAvailable}</Typography>
+          <Typography
+            sx={{
+              default: {
+                variant: 'h6'
+              }
+            }}
+          >
+            {props.locales.noImagesAvailable}
+          </Typography>
         </Stack>
       )}
     </StackMotion>

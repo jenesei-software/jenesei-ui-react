@@ -1,5 +1,4 @@
 import { CSSProperties, PropsWithChildren } from 'react'
-import { DefaultTheme } from 'styled-components'
 
 import {
   JeneseiPaletteKeys,
@@ -51,17 +50,16 @@ export type TypographyProps = PropsWithChildren & {
   isParagraph?: boolean
   isAnchor?: boolean
 
-  sx?: {
+  sx: {
     default: TypographyAllProps
   } & {
     [K in TJeneseiDevice]?: TypographyAllProps
   }
 }
-export type styledAddSXTypographyProps = AddDollarSign<Pick<TypographyProps, 'sx'>>
 
-export type TypographyCSSProps = styledAddSXTypographyProps
+export type TypographyCSSProps = AddDollarSign<Pick<TypographyProps, 'sx'>>
 
 export type TypographyTooltipProps = {
-  typography: styledAddSXTypographyProps
+  typography: TypographyProps
   tooltip: Omit<TooltipProps, 'children' | 'content'>
 } & PropsWithChildren

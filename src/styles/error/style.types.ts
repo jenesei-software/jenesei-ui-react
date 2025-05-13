@@ -9,10 +9,14 @@ export type ErrorMessageProps = {
 
   isErrorAbsolute?: boolean
 
-  size: TJeneseiThemeSize
+  size?: TJeneseiThemeSize
 
   width?: string
 }
 export interface addErrorProps {
   $isError?: boolean
 }
+export interface addNewErrorProps {
+  error?: ErrorMessageProps
+}
+export type addNewErrorStylesProps = AddDollarSign<addNewErrorProps>

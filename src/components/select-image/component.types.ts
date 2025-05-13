@@ -1,3 +1,4 @@
+import { addNewErrorProps } from '@local/styles/error'
 import { TJeneseiThemeGenreSelectImage, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
@@ -23,7 +24,7 @@ export type SelectImageProps = {
   genre: TSelectImageGenre
   size: TJeneseiThemeSize
   id?: string
-  width?: string | 'asHeight'
+  width?: string
   onChange?: (images: SelectImageItemProps[]) => void
   imageSettings: {
     maxSize: number
@@ -33,6 +34,6 @@ export type SelectImageProps = {
   }
   defaultImages: SelectImageItemProps[]
   images: SelectImageItemProps[]
-} & Pick<InputStandardProps, 'isError' | 'errorMessage' | 'isErrorAbsolute'>
+} & addNewErrorProps
 
-export type SelectImageWrapperProps = AddDollarSign<Pick<SelectImageProps, 'size' | 'width' | 'isError' | 'genre'>>
+export type SelectImageWrapperProps = AddDollarSign<Pick<SelectImageProps, 'size' | 'width' | 'error' | 'genre'>>

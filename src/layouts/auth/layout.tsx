@@ -16,11 +16,11 @@ import {
 } from '.'
 
 export const AuthLayout: FC<AuthLayoutProps> = props => {
-  const { isTablet, isMobile } = useScreenWidth()
+  const { screenActual } = useScreenWidth()
 
   return (
     <AnimatePresence>
-      {isMobile || isTablet ? (
+      {screenActual.value !== 'default' ? (
         <AuthLayoutWrapper
           key="1"
           initial={{ gridTemplateRows: '100% 0%', gridTemplateColumns: '100%' }}
@@ -221,10 +221,26 @@ export const AuthLayout: FC<AuthLayoutProps> = props => {
               </defs>
             </AuthLayoutWrapperBackgroundSVG>
             <AuthLayoutWrapperBackgroundText>
-              <Typography variant="h2" weight={700} color="whiteStandard">
+              <Typography
+                sx={{
+                  default: {
+                    variant: 'h2',
+                    weight: 700,
+                    color: 'whiteStandard'
+                  }
+                }}
+              >
                 Universal account
               </Typography>
-              <Typography variant="h5" weight={400} color="whiteStandard">
+              <Typography
+                sx={{
+                  default: {
+                    variant: 'h5',
+                    weight: 400,
+                    color: 'whiteStandard'
+                  }
+                }}
+              >
                 Safety is our advantage
               </Typography>
             </AuthLayoutWrapperBackgroundText>

@@ -1,10 +1,12 @@
 import { CSSProperties, PropsWithChildren } from 'react'
 
 import { LibraryIconItemProps, TLibraryIconCheckboxNameString } from '@local/components/icon'
-import { TJeneseiFontFamily, TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
+import { addNewErrorProps, addNewErrorStylesProps } from '@local/styles/error'
+import { addSXProps } from '@local/styles/sx'
+import { TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
-export interface CheckboxProps extends PropsWithChildren {
+export type CheckboxProps = PropsWithChildren & {
   checked?: boolean
 
   genre: TCheckboxGenre
@@ -23,46 +25,26 @@ export interface CheckboxProps extends PropsWithChildren {
 
   iconOrder?: LibraryIconItemProps['order']
 
-  isError?: boolean
-
-  errorMessage?: string
-
-  isErrorAbsolute?: boolean
-
   sizeIcon?: TJeneseiThemeSize
 
   onChange?: (checked: boolean) => void
 
-  width?: string | 'asHeight'
+  isWidthAsHeight?: boolean
 
   size: TJeneseiThemeSize
 
-  customFontFamily?: TJeneseiFontFamily
-
-  customFontSize?: number | string
-
-  customFontWeight?: number
-
   style?: CSSProperties
-}
+} & addSXProps &
+  addNewErrorProps
 
 export type StyledCheckboxProps = AddDollarSign<
   Pick<
     CheckboxProps,
-    | 'checked'
-    | 'genre'
-    | 'view'
-    | 'width'
-    | 'size'
-    | 'isError'
-    | 'isDisabled'
-    | 'isNotBackground'
-    | 'isHiddenBorder'
-    | 'customFontFamily'
-    | 'customFontSize'
-    | 'customFontWeight'
+    'checked' | 'genre' | 'view' | 'isWidthAsHeight' | 'size' | 'isDisabled' | 'isNotBackground' | 'isHiddenBorder'
   >
->
+> &
+  AddDollarSign<addSXProps> &
+  addNewErrorStylesProps
 
 export type TCheckboxGenre = keyof TJeneseiThemeGenre
 

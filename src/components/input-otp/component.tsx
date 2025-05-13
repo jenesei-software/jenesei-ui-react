@@ -125,7 +125,7 @@ export const InputOTP = (props: InputOTPProps) => {
   return (
     <>
       <InputOTPWrapper
-        $isError={props.isError}
+        $error={props.error}
         $size={props.size}
         id={props.id}
         ref={wrapperRef}
@@ -140,7 +140,7 @@ export const InputOTP = (props: InputOTPProps) => {
       >
         {otp.map((digit, index) => (
           <Input
-            width="asHeight"
+            isWidthAsHeight
             key={index}
             tabIndex={index + 1}
             ref={el => {
@@ -160,13 +160,7 @@ export const InputOTP = (props: InputOTPProps) => {
           />
         ))}
       </InputOTPWrapper>
-      <ErrorMessage
-        isError={props.isError}
-        errorMessage={props.errorMessage}
-        size={props.size}
-        width={props.width}
-        isErrorAbsolute={props.isErrorAbsolute}
-      />
+      {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
     </>
   )
 }

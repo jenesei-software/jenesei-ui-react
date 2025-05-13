@@ -47,12 +47,6 @@ jobs:
           NEW_VERSION=$(node -p "require('./package.json').version")
           echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
 
-      - name: Run README update script
-        run: |
-          node update-readme.js
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Commit and push changes
         run: |
           git add package.json package-lock.json README.md

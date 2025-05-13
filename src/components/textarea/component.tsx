@@ -80,7 +80,7 @@ export const TextArea = (props: TextAreaProps) => {
         <StyledTextArea
           ref={textareaRef}
           $isResize={props.isResize}
-          $isError={props.isError}
+          $error={props.error}
           $isTextAreaEffect={props.isTextAreaEffect}
           $isLoading={props.isLoading}
           $genre={props.genre}
@@ -108,13 +108,7 @@ export const TextArea = (props: TextAreaProps) => {
           />
         )} */}
       </StyledTextAreaWrapper>
-      <ErrorMessage
-        isError={props.isError}
-        errorMessage={props.errorMessage}
-        size={props.size}
-        width={props.width}
-        isErrorAbsolute={props.isErrorAbsolute}
-      />
+      {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
     </>
   )
 }

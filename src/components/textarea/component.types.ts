@@ -1,9 +1,10 @@
 import { FocusEventHandler, KeyboardEventHandler } from 'react'
 
+import { addNewErrorProps } from '@local/styles/error'
 import { TJeneseiThemeGenreTextArea, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
-export interface TextAreaProps {
+export type TextAreaProps = addNewErrorProps & {
   name?: string
 
   id?: string
@@ -11,10 +12,6 @@ export interface TextAreaProps {
   className?: string
 
   defaultValue?: string
-
-  errorMessage?: string
-
-  isErrorAbsolute?: boolean
 
   isAllowEmptyFormatting?: boolean
 
@@ -29,8 +26,6 @@ export interface TextAreaProps {
   width?: string
 
   isDisabled?: boolean
-
-  isError?: boolean
 
   isResize?: boolean
 
@@ -66,7 +61,7 @@ export type TTextAreaGenre = keyof TJeneseiThemeGenreTextArea
 export type StyledTextAreaProps = AddDollarSign<
   Pick<
     TextAreaProps,
-    'genre' | 'size' | 'isError' | 'isLoading' | 'isTextAreaEffect' | 'isDisabled' | 'isBold' | 'isResize'
+    'genre' | 'size' | 'error' | 'isLoading' | 'isTextAreaEffect' | 'isDisabled' | 'isBold' | 'isResize'
   >
 >
 

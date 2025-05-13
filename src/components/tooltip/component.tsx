@@ -238,7 +238,17 @@ export const TooltipContent: FC<TooltipProps> = props => {
             style={styleTooltip}
             transition={{ type: 'spring', duration: DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT }}
           >
-            {<Typography size={props.size ?? 14}>{props.content}</Typography>}
+            {
+              <Typography
+                sx={{
+                  default: {
+                    size: props.size ?? 14
+                  }
+                }}
+              >
+                {props.content}
+              </Typography>
+            }
           </TooltipBox>
         </AnimatePresence>,
         document.body

@@ -39,6 +39,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         $isDisabled={props.isDisabled}
         $width={props.width}
         $size={props.size}
+        $isWidthAsHeight={props.isWidthAsHeight}
       >
         {props.prefixChildren && (
           <InputPrefixChildren
@@ -53,7 +54,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         {props.variety === 'pattern' ? (
           <StyledInputPattern
             $isInputEffect={props.isInputEffect}
-            $isError={props?.isError}
+            $error={props?.error}
             $isLoading={props.isLoading}
             $postfixChildren={props?.postfixChildren}
             $prefixChildren={props?.prefixChildren}
@@ -83,7 +84,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         ) : props.variety === 'numeric' ? (
           <StyledInputNumeric
             $isInputEffect={props.isInputEffect}
-            $isError={props?.isError}
+            $error={props?.error}
             $isLoading={props.isLoading}
             $postfixChildren={props?.postfixChildren}
             $prefixChildren={props?.prefixChildren}
@@ -116,7 +117,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             maxLength={props.maxLength}
             minLength={props.minLength}
             ref={ref}
-            $isError={props.isError}
+            $error={props.error}
             $isInputEffect={props.isInputEffect}
             $isLoading={props.isLoading}
             $postfixChildren={props?.postfixChildren}
@@ -161,13 +162,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           </InputPostfixChildren>
         )}
       </StyledInputWrapper>
-      <ErrorMessage
-        isError={props.isError}
-        errorMessage={props.errorMessage}
-        size={props.size}
-        width={props.width}
-        isErrorAbsolute={props.isErrorAbsolute}
-      />
+      {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
     </>
   )
 })

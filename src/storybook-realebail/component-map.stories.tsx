@@ -79,13 +79,15 @@ const PopupContent: FC = () => {
               <Button
                 isHiddenBorder
                 genre="realebail-white"
-                width="asHeight"
+                isWidthAsHeight
                 size="small"
-                icon={{
-                  type: 'id',
-                  name: 'Close',
-                  size: 'medium'
-                }}
+                icons={[
+                  {
+                    type: 'id',
+                    name: 'Close',
+                    size: 'medium'
+                  }
+                ]}
                 onClick={handleClose}
               />
             </Stack>
@@ -101,7 +103,7 @@ const PopupContent: FC = () => {
               }}
             >
               <Checkbox
-                width="asHeight"
+                isWidthAsHeight
                 genre="realebail-white"
                 checked={checked}
                 onChange={() => handleChange()}
@@ -113,10 +115,25 @@ const PopupContent: FC = () => {
         }
       </Slider>
       <Stack sx={{ default: { flexDirection: 'column' } }}>
-        <Typography weight={500} variant="h7">
+        <Typography
+          sx={{
+            default: {
+              variant: 'h7',
+              weight: 500
+            }
+          }}
+        >
           Описание:
         </Typography>
-        <Typography variant="h6">Это описание</Typography>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h6'
+            }
+          }}
+        >
+          Это описание
+        </Typography>
       </Stack>
     </Stack>
   )

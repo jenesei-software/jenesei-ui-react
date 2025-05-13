@@ -7,9 +7,13 @@ export type ProviderScreenWidthProps = PropsWithChildren
 export type Screens = keyof IJeneseiThemeScreens
 
 export interface ScreenWidthContextProps {
-  isTabletMobile: boolean
-  isTablet: boolean
-  isMobile: boolean
-  isOther: boolean
-  screenWidth: Screens | 'other'
+  screenWidth: Screens
+  screens: {
+    value: Screens
+    isScreen: boolean
+  }[]
+  screenActual: {
+    value: Screens
+    isScreen: boolean
+  }
 }

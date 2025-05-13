@@ -1,184 +1,64 @@
 import { LinkProps, createLink } from '@tanstack/react-router'
-import { Ref, forwardRef, memo, useEffect, useRef, useState } from 'react'
+import { forwardRef, memo, useEffect, useMemo, useRef, useState } from 'react'
 
-import {
-  TitleAnchor,
-  TitleFont,
-  TitleH1,
-  TitleH2,
-  TitleH3,
-  TitleH4,
-  TitleH5,
-  TitleH6,
-  TitleH7,
-  TitleH8,
-  TitleH9,
-  TitleParagraph,
-  TypographyCSSProps,
-  TypographyProps,
-  TypographyTooltipProps
-} from '.'
+import { useScreenWidth } from '@local/contexts/context-screen-width'
+
+import { Title, TypographyCSSProps, TypographyProps, TypographyTooltipProps } from '.'
 import { Tooltip } from '../tooltip'
 
 const TypographyWithRef = forwardRef<HTMLElement | HTMLHeadingElement | HTMLAnchorElement | undefined, TypographyProps>(
   (props, ref) => {
-    const cssProps: TypographyCSSProps & Pick<TypographyProps, 'onClick' | 'className' | 'style'> = {
-      $sx: props.sx,
-      className: props.className,
-      style: props.style,
-      onClick: props.onClick ? props.onClick : () => {}
-    }
+    const { screenActual } = useScreenWidth()
+    const cssProps: TypographyCSSProps & Pick<TypographyProps, 'onClick' | 'className' | 'style'> = useMemo(
+      () => ({
+        $sx: props.sx,
+        className: props.className,
+        style: props.style,
+        onClick: props.onClick ? props.onClick : () => {}
+      }),
+      [props.sx, props.className, props.style, props.onClick]
+    )
 
-    if ('variant' in props) {
-      if (props.variant === 'h1') {
-        return props.isAnchor ? (
-          <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
+    const screenSX = useMemo(() => props.sx?.[screenActual.value] ?? props.sx?.default, [props.sx, screenActual.value])
+
+    if ('variant' in screenSX) {
+      if (screenSX.variant === 'h7' || screenSX.variant === 'h8' || screenSX.variant === 'h9') {
+        return (
+          <Title
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ref={ref as any}
+            as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : 'span'}
+            href={props.href}
+            {...cssProps}
+          >
             {props.children}
-          </TitleAnchor>
-        ) : props.isParagraph ? (
-          <TitleParagraph ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleParagraph>
-        ) : (
-          <TitleH1 ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleH1>
+          </Title>
         )
-      } else if (props.variant === 'h2') {
-        return props.isAnchor ? (
-          <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
+      } else {
+        return (
+          <Title
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ref={ref as any}
+            as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : screenSX.variant}
+            href={props.href}
+            {...cssProps}
+          >
             {props.children}
-          </TitleAnchor>
-        ) : props.isParagraph ? (
-          <TitleParagraph ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleParagraph>
-        ) : (
-          <TitleH2 ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleH2>
-        )
-      } else if (props.variant === 'h3') {
-        return props.isAnchor ? (
-          <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
-            {props.children}
-          </TitleAnchor>
-        ) : props.isParagraph ? (
-          <TitleParagraph ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleParagraph>
-        ) : (
-          <TitleH3 ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleH3>
-        )
-      } else if (props.variant === 'h4') {
-        return props.isAnchor ? (
-          <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
-            {props.children}
-          </TitleAnchor>
-        ) : props.isParagraph ? (
-          <TitleParagraph ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleParagraph>
-        ) : (
-          <TitleH4 ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleH4>
-        )
-      } else if (props.variant === 'h5') {
-        return props.isAnchor ? (
-          <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
-            {props.children}
-          </TitleAnchor>
-        ) : props.isParagraph ? (
-          <TitleParagraph ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleParagraph>
-        ) : (
-          <TitleH5 ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleH5>
-        )
-      } else if (props.variant === 'h6') {
-        return props.isAnchor ? (
-          <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
-            {props.children}
-          </TitleAnchor>
-        ) : props.isParagraph ? (
-          <TitleParagraph ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleParagraph>
-        ) : (
-          <TitleH6 ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleH6>
-        )
-      } else if (props.variant === 'h7') {
-        return props.isAnchor ? (
-          <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
-            {props.children}
-          </TitleAnchor>
-        ) : props.isParagraph ? (
-          <TitleParagraph ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleParagraph>
-        ) : (
-          <TitleH7 ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleH7>
-        )
-      } else if (props.variant === 'h8') {
-        return props.isAnchor ? (
-          <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
-            {props.children}
-          </TitleAnchor>
-        ) : props.isParagraph ? (
-          <TitleParagraph ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleParagraph>
-        ) : (
-          <TitleH8 ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleH8>
-        )
-      } else if (props.variant === 'h9') {
-        return props.isAnchor ? (
-          <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
-            {props.children}
-          </TitleAnchor>
-        ) : props.isParagraph ? (
-          <TitleParagraph ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleParagraph>
-        ) : (
-          <TitleH9 ref={ref as Ref<HTMLHeadingElement>} {...cssProps}>
-            {props.children}
-          </TitleH9>
+          </Title>
         )
       }
     }
 
-    if (props.isAnchor) {
-      return (
-        <TitleAnchor ref={ref as Ref<HTMLAnchorElement>} href={props.href} {...cssProps}>
-          {props.children}
-        </TitleAnchor>
-      )
-    }
-
-    if ('size' in props) {
-      return (
-        <TitleFont ref={ref as Ref<HTMLElement>} {...cssProps}>
-          {props.children}
-        </TitleFont>
-      )
-    }
-
     return (
-      <TitleFont ref={ref as Ref<HTMLElement>} {...cssProps}>
+      <Title
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ref={ref as any}
+        as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : 'span'}
+        href={props.href}
+        {...cssProps}
+      >
         {props.children}
-      </TitleFont>
+      </Title>
     )
   }
 )

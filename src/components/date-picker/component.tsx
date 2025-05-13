@@ -268,7 +268,7 @@ export const DatePicker = (props: DatePickerProps) => {
           $genre={props.genre}
           $size={props.size}
           placeholder={props?.placeholder}
-          $isError={props?.inputProps?.isError}
+          $error={props?.inputProps?.error}
           $isLoading={props?.inputProps?.isLoading}
           $postfixChildren={props?.inputProps?.postfixChildren}
           $prefixChildren={props?.inputProps?.prefixChildren}
@@ -322,12 +322,14 @@ export const DatePicker = (props: DatePickerProps) => {
                   <Button
                     type="button"
                     isRadius
-                    icon={{
-                      name: 'Arrow2',
-                      type: 'id',
-                      turn: 90
-                    }}
-                    width="asHeight"
+                    icons={[
+                      {
+                        name: 'Arrow2',
+                        type: 'id',
+                        turn: 90
+                      }
+                    ]}
+                    isWidthAsHeight
                     genre={props.genre}
                     size={'small'}
                     onClick={() => !isBlockDecreaseMonth && decreaseMonth()}
@@ -378,13 +380,15 @@ export const DatePicker = (props: DatePickerProps) => {
                   <Button
                     type="button"
                     onClick={() => !isBlockIncreaseMonth && increaseMonth()}
-                    width="asHeight"
+                    isWidthAsHeight
                     isRadius
-                    icon={{
-                      name: 'Arrow2',
-                      type: 'id',
-                      turn: -90
-                    }}
+                    icons={[
+                      {
+                        name: 'Arrow2',
+                        type: 'id',
+                        turn: -90
+                      }
+                    ]}
                     genre={props.genre}
                     size={'small'}
                     isHidden={isBlockIncreaseMonth}
@@ -431,13 +435,9 @@ export const DatePicker = (props: DatePickerProps) => {
           ) : null}
         </AnimatePresence>
       </DateWrapper>
-      <ErrorMessage
-        isError={props?.inputProps?.isError}
-        errorMessage={props?.inputProps?.errorMessage}
-        size={props.size}
-        width={props.width}
-        isErrorAbsolute={props?.inputProps?.isErrorAbsolute}
-      />
+      {props?.inputProps?.error ? (
+        <ErrorMessage {...props?.inputProps?.error} size={props?.inputProps?.error.size ?? props.size} />
+      ) : null}
     </Outside>
   )
 }

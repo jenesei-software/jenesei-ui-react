@@ -23,7 +23,14 @@ const defaultNotification = (
       width: '100%'
     }}
   >
-    <Typography variant="h8" wrap="nowrap">
+    <Typography
+      sx={{
+        default: {
+          variant: 'h8',
+          wrap: 'nowrap'
+        }
+      }}
+    >
       Notification
     </Typography>
   </div>
@@ -37,7 +44,14 @@ const defaultHeader = (
       width: '100%'
     }}
   >
-    <Typography variant="h1" wrap="nowrap">
+    <Typography
+      sx={{
+        default: {
+          variant: 'h1',
+          wrap: 'nowrap'
+        }
+      }}
+    >
       Header
     </Typography>
   </div>
@@ -51,7 +65,15 @@ const defaultFooter = (
       width: '100%'
     }}
   >
-    <Typography variant="h1">Footer</Typography>
+    <Typography
+      sx={{
+        default: {
+          variant: 'h1'
+        }
+      }}
+    >
+      Footer
+    </Typography>
   </div>
 )
 const defaultLeftAside = (
@@ -63,7 +85,15 @@ const defaultLeftAside = (
       width: '100%'
     }}
   >
-    <Typography variant="h6">Left Aside</Typography>
+    <Typography
+      sx={{
+        default: {
+          variant: 'h6'
+        }
+      }}
+    >
+      Left Aside
+    </Typography>
   </div>
 )
 const defaultRightAside = (
@@ -75,7 +105,15 @@ const defaultRightAside = (
       width: '100%'
     }}
   >
-    <Typography variant="h6">Right Aside</Typography>
+    <Typography
+      sx={{
+        default: {
+          variant: 'h6'
+        }
+      }}
+    >
+      Right Aside
+    </Typography>
   </div>
 )
 
@@ -88,7 +126,15 @@ const defaultNav = (
       width: '100%'
     }}
   >
-    <Typography>Nav</Typography>
+    <Typography
+      sx={{
+        default: {
+          variant: 'h6'
+        }
+      }}
+    >
+      Nav
+    </Typography>
   </div>
 )
 
@@ -101,12 +147,60 @@ const defaultChildren = (
       width: '100%'
     }}
   >
-    <Typography variant="h1">Title H1</Typography>
-    <Typography variant="h2">Title H2</Typography>
-    <Typography variant="h3">Title H3</Typography>
-    <Typography variant="h4">Title H4</Typography>
-    <Typography variant="h5">Title H5</Typography>
-    <Typography variant="h6">Title H6</Typography>
+    <Typography
+      sx={{
+        default: {
+          variant: 'h1'
+        }
+      }}
+    >
+      Title H1
+    </Typography>
+    <Typography
+      sx={{
+        default: {
+          variant: 'h2'
+        }
+      }}
+    >
+      Title H2
+    </Typography>
+    <Typography
+      sx={{
+        default: {
+          variant: 'h3'
+        }
+      }}
+    >
+      Title H3
+    </Typography>
+    <Typography
+      sx={{
+        default: {
+          variant: 'h4'
+        }
+      }}
+    >
+      Title H4
+    </Typography>
+    <Typography
+      sx={{
+        default: {
+          variant: 'h5'
+        }
+      }}
+    >
+      Title H5
+    </Typography>
+    <Typography
+      sx={{
+        default: {
+          variant: 'h6'
+        }
+      }}
+    >
+      Title H6
+    </Typography>
   </div>
 )
 
@@ -115,7 +209,14 @@ export const Default: Story = {
     defaultPreview: {
       time: 1000,
       content: (
-        <Typography variant="h6" weight={700}>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h6',
+              weight: 700
+            }
+          }}
+        >
           Loading
         </Typography>
       )

@@ -39,17 +39,15 @@ export const Checkbox: FC<CheckboxProps> = props => {
         type="button"
         style={props.style}
         $genre={props.genre}
-        $isError={props.isError}
+        $error={props.error}
         $view={props.view}
         $checked={props.checked}
-        $width={props.width}
+        $isWidthAsHeight={props.isWidthAsHeight}
         $size={props.size}
         $isDisabled={props.isDisabled}
         $isHiddenBorder={props.isHiddenBorder}
         $isNotBackground={props.isNotBackground}
-        $customFontFamily={props.customFontFamily}
-        $customFontSize={props.customFontSize}
-        $customFontWeight={props.customFontWeight}
+        $sx={props.sx}
         disabled={props.isDisabled}
         tabIndex={0}
         onClick={() => !props.isDisabled && handleOnClick(!props.checked)}
@@ -68,13 +66,7 @@ export const Checkbox: FC<CheckboxProps> = props => {
           </>
         )}
       </CheckboxWrapper>
-      <ErrorMessage
-        isError={props.isError}
-        errorMessage={props.errorMessage}
-        size={props.size}
-        width={props.width}
-        isErrorAbsolute={props.isErrorAbsolute}
-      />
+      {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
     </>
   )
 }

@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { getFontSizeStyles } from '@local/components/typography'
 import { addOutline, addTransition } from '@local/styles/add'
-import { addError } from '@local/styles/error'
+import { addNewError } from '@local/styles/error'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledInputChildrenProps, StyledInputProps, StyledInputWrapperProps } from '.'
@@ -17,7 +17,7 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
   justify-content: flex-start;
   flex-direction: column;
   ${props =>
-    props.$width === 'asHeight'
+    props.$isWidthAsHeight
       ? css`
           width: ${KEY_SIZE_DATA[props.$size].height}px;
           min-width: ${KEY_SIZE_DATA[props.$size].height}px;
@@ -116,7 +116,7 @@ export const StyledInputCSS = css<StyledInputProps>`
   ${InputIsInputEffect};
   ${addOutline};
   ${addTransition};
-  ${addError};
+  ${addNewError};
 
   ${props =>
     props.$prefixChildren &&

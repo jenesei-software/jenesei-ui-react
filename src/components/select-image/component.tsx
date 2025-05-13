@@ -132,7 +132,17 @@ export const SelectImage = (props: SelectImageProps) => {
               }}
               alt={image?.imageSrc}
               src={image?.imageSrc}
-              fallback={<Typography variant="h6">{props.locale.textFallbackImage}</Typography>}
+              fallback={
+                <Typography
+                  sx={{
+                    default: {
+                      variant: 'h6'
+                    }
+                  }}
+                >
+                  {props.locale.textFallbackImage}
+                </Typography>
+              }
             />
             <Button
               sx={{
@@ -144,11 +154,13 @@ export const SelectImage = (props: SelectImageProps) => {
               }}
               genre="realebail-white"
               size="small"
-              icon={{
-                type: 'id',
-                name: 'Arrow4'
-              }}
-              width="asHeight"
+              icons={[
+                {
+                  type: 'id',
+                  name: 'Arrow4'
+                }
+              ]}
+              isWidthAsHeight
               isHiddenBorder
               isRadius
               onClick={() => remove?.()}
@@ -166,7 +178,7 @@ export const SelectImage = (props: SelectImageProps) => {
         $size={props.size}
         id={props.id}
         $width={props.width}
-        $isError={props.isError}
+        $error={props.error}
       >
         <SelectImageListWrapper
           onDrop={e => {
@@ -235,7 +247,17 @@ export const SelectImage = (props: SelectImageProps) => {
                       }}
                       alt={img.name || 'image'}
                       src={img.url}
-                      fallback={<Typography variant="h6">{props.locale.textFallbackImage}</Typography>}
+                      fallback={
+                        <Typography
+                          sx={{
+                            default: {
+                              variant: 'h6'
+                            }
+                          }}
+                        >
+                          {props.locale.textFallbackImage}
+                        </Typography>
+                      }
                     />
                     <Button
                       sx={{
@@ -247,11 +269,13 @@ export const SelectImage = (props: SelectImageProps) => {
                       }}
                       genre={props.genre}
                       size="small"
-                      icon={{
-                        type: 'id',
-                        name: 'Close'
-                      }}
-                      width="asHeight"
+                      icons={[
+                        {
+                          type: 'id',
+                          name: 'Close'
+                        }
+                      ]}
+                      isWidthAsHeight
                       isHiddenBorder
                       isRadius
                       onClick={() => handleDelete(img.id)}
@@ -266,11 +290,13 @@ export const SelectImage = (props: SelectImageProps) => {
                       }}
                       genre={props.genre}
                       size="small"
-                      icon={{
-                        type: 'id',
-                        name: 'Activity'
-                      }}
-                      width="asHeight"
+                      icons={[
+                        {
+                          type: 'id',
+                          name: 'Activity'
+                        }
+                      ]}
+                      isWidthAsHeight
                       isHiddenBorder
                       isRadius
                       onClick={() => img.url && handleAdd({ id: img.id, imageSrc: img.url })}
@@ -300,6 +326,9 @@ export const SelectImage = (props: SelectImageProps) => {
                 <Typography
                   style={{
                     color: theme.colors.selectImage[props.genre].color.rest
+                  }}
+                  sx={{
+                    default: {}
                   }}
                 >
                   {props.locale.dragAndDrop}
@@ -350,13 +379,7 @@ export const SelectImage = (props: SelectImageProps) => {
           </Button>
         </Stack>
       </SelectImageWrapper>
-      <ErrorMessage
-        isError={props.isError}
-        errorMessage={props.errorMessage}
-        size={props.size}
-        width={props.width}
-        isErrorAbsolute={props.isErrorAbsolute}
-      />
+      {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
     </>
   )
 }

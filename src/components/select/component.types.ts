@@ -1,6 +1,7 @@
 import { FocusEventHandler, ReactNode } from 'react'
 
 import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
+import { addNewErrorProps } from '@local/styles/error'
 import { TJeneseiThemeGenreSelect, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
@@ -15,7 +16,7 @@ export interface ISelectItem {
   [key: string]: unknown
 }
 
-export interface SelectProps<T extends ISelectItem> {
+export type SelectProps<T extends ISelectItem> = addNewErrorProps & {
   name?: string
   id?: string
 
@@ -24,9 +25,6 @@ export interface SelectProps<T extends ISelectItem> {
   width?: string
   placeholder?: string
   isDisabled?: boolean
-  isError?: boolean
-  isErrorAbsolute?: boolean
-  errorMessage?: string
   isShowDropdownOptionIcon?: boolean
   isShowSelectInputIcon?: boolean
   isOnClickOptionClose?: boolean
@@ -36,16 +34,7 @@ export interface SelectProps<T extends ISelectItem> {
 
   inputProps?: Omit<
     InputStandardProps,
-    | 'isDisabled'
-    | 'isError'
-    | 'ErrorMessage'
-    | 'isErrorAbsolute'
-    | 'name'
-    | 'id'
-    | 'genre'
-    | 'size'
-    | 'placeholder'
-    | 'width'
+    'isDisabled' | 'error' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'
   >
   optionProps?: Omit<InputStandardProps, 'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'>
   isMulti?: boolean

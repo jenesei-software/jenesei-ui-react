@@ -5,9 +5,8 @@ import React, { FC, FocusEventHandler, ReactNode, memo, useCallback, useEffect, 
 
 import { Button } from '@local/components/button'
 import { InputChildrenProps } from '@local/components/input'
-import { Typography } from '@local/components/typography'
 import { ListLanguage, MapThemeList } from '@local/consts'
-import { ErrorMessage } from '@local/styles/error'
+import { ErrorMessage, addNewErrorProps } from '@local/styles/error'
 import { KEY_SIZE_DATA, TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
 
 import {
@@ -275,7 +274,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           $genre={props.genre}
           $size={props.size}
           placeholder={props.placeholder}
-          $isError={props?.isError}
+          $error={props?.error}
           $isLoading={props?.inputProps?.isLoading}
           $postfixChildren={props?.inputProps?.postfixChildren}
           $prefixChildren={props.inputProps?.prefixChildren}
@@ -357,7 +356,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                         genre={props.genre}
                         size={props.size}
                         isBold={props.optionProps?.isBold}
-                        isError={props.optionProps?.isError}
+                        error={props.optionProps?.error}
                         isLoading={props.optionProps?.isLoading}
                         prefixChildren={props.optionProps?.prefixChildren}
                         postfixChildren={props.optionProps?.postfixChildren}
@@ -377,7 +376,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                     genre={props.genre}
                     size={props.size}
                     isBold={props.optionProps?.isBold}
-                    isError={props.optionProps?.isError}
+                    error={props.optionProps?.error}
                     isLoading={props.optionProps?.isLoading}
                     prefixChildren={props.optionProps?.prefixChildren}
                     postfixChildren={props.optionProps?.postfixChildren}
@@ -419,33 +418,28 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           ) : null}
         </AnimatePresence>
       </SelectWrapper>
-      <ErrorMessage
-        isError={props.isError}
-        errorMessage={props.errorMessage}
-        size={props.size}
-        width={props.width}
-        isErrorAbsolute={props.isErrorAbsolute}
-      />
+      {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
     </>
   )
 }
 
-const ContainerDropdownOptionComponent = (params: {
-  genre: keyof TJeneseiThemeGenreInput
-  size: TJeneseiThemeSize
-  onClick: () => void
-  isError?: boolean
-  isLoading?: boolean
-  isNotShowHoverStyle?: boolean
-  isShowDropdownOptionIcon?: boolean
-  isBold?: boolean
-  postfixChildren?: InputChildrenProps
-  prefixChildren?: InputChildrenProps
-  checked: boolean
-  virtualRowSize: number
-  virtualRowStart: number
-  label: ReactNode
-}) => {
+const ContainerDropdownOptionComponent = (
+  params: addNewErrorProps & {
+    genre: keyof TJeneseiThemeGenreInput
+    size: TJeneseiThemeSize
+    onClick: () => void
+    isLoading?: boolean
+    isNotShowHoverStyle?: boolean
+    isShowDropdownOptionIcon?: boolean
+    isBold?: boolean
+    postfixChildren?: InputChildrenProps
+    prefixChildren?: InputChildrenProps
+    checked: boolean
+    virtualRowSize: number
+    virtualRowStart: number
+    label: ReactNode
+  }
+) => {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLLIElement>) => {
     if (event.key === 'Enter') {
       params.onClick()
@@ -456,7 +450,7 @@ const ContainerDropdownOptionComponent = (params: {
       tabIndex={0}
       onClick={params.onClick}
       onKeyDown={handleKeyDown}
-      $isError={params.isError}
+      $error={params.error}
       $isNotShowHoverStyle={params.isNotShowHoverStyle}
       $isLoading={params.isLoading}
       $postfixChildren={params.postfixChildren}
@@ -569,7 +563,7 @@ export const SelectMonth: FC<SelectDateProps> = props => {
 
       return {
         value: monthMoment.valueOf(),
-        label: <Typography>{monthItem.localeLong}</Typography>,
+        label: monthItem.localeLong,
         placeholder: monthItem.localeLong,
         search: `${monthItem.localeLong.toLowerCase()}, ${monthIndex + 1}`,
         isDisabled,

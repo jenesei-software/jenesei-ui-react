@@ -30,7 +30,14 @@ export const Auth: Story = {
     backUrlWebp: 'https://id.jenesei.ru/pictures/auth-back-mountain.webp',
     children: (
       <>
-        <Typography variant="h7" color="black100">
+        <Typography
+          sx={{
+            default: {
+              variant: 'h7',
+              color: 'black100'
+            }
+          }}
+        >
           Test
         </Typography>
       </>

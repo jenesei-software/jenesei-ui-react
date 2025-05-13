@@ -1,20 +1,20 @@
 import styled, { css } from 'styled-components'
 
 import { Icon } from '@local/components/icon'
-import { getFontSizeStyles } from '@local/components/typography'
+import { addSX, getFontSizeStyles } from '@local/components/typography'
 import { addCustomFont, addOutline, addTransition } from '@local/styles/add'
-import { addError } from '@local/styles/error'
+import { addNewError } from '@local/styles/error'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledCheckboxProps, StyledIconProps } from '.'
 
 /****************************************** Size *************************************************/
 export const CheckboxSize = css<StyledCheckboxProps>`
-  ${props => CheckboxSizeConstructor({ ...KEY_SIZE_DATA[props.$size], $width: props.$width })};
+  ${props => CheckboxSizeConstructor({ ...KEY_SIZE_DATA[props.$size], isWidthAsHeight: props.$isWidthAsHeight })};
 `
 export const CheckboxSizeConstructor = (
   props: IJeneseiThemeSize & {
-    $width?: string
+    isWidthAsHeight?: boolean
   }
 ) => css`
   height: ${props.height}px;
@@ -23,17 +23,12 @@ export const CheckboxSizeConstructor = (
   gap: ${props.padding - 2}px;
   ${params => getFontSizeStyles(props.font, 700, params.theme.font.family)};
   padding: ${props.padding - 4}px;
-  ${props.$width === 'asHeight'
-    ? css`
-        width: ${props.height}px;
-        min-width: ${props.height}px;
-        padding: 0px;
-        justify-content: center;
-      `
-    : css`
-        width: ${props.$width ?? 'max-content'};
-        min-width: ${props.$width ? `${props.$width}` : 'max-content'};
-      `};
+  ${props.isWidthAsHeight &&
+  css`
+    width: ${props.height}px;
+    min-width: ${props.height}px;
+    padding: 0px;
+  `};
 `
 
 /****************************************** Genre *************************************************/
@@ -97,8 +92,9 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   ${CheckboxHiddenBorder};
   ${CheckboxSize};
   ${addOutline};
-  ${addError};
+  ${addNewError};
   ${addCustomFont};
+  ${addSX};
   background-color: ${props => props.$isNotBackground && 'transparent'};
 `
 

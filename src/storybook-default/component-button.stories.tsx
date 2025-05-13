@@ -15,7 +15,6 @@ type Story = StoryObj<typeof Button>
 export const Text: Story = {
   args: {
     children: 'Click',
-    width: 'auto',
     type: 'button',
     genre: 'gray',
     size: 'medium'
@@ -24,13 +23,15 @@ export const Text: Story = {
 
 export const Icon: Story = {
   args: {
-    width: 'asHeight',
+    isWidthAsHeight: true,
     type: 'button',
-    icon: {
-      type: 'id',
-      name: 'Heart',
-      order: -1
-    },
+    icons: [
+      {
+        type: 'id',
+        name: 'Heart',
+        order: -1
+      }
+    ],
     genre: 'gray',
     size: 'medium'
   }

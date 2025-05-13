@@ -66,12 +66,14 @@ export const Pagination: FC<PaginationProps> = props => {
         onClick={handlePrevious}
         size={size}
         genre={props.genre}
-        icon={{
-          type: 'id',
-          name: 'Arrow2',
-          order: -1,
-          turn: 90
-        }}
+        icons={[
+          {
+            type: 'id',
+            name: 'Arrow2',
+            order: -1,
+            turn: 90
+          }
+        ]}
       >
         Previous
       </Button>
@@ -80,7 +82,7 @@ export const Pagination: FC<PaginationProps> = props => {
           {Array.from({ length: props.length }).map((_, i) => (
             <Button
               key={i}
-              width="asHeight"
+              isWidthAsHeight
               size={size}
               genre={i === props.index ? 'blackBorder' : 'white'}
               onClick={() => props.changeIndex(i)}
@@ -96,11 +98,13 @@ export const Pagination: FC<PaginationProps> = props => {
         onClick={handleNext}
         size={size}
         genre={props.genre}
-        icon={{
-          type: 'id',
-          name: 'Arrow2',
-          turn: -90
-        }}
+        icons={[
+          {
+            type: 'id',
+            name: 'Arrow2',
+            turn: -90
+          }
+        ]}
       >
         Next
       </Button>

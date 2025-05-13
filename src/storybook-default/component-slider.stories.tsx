@@ -29,12 +29,14 @@ export const Slider: Story = {
         <Button
           isHiddenBorder
           genre="productBorder"
-          width="asHeight"
+          isWidthAsHeight
           size="medium"
-          icon={{
-            type: 'id',
-            name: 'Heart'
-          }}
+          icons={[
+            {
+              type: 'id',
+              name: 'Heart'
+            }
+          ]}
         />
       </Stack>
     ),

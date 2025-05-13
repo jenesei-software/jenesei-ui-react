@@ -4,10 +4,13 @@ import styled, { css } from 'styled-components'
 import { getFontSizeStyles } from '@local/components/typography'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
-import { ErrorMessageProps, ErrorMessagePropsDollar, addErrorProps } from '.'
+import { ErrorMessageProps, ErrorMessagePropsDollar, addErrorProps, addNewErrorStylesProps } from '.'
 
 const ErrorMessageSize = css<ErrorMessagePropsDollar>`
-  ${props => ErrorMessageSizeConstructor({ ...KEY_SIZE_DATA[props.$size], $isErrorAbsolute: props.$isErrorAbsolute })};
+  ${props =>
+    props.$size
+      ? ErrorMessageSizeConstructor({ ...KEY_SIZE_DATA[props.$size], $isErrorAbsolute: props.$isErrorAbsolute })
+      : null};
 `
 const ErrorMessageSizeConstructor = (
   props: IJeneseiThemeSize & { $isErrorAbsolute: ErrorMessageProps['isErrorAbsolute'] }
@@ -45,7 +48,19 @@ export const addError = css<addErrorProps>`
       }
     `};
 `
-
+export const addNewError = css<addNewErrorStylesProps>`
+  ${props =>
+    props.$error?.isError &&
+    css`
+      border-color: ${props => props.theme.colors.danger};
+      &:focus,
+      &:active,
+      &:hover,
+      &:focus-visible {
+        border-color: ${props => props.theme.colors.danger};
+      }
+    `};
+`
 export const ErrorMessage: FC<ErrorMessageProps> = props => {
   return (
     <>

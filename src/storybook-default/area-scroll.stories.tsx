@@ -47,7 +47,15 @@ const ScrollWrapper: FC<ScrollProps> = props => {
           }
         })}
       >
-        <Typography variant="h7">One</Typography>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h7'
+            }
+          }}
+        >
+          One
+        </Typography>
       </Stack>
       {content && (
         <Stack
@@ -60,7 +68,15 @@ const ScrollWrapper: FC<ScrollProps> = props => {
             }
           })}
         >
-          <Typography variant="h7">Two</Typography>
+          <Typography
+            sx={{
+              default: {
+                variant: 'h7'
+              }
+            }}
+          >
+            Two
+          </Typography>
         </Stack>
       )}
     </ScrollComponent>
