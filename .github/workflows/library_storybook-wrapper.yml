@@ -1,4 +1,4 @@
-name: Call Library Storybook
+name: Library Storybook Wrapper
 
 on: workflow_dispatch
 
