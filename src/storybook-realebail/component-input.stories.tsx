@@ -15,7 +15,6 @@ type Story = StoryObj<typeof Input>
 const defaultArgs: Partial<InputProps> = {
   genre: 'realebail-white',
   size: 'largeMedium',
-  isError: false,
   isDisabled: false,
   isRequired: false,
   isReadOnly: false,
@@ -38,8 +37,11 @@ export const Password: Story = {
     },
     variety: 'standard',
     type: 'password',
-    errorMessage: 'Error',
-    isErrorAbsolute: true,
+    error: {
+      errorMessage: 'Пароль должен содержать не менее 8 символов, включая буквы и цифры',
+      isError: true,
+      isErrorAbsolute: true
+    },
     placeholder: 'Пароль'
   }
 }
