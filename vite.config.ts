@@ -21,7 +21,7 @@ export default defineConfig(() => {
       }
     },
     plugins: [
-      pluginUpdateReadme(),
+      pluginUpdateReadmePeerDependencies(),
       react(),
       tsconfigPaths(),
       !isStorybook &&
@@ -120,31 +120,22 @@ export default defineConfig(() => {
   }
 })
 
-function pluginUpdateReadme() {
+function pluginUpdateReadmePeerDependencies() {
   return {
-    name: 'update-readme-script',
+    name: 'update-readme-peer-dependencies',
     buildStart() {
       const __filename = fileURLToPath(import.meta.url)
       const __dirname = dirname(__filename)
 
-      // Путь к файлам
       const packageJsonPath = resolve(__dirname, 'package.json')
       const readmePath = resolve(__dirname, 'README.md')
 
-      // Асинхронная функция для обновления README
       async function updateReadme() {
-        // Загрузка package.json
         const packageJson = JSON.parse(await fs.readFile(packageJsonPath, 'utf8'))
-
-        // Извлечение peerDependencies
         const peerDependencies = packageJson.peerDependencies || {}
-
-        // Формирование команд для установки
         const commands = Object.keys(peerDependencies)
           .map(dep => `npm install ${dep} --save`)
           .join('\n')
-
-        // Формирование секции установки
         const installSection = `
 ## Installing dependencies
 
@@ -155,29 +146,26 @@ ${commands}
 \`\`\`
 `
 
-        // Чтение содержимого README.md
         const readmeContent = await fs.readFile(readmePath, 'utf8')
-
-        // Определение места для вставки
-        const insertionPoint = '# IMPORTANT' // Название секции, после которой нужно вставить новый текст
+        const insertionPoint = '# IMPORTANT'
 
         if (readmeContent.includes(insertionPoint)) {
-          // Найти позицию вставки
           const insertionIndex = readmeContent.indexOf(insertionPoint) + insertionPoint.length
 
-          // Сформировать обновлённое содержание
           const beforeInsertion = readmeContent.slice(0, insertionIndex).trim()
           const newContent = beforeInsertion + '\n\n' + installSection
 
-          // Записать изменённое содержимое обратно в файл
           await fs.writeFile(readmePath, newContent, 'utf8')
-          console.log('README обновлён с командой установки зависимостей.')
+          console.log(
+            '\x1b[32minfo\x1b[0m => UpdateReadmePeerDependencies: README updated with dependency install command.'
+          )
         } else {
-          console.log('Не удалось найти секцию для вставки в README.')
+          console.log(
+            '\x1b[33mwarn\x1b[0m => UpdateReadmePeerDependencies: Could not find section to insert into README.'
+          )
         }
       }
 
-      // Вызов асинхронной функции
       updateReadme().catch(console.error)
     }
   }

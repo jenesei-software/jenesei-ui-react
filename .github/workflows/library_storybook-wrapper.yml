@@ -1,0 +1,7 @@
+name: Call Library Storybook
+
+on: workflow_dispatch
+
+jobs:
+  call-publisher:
+    uses: jenesei-software/.github/.github/workflows/library_storybook.yml@main
