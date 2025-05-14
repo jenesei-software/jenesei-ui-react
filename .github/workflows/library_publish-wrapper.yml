@@ -1,4 +1,4 @@
-name: Library Storybook Wrapper
+name: Library Publish Wrapper
 
 on:
   workflow_dispatch:
