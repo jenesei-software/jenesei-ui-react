@@ -28,6 +28,7 @@ const SmoothWrapper: FC<StackProps> = props => {
       {...props}
       sx={theme => ({
         default: {
+          height: 'fit-content',
           gap: '4px',
           flexDirection: 'column',
           padding: '12px',

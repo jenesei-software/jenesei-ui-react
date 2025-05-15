@@ -1,10 +1,10 @@
 import type { Preview } from '@storybook/react'
-import React from 'react'
 import { ThemeProvider } from 'styled-components'
 
 import { ProviderDialog } from '../src/contexts/context-dialog'
 import { ProviderGeolocation } from '../src/contexts/context-geolocation'
 import { ProviderPermission } from '../src/contexts/context-permission'
+import { ProviderScreenWidth } from '../src/contexts/context-screen-width'
 import { JeneseiGlobalStyles, JeneseiTheme } from '../src/theme/index'
 
 import '@fontsource/inter/100.css'
@@ -33,10 +33,12 @@ const preview: Preview = {
         <ProviderPermission>
           <ProviderGeolocation>
             <ThemeProvider theme={JeneseiTheme}>
-              <JeneseiGlobalStyles />
-              <ProviderDialog zIndex={1000}>
-                <Story />
-              </ProviderDialog>
+              <ProviderScreenWidth>
+                <JeneseiGlobalStyles />
+                <ProviderDialog zIndex={1000}>
+                  <Story />
+                </ProviderDialog>
+              </ProviderScreenWidth>
             </ThemeProvider>
           </ProviderGeolocation>
         </ProviderPermission>

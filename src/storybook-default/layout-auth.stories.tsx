@@ -3,7 +3,6 @@ import { FC } from 'react'
 import 'styled-components'
 
 import { Typography } from '@local/components/typography'
-import { ProviderScreenWidth } from '@local/contexts/context-screen-width'
 
 import { AuthLayout, AuthLayoutProps } from '../layouts/auth'
 
@@ -16,11 +15,7 @@ export default meta
 type Story = StoryObj<typeof AuthLayout>
 
 const AuthWrapper: FC<AuthLayoutProps> = props => {
-  return (
-    <ProviderScreenWidth>
-      <AuthLayout {...props} />
-    </ProviderScreenWidth>
-  )
+  return <AuthLayout {...props} />
 }
 
 export const Auth: Story = {
