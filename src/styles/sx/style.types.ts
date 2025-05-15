@@ -16,4 +16,4 @@ export interface addSXProps {
         [K in TJeneseiDevice]?: CSSObject
       })
 }
-export type styledAddSXProps = AddDollarSign<addSXProps>
+export type addSXStyleProps = AddDollarSign<addSXProps>

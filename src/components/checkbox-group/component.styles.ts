@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { getFontSizeStyles } from '@local/components/typography'
+import { addSX } from '@local/styles/sx'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { CheckboxGroupWrapperProps } from '.'
@@ -19,8 +20,8 @@ export const CheckboxGroupWrapper = styled.div<CheckboxGroupWrapperProps>`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: ${props => props.$width ?? '100%'};
   ${CheckboxGroupSize};
+  ${addSX};
 `
 
 export const CheckboxGroupItem = styled.div`

@@ -6,7 +6,7 @@ import React, { FC, FocusEventHandler, ReactNode, memo, useCallback, useEffect, 
 import { Button } from '@local/components/button'
 import { InputChildrenProps } from '@local/components/input'
 import { ListLanguage, MapThemeList } from '@local/consts'
-import { ErrorMessage, addNewErrorProps } from '@local/styles/error'
+import { ErrorMessage, addErrorProps } from '@local/styles/error'
 import { KEY_SIZE_DATA, TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
 
 import {
@@ -424,7 +424,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
 }
 
 const ContainerDropdownOptionComponent = (
-  params: addNewErrorProps & {
+  params: addErrorProps & {
     genre: keyof TJeneseiThemeGenreInput
     size: TJeneseiThemeSize
     onClick: () => void

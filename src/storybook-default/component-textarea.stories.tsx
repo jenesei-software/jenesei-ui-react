@@ -15,7 +15,11 @@ type Story = StoryObj<typeof TextArea>
 const defaultArgs: Partial<TextAreaProps> = {
   genre: 'blackBorder',
   size: 'largeMedium',
-  isError: false,
+  error: {
+    errorMessage: 'Error',
+    isError: false,
+    isErrorAbsolute: false
+  },
   isDisabled: false,
   isRequired: false,
   isReadOnly: false,
@@ -35,8 +39,6 @@ export const Default: Story = {
   render: args => <TextAreaStringWrapper {...args} />,
   args: {
     ...defaultArgs,
-    errorMessage: 'Error',
-    isErrorAbsolute: true,
     placeholder: 'Default'
   }
 }

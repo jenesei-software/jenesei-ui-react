@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
 
 import { ComponentWithRipple } from '@local/components/ripple'
-import { getFontSizeStyles } from '@local/components/typography'
-import { addCustomFont, addOutline, addTransition } from '@local/styles/add'
+import { addSXTypography, getFontSizeStyles } from '@local/components/typography'
+import { addOutline, addTransition } from '@local/styles/add'
 import { addSX } from '@local/styles/sx'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
@@ -140,9 +140,9 @@ export const StyledButton = styled.button<StyledDollarButtonProps>`
   ${ButtonIsHiddenBorder};
   ${ButtonIsRadius};
   ${ButtonIsPlaystationEffect};
+  ${ButtonFlex};
   ${addTransition};
   ${addOutline};
-  ${addCustomFont};
-  ${ButtonFlex};
+  ${addSXTypography};
   ${addSX};
 `

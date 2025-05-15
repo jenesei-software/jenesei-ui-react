@@ -1,7 +1,7 @@
 import { FocusEventHandler, ReactNode } from 'react'
 
 import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
-import { addNewErrorProps } from '@local/styles/error'
+import { addErrorProps } from '@local/styles/error'
 import { TJeneseiThemeGenreSelect, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
@@ -16,7 +16,7 @@ export interface ISelectItem {
   [key: string]: unknown
 }
 
-export type SelectProps<T extends ISelectItem> = addNewErrorProps & {
+export type SelectProps<T extends ISelectItem> = addErrorProps & {
   name?: string
   id?: string
 

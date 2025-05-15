@@ -37,7 +37,6 @@ export const Checkbox: FC<CheckboxProps> = props => {
     <>
       <CheckboxWrapper
         type="button"
-        style={props.style}
         $genre={props.genre}
         $error={props.error}
         $view={props.view}
@@ -48,6 +47,7 @@ export const Checkbox: FC<CheckboxProps> = props => {
         $isHiddenBorder={props.isHiddenBorder}
         $isNotBackground={props.isNotBackground}
         $sx={props.sx}
+        $sxTypography={props.sxTypography}
         disabled={props.isDisabled}
         tabIndex={0}
         onClick={() => !props.isDisabled && handleOnClick(!props.checked)}

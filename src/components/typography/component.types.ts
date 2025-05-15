@@ -30,7 +30,7 @@ type TypographyDefaultProps = {
   isHoverUnderlining?: boolean
 }
 
-type TypographyDataProps = TypographyDefaultProps & {
+export type TypographyDataProps = TypographyDefaultProps & {
   size?: number
 }
 
@@ -39,6 +39,12 @@ type TypographyVariantProps = TypographyDefaultProps & {
 }
 
 export type TypographyAllProps = TypographyDataProps | TypographyVariantProps
+
+export type TypographySXProps = {
+  default: TypographyAllProps
+} & {
+  [K in TJeneseiDevice]?: TypographyAllProps
+}
 
 export type TypographyProps = PropsWithChildren & {
   onClick?: () => void
@@ -50,12 +56,13 @@ export type TypographyProps = PropsWithChildren & {
   isParagraph?: boolean
   isAnchor?: boolean
 
-  sx: {
-    default: TypographyAllProps
-  } & {
-    [K in TJeneseiDevice]?: TypographyAllProps
-  }
+  sx: TypographySXProps
 }
+
+export type addSXTypographyProps = {
+  sxTypography?: TypographySXProps
+}
+export type addSXTypographyStyleProps = AddDollarSign<addSXTypographyProps>
 
 export type TypographyCSSProps = AddDollarSign<Pick<TypographyProps, 'sx'>>
 

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
+import { addError } from '@local/styles/error'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { SelectImageWrapperProps } from '.'
@@ -38,6 +39,7 @@ export const SelectImageWrapper = styled.div<SelectImageWrapperProps>`
   flex-direction: column;
   width: ${props => props.$width || '100%'};
   ${SelectImageSize}
+  ${addError}
 `
 export const SelectImageListWrapper = styled(motion.div)<SelectImageWrapperProps>`
   border: 2px dashed;

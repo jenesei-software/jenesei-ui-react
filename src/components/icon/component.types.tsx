@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { addSXProps } from '@local/styles/sx'
+import { addSXProps, addSXStyleProps } from '@local/styles/sx'
 import { JeneseiPaletteKeys, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
@@ -42,7 +42,7 @@ export type LibraryIconItemProps =
 export type StyledLibraryIconIdItemProps = AddDollarSign<
   Pick<LibraryIconItemProps, 'size' | 'turn' | 'order'> & { color?: JeneseiPaletteKeys }
 > &
-  AddDollarSign<addSXProps>
+  addSXStyleProps
 
 export enum LibraryIconIdName {
   Close,

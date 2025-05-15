@@ -1,4 +1,5 @@
 import { CheckboxProps } from '@local/components/checkbox'
+import { addSXProps, addSXStyleProps } from '@local/styles/sx'
 import { AddDollarSign } from '@local/types'
 
 export interface ICheckboxValue {
@@ -6,12 +7,12 @@ export interface ICheckboxValue {
   value: string | number
 }
 
-export interface CheckboxGroupProps<T extends ICheckboxValue> {
+export type CheckboxGroupProps<T extends ICheckboxValue> = {
   checkboxGenre: CheckboxProps['genre']
 
   checkBoxView: CheckboxProps['view']
 
-  checkboxWidth?: CheckboxProps['width']
+  checkboxSX?: CheckboxProps['sx']
 
   checkboxIsHiddenBorder?: CheckboxProps['isHiddenBorder']
 
@@ -34,8 +35,7 @@ export interface CheckboxGroupProps<T extends ICheckboxValue> {
   value: T[]
 
   valueField: keyof T
+} & addSXProps
 
-  width?: string
-}
-
-export type CheckboxGroupWrapperProps = AddDollarSign<Pick<CheckboxGroupProps<ICheckboxValue>, 'width' | 'size'>>
+export type CheckboxGroupWrapperProps = AddDollarSign<Pick<CheckboxGroupProps<ICheckboxValue>, 'size'>> &
+  addSXStyleProps

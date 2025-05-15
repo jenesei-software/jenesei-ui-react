@@ -10,7 +10,7 @@ export const Toggle = (props: ToggleProps) => {
         $isDisabled={props.isDisabled}
         $value={props.value}
         $size={props.size}
-        $isError={props.isError}
+        $error={props.error}
         tabIndex={0}
         onClick={() => props.onChange && props.onChange(!props.value)}
       >
@@ -21,7 +21,7 @@ export const Toggle = (props: ToggleProps) => {
           $isDisabled={props.isDisabled}
           $value={props.value}
           $size={props.size}
-          $isError={props.isError}
+          $error={props.error}
         />
       </ToggleWrapper>
     </AnimatePresence>

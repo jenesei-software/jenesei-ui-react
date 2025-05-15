@@ -14,9 +14,6 @@ export type ErrorMessageProps = {
   width?: string
 }
 export interface addErrorProps {
-  $isError?: boolean
-}
-export interface addNewErrorProps {
   error?: ErrorMessageProps
 }
-export type addNewErrorStylesProps = AddDollarSign<addNewErrorProps>
+export type addErrorStylesProps = AddDollarSign<addErrorProps>

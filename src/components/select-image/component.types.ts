@@ -1,8 +1,6 @@
-import { addNewErrorProps } from '@local/styles/error'
+import { addErrorProps } from '@local/styles/error'
 import { TJeneseiThemeGenreSelectImage, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
-
-import { InputStandardProps } from '../input/component.types'
 
 export type TSelectImageGenre = keyof TJeneseiThemeGenreSelectImage
 
@@ -34,6 +32,6 @@ export type SelectImageProps = {
   }
   defaultImages: SelectImageItemProps[]
   images: SelectImageItemProps[]
-} & addNewErrorProps
+} & addErrorProps
 
 export type SelectImageWrapperProps = AddDollarSign<Pick<SelectImageProps, 'size' | 'width' | 'error' | 'genre'>>

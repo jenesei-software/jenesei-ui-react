@@ -80,9 +80,7 @@ export const Button: FC<ButtonProps> = props => {
       $isRadius={props.isRadius}
       $isHidden={props.isHidden}
       $isPlaystationEffect={props.isPlaystationEffect}
-      $customFontFamily={props.customFontFamily}
-      $customFontSize={props.customFontSize}
-      $customFontWeight={props.customFontWeight}
+      $sxTypography={props.sxTypography}
       $isHiddenBorder={props.isHiddenBorder || props.isPlaystationEffect}
       disabled={props.isDisabled}
       type={props.type ?? 'button'}

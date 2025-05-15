@@ -1,12 +1,12 @@
 import { css } from 'styled-components'
 
-import { TypographyCSSProps } from '.'
+import { TypographyDataProps } from '.'
 
 export const getFontSizeStyles = (
-  size: TypographyCSSProps['$size'],
-  weight: TypographyCSSProps['$weight'],
-  family: TypographyCSSProps['$family'],
-  height?: TypographyCSSProps['$height']
+  size: TypographyDataProps['size'],
+  weight: TypographyDataProps['weight'],
+  family: TypographyDataProps['family'],
+  height?: TypographyDataProps['height']
 ) => css`
   font-family: ${family ? family : 'inherit'};
   font-style: normal;

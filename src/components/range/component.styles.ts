@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 
+import { addError } from '@local/styles/error'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { RangeComponentProps, RangeWrapperProps } from '.'
@@ -20,6 +21,7 @@ export const RangeWrapper = styled.div<RangeWrapperProps>`
   align-items: center;
   height: 20px;
   ${InputOTPSize};
+  ${addError};
 `
 
 export const RangeTrack = styled.div<RangeComponentProps>`

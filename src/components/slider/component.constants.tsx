@@ -17,7 +17,13 @@ export const IMAGES: SliderProps['images'] = [
           }
         }}
       >
-        <Button isHiddenBorder isDisabled genre="realebail-white" size="medium" customFontWeight={400}>
+        <Button
+          isHiddenBorder
+          isDisabled
+          genre="realebail-white"
+          size="medium"
+          sxTypography={{ default: { weight: 700 } }}
+        >
           Los Angeles
         </Button>
       </Stack>
@@ -37,7 +43,13 @@ export const IMAGES: SliderProps['images'] = [
           }
         }}
       >
-        <Button isHiddenBorder isDisabled genre="realebail-white" size="medium" customFontWeight={400}>
+        <Button
+          isHiddenBorder
+          isDisabled
+          genre="realebail-white"
+          size="medium"
+          sxTypography={{ default: { weight: 700 } }}
+        >
           Los Angeles
         </Button>
       </Stack>
@@ -57,7 +69,13 @@ export const IMAGES: SliderProps['images'] = [
           }
         }}
       >
-        <Button isHiddenBorder isDisabled genre="realebail-white" size="medium" customFontWeight={400}>
+        <Button
+          isHiddenBorder
+          isDisabled
+          genre="realebail-white"
+          size="medium"
+          sxTypography={{ default: { weight: 700 } }}
+        >
           Los Angeles
         </Button>
       </Stack>
@@ -77,8 +95,14 @@ export const IMAGES: SliderProps['images'] = [
           }
         }}
       >
-        <Button isHiddenBorder isDisabled genre="realebail-white" size="medium" customFontWeight={400}>
-          Смотрит на Бога, но с другой стороны
+        <Button
+          isHiddenBorder
+          isDisabled
+          genre="realebail-white"
+          size="medium"
+          sxTypography={{ default: { weight: 700 } }}
+        >
+          Los Angeles
         </Button>
       </Stack>
     ),
@@ -96,8 +120,14 @@ export const IMAGES: SliderProps['images'] = [
           }
         }}
       >
-        <Button isHiddenBorder isDisabled genre="realebail-white" size="medium" customFontWeight={400}>
-          Дует в трубу
+        <Button
+          isHiddenBorder
+          isDisabled
+          genre="realebail-white"
+          size="medium"
+          sxTypography={{ default: { weight: 700 } }}
+        >
+          Los Angeles
         </Button>
       </Stack>
     ),

@@ -19,13 +19,21 @@ type Story = StoryObj<typeof CheckboxGroupComponent>
 const defaultArgs: Partial<CheckboxGroupProps<ICheckboxValue>> = {
   checkboxGenre: 'gray',
   checkBoxView: 'Radio',
-  checkboxWidth: '100%',
   checkboxIsHiddenBorder: false,
   multiple: true,
   size: 'medium',
   labelField: 'label',
   valueField: 'value',
-  width: '300px'
+  sx: {
+    default: {
+      width: '300px'
+    }
+  },
+  checkboxSX: {
+    default: {
+      width: '100%'
+    }
+  }
 }
 
 const CheckboxGroupWrapper: FC<CheckboxGroupProps<ICheckboxValue>> = props => {

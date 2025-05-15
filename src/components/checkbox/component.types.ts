@@ -1,10 +1,12 @@
-import { CSSProperties, PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 
 import { LibraryIconItemProps, TLibraryIconCheckboxNameString } from '@local/components/icon'
-import { addNewErrorProps, addNewErrorStylesProps } from '@local/styles/error'
-import { addSXProps } from '@local/styles/sx'
+import { addErrorProps, addErrorStylesProps } from '@local/styles/error'
+import { addSXProps, addSXStyleProps } from '@local/styles/sx'
 import { TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
+
+import { addSXTypographyProps, addSXTypographyStyleProps } from '../typography'
 
 export type CheckboxProps = PropsWithChildren & {
   checked?: boolean
@@ -32,10 +34,9 @@ export type CheckboxProps = PropsWithChildren & {
   isWidthAsHeight?: boolean
 
   size: TJeneseiThemeSize
-
-  style?: CSSProperties
 } & addSXProps &
-  addNewErrorProps
+  addErrorProps &
+  addSXTypographyProps
 
 export type StyledCheckboxProps = AddDollarSign<
   Pick<
@@ -43,8 +44,9 @@ export type StyledCheckboxProps = AddDollarSign<
     'checked' | 'genre' | 'view' | 'isWidthAsHeight' | 'size' | 'isDisabled' | 'isNotBackground' | 'isHiddenBorder'
   >
 > &
-  AddDollarSign<addSXProps> &
-  addNewErrorStylesProps
+  addSXStyleProps &
+  addErrorStylesProps &
+  addSXTypographyStyleProps
 
 export type TCheckboxGenre = keyof TJeneseiThemeGenre
 

@@ -14,7 +14,11 @@ type Story = StoryObj<typeof TypographyComponent>
 
 export const Typography: Story = {
   args: {
-    variant: 'h1',
+    sx: {
+      default: {
+        variant: 'h1'
+      }
+    },
     children: 'Hello, World!'
   }
 }

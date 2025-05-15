@@ -15,21 +15,38 @@ type Story = StoryObj<typeof Button>
 export const Product: Story = {
   args: {
     children: 'Click',
-    width: 'auto',
     type: 'button',
     genre: 'realebail-product',
     size: 'medium',
-    customFontWeight: 400,
-    customFontFamily: 'Work Sans'
+    sx: {
+      default: {
+        width: 'auto'
+      }
+    },
+    sxTypography: {
+      default: {
+        weight: 400,
+        family: 'Work Sans'
+      }
+    }
   }
 }
 export const Gray: Story = {
   args: {
     children: 'Click',
-    width: 'auto',
     type: 'button',
     genre: 'realebail-gray',
     size: 'medium',
-    customFontWeight: 400
+    sx: {
+      default: {
+        width: 'auto'
+      }
+    },
+    sxTypography: {
+      default: {
+        weight: 400,
+        family: 'Work Sans'
+      }
+    }
   }
 }

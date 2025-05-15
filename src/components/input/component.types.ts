@@ -8,11 +8,11 @@ import {
 } from 'react'
 import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'react-number-format'
 
-import { addNewErrorProps } from '@local/styles/error'
+import { addErrorProps } from '@local/styles/error'
 import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
-type InputDefaultProps = addNewErrorProps & {
+type InputDefaultProps = addErrorProps & {
   name?: string
 
   id?: string

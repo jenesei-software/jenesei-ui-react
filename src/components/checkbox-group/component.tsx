@@ -28,7 +28,7 @@ export const CheckboxGroup = <T extends ICheckboxValue>(props: CheckboxGroupProp
     [props]
   )
   return (
-    <CheckboxGroupWrapper className={props.className} $width={props.width} $size={props.size}>
+    <CheckboxGroupWrapper className={props.className} $sx={props.sx} $size={props.size}>
       {props.options.map((e, index) => {
         const isChecked = props.value.some(selectedItem => selectedItem[props.valueField] === e[props.valueField])
         return (
@@ -37,8 +37,8 @@ export const CheckboxGroup = <T extends ICheckboxValue>(props: CheckboxGroupProp
               genre={props.checkboxGenre}
               isHiddenBorder={props.checkboxIsHiddenBorder}
               view={props.checkBoxView}
+              sx={props.checkboxSX}
               size={props.size}
-              width={props.checkboxWidth}
               checked={isChecked}
             >
               {props.labelField && e?.[props.labelField] !== undefined && (

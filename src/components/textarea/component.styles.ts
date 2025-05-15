@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { getFontSizeStyles } from '@local/components/typography'
 import { addOutline, addTransitionWithoutSize } from '@local/styles/add'
-import { addNewError } from '@local/styles/error'
+import { addError } from '@local/styles/error'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledTextAreaProps, StyledTextAreaWrapperProps } from '.'
@@ -112,7 +112,7 @@ export const StyledTextAreaCSS = css<StyledTextAreaProps>`
   ${TextAreaIsTextAreaEffect};
   ${addTransitionWithoutSize};
   ${addOutline};
-  ${addNewError};
+  ${addError};
 `
 
 export const StyledTextArea = styled.textarea<StyledTextAreaProps>`

@@ -1,10 +1,10 @@
 import { FocusEventHandler, KeyboardEventHandler } from 'react'
 
-import { addNewErrorProps } from '@local/styles/error'
+import { addErrorProps } from '@local/styles/error'
 import { TJeneseiThemeGenreTextArea, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
-export type TextAreaProps = addNewErrorProps & {
+export type TextAreaProps = addErrorProps & {
   name?: string
 
   id?: string

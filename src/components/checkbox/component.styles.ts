@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components'
 
 import { Icon } from '@local/components/icon'
-import { addSX, getFontSizeStyles } from '@local/components/typography'
-import { addCustomFont, addOutline, addTransition } from '@local/styles/add'
-import { addNewError } from '@local/styles/error'
+import { addSXTypography, getFontSizeStyles } from '@local/components/typography'
+import { addOutline, addTransition } from '@local/styles/add'
+import { addError } from '@local/styles/error'
+import { addSX } from '@local/styles/sx'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledCheckboxProps, StyledIconProps } from '.'
@@ -92,8 +93,8 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   ${CheckboxHiddenBorder};
   ${CheckboxSize};
   ${addOutline};
-  ${addNewError};
-  ${addCustomFont};
+  ${addError};
+  ${addSXTypography};
   ${addSX};
   background-color: ${props => props.$isNotBackground && 'transparent'};
 `

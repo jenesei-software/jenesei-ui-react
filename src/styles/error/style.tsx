@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import { getFontSizeStyles } from '@local/components/typography'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
-import { ErrorMessageProps, ErrorMessagePropsDollar, addErrorProps, addNewErrorStylesProps } from '.'
+import { ErrorMessageProps, ErrorMessagePropsDollar, addErrorStylesProps } from '.'
 
 const ErrorMessageSize = css<ErrorMessagePropsDollar>`
   ${props =>
@@ -34,21 +34,7 @@ export const ErrorMessageComponent = styled.div<ErrorMessagePropsDollar>`
   width: ${props => props.$width ?? '100%'};
   ${ErrorMessageSize}
 `
-
-export const addError = css<addErrorProps>`
-  ${props =>
-    props.$isError &&
-    css`
-      border-color: ${props => props.theme.colors.danger};
-      &:focus,
-      &:active,
-      &:hover,
-      &:focus-visible {
-        border-color: ${props => props.theme.colors.danger};
-      }
-    `};
-`
-export const addNewError = css<addNewErrorStylesProps>`
+export const addError = css<addErrorStylesProps>`
   ${props =>
     props.$error?.isError &&
     css`

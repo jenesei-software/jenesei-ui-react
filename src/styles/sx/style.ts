@@ -1,13 +1,13 @@
 import { CSSObject, DefaultTheme, css } from 'styled-components'
 
-import { styledAddSXProps } from '.'
+import { addSXStyleProps } from '.'
 
 function toStyledCSS(value: CSSObject | ((theme: DefaultTheme) => CSSObject), theme: DefaultTheme) {
   const styles = typeof value === 'function' ? value(theme) : value
   return css(styles)
 }
 
-export const addSX = css<styledAddSXProps>`
+export const addSX = css<addSXStyleProps>`
   ${props => {
     const rawSX = props.$sx
     if (!rawSX) return null

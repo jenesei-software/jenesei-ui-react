@@ -15,7 +15,11 @@ type Story = StoryObj<typeof Input>
 const defaultArgs: Partial<InputProps> = {
   genre: 'blackBorder',
   size: 'largeMedium',
-  isError: false,
+  error: {
+    errorMessage: 'Error',
+    isError: false,
+    isErrorAbsolute: false
+  },
   isDisabled: false,
   isRequired: false,
   isReadOnly: false,
@@ -38,8 +42,6 @@ export const Password: Story = {
     },
     variety: 'standard',
     type: 'password',
-    errorMessage: 'Error',
-    isErrorAbsolute: true,
     placeholder: 'Password'
   }
 }

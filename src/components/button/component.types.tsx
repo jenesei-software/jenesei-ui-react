@@ -1,9 +1,11 @@
 import React, { PropsWithChildren } from 'react'
 
 import { IconTypeMap, LibraryIconItemProps } from '@local/components/icon'
-import { addSXProps } from '@local/styles/sx'
+import { addSXProps, addSXStyleProps } from '@local/styles/sx'
 import { TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
+
+import { addSXTypographyProps, addSXTypographyStyleProps } from '../typography'
 
 export type TButtonGenre = keyof TJeneseiThemeGenre
 
@@ -50,7 +52,8 @@ type ButtonPropsDefault = PropsWithChildren & {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 
   type?: 'button' | 'submit' | 'reset'
-} & addSXProps
+} & addSXProps &
+  addSXTypographyProps
 
 export type ButtonPropsStandard = ButtonPropsDefault & {
   isIconGroup?: false
@@ -75,7 +78,8 @@ export type StyledDollarButtonProps = AddDollarSign<
     | 'isFullSize'
   >
 > &
-  AddDollarSign<addSXProps>
+  addSXStyleProps &
+  addSXTypographyStyleProps
 
 export type StyledDollarButtonIconsWrapperProps = AddDollarSign<
   Pick<ButtonProps, 'isIconGroup' | 'size'> & Pick<ButtonPropsIconGroup, 'iconGroupOrder'>

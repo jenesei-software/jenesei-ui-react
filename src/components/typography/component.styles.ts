@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { JeneseiPalette } from '@local/theme/theme'
 
-import { TypographyAllProps, TypographyCSSProps } from '.'
+import { TypographyAllProps, TypographyCSSProps, addSXTypographyStyleProps } from '.'
 
 function toStyledCSS(value: TypographyAllProps) {
   return css`
@@ -204,7 +204,7 @@ function toStyledCSS(value: TypographyAllProps) {
       : null};
   `
 }
-export const addSX = css<TypographyCSSProps>`
+const addSX = css<TypographyCSSProps>`
   ${props => {
     const rawSX = props.$sx
     if (!rawSX) return null
@@ -241,4 +241,29 @@ const TypographyCSS = css<TypographyCSSProps>`
 
 export const Title = styled.span<TypographyCSSProps>`
   ${TypographyCSS}
+`
+
+export const addSXTypography = css<addSXTypographyStyleProps>`
+  ${props => {
+    const rawSX = props.$sxTypography
+    if (!rawSX) return null
+    return toStyledCSS(rawSX.default)
+  }}
+
+  ${props => {
+    const rawSX = props.$sxTypography
+    if (!rawSX) return null
+
+    return Object.entries(rawSX)
+      .filter(([key]) => key !== 'default')
+      .map(([deviceKey, value]) => {
+        const screenWidth = props.theme.screens[deviceKey as keyof typeof props.theme.screens]?.width
+        if (!screenWidth) return null
+        return css`
+          @media (max-width: ${screenWidth}) {
+            ${toStyledCSS(value)}
+          }
+        `
+      })
+  }}
 `
