@@ -1,0 +1,37 @@
+import{B as p}from"./component-DEPDE1I-.js";import"./styled-components.browser.esm-CyaOpMkv.js";import"./index-CnY36iC1.js";import"./component.styles-HSoMfZk7.js";import"./theme-D8gwu-FP.js";import"./style-KtjdfyVq.js";import"./style-C2EjhzEB.js";import"./theme.global-C6REP-xE.js";import"./component-BejfL9p2.js";import"./component.functions-BGGwQnpg.js";import"./component-CXRT2tYE.js";import"./jsx-runtime-uV6E1Fxi.js";import"./index-Dyxk8dpP.js";import"./tiny-invariant-DKC21gSL.js";import"./context.constants-_uES7CTn.js";import"./proxy-BgqLTuwE.js";const T={component:p,title:"RealEbail/Button"},r={args:{children:"Click",type:"button",genre:"realebail-product",size:"medium",sx:{default:{width:"auto"}},sxTypography:{default:{weight:400,family:"Work Sans"}}}},t={args:{children:"Click",type:"button",genre:"realebail-gray",size:"medium",sx:{default:{width:"auto"}},sxTypography:{default:{weight:400,family:"Work Sans"}}}};var e,a,n;r.parameters={...r.parameters,docs:{...(e=r.parameters)==null?void 0:e.docs,source:{originalSource:`{
+  args: {
+    children: 'Click',
+    type: 'button',
+    genre: 'realebail-product',
+    size: 'medium',
+    sx: {
+      default: {
+        width: 'auto'
+      }
+    },
+    sxTypography: {
+      default: {
+        weight: 400,
+        family: 'Work Sans'
+      }
+    }
+  }
+}`,...(n=(a=r.parameters)==null?void 0:a.docs)==null?void 0:n.source}}};var o,i,s;t.parameters={...t.parameters,docs:{...(o=t.parameters)==null?void 0:o.docs,source:{originalSource:`{
+  args: {
+    children: 'Click',
+    type: 'button',
+    genre: 'realebail-gray',
+    size: 'medium',
+    sx: {
+      default: {
+        width: 'auto'
+      }
+    },
+    sxTypography: {
+      default: {
+        weight: 400,
+        family: 'Work Sans'
+      }
+    }
+  }
+}`,...(s=(i=t.parameters)==null?void 0:i.docs)==null?void 0:s.source}}};const W=["Product","Gray"];export{t as Gray,r as Product,W as __namedExportsOrder,T as default};
