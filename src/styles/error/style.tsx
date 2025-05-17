@@ -1,10 +1,11 @@
-import { FC } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { getFontSizeStyles } from '@local/components/typography'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { ErrorMessageProps, ErrorMessagePropsDollar, addErrorStylesProps } from '.'
+import { WordsPullUp } from '../motion'
 
 const ErrorMessageSize = css<ErrorMessagePropsDollar>`
   ${props =>
@@ -33,6 +34,7 @@ export const ErrorMessageComponent = styled.div<ErrorMessagePropsDollar>`
   ${props => getFontSizeStyles(12, 400, props.theme.font.family)};
   width: ${props => props.$width ?? '100%'};
   ${ErrorMessageSize}
+  display: flex;
 `
 export const addError = css<addErrorStylesProps>`
   ${props =>
@@ -48,11 +50,27 @@ export const addError = css<addErrorStylesProps>`
     `};
 `
 export const ErrorMessage: FC<ErrorMessageProps> = props => {
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [localError, setLocalError] = useState<string | null>(null)
+  useEffect(() => {
+    if (props.errorMessage) {
+      setLocalError(props.errorMessage)
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+        timeoutRef.current = null
+      }
+    } else {
+      timeoutRef.current = setTimeout(() => setLocalError(null), 1000)
+      return () => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current)
+      }
+    }
+  }, [props.errorMessage])
   return (
     <>
-      {props.isError && props.errorMessage ? (
+      {props.isError && localError ? (
         <ErrorMessageComponent $size={props.size} $width={props.width} $isErrorAbsolute={props.isErrorAbsolute}>
-          {props.errorMessage}
+          <WordsPullUp text={localError} />
         </ErrorMessageComponent>
       ) : null}
     </>

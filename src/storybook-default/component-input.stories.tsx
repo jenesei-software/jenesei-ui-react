@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FC, useState } from 'react'
 import 'styled-components'
 
+import { Stack } from '@local/components/stack'
+
 import { Input, InputProps } from '../components/input'
 
 const meta: Meta<typeof Input> = {
@@ -16,9 +18,9 @@ const defaultArgs: Partial<InputProps> = {
   genre: 'blackBorder',
   size: 'largeMedium',
   error: {
-    errorMessage: 'Error',
-    isError: false,
-    isErrorAbsolute: false
+    errorMessage: 'Большая страшная ошибка на много строк',
+    isError: true,
+    isErrorAbsolute: true
   },
   isDisabled: false,
   isRequired: false,
@@ -30,7 +32,11 @@ const defaultArgs: Partial<InputProps> = {
 const InputStringWrapper: FC<InputProps> = props => {
   const [value, setValue] = useState<string>('')
 
-  return <Input {...props} value={value} variety="standard" onChange={newValue => setValue(newValue)} />
+  return (
+    <Stack sx={{ default: { position: 'relative', height: 'fit-content' } }}>
+      <Input {...props} value={value} variety="standard" onChange={newValue => setValue(newValue)} />
+    </Stack>
+  )
 }
 
 export const Password: Story = {
