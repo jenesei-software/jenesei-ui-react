@@ -36,10 +36,10 @@ const ProviderSonnerWrapperDouble: FC = () => {
         button: false
       },
       () => ({
-        title: 'Офигенчик!',
-        description: 'Данные загрузились!',
+        title: 'Офигенчик! Офигенчик! Офигенчик!',
+        description: 'Данные загрузились! Данные загрузились! Данные загрузились! Данные загрузились!',
         genre: 'greenTransparent',
-        icon: 'Heart'
+        icon: 'Activity'
       })
     )
   }

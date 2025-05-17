@@ -94,7 +94,7 @@ export const SonnerElementWrapper = styled.div<SonnerElementWrapperProps>`
 export const SonnerContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 2px;
   align-items: flex-start;
   justify-content: flex-start;
   align-self: stretch;
