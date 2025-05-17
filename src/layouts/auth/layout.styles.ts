@@ -58,6 +58,7 @@ export const AuthLayoutWrapperChildren = styled.div`
 `
 
 export const AuthLayoutWrapperChildrenWrapper = styled(motion.div)`
+  overflow: hidden;
   flex-grow: 1;
   display: flex;
 `
