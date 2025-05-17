@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC } from 'react'
 import styled, { css } from 'styled-components'
 
 import { getFontSizeStyles } from '@local/components/typography'
@@ -35,6 +35,7 @@ export const ErrorMessageComponent = styled.div<ErrorMessagePropsDollar>`
   width: ${props => props.$width ?? '100%'};
   ${ErrorMessageSize}
   display: flex;
+  flex-wrap: wrap;
 `
 export const addError = css<addErrorStylesProps>`
   ${props =>
@@ -50,27 +51,11 @@ export const addError = css<addErrorStylesProps>`
     `};
 `
 export const ErrorMessage: FC<ErrorMessageProps> = props => {
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const [localError, setLocalError] = useState<string | null>(null)
-  useEffect(() => {
-    if (props.errorMessage && props.isError) {
-      setLocalError(props.errorMessage)
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
-        timeoutRef.current = null
-      }
-    } else {
-      timeoutRef.current = setTimeout(() => setLocalError(null), 1000)
-      return () => {
-        if (timeoutRef.current) clearTimeout(timeoutRef.current)
-      }
-    }
-  }, [props.errorMessage, props.isError])
   return (
     <>
-      {localError ? (
+      {props.errorMessage && props.isError ? (
         <ErrorMessageComponent $size={props.size} $width={props.width} $isErrorAbsolute={props.isErrorAbsolute}>
-          <WordsPullUp text={localError} />
+          <WordsPullUp text={props.errorMessage} />
         </ErrorMessageComponent>
       ) : null}
     </>
