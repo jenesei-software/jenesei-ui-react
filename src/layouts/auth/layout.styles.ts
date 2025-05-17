@@ -59,6 +59,7 @@ export const AuthLayoutWrapperChildren = styled.div`
 
 export const AuthLayoutWrapperChildrenWrapper = styled(motion.div)`
   flex-grow: 1;
+  display: flex;
 `
 
 export const AuthLayoutWrapperBackgroundSVG = styled.svg`
