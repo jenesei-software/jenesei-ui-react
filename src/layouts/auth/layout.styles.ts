@@ -54,26 +54,11 @@ export const AuthLayoutWrapperChildren = styled.div`
   justify-self: stretch;
   display: flex;
   align-items: stretch;
+  flex-grow: 1;
 `
 
 export const AuthLayoutWrapperChildrenWrapper = styled(motion.div)`
-  z-index: 0;
-  padding: 80px;
-  display: flex;
-  align-items: center;
-  overflow-y: auto;
-  justify-content: flex-start;
-  @media (max-width: ${props => props.theme.screens.tablet.width}) {
-    justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-    padding: 100px;
-  }
-  @media (max-width: ${props => props.theme.screens.mobile.width}) {
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
-  }
+  flex-grow: 1;
 `
 
 export const AuthLayoutWrapperBackgroundSVG = styled.svg`
