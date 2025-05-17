@@ -92,12 +92,13 @@ export const ButtonSizeConstructor = (
     isWidthAsHeight?: boolean
   }
 ) => css`
-  height: ${props.height}px;
+  /* height: ${props.height}px; */
   min-height: ${props.height}px;
+  max-height: fit-content;
   border-radius: ${props.radius}px;
   gap: ${props.padding - 2}px;
   ${params => getFontSizeStyles(props.font, 700, params.theme.font.family)};
-  padding: 0px ${props.padding}px;
+  padding: 2px ${props.padding}px;
 
   ${() =>
     props.isFullSize &&
