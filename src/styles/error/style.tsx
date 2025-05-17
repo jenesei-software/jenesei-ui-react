@@ -53,7 +53,7 @@ export const ErrorMessage: FC<ErrorMessageProps> = props => {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [localError, setLocalError] = useState<string | null>(null)
   useEffect(() => {
-    if (props.errorMessage) {
+    if (props.errorMessage && props.isError) {
       setLocalError(props.errorMessage)
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current)
@@ -65,10 +65,10 @@ export const ErrorMessage: FC<ErrorMessageProps> = props => {
         if (timeoutRef.current) clearTimeout(timeoutRef.current)
       }
     }
-  }, [props.errorMessage])
+  }, [props.errorMessage, props.isError])
   return (
     <>
-      {props.isError && localError ? (
+      {localError ? (
         <ErrorMessageComponent $size={props.size} $width={props.width} $isErrorAbsolute={props.isErrorAbsolute}>
           <WordsPullUp text={localError} />
         </ErrorMessageComponent>
