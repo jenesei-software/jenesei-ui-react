@@ -17,48 +17,47 @@ export const Button: FC<ButtonProps> = props => {
 
   const iconComponents = useMemo(
     () =>
-      props.icons?.map((icon, index) =>
-        icon?.type === 'id' ? (
-          <Icon
-            key={index}
-            name={icon?.name as TLibraryIconIdNameString}
-            type="id"
-            size={icon?.size ?? props.size}
-            turn={icon.turn}
-            order={icon.order}
-            sx={{
-              default: {}
-            }}
-          />
-        ) : icon?.type === 'checkbox' ? (
-          <Icon
-            key={index}
-            name={icon?.name as TLibraryIconCheckboxNameString}
-            type="checkbox"
-            size={icon?.size ?? props.size}
-            turn={icon.turn}
-            order={icon.order}
-          />
-        ) : icon?.type === 'loading' ? (
-          <Icon
-            key={index}
-            name={icon?.name as TLibraryIconLoadingNameString}
-            type="loading"
-            size={icon?.size ?? props.size}
-            turn={icon.turn}
-            order={icon.order}
-          />
-        ) : icon?.type === 'realebail' ? (
-          <Icon
-            key={index}
-            name={icon?.name as TLibraryIcoRealEbailNameNameString}
-            type="realebail"
-            size={icon?.size ?? props.size}
-            turn={icon.turn}
-            order={icon.order}
-          />
-        ) : null
-      ),
+      (props.icons ?? [])
+        ?.filter(icon => !icon.isHidden)
+        ?.map((icon, index) =>
+          icon?.type === 'id' ? (
+            <Icon
+              key={index}
+              name={icon?.name as TLibraryIconIdNameString}
+              type="id"
+              size={icon?.size ?? props.size}
+              turn={icon.turn}
+              order={icon.order}
+            />
+          ) : icon?.type === 'checkbox' ? (
+            <Icon
+              key={index}
+              name={icon?.name as TLibraryIconCheckboxNameString}
+              type="checkbox"
+              size={icon?.size ?? props.size}
+              turn={icon.turn}
+              order={icon.order}
+            />
+          ) : icon?.type === 'loading' ? (
+            <Icon
+              key={index}
+              name={icon?.name as TLibraryIconLoadingNameString}
+              type="loading"
+              size={icon?.size ?? props.size}
+              turn={icon.turn}
+              order={icon.order}
+            />
+          ) : icon?.type === 'realebail' ? (
+            <Icon
+              key={index}
+              name={icon?.name as TLibraryIcoRealEbailNameNameString}
+              type="realebail"
+              size={icon?.size ?? props.size}
+              turn={icon.turn}
+              order={icon.order}
+            />
+          ) : null
+        ),
     [props.icons, props.size]
   )
 
