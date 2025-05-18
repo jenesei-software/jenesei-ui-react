@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import { addSX } from '@local/styles/sx'
 
 import { StyledStackProps } from '.'
+import { addRipple } from '../ripple'
 
 export const StyledStack = styled.div<StyledStackProps>`
   display: flex;
@@ -18,10 +19,12 @@ export const StyledStack = styled.div<StyledStackProps>`
       &:hover {
         background-color: ${props => props.theme.palette.black05};
       }
-    `}
+    `};
+  ${addRipple};
 `
 
 export const StyledStackMotion = styled(motion.div)<StyledStackProps>`
+  display: flex;
   ${addSX}
 
   ${props =>
@@ -33,5 +36,6 @@ export const StyledStackMotion = styled(motion.div)<StyledStackProps>`
       &:hover {
         background-color: ${props => props.theme.palette.black05};
       }
-    `}
+    `};
+  ${addRipple};
 `

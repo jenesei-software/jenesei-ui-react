@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { ComponentWithRipple } from '@local/components/ripple'
+import { addRippleDefault } from '@local/components/ripple'
 import { addSXTypography, getFontSizeStyles } from '@local/components/typography'
 import { addOutline, addTransition } from '@local/styles/add'
 import { addSX } from '@local/styles/sx'
@@ -133,7 +133,6 @@ export const StyledButton = styled.button<StyledDollarButtonProps>`
   cursor: pointer;
   user-select: none;
 
-  ${ComponentWithRipple};
   ${ButtonBorder};
   ${ButtonSize};
   ${ButtonGenre};
@@ -142,6 +141,7 @@ export const StyledButton = styled.button<StyledDollarButtonProps>`
   ${ButtonIsRadius};
   ${ButtonIsPlaystationEffect};
   ${ButtonFlex};
+  ${addRippleDefault};
   ${addTransition};
   ${addOutline};
   ${addSXTypography};

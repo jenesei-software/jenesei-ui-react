@@ -22,15 +22,25 @@ function toStyledCSS(value: TypographyAllProps) {
     css`
       overflow: ${value.overflow};
     `};
-    ${value.clamp &&
-    css`
-      display: -webkit-box;
-      -webkit-line-clamp: ${value.clamp};
-    `};
-    ${value.clampOrient &&
-    css`
-      -webkit-box-orient: ${value.clampOrient};
-    `};
+    ${value.line !== undefined && value.line === 1
+      ? css`
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        width: '-webkit-fill-available',
+        maxWidth: 'fit-content'
+     `
+      : css`
+        wordBreak: 'break-word',
+        whiteSpace: 'normal',
+        textOverflow: 'ellipsis',
+        display: '-webkit-box',
+        overflow: 'hidden',
+        WebkitBoxOrient: 'vertical',
+        WebkitLineClamp: line,
+        width: 'fit-content',
+        overflowWrap: 'anywhere'
+      `};
     ${value.family &&
     css`
       font-family: ${value.family};

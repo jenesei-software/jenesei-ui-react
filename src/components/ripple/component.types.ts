@@ -2,7 +2,7 @@ import { AddDollarSign } from '@local/types'
 
 export interface RippleProps {
   duration?: number
-  color: string
+  color?: string
   isDisabled?: boolean
   isHidden?: boolean
 }

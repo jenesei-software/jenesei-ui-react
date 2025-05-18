@@ -35,7 +35,7 @@ const useDebouncedRippleCleanUp = (rippleCount: number, duration: number, cleanU
 }
 
 export const Ripple: FC<RippleProps> = props => {
-  const color = useMemo(() => props.color, [props.color])
+  const color = useMemo(() => props.color ?? 'unset', [props.color])
   const duration = useMemo(() => props.duration ?? DEFAULT_RIPPLE_DURATION, [props.duration])
 
   const [rippleArray, setRippleArray] = useState<RippleArrayElement[]>([])
@@ -44,7 +44,7 @@ export const Ripple: FC<RippleProps> = props => {
     setRippleArray([])
   })
 
-  const addRipple = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+  const onMouseDown = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
     if (!event.isTrusted) return
     const rippleContainer = event.currentTarget.getBoundingClientRect()
     const size = rippleContainer.width > rippleContainer.height ? rippleContainer.width : rippleContainer.height
@@ -59,7 +59,7 @@ export const Ripple: FC<RippleProps> = props => {
 
   if (props.isDisabled || props.isHidden) return null
   return (
-    <RippleContainer id={DEFAULT_RIPPLE_ID} $duration={duration} $color={color} onMouseDown={addRipple}>
+    <RippleContainer id={DEFAULT_RIPPLE_ID} $duration={duration} $color={color} onMouseDown={onMouseDown}>
       {rippleArray.length > 0 &&
         rippleArray.map((ripple, index) => {
           return (

@@ -11,6 +11,7 @@ export const Stack: FC<StackProps> = props => {
       className={props.className}
       $sx={props.sx}
       $isHover={props.isHover}
+      $isRipple={props.isRipple}
     >
       {props.children}
     </StyledStack>
@@ -29,6 +30,7 @@ export const StackMotion: FC<StackMotionProps> = props => {
       className={props.className}
       $sx={props.sx}
       $isHover={props.isHover}
+      $isRipple={props.isRipple}
     >
       {props.children}
     </StyledStackMotion>

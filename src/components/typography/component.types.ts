@@ -12,10 +12,9 @@ import { AddDollarSign } from '@local/types'
 import { TooltipProps } from '../tooltip'
 
 type TypographyDefaultProps = {
+  line?: number
   weight?: TJeneseiTypographyWeight
-  clamp?: number
   device?: TJeneseiDevice
-  clampOrient?: CSSProperties['boxOrient']
   overflow?: CSSProperties['overflow']
   color?: JeneseiPaletteKeys
   family?: TJeneseiFontFamily

@@ -7,6 +7,7 @@ import { AddDollarSign } from '@local/types'
 export interface StackProps extends addSXProps, PropsWithChildren {
   className?: string
   isHover?: boolean
+  isRipple?: boolean
   onClick?: () => void
   onDrop?: (e: DragEvent<HTMLDivElement>) => void
   onDragOver?: DragEventHandler<HTMLDivElement>
@@ -19,6 +20,7 @@ export type StackMotionProps = StackProps &
     style?: CSSProperties
     className?: string
     isHover?: boolean
+    isRipple?: boolean
     onClick?: () => void
   }
 
