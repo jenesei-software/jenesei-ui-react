@@ -136,7 +136,9 @@ export enum LibraryIconIdName {
   CallMissed,
   CallSilent,
   Lock,
-  Unlock
+  Unlock,
+  Resources,
+  Language
 }
 export enum LibraryIconCheckboxName {
   Radio,
