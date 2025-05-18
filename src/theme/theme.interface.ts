@@ -214,7 +214,7 @@ export type TJeneseiFontFamily = 'Inter' | 'Roboto' | 'Work Sans'
 
 export type TJeneseiTypographyHeading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9'
 export type TJeneseiTypographyWeight = 100 | 300 | 400 | 500 | 700 | 900
-export type TJeneseiDevice = 'default' | 'mobile' | 'tablet'
+export type TJeneseiDevice = 'default' | 'tablet' | 'mobile'
 
 export interface IJeneseiTheme {
   screens: IJeneseiThemeScreens

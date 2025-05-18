@@ -81,6 +81,7 @@ const addSXAppOutlet = css<ProviderAppOutletProps>`
       .filter(([key]) => key !== 'default')
       .map(([key]) => {
         const deviceKey = key as keyof typeof props.theme.screens
+        console.log('deviceKey', deviceKey)
         const screenWidth = props.theme.screens[deviceKey]?.width
         if (!screenWidth) return null
         return css`
@@ -157,30 +158,7 @@ export const ProviderAppOutletNotification = styled.section<ProviderAppOutletPro
   grid-area: notification;
   display: flex;
 
-  ${props =>
-    props.$notification?.isFixed &&
-    css`
-      position: fixed;
-      width: 100%;
-      height: ${props.$notification.height};
-      @media (max-width: ${props => props.theme.screens.tablet.width}) {
-        height: ${props.$notification.heightTablet ? props.$notification.heightTablet : '0px'};
-      }
-
-      @media (max-width: ${props => props.theme.screens.mobile.width}) {
-        height: ${props.$notification && props.$notification.heightMobile ? props.$notification.heightMobile : '0px'};
-      }
-    `}
-
   ${props => (props.$notification?.height ? visibleStyles : hiddenStyles)}
-
-  @media (max-width: ${props => props.theme.screens.tablet.width}) {
-    ${props => (props.$notification?.heightTablet ? visibleStyles : hiddenStyles)}
-  }
-
-  @media (max-width: ${props => props.theme.screens.mobile.width}) {
-    ${props => (props.$notification?.heightMobile ? visibleStyles : hiddenStyles)}
-  }
 `
 
 export const ProviderAppOutletHeader = styled.header<ProviderAppOutletProps>`
@@ -194,14 +172,6 @@ export const ProviderAppOutletHeader = styled.header<ProviderAppOutletProps>`
   display: flex;
 
   ${props => (props.$header?.height ? visibleStyles : hiddenStyles)}
-
-  @media (max-width: ${props => props.theme.screens.tablet.width}) {
-    ${props => (props.$header?.heightTablet ? visibleStyles : hiddenStyles)}
-  }
-
-  @media (max-width: ${props => props.theme.screens.mobile.width}) {
-    ${props => (props.$header?.heightMobile ? visibleStyles : hiddenStyles)}
-  }
 `
 
 export const ProviderAppOutletFooter = styled.footer<ProviderAppOutletProps>`
@@ -215,14 +185,6 @@ export const ProviderAppOutletFooter = styled.footer<ProviderAppOutletProps>`
   display: flex;
 
   ${props => (props.$footer?.height ? visibleStyles : hiddenStyles)}
-
-  @media (max-width: ${props => props.theme.screens.tablet.width}) {
-    ${props => (props.$footer?.heightTablet ? visibleStyles : hiddenStyles)}
-  }
-
-  @media (max-width: ${props => props.theme.screens.mobile.width}) {
-    ${props => (props.$footer?.heightMobile ? visibleStyles : hiddenStyles)}
-  }
 `
 
 export const ProviderAppOutletNav = styled.nav<ProviderAppOutletProps>`
@@ -236,14 +198,6 @@ export const ProviderAppOutletNav = styled.nav<ProviderAppOutletProps>`
   display: flex;
 
   ${props => (props.$nav?.height ? visibleStyles : hiddenStyles)}
-
-  @media (max-width: ${props => props.theme.screens.tablet.width}) {
-    ${props => (props.$nav?.heightTablet ? visibleStyles : hiddenStyles)}
-  }
-
-  @media (max-width: ${props => props.theme.screens.mobile.width}) {
-    ${props => (props.$nav?.heightMobile ? visibleStyles : hiddenStyles)}
-  }
 `
 
 export const ProviderAppOutletLeftAside = styled.aside<ProviderAppOutletProps>`
@@ -257,14 +211,6 @@ export const ProviderAppOutletLeftAside = styled.aside<ProviderAppOutletProps>`
   display: flex;
 
   ${props => (props.$leftAside?.width ? visibleStyles : hiddenStyles)}
-
-  @media (max-width: ${props => props.theme.screens.tablet.width}) {
-    ${props => (props.$leftAside?.widthTablet ? visibleStyles : hiddenStyles)}
-  }
-
-  @media (max-width: ${props => props.theme.screens.mobile.width}) {
-    ${props => (props.$leftAside?.widthMobile ? visibleStyles : hiddenStyles)}
-  }
 `
 
 export const ProviderAppOutletRightAside = styled.aside<ProviderAppOutletProps>`
@@ -278,12 +224,4 @@ export const ProviderAppOutletRightAside = styled.aside<ProviderAppOutletProps>`
   display: flex;
 
   ${props => (props.$rightAside?.width ? visibleStyles : hiddenStyles)}
-
-  @media (max-width: ${props => props.theme.screens.tablet.width}) {
-    ${props => (props.$rightAside?.widthTablet ? visibleStyles : hiddenStyles)}
-  }
-
-  @media (max-width: ${props => props.theme.screens.mobile.width}) {
-    ${props => (props.$rightAside?.widthMobile ? visibleStyles : hiddenStyles)}
-  }
 `

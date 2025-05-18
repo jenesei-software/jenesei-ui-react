@@ -17,7 +17,6 @@ export interface ProviderAppProps extends PropsWithChildren {
     height?: {
       [K in TJeneseiDevice]?: string
     }
-    isFixed?: boolean
     zIndex?: number
   }
   header?: {

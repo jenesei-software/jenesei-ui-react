@@ -227,38 +227,51 @@ export const Default: Story = {
     defaultDescription: 'Description from Storybook?',
     notification: {
       component: defaultNotification,
-      height: '30px',
-      heightTablet: '20px',
-      heightMobile: '20px',
-      isFixed: false
+      height: {
+        default: '20px',
+        tablet: '20px',
+        mobile: '20px'
+      }
     },
     header: {
       component: defaultHeader,
-      height: '80px',
-      heightTablet: '60px',
-      heightMobile: '40px'
+      height: {
+        default: '80px',
+        tablet: '60px',
+        mobile: '40px'
+      }
     },
     leftAside: {
       component: defaultLeftAside,
-      width: '80px',
-      widthTablet: '60px'
+      width: {
+        default: '80px',
+        tablet: '60px',
+        mobile: '0px'
+      }
     },
     nav: {
       component: defaultNav,
-      height: '80px',
-      heightTablet: '60px',
-      heightMobile: '40px'
+      height: {
+        default: '80px',
+        tablet: '60px',
+        mobile: '40px'
+      }
     },
     rightAside: {
       component: defaultRightAside,
-      width: '80px',
-      widthTablet: '60px'
+      width: {
+        default: '80px',
+        tablet: '60px',
+        mobile: '0px'
+      }
     },
     footer: {
       component: defaultFooter,
-      height: '80px',
-      heightTablet: '60px',
-      heightMobile: '40px'
+      height: {
+        default: '80px',
+        tablet: '60px',
+        mobile: '40px'
+      }
     },
     children: defaultChildren
   }
@@ -271,34 +284,46 @@ export const AsideDifferentTop: Story = {
     isScrollOutlet: true,
     header: {
       component: defaultHeader,
-      height: '80px',
-      heightTablet: '60px',
-      heightMobile: '40px'
+      height: {
+        default: '80px',
+        tablet: '60px',
+        mobile: '40px'
+      }
     },
     nav: {
       component: defaultNav,
-      height: '80px',
-      heightTablet: '60px',
-      heightMobile: '40px'
+      height: {
+        default: '80px',
+        tablet: '60px',
+        mobile: '40px'
+      }
     },
     leftAside: {
       component: defaultLeftAside,
-      width: '80px',
-      widthTablet: '60px',
+      width: {
+        default: '80px',
+        tablet: '60px',
+        mobile: '0px'
+      },
       isTopNav: true
     },
     rightAside: {
       component: defaultRightAside,
-      width: '80px',
-      widthTablet: '60px',
+      width: {
+        default: '80px',
+        tablet: '60px',
+        mobile: '0px'
+      },
       isTopFooter: true,
       isTopHeader: true
     },
     footer: {
       component: defaultFooter,
-      height: '80px',
-      heightTablet: '60px',
-      heightMobile: '40px'
+      height: {
+        default: '80px',
+        tablet: '60px',
+        mobile: '40px'
+      }
     },
     children: defaultChildren
   }
@@ -311,15 +336,19 @@ export const WithoutAsides: Story = {
     isScrollOutlet: false,
     header: {
       component: defaultHeader,
-      height: '80px',
-      heightTablet: '60px',
-      heightMobile: '40px'
+      height: {
+        default: '80px',
+        tablet: '60px',
+        mobile: '40px'
+      }
     },
     footer: {
       component: defaultFooter,
-      height: '80px',
-      heightTablet: '60px',
-      heightMobile: '40px'
+      height: {
+        default: '80px',
+        tablet: '60px',
+        mobile: '0px'
+      }
     },
     children: defaultChildren
   }
