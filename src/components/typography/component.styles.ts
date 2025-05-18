@@ -37,8 +37,8 @@ function toStyledCSS(value: TypographyAllProps) {
             text-overflow: ellipsis;
             display: -webkit-box;
             overflow: hidden;
-            webkit-box-orient: vertical;
-            webkit-line-clamp: ${value.line};
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: ${value.line};
             width: fit-content;
             overflow-wrap: anywhere;
           `
