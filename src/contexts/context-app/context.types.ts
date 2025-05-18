@@ -1,7 +1,7 @@
 import { PropsWithChildren, ReactElement } from 'react'
 
 import { PreviewAdditionalProps } from '@local/areas/preview'
-import { JeneseiPaletteKeys } from '@local/theme'
+import { JeneseiPaletteKeys, TJeneseiDevice } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export interface ProviderAppProps extends PropsWithChildren {
@@ -14,38 +14,38 @@ export interface ProviderAppProps extends PropsWithChildren {
   isScrollOutlet?: boolean
   notification?: {
     component: ReactElement
-    height?: string
-    heightMobile?: string
-    heightTablet?: string
+    height?: {
+      [K in TJeneseiDevice]?: string
+    }
     isFixed?: boolean
     zIndex?: number
   }
   header?: {
     component: ReactElement
-    height?: string
-    heightMobile?: string
-    heightTablet?: string
+    height?: {
+      [K in TJeneseiDevice]?: string
+    }
     zIndex?: number
   }
   nav?: {
     component: ReactElement
-    height?: string
-    heightMobile?: string
-    heightTablet?: string
+    height?: {
+      [K in TJeneseiDevice]?: string
+    }
     zIndex?: number
   }
   footer?: {
     component: ReactElement
-    height?: string
-    heightMobile?: string
-    heightTablet?: string
+    height?: {
+      [K in TJeneseiDevice]?: string
+    }
     zIndex?: number
   }
   leftAside?: {
     component: ReactElement
-    width?: string
-    widthMobile?: string
-    widthTablet?: string
+    width?: {
+      [K in TJeneseiDevice]?: string
+    }
     isTopHeader?: boolean
     isTopFooter?: boolean
     isTopNav?: boolean
@@ -53,9 +53,9 @@ export interface ProviderAppProps extends PropsWithChildren {
   }
   rightAside?: {
     component: ReactElement
-    width?: string
-    widthMobile?: string
-    widthTablet?: string
+    width?: {
+      [K in TJeneseiDevice]?: string
+    }
     isTopHeader?: boolean
     isTopFooter?: boolean
     isTopNav?: boolean

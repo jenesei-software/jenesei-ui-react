@@ -38,6 +38,67 @@ const generateGridTemplateAreas = (props: ProviderAppOutletProps) => {
   return templateAreas
 }
 
+function toStyledCSS(props: {
+  leftAsideWidth: string
+  rightAsideWidth: string
+  notificationHeight: string
+  headerHeight: string
+  navHeight: string
+  footerHeight: string
+}) {
+  return css`
+    grid-template-columns: ${() => `${props.leftAsideWidth} 1fr ${props.rightAsideWidth}`};
+    grid-template-rows: ${() =>
+      `${props.notificationHeight} ${props.headerHeight} ${props.navHeight} 1fr ${props.footerHeight}`};
+  `
+}
+const addSXAppOutlet = css<ProviderAppOutletProps>`
+  ${props => {
+    const leftAsideWidth = props.$leftAside?.width?.default
+    const rightAsideWidth = props.$rightAside?.width?.default
+    const notificationHeight = props.$notification?.height?.default
+    const headerHeight = props.$header?.height?.default
+    const navHeight = props.$nav?.height?.default
+    const footerHeight = props.$footer?.height?.default
+    return toStyledCSS({
+      leftAsideWidth: leftAsideWidth ?? '0px',
+      rightAsideWidth: rightAsideWidth ?? '0px',
+      notificationHeight: notificationHeight ?? '0px',
+      headerHeight: headerHeight ?? '0px',
+      navHeight: navHeight ?? '0px',
+      footerHeight: footerHeight ?? '0px'
+    })
+  }}
+  ${props => {
+    const leftAsideWidth = props.$leftAside?.width
+    const rightAsideWidth = props.$rightAside?.width
+    const notificationHeight = props.$notification?.height
+    const headerHeight = props.$header?.height
+    const navHeight = props.$nav?.height
+    const footerHeight = props.$footer?.height
+
+    return Object.entries(props.theme.screens)
+      .filter(([key]) => key !== 'default')
+      .map(([key]) => {
+        const deviceKey = key as keyof typeof props.theme.screens
+        const screenWidth = props.theme.screens[deviceKey]?.width
+        if (!screenWidth) return null
+        return css`
+          @media (max-width: ${screenWidth}) {
+            ${toStyledCSS({
+              leftAsideWidth: leftAsideWidth && leftAsideWidth[deviceKey] ? leftAsideWidth[deviceKey] : '0px',
+              rightAsideWidth: rightAsideWidth && rightAsideWidth[deviceKey] ? rightAsideWidth[deviceKey] : '0px',
+              notificationHeight:
+                notificationHeight && notificationHeight[deviceKey] ? notificationHeight[deviceKey] : '0px',
+              headerHeight: headerHeight && headerHeight[deviceKey] ? headerHeight[deviceKey] : '0px',
+              navHeight: navHeight && navHeight[deviceKey] ? navHeight[deviceKey] : '0px',
+              footerHeight: footerHeight && footerHeight[deviceKey] ? footerHeight[deviceKey] : '0px'
+            })}
+          }
+        `
+      })
+  }}
+`
 export const ProviderAppOutlet = styled.div<ProviderAppOutletProps>`
   display: grid;
   width: 100%;
@@ -58,27 +119,7 @@ export const ProviderAppOutlet = styled.div<ProviderAppOutletProps>`
       max-height: 100dvh;
     `};
 
-  grid-template-columns: ${props =>
-    `${props.$leftAside ? props.$leftAside.width : '0px'} 1fr ${props.$rightAside ? props.$rightAside.width : '0px'}`};
-
-  grid-template-rows: ${props =>
-    `${props.$notification ? props.$notification.height : '0px'} ${props.$header ? props.$header.height : '0px'} ${props.$nav ? props.$nav.height : '0px'} 1fr ${props.$footer ? props.$footer.height : '0px'}`};
-
-  @media (max-width: ${props => props.theme.screens.tablet.width}) {
-    grid-template-columns: ${props =>
-      `${props.$leftAside && props.$leftAside.widthTablet ? props.$leftAside.widthTablet : '0px'} 1fr ${props.$rightAside && props.$rightAside.widthTablet ? props.$rightAside.widthTablet : '0px'}`};
-
-    grid-template-rows: ${props =>
-      `${props.$notification && props.$notification.heightTablet ? props.$notification.heightTablet : '0px'} ${props.$header && props.$header.heightTablet ? props.$header.heightTablet : '0px'} ${props.$nav && props.$nav.heightTablet ? props.$nav.heightTablet : '0px'} 1fr ${props.$footer && props.$footer.heightTablet ? props.$footer.heightTablet : '0px'}`};
-  }
-
-  @media (max-width: ${props => props.theme.screens.mobile.width}) {
-    grid-template-columns: ${props =>
-      `${props.$leftAside && props.$leftAside.widthMobile ? props.$leftAside.widthMobile : '0px'} 1fr ${props.$rightAside && props.$rightAside.widthMobile ? props.$rightAside.widthMobile : '0px'}`};
-
-    grid-template-rows: ${props =>
-      `${props.$notification && props.$notification.heightMobile ? props.$notification.heightMobile : '0px'} ${props.$header && props.$header.heightMobile ? props.$header.heightMobile : '0px'} ${props.$nav && props.$nav.heightMobile ? props.$nav.heightMobile : '0px'} 1fr ${props.$footer && props.$footer.heightMobile ? props.$footer.heightMobile : '0px'}`};
-  }
+  ${addSXAppOutlet};
 `
 
 const hiddenStyles = css`
