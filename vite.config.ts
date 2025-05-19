@@ -2,6 +2,7 @@ import { pluginUpdateReadmePD } from '@jenesei-software/jenesei-plugin-vite'
 import react from '@vitejs/plugin-react'
 import path, { resolve } from 'path'
 import process from 'process'
+import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import tsconfigPaths from 'vite-tsconfig-paths'
@@ -20,6 +21,7 @@ export default defineConfig(() => {
       }
     },
     plugins: [
+      visualizer(),
       pluginUpdateReadmePD({
         insertionPoint: '# IMPORTANT',
         pathReadme: resolve(__dirname, 'README.md'),

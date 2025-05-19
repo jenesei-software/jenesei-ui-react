@@ -305,7 +305,7 @@
     "vite-plugin-dts": "^4.3.0",
     "vite-tsconfig-paths": "^5.0.1"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@emotion/styled": "^11.13.0",
     "@tanstack/react-virtual": "^3.10.8",
     "framer-motion": "^11.13.1",
@@ -313,9 +313,7 @@
     "react-image-webp": "^0.8.0",
     "react-number-format": "^5.4.2",
     "styled-reset": "^4.5.2",
-    "uuid": "^11.0.3"
-  },
-  "peerDependencies": {
+    "uuid": "^11.0.3",
     "@tanstack/react-router": ">=1.97.0",
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
