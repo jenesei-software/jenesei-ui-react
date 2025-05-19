@@ -4,6 +4,7 @@ import { addGridTransition } from '@local/styles/add'
 import { JeneseiPalette } from '@local/theme'
 
 import { ProviderAppOutletChildrenProps, ProviderAppOutletProps, ProviderAppWrapperProps } from '.'
+import { ScreenWidthProps } from '../context-screen-width'
 
 export const ProviderAppWrapper = styled.div<ProviderAppWrapperProps>`
   display: flex;
@@ -80,7 +81,7 @@ const addSXAppOutlet = css<ProviderAppOutletProps>`
     return Object.entries(props.theme.screens)
       .filter(([key]) => key !== 'default')
       .map(([key]) => {
-        const deviceKey = key as keyof typeof props.theme.screens
+        const deviceKey = key as keyof ScreenWidthProps<string | null>
         const screenWidth = props.theme.screens[deviceKey]?.width
         if (!screenWidth) return null
         return css`
