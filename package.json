@@ -19,6 +19,11 @@
     "styled-components"
   ],
   "exports": {
+    ".": {
+      "types": "./build/index.d.ts",
+      "import": "./build/index.es.js",
+      "require": "./build/index.cjs.js"
+    },
     "./style-theme": {
       "types": "./build/style-theme.d.ts",
       "import": "./build/style-theme.es.js",
@@ -38,6 +43,11 @@
       "types": "./build/style-error.d.ts",
       "import": "./build/style-error.es.js",
       "require": "./build/style-error.cjs.js"
+    },
+    "./style-motion": {
+      "types": "./build/style-motion.d.ts",
+      "import": "./build/style-motion.es.js",
+      "require": "./build/style-motion.cjs.js"
     },
     "./types": {
       "types": "./build/types.d.ts",
@@ -193,11 +203,6 @@
       "types": "./build/area-smooth.d.ts",
       "import": "./build/area-smooth.es.js",
       "require": "./build/area-smooth.cjs.js"
-    },
-    "./layout-auth": {
-      "types": "./build/layout-auth.d.ts",
-      "import": "./build/layout-auth.es.js",
-      "require": "./build/layout-auth.cjs.js"
     },
     "./hooks-use-debounced-callback": {
       "types": "./build/hooks-use-debounced-callback.d.ts",

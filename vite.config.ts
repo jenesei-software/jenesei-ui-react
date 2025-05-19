@@ -44,11 +44,13 @@ export default defineConfig(() => {
       minify: 'terser',
       lib: {
         entry: {
+          index: resolve(__dirname, 'src/index.ts'),
           ['style-theme']: resolve(__dirname, 'src/theme/index.ts'),
 
           ['style-add']: resolve(__dirname, 'src/styles/add/index.ts'),
           ['style-error']: resolve(__dirname, 'src/styles/error/index.ts'),
           ['style-sx']: resolve(__dirname, 'src/styles/sx/index.ts'),
+          ['style-motion']: resolve(__dirname, 'src/styles/motion/index.ts'),
 
           ['types']: resolve(__dirname, 'src/types.ts'),
 
@@ -85,8 +87,6 @@ export default defineConfig(() => {
           ['area-scroll']: resolve(__dirname, 'src/areas/scroll/index.ts'),
           ['area-skeleton']: resolve(__dirname, 'src/areas/skeleton/index.ts'),
           ['area-smooth']: resolve(__dirname, 'src/areas/smooth/index.ts'),
-
-          ['layout-auth']: resolve(__dirname, 'src/layouts/auth/index.ts'),
 
           ['hooks-use-debounced-callback']: resolve(__dirname, 'src/hooks/use-debounced-callback/index.ts'),
           ['hooks-use-deep-compare-memoize']: resolve(__dirname, 'src/hooks/use-deep-compare-memoize/index.ts'),
