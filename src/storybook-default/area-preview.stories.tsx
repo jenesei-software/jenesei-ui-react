@@ -3,6 +3,7 @@ import { FC } from 'react'
 import 'styled-components'
 
 import { Stack } from '@local/components/stack'
+import { TypingEffect } from '@local/styles/motion'
 
 import { PreviewProps } from '../areas/preview'
 import { Preview as PreviewComponent } from '../areas/preview/area'
@@ -18,8 +19,10 @@ type Story = StoryObj<typeof PreviewComponent>
 
 export const PreviewMax: Story = {
   args: {
+    defaultVisible: false,
     visible: true,
-    content: 'Content'
+    minTime: 2000,
+    content: <TypingEffect text="Loading..." />
   }
 }
 
@@ -44,7 +47,8 @@ const PreviewStackWrapper: FC<PreviewProps> = props => {
 export const PreviewStack: Story = {
   render: args => <PreviewStackWrapper {...args} />,
   args: {
+    defaultVisible: false,
     time: 2000,
-    content: 'Loading...'
+    content: <TypingEffect text="Loading..." />
   }
 }

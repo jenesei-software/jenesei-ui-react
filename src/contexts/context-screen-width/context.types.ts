@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 
-import { IJeneseiThemeScreens } from '@local/theme'
+import { IJeneseiThemeScreens, TJeneseiDevice } from '@local/theme'
 
 export type ProviderScreenWidthProps = PropsWithChildren
 
@@ -12,8 +12,9 @@ export interface ScreenWidthContextProps {
     value: Screens
     isScreen: boolean
   }[]
-  screenActual: {
-    value: Screens
-    isScreen: boolean
-  }
+  screenActual: Screens
+}
+
+export type ScreenWidthProps<T> = {
+  [K in TJeneseiDevice]?: T
 }

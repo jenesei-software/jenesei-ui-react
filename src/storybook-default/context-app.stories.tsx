@@ -116,7 +116,6 @@ const defaultRightAside = (
     </Typography>
   </div>
 )
-
 const defaultNav = (
   <div
     style={{
@@ -137,7 +136,6 @@ const defaultNav = (
     </Typography>
   </div>
 )
-
 const defaultChildren = (
   <div
     style={{
@@ -207,7 +205,9 @@ const defaultChildren = (
 export const Default: Story = {
   args: {
     defaultPreview: {
-      time: 1000,
+      defaultVisible: false,
+      visible: true,
+      minTime: 2000,
       content: (
         <Typography
           sx={{
@@ -227,15 +227,15 @@ export const Default: Story = {
     defaultDescription: 'Description from Storybook?',
     notification: {
       component: defaultNotification,
-      height: {
+      length: {
         default: '20px',
         tablet: '20px',
-        mobile: '20px'
+        mobile: null
       }
     },
     header: {
       component: defaultHeader,
-      height: {
+      length: {
         default: '80px',
         tablet: '60px',
         mobile: '40px'
@@ -243,15 +243,15 @@ export const Default: Story = {
     },
     leftAside: {
       component: defaultLeftAside,
-      width: {
+      length: {
         default: '80px',
         tablet: '60px',
-        mobile: '0px'
+        mobile: null
       }
     },
     nav: {
       component: defaultNav,
-      height: {
+      length: {
         default: '80px',
         tablet: '60px',
         mobile: '40px'
@@ -259,15 +259,15 @@ export const Default: Story = {
     },
     rightAside: {
       component: defaultRightAside,
-      width: {
+      length: {
         default: '80px',
         tablet: '60px',
-        mobile: '0px'
+        mobile: null
       }
     },
     footer: {
       component: defaultFooter,
-      height: {
+      length: {
         default: '80px',
         tablet: '60px',
         mobile: '40px'
@@ -284,7 +284,7 @@ export const AsideDifferentTop: Story = {
     isScrollOutlet: true,
     header: {
       component: defaultHeader,
-      height: {
+      length: {
         default: '80px',
         tablet: '60px',
         mobile: '40px'
@@ -292,7 +292,7 @@ export const AsideDifferentTop: Story = {
     },
     nav: {
       component: defaultNav,
-      height: {
+      length: {
         default: '80px',
         tablet: '60px',
         mobile: '40px'
@@ -300,26 +300,26 @@ export const AsideDifferentTop: Story = {
     },
     leftAside: {
       component: defaultLeftAside,
-      width: {
+      length: {
         default: '80px',
         tablet: '60px',
-        mobile: '0px'
+        mobile: null
       },
       isTopNav: true
     },
     rightAside: {
       component: defaultRightAside,
-      width: {
+      length: {
         default: '80px',
         tablet: '60px',
-        mobile: '0px'
+        mobile: null
       },
       isTopFooter: true,
       isTopHeader: true
     },
     footer: {
       component: defaultFooter,
-      height: {
+      length: {
         default: '80px',
         tablet: '60px',
         mobile: '40px'
@@ -336,7 +336,7 @@ export const WithoutAsides: Story = {
     isScrollOutlet: false,
     header: {
       component: defaultHeader,
-      height: {
+      length: {
         default: '80px',
         tablet: '60px',
         mobile: '40px'
@@ -344,10 +344,10 @@ export const WithoutAsides: Story = {
     },
     footer: {
       component: defaultFooter,
-      height: {
+      length: {
         default: '80px',
         tablet: '60px',
-        mobile: '0px'
+        mobile: null
       }
     },
     children: defaultChildren

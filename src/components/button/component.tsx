@@ -3,7 +3,8 @@ import { useTheme } from 'styled-components'
 
 import {
   Icon,
-  TLibraryIcoRealEbailNameNameString,
+  TLibraryIcoLogoNameString,
+  TLibraryIcoRealEbailNameString,
   TLibraryIconCheckboxNameString,
   TLibraryIconIdNameString,
   TLibraryIconLoadingNameString
@@ -29,6 +30,15 @@ export const Button: FC<ButtonProps> = props => {
               turn={icon.turn}
               order={icon.order}
             />
+          ) : icon?.type === 'logo' ? (
+            <Icon
+              key={index}
+              name={icon?.name as TLibraryIcoLogoNameString}
+              type="logo"
+              size={icon?.size ?? props.size}
+              turn={icon.turn}
+              order={icon.order}
+            />
           ) : icon?.type === 'checkbox' ? (
             <Icon
               key={index}
@@ -50,7 +60,7 @@ export const Button: FC<ButtonProps> = props => {
           ) : icon?.type === 'realebail' ? (
             <Icon
               key={index}
-              name={icon?.name as TLibraryIcoRealEbailNameNameString}
+              name={icon?.name as TLibraryIcoRealEbailNameString}
               type="realebail"
               size={icon?.size ?? props.size}
               turn={icon.turn}

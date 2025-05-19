@@ -77,7 +77,7 @@ export function GradualSpacing({ text }: { text: string }) {
   )
 }
 
-export const BlurIn = ({ children }: { children: ReactNode }) => {
+export function BlurIn({ children }: { children: ReactNode }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
   return (

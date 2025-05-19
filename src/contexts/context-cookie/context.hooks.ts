@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { CookieContext } from '.'
+import { CookieContext, CookieContextProps } from '.'
 
 /**
  * Custom hook to access the CookieContext.
@@ -9,7 +9,7 @@ import { CookieContext } from '.'
  * You should understand which cookies you are changing and whether you have access to them.
  *
  */
-export const useCookie = () => {
+export const useCookie = (): CookieContextProps => {
   const context = useContext(CookieContext)
   if (!context) {
     throw new Error('useCookie must be used within an ProviderCookie')

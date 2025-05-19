@@ -6,10 +6,10 @@ import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 import { RangeComponentProps, RangeWrapperProps } from '.'
 
 /****************************************** Size *************************************************/
-export const InputOTPSize = css<RangeWrapperProps>`
-  ${props => InputOTPSizeConstructor({ ...KEY_SIZE_DATA[props.$size], ...props })};
+export const RangeSize = css<RangeWrapperProps>`
+  ${props => RangeSizeConstructor({ ...KEY_SIZE_DATA[props.$size], ...props })};
 `
-export const InputOTPSizeConstructor = (props: IJeneseiThemeSize & RangeWrapperProps) => css`
+export const RangeSizeConstructor = (props: IJeneseiThemeSize & RangeWrapperProps) => css`
   width: ${props.$width ?? '100%'};
 `
 
@@ -20,7 +20,7 @@ export const RangeWrapper = styled.div<RangeWrapperProps>`
   box-sizing: border-box;
   align-items: center;
   height: 20px;
-  ${InputOTPSize};
+  ${RangeSize};
   ${addError};
 `
 

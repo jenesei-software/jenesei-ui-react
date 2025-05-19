@@ -3,9 +3,9 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize'
 
-import { DialogContext, DialogContextItemProps } from '.'
+import { DialogContext, DialogContextItemProps, DialogContextProps } from '.'
 
-export const useDialogs = () => {
+export const useDialogs = (): DialogContextProps<object> => {
   const context = useContext(DialogContext)
   if (!context) {
     throw new Error('useDialogs must be used within an ProviderDialog')

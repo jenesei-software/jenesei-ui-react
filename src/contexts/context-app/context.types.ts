@@ -1,8 +1,10 @@
 import { PropsWithChildren, ReactElement } from 'react'
 
 import { PreviewAdditionalProps } from '@local/areas/preview'
-import { JeneseiPaletteKeys, TJeneseiDevice } from '@local/theme'
+import { JeneseiPaletteKeys } from '@local/theme'
 import { AddDollarSign } from '@local/types'
+
+import { ScreenWidthProps } from '../context-screen-width'
 
 export interface ProviderAppProps extends PropsWithChildren {
   defaultPreview?: PreviewAdditionalProps
@@ -14,37 +16,27 @@ export interface ProviderAppProps extends PropsWithChildren {
   isScrollOutlet?: boolean
   notification?: {
     component: ReactElement
-    height?: {
-      [K in TJeneseiDevice]?: string
-    }
+    length?: ScreenWidthProps<string | null>
     zIndex?: number
   }
   header?: {
     component: ReactElement
-    height?: {
-      [K in TJeneseiDevice]?: string
-    }
+    length?: ScreenWidthProps<string | null>
     zIndex?: number
   }
   nav?: {
     component: ReactElement
-    height?: {
-      [K in TJeneseiDevice]?: string
-    }
+    length?: ScreenWidthProps<string | null>
     zIndex?: number
   }
   footer?: {
     component: ReactElement
-    height?: {
-      [K in TJeneseiDevice]?: string
-    }
+    length?: ScreenWidthProps<string | null>
     zIndex?: number
   }
   leftAside?: {
     component: ReactElement
-    width?: {
-      [K in TJeneseiDevice]?: string
-    }
+    length?: ScreenWidthProps<string | null>
     isTopHeader?: boolean
     isTopFooter?: boolean
     isTopNav?: boolean
@@ -52,9 +44,7 @@ export interface ProviderAppProps extends PropsWithChildren {
   }
   rightAside?: {
     component: ReactElement
-    width?: {
-      [K in TJeneseiDevice]?: string
-    }
+    length?: ScreenWidthProps<string | null>
     isTopHeader?: boolean
     isTopFooter?: boolean
     isTopNav?: boolean
@@ -94,6 +84,9 @@ export type ProviderAppOutletProps = Partial<
   AddDollarSign<
     Pick<ProviderAppProps, 'isScrollOutlet' | 'notification' | 'header' | 'nav' | 'footer' | 'leftAside' | 'rightAside'>
   >
+>
+export type ProviderAppElementProps = Partial<
+  AddDollarSign<Pick<ProviderAppProps, 'notification' | 'header' | 'nav' | 'footer' | 'leftAside' | 'rightAside'>>
 >
 
 export type ProviderAppOutletChildrenProps = AddDollarSign<Pick<ProviderAppProps, 'main'>>

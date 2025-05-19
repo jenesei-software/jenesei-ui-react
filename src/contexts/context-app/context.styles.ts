@@ -1,6 +1,6 @@
 import { css, styled } from 'styled-components'
 
-import { addGridTransition, addTransition } from '@local/styles/add'
+import { addGridTransition } from '@local/styles/add'
 import { JeneseiPalette } from '@local/theme'
 
 import { ProviderAppOutletChildrenProps, ProviderAppOutletProps, ProviderAppWrapperProps } from '.'
@@ -38,7 +38,7 @@ const generateGridTemplateAreas = (props: ProviderAppOutletProps) => {
   return templateAreas
 }
 
-function toStyledCSS(props: {
+function toStyledAppOutletCSS(props: {
   leftAsideWidth: string
   rightAsideWidth: string
   notificationHeight: string
@@ -54,13 +54,13 @@ function toStyledCSS(props: {
 }
 const addSXAppOutlet = css<ProviderAppOutletProps>`
   ${props => {
-    const leftAsideWidth = props.$leftAside?.width?.default
-    const rightAsideWidth = props.$rightAside?.width?.default
-    const notificationHeight = props.$notification?.height?.default
-    const headerHeight = props.$header?.height?.default
-    const navHeight = props.$nav?.height?.default
-    const footerHeight = props.$footer?.height?.default
-    return toStyledCSS({
+    const leftAsideWidth = props.$leftAside?.length?.default
+    const rightAsideWidth = props.$rightAside?.length?.default
+    const notificationHeight = props.$notification?.length?.default
+    const headerHeight = props.$header?.length?.default
+    const navHeight = props.$nav?.length?.default
+    const footerHeight = props.$footer?.length?.default
+    return toStyledAppOutletCSS({
       leftAsideWidth: leftAsideWidth ?? '0px',
       rightAsideWidth: rightAsideWidth ?? '0px',
       notificationHeight: notificationHeight ?? '0px',
@@ -70,23 +70,22 @@ const addSXAppOutlet = css<ProviderAppOutletProps>`
     })
   }}
   ${props => {
-    const leftAsideWidth = props.$leftAside?.width
-    const rightAsideWidth = props.$rightAside?.width
-    const notificationHeight = props.$notification?.height
-    const headerHeight = props.$header?.height
-    const navHeight = props.$nav?.height
-    const footerHeight = props.$footer?.height
+    const leftAsideWidth = props.$leftAside?.length
+    const rightAsideWidth = props.$rightAside?.length
+    const notificationHeight = props.$notification?.length
+    const headerHeight = props.$header?.length
+    const navHeight = props.$nav?.length
+    const footerHeight = props.$footer?.length
 
     return Object.entries(props.theme.screens)
       .filter(([key]) => key !== 'default')
       .map(([key]) => {
         const deviceKey = key as keyof typeof props.theme.screens
-        console.log('deviceKey', deviceKey)
         const screenWidth = props.theme.screens[deviceKey]?.width
         if (!screenWidth) return null
         return css`
           @media (max-width: ${screenWidth}) {
-            ${toStyledCSS({
+            ${toStyledAppOutletCSS({
               leftAsideWidth: leftAsideWidth && leftAsideWidth[deviceKey] ? leftAsideWidth[deviceKey] : '0px',
               rightAsideWidth: rightAsideWidth && rightAsideWidth[deviceKey] ? rightAsideWidth[deviceKey] : '0px',
               notificationHeight:
@@ -100,13 +99,45 @@ const addSXAppOutlet = css<ProviderAppOutletProps>`
       })
   }}
 `
+// function toStyledElementCSS(props: { lengthElement: boolean }) {
+//   return css`
+//     display: ${() => (props.lengthElement ? 'flex' : 'none')};
+//     ${() => (props.lengthElement ? visibleStyles : hiddenStyles)}
+//   `
+// }
+// const addSXElement = (key: keyof ProviderAppElementProps) => css<ProviderAppOutletProps>`
+//   ${props => {
+//     const lengthElement = props[key]?.length?.default ? props[key]?.length?.default !== '0px' : false
+
+//     return toStyledElementCSS({
+//       lengthElement: lengthElement
+//     })
+//   }}
+//   ${props => {
+//     const lengthElement = props[key]?.length
+
+//     return Object.entries(props.theme.screens)
+//       .filter(([key]) => key !== 'default')
+//       .map(([key]) => {
+//         const deviceKey = key as keyof typeof props.theme.screens
+//         const screenWidth = props.theme.screens[deviceKey]?.width
+//         if (!screenWidth) return null
+//         return css`
+//           @media (max-width: ${screenWidth}) {
+//             ${toStyledElementCSS({
+//               lengthElement: lengthElement && lengthElement[deviceKey] ? lengthElement[deviceKey] !== '0px' : false
+//             })}
+//           }
+//         `
+//       })
+//   }}
+// `
 export const ProviderAppOutlet = styled.div<ProviderAppOutletProps>`
   display: grid;
   width: 100%;
   height: 100%;
 
   min-height: 100dvh;
-  max-height: none;
 
   ${addGridTransition};
 
@@ -115,32 +146,31 @@ export const ProviderAppOutlet = styled.div<ProviderAppOutletProps>`
   `}
 
   ${props =>
-    props.$isScrollOutlet &&
-    css`
-      max-height: 100dvh;
-    `};
+    props.$isScrollOutlet
+      ? css`
+          max-height: 100dvh;
+        `
+      : css`
+          max-height: none;
+        `};
 
   ${addSXAppOutlet};
 `
 
-const hiddenStyles = css`
-  opacity: 0;
-  visibility: hidden;
-  ${addTransition};
-`
+// const hiddenStyles = css`
+//   opacity: 0;
+//   visibility: hidden;
+//   ${addTransition};
+// `
 
-const visibleStyles = css`
-  opacity: 1;
-  visibility: visible;
-  ${addTransition};
-`
+// const visibleStyles = css`
+//   opacity: 1;
+//   visibility: visible;
+//   ${addTransition};
+// `
 
 export const ProviderAppOutletChildren = styled.main<ProviderAppOutletChildrenProps>`
-  ${props =>
-    props.$main?.zIndex !== undefined &&
-    css`
-      z-index: ${props.$main.zIndex};
-    `};
+  z-index: ${props => props?.$main?.zIndex ?? 'auto'};
   display: flex;
   grid-area: children;
   max-width: 100%;
@@ -149,79 +179,37 @@ export const ProviderAppOutletChildren = styled.main<ProviderAppOutletChildrenPr
 `
 
 export const ProviderAppOutletNotification = styled.section<ProviderAppOutletProps>`
-  ${props =>
-    props.$notification?.zIndex !== undefined &&
-    css`
-      z-index: ${props.$notification.zIndex};
-    `};
-
+  z-index: ${props => props?.$notification?.zIndex ?? 'auto'};
   grid-area: notification;
   display: flex;
-
-  ${props => (props.$notification?.height ? visibleStyles : hiddenStyles)}
 `
 
 export const ProviderAppOutletHeader = styled.header<ProviderAppOutletProps>`
-  ${props =>
-    props.$header?.zIndex !== undefined &&
-    css`
-      z-index: ${props.$header.zIndex};
-    `};
-
+  z-index: ${props => props?.$header?.zIndex ?? 'auto'};
   grid-area: header;
   display: flex;
-
-  ${props => (props.$header?.height ? visibleStyles : hiddenStyles)}
 `
 
 export const ProviderAppOutletFooter = styled.footer<ProviderAppOutletProps>`
-  ${props =>
-    props.$footer?.zIndex !== undefined &&
-    css`
-      z-index: ${props.$footer.zIndex};
-    `};
-
+  z-index: ${props => props?.$footer?.zIndex ?? 'auto'};
   grid-area: footer;
   display: flex;
-
-  ${props => (props.$footer?.height ? visibleStyles : hiddenStyles)}
 `
 
 export const ProviderAppOutletNav = styled.nav<ProviderAppOutletProps>`
-  ${props =>
-    props.$nav?.zIndex !== undefined &&
-    css`
-      z-index: ${props.$nav.zIndex};
-    `};
-
+  z-index: ${props => props?.$nav?.zIndex ?? 'auto'};
   grid-area: nav;
   display: flex;
-
-  ${props => (props.$nav?.height ? visibleStyles : hiddenStyles)}
 `
 
 export const ProviderAppOutletLeftAside = styled.aside<ProviderAppOutletProps>`
-  ${props =>
-    props.$leftAside?.zIndex !== undefined &&
-    css`
-      z-index: ${props.$leftAside.zIndex};
-    `};
-
+  z-index: ${props => props?.$leftAside?.zIndex ?? 'auto'};
   grid-area: leftAside;
   display: flex;
-
-  ${props => (props.$leftAside?.width ? visibleStyles : hiddenStyles)}
 `
 
 export const ProviderAppOutletRightAside = styled.aside<ProviderAppOutletProps>`
-  ${props =>
-    props.$rightAside?.zIndex !== undefined &&
-    css`
-      z-index: ${props.$rightAside.zIndex};
-    `};
-
+  z-index: ${props => props?.$rightAside?.zIndex ?? 'auto'};
   grid-area: rightAside;
   display: flex;
-
-  ${props => (props.$rightAside?.width ? visibleStyles : hiddenStyles)}
 `

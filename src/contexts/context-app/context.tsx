@@ -16,6 +16,7 @@ import {
   ProviderAppProps,
   ProviderAppWrapper
 } from '.'
+import { useScreenWidth } from '../context-screen-width'
 
 export const AppContext = createContext<AppContextProps | null>(null)
 
@@ -54,6 +55,7 @@ export const ProviderApp: FC<ProviderAppProps> = props => {
     props.defaultDescription
   )
   const { changePreview, previewProps } = usePreview(props.defaultPreview)
+  const { screenActual } = useScreenWidth()
 
   return (
     <AppContext.Provider
@@ -92,19 +94,41 @@ export const ProviderApp: FC<ProviderAppProps> = props => {
             $leftAside={props.leftAside}
             $rightAside={props.rightAside}
           >
-            <ProviderAppOutletNotification $notification={props.notification}>
-              {props.notification?.component || null}
-            </ProviderAppOutletNotification>
-            <ProviderAppOutletHeader $header={props.header}>{props.header?.component || null}</ProviderAppOutletHeader>
-            <ProviderAppOutletNav $nav={props.nav}>{props.nav?.component || null}</ProviderAppOutletNav>
-            <ProviderAppOutletLeftAside $leftAside={props.leftAside}>
-              {props.leftAside?.component || null}
-            </ProviderAppOutletLeftAside>
+            {props.notification?.length && props.notification?.length?.[screenActual] ? (
+              <ProviderAppOutletNotification $notification={props.notification}>
+                {props.notification?.component || null}
+              </ProviderAppOutletNotification>
+            ) : null}
+
+            {props.header?.length && props.header?.length?.[screenActual] ? (
+              <ProviderAppOutletHeader $header={props.header}>
+                {props.header?.component || null}
+              </ProviderAppOutletHeader>
+            ) : null}
+
+            {props.nav?.length && props.nav?.length?.[screenActual] ? (
+              <ProviderAppOutletNav $nav={props.nav}>{props.nav?.component || null}</ProviderAppOutletNav>
+            ) : null}
+
+            {props.leftAside?.length && props.leftAside?.length?.[screenActual] ? (
+              <ProviderAppOutletLeftAside $leftAside={props.leftAside}>
+                {props.leftAside?.component || null}
+              </ProviderAppOutletLeftAside>
+            ) : null}
+
             <ProviderAppOutletChildren $main={props.main}>{props.children}</ProviderAppOutletChildren>
-            <ProviderAppOutletRightAside $rightAside={props.rightAside}>
-              {props.rightAside?.component || null}
-            </ProviderAppOutletRightAside>
-            <ProviderAppOutletFooter $footer={props.footer}>{props.footer?.component || null}</ProviderAppOutletFooter>
+
+            {props.rightAside?.length && props.rightAside?.length?.[screenActual] ? (
+              <ProviderAppOutletRightAside $rightAside={props.rightAside}>
+                {props.rightAside?.component || null}
+              </ProviderAppOutletRightAside>
+            ) : null}
+
+            {props.footer?.length && props.footer?.length?.[screenActual] ? (
+              <ProviderAppOutletFooter $footer={props.footer}>
+                {props.footer?.component || null}
+              </ProviderAppOutletFooter>
+            ) : null}
           </ProviderAppOutlet>
         </ProviderAppWrapper>
       </Preview>
@@ -116,7 +140,7 @@ export const ProviderApp: FC<ProviderAppProps> = props => {
  * Custom hook to manage preview properties.
  */
 const usePreview = (defaultPreview: ProviderAppProps['defaultPreview']) => {
-  const [previewProps, setPreviewProps] = useState(defaultPreview || { visible: false })
+  const [previewProps, setPreviewProps] = useState(defaultPreview || { visible: true, defaultVisible: true })
 
   const changePreview = useCallback((newPreviewProps: PreviewAdditionalProps) => {
     setPreviewProps(newPreviewProps)

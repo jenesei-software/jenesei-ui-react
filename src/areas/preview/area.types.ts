@@ -4,6 +4,7 @@ type PreviewDefaultProps = { defaultVisible?: boolean; content?: ReactNode }
 
 interface PreviewIsShowProps extends PreviewDefaultProps {
   visible: boolean
+  minTime?: number
 }
 
 interface PreviewTimeProps extends PreviewDefaultProps {

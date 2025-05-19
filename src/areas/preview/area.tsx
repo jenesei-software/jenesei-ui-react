@@ -1,14 +1,17 @@
+import { AnimatePresence } from 'framer-motion'
 import { FC, useEffect, useMemo, useState } from 'react'
 
 import { Icon } from '@local/components/icon'
+import { Stack, StackMotion } from '@local/components/stack'
 
-import { LoadingWrapper, PreviewChildren, PreviewContent, PreviewProps, PreviewWrapper } from '.'
+import { PreviewProps } from '.'
 
 export const Preview: FC<PreviewProps> = props => {
-  const [visible, setVisible] = useState(props.defaultVisible ?? false)
+  const [visible, setVisible] = useState(props.defaultVisible ?? true)
 
   const propsVisible = useMemo(() => ('visible' in props ? props.visible : null), [props])
   const propsTime = useMemo(() => ('time' in props ? props.time : null), [props])
+  const propsMinTime = useMemo(() => ('minTime' in props ? props.minTime : null), [props])
 
   useEffect(() => {
     if (propsTime !== null) {
@@ -24,19 +27,88 @@ export const Preview: FC<PreviewProps> = props => {
 
   useEffect(() => {
     if (propsVisible !== null) {
-      setVisible(!propsVisible)
+      if (propsVisible) {
+        if (propsMinTime) {
+          const timer = setTimeout(() => {
+            setVisible(propsVisible)
+          }, propsMinTime)
+          return () => clearTimeout(timer)
+        } else {
+          setVisible(propsVisible)
+        }
+      } else {
+        setVisible(propsVisible)
+      }
     }
-  }, [propsVisible])
+  }, [propsVisible, propsMinTime])
 
   return (
     <>
-      <PreviewWrapper $visible={visible}>
-        <LoadingWrapper>
-          <Icon size="100%" type="loading" primaryColor="blueFocus" name="Line" />
-        </LoadingWrapper>
-        {!visible && props.content && <PreviewContent>{props.content}</PreviewContent>}
-      </PreviewWrapper>
-      <PreviewChildren $visible={visible}>{visible ? props.children : null}</PreviewChildren>
+      <AnimatePresence>
+        {!visible ? (
+          <StackMotion
+            key="loader"
+            sx={theme => ({
+              default: {
+                backgroundColor: theme.palette.whiteStandard,
+                width: '100%',
+                height: '100%',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 1
+              }
+            })}
+            transition={{ duration: 0.3 }}
+            exit={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            <Stack
+              sx={{
+                default: {
+                  position: 'absolute',
+                  width: '8vmin',
+                  height: '8vmin'
+                }
+              }}
+            >
+              <Icon size="100%" type="loading" primaryColor="blueFocus" name="Line" />
+            </Stack>
+            {props.content && (
+              <Stack
+                sx={{
+                  default: {
+                    position: 'relative',
+                    marginTop: '18vmin'
+                  }
+                }}
+              >
+                {props.content}
+              </Stack>
+            )}
+          </StackMotion>
+        ) : null}
+        {visible ? (
+          <StackMotion
+            key="children"
+            sx={{
+              default: {
+                display: 'contents',
+                zIndex: 0
+              }
+            }}
+            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            {props.children}
+          </StackMotion>
+        ) : null}
+      </AnimatePresence>
     </>
   )
 }

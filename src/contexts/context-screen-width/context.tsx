@@ -21,12 +21,7 @@ export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = props => {
 
   const screenActual: ScreenWidthContextProps['screenActual'] = useMemo(() => {
     const find = screens.find(item => item.isScreen)
-    return (
-      find ?? {
-        isScreen: true,
-        value: 'default'
-      }
-    )
+    return find?.value ?? 'default'
   }, [screens])
 
   useEffect(() => {

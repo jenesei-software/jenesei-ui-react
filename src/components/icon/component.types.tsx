@@ -31,13 +31,18 @@ export interface LibraryIconLoadingItemProps extends BaseLibraryIconProps {
 }
 export interface LibraryIconRealEbailItemProps extends BaseLibraryIconProps {
   type: 'realebail'
-  name: TLibraryIcoRealEbailNameNameString
+  name: TLibraryIcoRealEbailNameString
+}
+export interface LibraryIconLogoItemProps extends BaseLibraryIconProps {
+  type: 'logo'
+  name: TLibraryIcoLogoNameString
 }
 export type LibraryIconItemProps =
   | LibraryIconIdItemProps
   | LibraryIconCheckboxItemProps
   | LibraryIconLoadingItemProps
   | LibraryIconRealEbailItemProps
+  | LibraryIconLogoItemProps
 
 export type StyledLibraryIconIdItemProps = AddDollarSign<
   Pick<LibraryIconItemProps, 'size' | 'turn' | 'order'> & { color?: JeneseiPaletteKeys }
@@ -159,14 +164,19 @@ export enum LibraryIcoRealEbailName {
   UserSettings,
   User
 }
+export enum LibraryIconLogoName {
+  Jenesei
+}
 export type TLibraryIconIdNameString = keyof typeof LibraryIconIdName
 export type TLibraryIconCheckboxNameString = keyof typeof LibraryIconCheckboxName
 export type TLibraryIconLoadingNameString = keyof typeof LibraryIcoLoadingName
-export type TLibraryIcoRealEbailNameNameString = keyof typeof LibraryIcoRealEbailName
+export type TLibraryIcoRealEbailNameString = keyof typeof LibraryIcoRealEbailName
+export type TLibraryIcoLogoNameString = keyof typeof LibraryIconLogoName
 
 export type IconTypeMap = {
   id: TLibraryIconIdNameString
   checkbox: TLibraryIconCheckboxNameString
   loading: TLibraryIconLoadingNameString
-  realebail: TLibraryIcoRealEbailNameNameString
+  realebail: TLibraryIcoRealEbailNameString
+  logo: TLibraryIcoLogoNameString
 }

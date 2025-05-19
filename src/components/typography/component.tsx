@@ -19,7 +19,7 @@ const TypographyWithRef = forwardRef<HTMLElement | HTMLHeadingElement | HTMLAnch
       [props.sx, props.className, props.style, props.onClick]
     )
 
-    const screenSX = useMemo(() => props.sx?.[screenActual.value] ?? props.sx?.default, [props.sx, screenActual.value])
+    const screenSX = useMemo(() => props.sx?.[screenActual] ?? props.sx?.default, [props.sx, screenActual])
 
     if (screenSX && 'variant' in screenSX) {
       if (screenSX.variant === 'h7' || screenSX.variant === 'h8' || screenSX.variant === 'h9') {

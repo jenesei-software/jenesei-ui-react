@@ -31,6 +31,7 @@ type ButtonPropsDefault = PropsWithChildren & {
     | IconPropsByType<'checkbox'>
     | IconPropsByType<'loading'>
     | IconPropsByType<'realebail'>
+    | IconPropsByType<'logo'>
   )[]
 
   isDisabled?: boolean
