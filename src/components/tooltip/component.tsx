@@ -1,258 +1,233 @@
 import { AnimatePresence } from 'framer-motion'
-import React, { FC, MouseEventHandler, memo, useCallback, useMemo, useRef, useState } from 'react'
+import React, { FC, memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 
 import { Typography } from '@local/components/typography'
-import { DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT } from '@local/contexts/context-dialog'
 
-import { TooltipBox, TooltipContainer, TooltipProps } from '.'
+import { DEFAULT_TOOLTIP_DURATION, DEFAULT_TOOLTIP_PADDING, TooltipBox, TooltipContainer, TooltipProps } from '.'
 
 export const Tooltip: FC<TooltipProps> = memo(props => {
-  // eslint-disable-next-line react/prop-types
   if (props.isDisabled) return <>{props.children}</>
 
   return <TooltipContent {...props} />
 })
 
 export const TooltipContent: FC<TooltipProps> = props => {
-  // const theme = useTheme()
-
   const [visible, setVisible] = useState(false)
+  const [position, setPosition] = useState<{ top: number; left: number } | null>(null)
+  const [isMounted, setIsMounted] = useState(false)
 
-  const arrowSize = useMemo(() => 10, [])
-  // const arrowSizeString = useMemo(() => `${arrowSize}px`, [])
-  const arrowLength = useMemo(() => arrowSize, [arrowSize])
+  const padding = useMemo(() => props.padding ?? DEFAULT_TOOLTIP_PADDING, [props.padding])
 
   const refTooltip = useRef<HTMLDivElement>(null)
   const refContainer = useRef<HTMLDivElement>(null)
 
-  const handleMouseEnter: MouseEventHandler<HTMLDivElement> = useCallback(() => {
+  const handleMouseEnter = useCallback(() => {
     setVisible(true)
   }, [])
 
-  const handleMouseLeave: MouseEventHandler<HTMLDivElement> = useCallback(event => {
-    const target = event.relatedTarget as Node
+  useEffect(() => {
+    if (!visible) return
 
-    if (
-      !(target instanceof Node) ||
-      (!refTooltip.current?.contains(target) && !refContainer.current?.contains(target))
-    ) {
-      setVisible(false)
+    const handleGlobalMouseMove = (e: MouseEvent, padding: number) => {
+      const tooltip = refTooltip.current
+      const container = refContainer.current?.children[0] as HTMLElement
+
+      if (!tooltip || !container) return
+
+      const tooltipRect = tooltip.getBoundingClientRect()
+      const containerRect = container.getBoundingClientRect()
+
+      const mouseX = e.clientX
+      const mouseY = e.clientY
+
+      const isInsideTooltip =
+        mouseX >= tooltipRect.left - padding &&
+        mouseX <= tooltipRect.right + padding &&
+        mouseY >= tooltipRect.top - padding &&
+        mouseY <= tooltipRect.bottom + padding
+
+      const isInsideContainer =
+        mouseX >= containerRect.left - padding &&
+        mouseX <= containerRect.right + padding &&
+        mouseY >= containerRect.top - padding &&
+        mouseY <= containerRect.bottom + padding
+
+      if (!isInsideTooltip && !isInsideContainer) {
+        setVisible(false)
+      }
     }
-  }, [])
 
-  const styleTooltip = useMemo(() => {
-    if (!refTooltip.current || (!refContainer.current && !visible)) return {}
+    document.addEventListener('mousemove', e => handleGlobalMouseMove(e, padding))
+    return () => {
+      document.removeEventListener('mousemove', e => handleGlobalMouseMove(e, padding))
+    }
+  }, [padding, visible])
+
+  useLayoutEffect(() => {
+    if (!visible || !isMounted) {
+      setPosition(null)
+      return
+    }
 
     const tooltip = refTooltip.current
-    const container = refContainer.current
-
-    if (!tooltip || !container) return {}
+    const container = refContainer.current?.children[0] as HTMLElement
+    if (!tooltip || !container) return
 
     const tooltipRect = tooltip.getBoundingClientRect()
-    const containerRect = container.children[0].getBoundingClientRect()
+    const containerRect = container.getBoundingClientRect()
 
-    const style: React.CSSProperties = {}
-    switch (props.placement) {
-      case 'top':
-        style.left = `${containerRect.left + containerRect.width / 2 - tooltipRect.width / 2}px`
-        style.top = `${containerRect.top - tooltipRect.height - arrowLength}px`
-        break
+    const placements: NonNullable<TooltipProps['placement']>[] = [
+      props.placement ?? 'bottom',
+      'top',
+      'right',
+      'left',
+      'bottom-start',
+      'bottom-end',
+      'top-start',
+      'top-end',
+      'right-start',
+      'right-end',
+      'left-start',
+      'left-end'
+    ]
 
-      case 'top-start':
-        style.left = `${containerRect.left}px`
-        style.top = `${containerRect.top - tooltipRect.height - arrowLength}px`
-        break
+    const computeStyle = (placement: string) => {
+      const style: React.CSSProperties = {}
+      switch (placement) {
+        case 'top':
+          style.left = containerRect.left + containerRect.width / 2 - tooltipRect.width / 2
+          style.top = containerRect.top - tooltipRect.height - padding
+          break
+        case 'top-start':
+          style.left = containerRect.left
+          style.top = containerRect.top - tooltipRect.height - padding
+          break
+        case 'top-end':
+          style.left = containerRect.right - tooltipRect.width
+          style.top = containerRect.top - tooltipRect.height - padding
+          break
+        case 'right':
+          style.left = containerRect.right + padding
+          style.top = containerRect.top + containerRect.height / 2 - tooltipRect.height / 2
+          break
+        case 'right-start':
+          style.left = containerRect.right + padding
+          style.top = containerRect.top
+          break
+        case 'right-end':
+          style.left = containerRect.right + padding
+          style.top = containerRect.bottom - tooltipRect.height
+          break
+        case 'bottom':
+          style.left = containerRect.left + containerRect.width / 2 - tooltipRect.width / 2
+          style.top = containerRect.bottom + padding
+          break
+        case 'bottom-start':
+          style.left = containerRect.left
+          style.top = containerRect.bottom + padding
+          break
+        case 'bottom-end':
+          style.left = containerRect.right - tooltipRect.width
+          style.top = containerRect.bottom + padding
+          break
+        case 'left':
+          style.left = containerRect.left - tooltipRect.width - padding
+          style.top = containerRect.top + containerRect.height / 2 - tooltipRect.height / 2
+          break
+        case 'left-start':
+          style.left = containerRect.left - tooltipRect.width - padding
+          style.top = containerRect.top
+          break
+        case 'left-end':
+          style.left = containerRect.left - tooltipRect.width - padding
+          style.top = containerRect.bottom - tooltipRect.height
+          break
+      }
 
-      case 'top-end':
-        style.left = `${containerRect.right - tooltipRect.width}px`
-        style.top = `${containerRect.top - tooltipRect.height - arrowLength}px`
-        break
-
-      case 'right':
-        style.left = `${containerRect.right + arrowLength}px`
-        style.top = `${containerRect.top + containerRect.height / 2 - tooltipRect.height / 2}px`
-        break
-
-      case 'right-start':
-        style.left = `${containerRect.right + arrowLength}px`
-        style.top = `${containerRect.top}px`
-        break
-
-      case 'right-end':
-        style.left = `${containerRect.right + arrowLength}px`
-        style.top = `${containerRect.bottom - tooltipRect.height}px`
-        break
-
-      case 'bottom':
-        style.left = `${containerRect.left + containerRect.width / 2 - tooltipRect.width / 2}px`
-        style.top = `${containerRect.bottom + arrowLength}px`
-        break
-
-      case 'bottom-start':
-        style.left = `${containerRect.left}px`
-        style.top = `${containerRect.bottom + arrowLength}px`
-        break
-
-      case 'bottom-end':
-        style.left = `${containerRect.right - tooltipRect.width}px`
-        style.top = `${containerRect.bottom + arrowLength}px`
-        break
-
-      case 'left':
-        style.left = `${containerRect.left - tooltipRect.width - arrowLength}px`
-        style.top = `${containerRect.top + containerRect.height / 2 - tooltipRect.height / 2}px`
-        break
-
-      case 'left-start':
-        style.left = `${containerRect.left - tooltipRect.width - arrowLength}px`
-        style.top = `${containerRect.top}px`
-        break
-
-      case 'left-end':
-        style.left = `${containerRect.left - tooltipRect.width - arrowLength}px`
-        style.top = `${containerRect.bottom - tooltipRect.height}px`
-        break
-
-      default:
-        break
+      return {
+        left: Math.round(Number(style.left) || 0),
+        top: Math.round(Number(style.top) || 0),
+        placement
+      }
     }
 
-    return style
-  }, [arrowLength, props.placement, visible])
+    const isInViewport = (style: { left: number; top: number }) => {
+      const { left, top } = style
+      return (
+        left >= 0 &&
+        top >= 0 &&
+        left + tooltipRect.width <= window.innerWidth &&
+        top + tooltipRect.height <= window.innerHeight
+      )
+    }
 
-  // const styleArrow = useMemo(() => {
-  //   if (!refContainer.current && !visible) return {}
+    const adjustToViewport = (style: { left: number; top: number }) => {
+      const left = Math.min(Math.max(style.left, 0), window.innerWidth - tooltipRect.width)
+      const top = Math.min(Math.max(style.top, 0), window.innerHeight - tooltipRect.height)
+      return { left, top }
+    }
 
-  //   const container = refContainer.current
+    const fallback = computeStyle(props.placement ?? 'bottom')
+    const result = placements.map(computeStyle).find(isInViewport) || adjustToViewport(fallback)
+    setPosition({ top: result.top, left: result.left })
+  }, [visible, padding, props.placement, isMounted])
 
-  //   if (!container) return {}
-
-  //   const containerRect = container.children[0].getBoundingClientRect()
-
-  //   const style: CSSProperties = {}
-
-  //   switch (props.placement) {
-  //     case 'right':
-  //       style.left = `${containerRect.right}px`
-  //       style.top = `${containerRect.top + containerRect.height / 2 - 10}px`
-  //       style.borderWidth = `${arrowSizeString} ${arrowSizeString} ${arrowSizeString} 0`
-  //       style.borderColor = `transparent ${theme.palette.grayPatricia} transparent transparent`
-  //       break
-  //     case 'right-start':
-  //       style.left = `${containerRect.right}px`
-  //       style.top = `${containerRect.top + 5}px`
-  //       style.borderWidth = `${arrowSizeString} ${arrowSizeString} ${arrowSizeString} 0`
-  //       style.borderColor = `transparent ${theme.palette.grayPatricia} transparent transparent`
-  //       break
-
-  //     case 'right-end':
-  //       style.left = `${containerRect.right}px`
-  //       style.top = `${containerRect.top + containerRect.height - 25}px`
-  //       style.borderWidth = `${arrowSizeString} ${arrowSizeString} ${arrowSizeString} 0`
-  //       style.borderColor = `transparent ${theme.palette.grayPatricia} transparent transparent`
-  //       break
-  //     case 'left':
-  //       style.left = `${containerRect.left - 10}px`
-  //       style.top = `${containerRect.top + containerRect.height / 2 - 10}px`
-  //       style.borderWidth = `${arrowSizeString} 0 ${arrowSizeString} ${arrowSizeString}`
-  //       style.borderColor = `transparent transparent transparent ${theme.palette.grayPatricia}`
-  //       break
-
-  //     case 'left-start':
-  //       style.left = `${containerRect.left - 10}px`
-  //       style.top = `${containerRect.top + 5}px`
-  //       style.borderWidth = `${arrowSizeString} 0 ${arrowSizeString} ${arrowSizeString}`
-  //       style.borderColor = `transparent transparent transparent ${theme.palette.grayPatricia}`
-  //       break
-
-  //     case 'left-end':
-  //       style.left = `${containerRect.left - 10}px`
-  //       style.top = `${containerRect.top + containerRect.height - 25}px`
-  //       style.borderWidth = `${arrowSizeString} 0 ${arrowSizeString} ${arrowSizeString}`
-  //       style.borderColor = `transparent transparent transparent ${theme.palette.grayPatricia}`
-  //       break
-  //     case 'top':
-  //       style.left = `${containerRect.left + containerRect.width / 2 - 10}px`
-  //       style.top = `${containerRect.top - 10}px`
-  //       style.borderWidth = `${arrowSizeString} ${arrowSizeString} 0 ${arrowSizeString}`
-  //       style.borderColor = `${theme.palette.grayPatricia} transparent transparent transparent`
-  //       break
-
-  //     case 'top-start':
-  //       style.left = `${containerRect.left + 10}px`
-  //       style.top = `${containerRect.top - 10}px`
-  //       style.borderWidth = `${arrowSizeString} ${arrowSizeString} 0 ${arrowSizeString}`
-  //       style.borderColor = `${theme.palette.grayPatricia} transparent transparent transparent`
-  //       break
-
-  //     case 'top-end':
-  //       style.left = `${containerRect.right - 30}px`
-  //       style.top = `${containerRect.top - 10}px`
-  //       style.borderWidth = `${arrowSizeString} ${arrowSizeString} 0 ${arrowSizeString}`
-  //       style.borderColor = `${theme.palette.grayPatricia} transparent transparent transparent`
-  //       break
-  //     case 'bottom':
-  //       style.left = `${containerRect.left + containerRect.width / 2 - 10}px`
-  //       style.top = `${containerRect.bottom}px`
-  //       style.borderWidth = `0 ${arrowSizeString} ${arrowSizeString} ${arrowSizeString}`
-  //       style.borderColor = `transparent transparent ${theme.palette.grayPatricia}  transparent`
-  //       break
-
-  //     case 'bottom-start':
-  //       style.left = `${containerRect.left + 10}px`
-  //       style.top = `${containerRect.bottom}px`
-  //       style.borderWidth = `0 ${arrowSizeString} ${arrowSizeString} ${arrowSizeString}`
-  //       style.borderColor = `transparent transparent ${theme.palette.grayPatricia}  transparent`
-  //       break
-
-  //     case 'bottom-end':
-  //       style.left = `${containerRect.right - 30}px`
-  //       style.top = `${containerRect.bottom}px`
-  //       style.borderWidth = `0 ${arrowSizeString} ${arrowSizeString} ${arrowSizeString}`
-  //       style.borderColor = `transparent transparent ${theme.palette.grayPatricia}  transparent`
-  //       break
-  //     default:
-  //       break
-  //   }
-
-  //   return style
-  // }, [arrowSizeString, props.placement, theme.palette.grayPatricia, visible])
-
+  useEffect(() => {
+    if (visible) {
+      setIsMounted(true)
+    }
+  }, [visible])
   return (
     <>
-      <TooltipContainer ref={refContainer} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <TooltipContainer ref={refContainer} onMouseEnter={handleMouseEnter}>
         {props.children}
       </TooltipContainer>
-      {ReactDOM.createPortal(
-        <AnimatePresence>
-          {/* <TooltipArrow $visible={visible} style={styleArrow} /> */}
-          <TooltipBox
-            ref={refTooltip}
-            $maxHeight={props.maxHeight}
-            $maxWidth={props.maxWidth}
-            $whiteSpace={props.whiteSpace}
-            $placement={props.placement ?? 'bottom'}
-            $visible={visible}
-            onMouseLeave={handleMouseLeave}
-            style={styleTooltip}
-            transition={{ type: 'spring', duration: DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT }}
+      {isMounted &&
+        ReactDOM.createPortal(
+          <AnimatePresence
+            onExitComplete={() => {
+              if (!visible) {
+                setIsMounted(false)
+              }
+            }}
           >
-            {
-              <Typography
-                sx={{
-                  default: {
-                    size: props.size ?? 14
-                  }
+            {visible && (
+              <TooltipBox
+                ref={refTooltip}
+                $size={props.size}
+                $maxHeight={props.maxHeight}
+                $maxWidth={props.maxWidth}
+                $whiteSpace={props.whiteSpace}
+                $placement={props.placement ?? 'bottom'}
+                $visible={visible}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                style={{
+                  top: position ? position.top : 'auto',
+                  left: position ? position.left : 'auto',
+                  visibility: position ? 'visible' : 'hidden',
+                  pointerEvents: position ? 'auto' : 'none'
                 }}
+                transition={{ type: 'spring', duration: DEFAULT_TOOLTIP_DURATION }}
               >
-                {props.content}
-              </Typography>
-            }
-          </TooltipBox>
-        </AnimatePresence>,
-        document.body
-      )}
+                <Typography
+                  sx={
+                    props.sxTypography ?? {
+                      default: {
+                        size: 14
+                      }
+                    }
+                  }
+                >
+                  {props.content}
+                </Typography>
+              </TooltipBox>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
     </>
   )
 }

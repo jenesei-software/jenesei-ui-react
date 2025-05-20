@@ -1,6 +1,9 @@
 import { CSSProperties, PropsWithChildren, ReactNode } from 'react'
 
+import { TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
+
+import { addSXTypographyProps } from '../typography'
 
 export type Placement =
   | 'top'
@@ -16,18 +19,17 @@ export type Placement =
   | 'left-start'
   | 'left-end'
 
-export interface TooltipProps extends PropsWithChildren {
+export type TooltipProps = PropsWithChildren & {
   content: ReactNode
   placement?: Placement
+  padding?: number
   whiteSpace?: CSSProperties['whiteSpace']
-  maxWidth?: number
-  maxHeight?: number
+  maxWidth?: string
+  maxHeight?: string
   isDisabled?: boolean
-  size?: number
-}
+  size?: TJeneseiThemeSize
+} & addSXTypographyProps
 
 export type TooltipBoxProps = AddDollarSign<
-  Pick<TooltipProps, 'whiteSpace' | 'maxWidth' | 'maxHeight'> & { placement: Placement; visible: boolean }
+  Pick<TooltipProps, 'whiteSpace' | 'maxWidth' | 'maxHeight' | 'size'> & { placement: Placement; visible: boolean }
 >
-
-export type TooltipArrowProps = Pick<TooltipBoxProps, '$visible'>

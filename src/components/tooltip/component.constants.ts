@@ -1,0 +1,2 @@
+export const DEFAULT_TOOLTIP_PADDING = 10
+export const DEFAULT_TOOLTIP_DURATION = 0.3
