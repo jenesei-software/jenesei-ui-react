@@ -4,7 +4,14 @@ import ReactDOM from 'react-dom'
 
 import { Typography } from '@local/components/typography'
 
-import { DEFAULT_TOOLTIP_DURATION, DEFAULT_TOOLTIP_PADDING, TooltipBox, TooltipContainer, TooltipProps } from '.'
+import {
+  DEFAULT_TOOLTIP_DURATION,
+  DEFAULT_TOOLTIP_PADDING,
+  DEFAULT_TOOLTIP_PLACEMENT_FALLBACK,
+  TooltipBox,
+  TooltipContainer,
+  TooltipProps
+} from '.'
 
 export const Tooltip: FC<TooltipProps> = memo(props => {
   if (props.isDisabled) return <>{props.children}</>
@@ -78,7 +85,7 @@ export const TooltipContent: FC<TooltipProps> = props => {
     const containerRect = container.getBoundingClientRect()
 
     const placements: NonNullable<TooltipProps['placement']>[] = [
-      props.placement ?? 'bottom',
+      props.placement ?? DEFAULT_TOOLTIP_PLACEMENT_FALLBACK,
       'top',
       'right',
       'left',
@@ -161,15 +168,32 @@ export const TooltipContent: FC<TooltipProps> = props => {
         top + tooltipRect.height <= window.innerHeight
       )
     }
+    const isOverlapping = (rect1: DOMRect, rect2: DOMRect) => {
+      return !(
+        rect1.right <= rect2.left ||
+        rect1.left >= rect2.right ||
+        rect1.bottom <= rect2.top ||
+        rect1.top >= rect2.bottom
+      )
+    }
+    const isNotOverlappingWithContainer = (style: { left: number; top: number }) => {
+      const virtualTooltipRect = {
+        left: style.left,
+        top: style.top,
+        right: style.left + tooltipRect.width,
+        bottom: style.top + tooltipRect.height,
+        width: tooltipRect.width,
+        height: tooltipRect.height
+      }
 
-    const adjustToViewport = (style: { left: number; top: number }) => {
-      const left = Math.min(Math.max(style.left, 0), window.innerWidth - tooltipRect.width)
-      const top = Math.min(Math.max(style.top, 0), window.innerHeight - tooltipRect.height)
-      return { left, top }
+      return !isOverlapping(virtualTooltipRect as DOMRect, containerRect)
     }
 
-    const fallback = computeStyle(props.placement ?? 'bottom')
-    const result = placements.map(computeStyle).find(isInViewport) || adjustToViewport(fallback)
+    const isValidPosition = (style: { left: number; top: number }) => {
+      return isInViewport(style) && isNotOverlappingWithContainer(style)
+    }
+    const result =
+      placements.map(computeStyle).find(isValidPosition) || computeStyle(DEFAULT_TOOLTIP_PLACEMENT_FALLBACK)
     setPosition({ top: result.top, left: result.left })
   }, [visible, padding, props.placement, isMounted])
 
@@ -210,7 +234,7 @@ export const TooltipContent: FC<TooltipProps> = props => {
                   visibility: position ? 'visible' : 'hidden',
                   pointerEvents: position ? 'auto' : 'none'
                 }}
-                transition={{ type: 'spring', duration: DEFAULT_TOOLTIP_DURATION }}
+                transition={{ type: 'easeOut', duration: DEFAULT_TOOLTIP_DURATION }}
               >
                 <Typography
                   sx={
