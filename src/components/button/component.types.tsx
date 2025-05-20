@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 
-import { IconTypeMap, LibraryIconItemProps } from '@local/components/icon'
+import { IconItemProps } from '@local/components/icon'
 import { addSXProps, addSXStyleProps } from '@local/styles/sx'
 import { TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
@@ -8,15 +8,6 @@ import { AddDollarSign } from '@local/types'
 import { addSXTypographyProps, addSXTypographyStyleProps } from '../typography'
 
 export type TButtonGenre = keyof TJeneseiThemeGenre
-
-type IconPropsByType<T extends keyof IconTypeMap> = {
-  type: T
-  name: IconTypeMap[T]
-  size?: TJeneseiThemeSize
-  order?: LibraryIconItemProps['order']
-  turn?: LibraryIconItemProps['turn']
-  isHidden?: boolean
-}
 
 type ButtonPropsDefault = PropsWithChildren & {
   size: TJeneseiThemeSize
@@ -27,11 +18,11 @@ type ButtonPropsDefault = PropsWithChildren & {
   className?: string
 
   icons?: (
-    | IconPropsByType<'id'>
-    | IconPropsByType<'checkbox'>
-    | IconPropsByType<'loading'>
-    | IconPropsByType<'realebail'>
-    | IconPropsByType<'logo'>
+    | (Omit<IconItemProps<'id'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'id'>['size'] })
+    | (Omit<IconItemProps<'checkbox'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'checkbox'>['size'] })
+    | (Omit<IconItemProps<'loading'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'loading'>['size'] })
+    | (Omit<IconItemProps<'realebail'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'realebail'>['size'] })
+    | (Omit<IconItemProps<'logo'>, 'size'> & { isHidden?: boolean; size?: IconItemProps<'logo'>['size'] })
   )[]
 
   isDisabled?: boolean

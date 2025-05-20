@@ -4,7 +4,9 @@ import { addSXProps, addSXStyleProps } from '@local/styles/sx'
 import { JeneseiPaletteKeys, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
-export type BaseLibraryIconProps = {
+export type IconItemProps<T extends keyof IconTypeMap> = {
+  type: T
+  name: IconTypeMap[T]
   className?: string
   onClick?: (event: React.MouseEvent<SVGSVGElement>) => void
   size: TJeneseiThemeSize | '100%'
@@ -15,41 +17,12 @@ export type BaseLibraryIconProps = {
   tabIndex?: number
 } & addSXProps
 
-export interface LibraryIconIdItemProps extends BaseLibraryIconProps {
-  type: 'id'
-  name: TLibraryIconIdNameString
-}
-
-export interface LibraryIconCheckboxItemProps extends BaseLibraryIconProps {
-  type: 'checkbox'
-  name: TLibraryIconCheckboxNameString
-}
-
-export interface LibraryIconLoadingItemProps extends BaseLibraryIconProps {
-  type: 'loading'
-  name: TLibraryIconLoadingNameString
-}
-export interface LibraryIconRealEbailItemProps extends BaseLibraryIconProps {
-  type: 'realebail'
-  name: TLibraryIcoRealEbailNameString
-}
-export interface LibraryIconLogoItemProps extends BaseLibraryIconProps {
-  type: 'logo'
-  name: TLibraryIcoLogoNameString
-}
-export type LibraryIconItemProps =
-  | LibraryIconIdItemProps
-  | LibraryIconCheckboxItemProps
-  | LibraryIconLoadingItemProps
-  | LibraryIconRealEbailItemProps
-  | LibraryIconLogoItemProps
-
-export type StyledLibraryIconIdItemProps = AddDollarSign<
-  Pick<LibraryIconItemProps, 'size' | 'turn' | 'order'> & { color?: JeneseiPaletteKeys }
+export type StyledIconIdItemProps<T extends keyof IconTypeMap> = AddDollarSign<
+  Pick<IconItemProps<T>, 'size' | 'turn' | 'order'> & { color?: JeneseiPaletteKeys }
 > &
   addSXStyleProps
 
-export enum LibraryIconIdName {
+export enum ENUM_ICON_ID {
   Close,
   Biometry,
   QR,
@@ -95,6 +68,7 @@ export enum LibraryIconIdName {
   MoreSquare,
   Discount,
   Buy,
+  Web,
   InfoMini,
   DangerMini,
   DangerTriangle,
@@ -145,38 +119,38 @@ export enum LibraryIconIdName {
   Resources,
   Language
 }
-export enum LibraryIconCheckboxName {
+export enum ENUM_ICON_CHECKBOX {
   Radio,
   Square,
   Arrow,
   Heart
 }
-export enum LibraryIcoLoadingName {
+export enum ENUM_ICON_LOADING {
   Line,
   Circle,
   Blocks,
   Balls
 }
-export enum LibraryIcoRealEbailName {
+export enum ENUM_ICON_REALEBAIL {
   Map,
   HomeLikes,
   HomeManagement,
   UserSettings,
   User
 }
-export enum LibraryIconLogoName {
+export enum ENUM_ICON_LOGO {
   Jenesei
 }
-export type TLibraryIconIdNameString = keyof typeof LibraryIconIdName
-export type TLibraryIconCheckboxNameString = keyof typeof LibraryIconCheckboxName
-export type TLibraryIconLoadingNameString = keyof typeof LibraryIcoLoadingName
-export type TLibraryIcoRealEbailNameString = keyof typeof LibraryIcoRealEbailName
-export type TLibraryIcoLogoNameString = keyof typeof LibraryIconLogoName
+export type TIconIdNameString = keyof typeof ENUM_ICON_ID
+export type TIconCheckboxNameString = keyof typeof ENUM_ICON_CHECKBOX
+export type TIconLoadingNameString = keyof typeof ENUM_ICON_LOADING
+export type TIconRealEbailNameString = keyof typeof ENUM_ICON_REALEBAIL
+export type TIconLogoNameString = keyof typeof ENUM_ICON_LOGO
 
 export type IconTypeMap = {
-  id: TLibraryIconIdNameString
-  checkbox: TLibraryIconCheckboxNameString
-  loading: TLibraryIconLoadingNameString
-  realebail: TLibraryIcoRealEbailNameString
-  logo: TLibraryIcoLogoNameString
+  id: TIconIdNameString
+  checkbox: TIconCheckboxNameString
+  loading: TIconLoadingNameString
+  realebail: TIconRealEbailNameString
+  logo: TIconLogoNameString
 }

@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 
-import { LibraryIconItemProps, TLibraryIconCheckboxNameString } from '@local/components/icon'
+import { IconItemProps, TIconCheckboxNameString } from '@local/components/icon'
 import { addErrorProps, addErrorStylesProps } from '@local/styles/error'
 import { addSXProps, addSXStyleProps } from '@local/styles/sx'
 import { TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
@@ -13,7 +13,7 @@ export type CheckboxProps = PropsWithChildren & {
 
   genre: TCheckboxGenre
 
-  view: TLibraryIconCheckboxNameString
+  view: TIconCheckboxNameString
 
   isDisabled?: boolean
 
@@ -25,7 +25,7 @@ export type CheckboxProps = PropsWithChildren & {
 
   isNotBackground?: boolean
 
-  iconOrder?: LibraryIconItemProps['order']
+  iconOrder?: IconItemProps['order']
 
   sizeIcon?: TJeneseiThemeSize
 

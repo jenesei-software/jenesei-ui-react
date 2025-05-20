@@ -1,6 +1,6 @@
 import { PropsWithChildren, ReactNode } from 'react'
 
-import { TLibraryIconIdNameString } from '@local/components/icon'
+import { TIconIdNameString } from '@local/components/icon'
 import { IJeneseiTheme, TJeneseiThemeGenre } from '@local/theme/theme.interface'
 import { AddDollarSign } from '@local/types'
 
@@ -55,7 +55,7 @@ export type SonnerContentProps = SonnerContentContentProps | SonnerContentStanda
 type SonnerContentDefaultProps = {
   hidingMode?: 'clickOnSonner' | 'clickOnButton'
   hidingTime?: number
-  icon?: TLibraryIconIdNameString
+  icon?: TIconIdNameString
   id?: string
   genre?: keyof IJeneseiTheme['colors']['sonner']
   isLoading?: boolean

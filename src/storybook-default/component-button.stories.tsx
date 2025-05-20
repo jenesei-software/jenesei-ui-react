@@ -27,7 +27,7 @@ export const Icon: Story = {
     type: 'button',
     icons: [
       {
-        type: 'id',
+        type: 'checkbox',
         name: 'Heart',
         order: -1
       }

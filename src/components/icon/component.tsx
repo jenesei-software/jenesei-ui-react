@@ -1,25 +1,46 @@
+import { useMemo } from 'react'
+
 import { JeneseiPalette } from '@local/theme/theme'
 
-import { LibraryIconItemProps, StyledSVG } from '.'
-import LibraryIconCheckboxJSON from './component-checkbox.json'
-import LibraryIconIdJSON from './component-id.json'
-import LibraryIconLoadingJSON from './component-loading.json'
-import LibraryIconLogoJSON from './component-logo.json'
-import LibraryIconRealEbailJSON from './component-realebail.json'
+import {
+  IconItemProps,
+  IconTypeMap,
+  StyledSVG,
+  TIconCheckboxNameString,
+  TIconIdNameString,
+  TIconLoadingNameString,
+  TIconLogoNameString,
+  TIconRealEbailNameString
+} from '.'
+import IconCheckboxJSON from './component-checkbox.json'
+import IconIdJSON from './component-id.json'
+import IconLoadingJSON from './component-loading.json'
+import IconLogoJSON from './component-logo.json'
+import IconRealEbailJSON from './component-realebail.json'
 
-export const Icon = (props: LibraryIconItemProps) => {
-  const icon =
-    props.type == 'id'
-      ? LibraryIconIdJSON[props.name]
-      : props.type == 'realebail'
-        ? LibraryIconRealEbailJSON[props.name]
-        : props.type == 'logo'
-          ? LibraryIconLogoJSON[props.name]
-          : props.type === 'checkbox'
-            ? LibraryIconCheckboxJSON[props.name]
-            : props.type === 'loading'
-              ? LibraryIconLoadingJSON[props.name]
-              : null
+export const Icon = <T extends keyof IconTypeMap>(props: IconItemProps<T>) => {
+  const icon = useMemo(() => {
+    let icon = null
+
+    switch (props.type) {
+      case 'id':
+        icon = IconIdJSON[props.name as TIconIdNameString]
+        break
+      case 'realebail':
+        icon = IconRealEbailJSON[props.name as TIconRealEbailNameString]
+        break
+      case 'logo':
+        icon = IconLogoJSON[props.name as TIconLogoNameString]
+        break
+      case 'checkbox':
+        icon = IconCheckboxJSON[props.name as TIconCheckboxNameString]
+        break
+      case 'loading':
+        icon = IconLoadingJSON[props.name as TIconLoadingNameString]
+        break
+    }
+    return icon
+  }, [props.name, props.type])
 
   const primaryColor = props.primaryColor ? JeneseiPalette[props.primaryColor] : 'currentColor'
   const secondColor = props.secondColor ? JeneseiPalette[props.secondColor] : 'currentColor'

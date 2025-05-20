@@ -15,9 +15,9 @@ type Story = StoryObj<typeof Icon>
 export const Id: Story = {
   args: {
     primaryColor: 'blueGoogle',
-    name: 'Folder',
+    name: 'AddUser',
     size: 'large',
-    type: 'id'
+    type: 'checkbox'
   }
 }
 

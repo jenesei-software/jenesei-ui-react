@@ -3,11 +3,11 @@ import { useTheme } from 'styled-components'
 
 import {
   Icon,
-  TLibraryIcoLogoNameString,
-  TLibraryIcoRealEbailNameString,
-  TLibraryIconCheckboxNameString,
-  TLibraryIconIdNameString,
-  TLibraryIconLoadingNameString
+  TIconCheckboxNameString,
+  TIconIdNameString,
+  TIconLoadingNameString,
+  TIconLogoNameString,
+  TIconRealEbailNameString
 } from '@local/components/icon'
 import { Ripple } from '@local/components/ripple'
 
@@ -24,7 +24,7 @@ export const Button: FC<ButtonProps> = props => {
           icon?.type === 'id' ? (
             <Icon
               key={index}
-              name={icon?.name as TLibraryIconIdNameString}
+              name={icon?.name as TIconIdNameString}
               type="id"
               size={icon?.size ?? props.size}
               turn={icon.turn}
@@ -33,7 +33,7 @@ export const Button: FC<ButtonProps> = props => {
           ) : icon?.type === 'logo' ? (
             <Icon
               key={index}
-              name={icon?.name as TLibraryIcoLogoNameString}
+              name={icon?.name as TIconLogoNameString}
               type="logo"
               size={icon?.size ?? props.size}
               turn={icon.turn}
@@ -42,7 +42,7 @@ export const Button: FC<ButtonProps> = props => {
           ) : icon?.type === 'checkbox' ? (
             <Icon
               key={index}
-              name={icon?.name as TLibraryIconCheckboxNameString}
+              name={icon?.name as TIconCheckboxNameString}
               type="checkbox"
               size={icon?.size ?? props.size}
               turn={icon.turn}
@@ -51,7 +51,7 @@ export const Button: FC<ButtonProps> = props => {
           ) : icon?.type === 'loading' ? (
             <Icon
               key={index}
-              name={icon?.name as TLibraryIconLoadingNameString}
+              name={icon?.name as TIconLoadingNameString}
               type="loading"
               size={icon?.size ?? props.size}
               turn={icon.turn}
@@ -60,7 +60,7 @@ export const Button: FC<ButtonProps> = props => {
           ) : icon?.type === 'realebail' ? (
             <Icon
               key={index}
-              name={icon?.name as TLibraryIcoRealEbailNameString}
+              name={icon?.name as TIconRealEbailNameString}
               type="realebail"
               size={icon?.size ?? props.size}
               turn={icon.turn}

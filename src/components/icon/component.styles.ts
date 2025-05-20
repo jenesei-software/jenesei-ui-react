@@ -4,9 +4,9 @@ import { addColorTransition } from '@local/styles/add'
 import { addSX } from '@local/styles/sx'
 import { KEY_SIZE_DATA } from '@local/theme'
 
-import { StyledLibraryIconIdItemProps } from '.'
+import { StyledIconIdItemProps } from '.'
 
-export const StyledSVG = styled.svg<StyledLibraryIconIdItemProps>`
+export const StyledSVG = styled.svg<StyledIconIdItemProps>`
   color: ${props => (props.$color ? props.theme.palette[props.$color] : 'inherit')};
 
   ${props => css`
