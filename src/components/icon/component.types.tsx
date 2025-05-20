@@ -17,8 +17,8 @@ export type IconItemProps<T extends keyof IconTypeMap> = {
   tabIndex?: number
 } & addSXProps
 
-export type StyledIconIdItemProps<T extends keyof IconTypeMap> = AddDollarSign<
-  Pick<IconItemProps<T>, 'size' | 'turn' | 'order'> & { color?: JeneseiPaletteKeys }
+export type StyledIconIdItemProps = AddDollarSign<
+  Pick<IconItemProps<'id'>, 'size' | 'turn' | 'order'> & { color?: JeneseiPaletteKeys }
 > &
   addSXStyleProps
 
