@@ -25,7 +25,7 @@ export type CheckboxProps = PropsWithChildren & {
 
   isNotBackground?: boolean
 
-  iconOrder?: IconItemProps['order']
+  iconOrder?: IconItemProps<'checkbox'>['order']
 
   sizeIcon?: TJeneseiThemeSize
 
