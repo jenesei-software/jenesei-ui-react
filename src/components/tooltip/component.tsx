@@ -234,7 +234,7 @@ export const TooltipContent: FC<TooltipProps> = props => {
                   visibility: position ? 'visible' : 'hidden',
                   pointerEvents: position ? 'auto' : 'none'
                 }}
-                transition={{ type: 'easeOut', duration: DEFAULT_TOOLTIP_DURATION }}
+                transition={{ type: 'spring', duration: DEFAULT_TOOLTIP_DURATION }}
               >
                 <Typography
                   sx={
