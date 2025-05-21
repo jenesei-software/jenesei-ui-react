@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
+import { Stack } from '@local/components/stack'
 import { Typography } from '@local/components/typography'
 
 import { ProviderApp } from '../contexts/context-app'
@@ -137,13 +138,21 @@ const defaultNav = (
   </div>
 )
 const defaultChildren = (
-  <div
-    style={{
-      backgroundColor: 'white',
-      padding: '10px',
-      height: '600px',
-      width: '100%'
-    }}
+  <Stack
+    sx={theme => ({
+      default: {
+        backgroundColor: theme.palette.whiteStandard,
+        padding: '10px'
+      },
+      tablet: {
+        backgroundColor: theme.palette.whiteJanice,
+        padding: '10px'
+      },
+      mobile: {
+        backgroundColor: theme.palette.grayMonica,
+        padding: '10px'
+      }
+    })}
   >
     <Typography
       sx={{
@@ -199,7 +208,7 @@ const defaultChildren = (
     >
       Title H6
     </Typography>
-  </div>
+  </Stack>
 )
 
 export const Default: Story = {
