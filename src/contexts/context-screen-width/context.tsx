@@ -30,14 +30,16 @@ export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = props => {
       const screenSizes = Object.entries(theme.screens).sort(
         ([, a], [, b]) => +(a as { width: string }).width.slice(0, -2) - +(b as { width: string }).width.slice(0, -2)
       )
-      const screenSize: Screens =
-        (screenSizes.find(([, size]) => width <= +(size as { width: string }).width.slice(0, -2))?.[0] as Screens) ||
-        'default'
+      let screenSize: Screens = 'default'
+      for (const [key, size] of screenSizes) {
+        const bp = +(size as { width: string }).width.slice(0, -2)
+        if (width <= bp) {
+          screenSize = key as Screens
+        }
+      }
       setScreenWidth(screenSize)
     }
-
     handleResize()
-
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [theme.screens])
