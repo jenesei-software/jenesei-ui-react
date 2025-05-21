@@ -116,7 +116,7 @@ export const JeneseiGlobalStyles = createGlobalStyle`
   }
 
 
-  @media (max-width: ${props => props.theme.screens.tablet.width}) {
+  @media (max-width: ${props => props.theme.screens.tablet.width}px) {
     h1 {
       font-size:  ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.tablet}px;
     }
@@ -142,7 +142,7 @@ export const JeneseiGlobalStyles = createGlobalStyle`
     }
   }
 
-  @media (max-width: ${props => props.theme.screens.mobile.width}) {
+  @media (max-width: ${props => props.theme.screens.mobile.width}px) {
     h1 {
       font-size:  ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.mobile}px;
     }

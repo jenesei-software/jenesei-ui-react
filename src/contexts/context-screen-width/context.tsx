@@ -25,25 +25,34 @@ export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = props => {
   }, [screens])
 
   useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth
-      const screenSizes = Object.entries(theme.screens).sort(
-        ([, a], [, b]) => +(a as { width: string }).width.slice(0, -2) - +(b as { width: string }).width.slice(0, -2)
-      )
-      let screenSize: Screens = 'default'
-      for (const [key, size] of screenSizes) {
-        const bp = +(size as { width: string }).width.slice(0, -2)
-        if (width <= bp) {
-          screenSize = key as Screens
+    const sortedScreens = Object.entries(theme.screens)
+      .map(([key, value]) => ({
+        key: key as Screens,
+        bp: value.width
+      }))
+      .sort((a, b) => a.bp - b.bp)
+
+    const queries = sortedScreens.map(({ key, bp }) => {
+      return { key, mq: window.matchMedia(`(max-width: ${bp}px)`) }
+    })
+    const updateScreen = () => {
+      for (const { key, mq } of queries) {
+        if (mq.matches) {
+          setScreenWidth(key)
+          return
         }
       }
-      setScreenWidth(screenSize)
+      // На всякий случай fallback
+      setScreenWidth('default')
     }
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [theme.screens])
 
+    queries.forEach(({ mq }) => mq.addEventListener('change', updateScreen))
+    updateScreen()
+
+    return () => {
+      queries.forEach(({ mq }) => mq.removeEventListener('change', updateScreen))
+    }
+  }, [theme.screens])
   return (
     <ScreenWidthContext.Provider
       value={{

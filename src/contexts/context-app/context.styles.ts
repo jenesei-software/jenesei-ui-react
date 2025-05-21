@@ -85,7 +85,7 @@ const addSXAppOutlet = css<ProviderAppOutletProps>`
         const screenWidth = props.theme.screens[deviceKey]?.width
         if (!screenWidth) return null
         return css`
-          @media (max-width: ${screenWidth}) {
+          @media (max-width: ${screenWidth}px) {
             ${toStyledAppOutletCSS({
               leftAsideWidth: leftAsideWidth && leftAsideWidth[deviceKey] ? leftAsideWidth[deviceKey] : '0px',
               rightAsideWidth: rightAsideWidth && rightAsideWidth[deviceKey] ? rightAsideWidth[deviceKey] : '0px',
@@ -100,39 +100,6 @@ const addSXAppOutlet = css<ProviderAppOutletProps>`
       })
   }}
 `
-// function toStyledElementCSS(props: { lengthElement: boolean }) {
-//   return css`
-//     display: ${() => (props.lengthElement ? 'flex' : 'none')};
-//     ${() => (props.lengthElement ? visibleStyles : hiddenStyles)}
-//   `
-// }
-// const addSXElement = (key: keyof ProviderAppElementProps) => css<ProviderAppOutletProps>`
-//   ${props => {
-//     const lengthElement = props[key]?.length?.default ? props[key]?.length?.default !== '0px' : false
-
-//     return toStyledElementCSS({
-//       lengthElement: lengthElement
-//     })
-//   }}
-//   ${props => {
-//     const lengthElement = props[key]?.length
-
-//     return Object.entries(props.theme.screens)
-//       .filter(([key]) => key !== 'default')
-//       .map(([key]) => {
-//         const deviceKey = key as keyof typeof props.theme.screens
-//         const screenWidth = props.theme.screens[deviceKey]?.width
-//         if (!screenWidth) return null
-//         return css`
-//           @media (max-width: ${screenWidth}) {
-//             ${toStyledElementCSS({
-//               lengthElement: lengthElement && lengthElement[deviceKey] ? lengthElement[deviceKey] !== '0px' : false
-//             })}
-//           }
-//         `
-//       })
-//   }}
-// `
 export const ProviderAppOutlet = styled.div<ProviderAppOutletProps>`
   display: grid;
   width: 100%;
@@ -157,18 +124,6 @@ export const ProviderAppOutlet = styled.div<ProviderAppOutletProps>`
 
   ${addSXAppOutlet};
 `
-
-// const hiddenStyles = css`
-//   opacity: 0;
-//   visibility: hidden;
-//   ${addTransition};
-// `
-
-// const visibleStyles = css`
-//   opacity: 1;
-//   visibility: visible;
-//   ${addTransition};
-// `
 
 export const ProviderAppOutletChildren = styled.main<ProviderAppOutletChildrenProps>`
   z-index: ${props => props?.$main?.zIndex ?? 'auto'};

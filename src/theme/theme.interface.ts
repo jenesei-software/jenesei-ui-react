@@ -206,7 +206,7 @@ export interface IJeneseiThemeSizeToggle {
   thumb: number
 }
 
-export type IJeneseiThemeScreens = Record<TJeneseiDevice, { width: string }>
+export type IJeneseiThemeScreens = Record<TJeneseiDevice, { width: number }>
 
 export type TJeneseiThemeSize = 'large' | 'largeMedium' | 'medium' | 'mediumSmall' | 'small'
 

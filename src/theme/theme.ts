@@ -726,9 +726,9 @@ export const JeneseiTheme: IJeneseiTheme = {
     }
   },
   screens: {
-    default: { width: '1920px' },
-    tablet: { width: '1290px' },
-    mobile: { width: '850px' }
+    default: { width: 1920 },
+    tablet: { width: 1290 },
+    mobile: { width: 850 }
   },
   effects: {
     input: 'inset 0px 0px 4px rgba(0, 0, 0, 0.20)',

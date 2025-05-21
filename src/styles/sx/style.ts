@@ -28,7 +28,7 @@ export const addSX = css<addSXStyleProps>`
         const screenWidth = props.theme.screens[deviceKey as keyof typeof props.theme.screens]?.width
         if (!screenWidth) return null
         return css`
-          @media (max-width: ${screenWidth}) {
+          @media (max-width: ${screenWidth}px) {
             ${toStyledCSS(value, props.theme)}
           }
         `

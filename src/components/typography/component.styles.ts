@@ -92,11 +92,11 @@ function toStyledCSS(value: TypographyAllProps) {
             font-size: ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.default}px;
             line-height: ${props => props.theme.font.lineHeight};
             margin: 0;
-            @media (max-width: ${props => props.theme.screens.tablet.width}) {
+            @media (max-width: ${props => props.theme.screens.tablet.width}px) {
               font-size: ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.tablet}px;
             }
 
-            @media (max-width: ${props => props.theme.screens.mobile.width}) {
+            @media (max-width: ${props => props.theme.screens.mobile.width}px) {
               font-size: ${props => props.theme.font.sizeHeading.h1 * props.theme.font.sizeDefault.mobile}px;
             }
           `
@@ -105,11 +105,11 @@ function toStyledCSS(value: TypographyAllProps) {
               font-size: ${props => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.default}px;
               line-height: ${props => props.theme.font.lineHeight};
               margin: 0;
-              @media (max-width: ${props => props.theme.screens.tablet.width}) {
+              @media (max-width: ${props => props.theme.screens.tablet.width}px) {
                 font-size: ${props => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.tablet}px;
               }
 
-              @media (max-width: ${props => props.theme.screens.mobile.width}) {
+              @media (max-width: ${props => props.theme.screens.mobile.width}px) {
                 font-size: ${props => props.theme.font.sizeHeading.h2 * props.theme.font.sizeDefault.mobile}px;
               }
             `
@@ -118,11 +118,11 @@ function toStyledCSS(value: TypographyAllProps) {
                 font-size: ${props => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.default}px;
                 line-height: ${props => props.theme.font.lineHeight};
                 margin: 0;
-                @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                @media (max-width: ${props => props.theme.screens.tablet.width}px) {
                   font-size: ${props => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.tablet}px;
                 }
 
-                @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                @media (max-width: ${props => props.theme.screens.mobile.width}px) {
                   font-size: ${props => props.theme.font.sizeHeading.h3 * props.theme.font.sizeDefault.mobile}px;
                 }
               `
@@ -131,11 +131,11 @@ function toStyledCSS(value: TypographyAllProps) {
                   font-size: ${props => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.default}px;
                   line-height: ${props => props.theme.font.lineHeight};
                   margin: 0;
-                  @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                  @media (max-width: ${props => props.theme.screens.tablet.width}px) {
                     font-size: ${props => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.tablet}px;
                   }
 
-                  @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                  @media (max-width: ${props => props.theme.screens.mobile.width}px) {
                     font-size: ${props => props.theme.font.sizeHeading.h4 * props.theme.font.sizeDefault.mobile}px;
                   }
                 `
@@ -144,11 +144,11 @@ function toStyledCSS(value: TypographyAllProps) {
                     font-size: ${props => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.default}px;
                     line-height: ${props => props.theme.font.lineHeight};
                     margin: 0;
-                    @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                    @media (max-width: ${props => props.theme.screens.tablet.width}px) {
                       font-size: ${props => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.tablet}px;
                     }
 
-                    @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                    @media (max-width: ${props => props.theme.screens.mobile.width}px) {
                       font-size: ${props => props.theme.font.sizeHeading.h5 * props.theme.font.sizeDefault.mobile}px;
                     }
                   `
@@ -157,11 +157,11 @@ function toStyledCSS(value: TypographyAllProps) {
                       font-size: ${props => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.default}px;
                       line-height: ${props => props.theme.font.lineHeight};
                       margin: 0;
-                      @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                      @media (max-width: ${props => props.theme.screens.tablet.width}px) {
                         font-size: ${props => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.tablet}px;
                       }
 
-                      @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                      @media (max-width: ${props => props.theme.screens.mobile.width}px) {
                         font-size: ${props => props.theme.font.sizeHeading.h6 * props.theme.font.sizeDefault.mobile}px;
                       }
                     `
@@ -170,12 +170,12 @@ function toStyledCSS(value: TypographyAllProps) {
                         font-size: ${props => props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.default}px;
                         line-height: ${props => props.theme.font.lineHeight};
                         margin: 0;
-                        @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                        @media (max-width: ${props => props.theme.screens.tablet.width}px) {
                           font-size: ${props =>
                             props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.tablet}px;
                         }
 
-                        @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                        @media (max-width: ${props => props.theme.screens.mobile.width}px) {
                           font-size: ${props =>
                             props.theme.font.sizeHeading.h7 * props.theme.font.sizeDefault.mobile}px;
                         }
@@ -186,12 +186,12 @@ function toStyledCSS(value: TypographyAllProps) {
                             props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.default}px;
                           line-height: ${props => props.theme.font.lineHeight};
                           margin: 0;
-                          @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                          @media (max-width: ${props => props.theme.screens.tablet.width}px) {
                             font-size: ${props =>
                               props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.tablet}px;
                           }
 
-                          @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                          @media (max-width: ${props => props.theme.screens.mobile.width}px) {
                             font-size: ${props =>
                               props.theme.font.sizeHeading.h8 * props.theme.font.sizeDefault.mobile}px;
                           }
@@ -202,12 +202,12 @@ function toStyledCSS(value: TypographyAllProps) {
                               props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.default}px;
                             line-height: ${props => props.theme.font.lineHeight};
                             margin: 0;
-                            @media (max-width: ${props => props.theme.screens.tablet.width}) {
+                            @media (max-width: ${props => props.theme.screens.tablet.width}px) {
                               font-size: ${props =>
                                 props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.tablet}px;
                             }
 
-                            @media (max-width: ${props => props.theme.screens.mobile.width}) {
+                            @media (max-width: ${props => props.theme.screens.mobile.width}px) {
                               font-size: ${props =>
                                 props.theme.font.sizeHeading.h9 * props.theme.font.sizeDefault.mobile}px;
                             }
@@ -233,7 +233,7 @@ const addSX = css<TypographyCSSProps>`
         const screenWidth = props.theme.screens[deviceKey as keyof typeof props.theme.screens]?.width
         if (!screenWidth) return null
         return css`
-          @media (max-width: ${screenWidth}) {
+          @media (max-width: ${screenWidth}px) {
             ${toStyledCSS(value)}
           }
         `
@@ -272,7 +272,7 @@ export const addSXTypography = css<addSXTypographyStyleProps>`
         const screenWidth = props.theme.screens[deviceKey as keyof typeof props.theme.screens]?.width
         if (!screenWidth) return null
         return css`
-          @media (max-width: ${screenWidth}) {
+          @media (max-width: ${screenWidth}px) {
             ${toStyledCSS(value)}
           }
         `
