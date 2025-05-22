@@ -1,0 +1,31 @@
+import{j as c,d as p}from"./styled-components.browser.esm-CyaOpMkv.js";import{r as d}from"./index-CnY36iC1.js";import{O as L}from"./area-DMU-5v0B.js";import{b as O}from"./style-KtjdfyVq.js";import{m as _}from"./proxy-BS1eh56F.js";import{A as V}from"./index-DgedcAJ4.js";const m=d.createContext(null),D=e=>{const[s,u]=d.useState([]),g=d.useCallback(t=>{u(a=>{const i=a.find(n=>n.id===t);if(!i)return a;const r=i.index;return a.filter(n=>n.id!==t).map(n=>({...n,index:n.index>r?n.index-1:n.index}))})},[]),E=d.useCallback(t=>{u(a=>a.map(i=>i.id===t.id?{...i,...t}:i))},[]),b=d.useCallback(t=>{const a=t.id;u(i=>{const r=i.findIndex(n=>n.id===a);let o;if(r!==-1)o=[...i],o[r]={...t,id:a,index:i[r].index};else{o=i.map(l=>({...l,index:l.index+1}));const n={...t,id:a,index:0};o.unshift(n)}return o})},[]),N=d.useMemo(()=>s.length,[s.length]),I=d.useMemo(()=>e.zIndex,[e.zIndex]);return c.jsxDEV(m.Provider,{value:{add:b,remove:g,update:E,dialogHistory:s},children:[c.jsxDEV(V,{children:N&&c.jsxDEV(x,{$zIndex:I,initial:{opacity:0},exit:{opacity:0},animate:{opacity:1},transition:{type:"spring",duration:y},children:s.map(t=>{const a=t.index,i=t.content,r=t.id,o=t.props,n=t.maxWidth||v,l=t.maxHeight||w,A=t.borderRadius||W,T=t.padding||H,R=t.background||P;return c.jsxDEV($,{index:a,content:i,props:o,id:r,maxWidth:n,maxHeight:l,borderRadius:A,background:R,padding:T,remove:()=>g(r)},r,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:111,columnNumber:17},void 0)})},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:87,columnNumber:11},void 0)},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:85,columnNumber:7},void 0),e.children]},void 0,!0,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:84,columnNumber:5},void 0)},j=e=>{var s;return c.jsxDEV(L,{onOutsideClick:()=>e.remove(),children:c.jsxDEV(f,{initial:{opacity:0,scale:.8},animate:{opacity:1,scale:1},transition:{type:"spring",duration:k,delay:y},style:{zIndex:-e.index},$maxHeight:e.maxHeight,$maxWidth:e.maxWidth,$borderRadius:e.borderRadius,$padding:e.padding,$background:e.background,children:(s=e.content)==null?void 0:s.call(e,e.props,e.remove)},e.id,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:138,columnNumber:7},void 0)},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:137,columnNumber:5},void 0)},$=d.memo(j);try{m.displayName="DialogContext",m.__docgenInfo={description:"",displayName:"DialogContext",props:{}}}catch{}try{D.displayName="ProviderDialog",D.__docgenInfo={description:"",displayName:"ProviderDialog",props:{zIndex:{defaultValue:null,description:"",name:"zIndex",required:!0,type:{name:"number"}}}}}catch{}const x=p(_.div)`
+  position: fixed;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  background-color: ${e=>e.theme.palette.black50};
+  z-index: ${e=>e.$zIndex};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+`,f=p(_.dialog)`
+  ${O};
+  max-width: ${e=>e.$maxWidth};
+  max-height: ${e=>e.$maxHeight};
+  border-radius: ${e=>e.$borderRadius};
+  background: ${e=>e.$background&&e.theme.palette[e.$background]};
+  padding: ${e=>e.$padding};
+  width: max-content;
+  height: max-content;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+`,h=p(_.div)``;try{x.displayName="DialogLayout",x.__docgenInfo={description:"",displayName:"DialogLayout",props:{theme:{defaultValue:null,description:"",name:"theme",required:!1,type:{name:"DefaultTheme"}},as:{defaultValue:null,description:"",name:"as",required:!1,type:{name:"void | WebTarget"}},forwardedAs:{defaultValue:null,description:"",name:"forwardedAs",required:!1,type:{name:"void | WebTarget"}}}}}catch{}try{f.displayName="DialogElementWrapper",f.__docgenInfo={description:"",displayName:"DialogElementWrapper",props:{theme:{defaultValue:null,description:"",name:"theme",required:!1,type:{name:"DefaultTheme"}},as:{defaultValue:null,description:"",name:"as",required:!1,type:{name:"void | WebTarget"}},forwardedAs:{defaultValue:null,description:"",name:"forwardedAs",required:!1,type:{name:"void | WebTarget"}}}}}catch{}try{h.displayName="DialogContent",h.__docgenInfo={description:"",displayName:"DialogContent",props:{theme:{defaultValue:null,description:"",name:"theme",required:!1,type:{name:"DefaultTheme"}},as:{defaultValue:null,description:"",name:"as",required:!1,type:{name:"void | WebTarget"}},forwardedAs:{defaultValue:null,description:"",name:"forwardedAs",required:!1,type:{name:"void | WebTarget"}}}}}catch{}const k=.3,y=.4,w="max-content",v="max-content",W="12px",H="20px",P="whiteStandard";export{m as D,D as P};
