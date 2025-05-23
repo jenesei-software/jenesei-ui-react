@@ -1,11 +1,28 @@
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
 import { JeneseiPalette } from '@local/theme/theme'
 
 import { TypographyAllProps, TypographyCSSProps, addSXTypographyStyleProps } from '.'
 
+const shadowPulse = keyframes`
+  0% {
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  50% {
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+`
+
 function toStyledCSS(value: TypographyAllProps) {
   return css`
+    ${value.shadow &&
+    value.shadow === 'shadowPulse' &&
+    css`
+      animation: ${shadowPulse} 2s infinite;
+    `};
     ${value.letterSpacing &&
     css`
       letter-spacing: ${value.letterSpacing};

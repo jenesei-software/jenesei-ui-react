@@ -13,6 +13,7 @@ import { TooltipProps } from '../tooltip'
 
 type TypographyDefaultProps = {
   line?: number
+  shadow?: 'shadowPulse'
   weight?: TJeneseiTypographyWeight
   device?: TJeneseiDevice
   overflow?: CSSProperties['overflow']
