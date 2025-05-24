@@ -354,7 +354,6 @@ export const DatePicker = (props: DatePickerProps) => {
                       }}
                       startDate={props.startDate}
                       endDate={props.endDate}
-                      lang={'ru'}
                       width="90px"
                     />
                     <SelectYear
@@ -373,7 +372,6 @@ export const DatePicker = (props: DatePickerProps) => {
                       }}
                       startDate={props.startDate}
                       endDate={props.endDate}
-                      lang={'ru'}
                       width="70px"
                     />
                   </Stack>

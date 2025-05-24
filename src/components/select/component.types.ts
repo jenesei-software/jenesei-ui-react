@@ -85,7 +85,6 @@ export type SelectDateProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' 
   endDate?: number
   value: number
   onChange: (timestamp: number) => void
-  lang: 'ru' | 'en'
   monthsLocale: MonthItem[]
 }
 

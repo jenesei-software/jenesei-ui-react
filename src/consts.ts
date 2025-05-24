@@ -4,17 +4,17 @@ import { transformObjectToArray, transformObjectValuesToKeys } from './functions
 import { ILanguage, IService } from './types'
 
 export const ObjectLanguage: ILanguage = {
-  en: {
-    value: 'en',
+  eng: {
+    value: 'eng',
     label: 'English',
     placeholder: 'English',
-    search: 'English, en'
+    search: 'English, eng'
   },
-  ru: {
-    value: 'ru',
+  rus: {
+    value: 'rus',
     label: 'Русский',
     placeholder: 'Русский',
-    search: 'Русский, ru'
+    search: 'Русский, rus'
   }
 }
 
