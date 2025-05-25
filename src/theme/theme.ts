@@ -380,6 +380,88 @@ const DefaultJeneseiThemeGenreInput = {
     }
   }
 }
+const DefaultJeneseiThemeGenreRange = {
+  'realebail-white': {
+    track: {
+      background: {
+        rest: JeneseiPalette.grayBarbara
+      },
+      gradient: {
+        rest: JeneseiPalette.blueKaren
+      }
+    },
+    thumb: {
+      background: {
+        rest: JeneseiPalette.whiteStandard,
+        hover: JeneseiPalette.whiteStandard
+      },
+      border: {
+        rest: JeneseiPalette.blueRest,
+        hover: JeneseiPalette.blueRest
+      }
+    }
+  },
+  gray: {
+    track: {
+      background: {
+        rest: JeneseiPalette.grayJanice
+      },
+      gradient: {
+        rest: JeneseiPalette.black60
+      }
+    },
+    thumb: {
+      background: {
+        rest: JeneseiPalette.grayBarbara,
+        hover: JeneseiPalette.grayBarbara
+      },
+      border: {
+        rest: JeneseiPalette.black60,
+        hover: JeneseiPalette.black60
+      }
+    }
+  },
+  blackBorder: {
+    track: {
+      background: {
+        rest: JeneseiPalette.graySandra
+      },
+      gradient: {
+        rest: JeneseiPalette.black80
+      }
+    },
+    thumb: {
+      background: {
+        rest: JeneseiPalette.graySandra,
+        hover: JeneseiPalette.graySandra
+      },
+      border: {
+        rest: JeneseiPalette.black80,
+        hover: JeneseiPalette.black80
+      }
+    }
+  },
+  grayBorder: {
+    track: {
+      background: {
+        rest: JeneseiPalette.graySandra
+      },
+      gradient: {
+        rest: JeneseiPalette.black60
+      }
+    },
+    thumb: {
+      background: {
+        rest: JeneseiPalette.whiteStandard,
+        hover: JeneseiPalette.whiteStandard
+      },
+      border: {
+        rest: JeneseiPalette.black40,
+        hover: JeneseiPalette.black40
+      }
+    }
+  }
+}
 const DefaultJeneseiThemeGenreInputSelect = {
   'realebail-white': {
     background: {
@@ -739,6 +821,7 @@ export const JeneseiTheme: IJeneseiTheme = {
     white: JeneseiPalette.whiteStandard,
     focus: JeneseiPalette.black60,
     danger: JeneseiPalette.redGoogle,
+    range: DefaultJeneseiThemeGenreRange,
     sonner: DefaultJeneseiThemeGenreSonner,
     form: DefaultJeneseiThemeGenreForm,
     button: DefaultJeneseiThemeGenre,

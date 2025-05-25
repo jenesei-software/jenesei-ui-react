@@ -17,3 +17,4 @@ export type RangeProps = {
 
 export type RangeWrapperProps = AddDollarSign<Pick<RangeProps, 'size' | 'width' | 'error'>>
 export type RangeComponentProps = AddDollarSign<Pick<RangeProps, 'size' | 'genre'>>
+export type RangeThumbProps = RangeComponentProps & AddDollarSign<{ colorBorder: string; colorBackground: string }>

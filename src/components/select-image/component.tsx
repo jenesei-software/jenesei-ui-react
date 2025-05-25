@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { DragEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTheme } from 'styled-components'
 
+import { ImageSupportedFormatsForInput } from '@local/consts'
 import { useDialog } from '@local/contexts/context-dialog'
 import { ErrorMessage } from '@local/styles/error'
 import { KEY_SIZE_DATA } from '@local/theme'
@@ -127,8 +128,11 @@ export const SelectImage = (props: SelectImageProps) => {
                   }
                 })
               }}
+              isShowBeforeImage
               propsImage={{
-                objectFit: 'contain'
+                default: {
+                  objectFit: 'contain'
+                }
               }}
               alt={image?.imageSrc}
               src={image?.imageSrc}
@@ -340,7 +344,7 @@ export const SelectImage = (props: SelectImageProps) => {
           <input
             ref={inputRef}
             type="file"
-            accept="image/*"
+            accept={ImageSupportedFormatsForInput}
             multiple
             style={{ display: 'none' }}
             onChange={e => {

@@ -160,3 +160,6 @@ export const MapThemeList: MapTheme[] = [
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, Earthstar Geographics'
   }
 ]
+
+export const ImageSupportedFormats = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/avif'] as const
+export const ImageSupportedFormatsForInput = ['image/*', '.jpeg', '.jpg', '.png', '.webp', 'avif'].join(',')

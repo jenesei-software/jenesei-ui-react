@@ -153,8 +153,11 @@ export const Slider: FC<SliderProps> = props => {
                     }
                   })
                 }}
+                isShowBeforeImage
                 propsImage={{
-                  objectFit: 'contain'
+                  default: {
+                    objectFit: 'contain'
+                  }
                 }}
                 alt={(params?.images ?? [])?.[params?.activeImageIndex ?? 0]?.imageSrc}
                 src={(params?.images ?? [])?.[params?.activeImageIndex ?? 0]?.imageSrc}

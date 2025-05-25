@@ -14,6 +14,27 @@ export interface TJeneseiThemeGenreType {
   }
 }
 
+export interface TJeneseiThemeGenreTypeRange {
+  track: {
+    background: {
+      rest: string
+    }
+    gradient: {
+      rest: string
+    }
+  }
+  thumb: {
+    background: {
+      rest: string
+      hover: string
+    }
+    border: {
+      rest: string
+      hover: string
+    }
+  }
+}
+
 export interface TJeneseiThemeGenreTypeSelect {
   background: {
     rest: string
@@ -163,6 +184,13 @@ export interface TJeneseiThemeGenreInput {
   blackBorder: TJeneseiThemeGenreType
   'realebail-white': TJeneseiThemeGenreType
 }
+
+export interface TJeneseiThemeGenreRange {
+  gray: TJeneseiThemeGenreTypeRange
+  grayBorder: TJeneseiThemeGenreTypeRange
+  blackBorder: TJeneseiThemeGenreTypeRange
+  'realebail-white': TJeneseiThemeGenreTypeRange
+}
 export interface TJeneseiThemeGenreSelectImage {
   gray: TJeneseiThemeGenreTypeSelectImage
   grayBorder: TJeneseiThemeGenreTypeSelectImage
@@ -246,6 +274,7 @@ export interface IJeneseiTheme {
     focus: string
     white: string
     danger: string
+    range: TJeneseiThemeGenreRange
     date: TJeneseiThemeGenreDate
     button: TJeneseiThemeGenre
     toggle: TJeneseiThemeGenreToggle

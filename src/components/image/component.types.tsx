@@ -1,4 +1,6 @@
-import { CSSProperties, ReactNode } from 'react'
+import { ReactNode } from 'react'
+
+import { addSXProps, addSXStyleProps } from '@local/styles/sx'
 
 import { StackProps } from '../stack'
 
@@ -7,10 +9,11 @@ export interface ImageProps {
   alt: string
   fallback?: ReactNode
   loading?: ReactNode
-  propsImage?: CSSProperties
+  isShowBeforeImage?: boolean
+  propsImage?: addSXProps['sx']
   propsStack?: StackProps
 }
 
-export interface ImageIMGProps {
+export type ImageIMGProps = {
   $isPending: boolean
-}
+} & addSXStyleProps

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { addError } from '@local/styles/error'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
-import { RangeComponentProps, RangeWrapperProps } from '.'
+import { RangeComponentProps, RangeThumbProps, RangeWrapperProps } from '.'
 
 /****************************************** Size *************************************************/
 export const RangeSize = css<RangeWrapperProps>`
@@ -29,14 +29,14 @@ export const RangeTrack = styled.div<RangeComponentProps>`
   height: 3px;
   width: 100%;
   padding: 0px 10px;
-  background: #ccc;
   border-radius: 2px;
 `
-export const RangeThumb = styled.input<RangeComponentProps>`
+export const RangeThumb = styled.input<RangeThumbProps>`
   position: absolute;
   width: 100%;
   outline: none !important;
   pointer-events: none;
+  appearance: none;
   -webkit-appearance: none;
   background: transparent;
   left: 0;
@@ -48,20 +48,17 @@ export const RangeThumb = styled.input<RangeComponentProps>`
     margin: 0;
     padding: 0;
     border-radius: 50%;
-    background: #f7faff;
-    border: 3px #2a77ee solid;
+    background: ${props => props.$colorBackground};
+    border: 3px ${props => props.$colorBorder} solid;
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: 0px;
+    transition:
+      transform ${props => props.theme.transition.default},
+      color ${props => props.theme.transition.default},
+      background-color ${props => props.theme.transition.default};
+    &:hover {
+      transform: scale(1.2);
+    }
   }
-`
-export const RangeMarker = styled.div<RangeComponentProps>`
-  position: absolute;
-  top: -20px;
-  width: 12px;
-  height: 12px;
-  background: #2a77ee;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
 `

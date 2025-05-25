@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import { addTransition } from '@local/styles/add'
+import { addSX } from '@local/styles/sx'
 
 import { ImageIMGProps } from '.'
 
@@ -11,4 +12,5 @@ export const ImageIMG = styled.img<ImageIMGProps>`
   object-fit: cover;
   opacity: ${props => (props.$isPending ? 0 : 1)};
   ${addTransition};
+  ${addSX};
 `
