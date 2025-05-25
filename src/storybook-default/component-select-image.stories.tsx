@@ -20,12 +20,15 @@ export const SelectImage: Story = {
       console.log('Selected images:', images)
     },
     imageSettings: {
+      aspect: 900 / 600,
       maxSize: 5 * 1024 * 1024,
       maxCount: 5,
       width: 200,
       height: 200
     },
+    isContain: true,
     locale: {
+      dialogSave: 'Save',
       textFallbackImage: 'Fallback image',
       textAddImage: 'Add image',
       textResetImage: 'Reset image',

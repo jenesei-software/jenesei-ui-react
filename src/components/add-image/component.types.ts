@@ -1,6 +1,9 @@
+import { RefObject } from 'react'
+
 import { addSXProps } from '@local/styles/sx'
 
 import { ButtonProps } from '../button'
+import { SelectImageItemProps } from '../select-image'
 
 export interface AddImageProps extends addSXProps {
   imageSettings: {
@@ -8,6 +11,16 @@ export interface AddImageProps extends addSXProps {
     maxCount: number
     aspect: number
   }
-  onAdd: (files: File[] | null) => void
-  propsButton: ButtonProps
+  onSave: (files: SelectImageItemProps[] | null) => void
+  button: ButtonProps
+  dialog: {
+    button: ButtonProps
+  }
+  locale: {
+    dialogSave: string
+  }
+}
+
+export type useImageCropProps = Pick<AddImageProps, 'onSave' | 'locale' | 'dialog' | 'imageSettings'> & {
+  inputRef: RefObject<HTMLInputElement | null>
 }

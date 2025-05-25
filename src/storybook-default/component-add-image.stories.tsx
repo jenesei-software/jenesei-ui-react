@@ -14,20 +14,29 @@ type Story = StoryObj<typeof AddImage>
 
 export const Default: Story = {
   args: {
-    propsButton: {
+    button: {
       genre: 'blackBorder',
       size: 'medium',
       children: 'Add Image'
     },
+    dialog: {
+      button: {
+        genre: 'blackBorder',
+        size: 'medium'
+      }
+    },
+    locale: {
+      dialogSave: 'Save Image'
+    },
     imageSettings: {
-      aspect: 16 / 9,
+      aspect: 2 / 2,
       maxCount: 1,
       maxSize: 5 * 1024 * 1024 // 5 MB
     },
-    onAdd(files) {
+    onSave(files) {
       if (files) {
         files.forEach(file => {
-          console.log(`Added file: ${file.name}, size: ${file.size} bytes`)
+          console.log(`Added file: ${file.name}, size: ${file.isNew} bytes`)
         })
       } else {
         console.log('No files added')

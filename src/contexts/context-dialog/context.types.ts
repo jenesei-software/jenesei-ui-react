@@ -33,7 +33,7 @@ export type DialogElementProps = Pick<
   Pick<DialogContextItemProps<object>, 'remove'>
 
 export type DialogContentProps<T extends object> = {
-  content?: (props?: T, remove?: () => void) => ReactNode
+  content?: (props?: T, remove?: () => void, isAnimating?: boolean) => ReactNode
   props?: T
   maxWidth?: string
   maxHeight?: string

@@ -133,6 +133,7 @@ export const ProviderDialog: FC<ProviderDialogProps> = props => {
 }
 
 const DialogElement = (props: DialogElementProps) => {
+  const [isAnimating, setIsAnimating] = useState(true)
   return (
     <Outside onOutsideClick={() => props.remove()}>
       <DialogElementWrapper
@@ -145,6 +146,7 @@ const DialogElement = (props: DialogElementProps) => {
           opacity: 1,
           scale: 1
         }}
+        onAnimationComplete={() => setIsAnimating(false)}
         transition={{
           type: 'spring',
           duration: DEFAULT_PROVIDER_DIALOG_DURATION_ELEMENT,
@@ -159,7 +161,7 @@ const DialogElement = (props: DialogElementProps) => {
         $padding={props.padding}
         $background={props.background}
       >
-        {props.content?.(props.props, props.remove)}
+        {props.content?.(props.props, props.remove, isAnimating)}
       </DialogElementWrapper>
     </Outside>
   )

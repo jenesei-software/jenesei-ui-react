@@ -7,7 +7,14 @@ import { useDialog } from '@local/contexts/context-dialog'
 import { ErrorMessage } from '@local/styles/error'
 import { KEY_SIZE_DATA } from '@local/theme'
 
-import { SelectImageItemProps, SelectImageListWrapper, SelectImageProps, SelectImageWrapper } from '.'
+import {
+  SelectImageItemProps,
+  SelectImageListWrapper,
+  SelectImageProps,
+  SelectImageWrapper,
+  useImageViewProps
+} from '.'
+import { useImageCrop } from '../add-image'
 import { Button } from '../button'
 import { Image } from '../image'
 import { SliderImageProps } from '../slider'
@@ -22,44 +29,11 @@ export const SelectImage = (props: SelectImageProps) => {
 
   const inputRef = useRef<HTMLInputElement | null>(null)
   const theme = useTheme()
-  const handleAddFiles = useCallback(
-    (files: FileList) => {
-      setImages(prev => {
-        const { maxSize, maxCount } = props.imageSettings
-
-        const remainingSlots = maxCount - prev.length
-
-        const validFiles = Array.from(files)
-          .filter(file => {
-            if (file.size > maxSize) {
-              console.warn(`File ${file.name} exceeds the allowed size of ${maxSize} bytes`)
-              return false
-            }
-            return true
-          })
-          .slice(0, remainingSlots)
-
-        const newImages = validFiles.map((file, idx) => ({
-          id: Date.now() + idx,
-          file,
-          url: URL.createObjectURL(file),
-          index: prev.length + idx,
-          isNew: true,
-          name: file.name
-        }))
-
-        const finalImages = [...prev, ...newImages]
-        onChange?.(finalImages)
-        return finalImages
-      })
-    },
-    [onChange, props.imageSettings]
-  )
 
   const handleDrop = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault()
     if (e.dataTransfer.files?.length) {
-      handleAddFiles(e.dataTransfer.files)
+      handleAddFilesCrop(e.dataTransfer.files)
     }
   }
 
@@ -70,6 +44,35 @@ export const SelectImage = (props: SelectImageProps) => {
       return finalImages
     })
   }
+
+  const { handleAddFiles: handleAddFilesCrop } = useImageCrop({
+    onSave: files => {
+      if (files) {
+        setImages(prev => {
+          const newImages = files.map((file, idx) => ({
+            ...file,
+            index: prev.length + idx
+          }))
+          const finalImages = [...prev, ...newImages]
+          onChange?.(finalImages)
+          return finalImages
+        })
+      }
+    },
+    locale: props.locale,
+    dialog: {
+      button: {
+        genre: props.genre,
+        size: props.size
+      }
+    },
+    imageSettings: {
+      maxSize: props.imageSettings.maxSize,
+      maxCount: props.imageSettings.maxCount - images.length,
+      aspect: props.imageSettings.aspect
+    },
+    inputRef: inputRef
+  })
 
   const openFileDialog = () => {
     inputRef.current?.click()
@@ -82,99 +85,14 @@ export const SelectImage = (props: SelectImageProps) => {
   useEffect(() => {
     setImages(props.images || [])
   }, [props.images])
-
   const size = useMemo(() => KEY_SIZE_DATA[props.size], [props.size])
-  const br = useMemo(() => `${size.radius}px`, [size.radius])
 
-  const { add } = useDialog<{
-    br?: string
-  }>({
-    br: br
+  const { handleAdd } = useImageView({
+    size: props.size,
+    locale: {
+      textFallbackImage: props.locale.textFallbackImage
+    }
   })
-  const handleAdd = useCallback(
-    (image: SliderImageProps) => {
-      add({
-        borderRadius: br,
-        padding: '0',
-        background: 'whiteStandard',
-        content: (params, remove) => (
-          <Stack
-            sx={{
-              default: {
-                position: 'relative',
-                overflow: 'hidden',
-                aspectRatio: '900 / 600',
-                width: 'auto',
-                maxWidth: '70dvw',
-                height: '85dvh',
-                borderRadius: params?.br
-              },
-              tablet: {
-                maxWidth: '95dvw'
-              }
-            }}
-          >
-            <Image
-              propsStack={{
-                sx: theme => ({
-                  default: {
-                    width: '100%',
-                    height: '100%',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: theme.palette.black10,
-                    position: 'absolute',
-                    pointerEvents: 'none'
-                  }
-                })
-              }}
-              isShowBeforeImage
-              propsImage={{
-                default: {
-                  objectFit: 'contain'
-                }
-              }}
-              alt={image?.imageSrc}
-              src={image?.imageSrc}
-              fallback={
-                <Typography
-                  sx={{
-                    default: {
-                      variant: 'h6'
-                    }
-                  }}
-                >
-                  {props.locale.textFallbackImage}
-                </Typography>
-              }
-            />
-            <Button
-              sx={{
-                default: {
-                  position: 'absolute',
-                  bottom: 15,
-                  right: 15
-                }
-              }}
-              genre="realebail-white"
-              size="small"
-              icons={[
-                {
-                  type: 'id',
-                  name: 'Arrow4'
-                }
-              ]}
-              isWidthAsHeight
-              isHiddenBorder
-              isRadius
-              onClick={() => remove?.()}
-            />
-          </Stack>
-        )
-      })
-    },
-    [add, br, props.locale.textFallbackImage]
-  )
   return (
     <>
       <SelectImageWrapper
@@ -248,6 +166,12 @@ export const SelectImage = (props: SelectImageProps) => {
                             pointerEvents: 'none'
                           }
                         })
+                      }}
+                      isShowBeforeImage={props.isContain}
+                      propsImage={{
+                        default: {
+                          objectFit: props.isContain ? 'contain' : 'cover'
+                        }
                       }}
                       alt={img.name || 'image'}
                       src={img.url}
@@ -348,7 +272,7 @@ export const SelectImage = (props: SelectImageProps) => {
             multiple
             style={{ display: 'none' }}
             onChange={e => {
-              if (e.target.files) handleAddFiles(e.target.files)
+              if (e.target.files) handleAddFilesCrop(e.target.files)
             }}
           />
         </SelectImageListWrapper>
@@ -386,4 +310,100 @@ export const SelectImage = (props: SelectImageProps) => {
       {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
     </>
   )
+}
+
+export const useImageView = (props: useImageViewProps) => {
+  const size = useMemo(() => KEY_SIZE_DATA[props.size], [props.size])
+  const br = useMemo(() => `${size.radius}px`, [size.radius])
+
+  const { add } = useDialog<{
+    br?: string
+  }>({
+    br: br
+  })
+  const handleAdd = useCallback(
+    (image: SliderImageProps) => {
+      add({
+        borderRadius: br,
+        padding: '0',
+        background: 'whiteStandard',
+        content: (params, remove) => (
+          <Stack
+            sx={{
+              default: {
+                position: 'relative',
+                overflow: 'hidden',
+                aspectRatio: '900 / 600',
+                width: 'auto',
+                maxWidth: '70dvw',
+                height: '85dvh',
+                borderRadius: params?.br
+              },
+              tablet: {
+                maxWidth: '95dvw'
+              }
+            }}
+          >
+            <Image
+              propsStack={{
+                sx: theme => ({
+                  default: {
+                    width: '100%',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: theme.palette.black10,
+                    position: 'absolute',
+                    pointerEvents: 'none'
+                  }
+                })
+              }}
+              isShowBeforeImage
+              propsImage={{
+                default: {
+                  objectFit: 'contain'
+                }
+              }}
+              alt={image?.imageSrc}
+              src={image?.imageSrc}
+              fallback={
+                <Typography
+                  sx={{
+                    default: {
+                      variant: 'h6'
+                    }
+                  }}
+                >
+                  {props.locale.textFallbackImage}
+                </Typography>
+              }
+            />
+            <Button
+              sx={{
+                default: {
+                  position: 'absolute',
+                  bottom: 15,
+                  right: 15
+                }
+              }}
+              genre="realebail-white"
+              size="small"
+              icons={[
+                {
+                  type: 'id',
+                  name: 'Arrow4'
+                }
+              ]}
+              isWidthAsHeight
+              isHiddenBorder
+              isRadius
+              onClick={() => remove?.()}
+            />
+          </Stack>
+        )
+      })
+    },
+    [add, br, props.locale.textFallbackImage]
+  )
+  return { handleAdd }
 }
