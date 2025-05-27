@@ -3,6 +3,9 @@ import { ReactNode } from '@tanstack/react-router'
 import { StackProps } from '../stack'
 
 export type SliderProps = {
+  imageSettings: {
+    aspect: number
+  }
   images: { id: number; imageSrc: string; children?: ReactNode }[]
   children?: (props: { isDialog: boolean }) => ReactNode | ReactNode
   onIndexChange?: (index: number) => void

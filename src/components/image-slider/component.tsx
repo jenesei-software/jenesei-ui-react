@@ -106,7 +106,7 @@ export const Slider: FC<SliderProps> = props => {
             default: {
               position: 'relative',
               overflow: 'hidden',
-              aspectRatio: '900 / 600',
+              aspectRatio: `${props.imageSettings.aspect * 2} / 2`,
               width: 'auto',
               maxWidth: '70dvw',
               height: '85dvh',
@@ -272,7 +272,7 @@ export const Slider: FC<SliderProps> = props => {
         </Stack>
       )
     })
-  }, [add, br, isLengthOne, props.locales.failedToLoad])
+  }, [add, br, isLengthOne, props.imageSettings.aspect, props.locales.failedToLoad])
   return (
     <StackMotion
       {...props.propsStack}

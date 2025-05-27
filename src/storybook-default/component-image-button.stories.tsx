@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
-import { AddImage } from '@local/components/add-image'
+import { ImageButton } from '@local/components/image-button'
 
-const meta: Meta<typeof AddImage> = {
-  component: AddImage,
-  title: 'Component/AddImage'
+const meta: Meta<typeof ImageButton> = {
+  component: ImageButton,
+  title: 'Component/Image/Button'
 }
 
 export default meta
 
-type Story = StoryObj<typeof AddImage>
+type Story = StoryObj<typeof ImageButton>
 
-export const Default: Story = {
+export const Button: Story = {
   args: {
     button: {
       genre: 'blackBorder',

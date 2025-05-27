@@ -8,22 +8,22 @@ import { ErrorMessage } from '@local/styles/error'
 import { KEY_SIZE_DATA } from '@local/theme'
 
 import {
-  SelectImageItemProps,
-  SelectImageListWrapper,
-  SelectImageProps,
-  SelectImageWrapper,
+  ImageSelectItemProps,
+  ImageSelectListWrapper,
+  ImageSelectProps,
+  ImageSelectWrapper,
   useImageViewProps
 } from '.'
-import { useImageCrop } from '../add-image'
 import { Button } from '../button'
 import { Image } from '../image'
-import { SliderImageProps } from '../slider'
+import { useImageCrop } from '../image-button'
+import { SliderImageProps } from '../image-slider'
 import { Stack } from '../stack'
 import { Typography } from '../typography'
 
-export const SelectImage = (props: SelectImageProps) => {
+export const ImageSelect = (props: ImageSelectProps) => {
   const { onChange } = props
-  const [images, setImages] = useState<SelectImageItemProps[]>(props.images || [])
+  const [images, setImages] = useState<ImageSelectItemProps[]>(props.images || [])
 
   const [isDraggingOver, setIsDraggingOver] = useState(false)
 
@@ -91,18 +91,19 @@ export const SelectImage = (props: SelectImageProps) => {
     size: props.size,
     locale: {
       textFallbackImage: props.locale.textFallbackImage
-    }
+    },
+    imageSettings: props.imageSettings
   })
   return (
     <>
-      <SelectImageWrapper
+      <ImageSelectWrapper
         $genre={props.genre}
         $size={props.size}
         id={props.id}
         $width={props.width}
         $error={props.error}
       >
-        <SelectImageListWrapper
+        <ImageSelectListWrapper
           onDrop={e => {
             handleDrop(e)
             setIsDraggingOver(false)
@@ -275,7 +276,7 @@ export const SelectImage = (props: SelectImageProps) => {
               if (e.target.files) handleAddFilesCrop(e.target.files)
             }}
           />
-        </SelectImageListWrapper>
+        </ImageSelectListWrapper>
         <Stack sx={{ default: { flexGrow: 1, gap: `${size.padding - 2}px` } }}>
           <Button
             type="button"
@@ -289,7 +290,7 @@ export const SelectImage = (props: SelectImageProps) => {
             isRadius
             onClick={openFileDialog}
           >
-            {props.locale.textAddImage}
+            {props.locale.textImageButton}
           </Button>
           <Button
             isRadius
@@ -306,7 +307,7 @@ export const SelectImage = (props: SelectImageProps) => {
             {props.locale.textResetImage}
           </Button>
         </Stack>
-      </SelectImageWrapper>
+      </ImageSelectWrapper>
       {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
     </>
   )
@@ -333,7 +334,7 @@ export const useImageView = (props: useImageViewProps) => {
               default: {
                 position: 'relative',
                 overflow: 'hidden',
-                aspectRatio: '900 / 600',
+                aspectRatio: `${props.imageSettings.aspect * 2} / 2`,
                 width: 'auto',
                 maxWidth: '70dvw',
                 height: '85dvh',
@@ -403,7 +404,7 @@ export const useImageView = (props: useImageViewProps) => {
         )
       })
     },
-    [add, br, props.locale.textFallbackImage]
+    [add, br, props.imageSettings.aspect, props.locale.textFallbackImage]
   )
   return { handleAdd }
 }

@@ -8,12 +8,12 @@ import { useDialog } from '@local/contexts/context-dialog'
 import { KEY_SIZE_DATA } from '@local/theme'
 import { IImageFormat } from '@local/types'
 
-import { AddImageProps, useImageCropProps } from '.'
+import { ImageButtonProps, useImageCropProps } from '.'
 import { Button } from '../button'
-import { SelectImageItemProps } from '../select-image'
+import { ImageSelectItemProps } from '../image-select'
 import { Stack } from '../stack'
 
-export const AddImage: FC<AddImageProps> = props => {
+export const ImageButton: FC<ImageButtonProps> = props => {
   const inputRef = useRef<HTMLInputElement | null>(null)
   const openFileDialog = () => {
     inputRef.current?.click()
@@ -78,7 +78,7 @@ export const useImageCrop = (props: useImageCropProps) => {
     croppedArea: croppedArea
   })
   const handleAdd = useCallback(
-    (image: SelectImageItemProps) => {
+    (image: ImageSelectItemProps) => {
       add({
         borderRadius: br,
         padding: '0',
@@ -87,14 +87,14 @@ export const useImageCrop = (props: useImageCropProps) => {
           // eslint-disable-next-line react-hooks/rules-of-hooks
           const [isLoading, setIsLoading] = useState(false)
 
-          const onSave = async (file: SelectImageItemProps) => {
+          const onSave = async (file: ImageSelectItemProps) => {
             if (file.url && file.name && params?.croppedArea) {
               setIsLoading(true)
               const blob = await getCroppedImg(file.url, params.croppedArea, file.format)
               setIsLoading(false)
               const croppedFile = new File([blob], file.name, { type: file.format })
 
-              const newImage: SelectImageItemProps = {
+              const newImage: ImageSelectItemProps = {
                 id: Date.now() + file.index,
                 file: croppedFile,
                 url: URL.createObjectURL(croppedFile),
@@ -114,7 +114,7 @@ export const useImageCrop = (props: useImageCropProps) => {
                 default: {
                   position: 'relative',
                   overflow: 'hidden',
-                  aspectRatio: '900 / 600',
+                  aspectRatio: `${props.imageSettings.aspect * 2} / 2`,
                   width: 'auto',
                   maxWidth: '70dvw',
                   height: '85dvh',
@@ -213,7 +213,7 @@ export const useImageCrop = (props: useImageCropProps) => {
         return true
       })
 
-      const newImages: SelectImageItemProps[] = validFiles.map((file, idx) => ({
+      const newImages: ImageSelectItemProps[] = validFiles.map((file, idx) => ({
         id: Date.now() + idx,
         file,
         url: URL.createObjectURL(file),

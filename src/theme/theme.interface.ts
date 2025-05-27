@@ -53,7 +53,7 @@ export interface TJeneseiThemeGenreTypeSelect {
     placeholder: string
   }
 }
-export interface TJeneseiThemeGenreTypeSelectImage {
+export interface TJeneseiThemeGenreTypeImageSelect {
   background: {
     rest: string
     hover: string
@@ -191,11 +191,11 @@ export interface TJeneseiThemeGenreRange {
   blackBorder: TJeneseiThemeGenreTypeRange
   'realebail-white': TJeneseiThemeGenreTypeRange
 }
-export interface TJeneseiThemeGenreSelectImage {
-  gray: TJeneseiThemeGenreTypeSelectImage
-  grayBorder: TJeneseiThemeGenreTypeSelectImage
-  blackBorder: TJeneseiThemeGenreTypeSelectImage
-  'realebail-white': TJeneseiThemeGenreTypeSelectImage
+export interface TJeneseiThemeGenreImageSelect {
+  gray: TJeneseiThemeGenreTypeImageSelect
+  grayBorder: TJeneseiThemeGenreTypeImageSelect
+  blackBorder: TJeneseiThemeGenreTypeImageSelect
+  'realebail-white': TJeneseiThemeGenreTypeImageSelect
 }
 export interface TJeneseiThemeGenreSelect {
   gray: TJeneseiThemeGenreTypeSelect
@@ -281,7 +281,7 @@ export interface IJeneseiTheme {
     checkbox: TJeneseiThemeGenre
     form: TJeneseiThemeGenreForm
     input: TJeneseiThemeGenreInput
-    selectImage: TJeneseiThemeGenreSelectImage
+    selectImage: TJeneseiThemeGenreImageSelect
     select: TJeneseiThemeGenreSelect
     sonner: TJeneseiThemeGenreSonner
   }

@@ -4,9 +4,9 @@ import styled, { css } from 'styled-components'
 import { addError } from '@local/styles/error'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
-import { SelectImageWrapperProps } from '.'
+import { ImageSelectWrapperProps } from '.'
 
-const SelectImageListGenre = css<SelectImageWrapperProps>`
+const ImageSelectListGenre = css<ImageSelectWrapperProps>`
   ${props => css`
     background: ${props.theme.colors.selectImage[props.$genre].background.rest};
     color: ${props.theme.colors.selectImage[props.$genre].color.rest};
@@ -21,32 +21,32 @@ const SelectImageListGenre = css<SelectImageWrapperProps>`
   `};
 `
 /****************************************** Size *************************************************/
-export const SelectImageListSize = css<SelectImageWrapperProps>`
-  ${props => SelectImageListSizeConstructor(KEY_SIZE_DATA[props.$size])};
+export const ImageSelectListSize = css<ImageSelectWrapperProps>`
+  ${props => ImageSelectListSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
-export const SelectImageListSizeConstructor = (props: IJeneseiThemeSize) => css`
+export const ImageSelectListSizeConstructor = (props: IJeneseiThemeSize) => css`
   padding: ${props.padding}px;
   border-radius: ${props.radius}px;
 `
-export const SelectImageSize = css<SelectImageWrapperProps>`
-  ${props => SelectImageSizeConstructor(KEY_SIZE_DATA[props.$size])};
+export const ImageSelectSize = css<ImageSelectWrapperProps>`
+  ${props => ImageSelectSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
-export const SelectImageSizeConstructor = (props: IJeneseiThemeSize) => css`
+export const ImageSelectSizeConstructor = (props: IJeneseiThemeSize) => css`
   gap: ${props.padding - 2}px;
 `
-export const SelectImageWrapper = styled.div<SelectImageWrapperProps>`
+export const ImageSelectWrapper = styled.div<ImageSelectWrapperProps>`
   display: flex;
   flex-direction: column;
   width: ${props => props.$width || '100%'};
-  ${SelectImageSize}
+  ${ImageSelectSize}
   ${addError}
 `
-export const SelectImageListWrapper = styled(motion.div)<SelectImageWrapperProps>`
+export const ImageSelectListWrapper = styled(motion.div)<ImageSelectWrapperProps>`
   border: 2px dashed;
 
   display: flex;
   flex-direction: column;
   width: ${props => props.$width || '100%'};
-  ${SelectImageListGenre}
-  ${SelectImageListSize}
+  ${ImageSelectListGenre}
+  ${ImageSelectListSize}
 `

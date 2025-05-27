@@ -8,7 +8,7 @@ import { Typography } from '@local/components/typography'
 
 import { Button } from '../components/button'
 import { DEFAULT_MAP_THEME, Map, MapDot, MapDotProps, MapProps } from '../components/map'
-import { IMAGES, Slider } from '../components/slider'
+import { IMAGES, Slider } from '../components/image-slider'
 import { Stack } from '../components/stack'
 
 const meta: Meta<typeof Map> = {

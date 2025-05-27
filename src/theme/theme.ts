@@ -256,7 +256,7 @@ const DefaultJeneseiThemeGenre = {
     }
   }
 }
-const DefaultJeneseiThemeSelectImage = {
+const DefaultJeneseiThemeImageSelect = {
   'realebail-white': {
     background: {
       rest: JeneseiPalette.whiteJanice,
@@ -829,7 +829,7 @@ export const JeneseiTheme: IJeneseiTheme = {
     toggle: DefaultJeneseiThemeGenreToggle,
     checkbox: DefaultJeneseiThemeGenre,
     input: DefaultJeneseiThemeGenreInput,
-    selectImage: DefaultJeneseiThemeSelectImage,
+    selectImage: DefaultJeneseiThemeImageSelect,
     select: DefaultJeneseiThemeGenreInputSelect
   }
 }

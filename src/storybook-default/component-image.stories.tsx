@@ -5,7 +5,7 @@ import { Image as ImageComponent } from '../components/image'
 
 const meta: Meta<typeof ImageComponent> = {
   component: ImageComponent,
-  title: 'Component/Image'
+  title: 'Component/Image/Image'
 }
 
 export default meta

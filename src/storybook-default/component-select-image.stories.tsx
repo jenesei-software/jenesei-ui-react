@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
-import { SelectImage as SelectImageComponent } from '../components/select-image'
+import { ImageSelect as ImageSelectComponent } from '../components/image-select'
 
-const meta: Meta<typeof SelectImageComponent> = {
-  component: SelectImageComponent,
-  title: 'Component/SelectImage'
+const meta: Meta<typeof ImageSelectComponent> = {
+  component: ImageSelectComponent,
+  title: 'Component/Image/Select'
 }
 
 export default meta
-type Story = StoryObj<typeof SelectImageComponent>
+type Story = StoryObj<typeof ImageSelectComponent>
 
-export const SelectImage: Story = {
+export const Select: Story = {
   args: {
     genre: 'realebail-white',
     width: '100%',
@@ -30,7 +30,7 @@ export const SelectImage: Story = {
     locale: {
       dialogSave: 'Save',
       textFallbackImage: 'Fallback image',
-      textAddImage: 'Add image',
+      textImageButton: 'Add image',
       textResetImage: 'Reset image',
       dragAndDrop: 'Drag and drop your files here'
     },

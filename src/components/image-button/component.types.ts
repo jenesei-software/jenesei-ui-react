@@ -3,15 +3,15 @@ import { RefObject } from 'react'
 import { addSXProps } from '@local/styles/sx'
 
 import { ButtonProps } from '../button'
-import { SelectImageItemProps } from '../select-image'
+import { ImageSelectItemProps } from '../image-select'
 
-export interface AddImageProps extends addSXProps {
+export interface ImageButtonProps extends addSXProps {
   imageSettings: {
     maxSize: number
     maxCount: number
     aspect: number
   }
-  onSave: (files: SelectImageItemProps[] | null) => void
+  onSave: (files: ImageSelectItemProps[] | null) => void
   button: ButtonProps
   dialog: {
     button: ButtonProps
@@ -21,6 +21,6 @@ export interface AddImageProps extends addSXProps {
   }
 }
 
-export type useImageCropProps = Pick<AddImageProps, 'onSave' | 'locale' | 'dialog' | 'imageSettings'> & {
+export type useImageCropProps = Pick<ImageButtonProps, 'onSave' | 'locale' | 'dialog' | 'imageSettings'> & {
   inputRef: RefObject<HTMLInputElement | null>
 }

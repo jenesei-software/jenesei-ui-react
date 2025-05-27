@@ -2,12 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
 import { Button } from '../components/button'
-import { IMAGES, Slider as SliderComponent } from '../components/slider'
+import { IMAGES, Slider as SliderComponent } from '../components/image-slider'
 import { Stack } from '../components/stack'
 
 const meta: Meta<typeof SliderComponent> = {
   component: SliderComponent,
-  title: 'Component/Slider'
+  title: 'Component/Image/Slider'
 }
 
 export default meta
@@ -43,6 +43,9 @@ export const Slider: Story = {
     locales: {
       failedToLoad: 'Failed to load image',
       noImagesAvailable: 'No images available'
+    },
+    imageSettings: {
+      aspect: 1.5
     },
     propsStack: {
       sx: {
