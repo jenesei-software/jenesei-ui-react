@@ -10,9 +10,8 @@ export const Image: FC<ImageProps> = props => {
   const [isError, setIsError] = useState(false)
   return (
     <Stack
-      {...props.propsStack}
       sx={theme => ({
-        ...props.propsStack?.sx,
+        ...props?.sxStack,
         default: {
           position: 'relative',
           overflow: 'hidden',
@@ -34,16 +33,16 @@ export const Image: FC<ImageProps> = props => {
                 }
               }
             : {}),
-          ...(props.propsStack?.sx
-            ? typeof props.propsStack?.sx === 'function'
-              ? props.propsStack?.sx(theme).default
-              : props.propsStack?.sx.default
+          ...(props?.sxStack
+            ? typeof props?.sxStack === 'function'
+              ? props?.sxStack(theme).default
+              : props?.sxStack.default
             : {})
         }
       })}
     >
       {!isError ? (
-        props.loading || isPending ? (
+        props.componentLoading || isPending ? (
           <Skeleton
             visible
             sx={{
@@ -64,10 +63,10 @@ export const Image: FC<ImageProps> = props => {
           onLoadStart={() => setIsPending(true)}
           onLoad={() => setIsPending(false)}
           onError={() => setIsError(true)}
-          $sx={props.propsImage}
+          $sx={props.sxImage}
         />
       )}
-      {isError ? props.fallback || null : null}
+      {isError ? props.componentFallback || null : null}
     </Stack>
   )
 }

@@ -19,7 +19,7 @@ export const StyledSVG = styled.svg<StyledIconIdItemProps>`
     transform: rotate(${props.$turn || 0}deg);
   `}
   ${props =>
-    props.$order ||
+    props.$order !== undefined &&
     css`
       order: ${props.$order};
     `};

@@ -10,4 +10,5 @@ export interface PaginationProps {
 export interface PaginationQuantityWrapperProps {
   $left: string
   $width: string
+  $gap: number
 }

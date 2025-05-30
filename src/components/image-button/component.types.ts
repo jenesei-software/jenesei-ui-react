@@ -6,19 +6,23 @@ import { ButtonProps } from '../button'
 import { ImageSelectItemProps } from '../image-select'
 
 export interface ImageButtonProps extends addSXProps {
-  imageSettings: {
-    maxSize: number
-    maxCount: number
-    aspect: number
-  }
-  onSave: (files: ImageSelectItemProps[] | null) => void
   button: ButtonProps
+
   dialog: {
     button: ButtonProps
   }
+
+  imageSettings: {
+    maxSize: number
+    maxCount: number
+    aspect?: number
+  }
+
   locale: {
     dialogSave: string
   }
+
+  onSave: (files: ImageSelectItemProps[] | null) => void
 }
 
 export type useImageCropProps = Pick<ImageButtonProps, 'onSave' | 'locale' | 'dialog' | 'imageSettings'> & {

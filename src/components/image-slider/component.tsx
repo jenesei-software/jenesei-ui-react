@@ -140,28 +140,26 @@ export const Slider: FC<SliderProps> = props => {
                 : {})}
             >
               <Image
-                propsStack={{
-                  sx: theme => ({
-                    default: {
-                      width: '100%',
-                      height: '100%',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      backgroundColor: theme.palette.black10,
-                      position: 'absolute',
-                      pointerEvents: 'none'
-                    }
-                  })
-                }}
+                sxStack={theme => ({
+                  default: {
+                    width: '100%',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: theme.palette.black10,
+                    position: 'absolute',
+                    pointerEvents: 'none'
+                  }
+                })}
                 isShowBeforeImage
-                propsImage={{
+                sxImage={{
                   default: {
                     objectFit: 'contain'
                   }
                 }}
                 alt={(params?.images ?? [])?.[params?.activeImageIndex ?? 0]?.imageSrc}
                 src={(params?.images ?? [])?.[params?.activeImageIndex ?? 0]?.imageSrc}
-                fallback={
+                componentFallback={
                   <Typography
                     sx={{
                       default: {
@@ -351,22 +349,20 @@ export const Slider: FC<SliderProps> = props => {
                 : {})}
             >
               <Image
-                propsStack={{
-                  sx: theme => ({
-                    default: {
-                      width: '100%',
-                      height: '100%',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      backgroundColor: theme.palette.black10,
-                      position: 'absolute',
-                      pointerEvents: 'none'
-                    }
-                  })
-                }}
+                sxStack={theme => ({
+                  default: {
+                    width: '100%',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: theme.palette.black10,
+                    position: 'absolute',
+                    pointerEvents: 'none'
+                  }
+                })}
                 alt={images[activeImageIndex]?.imageSrc}
                 src={images[activeImageIndex]?.imageSrc}
-                fallback={
+                componentFallback={
                   <Typography
                     sx={{
                       default: {

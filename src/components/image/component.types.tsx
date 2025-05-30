@@ -2,16 +2,20 @@ import { ReactNode } from 'react'
 
 import { addSXProps, addSXStyleProps } from '@local/styles/sx'
 
-import { StackProps } from '../stack'
-
 export interface ImageProps {
-  src: string
   alt: string
-  fallback?: ReactNode
-  loading?: ReactNode
+
+  componentFallback?: ReactNode
+
+  componentLoading?: ReactNode
+
   isShowBeforeImage?: boolean
-  propsImage?: addSXProps['sx']
-  propsStack?: StackProps
+
+  src: string
+
+  sxImage?: addSXProps['sx']
+
+  sxStack?: addSXProps['sx']
 }
 
 export type ImageIMGProps = {

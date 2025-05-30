@@ -53,13 +53,16 @@ export const Pagination: FC<PaginationProps> = props => {
     } else {
       calculation = indexesLeft - approximateVisibleMiddle
     }
-    return `-${calculation * widthIndex + calculation * gap}px`
+    return `calc(-${calculation * widthIndex + calculation * gap}px + ${gap}px)`
   }, [indexesLeft, approximateVisibleMiddle, indexesRight, widthIndex, gap, props.length, props.viewQuantity])
 
-  const width = useMemo(() => `${props.viewQuantity * 30 + (props.viewQuantity - 1) * 12}px`, [props.viewQuantity])
+  const width = useMemo(
+    () => `${props.viewQuantity * 30 + gap + (props.viewQuantity - 1) * 12}px`,
+    [gap, props.viewQuantity]
+  )
 
   return (
-    <Stack sx={{ default: { gap: gapString } }}>
+    <Stack sx={{ default: { height: 'fit-content' } }}>
       <Button
         isDisabled={isDisabledPrevious}
         isHidden={isDisabledPrevious}
@@ -77,8 +80,8 @@ export const Pagination: FC<PaginationProps> = props => {
       >
         Previous
       </Button>
-      <PaginationQuantityWrapper $left={left} $width={width}>
-        <PaginationQuantityButtons $left={left} $width={width}>
+      <PaginationQuantityWrapper $left={left} $width={width} $gap={gap}>
+        <PaginationQuantityButtons $left={left} $width={width} $gap={gap}>
           {Array.from({ length: props.length }).map((_, i) => (
             <Button
               key={i}

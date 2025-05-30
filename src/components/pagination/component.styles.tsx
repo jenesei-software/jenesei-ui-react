@@ -8,6 +8,8 @@ export const PaginationQuantityWrapper = styled.div<PaginationQuantityWrapperPro
   position: relative;
   width: ${props => props.$width};
   overflow: hidden;
+  margin: -2px;
+  padding: 2px;
   ${addTransition};
 `
 
@@ -18,6 +20,7 @@ export const PaginationQuantityButtons = styled.div<PaginationQuantityWrapperPro
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  padding: 0px ${props => props.$gap}px;
   left: ${props => props.$left};
   ${addTransition};
 `

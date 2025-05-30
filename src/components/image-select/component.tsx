@@ -45,8 +45,8 @@ export const ImageSelect = (props: ImageSelectProps) => {
     })
   }
 
-  const { handleAddFiles: handleAddFilesCrop } = useImageCrop({
-    onSave: files => {
+  const handleOnSave = useCallback(
+    (files: ImageSelectItemProps[] | null) => {
       if (files) {
         setImages(prev => {
           const newImages = files.map((file, idx) => ({
@@ -59,6 +59,10 @@ export const ImageSelect = (props: ImageSelectProps) => {
         })
       }
     },
+    [onChange]
+  )
+  const { handleAddFiles: handleAddFilesCrop } = useImageCrop({
+    onSave: handleOnSave,
     locale: props.locale,
     dialog: {
       button: {
@@ -155,28 +159,26 @@ export const ImageSelect = (props: ImageSelectProps) => {
                     }}
                   >
                     <Image
-                      propsStack={{
-                        sx: theme => ({
-                          default: {
-                            width: '100%',
-                            height: '100%',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            backgroundColor: theme.palette.black10,
-                            position: 'absolute',
-                            pointerEvents: 'none'
-                          }
-                        })
-                      }}
+                      sxStack={theme => ({
+                        default: {
+                          width: '100%',
+                          height: '100%',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          backgroundColor: theme.palette.black10,
+                          position: 'absolute',
+                          pointerEvents: 'none'
+                        }
+                      })}
                       isShowBeforeImage={props.isContain}
-                      propsImage={{
+                      sxImage={{
                         default: {
                           objectFit: props.isContain ? 'contain' : 'cover'
                         }
                       }}
                       alt={img.name || 'image'}
                       src={img.url}
-                      fallback={
+                      componentFallback={
                         <Typography
                           sx={{
                             default: {
@@ -346,28 +348,26 @@ export const useImageView = (props: useImageViewProps) => {
             }}
           >
             <Image
-              propsStack={{
-                sx: theme => ({
-                  default: {
-                    width: '100%',
-                    height: '100%',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: theme.palette.black10,
-                    position: 'absolute',
-                    pointerEvents: 'none'
-                  }
-                })
-              }}
+              sxStack={theme => ({
+                default: {
+                  width: '100%',
+                  height: '100%',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: theme.palette.black10,
+                  position: 'absolute',
+                  pointerEvents: 'none'
+                }
+              })}
               isShowBeforeImage
-              propsImage={{
+              sxImage={{
                 default: {
                   objectFit: 'contain'
                 }
               }}
               alt={image?.imageSrc}
               src={image?.imageSrc}
-              fallback={
+              componentFallback={
                 <Typography
                   sx={{
                     default: {
