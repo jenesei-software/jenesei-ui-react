@@ -15,6 +15,8 @@ type Story = StoryObj<typeof SliderComponent>
 
 export const Slider: Story = {
   args: {
+    genre: 'realebail-white',
+    size: 'medium',
     images: IMAGES,
     children: () => (
       <Stack
@@ -51,8 +53,7 @@ export const Slider: Story = {
       sx: {
         default: {
           height: '350px',
-          width: '500px',
-          borderRadius: '10px'
+          width: '500px'
         }
       }
     }

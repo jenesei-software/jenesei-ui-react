@@ -1,5 +1,3 @@
-import { RefObject } from 'react'
-
 import { addSXProps } from '@local/styles/sx'
 
 import { ButtonProps } from '../button'
@@ -20,6 +18,8 @@ export interface ImageButtonProps extends addSXProps {
   }
 
   locale: {
+    buttonAdd: string
+
     dialogSave: string
     dialogCancel: string
 
@@ -28,8 +28,4 @@ export interface ImageButtonProps extends addSXProps {
   }
 
   onSave: (files: ImageSelectItemProps[] | null) => void
-}
-
-export type useImageCropProps = Pick<ImageButtonProps, 'onSave' | 'locale' | 'dialog' | 'imageSettings'> & {
-  inputRef: RefObject<HTMLInputElement | null>
 }

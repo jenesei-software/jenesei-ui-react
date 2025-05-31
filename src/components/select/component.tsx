@@ -40,7 +40,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
   const [isAll, setIsAll] = useState(props?.footer?.selectAll?.defaultValue ?? false)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const refInput = useRef<HTMLInputElement>(null)
   const parentListRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
@@ -110,7 +110,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const handleOnBlurEasy = useCallback(() => {
     setIsOpen(false)
     wrapperRef?.current?.blur()
-    inputRef?.current?.blur()
+    refInput?.current?.blur()
   }, [])
 
   const handleOnBlur: FocusEventHandler<HTMLInputElement> = useCallback(
@@ -207,9 +207,9 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     const handleClickOutside = (event: MouseEvent) => {
       if (
         parentListRef.current &&
-        inputRef.current &&
+        refInput.current &&
         !parentListRef.current.contains(event.target as Node) &&
-        !inputRef.current.contains(event.target as Node)
+        !refInput.current.contains(event.target as Node)
       ) {
         handleOnBlurEasy()
       }
@@ -295,7 +295,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
             borderBottomRightRadius: isOpen ? `0px` : `${radius}px`
           }}
           transition={{ duration: 0.2 }}
-          ref={inputRef}
+          ref={refInput}
         />
         {props.isShowSelectInputIcon && (
           <SelectInputIcon

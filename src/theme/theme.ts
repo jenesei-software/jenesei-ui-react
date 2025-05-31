@@ -11,7 +11,7 @@ export const JeneseiPalette: Record<JeneseiPaletteKeys, string> = {
   currentColor: 'currentColor',
   inherit: 'inherit',
   transparent: 'transparent',
-  black100: '#000000;',
+  black100: '#000000',
   black80: 'rgba(0 0 0 / 0.8)',
   black60: 'rgba(0 0 0 / 0.6)',
   black50: 'rgba(0 0 0 / 0.5)',

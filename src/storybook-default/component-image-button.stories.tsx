@@ -30,6 +30,7 @@ export const Button: Story = {
       }
     },
     locale: {
+      buttonAdd: 'Add Image',
       dialogSave: 'Save',
       dialogCancel: 'Cancel',
       dialogAddImage: 'Add',

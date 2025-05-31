@@ -15,7 +15,7 @@ export const Select: Story = {
   args: {
     propsButton: {
       default: {
-        genre: 'realebail-white',
+        genre: 'product',
         size: 'medium'
       },
       delete: {
@@ -38,13 +38,13 @@ export const Select: Story = {
     },
     isContain: true,
     locale: {
+      buttonAdd: 'Add Image',
       dialogSave: 'Save',
       dialogCancel: 'Cancel',
       dialogAddImage: 'Add',
       dialogDeleteImage: 'Delete',
-      textFallbackImage: 'Fallback image',
-      textImageButton: 'Add image',
-      textResetImage: 'Reset image',
+      imageFallback: 'Fallback image',
+      buttonReset: 'Reset image',
       dragAndDrop: 'Drag and drop your files here'
     },
     defaultImages: [],

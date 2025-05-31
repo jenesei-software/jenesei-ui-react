@@ -3,7 +3,15 @@ import styled from 'styled-components'
 
 import { addOutline } from '@local/styles/add'
 
-import { DialogElementWrapperProps, DialogLayoutProps } from '.'
+import {
+  DEFAULT_PROVIDER_DIALOG_ELEMENT_BACKGROUND,
+  DEFAULT_PROVIDER_DIALOG_ELEMENT_BORDER_RADIUS,
+  DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_HEIGHT,
+  DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_WIDTH,
+  DEFAULT_PROVIDER_DIALOG_ELEMENT_PADDING,
+  DialogElementWrapperProps,
+  DialogLayoutProps
+} from '.'
 
 export const DialogLayout = styled(motion.div)<DialogLayoutProps>`
   position: fixed;
@@ -20,11 +28,14 @@ export const DialogLayout = styled(motion.div)<DialogLayoutProps>`
 
 export const DialogElementWrapper = styled(motion.dialog)<DialogElementWrapperProps>`
   ${addOutline};
-  max-width: ${props => props.$maxWidth};
-  max-height: ${props => props.$maxHeight};
-  border-radius: ${props => props.$borderRadius};
-  background: ${props => props.$background && props.theme.palette[props.$background]};
-  padding: ${props => props.$padding};
+  max-width: ${props => props.$propsDialog?.maxWidth || DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_WIDTH};
+  max-height: ${props => props.$propsDialog?.maxHeight || DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_HEIGHT};
+  border-radius: ${props => props.$propsDialog?.borderRadius || DEFAULT_PROVIDER_DIALOG_ELEMENT_BORDER_RADIUS};
+  background: ${props =>
+    props.$propsDialog?.background
+      ? props.theme.palette[props.$propsDialog.background]
+      : props.theme.palette[DEFAULT_PROVIDER_DIALOG_ELEMENT_BACKGROUND]};
+  padding: ${props => props.$propsDialog?.padding || DEFAULT_PROVIDER_DIALOG_ELEMENT_PADDING};
   width: max-content;
   height: max-content;
   border: 0;

@@ -3,31 +3,28 @@ import { DragEvent, useCallback, useEffect, useMemo, useRef, useState } from 're
 import { useTheme } from 'styled-components'
 
 import { ImageSupportedFormatsForInput } from '@local/consts'
-import { useDialog } from '@local/contexts/context-dialog'
+import { useImageCrop } from '@local/hooks/use-image-crop'
+import { useImageView } from '@local/hooks/use-image-view'
 import { ErrorMessage } from '@local/styles/error'
 import { KEY_SIZE_DATA } from '@local/theme'
 
-import {
-  ImageSelectItemProps,
-  ImageSelectListWrapper,
-  ImageSelectProps,
-  ImageSelectWrapper,
-  useImageViewProps
-} from '.'
+import { ImageSelectItemProps, ImageSelectListWrapper, ImageSelectProps, ImageSelectWrapper } from '.'
 import { Button } from '../button'
 import { Image } from '../image'
-import { useImageCrop } from '../image-button'
-import { SliderImageProps } from '../image-slider'
 import { Stack } from '../stack'
 import { Typography } from '../typography'
 
 export const ImageSelect = (props: ImageSelectProps) => {
   const { onChange } = props
+
+  const size = useMemo(() => KEY_SIZE_DATA[props.size], [props.size])
+
   const [images, setImages] = useState<ImageSelectItemProps[]>(props.images || [])
 
   const [isDraggingOver, setIsDraggingOver] = useState(false)
 
-  const inputRef = useRef<HTMLInputElement | null>(null)
+  const refInput = useRef<HTMLInputElement | null>(null)
+
   const theme = useTheme()
 
   const handleDrop = (e: DragEvent<HTMLDivElement>) => {
@@ -61,6 +58,16 @@ export const ImageSelect = (props: ImageSelectProps) => {
     },
     [onChange]
   )
+
+  const openFileDialog = () => {
+    refInput.current?.click()
+  }
+
+  const resetImages = () => {
+    setImages(props.defaultImages || [])
+    onChange?.(props.defaultImages || [])
+  }
+
   const { handleAddFiles: handleAddFilesCrop } = useImageCrop({
     onSave: handleOnSave,
     locale: props.locale,
@@ -79,30 +86,20 @@ export const ImageSelect = (props: ImageSelectProps) => {
       maxCount: props.imageSettings.maxCount - images.length,
       aspect: props.imageSettings.aspect
     },
-    inputRef: inputRef
+    refInput: refInput
   })
 
-  const openFileDialog = () => {
-    inputRef.current?.click()
-  }
-  const resetImages = () => {
-    setImages(props.defaultImages || [])
-    onChange?.(props.defaultImages || [])
-  }
+  const { handleAdd } = useImageView({
+    size: props.size,
+    locale: props.locale,
+    imageSettings: props.imageSettings,
+    genre: props.genre
+  })
 
   useEffect(() => {
     setImages(props.images || [])
   }, [props.images])
-  const size = useMemo(() => KEY_SIZE_DATA[props.size], [props.size])
 
-  const { handleAdd } = useImageView({
-    size: props.size,
-    locale: {
-      textFallbackImage: props.locale.textFallbackImage
-    },
-    imageSettings: props.imageSettings,
-    genre: props.genre
-  })
   return (
     <>
       <ImageSelectWrapper
@@ -191,7 +188,7 @@ export const ImageSelect = (props: ImageSelectProps) => {
                             }
                           }}
                         >
-                          {props.locale.textFallbackImage}
+                          {props.locale.imageFallback}
                         </Typography>
                       }
                     />
@@ -274,7 +271,7 @@ export const ImageSelect = (props: ImageSelectProps) => {
           </motion.div>
 
           <input
-            ref={inputRef}
+            ref={refInput}
             type="file"
             accept={ImageSupportedFormatsForInput}
             multiple
@@ -297,7 +294,7 @@ export const ImageSelect = (props: ImageSelectProps) => {
             isRadius
             onClick={openFileDialog}
           >
-            {props.locale.textImageButton}
+            {props.locale.buttonAdd}
           </Button>
           <Button
             isRadius
@@ -311,105 +308,11 @@ export const ImageSelect = (props: ImageSelectProps) => {
             genre={props.genre}
             size={props.size}
           >
-            {props.locale.textResetImage}
+            {props.locale.buttonReset}
           </Button>
         </Stack>
       </ImageSelectWrapper>
       {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
     </>
   )
-}
-
-export const useImageView = (props: useImageViewProps) => {
-  const size = useMemo(() => KEY_SIZE_DATA[props.size], [props.size])
-  const br = useMemo(() => `${size.radius}px`, [size.radius])
-
-  const { add } = useDialog<{
-    br?: string
-  }>({
-    br: br
-  })
-  const handleAdd = useCallback(
-    (image: SliderImageProps) => {
-      add({
-        borderRadius: br,
-        padding: '0',
-        background: 'whiteStandard',
-        content: (params, remove) => (
-          <Stack
-            sx={{
-              default: {
-                position: 'relative',
-                overflow: 'hidden',
-                aspectRatio: `${props.imageSettings.aspect * 2} / 2`,
-                width: 'auto',
-                maxWidth: '70dvw',
-                height: '85dvh',
-                borderRadius: params?.br
-              },
-              tablet: {
-                maxWidth: '95dvw'
-              }
-            }}
-          >
-            <Image
-              sxStack={theme => ({
-                default: {
-                  width: '100%',
-                  height: '100%',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: theme.palette.black10,
-                  position: 'absolute',
-                  pointerEvents: 'none'
-                }
-              })}
-              isShowBeforeImage
-              sxImage={{
-                default: {
-                  objectFit: 'contain'
-                }
-              }}
-              alt={image?.imageSrc}
-              src={image?.imageSrc}
-              componentFallback={
-                <Typography
-                  sx={{
-                    default: {
-                      variant: 'h6'
-                    }
-                  }}
-                >
-                  {props.locale.textFallbackImage}
-                </Typography>
-              }
-            />
-            <Button
-              sx={{
-                default: {
-                  position: 'absolute',
-                  bottom: 15,
-                  right: 15
-                }
-              }}
-              genre="realebail-white"
-              size="small"
-              icons={[
-                {
-                  type: 'id',
-                  name: 'Arrow4'
-                }
-              ]}
-              isWidthAsHeight
-              isHiddenBorder
-              isRadius
-              onClick={() => remove?.()}
-            />
-          </Stack>
-        )
-      })
-    },
-    [add, br, props.imageSettings.aspect, props.locale.textFallbackImage]
-  )
-  return { handleAdd }
 }

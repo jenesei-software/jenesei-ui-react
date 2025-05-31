@@ -6,11 +6,6 @@ import { Outside } from '@local/areas/outside'
 import {
   DEFAULT_PROVIDER_DIALOG_DURATION_ELEMENT,
   DEFAULT_PROVIDER_DIALOG_DURATION_LAYOUT,
-  DEFAULT_PROVIDER_DIALOG_ELEMENT_BACKGROUND,
-  DEFAULT_PROVIDER_DIALOG_ELEMENT_BORDER_RADIUS,
-  DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_HEIGHT,
-  DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_WIDTH,
-  DEFAULT_PROVIDER_DIALOG_ELEMENT_PADDING,
   DialogContentProps,
   DialogContextProps,
   DialogElementProps,
@@ -102,11 +97,7 @@ export const ProviderDialog: FC<ProviderDialogProps> = props => {
               const content = dialog.content
               const id = dialog.id
               const props = dialog.props
-              const maxWidth = dialog.maxWidth || DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_WIDTH
-              const maxHeight = dialog.maxHeight || DEFAULT_PROVIDER_DIALOG_ELEMENT_MAX_HEIGHT
-              const borderRadius = dialog.borderRadius || DEFAULT_PROVIDER_DIALOG_ELEMENT_BORDER_RADIUS
-              const padding = dialog.padding || DEFAULT_PROVIDER_DIALOG_ELEMENT_PADDING
-              const background = dialog.background || DEFAULT_PROVIDER_DIALOG_ELEMENT_BACKGROUND
+
               return (
                 <MemoizedDialogElement
                   index={index}
@@ -114,11 +105,6 @@ export const ProviderDialog: FC<ProviderDialogProps> = props => {
                   props={props}
                   key={id}
                   id={id}
-                  maxWidth={maxWidth}
-                  maxHeight={maxHeight}
-                  borderRadius={borderRadius}
-                  background={background}
-                  padding={padding}
                   remove={() => remove(id)}
                 />
               )
@@ -155,11 +141,7 @@ const DialogElement = (props: DialogElementProps) => {
         style={{
           zIndex: -props.index!
         }}
-        $maxHeight={props.maxHeight}
-        $maxWidth={props.maxWidth}
-        $borderRadius={props.borderRadius}
-        $padding={props.padding}
-        $background={props.background}
+        $propsDialog={props.props?.propsDialog}
       >
         {props.content?.(props.props, props.remove, isAnimating)}
       </DialogElementWrapper>

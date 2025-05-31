@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { useDeepCompareMemoize } from '@local/hooks/use-deep-compare-memoize'
 
-import { DialogContext, DialogContextItemProps, DialogContextProps } from '.'
+import { DialogContext, DialogContextItemProps, DialogContextProps, useDialogProps } from '.'
 
 export const useDialogs = (): DialogContextProps<object> => {
   const context = useContext(DialogContext)
@@ -13,7 +13,7 @@ export const useDialogs = (): DialogContextProps<object> => {
   return context
 }
 
-export const useDialog = <T extends object>(props?: T): DialogContextItemProps<T> => {
+export const useDialog = <T extends object>(props?: useDialogProps<T>): DialogContextItemProps<T> => {
   const { add, remove, update, dialogHistory } = useDialogs()
   const [id, setId] = useState<string | null>(null)
 
