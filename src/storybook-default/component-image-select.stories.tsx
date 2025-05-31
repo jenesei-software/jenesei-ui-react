@@ -13,12 +13,22 @@ type Story = StoryObj<typeof ImageSelectComponent>
 
 export const Select: Story = {
   args: {
-    genre: 'realebail-white',
+    propsButton: {
+      default: {
+        genre: 'realebail-white',
+        size: 'medium'
+      },
+      delete: {
+        genre: 'blackBorder',
+        size: 'medium'
+      }
+    },
     width: '100%',
-    size: 'medium',
     onChange(images) {
       console.log('Selected images:', images)
     },
+    genre: 'realebail-white',
+    size: 'medium',
     imageSettings: {
       aspect: 900 / 600,
       maxSize: 5 * 1024 * 1024,
@@ -29,6 +39,9 @@ export const Select: Story = {
     isContain: true,
     locale: {
       dialogSave: 'Save',
+      dialogCancel: 'Cancel',
+      dialogAddImage: 'Add',
+      dialogDeleteImage: 'Delete',
       textFallbackImage: 'Fallback image',
       textImageButton: 'Add image',
       textResetImage: 'Reset image',

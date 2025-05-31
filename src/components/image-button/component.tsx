@@ -11,6 +11,7 @@ import { IImageFormat } from '@local/types'
 import { ImageButtonProps, useImageCropProps } from '.'
 import { Button } from '../button'
 import { ImageSelectItemProps } from '../image-select'
+import { Pagination, PaginationProps } from '../pagination'
 import { Stack } from '../stack'
 
 export const ImageButton: FC<ImageButtonProps> = props => {
@@ -107,7 +108,7 @@ export const useImageCrop = (props: useImageCropProps) => {
 export function getCroppedImg(imageSrc: string, crop: Area, format: string = 'image/png'): Promise<Blob> {
   const mimeType: IImageFormat = ImageSupportedFormats.includes(format as IImageFormat)
     ? (format as IImageFormat)
-    : 'image/png' // fallback на PNG
+    : 'image/png'
 
   return new Promise((resolve, reject) => {
     const image = new Image()
@@ -145,41 +146,78 @@ const CropperWrapper: FC<{
   const [croppedArea, setCroppedArea] = useState<Area | null>(null)
   const [zoom, setZoom] = useState(1)
   const isMulti = useMemo(() => props.images.length > 1, [props.images.length])
-  const onSave = useCallback(
-    async (file: ImageSelectItemProps) => {
+  const onContinue = useCallback(
+    async (file: ImageSelectItemProps, fileIndex: number, isDeleted: boolean) => {
       if (file.url && file.name && croppedArea) {
         setIsLoading(true)
-        const blob = await getCroppedImg(file.url, croppedArea, file.format)
-        const croppedFile = new File([blob], file.name, { type: file.format })
 
         const newImage: ImageSelectItemProps = {
-          id: Date.now() + file.index,
-          file: croppedFile,
-          url: URL.createObjectURL(croppedFile),
-          index: file.index,
-          isNew: true,
+          id: Date.now() + fileIndex,
+          file: props.images[fileIndex].file,
+          url: props.images[fileIndex].url,
+          index: fileIndex,
           name: file.name,
-          format: file.format
+          format: file.format,
+          isCropped: isDeleted ? false : true,
+          isNew: true,
+          isDeleted: isDeleted,
+          croppedArea: croppedArea,
+          zoom: zoom,
+          crop: crop
         }
-        setNewImages(prev => [...prev, newImage])
-        setZoom(1)
-        setCrop({ x: 0, y: 0 })
-        setCroppedArea(null)
-        setIndex(prev => prev + 1)
+
+        setNewImages(prev => {
+          const arr = [...prev]
+          arr[fileIndex] = newImage
+          return arr
+        })
+
+        const newIndex = fileIndex + 1 >= props.images.length ? 0 : fileIndex + 1
+        const continueImage = newImages?.[newIndex]
+        setZoom(continueImage?.zoom ?? 1)
+        setCrop(continueImage?.crop ?? { x: 0, y: 0 })
+        setIndex(newIndex)
 
         setIsLoading(false)
       }
     },
-    [croppedArea]
+    [crop, croppedArea, newImages, props.images, zoom]
   )
 
-  useEffect(() => {
-    if (index === props.images.length) {
-      props.params?.onSave?.(newImages.filter(Boolean) as ImageSelectItemProps[])
-      props.remove?.()
-    }
-  }, [index, newImages, props])
+  // useEffect(() => {
+  //   if (index === props.images.length) {
+  //     props.params?.onSave?.(newImages.filter(Boolean) as ImageSelectItemProps[])
+  //     props.remove?.()
+  //   }
+  // }, [index, newImages, props])
 
+  const onSave = useCallback(async () => {
+    // Делаем асинхронную обработку всех изображений
+    const saveImages = await Promise.all(
+      newImages.map(async image => {
+        if (image.isDeleted || !image.url || !image.name || !image.croppedArea) return null
+        const blob = await getCroppedImg(image.url!, image.croppedArea!, image.format)
+        const croppedFile = new File([blob], image.name!, { type: image.format })
+
+        const newImage: ImageSelectItemProps = {
+          ...image,
+          id: image.id,
+          file: croppedFile,
+          url: URL.createObjectURL(croppedFile),
+          index: image.index,
+          isNew: true,
+          isDeleted: false,
+          name: image.name,
+          format: image.format,
+          zoom: zoom,
+          crop: crop
+        }
+        return newImage
+      })
+    )
+    props.params?.onSave?.(saveImages.filter(Boolean) as ImageSelectItemProps[])
+    props.remove?.()
+  }, [crop, newImages, props, zoom])
   useEffect(() => {
     return () => {
       setZoom(1)
@@ -190,8 +228,32 @@ const CropperWrapper: FC<{
     }
   }, [])
 
+  const isDisabledSave = useMemo(() => {
+    return newImages.every(image => image.isDeleted || !image.isCropped)
+  }, [newImages])
   const genre = useMemo(() => props.params?.dialog.button.genre || 'product', [props.params?.dialog.button.genre])
   const size = useMemo(() => props.params?.dialog.button.size || 'medium', [props.params?.dialog.button.size])
+
+  const lengthData: PaginationProps['lengthData'] = useMemo(() => {
+    return newImages.reduce<PaginationProps['lengthData']>((acc, image) => {
+      if (acc && image?.index !== undefined)
+        acc[image.index] = {
+          genre: image.isCropped ? 'greenTransparent' : image.isDeleted ? 'redTransparent' : 'white',
+          icons: image.isCropped
+            ? [{ type: 'id', name: 'TickMini' }]
+            : image.isDeleted
+              ? [{ type: 'id', name: 'CloseMini' }]
+              : []
+        }
+      return acc
+    }, {})
+  }, [newImages])
+
+  const genreDelete = useMemo(
+    () => props.params?.dialog.buttonDelete.genre || 'product',
+    [props.params?.dialog.buttonDelete.genre]
+  )
+  const sizeDelete = useMemo(() => props.params?.dialog.button.size || 'medium', [props.params?.dialog.button.size])
   return (
     <Stack
       sx={theme => ({
@@ -241,22 +303,31 @@ const CropperWrapper: FC<{
             />
           ) : null}
         </Stack>
-        <Button
+        <Stack
           sx={{
             default: {
               position: 'absolute',
-              bottom: 15,
-              right: 15
+              top: 15,
+              right: 15,
+              gap: '10px'
             }
           }}
-          genre={genre}
-          size={size}
-          isHiddenBorder
-          isRadius
-          onClick={() => onSave?.(props.images?.[index])}
         >
-          {props.params?.locale.dialogSave}
-        </Button>
+          <Button genre={genreDelete} size={sizeDelete} isHiddenBorder isRadius onClick={() => props.remove?.()}>
+            {props.params?.locale.dialogCancel}
+          </Button>
+          <Button
+            genre={genre}
+            size={size}
+            isHiddenBorder
+            isRadius
+            onClick={() => onSave()}
+            isHidden={isDisabledSave}
+            isDisabled={isDisabledSave}
+          >
+            {props.params?.locale.dialogSave}
+          </Button>
+        </Stack>
       </Preview>
       {isMulti && index !== props.images.length && (
         <Button
@@ -277,7 +348,36 @@ const CropperWrapper: FC<{
           {index + 1}
         </Button>
       )}
-      <Button
+      <Stack
+        sx={{
+          default: {
+            position: 'absolute',
+            bottom: 15,
+            right: 15,
+            gap: '10px'
+          }
+        }}
+      >
+        <Button
+          genre={genreDelete}
+          size={sizeDelete}
+          isHiddenBorder
+          isRadius
+          onClick={() => onContinue?.(props.images?.[index], index, true)}
+        >
+          {props.params?.locale.dialogDeleteImage}
+        </Button>
+        <Button
+          genre={genre}
+          size={size}
+          isHiddenBorder
+          isRadius
+          onClick={() => onContinue?.(props.images?.[index], index, false)}
+        >
+          {props.params?.locale.dialogAddImage}
+        </Button>
+      </Stack>
+      {/* <Button
         sx={{
           default: {
             position: 'absolute',
@@ -296,10 +396,61 @@ const CropperWrapper: FC<{
         isWidthAsHeight
         isHiddenBorder
         isRadius
-        onClick={() => {
-          setIndex(prev => prev + 1)
-        }}
-      />
+        // onClick={() => {
+        //   setIndex(prev => prev + 1)
+        // }}
+      /> */}
+      {isMulti && (
+        <Stack
+          sx={theme => ({
+            default: {
+              position: 'absolute',
+              bottom: 5,
+              left: 5,
+              backgroundColor: theme.palette.whiteStandard,
+              padding: '10px',
+              borderRadius: '50px'
+            }
+          })}
+        >
+          <Pagination
+            lengthData={lengthData}
+            length={props.images.length}
+            index={index}
+            changeIndex={newIndex => {
+              setIndex(newIndex)
+              const continueImage = newImages?.[newIndex]
+              setZoom(continueImage?.zoom ?? 1)
+              setCrop(continueImage?.crop ?? { x: 0, y: 0 })
+            }}
+            isInfinity
+            viewQuantity={4}
+            buttonControl={{
+              genre: genre,
+              size: size,
+              isRadius: true,
+              isWidthAsHeight: true
+            }}
+            buttonCount={{
+              active: {
+                genre: genre,
+                size: size,
+                isRadius: true,
+                isPlaystationEffect: true
+              },
+              inactive: {
+                genre: 'white',
+                size: size,
+                isRadius: true
+              }
+            }}
+            locale={{
+              next: 'Next',
+              prev: 'Prev'
+            }}
+          />
+        </Stack>
+      )}
     </Stack>
   )
 }

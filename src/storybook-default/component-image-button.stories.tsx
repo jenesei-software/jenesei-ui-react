@@ -23,10 +23,17 @@ export const Button: Story = {
       button: {
         genre: 'blackBorder',
         size: 'medium'
+      },
+      buttonDelete: {
+        genre: 'blackBorder',
+        size: 'medium'
       }
     },
     locale: {
-      dialogSave: 'Save Image'
+      dialogSave: 'Save',
+      dialogCancel: 'Cancel',
+      dialogAddImage: 'Add',
+      dialogDeleteImage: 'Delete'
     },
     imageSettings: {
       aspect: 2 / 2,

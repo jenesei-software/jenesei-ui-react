@@ -1,14 +1,20 @@
-export interface PaginationProps {
-  genre: 'black'
+import { ButtonProps, addSXProps } from '@local/index'
+
+export type PaginationProps = {
+  buttonControl: Pick<ButtonProps, 'size' | 'genre' | 'isRadius' | 'isWidthAsHeight' | 'isPlaystationEffect'>
+  buttonCount: {
+    active: Pick<ButtonProps, 'size' | 'genre' | 'isRadius' | 'isPlaystationEffect'>
+    inactive: Pick<ButtonProps, 'size' | 'genre' | 'isRadius' | 'isPlaystationEffect'>
+  }
+  gap?: number
   index: number
+  lengthData?: Record<number, Pick<ButtonProps, 'genre' | 'icons'>>
   length: number
   isInfinity?: boolean
   viewQuantity: number
   changeIndex: (index: number) => void
-}
-
-export interface PaginationQuantityWrapperProps {
-  $left: string
-  $width: string
-  $gap: number
-}
+  locale: {
+    prev: string
+    next: string
+  }
+} & addSXProps

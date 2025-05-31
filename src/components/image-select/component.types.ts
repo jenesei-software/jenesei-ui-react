@@ -1,3 +1,6 @@
+import { Area } from 'react-easy-crop'
+
+import { ButtonProps } from '@local/index'
 import { addErrorProps } from '@local/styles/error'
 import { TJeneseiThemeGenreImageSelect, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
@@ -13,7 +16,15 @@ export type ImageSelectItemProps = {
   index: number
   name?: string
   isNew?: boolean
+  isDeleted?: boolean
+  isCropped?: boolean
   format?: string
+  crop?: {
+    x: number
+    y: number
+  }
+  zoom?: number
+  croppedArea?: Area | null
 }
 export type ImageSelectProps = {
   locale: {
@@ -24,6 +35,10 @@ export type ImageSelectProps = {
   } & ImageButtonProps['locale']
   genre: TImageSelectGenre
   size: TJeneseiThemeSize
+  propsButton: {
+    default: Pick<ButtonProps, 'size' | 'genre'>
+    delete: Pick<ButtonProps, 'size' | 'genre'>
+  }
   id?: string
   width?: string
   onChange?: (images: ImageSelectItemProps[]) => void
@@ -39,7 +54,7 @@ export type ImageSelectProps = {
   images: ImageSelectItemProps[]
 } & addErrorProps
 
-export type ImageSelectWrapperProps = AddDollarSign<Pick<ImageSelectProps, 'size' | 'width' | 'error' | 'genre'>>
-export type useImageViewProps = Pick<ImageSelectProps, 'size' | 'imageSettings'> & {
+export type ImageSelectWrapperProps = AddDollarSign<Pick<ImageSelectProps, 'width' | 'error' | 'genre' | 'size'>>
+export type useImageViewProps = Pick<ImageSelectProps, 'imageSettings' | 'genre' | 'size'> & {
   locale: Pick<ImageSelectProps['locale'], 'textFallbackImage'>
 }

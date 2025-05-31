@@ -14,7 +14,29 @@ const meta: Meta<typeof Pagination> = {
 export default meta
 type Story = StoryObj<typeof Pagination>
 
-const defaultArgs: Partial<PaginationProps> = {}
+const defaultArgs: Partial<PaginationProps> = {
+  buttonControl: {
+    genre: 'product',
+    size: 'medium',
+    isRadius: true,
+    isWidthAsHeight: true,
+    isPlaystationEffect: true
+  },
+  buttonCount: {
+    active: {
+      genre: 'product',
+      size: 'medium',
+      isRadius: true,
+      isPlaystationEffect: true
+    },
+    inactive: {
+      genre: 'white',
+      size: 'medium',
+      isRadius: true,
+      isPlaystationEffect: true
+    }
+  }
+}
 
 const PaginationWrapper: FC<PaginationProps> = props => {
   const [index, setIndex] = useState(props.index)
@@ -41,8 +63,12 @@ export const Default: Story = {
     ...defaultArgs,
     index: 1,
     length: 12,
-    genre: 'black',
+
     isInfinity: false,
-    viewQuantity: 4
+    viewQuantity: 4,
+    locale: {
+      next: 'Next',
+      prev: 'Prev'
+    }
   }
 }

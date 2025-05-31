@@ -10,6 +10,7 @@ export interface ImageButtonProps extends addSXProps {
 
   dialog: {
     button: ButtonProps
+    buttonDelete: ButtonProps
   }
 
   imageSettings: {
@@ -20,6 +21,10 @@ export interface ImageButtonProps extends addSXProps {
 
   locale: {
     dialogSave: string
+    dialogCancel: string
+
+    dialogAddImage: string
+    dialogDeleteImage: string
   }
 
   onSave: (files: ImageSelectItemProps[] | null) => void

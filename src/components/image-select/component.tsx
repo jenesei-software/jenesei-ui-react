@@ -66,8 +66,12 @@ export const ImageSelect = (props: ImageSelectProps) => {
     locale: props.locale,
     dialog: {
       button: {
-        genre: props.genre,
-        size: props.size
+        genre: props.propsButton.default.genre,
+        size: props.propsButton.default.size
+      },
+      buttonDelete: {
+        genre: props.propsButton.delete.genre,
+        size: props.propsButton.delete.size
       }
     },
     imageSettings: {
@@ -96,7 +100,8 @@ export const ImageSelect = (props: ImageSelectProps) => {
     locale: {
       textFallbackImage: props.locale.textFallbackImage
     },
-    imageSettings: props.imageSettings
+    imageSettings: props.imageSettings,
+    genre: props.genre
   })
   return (
     <>

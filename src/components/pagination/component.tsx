@@ -1,11 +1,10 @@
+import { AnimatePresence, motion } from 'framer-motion'
 import { FC, useCallback, useMemo } from 'react'
 
 import { Button } from '@local/components/button'
 import { Stack } from '@local/components/stack'
-import { KEY_SIZE_DATA } from '@local/theme/theme'
-import { TJeneseiThemeSize } from '@local/theme/theme.interface'
 
-import { PaginationProps, PaginationQuantityButtons, PaginationQuantityWrapper } from '.'
+import { DEFAULT_COMPONENT_PAGINATION_GAP, PaginationProps } from '.'
 
 export const Pagination: FC<PaginationProps> = props => {
   const isDisabledPrevious = useMemo(() => props.index == 0 && !props.isInfinity, [props.index, props.isInfinity])
@@ -14,11 +13,8 @@ export const Pagination: FC<PaginationProps> = props => {
     [props.index, props.isInfinity, props.length]
   )
 
-  const size: TJeneseiThemeSize = useMemo(() => 'small', [])
-  const gap = useMemo(() => 12, [])
-  const widthIndex = useMemo(() => KEY_SIZE_DATA[size].height, [size])
-  const gapString = useMemo(() => `${gap}px`, [gap])
-
+  const gap = useMemo(() => props.gap ?? DEFAULT_COMPONENT_PAGINATION_GAP, [props.gap])
+  const lengthData = useMemo(() => props.lengthData ?? {}, [props.lengthData])
   const handlePrevious = useCallback(() => {
     if (props.index == 0) {
       if (props.isInfinity) {
@@ -39,36 +35,29 @@ export const Pagination: FC<PaginationProps> = props => {
     }
   }, [props])
 
-  const indexesRight = useMemo(() => props.length - 1 - props.index, [props.index, props.length])
-  const indexesLeft = useMemo(() => props.index, [props.index])
-
-  const approximateVisibleMiddle = useMemo(() => Math.floor(props.viewQuantity / 2), [props.viewQuantity])
-
-  const left = useMemo(() => {
-    let calculation = 0
-    if (indexesLeft <= approximateVisibleMiddle) {
-      calculation = 0
-    } else if (indexesRight <= approximateVisibleMiddle) {
-      calculation = props.length - props.viewQuantity
-    } else {
-      calculation = indexesLeft - approximateVisibleMiddle
-    }
-    return `calc(-${calculation * widthIndex + calculation * gap}px + ${gap}px)`
-  }, [indexesLeft, approximateVisibleMiddle, indexesRight, widthIndex, gap, props.length, props.viewQuantity])
-
-  const width = useMemo(
-    () => `${props.viewQuantity * 30 + gap + (props.viewQuantity - 1) * 12}px`,
-    [gap, props.viewQuantity]
-  )
+  const visibleButtons = useMemo(() => {
+    const half = Math.floor(props.viewQuantity / 2)
+    const start = Math.max(0, Math.min(props.index - half, props.length - props.viewQuantity))
+    const end = Math.min(props.length, start + props.viewQuantity)
+    return Array.from({ length: end - start }, (_, i) => start + i)
+  }, [props.index, props.viewQuantity, props.length])
 
   return (
-    <Stack sx={{ default: { height: 'fit-content' } }}>
+    <Stack
+      sx={theme => ({
+        ...props?.sx,
+        default: {
+          height: 'fit-content',
+          gap: `${gap}px`,
+          ...(props?.sx ? (typeof props?.sx === 'function' ? props?.sx(theme).default : props?.sx.default) : {})
+        }
+      })}
+    >
       <Button
         isDisabled={isDisabledPrevious}
         isHidden={isDisabledPrevious}
         onClick={handlePrevious}
-        size={size}
-        genre={props.genre}
+        {...props.buttonControl}
         icons={[
           {
             type: 'id',
@@ -78,29 +67,62 @@ export const Pagination: FC<PaginationProps> = props => {
           }
         ]}
       >
-        Previous
+        {!props.buttonControl.isWidthAsHeight && props.locale.prev}
       </Button>
-      <PaginationQuantityWrapper $left={left} $width={width} $gap={gap}>
-        <PaginationQuantityButtons $left={left} $width={width} $gap={gap}>
-          {Array.from({ length: props.length }).map((_, i) => (
-            <Button
-              key={i}
-              isWidthAsHeight
-              size={size}
-              genre={i === props.index ? 'blackBorder' : 'white'}
-              onClick={() => props.changeIndex(i)}
-            >
-              {i + 1}
-            </Button>
-          ))}
-        </PaginationQuantityButtons>
-      </PaginationQuantityWrapper>
+
+      <Stack
+        sx={{
+          default: {
+            width: 'fit-content',
+            height: 'fit-content',
+            display: 'flex',
+            gap: `${gap}px`,
+            alignItems: 'center',
+            justifyContent: 'flex-start'
+          }
+        }}
+      >
+        {Array.from({ length: props.length }).map((_, i) => {
+          const isVisible = visibleButtons.includes(i)
+          return (
+            <AnimatePresence key={i} mode="popLayout">
+              {isVisible && (
+                <motion.div
+                  layout
+                  initial={{
+                    opacity: 0,
+                    scale: 0.8
+                  }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1
+                  }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.8
+                  }}
+                  transition={{ duration: 1, ease: 'backOut' }}
+                >
+                  <Button
+                    isWidthAsHeight
+                    {...(i === props.index ? props.buttonCount.active : props.buttonCount.inactive)}
+                    {...lengthData?.[i]}
+                    onClick={() => props.changeIndex(i)}
+                  >
+                    {lengthData?.[i]?.icons?.length ? null : i + 1}
+                  </Button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          )
+        })}
+      </Stack>
+
       <Button
         isDisabled={isDisabledNext}
         isHidden={isDisabledNext}
         onClick={handleNext}
-        size={size}
-        genre={props.genre}
+        {...props.buttonControl}
         icons={[
           {
             type: 'id',
@@ -109,7 +131,7 @@ export const Pagination: FC<PaginationProps> = props => {
           }
         ]}
       >
-        Next
+        {!props.buttonControl.isWidthAsHeight && props.locale.next}
       </Button>
     </Stack>
   )
