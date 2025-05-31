@@ -1,0 +1,31 @@
+import{j as c,d as _}from"./styled-components.browser.esm-CyaOpMkv.js";import{r as o}from"./index-CnY36iC1.js";import{O as L}from"./area-DMU-5v0B.js";import{b as O}from"./style-IM99yq-C.js";import{m as g}from"./proxy-BS1eh56F.js";import{A as V}from"./index-DgedcAJ4.js";const x=o.createContext(null),D=e=>{const[s,l]=o.useState([]),u=o.useCallback(t=>{l(a=>{const i=a.find(n=>n.id===t);if(!i)return a;const r=i.index;return a.filter(n=>n.id!==t).map(n=>({...n,index:n.index>r?n.index-1:n.index}))})},[]),E=o.useCallback(t=>{l(a=>a.map(i=>i.id===t.id?{...i,...t}:i))},[]),b=o.useCallback(t=>{const a=t.id;l(i=>{const r=i.findIndex(n=>n.id===a);let d;if(r!==-1)d=[...i],d[r]={...t,id:a,index:i[r].index};else{d=i.map(m=>({...m,index:m.index+1}));const n={...t,id:a,index:0};d.unshift(n)}return d})},[]),N=o.useMemo(()=>s.length,[s.length]),I=o.useMemo(()=>e.zIndex,[e.zIndex]);return c.jsxDEV(x.Provider,{value:{add:b,remove:u,update:E,dialogHistory:s},children:[c.jsxDEV(V,{children:N&&c.jsxDEV(f,{$zIndex:I,initial:{opacity:0},exit:{opacity:0},animate:{opacity:1},transition:{type:"spring",duration:y},children:s.map(t=>{const a=t.index,i=t.content,r=t.id,d=t.props,n=t.maxWidth||v,m=t.maxHeight||w,A=t.borderRadius||W,T=t.padding||C,R=t.background||H;return c.jsxDEV($,{index:a,content:i,props:d,id:r,maxWidth:n,maxHeight:m,borderRadius:A,background:R,padding:T,remove:()=>u(r)},r,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:111,columnNumber:17},void 0)})},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:87,columnNumber:11},void 0)},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:85,columnNumber:7},void 0),e.children]},void 0,!0,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:84,columnNumber:5},void 0)},j=e=>{var u;const[s,l]=o.useState(!0);return c.jsxDEV(L,{onOutsideClick:()=>e.remove(),children:c.jsxDEV(p,{initial:{opacity:0,scale:.8},animate:{opacity:1,scale:1},onAnimationComplete:()=>l(!1),transition:{type:"spring",duration:k,delay:y},style:{zIndex:-e.index},$maxHeight:e.maxHeight,$maxWidth:e.maxWidth,$borderRadius:e.borderRadius,$padding:e.padding,$background:e.background,children:(u=e.content)==null?void 0:u.call(e,e.props,e.remove,s)},e.id,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:139,columnNumber:7},void 0)},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:138,columnNumber:5},void 0)},$=o.memo(j);try{x.displayName="DialogContext",x.__docgenInfo={description:"",displayName:"DialogContext",props:{}}}catch{}try{D.displayName="ProviderDialog",D.__docgenInfo={description:"",displayName:"ProviderDialog",props:{zIndex:{defaultValue:null,description:"",name:"zIndex",required:!0,type:{name:"number"}}}}}catch{}const f=_(g.div)`
+  position: fixed;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  background-color: ${e=>e.theme.palette.black50};
+  z-index: ${e=>e.$zIndex};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+`,p=_(g.dialog)`
+  ${O};
+  max-width: ${e=>e.$maxWidth};
+  max-height: ${e=>e.$maxHeight};
+  border-radius: ${e=>e.$borderRadius};
+  background: ${e=>e.$background&&e.theme.palette[e.$background]};
+  padding: ${e=>e.$padding};
+  width: max-content;
+  height: max-content;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+`,h=_(g.div)``;try{f.displayName="DialogLayout",f.__docgenInfo={description:"",displayName:"DialogLayout",props:{theme:{defaultValue:null,description:"",name:"theme",required:!1,type:{name:"DefaultTheme"}},as:{defaultValue:null,description:"",name:"as",required:!1,type:{name:"void | WebTarget"}},forwardedAs:{defaultValue:null,description:"",name:"forwardedAs",required:!1,type:{name:"void | WebTarget"}}}}}catch{}try{p.displayName="DialogElementWrapper",p.__docgenInfo={description:"",displayName:"DialogElementWrapper",props:{theme:{defaultValue:null,description:"",name:"theme",required:!1,type:{name:"DefaultTheme"}},as:{defaultValue:null,description:"",name:"as",required:!1,type:{name:"void | WebTarget"}},forwardedAs:{defaultValue:null,description:"",name:"forwardedAs",required:!1,type:{name:"void | WebTarget"}}}}}catch{}try{h.displayName="DialogContent",h.__docgenInfo={description:"",displayName:"DialogContent",props:{theme:{defaultValue:null,description:"",name:"theme",required:!1,type:{name:"DefaultTheme"}},as:{defaultValue:null,description:"",name:"as",required:!1,type:{name:"void | WebTarget"}},forwardedAs:{defaultValue:null,description:"",name:"forwardedAs",required:!1,type:{name:"void | WebTarget"}}}}}catch{}const k=.3,y=.4,w="max-content",v="max-content",W="12px",C="20px",H="whiteStandard";export{x as D,D as P};
