@@ -109,6 +109,21 @@
       "import": "./build/component-image.es.js",
       "require": "./build/component-image.cjs.js"
     },
+    "./component-image-select": {
+      "types": "./build/component-image-select.d.ts",
+      "import": "./build/component-image-select.es.js",
+      "require": "./build/component-image-select.cjs.js"
+    },
+    "./component-image-slider": {
+      "types": "./build/component-image-slider.d.ts",
+      "import": "./build/component-image-slider.es.js",
+      "require": "./build/component-image-slider.cjs.js"
+    },
+    "./component-image-button": {
+      "types": "./build/component-image-button.d.ts",
+      "import": "./build/component-image-button.es.js",
+      "require": "./build/component-image-button.cjs.js"
+    },
     "./component-input": {
       "types": "./build/component-input.d.ts",
       "import": "./build/component-input.es.js",
@@ -138,11 +153,6 @@
       "types": "./build/component-select.d.ts",
       "import": "./build/component-select.es.js",
       "require": "./build/component-select.cjs.js"
-    },
-    "./component-select-image": {
-      "types": "./build/component-select-image.d.ts",
-      "import": "./build/component-select-image.es.js",
-      "require": "./build/component-select-image.cjs.js"
     },
     "./component-separator": {
       "types": "./build/component-separator.d.ts",

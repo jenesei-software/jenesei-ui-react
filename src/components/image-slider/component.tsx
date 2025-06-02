@@ -4,14 +4,14 @@ import { FC, useMemo } from 'react'
 import { useImageSlider } from '@local/hooks/use-image-slider'
 import { KEY_SIZE_DATA } from '@local/theme'
 
-import { SliderDot, SliderImage, SliderProps } from '.'
+import { ImageSliderProps, SliderDot, SliderImage } from '.'
 import { Button } from '../button'
 import { Icon } from '../icon'
 import { Image } from '../image'
 import { Stack, StackMotion } from '../stack'
 import { Typography } from '../typography'
 
-export const Slider: FC<SliderProps> = props => {
+export const ImageSlider: FC<ImageSliderProps> = props => {
   const { onIndexChange } = props
   const images = useMemo(() => props.images, [props.images])
   const size = useMemo(() => KEY_SIZE_DATA[props.size], [props.size])

@@ -7,7 +7,7 @@ import { SelectMapTheme } from '@local/components/select'
 import { Typography } from '@local/components/typography'
 
 import { Button } from '../components/button'
-import { IMAGES, Slider } from '../components/image-slider'
+import { IMAGES, ImageSlider } from '../components/image-slider'
 import { DEFAULT_MAP_THEME, Map, MapDot, MapDotProps, MapProps } from '../components/map'
 import { Stack } from '../components/stack'
 
@@ -48,7 +48,7 @@ const PopupContent: FC = () => {
     <Stack
       sx={{ default: { flexDirection: 'column', gap: '10px', height: '400px', width: '310px', maxWidth: '80dvw' } }}
     >
-      <Slider
+      <ImageSlider
         locales={{
           failedToLoad: 'Не удалось загрузить изображение',
           noImagesAvailable: 'Нет доступных изображений'
@@ -118,7 +118,7 @@ const PopupContent: FC = () => {
             </Stack>
           )
         }
-      </Slider>
+      </ImageSlider>
       <Stack sx={{ default: { flexDirection: 'column' } }}>
         <Typography
           sx={{

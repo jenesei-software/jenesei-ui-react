@@ -2,18 +2,18 @@ import type { Meta, StoryObj } from '@storybook/react'
 import 'styled-components'
 
 import { Button } from '../components/button'
-import { IMAGES, Slider as SliderComponent } from '../components/image-slider'
+import { IMAGES, ImageSlider as SliderComponent } from '../components/image-slider'
 import { Stack } from '../components/stack'
 
 const meta: Meta<typeof SliderComponent> = {
   component: SliderComponent,
-  title: 'Component/Image/Slider'
+  title: 'Component/Image/ImageSlider'
 }
 
 export default meta
 type Story = StoryObj<typeof SliderComponent>
 
-export const Slider: Story = {
+export const ImageSlider: Story = {
   args: {
     genre: 'realebail-white',
     size: 'medium',

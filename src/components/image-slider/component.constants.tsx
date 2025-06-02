@@ -1,10 +1,10 @@
 import 'styled-components'
 
-import { SliderProps } from '.'
+import { ImageSliderProps } from '.'
 import { Button } from '../button'
 import { Stack } from '../stack'
 
-export const IMAGES: SliderProps['images'] = [
+export const IMAGES: ImageSliderProps['images'] = [
   {
     id: 0,
     children: (

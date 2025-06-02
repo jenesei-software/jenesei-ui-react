@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Image } from '@local/components/image'
 import { Stack } from '@local/components/stack'
 import { useDialog } from '@local/contexts/context-dialog'
-import { Button, SliderDot, SliderImage, SliderProps, Typography } from '@local/index'
+import { Button, SliderDot, SliderImage, ImageSliderProps, Typography } from '@local/index'
 import { KEY_SIZE_DATA } from '@local/theme'
 
 import { useImageSliderProps } from '.'
@@ -68,14 +68,14 @@ export const useImageSlider = (props: useImageSliderProps) => {
     {
       br?: string
       dragEndHandler: (dragInfo: PanInfo) => void
-      images: SliderProps['images']
-      children?: SliderProps['children']
+      images: ImageSliderProps['images']
+      children?: ImageSliderProps['children']
       activeImageIndex: number
       activeImageId: number | null
       swipeToImage: (swipeDirection: number) => void
       skipToImage: (imageId: number) => void
       direction: number
-    } & Pick<SliderProps, 'genre' | 'size'>
+    } & Pick<ImageSliderProps, 'genre' | 'size'>
   >({
     br: br,
     dragEndHandler: dragEndHandler,

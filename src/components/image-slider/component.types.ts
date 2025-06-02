@@ -6,7 +6,7 @@ import { TJeneseiThemeSize } from '@local/theme'
 import { TImageSelectGenre } from '../image-select'
 import { StackProps } from '../stack'
 
-export type SliderProps = {
+export type ImageSliderProps = {
   genre: TImageSelectGenre
   size: TJeneseiThemeSize
   imageSettings: {
