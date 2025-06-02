@@ -7,8 +7,8 @@ import { SelectMapTheme } from '@local/components/select'
 import { Typography } from '@local/components/typography'
 
 import { Button } from '../components/button'
-import { DEFAULT_MAP_THEME, Map, MapDot, MapDotProps, MapProps } from '../components/map'
 import { IMAGES, Slider } from '../components/image-slider'
+import { DEFAULT_MAP_THEME, Map, MapDot, MapDotProps, MapProps } from '../components/map'
 import { Stack } from '../components/stack'
 
 const meta: Meta<typeof Map> = {
@@ -62,6 +62,11 @@ const PopupContent: FC = () => {
               borderRadius: '10px'
             }
           }
+        }}
+        genre={'realebail-white'}
+        size={'small'}
+        imageSettings={{
+          aspect: 0
         }}
       >
         {({ isDialog }) =>
