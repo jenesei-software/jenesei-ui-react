@@ -11,7 +11,7 @@ export interface ImageProps {
 
   isShowBeforeImage?: boolean
 
-  src: string
+  src?: string
 
   sxImage?: addSXProps['sx']
 

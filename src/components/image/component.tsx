@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import { Skeleton } from '@local/areas/skeleton'
 import { Stack } from '@local/components/stack'
@@ -8,6 +8,11 @@ import { ImageIMG, ImageProps } from '.'
 export const Image: FC<ImageProps> = props => {
   const [isPending, setIsPending] = useState(true)
   const [isError, setIsError] = useState(false)
+
+  useEffect(() => {
+    setIsPending(true)
+    setIsError(false)
+  }, [props.src])
   return (
     <Stack
       sx={theme => ({
