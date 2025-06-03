@@ -99,15 +99,11 @@ const CropperWrapper: FC<{
   remove?: () => void
   isAnimating?: boolean
 }> = props => {
-  // const [isLoading, setIsLoading] = useState(false)
   const [index, setIndex] = useState(0)
   const [newImages, setNewImages] = useState<ImageSelectItemProps[]>([])
   const [newImagesCroppedArea, setNewImagesCroppedArea] = useState<(Area | null)[]>([])
 
   const theme = useTheme()
-  // const [crop, setCrop] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
-  // const [croppedArea, setCroppedArea] = useState<Area | null>(null)
-  // const [zoom, setZoom] = useState(1)
   const isMulti = useMemo(() => props.images.length > 1, [props.images.length])
 
   const newImageIndex = useMemo(() => newImages?.[index], [newImages, index])
@@ -117,7 +113,7 @@ const CropperWrapper: FC<{
       const saveImages = await Promise.all(
         images.map(async image => {
           const imageCroppedArea = newImagesCroppedArea[image.index] ?? null
-          if (image.isDeleted || !image.url || !image.name || !imageCroppedArea) return null
+          if (image.isDeleted || !image.isCropped || !image.url || !image.name || !imageCroppedArea) return null
           const blob = await getCroppedImg(image.url!, imageCroppedArea, image.format)
           const croppedFile = new File([blob], image.name!, { type: image.format })
 
