@@ -99,21 +99,26 @@ const CropperWrapper: FC<{
   remove?: () => void
   isAnimating?: boolean
 }> = props => {
-  const [isLoading, setIsLoading] = useState(false)
+  // const [isLoading, setIsLoading] = useState(false)
   const [index, setIndex] = useState(0)
   const [newImages, setNewImages] = useState<ImageSelectItemProps[]>([])
+  const [newImagesCroppedArea, setNewImagesCroppedArea] = useState<(Area | null)[]>([])
+
   const theme = useTheme()
-  const [crop, setCrop] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
-  const [croppedArea, setCroppedArea] = useState<Area | null>(null)
-  const [zoom, setZoom] = useState(1)
+  // const [crop, setCrop] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
+  // const [croppedArea, setCroppedArea] = useState<Area | null>(null)
+  // const [zoom, setZoom] = useState(1)
   const isMulti = useMemo(() => props.images.length > 1, [props.images.length])
+
+  const newImageIndex = useMemo(() => newImages?.[index], [newImages, index])
 
   const onSave = useCallback(
     async (images: ImageSelectItemProps[]) => {
       const saveImages = await Promise.all(
         images.map(async image => {
-          if (image.isDeleted || !image.url || !image.name || !image.croppedArea) return null
-          const blob = await getCroppedImg(image.url!, image.croppedArea!, image.format)
+          const imageCroppedArea = newImagesCroppedArea[image.index] ?? null
+          if (image.isDeleted || !image.url || !image.name || !imageCroppedArea) return null
+          const blob = await getCroppedImg(image.url!, imageCroppedArea, image.format)
           const croppedFile = new File([blob], image.name!, { type: image.format })
 
           const newImage: ImageSelectItemProps = {
@@ -127,80 +132,82 @@ const CropperWrapper: FC<{
       props.params?.onSave?.(saveImages.filter(Boolean) as ImageSelectItemProps[])
       props.remove?.()
     },
-    [props]
+    [newImagesCroppedArea, props]
   )
-  const onContinue = useCallback(
-    async (file: ImageSelectItemProps, fileIndex: number, isDeleted: boolean) => {
-      if (file.url && file.name && croppedArea) {
-        setIsLoading(true)
-
+  const onChange = useCallback(
+    async (params: {
+      index: number
+      isDeleted?: boolean
+      isCropped?: boolean
+      isNext?: boolean
+      isSave?: boolean
+      crop?: { x: number; y: number }
+      croppedArea?: Area | null
+      zoom?: number
+    }) => {
+      const image = props.images?.[params.index]
+      if (image) {
         const newImage: ImageSelectItemProps = {
-          id: Date.now() + fileIndex,
-          file: props.images[fileIndex].file,
-          url: props.images[fileIndex].url,
-          index: fileIndex,
-          name: file.name,
-          format: file.format,
-          isCropped: isDeleted ? false : true,
+          ...image,
+          id: Date.now() + params.index,
+          index: params.index,
+          croppedArea: params.croppedArea ?? image.croppedArea,
+          zoom: params.zoom ?? image.zoom,
+          crop: params.crop ?? image.crop,
+
           isNew: true,
-          isDeleted: isDeleted,
-          croppedArea: croppedArea,
-          zoom: zoom,
-          crop: crop
+          isCropped: params.isCropped ?? image.isCropped,
+          isDeleted: params.isDeleted ?? image.isDeleted
         }
+        setNewImages(prev => {
+          const arr = [...prev]
+          arr[params.index] = newImage
+          return arr
+        })
 
-        if (!isMulti) {
-          onSave([newImage])
-        } else {
-          setNewImages(prev => {
-            const arr = [...prev]
-            arr[fileIndex] = newImage
-            return arr
-          })
-
-          const newIndex = fileIndex + 1 >= props.images.length ? 0 : fileIndex + 1
-          const continueImage = newImages?.[newIndex]
-          setZoom(continueImage?.zoom ?? 1)
-          setCrop(continueImage?.crop ?? { x: 0, y: 0 })
+        if (params.isNext) {
+          const newIndex = params.index + 1 >= props.images.length ? 0 : params.index + 1
           setIndex(newIndex)
         }
 
-        setIsLoading(false)
+        if (params.isSave) {
+          onSave([newImage])
+        }
       }
     },
-    [crop, croppedArea, isMulti, newImages, onSave, props.images, zoom]
+    [onSave, props.images]
   )
   useEffect(() => {
+    setNewImages(props.images)
+    setNewImagesCroppedArea(props.images.map(image => image.croppedArea ?? null))
+  }, [props.images])
+  useEffect(() => {
     return () => {
-      setZoom(1)
-      setCrop({ x: 0, y: 0 })
-      setCroppedArea(null)
       setIndex(0)
       setNewImages([])
+      setNewImagesCroppedArea([])
     }
   }, [])
-
-  const isDisabledSave = useMemo(() => {
-    return newImages.every(image => image.isDeleted || !image.isCropped)
-  }, [newImages])
-  const genre = useMemo(() => props.params?.dialog.button.genre || 'product', [props.params?.dialog.button.genre])
-  const size = useMemo(() => props.params?.dialog.button.size || 'medium', [props.params?.dialog.button.size])
 
   const lengthData: PaginationProps['lengthData'] = useMemo(() => {
     return newImages.reduce<PaginationProps['lengthData']>((acc, image) => {
       if (acc && image?.index !== undefined)
         acc[image.index] = {
-          genre: image.isCropped ? 'greenTransparent' : image.isDeleted ? 'redTransparent' : 'white',
-          icons: image.isCropped
-            ? [{ type: 'id', name: 'TickMini' }]
-            : image.isDeleted
-              ? [{ type: 'id', name: 'CloseMini' }]
+          genre: image.isDeleted ? 'redTransparent' : image.isCropped ? 'greenTransparent' : 'white',
+          icons: image.isDeleted
+            ? [{ type: 'id', name: 'CloseMini' }]
+            : image.isCropped
+              ? [{ type: 'id', name: 'TickMini' }]
               : []
         }
       return acc
     }, {})
   }, [newImages])
-
+  const isDisabledSave = useMemo(() => {
+    return newImages.every(image => image?.isDeleted || !image?.isCropped)
+  }, [newImages])
+  const genre = useMemo(() => props.params?.dialog.button.genre || 'product', [props.params?.dialog.button.genre])
+  const size = useMemo(() => props.params?.dialog.button.size || 'medium', [props.params?.dialog.button.size])
   const genreDelete = useMemo(
     () => props.params?.dialog.buttonDelete.genre || 'product',
     [props.params?.dialog.buttonDelete.genre]
@@ -224,7 +231,7 @@ const CropperWrapper: FC<{
         }
       })}
     >
-      <Preview visible={!props.isAnimating || isLoading} minTime={1000}>
+      <Preview visible={!props.isAnimating} minTime={500}>
         <Stack
           sx={{
             default: {
@@ -236,24 +243,38 @@ const CropperWrapper: FC<{
             }
           }}
         >
-          {crop ? (
+          {newImageIndex && (
             <Cropper
               style={{
                 containerStyle: {
                   backgroundColor: theme.palette.black80
                 }
               }}
-              image={props.images?.[index]?.url}
-              crop={crop}
-              zoom={zoom}
+              image={newImageIndex.url}
+              crop={newImageIndex?.crop ?? { x: 0, y: 0 }}
+              zoom={newImageIndex?.zoom ?? 1}
               aspect={props.params?.imageSettings.aspect}
-              onCropChange={setCrop}
-              onZoomChange={setZoom}
+              onCropChange={crop => {
+                onChange({
+                  ...newImageIndex,
+                  crop: crop
+                })
+              }}
+              onZoomChange={zoom => {
+                onChange({
+                  ...newImageIndex,
+                  zoom: zoom
+                })
+              }}
               onCropComplete={(_, croppedArea) => {
-                setCroppedArea(croppedArea)
+                setNewImagesCroppedArea(prev => {
+                  const arr = [...prev]
+                  arr[index] = croppedArea
+                  return arr
+                })
               }}
             />
-          ) : null}
+          )}
         </Stack>
 
         <Stack
@@ -340,9 +361,6 @@ const CropperWrapper: FC<{
             index={index}
             changeIndex={newIndex => {
               setIndex(newIndex)
-              const continueImage = newImages?.[newIndex]
-              setZoom(continueImage?.zoom ?? 1)
-              setCrop(continueImage?.crop ?? { x: 0, y: 0 })
             }}
             isInfinity
             viewQuantity={4}
@@ -387,7 +405,13 @@ const CropperWrapper: FC<{
               size={sizeDelete}
               isHiddenBorder
               isRadius
-              onClick={() => onContinue?.(props.images?.[index], index, true)}
+              onClick={() => {
+                onChange({
+                  ...newImageIndex,
+                  isDeleted: true,
+                  isNext: isMulti
+                })
+              }}
             >
               {props.params?.locale.dialogDeleteImage}
             </Button>
@@ -397,7 +421,15 @@ const CropperWrapper: FC<{
             size={size}
             isHiddenBorder
             isRadius
-            onClick={() => onContinue?.(props.images?.[index], index, false)}
+            onClick={() => {
+              onChange({
+                ...newImageIndex,
+                isDeleted: false,
+                isCropped: true,
+                isNext: isMulti,
+                isSave: !isMulti
+              })
+            }}
           >
             {isMulti ? props.params?.locale.dialogAddImage : props.params?.locale.dialogSave}
           </Button>
