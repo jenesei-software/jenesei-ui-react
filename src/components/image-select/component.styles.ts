@@ -9,15 +9,15 @@ import { ImageSelectWrapperProps } from '.'
 
 const ImageSelectListGenre = css<ImageSelectWrapperProps>`
   ${props => css`
-    background: ${props.theme.colors.selectImage[props.$genre].background.rest};
-    color: ${props.theme.colors.selectImage[props.$genre].color.rest};
+    background: ${props.theme.colors.imageSelect[props.$genre].background.rest};
+    color: ${props.theme.colors.imageSelect[props.$genre].color.rest};
     &:active {
-      background: ${props.theme.colors.selectImage[props.$genre].background.rest};
-      color: ${props.theme.colors.selectImage[props.$genre].color.rest};
+      background: ${props.theme.colors.imageSelect[props.$genre].background.rest};
+      color: ${props.theme.colors.imageSelect[props.$genre].color.rest};
     }
     &:focus-visible {
-      background: ${props.theme.colors.selectImage[props.$genre].background.rest};
-      color: ${props.theme.colors.selectImage[props.$genre].color.rest};
+      background: ${props.theme.colors.imageSelect[props.$genre].background.rest};
+      color: ${props.theme.colors.imageSelect[props.$genre].color.rest};
     }
   `};
 `

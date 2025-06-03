@@ -3,26 +3,19 @@ export interface TJeneseiThemeGenreType {
     rest: string
     hover: string
   }
+
   border: {
     rest: string
     hover: string
   }
+
   color: {
     rest: string
     hover: string
     placeholder: string
   }
 }
-
 export interface TJeneseiThemeGenreTypeRange {
-  track: {
-    background: {
-      rest: string
-    }
-    gradient: {
-      rest: string
-    }
-  }
   thumb: {
     background: {
       rest: string
@@ -33,19 +26,29 @@ export interface TJeneseiThemeGenreTypeRange {
       hover: string
     }
   }
-}
 
+  track: {
+    background: {
+      rest: string
+    }
+    gradient: {
+      rest: string
+    }
+  }
+}
 export interface TJeneseiThemeGenreTypeSelect {
   background: {
     rest: string
     hover: string
     select: string
   }
+
   border: {
     rest: string
     hover: string
     select: string
   }
+
   color: {
     rest: string
     hover: string
@@ -58,10 +61,12 @@ export interface TJeneseiThemeGenreTypeImageSelect {
     rest: string
     hover: string
   }
+
   border: {
     rest: string
     hover: string
   }
+
   color: {
     rest: string
     hover: string
@@ -83,6 +88,7 @@ export interface TJeneseiThemeGenreTypeToggle {
       thumbBoxShadow: string
     }
   }
+
   unActive: {
     rest: {
       track: string
@@ -98,7 +104,6 @@ export interface TJeneseiThemeGenreTypeToggle {
     }
   }
 }
-
 export interface TJeneseiThemeGenreTypeDate {
   background: {
     rest: string
@@ -108,6 +113,7 @@ export interface TJeneseiThemeGenreTypeDate {
     choice: string
     line: string
   }
+
   border: {
     rest: string
     hover: string
@@ -116,6 +122,7 @@ export interface TJeneseiThemeGenreTypeDate {
     choice: string
     line: string
   }
+
   color: {
     rest: string
     hover: string
@@ -130,108 +137,120 @@ export interface TJeneseiThemeGenreTypeSonner {
   button: {
     genre: keyof TJeneseiThemeGenre
   }
+
+  description: {
+    color: string
+  }
+
+  icon: {
+    color: string
+  }
+
+  title: {
+    color: string
+  }
+
   wrapper: {
     background: string
     borderColor: string
     boxShadow: string
     boxShadowHover: string
   }
-  icon: {
-    color: string
-  }
-  title: {
-    color: string
-  }
-  description: {
-    color: string
-  }
 }
 
 export interface TJeneseiThemeGenreTypeForm {
   background: string
+
   border: string
+
   color: string
 }
 
-export interface TJeneseiThemeGenre {
-  gray: TJeneseiThemeGenreType
-  grayBorder: TJeneseiThemeGenreType
-  black: TJeneseiThemeGenreType
-  blackBorder: TJeneseiThemeGenreType
-  product: TJeneseiThemeGenreType
-  productBorder: TJeneseiThemeGenreType
-  white: TJeneseiThemeGenreType
-  greenTransparent: TJeneseiThemeGenreType
-  redTransparent: TJeneseiThemeGenreType
-  yellowTransparent: TJeneseiThemeGenreType
-  'realebail-product': TJeneseiThemeGenreType
-  'realebail-gray': TJeneseiThemeGenreType
-  'realebail-white': TJeneseiThemeGenreType
-}
+export type TJeneseiGenreName =
+  | 'gray'
+  | 'grayBorder'
+  | 'black'
+  | 'blackBorder'
+  | 'product'
+  | 'productBorder'
+  | 'white'
+  | 'greenTransparent'
+  | 'redTransparent'
+  | 'yellowTransparent'
+  | 'realebail-product'
+  | 'realebail-gray'
+  | 'realebail-white'
 
-export interface TJeneseiThemeGenreToggle {
-  product: TJeneseiThemeGenreTypeToggle
-}
-export interface TJeneseiThemeGenreSonner {
-  black: TJeneseiThemeGenreTypeSonner
-  greenTransparent: TJeneseiThemeGenreTypeSonner
-  redTransparent: TJeneseiThemeGenreTypeSonner
-  yellowTransparent: TJeneseiThemeGenreTypeSonner
-}
-export interface TJeneseiThemeGenreInput {
-  gray: TJeneseiThemeGenreType
-  grayBorder: TJeneseiThemeGenreType
-  blackBorder: TJeneseiThemeGenreType
-  'realebail-white': TJeneseiThemeGenreType
-}
+export type TJeneseiThemeGenre = Record<
+  Extract<
+    TJeneseiGenreName,
+    | 'gray'
+    | 'grayBorder'
+    | 'black'
+    | 'blackBorder'
+    | 'product'
+    | 'productBorder'
+    | 'white'
+    | 'greenTransparent'
+    | 'redTransparent'
+    | 'yellowTransparent'
+    | 'realebail-product'
+    | 'realebail-gray'
+    | 'realebail-white'
+  >,
+  TJeneseiThemeGenreType
+>
 
-export interface TJeneseiThemeGenreRange {
-  gray: TJeneseiThemeGenreTypeRange
-  grayBorder: TJeneseiThemeGenreTypeRange
-  blackBorder: TJeneseiThemeGenreTypeRange
-  'realebail-white': TJeneseiThemeGenreTypeRange
-}
-export interface TJeneseiThemeGenreImageSelect {
-  gray: TJeneseiThemeGenreTypeImageSelect
-  grayBorder: TJeneseiThemeGenreTypeImageSelect
-  blackBorder: TJeneseiThemeGenreTypeImageSelect
-  'realebail-white': TJeneseiThemeGenreTypeImageSelect
-}
-export interface TJeneseiThemeGenreSelect {
-  gray: TJeneseiThemeGenreTypeSelect
-  grayBorder: TJeneseiThemeGenreTypeSelect
-  blackBorder: TJeneseiThemeGenreTypeSelect
-  'realebail-white': TJeneseiThemeGenreTypeSelect
-}
-export interface TJeneseiThemeGenreTextArea {
-  gray: TJeneseiThemeGenreType
-  grayBorder: TJeneseiThemeGenreType
-  blackBorder: TJeneseiThemeGenreType
-  'realebail-white': TJeneseiThemeGenreType
-}
-export interface TJeneseiThemeGenreDate {
-  gray: TJeneseiThemeGenreTypeDate
-  grayBorder: TJeneseiThemeGenreTypeDate
-  blackBorder: TJeneseiThemeGenreTypeDate
-  'realebail-white': TJeneseiThemeGenreTypeDate
-}
-export interface TJeneseiThemeGenreForm {
-  gray: TJeneseiThemeGenreTypeForm
-  grayBorder: TJeneseiThemeGenreTypeForm
-}
+export type TJeneseiThemeGenreToggle = Record<Extract<TJeneseiGenreName, 'product'>, TJeneseiThemeGenreTypeToggle>
+export type TJeneseiThemeGenreSonner = Record<
+  Extract<TJeneseiGenreName, 'black' | 'greenTransparent' | 'redTransparent' | 'yellowTransparent'>,
+  TJeneseiThemeGenreTypeSonner
+>
+export type TJeneseiThemeGenreInput = Record<
+  Extract<TJeneseiGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
+  TJeneseiThemeGenreType
+>
+export type TJeneseiThemeGenreRange = Record<
+  Extract<TJeneseiGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
+  TJeneseiThemeGenreTypeRange
+>
+export type TJeneseiThemeGenreImageSelect = Record<
+  Extract<TJeneseiGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
+  TJeneseiThemeGenreTypeImageSelect
+>
+export type TJeneseiThemeGenreSelect = Record<
+  Extract<TJeneseiGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
+  TJeneseiThemeGenreTypeSelect
+>
+export type TJeneseiThemeGenreTextArea = Record<
+  Extract<TJeneseiGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
+  TJeneseiThemeGenreType
+>
+export type TJeneseiThemeGenreDate = Record<
+  Extract<TJeneseiGenreName, 'gray' | 'grayBorder' | 'blackBorder' | 'realebail-white'>,
+  TJeneseiThemeGenreTypeDate
+>
+
 export interface IJeneseiThemeSize {
-  height: number
-  heightIcon: number
-  radius: number
-  padding: number
   font: number
+
+  height: number
+
+  heightIcon: number
+
+  padding: number
+
+  radius: number
 }
 
 export interface IJeneseiThemeSizeToggle {
   height: number
-  width: number
+
   padding: number
+
   thumb: number
+
+  width: number
 }
 
 export type IJeneseiThemeScreens = Record<TJeneseiDevice, { width: number }>
@@ -245,31 +264,6 @@ export type TJeneseiTypographyWeight = 100 | 300 | 400 | 500 | 700 | 900
 export type TJeneseiDevice = 'default' | 'tablet' | 'mobile'
 
 export interface IJeneseiTheme {
-  screens: IJeneseiThemeScreens
-  transition: {
-    duration: string
-    timingFunction: string
-    default: string
-    icon: string
-  }
-  scrollbar: {
-    width: number
-    background: string
-    thumb: string
-    thumbBorder: string
-  }
-  font: {
-    family: TJeneseiFontFamily
-    weight: TJeneseiTypographyWeight
-    sizeDefault: Record<TJeneseiDevice, number>
-    sizeHeading: Record<TJeneseiTypographyHeading, number>
-    lineHeight: number
-  }
-  effects: {
-    input: string
-    button: string
-  }
-  palette: Record<JeneseiPaletteKeys, string>
   colors: {
     focus: string
     white: string
@@ -279,11 +273,41 @@ export interface IJeneseiTheme {
     button: TJeneseiThemeGenre
     toggle: TJeneseiThemeGenreToggle
     checkbox: TJeneseiThemeGenre
-    form: TJeneseiThemeGenreForm
     input: TJeneseiThemeGenreInput
-    selectImage: TJeneseiThemeGenreImageSelect
+    imageSelect: TJeneseiThemeGenreImageSelect
     select: TJeneseiThemeGenreSelect
     sonner: TJeneseiThemeGenreSonner
+  }
+
+  effects: {
+    input: string
+    button: string
+  }
+
+  font: {
+    family: TJeneseiFontFamily
+    weight: TJeneseiTypographyWeight
+    sizeDefault: Record<TJeneseiDevice, number>
+    sizeHeading: Record<TJeneseiTypographyHeading, number>
+    lineHeight: number
+  }
+
+  palette: Record<JeneseiPaletteKeys, string>
+
+  screens: IJeneseiThemeScreens
+
+  scrollbar: {
+    width: number
+    background: string
+    thumb: string
+    thumbBorder: string
+  }
+
+  transition: {
+    duration: string
+    timingFunction: string
+    default: string
+    icon: string
   }
 }
 

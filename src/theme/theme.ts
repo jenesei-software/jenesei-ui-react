@@ -3,7 +3,14 @@ import {
   IJeneseiThemeSize,
   IJeneseiThemeSizeToggle,
   JeneseiPaletteKeys,
+  TJeneseiThemeGenre,
+  TJeneseiThemeGenreDate,
+  TJeneseiThemeGenreImageSelect,
+  TJeneseiThemeGenreInput,
+  TJeneseiThemeGenreRange,
+  TJeneseiThemeGenreSelect,
   TJeneseiThemeGenreSonner,
+  TJeneseiThemeGenreToggle,
   TJeneseiThemeSize
 } from '.'
 
@@ -59,7 +66,7 @@ export const JeneseiPalette: Record<JeneseiPaletteKeys, string> = {
   amnezia: '#222224'
 }
 
-const DefaultJeneseiThemeGenre = {
+const DefaultJeneseiThemeGenreLight: TJeneseiThemeGenre = {
   'realebail-white': {
     background: {
       rest: JeneseiPalette.whiteJanice,
@@ -256,7 +263,204 @@ const DefaultJeneseiThemeGenre = {
     }
   }
 }
-const DefaultJeneseiThemeImageSelect = {
+const DefaultJeneseiThemeGenreBlack: TJeneseiThemeGenre = {
+  'realebail-white': {
+    background: {
+      rest: JeneseiPalette.whiteJanice,
+      hover: JeneseiPalette.whiteJanice
+    },
+    color: {
+      rest: JeneseiPalette.blueKaren,
+      hover: JeneseiPalette.blueMonica,
+      placeholder: JeneseiPalette.blueKaren
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
+    }
+  },
+  'realebail-product': {
+    background: {
+      rest: JeneseiPalette.blueKaren,
+      hover: JeneseiPalette.blueMonica
+    },
+    color: {
+      rest: JeneseiPalette.whiteJanice,
+      hover: JeneseiPalette.whiteJanice,
+      placeholder: JeneseiPalette.whiteJanice
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
+    }
+  },
+  'realebail-gray': {
+    background: {
+      rest: JeneseiPalette.grayAdriana,
+      hover: JeneseiPalette.graySarah
+    },
+    color: {
+      rest: JeneseiPalette.blackHelena,
+      hover: JeneseiPalette.blackHelena,
+      placeholder: JeneseiPalette.blackHelena
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
+    }
+  },
+  white: {
+    background: {
+      rest: JeneseiPalette.black100,
+      hover: JeneseiPalette.whiteStandard
+    },
+    color: {
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.black60,
+      placeholder: JeneseiPalette.black80
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
+    }
+  },
+  product: {
+    background: {
+      rest: JeneseiPalette.blueRest,
+      hover: JeneseiPalette.blueHover
+    },
+    color: {
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard,
+      placeholder: JeneseiPalette.whiteStandard
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
+    }
+  },
+  productBorder: {
+    background: {
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard
+    },
+    color: {
+      rest: JeneseiPalette.blueRest,
+      hover: JeneseiPalette.blueHover,
+      placeholder: JeneseiPalette.blueRest
+    },
+    border: {
+      rest: JeneseiPalette.blueRest,
+      hover: JeneseiPalette.blueHover
+    }
+  },
+  gray: {
+    background: {
+      rest: JeneseiPalette.black10,
+      hover: JeneseiPalette.graySandra
+    },
+    color: {
+      rest: JeneseiPalette.black60,
+      hover: JeneseiPalette.black60,
+      placeholder: JeneseiPalette.black80
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
+    }
+  },
+  grayBorder: {
+    background: {
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard
+    },
+    color: {
+      rest: JeneseiPalette.black60,
+      hover: JeneseiPalette.black60,
+      placeholder: JeneseiPalette.black80
+    },
+    border: {
+      rest: JeneseiPalette.black10,
+      hover: JeneseiPalette.graySandra
+    }
+  },
+  black: {
+    background: {
+      rest: JeneseiPalette.black100,
+      hover: JeneseiPalette.black60
+    },
+    color: {
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard,
+      placeholder: JeneseiPalette.whiteStandard
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
+    }
+  },
+  blackBorder: {
+    background: {
+      rest: JeneseiPalette.whiteStandard,
+      hover: JeneseiPalette.whiteStandard
+    },
+    color: {
+      rest: JeneseiPalette.black100,
+      hover: JeneseiPalette.black60,
+      placeholder: JeneseiPalette.black100
+    },
+    border: {
+      rest: JeneseiPalette.black100,
+      hover: JeneseiPalette.black60
+    }
+  },
+  greenTransparent: {
+    background: {
+      rest: JeneseiPalette.green10,
+      hover: JeneseiPalette.green25
+    },
+    color: {
+      rest: JeneseiPalette.green100,
+      hover: JeneseiPalette.green100,
+      placeholder: JeneseiPalette.green100
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
+    }
+  },
+  yellowTransparent: {
+    background: {
+      rest: JeneseiPalette.yellow10,
+      hover: JeneseiPalette.yellow25
+    },
+    color: {
+      rest: JeneseiPalette.yellow100,
+      hover: JeneseiPalette.yellow100,
+      placeholder: JeneseiPalette.yellow100
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
+    }
+  },
+  redTransparent: {
+    background: {
+      rest: JeneseiPalette.red10,
+      hover: JeneseiPalette.red25
+    },
+    color: {
+      rest: JeneseiPalette.red100,
+      hover: JeneseiPalette.red100,
+      placeholder: JeneseiPalette.red100
+    },
+    border: {
+      rest: JeneseiPalette.transparent,
+      hover: JeneseiPalette.transparent
+    }
+  }
+}
+const DefaultJeneseiThemeImageSelect: TJeneseiThemeGenreImageSelect = {
   'realebail-white': {
     background: {
       rest: JeneseiPalette.whiteJanice,
@@ -318,7 +522,7 @@ const DefaultJeneseiThemeImageSelect = {
     }
   }
 }
-const DefaultJeneseiThemeGenreInput = {
+const DefaultJeneseiThemeGenreInput: TJeneseiThemeGenreInput = {
   'realebail-white': {
     background: {
       rest: JeneseiPalette.whiteStandard,
@@ -380,7 +584,7 @@ const DefaultJeneseiThemeGenreInput = {
     }
   }
 }
-const DefaultJeneseiThemeGenreRange = {
+const DefaultJeneseiThemeGenreRange: TJeneseiThemeGenreRange = {
   'realebail-white': {
     track: {
       background: {
@@ -462,7 +666,7 @@ const DefaultJeneseiThemeGenreRange = {
     }
   }
 }
-const DefaultJeneseiThemeGenreInputSelect = {
+const DefaultJeneseiThemeSelect: TJeneseiThemeGenreSelect = {
   'realebail-white': {
     background: {
       rest: JeneseiPalette.whiteJanice,
@@ -536,8 +740,7 @@ const DefaultJeneseiThemeGenreInputSelect = {
     }
   }
 }
-
-const DefaultJeneseiThemeGenreDate = {
+const DefaultJeneseiThemeGenreDate: TJeneseiThemeGenreDate = {
   'realebail-white': {
     background: {
       rest: JeneseiPalette.whiteJanice,
@@ -647,19 +850,7 @@ const DefaultJeneseiThemeGenreDate = {
     }
   }
 }
-const DefaultJeneseiThemeGenreForm = {
-  gray: {
-    background: JeneseiPalette.whiteStandard,
-    color: JeneseiPalette.black60,
-    border: JeneseiPalette.transparent
-  },
-  grayBorder: {
-    background: JeneseiPalette.whiteStandard,
-    color: JeneseiPalette.black60,
-    border: JeneseiPalette.black10
-  }
-}
-const DefaultJeneseiThemeGenreToggle = {
+const DefaultJeneseiThemeGenreToggle: TJeneseiThemeGenreToggle = {
   product: {
     active: {
       rest: {
@@ -773,7 +964,7 @@ const DefaultJeneseiThemeGenreSonner: TJeneseiThemeGenreSonner = {
     }
   }
 }
-export const JeneseiTheme: IJeneseiTheme = {
+export const JeneseiThemeLight: IJeneseiTheme = {
   transition: {
     duration: '0.3s',
     timingFunction: 'ease',
@@ -823,14 +1014,72 @@ export const JeneseiTheme: IJeneseiTheme = {
     danger: JeneseiPalette.redGoogle,
     range: DefaultJeneseiThemeGenreRange,
     sonner: DefaultJeneseiThemeGenreSonner,
-    form: DefaultJeneseiThemeGenreForm,
-    button: DefaultJeneseiThemeGenre,
+    button: DefaultJeneseiThemeGenreLight,
     date: DefaultJeneseiThemeGenreDate,
     toggle: DefaultJeneseiThemeGenreToggle,
-    checkbox: DefaultJeneseiThemeGenre,
+    checkbox: DefaultJeneseiThemeGenreLight,
     input: DefaultJeneseiThemeGenreInput,
-    selectImage: DefaultJeneseiThemeImageSelect,
-    select: DefaultJeneseiThemeGenreInputSelect
+    imageSelect: DefaultJeneseiThemeImageSelect,
+    select: DefaultJeneseiThemeSelect
+  }
+}
+export const JeneseiThemeBlack: IJeneseiTheme = {
+  transition: {
+    duration: '0.3s',
+    timingFunction: 'ease',
+    default: '0.3s ease',
+    icon: '0.05s ease'
+  },
+  scrollbar: {
+    width: 4,
+    background: JeneseiPalette.black05,
+    thumb: JeneseiPalette.black10,
+    thumbBorder: JeneseiPalette.black05
+  },
+  font: {
+    family: 'Inter',
+    weight: 400,
+    lineHeight: 1.2,
+    sizeDefault: {
+      default: 16,
+      mobile: 12,
+      tablet: 14
+    },
+    sizeHeading: {
+      h1: 2.5,
+      h2: 2.25,
+      h3: 2,
+      h4: 1.75,
+      h5: 1.5,
+      h6: 1.25,
+      h7: 1,
+      h8: 0.75,
+      h9: 0.5
+    }
+  },
+  screens: {
+    default: { width: 1920 },
+    tablet: { width: 1290 },
+    mobile: { width: 850 }
+  },
+  effects: {
+    input: 'inset 0px 0px 4px rgba(0, 0, 0, 0.20)',
+    button: '0px 0px 4px 0px rgba(0, 0, 0, 0.25) inset, 0px 4px 4px 0px rgba(0, 0, 0, 0.25)'
+  },
+  palette: JeneseiPalette,
+  colors: {
+    white: JeneseiPalette.whiteStandard,
+    focus: JeneseiPalette.black60,
+    danger: JeneseiPalette.redGoogle,
+    range: DefaultJeneseiThemeGenreRange,
+    sonner: DefaultJeneseiThemeGenreSonner,
+    button: DefaultJeneseiThemeGenreBlack,
+    date: DefaultJeneseiThemeGenreDate,
+    toggle: DefaultJeneseiThemeGenreToggle,
+    checkbox: DefaultJeneseiThemeGenreBlack,
+    input: DefaultJeneseiThemeGenreInput,
+    imageSelect: DefaultJeneseiThemeImageSelect,
+    select: DefaultJeneseiThemeSelect
   }
 }
 export const KEY_SIZE_DATA: Record<TJeneseiThemeSize, IJeneseiThemeSize> = {

@@ -1,11 +1,13 @@
 import type { Preview } from '@storybook/react'
+import { PropsWithChildren } from 'react'
 import { ThemeProvider } from 'styled-components'
 
+import { ProviderBrowserTheme, useBrowserTheme } from '../src/contexts/context-browser-theme'
 import { ProviderDialog } from '../src/contexts/context-dialog'
 import { ProviderGeolocation } from '../src/contexts/context-geolocation'
 import { ProviderPermission } from '../src/contexts/context-permission'
 import { ProviderScreenWidth } from '../src/contexts/context-screen-width'
-import { JeneseiGlobalStyles, JeneseiTheme } from '../src/theme/index'
+import { JeneseiGlobalStyles, JeneseiThemeBlack, JeneseiThemeLight } from '../src/theme/index'
 
 import '@fontsource/inter/100.css'
 import '@fontsource/inter/300.css'
@@ -32,14 +34,11 @@ const preview: Preview = {
       return (
         <ProviderPermission>
           <ProviderGeolocation>
-            <ThemeProvider theme={JeneseiTheme}>
-              <ProviderScreenWidth>
-                <JeneseiGlobalStyles />
-                <ProviderDialog zIndex={1000}>
-                  <Story />
-                </ProviderDialog>
-              </ProviderScreenWidth>
-            </ThemeProvider>
+            <ProviderBrowserTheme>
+              <Layout>
+                <Story />
+              </Layout>
+            </ProviderBrowserTheme>
           </ProviderGeolocation>
         </ProviderPermission>
       )
@@ -55,4 +54,16 @@ const preview: Preview = {
   }
 }
 
+const Layout = (props: PropsWithChildren) => {
+  const { theme } = useBrowserTheme()
+  console.log('Current theme:', theme)
+  return (
+    <ThemeProvider theme={theme === 'light' ? JeneseiThemeLight : JeneseiThemeBlack}>
+      <ProviderScreenWidth>
+        <JeneseiGlobalStyles />
+        <ProviderDialog zIndex={1000}>{props.children}</ProviderDialog>
+      </ProviderScreenWidth>
+    </ThemeProvider>
+  )
+}
 export default preview

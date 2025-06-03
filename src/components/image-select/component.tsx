@@ -113,8 +113,8 @@ export const ImageSelect = (props: ImageSelectProps) => {
           onDragLeave={() => setIsDraggingOver(false)}
           animate={{
             borderColor: isDraggingOver
-              ? theme.colors.selectImage[props.genre].border.hover
-              : theme.colors.selectImage[props.genre].border.rest
+              ? theme.colors.imageSelect[props.genre].border.hover
+              : theme.colors.imageSelect[props.genre].border.rest
           }}
           transition={{ duration: 0.3 }}
           $genre={props.genre}
@@ -252,7 +252,7 @@ export const ImageSelect = (props: ImageSelectProps) => {
               >
                 <Typography
                   style={{
-                    color: theme.colors.selectImage[props.genre].color.rest
+                    color: theme.colors.imageSelect[props.genre].color.rest
                   }}
                   sx={{
                     default: {}
