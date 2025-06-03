@@ -19,7 +19,11 @@ const defaultArgs: Partial<InputProps> = {
   isRequired: false,
   isReadOnly: false,
   isLoading: false,
-  width: '300px'
+  sx: {
+    default: {
+      width: '300px'
+    }
+  }
 }
 
 const InputStringWrapper: FC<InputProps> = props => {

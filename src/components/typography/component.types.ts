@@ -1,4 +1,4 @@
-import { CSSProperties, PropsWithChildren } from 'react'
+import { CSSProperties, PropsWithChildren, Ref } from 'react'
 
 import {
   JeneseiPaletteKeys,
@@ -55,6 +55,8 @@ export type TypographyProps = PropsWithChildren & {
 
   isParagraph?: boolean
   isAnchor?: boolean
+
+  ref?: Ref<HTMLElement | HTMLHeadingElement | HTMLAnchorElement | null>
 
   sx: TypographySXProps
 }

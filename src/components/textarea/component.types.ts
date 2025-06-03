@@ -1,60 +1,60 @@
 import { FocusEventHandler, KeyboardEventHandler } from 'react'
 
+import { addSXProps } from '@local/index'
 import { addErrorProps } from '@local/styles/error'
 import { TJeneseiThemeGenreTextArea, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
-export type TextAreaProps = addErrorProps & {
-  name?: string
+export type TextAreaProps = addErrorProps &
+  addSXProps & {
+    name?: string
 
-  id?: string
+    id?: string
 
-  className?: string
+    className?: string
 
-  defaultValue?: string
+    defaultValue?: string
 
-  isAllowEmptyFormatting?: boolean
+    isAllowEmptyFormatting?: boolean
 
-  genre: TTextAreaGenre
+    genre: TTextAreaGenre
 
-  height?: number
+    height?: number
 
-  maxRows?: number
+    maxRows?: number
 
-  size: TJeneseiThemeSize
+    size: TJeneseiThemeSize
 
-  width?: string
+    isDisabled?: boolean
 
-  isDisabled?: boolean
+    isResize?: boolean
 
-  isResize?: boolean
+    isAutoHeight?: boolean
 
-  isAutoHeight?: boolean
+    isLoading?: boolean
 
-  isLoading?: boolean
+    isReadOnly?: boolean
 
-  isReadOnly?: boolean
+    isTextAreaEffect?: boolean
 
-  isTextAreaEffect?: boolean
+    isRequired?: boolean
 
-  isRequired?: boolean
+    isNoSpaces?: boolean
 
-  isNoSpaces?: boolean
+    onBlur?: FocusEventHandler<HTMLTextAreaElement>
 
-  onBlur?: FocusEventHandler<HTMLTextAreaElement>
+    onChange?: (value: string) => void
 
-  onChange?: (value: string) => void
+    onFocus?: FocusEventHandler<HTMLTextAreaElement>
 
-  onFocus?: FocusEventHandler<HTMLTextAreaElement>
+    onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>
 
-  onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>
+    placeholder?: string
 
-  placeholder?: string
+    isBold?: boolean
 
-  isBold?: boolean
-
-  value?: string | null
-}
+    value?: string | null
+  }
 
 export type TTextAreaGenre = keyof TJeneseiThemeGenreTextArea
 
@@ -65,4 +65,4 @@ export type StyledTextAreaProps = AddDollarSign<
   >
 >
 
-export type StyledTextAreaWrapperProps = AddDollarSign<Pick<TextAreaProps, 'isDisabled' | 'isTextAreaEffect' | 'width'>>
+export type StyledTextAreaWrapperProps = AddDollarSign<Pick<TextAreaProps, 'isDisabled' | 'isTextAreaEffect' | 'sx'>>

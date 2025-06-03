@@ -25,7 +25,11 @@ const defaultArgs: Partial<TextAreaProps> = {
   isReadOnly: false,
   isLoading: false,
   isAutoHeight: true,
-  width: '300px',
+  sx: {
+    default: {
+      width: '300px'
+    }
+  },
   maxRows: 8
 }
 

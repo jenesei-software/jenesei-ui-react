@@ -49,6 +49,7 @@ export const Preview: FC<PreviewProps> = props => {
           <StackMotion
             key="loader"
             sx={theme => ({
+              ...props?.sxLoader,
               default: {
                 backgroundColor: theme.palette.whiteStandard,
                 width: '100%',
@@ -59,7 +60,12 @@ export const Preview: FC<PreviewProps> = props => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                zIndex: 1
+                zIndex: 1,
+                ...(props?.sxLoader
+                  ? typeof props?.sxLoader === 'function'
+                    ? props?.sxLoader(theme).default
+                    : props?.sxLoader.default
+                  : {})
               }
             })}
             transition={{ duration: 0.3 }}
@@ -94,12 +100,18 @@ export const Preview: FC<PreviewProps> = props => {
         {visible ? (
           <StackMotion
             key="children"
-            sx={{
+            sx={theme => ({
+              ...props?.sxChildren,
               default: {
                 display: 'contents',
-                zIndex: 0
+                zIndex: 0,
+                ...(props?.sxChildren
+                  ? typeof props?.sxChildren === 'function'
+                    ? props?.sxChildren(theme).default
+                    : props?.sxChildren.default
+                  : {})
               }
-            }}
+            })}
             transition={{ duration: 0.3 }}
             initial={{ opacity: 0 }}
             exit={{ opacity: 0 }}

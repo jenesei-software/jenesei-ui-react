@@ -23,7 +23,11 @@ export const Select: Story = {
         size: 'medium'
       }
     },
-    width: '100%',
+    sx: {
+      default: {
+        width: '100%'
+      }
+    },
     onChange(images) {
       console.log('Selected images:', images)
     },

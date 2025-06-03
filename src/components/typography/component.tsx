@@ -1,75 +1,73 @@
 import { LinkProps, createLink } from '@tanstack/react-router'
-import { forwardRef, memo, useEffect, useMemo, useRef, useState } from 'react'
+import { memo, useEffect, useMemo, useRef, useState } from 'react'
 
 import { useScreenWidth } from '@local/contexts/context-screen-width'
 
 import { Title, TypographyCSSProps, TypographyProps, TypographyTooltipProps } from '.'
 import { Tooltip } from '../tooltip'
 
-const TypographyWithRef = forwardRef<HTMLElement | HTMLHeadingElement | HTMLAnchorElement | undefined, TypographyProps>(
-  (props, ref) => {
-    const { screenActual } = useScreenWidth()
-    const cssProps: TypographyCSSProps & Pick<TypographyProps, 'onClick' | 'className' | 'style'> = useMemo(
-      () => ({
-        $sx: props.sx,
-        className: props.className,
-        style: props.style,
-        onClick: props.onClick ? props.onClick : () => {}
-      }),
-      [props.sx, props.className, props.style, props.onClick]
-    )
+const TypographyWithRef = (props: TypographyProps) => {
+  const { screenActual } = useScreenWidth()
+  const cssProps: TypographyCSSProps & Pick<TypographyProps, 'onClick' | 'className' | 'style'> = useMemo(
+    () => ({
+      $sx: props.sx,
+      className: props.className,
+      style: props.style,
+      onClick: props.onClick ? props.onClick : () => {}
+    }),
+    [props.sx, props.className, props.style, props.onClick]
+  )
 
-    const screenSX = useMemo(() => props.sx?.[screenActual] ?? props.sx?.default, [props.sx, screenActual])
+  const screenSX = useMemo(() => props.sx?.[screenActual] ?? props.sx?.default, [props.sx, screenActual])
 
-    if (screenSX && 'variant' in screenSX) {
-      if (screenSX.variant === 'h7' || screenSX.variant === 'h8' || screenSX.variant === 'h9') {
-        return (
-          <Title
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            ref={ref as any}
-            as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : 'span'}
-            href={props.href}
-            {...cssProps}
-          >
-            {props.children}
-          </Title>
-        )
-      } else {
-        return (
-          <Title
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            ref={ref as any}
-            as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : screenSX.variant}
-            href={props.href}
-            {...cssProps}
-          >
-            {props.children}
-          </Title>
-        )
-      }
+  if (screenSX && 'variant' in screenSX) {
+    if (screenSX.variant === 'h7' || screenSX.variant === 'h8' || screenSX.variant === 'h9') {
+      return (
+        <Title
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          ref={props.ref as any}
+          as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : 'span'}
+          href={props.href}
+          {...cssProps}
+        >
+          {props.children}
+        </Title>
+      )
+    } else {
+      return (
+        <Title
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          ref={props.ref as any}
+          as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : screenSX.variant}
+          href={props.href}
+          {...cssProps}
+        >
+          {props.children}
+        </Title>
+      )
     }
-
-    return (
-      <Title
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ref={ref as any}
-        as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : 'span'}
-        href={props.href}
-        {...cssProps}
-      >
-        {props.children}
-      </Title>
-    )
   }
-)
+
+  return (
+    <Title
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ref={props.ref as any}
+      as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : 'span'}
+      href={props.href}
+      {...cssProps}
+    >
+      {props.children}
+    </Title>
+  )
+}
 
 export const Typography = (props: TypographyProps) => {
   return <TypographyWithRef {...props} />
 }
 
-const TypographySizeIsAnchor = forwardRef<HTMLElement, TypographyProps & LinkProps>((props, ref) => {
-  return <TypographyWithRef isAnchor {...props} ref={ref} href={props.href} />
-})
+const TypographySizeIsAnchor = (props: TypographyProps & LinkProps) => {
+  return <TypographyWithRef isAnchor {...props} ref={props.ref} href={props.href} />
+}
 
 export const TypographyLink = createLink(TypographySizeIsAnchor)
 

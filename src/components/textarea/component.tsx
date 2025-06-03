@@ -75,7 +75,7 @@ export const TextArea = (props: TextAreaProps) => {
         $isTextAreaEffect={props.isTextAreaEffect}
         className={props.className}
         $isDisabled={props.isDisabled}
-        $width={props.width}
+        $sx={props.sx}
       >
         <StyledTextArea
           ref={textareaRef}

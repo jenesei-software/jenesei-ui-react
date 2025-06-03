@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
 import { addError } from '@local/styles/error'
+import { addSX } from '@local/styles/sx'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { ImageSelectWrapperProps } from '.'
@@ -37,16 +38,17 @@ export const ImageSelectSizeConstructor = (props: IJeneseiThemeSize) => css`
 export const ImageSelectWrapper = styled.div<ImageSelectWrapperProps>`
   display: flex;
   flex-direction: column;
-  width: ${props => props.$width || '100%'};
-  ${ImageSelectSize}
-  ${addError}
+  width: 100%;
+  ${ImageSelectSize};
+  ${addError};
+  ${addSX};
 `
 export const ImageSelectListWrapper = styled(motion.div)<ImageSelectWrapperProps>`
   border: 2px dashed;
 
   display: flex;
   flex-direction: column;
-  width: ${props => props.$width || '100%'};
+  width: 100%;
   ${ImageSelectListGenre}
   ${ImageSelectListSize}
 `

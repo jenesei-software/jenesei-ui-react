@@ -102,13 +102,7 @@ export const ImageSelect = (props: ImageSelectProps) => {
 
   return (
     <>
-      <ImageSelectWrapper
-        $genre={props.genre}
-        $size={props.size}
-        id={props.id}
-        $width={props.width}
-        $error={props.error}
-      >
+      <ImageSelectWrapper $genre={props.genre} $size={props.size} id={props.id} $sx={props.sx} $error={props.error}>
         <ImageSelectListWrapper
           onDrop={e => {
             handleDrop(e)

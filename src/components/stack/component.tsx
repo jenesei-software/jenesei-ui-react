@@ -5,6 +5,7 @@ import { StackMotionProps, StackProps, StyledStack, StyledStackMotion } from '.'
 export const Stack: FC<StackProps> = props => {
   return (
     <StyledStack
+      ref={props.ref}
       onClick={props.onClick}
       onDrop={props.onDrop}
       onDragOver={props.onDragOver}
@@ -21,6 +22,7 @@ export const Stack: FC<StackProps> = props => {
 export const StackMotion: FC<StackMotionProps> = props => {
   return (
     <StyledStackMotion
+      ref={props.ref}
       layout={props.layout}
       initial={props.initial}
       animate={props.animate}

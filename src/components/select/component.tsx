@@ -253,7 +253,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
       <SelectWrapper
         $size={props.size}
         $genre={props.genre}
-        $width={props.width}
+        $sx={props.sx}
         // tabIndex={0}
         $radius={radius}
         $isDisabled={props?.isDisabled}

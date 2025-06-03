@@ -6,6 +6,7 @@ import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { ErrorMessageProps, ErrorMessagePropsDollar, addErrorStylesProps } from '.'
 import { WordsPullUp } from '../motion'
+import { addSX } from '../sx'
 
 const ErrorMessageSize = css<ErrorMessagePropsDollar>`
   ${props =>
@@ -32,10 +33,11 @@ const ErrorMessageSizeConstructor = (
 
 export const ErrorMessageComponent = styled.div<ErrorMessagePropsDollar>`
   ${props => getFontSizeStyles(12, 400, props.theme.font.family)};
-  width: ${props => props.$width ?? '100%'};
-  ${ErrorMessageSize}
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
+  ${ErrorMessageSize}
+  ${addSX}
 `
 export const addError = css<addErrorStylesProps>`
   ${props =>
@@ -54,7 +56,7 @@ export const ErrorMessage: FC<ErrorMessageProps> = props => {
   return (
     <>
       {props.errorMessage && props.isError ? (
-        <ErrorMessageComponent $size={props.size} $width={props.width} $isErrorAbsolute={props.isErrorAbsolute}>
+        <ErrorMessageComponent $size={props.size} $sx={props.sx} $isErrorAbsolute={props.isErrorAbsolute}>
           <WordsPullUp text={props.errorMessage} />
         </ErrorMessageComponent>
       ) : null}

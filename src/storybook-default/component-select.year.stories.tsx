@@ -20,7 +20,11 @@ const value = moment.utc().valueOf()
 const defaultArgs: Partial<SelectYearProps> = {
   size: 'medium',
   genre: 'gray',
-  width: '70px',
+  sx: {
+    default: {
+      width: '300px'
+    }
+  },
   startDate: startDate,
   endDate: endDate,
   value: value

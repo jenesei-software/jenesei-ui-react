@@ -136,7 +136,7 @@ export const InputOTP = (props: InputOTPProps) => {
             }
           }, 0)
         }}
-        $width={props.width}
+        $sx={props.sx}
       >
         {otp.map((digit, index) => (
           <Input

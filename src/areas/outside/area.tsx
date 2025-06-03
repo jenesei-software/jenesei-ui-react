@@ -1,8 +1,12 @@
 import { FC, PropsWithChildren, useEffect, useRef } from 'react'
 
-interface OutsideProps extends PropsWithChildren {
-  onOutsideClick: (event: MouseEvent) => void
-}
+import { Stack } from '@local/components/stack'
+import { addSXProps } from '@local/index'
+
+type OutsideProps = PropsWithChildren &
+  addSXProps & {
+    onOutsideClick: (event: MouseEvent) => void
+  }
 
 export const Outside: FC<OutsideProps> = props => {
   const elementRef = useRef<HTMLDivElement>(null)
@@ -20,8 +24,17 @@ export const Outside: FC<OutsideProps> = props => {
     }
   }, [props])
   return (
-    <div style={{ display: 'contents' }} ref={elementRef}>
+    <Stack
+      sx={theme => ({
+        ...props?.sx,
+        default: {
+          display: 'content',
+          ...(props?.sx ? (typeof props?.sx === 'function' ? props?.sx(theme).default : props?.sx.default) : {})
+        }
+      })}
+      ref={elementRef}
+    >
       {props.children}
-    </div>
+    </Stack>
   )
 }

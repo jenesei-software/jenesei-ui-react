@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { StyledInputCSS, StyledMotionInput } from '@local/components/input'
 import { addBorder, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
+import { addSX } from '@local/styles/sx'
 import { IJeneseiThemeSize } from '@local/theme'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 
@@ -17,7 +18,7 @@ import {
 import { Icon } from '../icon'
 
 export const SelectWrapper = styled(motion.div)<SelectWrapperProps>`
-  width: ${props => props.$width ?? '100%'};
+  width: 100%;
   position: relative;
   height: fit-content;
   ${props =>
@@ -45,6 +46,7 @@ export const SelectWrapper = styled(motion.div)<SelectWrapperProps>`
   &:focus-visible {
     outline: none !important;
   }
+  ${addSX};
 `
 
 export const DropdownListParentSize = css<SelectStyledListProps>`

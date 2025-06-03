@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 import { getFontSizeStyles } from '@local/components/typography'
 import { addOutline, addTransitionWithoutSize } from '@local/styles/add'
 import { addError } from '@local/styles/error'
+import { addSX } from '@local/styles/sx'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledTextAreaProps, StyledTextAreaWrapperProps } from '.'
@@ -15,12 +16,8 @@ export const StyledTextAreaWrapper = styled.div<StyledTextAreaWrapperProps>`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  width: ${props => props.$width ?? '100%'};
-  ${props =>
-    props.$width &&
-    css`
-      max-width: ${props.$width};
-    `}
+  width: 100%;
+  ${addSX};
 `
 
 /****************************************** Placeholder *************************************************/

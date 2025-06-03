@@ -1,6 +1,6 @@
 import { Area } from 'react-easy-crop'
 
-import { ButtonProps } from '@local/index'
+import { ButtonProps, addSXProps } from '@local/index'
 import { addErrorProps } from '@local/styles/error'
 import { TJeneseiThemeGenreImageSelect, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
@@ -50,7 +50,6 @@ export type ImageSelectProps = {
     delete: Pick<ButtonProps, 'size' | 'genre'>
   }
   id?: string
-  width?: string
   onChange?: (images: ImageSelectItemProps[]) => void
   isContain?: boolean
   imageSettings: {
@@ -62,6 +61,7 @@ export type ImageSelectProps = {
   }
   defaultImages: ImageSelectItemProps[]
   images: ImageSelectItemProps[]
-} & addErrorProps
+} & addErrorProps &
+  addSXProps
 
-export type ImageSelectWrapperProps = AddDollarSign<Pick<ImageSelectProps, 'width' | 'error' | 'genre' | 'size'>>
+export type ImageSelectWrapperProps = AddDollarSign<Pick<ImageSelectProps, 'sx' | 'error' | 'genre' | 'size'>>

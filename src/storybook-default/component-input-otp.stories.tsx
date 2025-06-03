@@ -20,7 +20,11 @@ export const Default: Story = {
   args: {
     ...defaultArgs,
     length: 6,
-    width: '320px',
+    sx: {
+      default: {
+        width: '320px'
+      }
+    },
     onComplete(otp) {
       console.log('onComplete', otp)
     },

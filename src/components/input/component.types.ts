@@ -4,74 +4,77 @@ import {
   HTMLInputAutoCompleteAttribute,
   HTMLInputTypeAttribute,
   KeyboardEventHandler,
-  PropsWithChildren
+  PropsWithChildren,
+  Ref
 } from 'react'
 import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'react-number-format'
 
 import { addErrorProps } from '@local/styles/error'
+import { addSXProps } from '@local/styles/sx'
 import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
-type InputDefaultProps = addErrorProps & {
-  name?: string
+type InputDefaultProps = addErrorProps &
+  addSXProps & {
+    ref?: Ref<HTMLInputElement | null>
 
-  id?: string
+    name?: string
 
-  className?: string
+    id?: string
 
-  defaultValue?: string
+    className?: string
 
-  isNotShowHoverStyle?: boolean
+    defaultValue?: string
 
-  autocomplete?: HTMLInputAutoCompleteAttribute
+    isNotShowHoverStyle?: boolean
 
-  isAllowEmptyFormatting?: boolean
+    autocomplete?: HTMLInputAutoCompleteAttribute
 
-  genre: TInputGenre
+    isAllowEmptyFormatting?: boolean
 
-  size: TJeneseiThemeSize
+    genre: TInputGenre
 
-  tabIndex?: number
+    size: TJeneseiThemeSize
 
-  width?: string
+    tabIndex?: number
 
-  isWidthAsHeight?: boolean
+    isWidthAsHeight?: boolean
 
-  isDisabled?: boolean
+    isDisabled?: boolean
 
-  isLoading?: boolean
+    isLoading?: boolean
 
-  isReadOnly?: boolean
+    isReadOnly?: boolean
 
-  isInputEffect?: boolean
+    isInputEffect?: boolean
 
-  isRequired?: boolean
+    isRequired?: boolean
 
-  isNoSpaces?: boolean
+    isNoSpaces?: boolean
 
-  onBlur?: FocusEventHandler<HTMLInputElement>
+    onBlur?: FocusEventHandler<HTMLInputElement>
 
-  onPaste?: ClipboardEventHandler<HTMLInputElement>
+    onPaste?: ClipboardEventHandler<HTMLInputElement>
 
-  onFocus?: FocusEventHandler<HTMLInputElement>
+    onFocus?: FocusEventHandler<HTMLInputElement>
 
-  onKeyDown?: KeyboardEventHandler<HTMLInputElement>
+    onKeyDown?: KeyboardEventHandler<HTMLInputElement>
 
-  placeholder?: string
+    placeholder?: string
 
-  isBold?: boolean
+    isBold?: boolean
 
-  postfixChildren?: InputChildrenProps
+    postfixChildren?: InputChildrenProps
 
-  prefixChildren?: InputChildrenProps
+    prefixChildren?: InputChildrenProps
 
-  value?: string | null | number
+    value?: string | null | number
 
-  inputMode?: 'text' | 'none' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search'
+    inputMode?: 'text' | 'none' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search'
 
-  maxLength?: number
-  minLength?: number
-}
+    maxLength?: number
+    minLength?: number
+  }
 export type InputStandardProps = InputDefaultProps & {
   variety: 'standard'
   onChange?: (value: string) => void
@@ -139,5 +142,5 @@ export type StyledInputProps = AddDollarSign<
 >
 
 export type StyledInputWrapperProps = AddDollarSign<
-  Pick<InputProps, 'isDisabled' | 'isInputEffect' | 'width' | 'size' | 'isWidthAsHeight'>
+  Pick<InputProps, 'isDisabled' | 'isInputEffect' | 'sx' | 'size' | 'isWidthAsHeight'>
 >

@@ -1,4 +1,4 @@
-import { forwardRef, useCallback } from 'react'
+import { useCallback } from 'react'
 import { NumberFormatValues } from 'react-number-format'
 
 import { ErrorMessage } from '@local/styles/error'
@@ -13,7 +13,7 @@ import {
   StyledInputWrapper
 } from '.'
 
-export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+export const Input = (props: InputProps) => {
   const handleOnChange = useCallback(
     (input: string | NumberFormatValues) => {
       if (props.variety === 'standard') {
@@ -37,7 +37,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         $isInputEffect={props.isInputEffect}
         className={props.className}
         $isDisabled={props.isDisabled}
-        $width={props.width}
+        $sx={props.sx}
         $size={props.size}
         $isWidthAsHeight={props.isWidthAsHeight}
       >
@@ -116,7 +116,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             inputMode={props.inputMode}
             maxLength={props.maxLength}
             minLength={props.minLength}
-            ref={ref}
+            ref={props.ref}
             $error={props.error}
             $isInputEffect={props.isInputEffect}
             $isLoading={props.isLoading}
@@ -165,9 +165,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
     </>
   )
-})
-
-Input.displayName = 'Input'
+}
 
 export function formatPhoneNumber(dialCode: string, international: string) {
   function isDigit(char: string): boolean {

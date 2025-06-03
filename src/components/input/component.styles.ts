@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components'
 import { getFontSizeStyles } from '@local/components/typography'
 import { addOutline, addTransition } from '@local/styles/add'
 import { addError } from '@local/styles/error'
+import { addSX } from '@local/styles/sx'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledInputChildrenProps, StyledInputProps, StyledInputWrapperProps } from '.'
@@ -25,9 +26,8 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
             text-align: center;
           }
         `
-      : css`
-          width: ${props.$width ?? '100%'};
-        `};
+      : null};
+  ${addSX};
 `
 
 /****************************************** Placeholder *************************************************/

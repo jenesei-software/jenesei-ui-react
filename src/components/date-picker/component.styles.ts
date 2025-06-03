@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import { InputIsInputEffect, StyledInput } from '@local/components/input'
 import { getFontSizeStyles } from '@local/components/typography'
 import { addOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
+import { addSX } from '@local/styles/sx'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 import { IJeneseiThemeSize } from '@local/theme/theme.interface'
 
@@ -16,8 +17,9 @@ import {
 } from '.'
 
 export const DateWrapper = styled.div<DateWrapperProps>`
-  width: ${props => props.$width ?? '100%'};
+  width: 100%;
   position: relative;
+  ${addSX};
 `
 
 export const DateDropdownListParent = styled(motion.div)<DateStyledListProps>`

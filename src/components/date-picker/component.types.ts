@@ -1,6 +1,7 @@
 import { FocusEvent } from 'react'
 
 import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
+import { addSXProps } from '@local/styles/sx'
 import { TJeneseiThemeGenreDate, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
@@ -9,49 +10,62 @@ import { SelectDateProps } from '../select'
 export type TDateGenre = keyof TJeneseiThemeGenreDate
 
 export interface DateDayProps {
-  value: number
-
-  labelString: string
-  labelNumber: number
-
   dayOfWeek: number
-  weekOfMonth: number
+
+  isCurrentMonth: boolean
+
+  isDisabled: boolean
+
+  isToday: boolean
 
   isWeekend: boolean
-  isToday: boolean
-  isCurrentMonth: boolean
-  isDisabled: boolean
-}
-export interface DatePickerProps {
-  name?: string
-  id?: string
 
-  locale: {
-    months: SelectDateProps['monthsLocale']
-    weeks: WeekItem[]
-  }
-  startDate?: number
+  labelNumber: number
+
+  labelString: string
+
+  value: number
+
+  weekOfMonth: number
+}
+export type DatePickerProps = addSXProps & {
   endDate?: number
 
-  size: TJeneseiThemeSize
   genre: TDateGenre
-  width?: string
-  placeholder?: string
 
-  isOnClickClose?: boolean
-  isInputEffect?: InputStandardProps['isInputEffect']
+  id?: string
+
   inputProps: Omit<
     InputStandardProps,
     'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width' | 'value' | 'isInputEffect'
   >
 
-  value: number | null
-
   isDisabled?: boolean
 
-  onChange: (timestamp: number) => void
-  onFocus?: (event: FocusEvent<HTMLDivElement, Element>) => void
+  isInputEffect?: InputStandardProps['isInputEffect']
+
+  isOnClickClose?: boolean
+
+  locale: {
+    months: SelectDateProps['monthsLocale']
+    weeks: WeekItem[]
+  }
+
+  name?: string
+
   onBlur?: (event?: MouseEvent) => void
+
+  onChange: (timestamp: number) => void
+
+  onFocus?: (event: FocusEvent<HTMLDivElement, Element>) => void
+
+  placeholder?: string
+
+  size: TJeneseiThemeSize
+
+  startDate?: number
+
+  value: number | null
 }
 
 export type DateWrapperProps = AddDollarSign<
@@ -87,6 +101,10 @@ export type DateDropdownDayProps = AddDollarSign<
 >
 
 export type MonthItem = {
+  localeLong: string
+
+  localeShort: string
+
   value:
     | 'january'
     | 'february'
@@ -100,11 +118,11 @@ export type MonthItem = {
     | 'october'
     | 'november'
     | 'december'
-  localeLong: string
-  localeShort: string
 }
 export type WeekItem = {
-  value: 'mo' | 'tu' | 'we' | 'th' | 'fr' | 'sa' | 'su'
   localeLong: string
+
   localeShort: string
+
+  value: 'mo' | 'tu' | 'we' | 'th' | 'fr' | 'sa' | 'su'
 }

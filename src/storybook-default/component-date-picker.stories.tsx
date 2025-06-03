@@ -41,7 +41,11 @@ export const PastHundredYears: Story = {
     },
     size: 'medium',
     genre: 'gray',
-    width: '300px',
+    sx: {
+      default: {
+        width: '300px'
+      }
+    },
     startDate: PastHundredYearsStartDate,
     endDate: PastHundredYearsEndDate,
     value: PastHundredYearsValue,
@@ -66,7 +70,11 @@ export const LastHundredYear18YearsAgo: Story = {
     },
     size: 'medium',
     genre: 'gray',
-    width: '300px',
+    sx: {
+      default: {
+        width: '300px'
+      }
+    },
     startDate: LastHundredYear18YearsAgoStartDate,
     endDate: LastHundredYear18YearsAgoEndDate,
     value: LastHundredYear18YearsAgoValue
@@ -86,7 +94,11 @@ export const LastHundredYear21YearsAgo: Story = {
     },
     size: 'medium',
     genre: 'gray',
-    width: '300px',
+    sx: {
+      default: {
+        width: '300px'
+      }
+    },
     startDate: LastHundredYear21YearsAgoStartDate,
     endDate: LastHundredYear21YearsAgoEndDate,
     value: LastHundredYear21YearsAgoValue
@@ -106,7 +118,11 @@ export const NextThreeMonths: Story = {
     },
     size: 'medium',
     genre: 'gray',
-    width: '300px',
+    sx: {
+      default: {
+        width: '300px'
+      }
+    },
     startDate: NextThreeMonthsStartDate,
     endDate: NextThreeMonthsEndDate,
     value: NextThreeMonthsValue

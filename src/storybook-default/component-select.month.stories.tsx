@@ -18,7 +18,11 @@ type Story = StoryObj<typeof SelectMonth>
 const defaultArgs: Partial<SelectDateProps> = {
   size: 'medium',
   genre: 'gray',
-  width: '300px',
+  sx: {
+    default: {
+      width: '300px'
+    }
+  },
   monthsLocale: localeMonths
 }
 

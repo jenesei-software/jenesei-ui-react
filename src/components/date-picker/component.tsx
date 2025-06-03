@@ -252,7 +252,7 @@ export const DatePicker = (props: DatePickerProps) => {
       <DateWrapper
         $size={props.size}
         $genre={props.genre}
-        $width={props.width}
+        $sx={props.sx}
         $isDisabled={props?.isDisabled}
         $radius={radius}
         $parentListHeight={height}
