@@ -1,17 +1,9 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import { addError } from '@local/styles/error'
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
+import { addSX } from '@local/styles/sx'
 
 import { RangeComponentProps, RangeThumbProps, RangeWrapperProps } from '.'
-
-/****************************************** Size *************************************************/
-export const RangeSize = css<RangeWrapperProps>`
-  ${props => RangeSizeConstructor({ ...KEY_SIZE_DATA[props.$size], ...props })};
-`
-export const RangeSizeConstructor = (props: IJeneseiThemeSize & RangeWrapperProps) => css`
-  width: ${props.$width ?? '100%'};
-`
 
 export const RangeWrapper = styled.div<RangeWrapperProps>`
   position: relative;
@@ -20,8 +12,8 @@ export const RangeWrapper = styled.div<RangeWrapperProps>`
   box-sizing: border-box;
   align-items: center;
   height: 20px;
-  ${RangeSize};
   ${addError};
+  ${addSX};
 `
 
 export const RangeTrack = styled.div<RangeComponentProps>`

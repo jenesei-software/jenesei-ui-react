@@ -28,7 +28,7 @@ export const ProviderScreenWidth: FC<ProviderScreenWidthProps> = props => {
     const sortedScreens = Object.entries(theme.screens)
       .map(([key, value]) => ({
         key: key as Screens,
-        bp: value.width
+        bp: (value as { width: number }).width
       }))
       .sort((a, b) => a.bp - b.bp)
 

@@ -47,7 +47,7 @@ export const Range = (props: RangeProps) => {
   const gradient = useMemo(() => `linear-gradient(to right, ${trackGradient})`, [trackGradient])
 
   return (
-    <RangeWrapper $size={props.size} $width={props.width} $error={props.error} onBlur={props.onBlur}>
+    <RangeWrapper $size={props.size} $sx={props.sx} $error={props.error} onBlur={props.onBlur}>
       {props.values.map((val, idx) => (
         <RangeThumb
           key={idx}

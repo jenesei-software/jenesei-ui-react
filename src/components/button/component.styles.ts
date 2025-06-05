@@ -93,6 +93,7 @@ export const ButtonSizeConstructor = (
   }
 ) => css`
   /* height: ${props.height}px; */
+  height: fit-content;
   min-height: ${props.height}px;
   max-height: fit-content;
   border-radius: ${props.radius}px;

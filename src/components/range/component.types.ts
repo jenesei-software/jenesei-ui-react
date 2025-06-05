@@ -13,8 +13,8 @@ export type RangeProps = {
   max: number
   isShowMarker?: boolean
   onBlur?: FocusEventHandler<HTMLDivElement>
-} & Pick<InputStandardProps, 'size' | 'genre' | 'id' | 'width' | 'error'>
+} & Pick<InputStandardProps, 'size' | 'genre' | 'id' | 'sx' | 'error'>
 
-export type RangeWrapperProps = AddDollarSign<Pick<RangeProps, 'size' | 'width' | 'error'>>
+export type RangeWrapperProps = AddDollarSign<Pick<RangeProps, 'size' | 'sx' | 'error'>>
 export type RangeComponentProps = AddDollarSign<Pick<RangeProps, 'size' | 'genre'>>
 export type RangeThumbProps = RangeComponentProps & AddDollarSign<{ colorBorder: string; colorBackground: string }>

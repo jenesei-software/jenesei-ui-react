@@ -57,7 +57,9 @@ export const useImageCrop = (props: useImageCropProps) => {
         name: file.name,
         format: file.type as IImageFormat
       }))
-      props.refInput.current!.value = ''
+      if (props.refInput && 'current' in props.refInput && props.refInput.current) {
+        props.refInput.current.value = ''
+      }
 
       if (newImages.length) handleAdd(newImages)
     },
