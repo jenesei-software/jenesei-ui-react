@@ -1,0 +1,31 @@
+import{j as l,d as _}from"./styled-components.browser.esm-CyaOpMkv.js";import{b as A}from"./style-KtjdfyVq.js";import{r as d}from"./index-CnY36iC1.js";import{O as T}from"./area-D7R4tX3s.js";import{m as g}from"./proxy-BS1eh56F.js";import{A as L}from"./index-DgedcAJ4.js";const p=d.createContext(null),y=e=>{const[t,c]=d.useState([]),u=d.useCallback(n=>{c(o=>{const i=o.find(a=>a.id===n);if(!i)return o;const r=i.index;return o.filter(a=>a.id!==n).map(a=>({...a,index:a.index>r?a.index-1:a.index}))})},[]),m=d.useCallback(n=>{c(o=>o.map(i=>i.id===n.id?{...i,...n}:i))},[]),N=d.useCallback(n=>{const o=n.id;c(i=>{const r=i.findIndex(a=>a.id===o);let s;if(r!==-1)s=[...i],s[r]={...n,id:o,index:i[r].index};else{s=i.map(D=>({...D,index:D.index+1}));const a={...n,id:o,index:0};s.unshift(a)}return s})},[]),I=d.useMemo(()=>t.length,[t.length]),b=d.useMemo(()=>e.zIndex,[e.zIndex]);return l.jsxDEV(p.Provider,{value:{add:N,remove:u,update:m,dialogHistory:t},children:[l.jsxDEV(L,{children:I&&l.jsxDEV(x,{$zIndex:b,initial:{opacity:0},exit:{opacity:0},animate:{opacity:1},transition:{type:"spring",duration:E},children:t.map(n=>{const o=n.index,i=n.content,r=n.id,s=n.props;return l.jsxDEV(O,{index:o,content:i,props:s,id:r,remove:()=>u(r)},r,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:102,columnNumber:17},void 0)})},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:82,columnNumber:11},void 0)},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:80,columnNumber:7},void 0),e.children]},void 0,!0,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:79,columnNumber:5},void 0)},R=e=>{var u,m;const[t,c]=d.useState(!0);return l.jsxDEV(T,{onOutsideClick:()=>e.remove(),children:l.jsxDEV(f,{initial:{opacity:0,scale:.8},animate:{opacity:1,scale:1},onAnimationComplete:()=>c(!1),transition:{type:"spring",duration:V,delay:E},style:{zIndex:-e.index},$propsDialog:(u=e.props)==null?void 0:u.propsDialog,children:(m=e.content)==null?void 0:m.call(e,e.props,e.remove,t)},e.id,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:125,columnNumber:7},void 0)},void 0,!1,{fileName:"/home/runner/work/jenesei-ui-react/jenesei-ui-react/src/contexts/context-dialog/context.tsx",lineNumber:124,columnNumber:5},void 0)},O=d.memo(R);try{p.displayName="DialogContext",p.__docgenInfo={description:"",displayName:"DialogContext",props:{}}}catch{}try{y.displayName="ProviderDialog",y.__docgenInfo={description:"",displayName:"ProviderDialog",props:{zIndex:{defaultValue:null,description:"",name:"zIndex",required:!0,type:{name:"number"}}}}}catch{}const x=_(g.div)`
+  position: fixed;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  background-color: ${e=>e.theme.palette.black50};
+  z-index: ${e=>e.$zIndex};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+`,f=_(g.dialog)`
+  ${A};
+  max-width: ${e=>{var t;return((t=e.$propsDialog)==null?void 0:t.maxWidth)||w}};
+  max-height: ${e=>{var t;return((t=e.$propsDialog)==null?void 0:t.maxHeight)||j}};
+  border-radius: ${e=>{var t;return((t=e.$propsDialog)==null?void 0:t.borderRadius)||v}};
+  background: ${e=>{var t;return(t=e.$propsDialog)!=null&&t.background?e.theme.palette[e.$propsDialog.background]:e.theme.palette[k]}};
+  padding: ${e=>{var t;return((t=e.$propsDialog)==null?void 0:t.padding)||$}};
+  width: max-content;
+  height: max-content;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+`,h=_(g.div)``;try{x.displayName="DialogLayout",x.__docgenInfo={description:"",displayName:"DialogLayout",props:{theme:{defaultValue:null,description:"",name:"theme",required:!1,type:{name:"DefaultTheme"}},as:{defaultValue:null,description:"",name:"as",required:!1,type:{name:"void | WebTarget"}},forwardedAs:{defaultValue:null,description:"",name:"forwardedAs",required:!1,type:{name:"void | WebTarget"}}}}}catch{}try{f.displayName="DialogElementWrapper",f.__docgenInfo={description:"",displayName:"DialogElementWrapper",props:{theme:{defaultValue:null,description:"",name:"theme",required:!1,type:{name:"DefaultTheme"}},as:{defaultValue:null,description:"",name:"as",required:!1,type:{name:"void | WebTarget"}},forwardedAs:{defaultValue:null,description:"",name:"forwardedAs",required:!1,type:{name:"void | WebTarget"}}}}}catch{}try{h.displayName="DialogContent",h.__docgenInfo={description:"",displayName:"DialogContent",props:{theme:{defaultValue:null,description:"",name:"theme",required:!1,type:{name:"DefaultTheme"}},as:{defaultValue:null,description:"",name:"as",required:!1,type:{name:"void | WebTarget"}},forwardedAs:{defaultValue:null,description:"",name:"forwardedAs",required:!1,type:{name:"void | WebTarget"}}}}}catch{}const V=.3,E=.4,j="max-content",w="max-content",v="12px",$="20px",k="whiteStandard";export{p as D,y as P};
