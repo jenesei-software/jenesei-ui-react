@@ -172,23 +172,23 @@ export const DatePicker = (props: DatePickerProps) => {
     const input = e.currentTarget
     const pos = input.selectionStart ?? 0
 
-    if (e.code.startsWith('Numpad')) {
-      if (pos === 1) {
-        setActiveSegment('month')
-      } else if (pos === 4) {
-        setActiveSegment('year')
-      }
-      // if (pos < 2) {
-      //   setActiveSegment('month')
-      // } else if (pos >= 2 && pos < 5) {
-      //   setActiveSegment('year')
-      // } else if (pos >= 5 && pos < 6) {
-      //   setActiveSegment('year')
-      // } else if (pos >= 5) {
-      //   setActiveSegment('day')
-      // }
-      // e.preventDefault()
-    }
+    // if (e.code.startsWith('Numpad')) {
+    //   if (pos === 1) {
+    //     setActiveSegment('month')
+    //   } else if (pos === 4) {
+    //     setActiveSegment('year')
+    //   }
+    //   // if (pos < 2) {
+    //   //   setActiveSegment('month')
+    //   // } else if (pos >= 2 && pos < 5) {
+    //   //   setActiveSegment('year')
+    //   // } else if (pos >= 5 && pos < 6) {
+    //   //   setActiveSegment('year')
+    //   // } else if (pos >= 5) {
+    //   //   setActiveSegment('day')
+    //   // }
+    //   // e.preventDefault()
+    // }
     if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
       if (pos > 0 && pos <= 2) {
         setActiveSegment('day')
@@ -336,9 +336,25 @@ export const DatePicker = (props: DatePickerProps) => {
   useEffect(() => {
     console.log('activeSegment', activeSegment)
   }, [activeSegment])
-  function formatDatePart(val: number, len: number) {
+  function formatDatePartWithPadding(val: number, len: number, originalStr: string, isActive: boolean) {
+    // Если значение NaN, возвращаем маску
     if (isNaN(val)) return '_'.repeat(len)
-    return String(val).padStart(len, '0')
+
+    // Преобразуем число в строку
+    const valStr = String(val)
+
+    // Если активный сегмент - оставляем как есть, но добавляем '_' если нужно
+    if (isActive) {
+      return valStr.padEnd(len, '_')
+    }
+
+    // Для неактивных сегментов всегда используем ведущий ноль для однозначных чисел
+    if (valStr.length === 1) {
+      return valStr.padStart(len, '0')
+    }
+
+    // Для двузначных и более, оставляем как есть
+    return valStr.padEnd(len, '_')
   }
   return (
     <Outside
@@ -393,28 +409,86 @@ export const DatePicker = (props: DatePickerProps) => {
           // allowEmptyFormatting
           onKeyDown={handleInputKeyDown}
           onValueChange={(value, source) => {
-            const dayStr = value.formattedValue.split('.')[0]?.replace(/[^0-9]/g, '') || ''
-            const monthStr = value.formattedValue.split('.')[1]?.replace(/[^0-9]/g, '') || ''
-            const yearStr = value.formattedValue.split('.')[2]?.replace(/[^0-9]/g, '') || ''
+            const input = source.event?.currentTarget
+            const pos = input?.selectionStart ?? 0
+            let localActiveSegment = 'day'
+            if (pos <= 2) {
+              localActiveSegment = 'day'
+            } else if (pos > 2 && pos <= 5) {
+              localActiveSegment = 'month'
+            } else if (pos > 5) {
+              localActiveSegment = 'year'
+            }
+            console.log('pos', localActiveSegment, value.formattedValue)
+
+            const prevParts = formattedValue.split('.')
+
+            const prevDayStr = prevParts[0] || ''
+            const prevMonthStr = prevParts[1] || ''
+            const prevYearStr = prevParts[2] || ''
+
+            let dayStr = value.formattedValue.split('.')[0] || ''
+            let monthStr = value.formattedValue.split('.')[1] || ''
+            let yearStr = value.formattedValue.split('.')[2] || ''
 
             let day = dayStr ? Number(dayStr) : NaN
             let month = monthStr ? Number(monthStr) : NaN
             let year = yearStr ? Number(yearStr) : NaN
 
-            if (activeSegment === 'day') {
+            if (localActiveSegment === 'day') {
               month = NaN
               year = NaN
-            } else if (activeSegment === 'month') {
+              monthStr = ''
+              yearStr = ''
+              if (prevMonthStr || prevYearStr) {
+                if (dayStr.length == 2) {
+                  day = Number(dayStr[0])
+                  dayStr = dayStr[0] + '_'
+                }
+              }
+            } else if (localActiveSegment === 'month') {
               year = NaN
+              yearStr = ''
+              if (prevDayStr[1] === '_') {
+                monthStr = dayStr[1] + '_'
+                month = Number(dayStr[1])
+                dayStr = '_' + prevDayStr[0]
+                day = Number(prevDayStr[0])
+              }
+              if (prevYearStr) {
+                if (monthStr.length == 2) {
+                  month = Number(monthStr[0])
+                  monthStr = '_' + monthStr[0]
+                }
+              }
+            } else if (localActiveSegment === 'year') {
+              if (prevMonthStr[1] === '_') {
+                yearStr = monthStr[1] + '___'
+                year = Number(monthStr[1])
+                monthStr = prevMonthStr[0]
+                month = Number(prevMonthStr[0])
+              }
             }
+            const newFormattedValue =
+              `${formatDatePartWithPadding(day, 2, dayStr, localActiveSegment === 'day')}.` +
+              `${formatDatePartWithPadding(month, 2, monthStr, localActiveSegment === 'month')}.` +
+              `${formatDatePartWithPadding(year, 4, yearStr, localActiveSegment === 'year')}`
+            // console.log(
+            //   'month',
+            //   monthStr,
+            //   'month day',
+            //   formatDatePartWithPadding(month, 2, monthStr, activeSegment === 'month')
+            // )
 
-            const newFormattedValue = `${formatDatePart(day, 2)}.${formatDatePart(month, 2)}.${formatDatePart(year, 4)}`
-            setFormattedValue(newFormattedValue)
-            console.log('formattedValue', value.formattedValue)
             console.log('newFormattedValue', newFormattedValue)
-            // console.log('newFormattedValue', day, month, year)
+            setFormattedValue(newFormattedValue)
 
             if (isNaN(day) || isNaN(month) || isNaN(year)) {
+              return
+            }
+
+            const formattedValueHasMasks = newFormattedValue.includes('_')
+            if (formattedValueHasMasks) {
               return
             }
 
