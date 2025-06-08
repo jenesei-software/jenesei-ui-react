@@ -40,6 +40,7 @@ export const DatePicker = (props: DatePickerProps) => {
   const [currentYear, setCurrentYear] = useState(unixValue.clone().year())
   const [currentDay, setCurrentDay] = useState(unixValue.clone().date())
   const inputRef = useRef<HTMLInputElement>(null)
+  const [activeSegment, setActiveSegment] = useState<'day' | 'month' | 'year' | null>(null)
 
   const currentDateLabel = useMemo(() => {
     if (isNullValue) return '' // Если значение null, то пустая строка
@@ -170,71 +171,74 @@ export const DatePicker = (props: DatePickerProps) => {
   const handleInputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     const input = e.currentTarget
     const pos = input.selectionStart ?? 0
-    // const end = input.selectionEnd ?? 0
-    console.log('handleInputKeyDown', pos)
 
-    console.log('pos', pos, e)
-
-    // DD.MM.YYYY
-    // ArrowLeft and ArrowDown
+    if (e.code.startsWith('Numpad')) {
+      if (pos === 1) {
+        setActiveSegment('month')
+      } else if (pos === 4) {
+        setActiveSegment('year')
+      }
+      // if (pos < 2) {
+      //   setActiveSegment('month')
+      // } else if (pos >= 2 && pos < 5) {
+      //   setActiveSegment('year')
+      // } else if (pos >= 5 && pos < 6) {
+      //   setActiveSegment('year')
+      // } else if (pos >= 5) {
+      //   setActiveSegment('day')
+      // }
+      // e.preventDefault()
+    }
     if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
       if (pos > 0 && pos <= 2) {
-        // DD
-        input.setSelectionRange(0, 2)
-        e.preventDefault()
+        setActiveSegment('day')
       } else if (pos === 0) {
-        // YYYY
-        input.setSelectionRange(6, 10)
-        e.preventDefault()
+        setActiveSegment('year')
       } else if (pos > 2 && pos <= 5) {
-        // DD
-        input.setSelectionRange(0, 2)
-        e.preventDefault()
+        setActiveSegment('day')
       } else if (pos > 5) {
-        // MM
-        input.setSelectionRange(3, 5)
-        e.preventDefault()
+        setActiveSegment('month')
       }
+      e.preventDefault()
     }
-
-    // ArrowRight and ArrowUp
     if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
       if (pos < 2) {
-        // MM
-        input.setSelectionRange(3, 5)
-        e.preventDefault()
+        setActiveSegment('month')
       } else if (pos >= 2 && pos < 5) {
-        // YYYY
-        input.setSelectionRange(6, 10)
-        e.preventDefault()
+        setActiveSegment('year')
       } else if (pos >= 5 && pos < 6) {
-        // YYYY
-        input.setSelectionRange(6, 10)
-        e.preventDefault()
+        setActiveSegment('year')
       } else if (pos >= 5) {
-        // DD
-        input.setSelectionRange(0, 2)
-        e.preventDefault()
+        setActiveSegment('day')
       }
+      e.preventDefault()
     }
   }
 
   const handleInputClick = (e: MouseEvent<HTMLInputElement>) => {
-    const input = e.currentTarget
-    const pos = input.selectionStart ?? 0
-    console.log('handleInputClick', pos)
-    // Определяем диапазоны для дня, месяца и года
+    const pos = e.currentTarget.selectionStart ?? 0
     if (pos <= 2) {
-      // День
-      input.setSelectionRange(0, 2)
+      setActiveSegment('day')
     } else if (pos > 2 && pos <= 5) {
-      // Месяц
-      input.setSelectionRange(3, 5)
+      setActiveSegment('month')
     } else {
-      // Год
-      input.setSelectionRange(6, 10)
+      setActiveSegment('year')
     }
   }
+
+  useEffect(() => {
+    if (activeSegment !== null) {
+      setTimeout(() => {
+        if (activeSegment === 'day') {
+          inputRef.current?.setSelectionRange(0, 2)
+        } else if (activeSegment === 'month') {
+          inputRef.current?.setSelectionRange(3, 5)
+        } else if (activeSegment === 'year') {
+          inputRef.current?.setSelectionRange(6, 10)
+        }
+      }, 100)
+    }
+  }, [activeSegment])
   const isBlockIncreaseMonth = useMemo(() => {
     const nextMonth = moment
       .utc()
@@ -328,6 +332,14 @@ export const DatePicker = (props: DatePickerProps) => {
 
     return setFormattedValue('')
   }, [isNullValue, props.value])
+
+  useEffect(() => {
+    console.log('activeSegment', activeSegment)
+  }, [activeSegment])
+  function formatDatePart(val: number, len: number) {
+    if (isNaN(val)) return '_'.repeat(len)
+    return String(val).padStart(len, '0')
+  }
   return (
     <Outside
       onOutsideClick={event => {
@@ -349,7 +361,12 @@ export const DatePicker = (props: DatePickerProps) => {
         }}
       >
         <DateStyledInput
-          ref={inputRef}
+          // ref={inputRef}
+          getInputRef={(ref: HTMLInputElement | null) => {
+            if (ref && !inputRef.current) {
+              inputRef.current = ref
+            }
+          }}
           id={props.id}
           name={props.name}
           $genre={props.genre}
@@ -376,26 +393,28 @@ export const DatePicker = (props: DatePickerProps) => {
           // allowEmptyFormatting
           onKeyDown={handleInputKeyDown}
           onValueChange={(value, source) => {
-            // eslint-disable-next-line prefer-const
-            let [day, month, year] = value.formattedValue.split('.').map(Number)
-            console.log(value.formattedValue, day, month, year)
+            const dayStr = value.formattedValue.split('.')[0]?.replace(/[^0-9]/g, '') || ''
+            const monthStr = value.formattedValue.split('.')[1]?.replace(/[^0-9]/g, '') || ''
+            const yearStr = value.formattedValue.split('.')[2]?.replace(/[^0-9]/g, '') || ''
+
+            let day = dayStr ? Number(dayStr) : NaN
+            let month = monthStr ? Number(monthStr) : NaN
+            let year = yearStr ? Number(yearStr) : NaN
+
+            if (activeSegment === 'day') {
+              month = NaN
+              year = NaN
+            } else if (activeSegment === 'month') {
+              year = NaN
+            }
+
+            const newFormattedValue = `${formatDatePart(day, 2)}.${formatDatePart(month, 2)}.${formatDatePart(year, 4)}`
+            setFormattedValue(newFormattedValue)
+            console.log('formattedValue', value.formattedValue)
+            console.log('newFormattedValue', newFormattedValue)
+            // console.log('newFormattedValue', day, month, year)
+
             if (isNaN(day) || isNaN(month) || isNaN(year)) {
-              // Автопереход: если день заполнен (2 символа), выделяем месяц
-
-              if (isNaN(day)) {
-                setTimeout(() => {
-                  inputRef.current?.setSelectionRange(0, 2)
-                }, 100)
-              } else if (isNaN(month)) {
-                console.log('month is NaN')
-                inputRef.current?.setSelectionRange(3, 5)
-              } else if (isNaN(year)) {
-                setTimeout(() => {
-                  inputRef.current?.setSelectionRange(6, 10)
-                }, 1000)
-              }
-              setFormattedValue(value.formattedValue)
-
               return
             }
 
@@ -428,9 +447,11 @@ export const DatePicker = (props: DatePickerProps) => {
           // onChange={event => props.inputProps?.onChange && props.inputProps?.onChange(event.target.value)}
           onFocus={e => {
             setInputPlaceholder('')
+            setActiveSegment('day')
             props?.inputProps?.onFocus?.(e)
           }}
           onBlur={e => {
+            setActiveSegment(null)
             if (!formattedValue) setInputPlaceholder(props?.placeholder)
             props?.inputProps?.onBlur?.(e)
           }}
