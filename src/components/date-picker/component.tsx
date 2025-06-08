@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion'
 import moment from 'moment'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { KeyboardEvent, MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTheme } from 'styled-components'
 
 import { Outside } from '@local/areas/outside'
@@ -39,6 +39,7 @@ export const DatePicker = (props: DatePickerProps) => {
   const [currentMonth, setCurrentMonth] = useState(unixValue.clone().month())
   const [currentYear, setCurrentYear] = useState(unixValue.clone().year())
   const [currentDay, setCurrentDay] = useState(unixValue.clone().date())
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const currentDateLabel = useMemo(() => {
     if (isNullValue) return '' // Если значение null, то пустая строка
@@ -164,6 +165,76 @@ export const DatePicker = (props: DatePickerProps) => {
   const handleOnClose = useCallback(() => {
     setIsOpen(false)
   }, [])
+  const [inputPlaceholder, setInputPlaceholder] = useState(props?.placeholder)
+
+  const handleInputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    const input = e.currentTarget
+    const pos = input.selectionStart ?? 0
+    // const end = input.selectionEnd ?? 0
+    console.log('handleInputKeyDown', pos)
+
+    console.log('pos', pos, e)
+
+    // DD.MM.YYYY
+    // ArrowLeft and ArrowDown
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+      if (pos > 0 && pos <= 2) {
+        // DD
+        input.setSelectionRange(0, 2)
+        e.preventDefault()
+      } else if (pos === 0) {
+        // YYYY
+        input.setSelectionRange(6, 10)
+        e.preventDefault()
+      } else if (pos > 2 && pos <= 5) {
+        // DD
+        input.setSelectionRange(0, 2)
+        e.preventDefault()
+      } else if (pos > 5) {
+        // MM
+        input.setSelectionRange(3, 5)
+        e.preventDefault()
+      }
+    }
+
+    // ArrowRight and ArrowUp
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+      if (pos < 2) {
+        // MM
+        input.setSelectionRange(3, 5)
+        e.preventDefault()
+      } else if (pos >= 2 && pos < 5) {
+        // YYYY
+        input.setSelectionRange(6, 10)
+        e.preventDefault()
+      } else if (pos >= 5 && pos < 6) {
+        // YYYY
+        input.setSelectionRange(6, 10)
+        e.preventDefault()
+      } else if (pos >= 5) {
+        // DD
+        input.setSelectionRange(0, 2)
+        e.preventDefault()
+      }
+    }
+  }
+
+  const handleInputClick = (e: MouseEvent<HTMLInputElement>) => {
+    const input = e.currentTarget
+    const pos = input.selectionStart ?? 0
+    console.log('handleInputClick', pos)
+    // Определяем диапазоны для дня, месяца и года
+    if (pos <= 2) {
+      // День
+      input.setSelectionRange(0, 2)
+    } else if (pos > 2 && pos <= 5) {
+      // Месяц
+      input.setSelectionRange(3, 5)
+    } else {
+      // Год
+      input.setSelectionRange(6, 10)
+    }
+  }
   const isBlockIncreaseMonth = useMemo(() => {
     const nextMonth = moment
       .utc()
@@ -242,6 +313,21 @@ export const DatePicker = (props: DatePickerProps) => {
       }
     })
   }, [props.locale.weeks])
+
+  const [formattedValue, setFormattedValue] = useState<string>('')
+  useEffect(() => {
+    if (isNullValue) return setFormattedValue('')
+
+    if (props.value) {
+      const day = moment(props.value).utc().format('DD')
+      const year = moment(props.value).utc().format('YYYY')
+      const month = moment(props.value).utc().format('MM')
+
+      return setFormattedValue(`${day}.${month}.${year}`)
+    }
+
+    return setFormattedValue('')
+  }, [isNullValue, props.value])
   return (
     <Outside
       onOutsideClick={event => {
@@ -263,11 +349,12 @@ export const DatePicker = (props: DatePickerProps) => {
         }}
       >
         <DateStyledInput
+          ref={inputRef}
           id={props.id}
           name={props.name}
           $genre={props.genre}
           $size={props.size}
-          placeholder={props?.placeholder}
+          placeholder={inputPlaceholder}
           $error={props?.inputProps?.error}
           $isLoading={props?.inputProps?.isLoading}
           $postfixChildren={props?.inputProps?.postfixChildren}
@@ -276,15 +363,77 @@ export const DatePicker = (props: DatePickerProps) => {
           disabled={props?.isDisabled}
           $isDisabled={props?.isDisabled}
           $isInputEffect={props?.isInputEffect}
-          readOnly={true}
-          required={props?.inputProps?.isRequired}
-          defaultValue={props?.inputProps?.defaultValue}
-          value={currentDateLabel}
-          type={props?.inputProps?.type}
-          onChange={event => props.inputProps?.onChange && props.inputProps?.onChange(event.target.value)}
-          onBlur={props?.inputProps?.onBlur}
-          onFocus={props?.inputProps?.onFocus}
-          onClick={handleOnOpen}
+          allowEmptyFormatting={inputPlaceholder ? false : true}
+          // readOnly={true}
+          // required={props?.inputProps?.isRequired}
+          // defaultValue={props?.inputProps?.defaultValue}
+          // aria-placeholder={props?.inputProps?.pl}
+          value={formattedValue}
+          // type={props?.inputProps?.type}
+          format="##.##.####"
+          mask="_"
+          type="text"
+          // allowEmptyFormatting
+          onKeyDown={handleInputKeyDown}
+          onValueChange={(value, source) => {
+            // eslint-disable-next-line prefer-const
+            let [day, month, year] = value.formattedValue.split('.').map(Number)
+            console.log(value.formattedValue, day, month, year)
+            if (isNaN(day) || isNaN(month) || isNaN(year)) {
+              // Автопереход: если день заполнен (2 символа), выделяем месяц
+
+              if (isNaN(day)) {
+                setTimeout(() => {
+                  inputRef.current?.setSelectionRange(0, 2)
+                }, 100)
+              } else if (isNaN(month)) {
+                console.log('month is NaN')
+                inputRef.current?.setSelectionRange(3, 5)
+              } else if (isNaN(year)) {
+                setTimeout(() => {
+                  inputRef.current?.setSelectionRange(6, 10)
+                }, 1000)
+              }
+              setFormattedValue(value.formattedValue)
+
+              return
+            }
+
+            if (day > 31) day = 1
+            if (month > 12) month = 12
+
+            let m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day')
+            if (!m.isValid()) {
+              const lastDay = moment.utc(`${month}.${year}`, 'M.YYYY').endOf('month').date()
+              day = lastDay
+              m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day')
+            }
+
+            const formatted = `${String(day).padStart(2, '0')}.${String(month).padStart(2, '0')}.${year}`
+            setFormattedValue(formatted)
+
+            if (m.isValid()) {
+              const mValueDay = m.clone().valueOf()
+              const unixValueDay = unixValue.clone().valueOf()
+              if (mValueDay !== unixValueDay) {
+                updateDateFromTimestamp(mValueDay, false, true)
+              }
+            }
+          }}
+          onClick={e => {
+            handleOnOpen()
+            handleInputClick(e)
+            setInputPlaceholder('')
+          }}
+          // onChange={event => props.inputProps?.onChange && props.inputProps?.onChange(event.target.value)}
+          onFocus={e => {
+            setInputPlaceholder('')
+            props?.inputProps?.onFocus?.(e)
+          }}
+          onBlur={e => {
+            if (!formattedValue) setInputPlaceholder(props?.placeholder)
+            props?.inputProps?.onBlur?.(e)
+          }}
         />
 
         <AnimatePresence>

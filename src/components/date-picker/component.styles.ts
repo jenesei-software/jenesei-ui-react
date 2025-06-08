@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
-import { InputIsInputEffect, StyledInput } from '@local/components/input'
+import { InputIsInputEffect, StyledInputPattern } from '@local/components/input'
 import { getFontSizeStyles } from '@local/components/typography'
 import { addOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
 import { addSX } from '@local/styles/sx'
@@ -153,4 +153,4 @@ export const DateDropdownDayOfWeek = styled.button<DateDropdownDayProps>`
   opacity: 1;
   background-color: transparent;
 `
-export const DateStyledInput = styled(StyledInput)<DateStyledInputProps>``
+export const DateStyledInput = styled(StyledInputPattern)<DateStyledInputProps>``

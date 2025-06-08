@@ -16,7 +16,7 @@ export default meta
 type Story = StoryObj<typeof DatePicker>
 
 const DatePickerWrapper: FC<DatePickerProps> = props => {
-  const [value, setValue] = useState<number | null>(props.value)
+  const [value, setValue] = useState<number | null>(null)
   const handleSelectChange = (value: number) => {
     setValue(value)
   }
@@ -30,7 +30,6 @@ const DatePickerWrapper: FC<DatePickerProps> = props => {
 
 const PastHundredYearsStartDate = moment.utc().subtract(100, 'years').startOf('year').valueOf()
 const PastHundredYearsEndDate = moment.utc().startOf('day').valueOf()
-const PastHundredYearsValue = moment.utc().startOf('day').valueOf()
 
 export const PastHundredYears: Story = {
   render: args => <DatePickerWrapper {...args} />,
@@ -48,11 +47,11 @@ export const PastHundredYears: Story = {
     },
     startDate: PastHundredYearsStartDate,
     endDate: PastHundredYearsEndDate,
-    value: PastHundredYearsValue,
+    value: null,
     onBlur(event) {
       console.log('onBlur', event)
     },
-    placeholder: 'Placeholder',
+    placeholder: 'ДД.ММ.ГГГГ',
     isOnClickClose: true
   }
 }
