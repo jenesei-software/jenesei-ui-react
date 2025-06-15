@@ -1,7 +1,6 @@
 import { AnimatePresence } from 'framer-motion'
 import moment, { Moment } from 'moment'
 import { KeyboardEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { PatternFormat } from 'react-number-format'
 import { useTheme } from 'styled-components'
 
 import { Outside } from '@local/areas/outside'
@@ -194,6 +193,18 @@ export const DatePicker = (props: DatePickerProps) => {
         e.preventDefault()
         return
       }
+      if (e.key === 'Backspace' || e.key === 'Delete') {
+        if (activeSegment === 'day') {
+          setInputDay(null)
+        } else if (activeSegment === 'month') {
+          setInputMonth(null)
+        } else if (activeSegment === 'year') {
+          setInputYear(null)
+        }
+        const nextSegment = activeSegment === 'day' ? 'day' : activeSegment === 'month' ? 'day' : 'month'
+        setActiveSegment(nextSegment)
+        e.preventDefault()
+      }
       if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
         const nextSegment = activeSegment === 'day' ? 'year' : activeSegment === 'month' ? 'day' : 'month'
         setActiveSegment(nextSegment)
@@ -273,6 +284,12 @@ export const DatePicker = (props: DatePickerProps) => {
       }, 0)
     }
   }, [activeSegment])
+
+  useEffect(() => {
+    if (isOpen) {
+      setActiveSegment('day')
+    }
+  }, [isOpen])
   return (
     <Outside
       onOutsideClick={event => {
@@ -293,7 +310,7 @@ export const DatePicker = (props: DatePickerProps) => {
           handleOnOpen()
         }}
       >
-        <DateInputWrapper $genre={props.genre} $size={props.size} $error={props.error}>
+        <DateInputWrapper tabIndex={0} $genre={props.genre} $size={props.size} $error={props.error}>
           <DateInput
             $genre={props.genre}
             $size={props.size}
@@ -326,13 +343,14 @@ export const DatePicker = (props: DatePickerProps) => {
             onBlur={() => {
               if (inputDay && inputDay.includes('_')) setInputDay(fixUnderscoreToZero(inputDay))
             }}
-            allowEmptyFormatting={inputDay ? false : true}
+            placeholder="DD"
+            // allowEmptyFormatting={inputDay ? false : true}
             type="text"
             format="##"
             mask="_"
-            style={{ width: '22px' }}
+            style={{ width: '20px' }}
           />
-          .
+          <span style={{ width: '4px', pointerEvents: 'none', textAlign: 'center' }}>.</span>
           <DateInput
             $genre={props.genre}
             $size={props.size}
@@ -341,6 +359,7 @@ export const DatePicker = (props: DatePickerProps) => {
               if (inputMonth && inputMonth.includes('_')) setInputMonth(fixUnderscoreToZero(inputMonth))
             }}
             value={inputMonth ?? ''}
+            placeholder="MM"
             onValueChange={(values, sourceInfo) => {
               if (sourceInfo.source !== 'event') return
               const value = values.formattedValue
@@ -363,14 +382,15 @@ export const DatePicker = (props: DatePickerProps) => {
               setActiveSegment('month')
               e.target.select()
             }}
-            allowEmptyFormatting={inputMonth ? false : true}
+            // allowEmptyFormatting={inputMonth ? false : true}
             type="text"
             format="##"
             mask="_"
-            style={{ width: '22px' }}
+            style={{ width: '20px' }}
           />
-          .
+          <span style={{ width: '6px', pointerEvents: 'none', textAlign: 'center' }}>.</span>
           <DateInput
+            placeholder="YYYY"
             $genre={props.genre}
             $size={props.size}
             onKeyDown={handleKeyDown}
@@ -397,7 +417,7 @@ export const DatePicker = (props: DatePickerProps) => {
                 refYear.current = ref
               }
             }}
-            allowEmptyFormatting={inputYear ? false : true}
+            // allowEmptyFormatting={inputYear ? false : true}
             onFocus={e => {
               setActiveSegment('year')
               e.target.select()

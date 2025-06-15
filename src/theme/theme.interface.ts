@@ -257,7 +257,7 @@ export type IJeneseiThemeScreens = Record<TJeneseiDevice, { width: number }>
 
 export type TJeneseiThemeSize = 'large' | 'largeMedium' | 'medium' | 'mediumSmall' | 'small'
 
-export type TJeneseiFontFamily = 'Inter' | 'Roboto' | 'Work Sans'
+export type TJeneseiFontFamily = 'Inter' | 'Roboto' | 'Work Sans' | 'Roboto Mono'
 
 export type TJeneseiTypographyHeading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8' | 'h9'
 export type TJeneseiTypographyWeight = 100 | 300 | 400 | 500 | 700 | 900

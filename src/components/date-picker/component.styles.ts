@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { PatternFormat } from 'react-number-format'
 import styled, { css } from 'styled-components'
 
-import { InputIsInputEffect, InputPlaceholder } from '@local/components/input'
+import { InputIsInputEffect, InputPlaceholder, InputPlaceholderNiceNumber } from '@local/components/input'
 import { getFontSizeStyles } from '@local/components/typography'
 import { addNiceNumber, addOutline, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
 import { addError } from '@local/styles/error'
@@ -164,17 +164,17 @@ const DateInputGenre = css<DateInputProps>`
   `};
 `
 export const DateInput = styled(PatternFormat)<DateInputProps>`
-  ${addNiceNumber};
   resize: none;
   overflow: hidden;
   border: 0px solid;
+  background: transparent;
   padding: 0px !important;
   margin: 0px !important;
   white-space: nowrap;
   text-align: left;
-  ${props => getFontSizeStyles(16, 400, props.theme.font.family, props.theme.font.lineHeight)};
+  ${props => getFontSizeStyles(16, 400, 'Roboto Mono', props.theme.font.lineHeight)};
   ${DateInputGenre};
-  ${InputPlaceholder};
+  ${InputPlaceholderNiceNumber};
   ${addRemoveOutline};
 `
 
@@ -184,15 +184,19 @@ const DateInputWrapperGenre = css<DateInputProps>`
     background: ${props.theme.colors.input[props.$genre].background.rest};
     border-color: ${props.theme.colors.input[props.$genre].border.rest};
     color: ${props.theme.colors.input[props.$genre].color.rest};
-    &:active {
-      background: ${props.theme.colors.input[props.$genre].background.rest};
-      border-color: ${props.theme.colors.input[props.$genre].border.rest};
-      color: ${props.theme.colors.input[props.$genre].color.rest};
+    outline: 2px solid transparent;
+    outline-offset: 1px;
+    &:hover {
+      background: ${props.theme.colors.input[props.$genre].background.hover};
+      border-color: ${props.theme.colors.input[props.$genre].border.hover};
+      color: ${props.theme.colors.input[props.$genre].color.hover};
     }
-    &:focus-visible {
+    &:has(:focus-visible),
+    &:has(:active) {
       background: ${props.theme.colors.input[props.$genre].background.rest};
       border-color: ${props.theme.colors.input[props.$genre].border.rest};
       color: ${props.theme.colors.input[props.$genre].color.rest};
+      outline: 2px solid ${props => props.theme.colors.focus};
     }
   `};
 `
