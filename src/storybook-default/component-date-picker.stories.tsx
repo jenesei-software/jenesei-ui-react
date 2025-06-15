@@ -17,7 +17,7 @@ type Story = StoryObj<typeof DatePicker>
 
 const DatePickerWrapper: FC<DatePickerProps> = props => {
   const [value, setValue] = useState<number | null>(null)
-  const handleSelectChange = (value: number) => {
+  const handleSelectChange = (value: number | null) => {
     setValue(value)
   }
 

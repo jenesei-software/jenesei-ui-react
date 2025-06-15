@@ -276,6 +276,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           placeholder={props.placeholder}
           $error={props?.error}
           $isLoading={props?.inputProps?.isLoading}
+          $isNiceNumber={props?.inputProps?.isNiceNumber}
           $postfixChildren={props?.inputProps?.postfixChildren}
           $prefixChildren={props.inputProps?.prefixChildren}
           $isBold={props?.inputProps?.isBold}
@@ -675,6 +676,7 @@ export const SelectYear: FC<SelectYearProps> = props => {
       onChange={handleSelectChange}
       inputProps={{
         ...props.inputProps,
+        isNiceNumber: true,
         variety: 'standard',
         value: selectedYear?.placeholder ?? props.placeholder,
         isReadOnly: true

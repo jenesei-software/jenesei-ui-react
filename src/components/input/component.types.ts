@@ -40,6 +40,8 @@ type InputDefaultProps = addErrorProps &
 
     isWidthAsHeight?: boolean
 
+    isNiceNumber?: boolean
+
     isDisabled?: boolean
 
     isLoading?: boolean
@@ -137,6 +139,7 @@ export type StyledInputProps = AddDollarSign<
     | 'postfixChildren'
     | 'prefixChildren'
     | 'isBold'
+    | 'isNiceNumber'
     | 'isNotShowHoverStyle'
   >
 >

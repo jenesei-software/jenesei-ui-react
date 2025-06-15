@@ -97,3 +97,8 @@ export const addRemoveOutline = css`
     outline: 0px solid ${props => props.theme.colors.focus};
   }
 `
+
+export const addNiceNumber = css`
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+`

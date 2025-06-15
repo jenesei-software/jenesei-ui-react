@@ -1,25 +1,22 @@
 import { motion } from 'framer-motion'
+import { PatternFormat } from 'react-number-format'
 import styled, { css } from 'styled-components'
 
-import { InputIsInputEffect, StyledInputPattern } from '@local/components/input'
+import { InputIsInputEffect, InputPlaceholder } from '@local/components/input'
 import { getFontSizeStyles } from '@local/components/typography'
-import { addOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
+import { addNiceNumber, addOutline, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
+import { addError } from '@local/styles/error'
 import { addSX } from '@local/styles/sx'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 import { IJeneseiThemeSize } from '@local/theme/theme.interface'
 
-import {
-  DateDropdownDayProps,
-  DateDropdownListProps,
-  DateStyledInputProps,
-  DateStyledListProps,
-  DateWrapperProps
-} from '.'
+import { DateDropdownDayProps, DateDropdownListProps, DateInputProps, DateStyledListProps, DateWrapperProps } from '.'
 
 export const DateWrapper = styled.div<DateWrapperProps>`
   width: 100%;
   position: relative;
   ${addSX};
+  ${addNiceNumber};
 `
 
 export const DateDropdownListParent = styled(motion.div)<DateStyledListProps>`
@@ -153,4 +150,80 @@ export const DateDropdownDayOfWeek = styled.button<DateDropdownDayProps>`
   opacity: 1;
   background-color: transparent;
 `
-export const DateStyledInput = styled(StyledInputPattern)<DateStyledInputProps>``
+
+/****************************************** Genre *************************************************/
+const DateInputGenre = css<DateInputProps>`
+  ${props => css`
+    color: ${props.theme.colors.input[props.$genre].color.rest};
+    &:active {
+      color: ${props.theme.colors.input[props.$genre].color.rest};
+    }
+    &:focus-visible {
+      color: ${props.theme.colors.input[props.$genre].color.rest};
+    }
+  `};
+`
+export const DateInput = styled(PatternFormat)<DateInputProps>`
+  ${addNiceNumber};
+  resize: none;
+  overflow: hidden;
+  border: 0px solid;
+  padding: 0px !important;
+  margin: 0px !important;
+  white-space: nowrap;
+  text-align: left;
+  ${props => getFontSizeStyles(16, 400, props.theme.font.family, props.theme.font.lineHeight)};
+  ${DateInputGenre};
+  ${InputPlaceholder};
+  ${addRemoveOutline};
+`
+
+/****************************************** Genre *************************************************/
+const DateInputWrapperGenre = css<DateInputProps>`
+  ${props => css`
+    background: ${props.theme.colors.input[props.$genre].background.rest};
+    border-color: ${props.theme.colors.input[props.$genre].border.rest};
+    color: ${props.theme.colors.input[props.$genre].color.rest};
+    &:active {
+      background: ${props.theme.colors.input[props.$genre].background.rest};
+      border-color: ${props.theme.colors.input[props.$genre].border.rest};
+      color: ${props.theme.colors.input[props.$genre].color.rest};
+    }
+    &:focus-visible {
+      background: ${props.theme.colors.input[props.$genre].background.rest};
+      border-color: ${props.theme.colors.input[props.$genre].border.rest};
+      color: ${props.theme.colors.input[props.$genre].color.rest};
+    }
+  `};
+`
+
+/****************************************** Size *************************************************/
+export const DateInputWrapperSize = css<DateInputProps>`
+  ${props => DateInputWrapperSizeConstructor(KEY_SIZE_DATA[props.$size])};
+`
+export const DateInputWrapperSizeConstructor = (props: IJeneseiThemeSize) => css`
+  padding: 0px ${props.padding}px;
+  height: ${props.height}px;
+  min-height: ${props.height}px;
+  max-height: ${props.height}px;
+  border-radius: ${props.radius}px;
+`
+
+export const DateInputWrapper = styled.div<DateInputProps>`
+  resize: none;
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid;
+
+  white-space: nowrap;
+
+  display: flex;
+  align-items: center;
+  gap: 0px;
+
+  ${DateInputWrapperSize};
+  ${DateInputWrapperGenre};
+  ${addOutline};
+  ${addTransition};
+  ${addError};
+`

@@ -1,6 +1,7 @@
 import { FocusEvent } from 'react'
 
-import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
+import { InputStandardProps, StyledInputProps, StyledInputWrapperProps, TInputGenre } from '@local/components/input'
+import { addErrorProps } from '@local/styles/error'
 import { addSXProps } from '@local/styles/sx'
 import { TJeneseiThemeGenreDate, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
@@ -28,45 +29,46 @@ export interface DateDayProps {
 
   weekOfMonth: number
 }
-export type DatePickerProps = addSXProps & {
-  endDate?: number
+export type DatePickerProps = addErrorProps &
+  addSXProps & {
+    endDate?: number
 
-  genre: TDateGenre
+    genre: TDateGenre
 
-  id?: string
+    id?: string
 
-  inputProps: Omit<
-    InputStandardProps,
-    'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width' | 'value' | 'isInputEffect'
-  >
+    inputProps: Omit<
+      InputStandardProps,
+      'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width' | 'value' | 'isInputEffect' | 'error'
+    >
 
-  isDisabled?: boolean
+    isDisabled?: boolean
 
-  isInputEffect?: InputStandardProps['isInputEffect']
+    isInputEffect?: InputStandardProps['isInputEffect']
 
-  isOnClickClose?: boolean
+    isOnClickClose?: boolean
 
-  locale: {
-    months: SelectDateProps['monthsLocale']
-    weeks: WeekItem[]
+    locale: {
+      months: SelectDateProps['monthsLocale']
+      weeks: WeekItem[]
+    }
+
+    name?: string
+
+    onBlur?: (event?: MouseEvent) => void
+
+    onChange: (timestamp: number | null) => void
+
+    onFocus?: (event: FocusEvent<HTMLDivElement, Element>) => void
+
+    placeholder?: string
+
+    size: TJeneseiThemeSize
+
+    startDate?: number
+
+    value: number | null
   }
-
-  name?: string
-
-  onBlur?: (event?: MouseEvent) => void
-
-  onChange: (timestamp: number) => void
-
-  onFocus?: (event: FocusEvent<HTMLDivElement, Element>) => void
-
-  placeholder?: string
-
-  size: TJeneseiThemeSize
-
-  startDate?: number
-
-  value: number | null
-}
 
 export type DateWrapperProps = AddDollarSign<
   Pick<InputStandardProps, 'genre' | 'isDisabled'> & {
@@ -76,7 +78,7 @@ export type DateWrapperProps = AddDollarSign<
 > &
   StyledInputWrapperProps
 
-export type DateStyledInputProps = StyledInputProps
+export type DateInputProps = AddDollarSign<Pick<DatePickerProps, 'error' | 'genre' | 'size'>>
 
 export type DateStyledOptionProps = AddDollarSign<{
   isSelectedItem?: boolean

@@ -3,7 +3,7 @@ import { NumericFormat, PatternFormat } from 'react-number-format'
 import styled, { css } from 'styled-components'
 
 import { getFontSizeStyles } from '@local/components/typography'
-import { addOutline, addTransition } from '@local/styles/add'
+import { addNiceNumber, addOutline, addTransition } from '@local/styles/add'
 import { addError } from '@local/styles/error'
 import { addSX } from '@local/styles/sx'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
@@ -117,6 +117,12 @@ export const StyledInputCSS = css<StyledInputProps>`
   ${addOutline};
   ${addTransition};
   ${addError};
+
+  ${props =>
+    props.$isNiceNumber &&
+    css`
+      ${addNiceNumber};
+    `};
 
   ${props =>
     props.$prefixChildren &&

@@ -1,6 +1,7 @@
 import { AnimatePresence } from 'framer-motion'
-import moment from 'moment'
-import { KeyboardEvent, MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import moment, { Moment } from 'moment'
+import { KeyboardEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { PatternFormat } from 'react-number-format'
 import { useTheme } from 'styled-components'
 
 import { Outside } from '@local/areas/outside'
@@ -18,8 +19,9 @@ import {
   DateDropdownDays,
   DateDropdownList,
   DateDropdownListParent,
+  DateInput,
+  DateInputWrapper,
   DatePickerProps,
-  DateStyledInput,
   DateWrapper,
   WeekItem
 } from '.'
@@ -33,40 +35,40 @@ function countSevens(number: number) {
 }
 
 export const DatePicker = (props: DatePickerProps) => {
+  const { onChange, onBlur } = props
   const theme = useTheme()
-  const isNullValue = useMemo(() => props.value === null || props.value === undefined, [props.value])
-  const [unixValue, setUnixValue] = useState(props.value ? moment(props.value).utc() : moment.utc())
-  const [currentMonth, setCurrentMonth] = useState(unixValue.clone().month())
-  const [currentYear, setCurrentYear] = useState(unixValue.clone().year())
-  const [currentDay, setCurrentDay] = useState(unixValue.clone().date())
-  const inputRef = useRef<HTMLInputElement>(null)
+
+  const [valueMoment, setValueMoment] = useState<null | Moment>(null)
+  const [currentMonth, setCurrentMonth] = useState<null | number>(null)
+  const [currentYear, setCurrentYear] = useState<null | number>(null)
+  const [currentDay, setCurrentDay] = useState<null | number>(null)
+
+  const [inputDay, setInputDay] = useState<string | null>(null)
+  const [inputMonth, setInputMonth] = useState<string | null>(null)
+  const [inputYear, setInputYear] = useState<string | null>(null)
+
+  const refDay = useRef<HTMLInputElement>(null)
+  const refMonth = useRef<HTMLInputElement>(null)
+  const refYear = useRef<HTMLInputElement>(null)
+
+  const [isOpen, setIsOpen] = useState(false)
+
   const [activeSegment, setActiveSegment] = useState<'day' | 'month' | 'year' | null>(null)
 
-  const currentDateLabel = useMemo(() => {
-    if (isNullValue) return '' // Если значение null, то пустая строка
+  const daysInWeek = useMemo(() => {
+    const weekOrder: WeekItem['value'][] = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su']
 
-    if (props.value) {
-      const monthIndex = moment(props.value).utc().month() // Получаем индекс месяца
-      const momentMonth = moment().month(monthIndex).format('MMMM').toLowerCase() // Месяц в нижнем регистре
-
-      // Находим локализованный месяц в массиве
-      const localizedMonth = props.locale.months.find(
-        month => month.value.toLowerCase() === momentMonth // Сравниваем в нижнем регистре
-      )?.localeLong
-
-      // Если локализованный месяц найден, используем его, если нет - стандартный месяц
-      const monthToDisplay = localizedMonth || moment(props.value).utc().format('MMMM')
-
-      const day = moment(props.value).utc().format('D')
-      const year = moment(props.value).utc().format('YYYY')
-
-      return `${day} ${monthToDisplay} ${year}`
-    }
-
-    return '' // Если нет значения, возвращаем пустую строку
-  }, [isNullValue, props.value, props.locale.months])
+    return weekOrder.map((key, index) => {
+      const found = props.locale.weeks.find(w => w.value === key)
+      return {
+        index,
+        label: found?.localeShort ?? key.toUpperCase()
+      }
+    })
+  }, [props.locale.weeks])
 
   const daysInMonth: DateDayProps[] = useMemo(() => {
+    if (currentYear === null || currentMonth === null) return []
     const today = moment.utc()
 
     const startOfMonth = moment.utc().year(currentYear).month(currentMonth).startOf('month')
@@ -133,113 +135,15 @@ export const DatePicker = (props: DatePickerProps) => {
     return days
   }, [currentMonth, currentYear, props.endDate, props.startDate])
 
-  // Увеличение месяца
-  const increaseMonth = () => {
-    const newDate = moment.utc().year(currentYear).month(currentMonth).date(currentDay).add(1, 'month')
-    setCurrentDay(newDate.date())
-    setCurrentMonth(newDate.month())
-    setCurrentYear(newDate.year())
-  }
-
-  // Уменьшение месяца
-  const decreaseMonth = () => {
-    const newDate = moment.utc().year(currentYear).month(currentMonth).date(currentDay).subtract(1, 'month')
-    setCurrentDay(newDate.date())
-    setCurrentMonth(newDate.month())
-    setCurrentYear(newDate.year())
-  }
-
-  const [isOpen, setIsOpen] = useState(false)
-
   const rows = useMemo(() => countSevens(daysInMonth.length) + 1, [daysInMonth])
-
   const height = useMemo(
     () => 40 + rows * 28 + (rows - 1) * 6 + KEY_SIZE_DATA[props.size].padding * 2,
     [props.size, rows]
   )
-
   const radius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size])
 
-  const handleOnOpen = useCallback(() => {
-    setIsOpen(true)
-  }, [])
-  const handleOnClose = useCallback(() => {
-    setIsOpen(false)
-  }, [])
-  const [inputPlaceholder, setInputPlaceholder] = useState(props?.placeholder)
-
-  const handleInputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    const input = e.currentTarget
-    const pos = input.selectionStart ?? 0
-
-    // if (e.code.startsWith('Numpad')) {
-    //   if (pos === 1) {
-    //     setActiveSegment('month')
-    //   } else if (pos === 4) {
-    //     setActiveSegment('year')
-    //   }
-    //   // if (pos < 2) {
-    //   //   setActiveSegment('month')
-    //   // } else if (pos >= 2 && pos < 5) {
-    //   //   setActiveSegment('year')
-    //   // } else if (pos >= 5 && pos < 6) {
-    //   //   setActiveSegment('year')
-    //   // } else if (pos >= 5) {
-    //   //   setActiveSegment('day')
-    //   // }
-    //   // e.preventDefault()
-    // }
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
-      if (pos > 0 && pos <= 2) {
-        setActiveSegment('day')
-      } else if (pos === 0) {
-        setActiveSegment('year')
-      } else if (pos > 2 && pos <= 5) {
-        setActiveSegment('day')
-      } else if (pos > 5) {
-        setActiveSegment('month')
-      }
-      e.preventDefault()
-    }
-    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
-      if (pos < 2) {
-        setActiveSegment('month')
-      } else if (pos >= 2 && pos < 5) {
-        setActiveSegment('year')
-      } else if (pos >= 5 && pos < 6) {
-        setActiveSegment('year')
-      } else if (pos >= 5) {
-        setActiveSegment('day')
-      }
-      e.preventDefault()
-    }
-  }
-
-  const handleInputClick = (e: MouseEvent<HTMLInputElement>) => {
-    const pos = e.currentTarget.selectionStart ?? 0
-    if (pos <= 2) {
-      setActiveSegment('day')
-    } else if (pos > 2 && pos <= 5) {
-      setActiveSegment('month')
-    } else {
-      setActiveSegment('year')
-    }
-  }
-
-  useEffect(() => {
-    if (activeSegment !== null) {
-      setTimeout(() => {
-        if (activeSegment === 'day') {
-          inputRef.current?.setSelectionRange(0, 2)
-        } else if (activeSegment === 'month') {
-          inputRef.current?.setSelectionRange(3, 5)
-        } else if (activeSegment === 'year') {
-          inputRef.current?.setSelectionRange(6, 10)
-        }
-      }, 100)
-    }
-  }, [activeSegment])
-  const isBlockIncreaseMonth = useMemo(() => {
+  const isBlockNextMonth = useMemo(() => {
+    if (currentYear === null || currentMonth === null || currentDay === null) return true
     const nextMonth = moment
       .utc()
       .year(currentYear)
@@ -252,7 +156,8 @@ export const DatePicker = (props: DatePickerProps) => {
     return isBeforeEndDate
   }, [currentYear, currentMonth, currentDay, props.endDate])
 
-  const isBlockDecreaseMonth = useMemo(() => {
+  const isBlockPrevMonth = useMemo(() => {
+    if (currentYear === null || currentMonth === null || currentDay === null) return true
     const prevMonth = moment
       .utc()
       .year(currentYear)
@@ -265,102 +170,114 @@ export const DatePicker = (props: DatePickerProps) => {
     return isAfterStartDate
   }, [currentYear, currentMonth, currentDay, props.startDate])
 
-  const updateDateFromTimestamp = useCallback(
-    (timestamp: number, isDay?: boolean, isChange?: boolean) => {
-      const newDate = moment(timestamp).utc()
-      if (isChange) props.onChange(newDate.valueOf())
-      setCurrentDay(newDate.date())
-      setCurrentMonth(newDate.month())
-      setCurrentYear(newDate.year())
-      if (props.isOnClickClose && isDay) {
-        props.onBlur?.()
+  const handleOnOpen = useCallback(() => {
+    setIsOpen(true)
+  }, [])
+  const handleOnClose = useCallback(
+    (isCheck?: boolean) => {
+      setIsOpen(false)
+      if (isCheck)
+        if (!inputDay || !inputMonth || !inputYear) {
+          onChange(null)
+        }
+    },
+    [inputDay, inputMonth, inputYear, onChange]
+  )
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLInputElement>) => {
+      if (
+        !/^\d$/.test(e.key) &&
+        !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Backspace', 'Delete', 'Tab'].includes(e.key) &&
+        !e.ctrlKey &&
+        !e.metaKey
+      ) {
+        e.preventDefault()
+        return
+      }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+        const nextSegment = activeSegment === 'day' ? 'year' : activeSegment === 'month' ? 'day' : 'month'
+        setActiveSegment(nextSegment)
+        e.preventDefault()
+      }
+      if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+        const nextSegment = activeSegment === 'day' ? 'month' : activeSegment === 'month' ? 'year' : 'day'
+        setActiveSegment(nextSegment)
+        e.preventDefault()
+      }
+    },
+    [activeSegment]
+  )
+
+  const onChangeDate = useCallback(
+    (timestamp: number, isBlur?: boolean, isChange?: boolean) => {
+      const momentStartDate = props.startDate ? moment(props.startDate).utc() : null
+      const momentEndDate = props.endDate ? moment(props.endDate).utc() : null
+      const momentCheckDate = moment(timestamp).utc()
+      let momentNewDate = moment(timestamp).utc()
+
+      if (momentStartDate && momentCheckDate.isBefore(momentStartDate, 'day')) {
+        momentNewDate = momentStartDate.startOf('day')
+      } else if (momentEndDate && momentCheckDate.isAfter(momentEndDate, 'day')) {
+        momentNewDate = momentEndDate.startOf('day')
+      }
+      if (valueMoment && valueMoment.isSame(momentNewDate, 'day')) return
+      setValueMoment(momentNewDate)
+      setCurrentDay(momentNewDate.date())
+      setCurrentMonth(momentNewDate.month())
+      setCurrentYear(momentNewDate.year())
+      if (isChange) onChange(momentNewDate.valueOf())
+      if (props.isOnClickClose && isBlur) {
+        onBlur?.()
         handleOnClose()
       }
     },
-    [handleOnClose, props]
+    [props.startDate, props.endDate, props.isOnClickClose, valueMoment, onChange, onBlur, handleOnClose]
   )
+  const onNextMonth = useCallback(() => {
+    if (currentYear === null || currentMonth === null || currentDay === null) return
+    const newDate = moment.utc().year(currentYear).month(currentMonth).date(currentDay).add(1, 'month')
+    onChangeDate(newDate.valueOf(), false, false)
+  }, [currentDay, currentMonth, currentYear, onChangeDate])
+
+  const onPrevMonth = useCallback(() => {
+    if (currentYear === null || currentMonth === null || currentDay === null) return
+    const newDate = moment.utc().year(currentYear).month(currentMonth).date(currentDay).subtract(1, 'month')
+    onChangeDate(newDate.valueOf(), false, false)
+  }, [currentDay, currentMonth, currentYear, onChangeDate])
 
   useEffect(() => {
-    const unixValue = props.value ? moment(props.value).utc() : moment.utc()
-    setUnixValue(unixValue)
-  }, [props.value])
-
-  useEffect(() => {
-    const momentValue = props.value ? moment(props.value).utc() : moment.utc()
-    const momentStartDate = props.startDate ? moment(props.startDate).utc() : null
-    const momentEndDate = props.endDate ? moment(props.endDate).utc() : null
-
-    if (momentStartDate && momentValue.isBefore(momentStartDate, 'day')) {
-      updateDateFromTimestamp(momentStartDate.startOf('day').valueOf(), false, !!props.value)
-    } else if (momentEndDate && momentValue.isAfter(momentEndDate, 'day')) {
-      updateDateFromTimestamp(momentEndDate.startOf('day').valueOf(), false, !!props.value)
+    const valueMoment = props.value ? moment(props.value).utc() : moment.utc()
+    if (props.value !== null && props.value !== undefined) {
+      setInputDay(fixOneToZero(valueMoment.date().toString()))
+      setInputMonth(fixOneToZero((valueMoment.month() + 1).toString()))
+      setInputYear(valueMoment.year().toString())
+    } else {
+      setInputDay(null)
+      setInputMonth(null)
+      setInputYear(null)
     }
-  }, [props.endDate, props.startDate, props.value, updateDateFromTimestamp])
+    onChangeDate(valueMoment.valueOf(), false, false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.value, isOpen])
 
   useEffect(() => {
-    if (props.value) {
-      const newDate = moment(props.value).utc()
-      setCurrentDay(newDate.date())
-      setCurrentMonth(newDate.month())
-      setCurrentYear(newDate.year())
+    if (activeSegment !== null) {
+      setTimeout(() => {
+        if (activeSegment === 'day') {
+          refDay.current?.focus()
+        } else if (activeSegment === 'month') {
+          refMonth.current?.focus()
+        } else if (activeSegment === 'year') {
+          refYear.current?.focus()
+        }
+      }, 0)
     }
-  }, [props.value])
-
-  const weekDays = useMemo(() => {
-    const weekOrder: WeekItem['value'][] = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su']
-
-    return weekOrder.map((key, index) => {
-      const found = props.locale.weeks.find(w => w.value === key)
-      return {
-        index,
-        label: found?.localeShort ?? key.toUpperCase()
-      }
-    })
-  }, [props.locale.weeks])
-
-  const [formattedValue, setFormattedValue] = useState<string>('')
-  useEffect(() => {
-    if (isNullValue) return setFormattedValue('')
-
-    if (props.value) {
-      const day = moment(props.value).utc().format('DD')
-      const year = moment(props.value).utc().format('YYYY')
-      const month = moment(props.value).utc().format('MM')
-
-      return setFormattedValue(`${day}.${month}.${year}`)
-    }
-
-    return setFormattedValue('')
-  }, [isNullValue, props.value])
-
-  useEffect(() => {
-    console.log('activeSegment', activeSegment)
   }, [activeSegment])
-  function formatDatePartWithPadding(val: number, len: number, originalStr: string, isActive: boolean) {
-    // Если значение NaN, возвращаем маску
-    if (isNaN(val)) return '_'.repeat(len)
-
-    // Преобразуем число в строку
-    const valStr = String(val)
-
-    // Если активный сегмент - оставляем как есть, но добавляем '_' если нужно
-    if (isActive) {
-      return valStr.padEnd(len, '_')
-    }
-
-    // Для неактивных сегментов всегда используем ведущий ноль для однозначных чисел
-    if (valStr.length === 1) {
-      return valStr.padStart(len, '0')
-    }
-
-    // Для двузначных и более, оставляем как есть
-    return valStr.padEnd(len, '_')
-  }
   return (
     <Outside
       onOutsideClick={event => {
         if (isOpen) props?.onBlur?.(event)
-        handleOnClose()
+        handleOnClose(true)
       }}
     >
       <DateWrapper
@@ -376,160 +293,121 @@ export const DatePicker = (props: DatePickerProps) => {
           handleOnOpen()
         }}
       >
-        <DateStyledInput
-          // ref={inputRef}
-          getInputRef={(ref: HTMLInputElement | null) => {
-            if (ref && !inputRef.current) {
-              inputRef.current = ref
-            }
-          }}
-          id={props.id}
-          name={props.name}
-          $genre={props.genre}
-          $size={props.size}
-          placeholder={inputPlaceholder}
-          $error={props?.inputProps?.error}
-          $isLoading={props?.inputProps?.isLoading}
-          $postfixChildren={props?.inputProps?.postfixChildren}
-          $prefixChildren={props?.inputProps?.prefixChildren}
-          $isBold={props?.inputProps?.isBold}
-          disabled={props?.isDisabled}
-          $isDisabled={props?.isDisabled}
-          $isInputEffect={props?.isInputEffect}
-          allowEmptyFormatting={inputPlaceholder ? false : true}
-          // readOnly={true}
-          // required={props?.inputProps?.isRequired}
-          // defaultValue={props?.inputProps?.defaultValue}
-          // aria-placeholder={props?.inputProps?.pl}
-          value={formattedValue}
-          // type={props?.inputProps?.type}
-          format="##.##.####"
-          mask="_"
-          type="text"
-          // allowEmptyFormatting
-          onKeyDown={handleInputKeyDown}
-          onValueChange={(value, source) => {
-            const input = source.event?.currentTarget
-            const pos = input?.selectionStart ?? 0
-            let localActiveSegment = 'day'
-            if (pos <= 2) {
-              localActiveSegment = 'day'
-            } else if (pos > 2 && pos <= 5) {
-              localActiveSegment = 'month'
-            } else if (pos > 5) {
-              localActiveSegment = 'year'
-            }
-            console.log('pos', localActiveSegment, value.formattedValue)
+        <DateInputWrapper $genre={props.genre} $size={props.size} $error={props.error}>
+          <DateInput
+            $genre={props.genre}
+            $size={props.size}
+            onKeyDown={handleKeyDown}
+            value={inputDay ?? ''}
+            onValueChange={(values, sourceInfo) => {
+              if (sourceInfo.source !== 'event') return
+              const value = values.formattedValue
+              setInputMonth(null)
+              setInputYear(null)
 
-            const prevParts = formattedValue.split('.')
+              if (Number(value) && Number(value) > 31) {
+                setInputDay('31')
+              } else {
+                setInputDay(value)
+              }
+              if (value !== '' && !value.includes('_')) {
+                setActiveSegment('month')
+              }
+            }}
+            getInputRef={(ref: HTMLInputElement | null) => {
+              if (ref && !refDay.current) {
+                refDay.current = ref
+              }
+            }}
+            onFocus={e => {
+              setActiveSegment('day')
+              e.target.select()
+            }}
+            onBlur={() => {
+              if (inputDay && inputDay.includes('_')) setInputDay(fixUnderscoreToZero(inputDay))
+            }}
+            allowEmptyFormatting={inputDay ? false : true}
+            type="text"
+            format="##"
+            mask="_"
+            style={{ width: '22px' }}
+          />
+          .
+          <DateInput
+            $genre={props.genre}
+            $size={props.size}
+            onKeyDown={handleKeyDown}
+            onBlur={() => {
+              if (inputMonth && inputMonth.includes('_')) setInputMonth(fixUnderscoreToZero(inputMonth))
+            }}
+            value={inputMonth ?? ''}
+            onValueChange={(values, sourceInfo) => {
+              if (sourceInfo.source !== 'event') return
+              const value = values.formattedValue
+              setInputYear(null)
+              if (Number(value) > 12) {
+                setInputMonth('12')
+              } else {
+                setInputMonth(value)
+              }
+              if (value !== '' && !value.includes('_')) {
+                setActiveSegment('year')
+              }
+            }}
+            getInputRef={(ref: HTMLInputElement | null) => {
+              if (ref && !refMonth.current) {
+                refMonth.current = ref
+              }
+            }}
+            onFocus={e => {
+              setActiveSegment('month')
+              e.target.select()
+            }}
+            allowEmptyFormatting={inputMonth ? false : true}
+            type="text"
+            format="##"
+            mask="_"
+            style={{ width: '22px' }}
+          />
+          .
+          <DateInput
+            $genre={props.genre}
+            $size={props.size}
+            onKeyDown={handleKeyDown}
+            value={inputYear ?? ''}
+            onValueChange={(values, sourceInfo) => {
+              if (sourceInfo.source !== 'event') return
+              const value = values.formattedValue
+              setInputYear(value)
 
-            const prevDayStr = prevParts[0] || ''
-            const prevMonthStr = prevParts[1] || ''
-            const prevYearStr = prevParts[2] || ''
-
-            let dayStr = value.formattedValue.split('.')[0] || ''
-            let monthStr = value.formattedValue.split('.')[1] || ''
-            let yearStr = value.formattedValue.split('.')[2] || ''
-
-            let day = dayStr ? Number(dayStr) : NaN
-            let month = monthStr ? Number(monthStr) : NaN
-            let year = yearStr ? Number(yearStr) : NaN
-
-            if (localActiveSegment === 'day') {
-              month = NaN
-              year = NaN
-              monthStr = ''
-              yearStr = ''
-              if (prevMonthStr || prevYearStr) {
-                if (dayStr.length == 2) {
-                  day = Number(dayStr[0])
-                  dayStr = dayStr[0] + '_'
+              if (value !== '' && !value.includes('_')) {
+                const day = inputDay ? Number(inputDay) : NaN
+                const month = inputMonth ? Number(inputMonth) : NaN
+                const year = value ? Number(value) : NaN
+                if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
+                  const m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day')
+                  if (m.isValid()) {
+                    onChangeDate(m.valueOf(), false, true)
+                  }
                 }
               }
-            } else if (localActiveSegment === 'month') {
-              year = NaN
-              yearStr = ''
-              if (prevDayStr[1] === '_') {
-                monthStr = dayStr[1] + '_'
-                month = Number(dayStr[1])
-                dayStr = '_' + prevDayStr[0]
-                day = Number(prevDayStr[0])
+            }}
+            getInputRef={(ref: HTMLInputElement | null) => {
+              if (ref && !refYear.current) {
+                refYear.current = ref
               }
-              if (prevYearStr) {
-                if (monthStr.length == 2) {
-                  month = Number(monthStr[0])
-                  monthStr = '_' + monthStr[0]
-                }
-              }
-            } else if (localActiveSegment === 'year') {
-              if (prevMonthStr[1] === '_') {
-                yearStr = monthStr[1] + '___'
-                year = Number(monthStr[1])
-                monthStr = prevMonthStr[0]
-                month = Number(prevMonthStr[0])
-              }
-            }
-            const newFormattedValue =
-              `${formatDatePartWithPadding(day, 2, dayStr, localActiveSegment === 'day')}.` +
-              `${formatDatePartWithPadding(month, 2, monthStr, localActiveSegment === 'month')}.` +
-              `${formatDatePartWithPadding(year, 4, yearStr, localActiveSegment === 'year')}`
-            // console.log(
-            //   'month',
-            //   monthStr,
-            //   'month day',
-            //   formatDatePartWithPadding(month, 2, monthStr, activeSegment === 'month')
-            // )
-
-            console.log('newFormattedValue', newFormattedValue)
-            setFormattedValue(newFormattedValue)
-
-            if (isNaN(day) || isNaN(month) || isNaN(year)) {
-              return
-            }
-
-            const formattedValueHasMasks = newFormattedValue.includes('_')
-            if (formattedValueHasMasks) {
-              return
-            }
-
-            if (day > 31) day = 1
-            if (month > 12) month = 12
-
-            let m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day')
-            if (!m.isValid()) {
-              const lastDay = moment.utc(`${month}.${year}`, 'M.YYYY').endOf('month').date()
-              day = lastDay
-              m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day')
-            }
-
-            const formatted = `${String(day).padStart(2, '0')}.${String(month).padStart(2, '0')}.${year}`
-            setFormattedValue(formatted)
-
-            if (m.isValid()) {
-              const mValueDay = m.clone().valueOf()
-              const unixValueDay = unixValue.clone().valueOf()
-              if (mValueDay !== unixValueDay) {
-                updateDateFromTimestamp(mValueDay, false, true)
-              }
-            }
-          }}
-          onClick={e => {
-            handleOnOpen()
-            handleInputClick(e)
-            setInputPlaceholder('')
-          }}
-          // onChange={event => props.inputProps?.onChange && props.inputProps?.onChange(event.target.value)}
-          onFocus={e => {
-            setInputPlaceholder('')
-            setActiveSegment('day')
-            props?.inputProps?.onFocus?.(e)
-          }}
-          onBlur={e => {
-            setActiveSegment(null)
-            if (!formattedValue) setInputPlaceholder(props?.placeholder)
-            props?.inputProps?.onBlur?.(e)
-          }}
-        />
+            }}
+            allowEmptyFormatting={inputYear ? false : true}
+            onFocus={e => {
+              setActiveSegment('year')
+              e.target.select()
+            }}
+            type="text"
+            format="####"
+            mask="_"
+            style={{ width: '44px' }}
+          />
+        </DateInputWrapper>
 
         <AnimatePresence>
           {isOpen ? (
@@ -576,52 +454,53 @@ export const DatePicker = (props: DatePickerProps) => {
                     isWidthAsHeight
                     genre={props.genre}
                     size={'small'}
-                    onClick={() => !isBlockDecreaseMonth && decreaseMonth()}
-                    isHidden={isBlockDecreaseMonth}
+                    onClick={() => !isBlockPrevMonth && onPrevMonth()}
+                    isHidden={isBlockPrevMonth}
                   />
-                  <Stack sx={{ default: { gap: '8px' } }}>
-                    <SelectMonth
-                      monthsLocale={props.locale.months}
-                      genre={props.genre}
-                      size={'small'}
-                      inputProps={undefined}
-                      value={moment
-                        .utc()
-                        .year(currentYear)
-                        .month(currentMonth)
-                        .date(currentDay)
-                        .startOf('day')
-                        .utc()
-                        .valueOf()}
-                      onChange={(timestamp: number) => {
-                        updateDateFromTimestamp(timestamp, false, true)
-                      }}
-                      startDate={props.startDate}
-                      endDate={props.endDate}
-                      sx={{ default: { width: '90px' } }}
-                    />
-                    <SelectYear
-                      genre={props.genre}
-                      size={'small'}
-                      value={moment
-                        .utc()
-                        .year(currentYear)
-                        .month(currentMonth)
-                        .date(currentDay)
-                        .startOf('day')
-                        .utc()
-                        .valueOf()}
-                      onChange={(timestamp: number) => {
-                        updateDateFromTimestamp(timestamp, false, true)
-                      }}
-                      startDate={props.startDate}
-                      endDate={props.endDate}
-                      sx={{ default: { width: '70px' } }}
-                    />
-                  </Stack>
+                  {currentYear !== null && currentMonth !== null && currentDay !== null ? (
+                    <Stack sx={{ default: { gap: '8px' } }}>
+                      <SelectMonth
+                        monthsLocale={props.locale.months}
+                        genre={props.genre}
+                        size={'small'}
+                        value={moment
+                          .utc()
+                          .year(currentYear)
+                          .month(currentMonth)
+                          .date(currentDay)
+                          .startOf('day')
+                          .utc()
+                          .valueOf()}
+                        onChange={(timestamp: number) => {
+                          onChangeDate(timestamp, false, true)
+                        }}
+                        startDate={props.startDate}
+                        endDate={props.endDate}
+                        sx={{ default: { width: '90px' } }}
+                      />
+                      <SelectYear
+                        genre={props.genre}
+                        size={'small'}
+                        value={moment
+                          .utc()
+                          .year(currentYear)
+                          .month(currentMonth)
+                          .date(currentDay)
+                          .startOf('day')
+                          .utc()
+                          .valueOf()}
+                        onChange={(timestamp: number) => {
+                          onChangeDate(timestamp, false, true)
+                        }}
+                        startDate={props.startDate}
+                        endDate={props.endDate}
+                        sx={{ default: { width: '70px' } }}
+                      />
+                    </Stack>
+                  ) : null}
                   <Button
                     type="button"
-                    onClick={() => !isBlockIncreaseMonth && increaseMonth()}
+                    onClick={() => !isBlockNextMonth && onNextMonth()}
                     isWidthAsHeight
                     isRadius
                     icons={[
@@ -633,11 +512,11 @@ export const DatePicker = (props: DatePickerProps) => {
                     ]}
                     genre={props.genre}
                     size={'small'}
-                    isHidden={isBlockIncreaseMonth}
+                    isHidden={isBlockNextMonth}
                   />
                 </Stack>
                 <DateDropdownDays $rows={rows}>
-                  {weekDays.map((e, index) => (
+                  {daysInWeek.map((e, index) => (
                     <DateDropdownDayOfWeek
                       $isToday={false}
                       $isWeekend={false}
@@ -660,10 +539,10 @@ export const DatePicker = (props: DatePickerProps) => {
                         $row={day.weekOfMonth + 1}
                         $column={day.dayOfWeek}
                         key={day.value}
-                        onClick={() => updateDateFromTimestamp(day.value, true, true)}
+                        onClick={() => onChangeDate(day.value, true, true)}
                         $isToday={day.isToday}
                         $isWeekend={day.isWeekend}
-                        $isChoice={day.value === unixValue.valueOf()}
+                        $isChoice={day.value === valueMoment?.valueOf()}
                         $isCurrentMonth={day.isCurrentMonth}
                       >
                         <Ripple color={theme.colors.date[props.genre].color.rest} />
@@ -677,9 +556,20 @@ export const DatePicker = (props: DatePickerProps) => {
           ) : null}
         </AnimatePresence>
       </DateWrapper>
-      {props?.inputProps?.error ? (
-        <ErrorMessage {...props?.inputProps?.error} size={props?.inputProps?.error.size ?? props.size} />
-      ) : null}
+      {props?.error ? <ErrorMessage {...props?.error} size={props?.error.size ?? props.size} /> : null}
     </Outside>
   )
+}
+function fixUnderscoreToZero(str: string) {
+  if (str.length === 2) {
+    return '0' + str[0]
+  }
+  return str.replace(/_/g, '0')
+}
+
+function fixOneToZero(str: string) {
+  if (str.length === 1) {
+    return '0' + str[0]
+  }
+  return str
 }

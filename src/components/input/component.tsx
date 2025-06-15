@@ -53,6 +53,7 @@ export const Input = (props: InputProps) => {
         )}
         {props.variety === 'pattern' ? (
           <StyledInputPattern
+            $isNiceNumber={props.isNiceNumber}
             $isInputEffect={props.isInputEffect}
             $error={props?.error}
             $isLoading={props.isLoading}
@@ -83,6 +84,7 @@ export const Input = (props: InputProps) => {
           />
         ) : props.variety === 'numeric' ? (
           <StyledInputNumeric
+            $isNiceNumber={props.isNiceNumber}
             $isInputEffect={props.isInputEffect}
             $error={props?.error}
             $isLoading={props.isLoading}
@@ -113,6 +115,7 @@ export const Input = (props: InputProps) => {
           />
         ) : (
           <StyledInput
+            $isNiceNumber={props.isNiceNumber}
             inputMode={props.inputMode}
             maxLength={props.maxLength}
             minLength={props.minLength}
