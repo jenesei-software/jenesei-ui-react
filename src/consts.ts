@@ -1,5 +1,3 @@
-import exp from 'constants'
-
 import { InputItem, MonthItem, WeekItem } from './components/date-picker'
 import { MapTheme } from './components/map'
 import { transformObjectToArray, transformObjectValuesToKeys } from './functions'
