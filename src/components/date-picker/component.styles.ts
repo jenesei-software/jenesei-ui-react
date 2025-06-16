@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { PatternFormat } from 'react-number-format'
 import styled, { css } from 'styled-components'
 
-import { InputIsInputEffect, InputPlaceholder, InputPlaceholderNiceNumber } from '@local/components/input'
+import { InputIsInputEffect, InputPlaceholderNiceNumber } from '@local/components/input'
 import { getFontSizeStyles } from '@local/components/typography'
 import { addNiceNumber, addOutline, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
 import { addError } from '@local/styles/error'

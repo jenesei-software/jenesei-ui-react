@@ -1,6 +1,6 @@
 import { FocusEvent } from 'react'
 
-import { InputStandardProps, StyledInputProps, StyledInputWrapperProps, TInputGenre } from '@local/components/input'
+import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
 import { addErrorProps } from '@local/styles/error'
 import { addSXProps } from '@local/styles/sx'
 import { TJeneseiThemeGenreDate, TJeneseiThemeSize } from '@local/theme'
