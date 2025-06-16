@@ -52,6 +52,8 @@ type InputDefaultProps = addErrorProps &
 
     isRequired?: boolean
 
+    isCenter?: boolean
+
     isNoSpaces?: boolean
 
     onBlur?: FocusEventHandler<HTMLInputElement>
@@ -141,6 +143,8 @@ export type StyledInputProps = AddDollarSign<
     | 'isBold'
     | 'isNiceNumber'
     | 'isNotShowHoverStyle'
+    | 'sx'
+    | 'isCenter'
   >
 >
 

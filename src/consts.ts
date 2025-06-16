@@ -1,4 +1,6 @@
-import { MonthItem, WeekItem } from './components/date-picker'
+import exp from 'constants'
+
+import { InputItem, MonthItem, WeekItem } from './components/date-picker'
 import { MapTheme } from './components/map'
 import { transformObjectToArray, transformObjectValuesToKeys } from './functions'
 import { ILanguage, IService } from './types'
@@ -33,6 +35,11 @@ export const KeysLanguage = transformObjectValuesToKeys(ObjectLanguage)
 export const ListService = transformObjectToArray(ObjectService)
 export const KeysService = transformObjectValuesToKeys(ObjectService)
 
+export const localeInput: InputItem = {
+  day: 'ДД',
+  month: 'ММ',
+  year: 'ГГГГ'
+}
 export const localeMonths: MonthItem[] = [
   {
     localeLong: 'Январь',

@@ -212,4 +212,5 @@ export const DropdownSelectAll = styled.div`
 
 export const SelectStyledInput = styled(StyledMotionInput)<SelectStyledInputProps>`
   ${addRemoveOutline};
+  ${addSX};
 `

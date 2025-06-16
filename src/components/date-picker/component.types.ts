@@ -51,6 +51,7 @@ export type DatePickerProps = addErrorProps &
     locale: {
       months: SelectDateProps['monthsLocale']
       weeks: WeekItem[]
+      inputs: InputItem
     }
 
     name?: string
@@ -60,8 +61,6 @@ export type DatePickerProps = addErrorProps &
     onChange: (timestamp: number | null) => void
 
     onFocus?: (event: FocusEvent<HTMLDivElement, Element>) => void
-
-    placeholder?: string
 
     size: TJeneseiThemeSize
 
@@ -127,4 +126,9 @@ export type WeekItem = {
   localeShort: string
 
   value: 'mo' | 'tu' | 'we' | 'th' | 'fr' | 'sa' | 'su'
+}
+export type InputItem = {
+  day: string
+  month: string
+  year: string
 }

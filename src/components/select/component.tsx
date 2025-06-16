@@ -280,6 +280,8 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           $postfixChildren={props?.inputProps?.postfixChildren}
           $prefixChildren={props.inputProps?.prefixChildren}
           $isBold={props?.inputProps?.isBold}
+          $isCenter={props?.inputProps?.isCenter}
+          $sx={props?.inputProps?.sx}
           disabled={props?.isDisabled}
           $isDisabled={props?.isDisabled}
           readOnly={props?.inputProps?.isReadOnly}
@@ -356,12 +358,8 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                         label={item.label}
                         genre={props.genre}
                         size={props.size}
-                        isBold={props.optionProps?.isBold}
-                        error={props.optionProps?.error}
-                        isLoading={props.optionProps?.isLoading}
-                        prefixChildren={props.optionProps?.prefixChildren}
-                        postfixChildren={props.optionProps?.postfixChildren}
                         isShowDropdownOptionIcon={props.isShowDropdownOptionIcon}
+                        {...props.optionProps}
                       />
                     )
                   })
@@ -376,11 +374,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                     label={props.labelEmptyOption ?? DEFAULT_LABEL_EMPTY_OPTION}
                     genre={props.genre}
                     size={props.size}
-                    isBold={props.optionProps?.isBold}
-                    error={props.optionProps?.error}
-                    isLoading={props.optionProps?.isLoading}
-                    prefixChildren={props.optionProps?.prefixChildren}
-                    postfixChildren={props.optionProps?.postfixChildren}
+                    {...props.optionProps}
                     isShowDropdownOptionIcon={props.isShowDropdownOptionIcon}
                   />
                 )}
@@ -433,6 +427,7 @@ const ContainerDropdownOptionComponent = (
     isNotShowHoverStyle?: boolean
     isShowDropdownOptionIcon?: boolean
     isBold?: boolean
+    isCenter?: boolean
     postfixChildren?: InputChildrenProps
     prefixChildren?: InputChildrenProps
     checked: boolean
@@ -452,6 +447,7 @@ const ContainerDropdownOptionComponent = (
       onClick={params.onClick}
       onKeyDown={handleKeyDown}
       $error={params.error}
+      $isCenter={params.isCenter}
       $isNotShowHoverStyle={params.isNotShowHoverStyle}
       $isLoading={params.isLoading}
       $postfixChildren={params.postfixChildren}
@@ -674,8 +670,14 @@ export const SelectYear: FC<SelectYearProps> = props => {
       isOnClickOptionClose
       value={selectedYear ? [selectedYear] : []}
       onChange={handleSelectChange}
+      optionProps={{
+        isCenter: true,
+        variety: 'standard',
+        ...props.optionProps
+      }}
       inputProps={{
         ...props.inputProps,
+        isCenter: true,
         isNiceNumber: true,
         variety: 'standard',
         value: selectedYear?.placeholder ?? props.placeholder,

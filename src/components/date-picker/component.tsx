@@ -343,8 +343,7 @@ export const DatePicker = (props: DatePickerProps) => {
             onBlur={() => {
               if (inputDay && inputDay.includes('_')) setInputDay(fixUnderscoreToZero(inputDay))
             }}
-            placeholder="DD"
-            // allowEmptyFormatting={inputDay ? false : true}
+            placeholder={props.locale.inputs.day}
             type="text"
             format="##"
             mask="_"
@@ -359,7 +358,7 @@ export const DatePicker = (props: DatePickerProps) => {
               if (inputMonth && inputMonth.includes('_')) setInputMonth(fixUnderscoreToZero(inputMonth))
             }}
             value={inputMonth ?? ''}
-            placeholder="MM"
+            placeholder={props.locale.inputs.month}
             onValueChange={(values, sourceInfo) => {
               if (sourceInfo.source !== 'event') return
               const value = values.formattedValue
@@ -382,7 +381,6 @@ export const DatePicker = (props: DatePickerProps) => {
               setActiveSegment('month')
               e.target.select()
             }}
-            // allowEmptyFormatting={inputMonth ? false : true}
             type="text"
             format="##"
             mask="_"
@@ -390,7 +388,7 @@ export const DatePicker = (props: DatePickerProps) => {
           />
           <span style={{ width: '6px', pointerEvents: 'none', textAlign: 'center' }}>.</span>
           <DateInput
-            placeholder="YYYY"
+            placeholder={props.locale.inputs.year}
             $genre={props.genre}
             $size={props.size}
             onKeyDown={handleKeyDown}
@@ -417,7 +415,6 @@ export const DatePicker = (props: DatePickerProps) => {
                 refYear.current = ref
               }
             }}
-            // allowEmptyFormatting={inputYear ? false : true}
             onFocus={e => {
               setActiveSegment('year')
               e.target.select()

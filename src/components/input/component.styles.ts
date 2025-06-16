@@ -140,6 +140,12 @@ export const StyledInputCSS = css<StyledInputProps>`
     css`
       ${addNiceNumber};
     `};
+  ${props =>
+    props.$isCenter &&
+    css`
+      text-align: center;
+      justify-content: center;
+    `};
 
   ${props =>
     props.$prefixChildren &&

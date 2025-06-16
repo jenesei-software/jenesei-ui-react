@@ -3,7 +3,7 @@ import moment from 'moment'
 import { FC, useEffect, useState } from 'react'
 import 'styled-components'
 
-import { localeMonths, localeWeeks } from '@local/consts'
+import { localeInput, localeMonths, localeWeeks } from '@local/consts'
 
 import { DatePicker, DatePickerProps } from '../components/date-picker'
 
@@ -36,7 +36,8 @@ export const PastHundredYears: Story = {
   args: {
     locale: {
       months: localeMonths,
-      weeks: localeWeeks
+      weeks: localeWeeks,
+      inputs: localeInput
     },
     size: 'medium',
     genre: 'gray',
@@ -65,7 +66,8 @@ export const LastHundredYear18YearsAgo: Story = {
   args: {
     locale: {
       months: localeMonths,
-      weeks: localeWeeks
+      weeks: localeWeeks,
+      inputs: localeInput
     },
     size: 'medium',
     genre: 'gray',
@@ -89,7 +91,8 @@ export const LastHundredYear21YearsAgo: Story = {
   args: {
     locale: {
       months: localeMonths,
-      weeks: localeWeeks
+      weeks: localeWeeks,
+      inputs: localeInput
     },
     size: 'medium',
     genre: 'gray',
@@ -113,7 +116,8 @@ export const NextThreeMonths: Story = {
   args: {
     locale: {
       months: localeMonths,
-      weeks: localeWeeks
+      weeks: localeWeeks,
+      inputs: localeInput
     },
     size: 'medium',
     genre: 'gray',
