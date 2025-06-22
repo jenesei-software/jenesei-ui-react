@@ -22,12 +22,12 @@ const ErrorMessageSizeConstructor = (
         position: absolute;
         top: calc(100% + 4px);
         padding-left: ${props.padding}px;
-        color: ${props => props.theme.colors.danger};
+        color: ${props => props.theme.states.danger};
       `
     : css`
         position: static;
         padding: 0px ${props.padding}px;
-        color: ${props => props.theme.colors.danger};
+        color: ${props => props.theme.states.danger};
       `}
 `
 
@@ -43,12 +43,12 @@ export const addError = css<addErrorStylesProps>`
   ${props =>
     props.$error?.isError &&
     css`
-      border-color: ${props => props.theme.colors.danger};
+      border-color: ${props => props.theme.states.danger};
       &:focus,
       &:active,
       &:hover,
       &:focus-visible {
-        border-color: ${props => props.theme.colors.danger};
+        border-color: ${props => props.theme.states.danger};
       }
     `};
 `

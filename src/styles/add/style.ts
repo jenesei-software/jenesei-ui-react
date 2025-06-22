@@ -79,14 +79,14 @@ export const addOutline = css`
   outline: 2px solid transparent;
   outline-offset: 1px;
   &:focus-visible {
-    outline: 2px solid ${props => props.theme.colors.focus};
+    outline: 2px solid ${props => props.theme.states.focus};
   }
 `
 
 export const addBorder = css`
   border: 1px solid transparent;
   &:focus-visible {
-    border-color: ${props => props.theme.colors.focus};
+    border-color: ${props => props.theme.states.focus};
   }
 `
 
@@ -94,7 +94,7 @@ export const addRemoveOutline = css`
   outline: 0px solid transparent;
   outline-offset: 0px;
   &:focus-visible {
-    outline: 0px solid ${props => props.theme.colors.focus};
+    outline: 0px solid ${props => props.theme.states.focus};
   }
 `
 

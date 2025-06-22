@@ -264,10 +264,11 @@ export type TJeneseiTypographyWeight = 100 | 300 | 400 | 500 | 700 | 900
 export type TJeneseiDevice = 'default' | 'tablet' | 'mobile'
 
 export interface IJeneseiTheme {
-  colors: {
+  states: {
     focus: string
-    white: string
     danger: string
+  }
+  colors: {
     range: TJeneseiThemeGenreRange
     date: TJeneseiThemeGenreDate
     button: TJeneseiThemeGenre
@@ -309,6 +310,7 @@ export interface IJeneseiTheme {
     default: string
     icon: string
   }
+  getContrastYIQ: (hexcolor: string) => string
 }
 
 export type JeneseiPaletteKeys =

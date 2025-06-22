@@ -196,7 +196,7 @@ const DateInputWrapperGenre = css<DateInputProps>`
       background: ${props.theme.colors.input[props.$genre].background.rest};
       border-color: ${props.theme.colors.input[props.$genre].border.rest};
       color: ${props.theme.colors.input[props.$genre].color.rest};
-      outline: 2px solid ${props => props.theme.colors.focus};
+      outline: 2px solid ${props => props.theme.states.focus};
     }
   `};
 `

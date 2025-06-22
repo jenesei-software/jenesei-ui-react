@@ -225,9 +225,9 @@ export const TooltipContent: FC<TooltipProps> = props => {
                 $whiteSpace={props.whiteSpace}
                 $placement={props.placement ?? 'bottom'}
                 $visible={visible}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, scale: 0.85, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.85, y: 10 }}
                 style={{
                   top: position ? position.top : 'auto',
                   left: position ? position.left : 'auto',

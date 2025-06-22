@@ -107,7 +107,7 @@ export const SonnerIcon = styled.div`
   display: contents;
 `
 export const SonnerContentTitle = styled.div<SonnerContentTitleProps>`
-  ${props => getFontSizeStyles(12, 700, props.theme.font.family)}
+  ${props => getFontSizeStyles(14, 700, props.theme.font.family)}
   color:  ${props => props.theme.colors.sonner[props.$genre].title.color};
   text-align: left;
   display: flex;
@@ -115,7 +115,7 @@ export const SonnerContentTitle = styled.div<SonnerContentTitleProps>`
   justify-content: flex-start;
 `
 export const SonnerContentDescription = styled.div<SonnerContentDescriptionProps>`
-  ${props => getFontSizeStyles(8, 400, props.theme.font.family)}
+  ${props => getFontSizeStyles(12, 400, props.theme.font.family)}
   color:${props => props.theme.colors.sonner[props.$genre].description.color};
   text-align: left;
   position: relative;

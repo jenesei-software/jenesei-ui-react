@@ -40,7 +40,7 @@ export const ToggleWrapper = styled(motion.div)<StyledToggleProps>`
   ${addTransition};
 
   &:focus-visible {
-    outline: 1px solid ${props => props.theme.colors.focus};
+    outline: 1px solid ${props => props.theme.states.focus};
   }
   ${props =>
     props.$isDisabled

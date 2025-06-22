@@ -32,7 +32,7 @@ export const SelectWrapper = styled(motion.div)<SelectWrapperProps>`
           left: -1px;
           bottom: -1px;
           right: -1px;
-          outline: 2px ${props.theme.colors.focus} solid;
+          outline: 2px ${props.theme.states.focus} solid;
           outline-offset: 1px;
           border-radius: ${`${props.$radius + 1}px`};
           pointer-events: none;
