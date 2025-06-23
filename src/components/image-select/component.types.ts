@@ -1,11 +1,11 @@
 import { Area } from 'react-easy-crop'
 
-import { ButtonProps, addSXProps } from '@local/index'
+import { ButtonProps } from '@local/components/button'
+import { ImageButtonProps } from '@local/components/image-button'
 import { addErrorProps } from '@local/styles/error'
+import { addSXProps } from '@local/styles/sx'
 import { TJeneseiThemeGenreImageSelect, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
-
-import { ImageButtonProps } from '../image-button'
 
 export type TImageSelectGenre = keyof TJeneseiThemeGenreImageSelect
 

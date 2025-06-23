@@ -21,6 +21,7 @@ export const Popover: FC<PopoverProps> = props => {
           }}
         >
           <PopoverWrapper
+            $genre={props.genre ?? 'black'}
             className={props.className}
             tabIndex={0}
             initial={{ opacity: 0, scale: 0.95 }}
@@ -28,8 +29,8 @@ export const Popover: FC<PopoverProps> = props => {
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.2 }}
             $sx={props.sx}
+            $size={props.size}
             $sxTypography={props.sxTypography}
-            $padding={props.padding}
             $maxHeight={props.maxHeight}
             $maxWidth={props.maxWidth}
           >
@@ -46,7 +47,7 @@ type UsePopoverProps = {
   placement: Placement
   offset?: number
   isClickOutside?: boolean
-  isHoverOutside?: boolean
+  isFloatingHover?: boolean
   hoverCloseDelay?: number
   hoverOffset?: number
   mode?: 'click' | 'hover'
@@ -142,7 +143,7 @@ export const usePopover = (props: UsePopoverProps) => {
   }, [isOpen, refs.reference, refs.floating, update, props.isClickOutside])
 
   useEffect(() => {
-    if (!isOpen || !props.isHoverOutside || !refs.reference.current || !refs.floating.current) return
+    if (!isOpen || !props.isFloatingHover || !refs.reference.current || !refs.floating.current) return
 
     const refEl = refs.reference.current
     const floatingEl = refs.floating.current
@@ -151,32 +152,29 @@ export const usePopover = (props: UsePopoverProps) => {
       const mouseX = e.clientX
       const mouseY = e.clientY
 
-      const refRect = refEl instanceof HTMLElement ? refEl.getBoundingClientRect() : null
-      const floatingRect = floatingEl instanceof HTMLElement ? floatingEl.getBoundingClientRect() : null
+      const refRect = refEl.getBoundingClientRect()
+      const floatingRect = floatingEl.getBoundingClientRect()
 
-      if (refRect && floatingRect) {
-        const combinedRect = {
-          top: Math.min(refRect.top, floatingRect.top) - hoverOffset,
-          bottom: Math.max(refRect.bottom, floatingRect.bottom) + hoverOffset,
-          left: Math.min(refRect.left, floatingRect.left) - hoverOffset,
-          right: Math.max(refRect.right, floatingRect.right) + hoverOffset
+      const isInsideRef =
+        mouseX >= refRect.left - hoverOffset &&
+        mouseX <= refRect.right + hoverOffset &&
+        mouseY >= refRect.top - hoverOffset &&
+        mouseY <= refRect.bottom + hoverOffset
+
+      const isInsideFloating =
+        mouseX >= floatingRect.left - hoverOffset &&
+        mouseX <= floatingRect.right + hoverOffset &&
+        mouseY >= floatingRect.top - hoverOffset &&
+        mouseY <= floatingRect.bottom + hoverOffset
+
+      if (isInsideRef || isInsideFloating) {
+        if (hoverCloseTimeout.current) {
+          clearTimeout(hoverCloseTimeout.current)
+          hoverCloseTimeout.current = null
         }
-
-        const isInside =
-          mouseX >= combinedRect.left &&
-          mouseX <= combinedRect.right &&
-          mouseY >= combinedRect.top &&
-          mouseY <= combinedRect.bottom
-
-        if (!isInside) {
-          if (hoverCloseTimeout.current) clearTimeout(hoverCloseTimeout.current)
-          hoverCloseTimeout.current = setTimeout(() => setIsOpen(false), hoverCloseDelay)
-        } else {
-          if (hoverCloseTimeout.current) {
-            clearTimeout(hoverCloseTimeout.current)
-            hoverCloseTimeout.current = null
-          }
-        }
+      } else {
+        if (hoverCloseTimeout.current) clearTimeout(hoverCloseTimeout.current)
+        hoverCloseTimeout.current = setTimeout(() => setIsOpen(false), hoverCloseDelay)
       }
     }
 
@@ -188,7 +186,7 @@ export const usePopover = (props: UsePopoverProps) => {
         clearTimeout(hoverCloseTimeout.current)
       }
     }
-  }, [isOpen, props.isHoverOutside, refs.reference, refs.floating, hoverOffset, hoverCloseDelay])
+  }, [isOpen, props.isFloatingHover, refs.reference, refs.floating, hoverOffset, hoverCloseDelay])
 
   const open = useCallback(() => setIsOpen(true), [])
   const close = useCallback(() => setIsOpen(false), [])

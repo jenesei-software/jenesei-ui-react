@@ -1,21 +1,47 @@
 import { motion } from 'framer-motion'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-import { addSXTypography } from '@local/components/typography'
+import { addSXTypography, getFontSizeStyles } from '@local/components/typography'
 import { addOutline } from '@local/styles/add'
 import { addSX } from '@local/styles/sx'
+import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledPopoverProps } from '.'
 
+/****************************************** Popover Genre *************************************************/
+const addPopoverGenre = css<StyledPopoverProps>`
+  ${props => css`
+    background: ${props.theme.colors.button[props.$genre].background.rest};
+    border-color: ${props.theme.colors.button[props.$genre].border.rest};
+    color: ${props.theme.colors.button[props.$genre].color.rest};
+    box-shadow: ${props.theme.effects.button};
+  `};
+`
+
+/****************************************** Popover Size *************************************************/
+export const addPopoverSize = css<StyledPopoverProps>`
+  ${props =>
+    addPopoverSizeConstructor({
+      ...KEY_SIZE_DATA[props.$size ?? 'medium']
+    })};
+`
+export const addPopoverSizeConstructor = (props: IJeneseiThemeSize) => css`
+  display: flex;
+  border-radius: ${props.radius}px;
+  padding: ${props.padding}px;
+  gap: ${props.padding - 2}px;
+  ${params => getFontSizeStyles(props.font, 500, params.theme.font.family)};
+`
+
 /****************************************** Default *************************************************/
 export const PopoverWrapper = styled(motion.div)<StyledPopoverProps>`
-  background-color: darkgray;
-  border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  padding: ${props => props.$padding || '16px'};
-  max-width: ${props => props.$maxWidth || '400px'};
-  max-height: ${props => props.$maxHeight || '400px'};
+  max-width: ${props => props.$maxWidth || '100%'};
+  max-height: ${props => props.$maxHeight || '100%'};
+  overflow: auto;
+  flex-direction: column;
+  ${addPopoverSize};
   ${addOutline};
   ${addSXTypography};
   ${addSX};
+  ${addPopoverGenre};
 `

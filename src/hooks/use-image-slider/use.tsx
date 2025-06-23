@@ -1,10 +1,12 @@
 import { AnimatePresence, PanInfo, Variants } from 'framer-motion'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
+import { Button } from '@local/components/button'
 import { Image } from '@local/components/image'
+import { ImageSliderProps, SliderDot, SliderImage } from '@local/components/image-slider'
 import { Stack } from '@local/components/stack'
+import { Typography } from '@local/components/typography'
 import { useDialog } from '@local/contexts/context-dialog'
-import { Button, SliderDot, SliderImage, ImageSliderProps, Typography } from '@local/index'
 import { KEY_SIZE_DATA } from '@local/theme'
 
 import { useImageSliderProps } from '.'

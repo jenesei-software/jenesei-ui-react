@@ -3,12 +3,14 @@ import Cropper, { Area } from 'react-easy-crop'
 import { useTheme } from 'styled-components'
 
 import { Preview } from '@local/areas/preview'
+import { Button } from '@local/components/button'
 import { ImageSelectItemProps } from '@local/components/image-select'
 import { Pagination, PaginationProps } from '@local/components/pagination'
 import { Stack } from '@local/components/stack'
+import { ImageSupportedFormats } from '@local/consts'
 import { useDialog } from '@local/contexts/context-dialog'
-import { Button, IImageFormat, ImageSupportedFormats } from '@local/index'
 import { KEY_SIZE_DATA } from '@local/theme'
+import { IImageFormat } from '@local/types'
 
 import { useImageCropAddProps, useImageCropProps } from '.'
 

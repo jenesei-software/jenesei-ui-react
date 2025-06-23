@@ -1,4 +1,4 @@
-import { addSXProps } from '@local/index'
+import { addSXProps } from '@local/styles/sx'
 import { TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 

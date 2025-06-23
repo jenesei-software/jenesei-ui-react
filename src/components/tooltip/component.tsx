@@ -23,17 +23,17 @@ export const TooltipContent: FC<TooltipProps> = props => {
     offset: props.offset ?? DEFAULT_TOOLTIP_OFFSET_FALLBACK,
     mode: 'hover',
     isClickOutside: true,
-    isHoverOutside: true
+    isFloatingHover: true
   })
   return (
     <>
-      <TooltipContainer ref={reference as Ref<HTMLDivElement | null>}>{props.children}</TooltipContainer>
+      <TooltipContainer sx={props.sx} ref={reference as Ref<HTMLDivElement | null>}>
+        {props.children}
+      </TooltipContainer>
       <TooltipBox
-        $size={props.size}
-        $maxHeight={props.maxHeight}
-        $maxWidth={props.maxWidth}
-        $whiteSpace={props.whiteSpace}
+        size={props.size}
         isOpen={isOpen}
+        genre={props.genre}
         floatingStyles={floatingStyles}
         ref={floating}
         maxHeight={props.maxHeight}

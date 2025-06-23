@@ -1,8 +1,8 @@
 import { FocusEventHandler, ReactNode } from 'react'
 
 import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
-import { addSXProps } from '@local/index'
 import { addErrorProps } from '@local/styles/error'
+import { addSXProps } from '@local/styles/sx'
 import { TJeneseiThemeGenreSelect, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 

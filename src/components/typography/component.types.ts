@@ -1,5 +1,6 @@
 import { CSSProperties, PropsWithChildren, Ref } from 'react'
 
+import { SXProps } from '@local/styles/sx'
 import {
   JeneseiPaletteKeys,
   TJeneseiDevice,
@@ -12,22 +13,37 @@ import { AddDollarSign } from '@local/types'
 import { TooltipProps } from '../tooltip'
 
 type TypographyDefaultProps = {
-  line?: number
-  shadow?: 'shadowPulse'
-  weight?: TJeneseiTypographyWeight
-  device?: TJeneseiDevice
-  overflow?: CSSProperties['overflow']
-  color?: JeneseiPaletteKeys
-  family?: TJeneseiFontFamily
   align?: CSSProperties['textAlign']
-  decoration?: CSSProperties['textDecoration']
-  transform?: CSSProperties['textTransform']
-  wrap?: CSSProperties['textWrap']
-  letterSpacing?: CSSProperties['letterSpacing']
+
+  color?: JeneseiPaletteKeys
+
   cursor?: CSSProperties['cursor']
-  height?: number
+
+  decoration?: CSSProperties['textDecoration']
+
+  device?: TJeneseiDevice
+
+  family?: TJeneseiFontFamily
+
   flex?: string
+
+  height?: number
+
   isHoverUnderlining?: boolean
+
+  letterSpacing?: CSSProperties['letterSpacing']
+
+  line?: number
+
+  overflow?: CSSProperties['overflow']
+
+  shadow?: 'shadowPulse'
+
+  transform?: CSSProperties['textTransform']
+
+  weight?: TJeneseiTypographyWeight
+
+  wrap?: CSSProperties['textWrap']
 }
 
 export type TypographyDataProps = TypographyDefaultProps & {
@@ -48,9 +64,8 @@ export type TypographySXProps = {
 
 export type TypographyProps = PropsWithChildren & {
   onClick?: () => void
-  style?: CSSProperties
   className?: string
-
+  style?: CSSProperties
   href?: string
 
   isParagraph?: boolean
@@ -59,6 +74,8 @@ export type TypographyProps = PropsWithChildren & {
   ref?: Ref<HTMLElement | HTMLHeadingElement | HTMLAnchorElement | null>
 
   sx: TypographySXProps
+
+  sxStandard?: SXProps
 }
 
 export type addSXTypographyProps = {
@@ -66,7 +83,10 @@ export type addSXTypographyProps = {
 }
 export type addSXTypographyStyleProps = AddDollarSign<addSXTypographyProps>
 
-export type TypographyCSSProps = AddDollarSign<Pick<TypographyProps, 'sx'>>
+export type TypographyCSSProps = AddDollarSign<{
+  sxTypography: TypographySXProps
+  sx?: SXProps
+}>
 
 export type TypographyTooltipProps = {
   typography: TypographyProps

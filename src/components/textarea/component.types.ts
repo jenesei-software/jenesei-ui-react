@@ -1,7 +1,7 @@
 import { FocusEventHandler, KeyboardEventHandler } from 'react'
 
-import { addSXProps } from '@local/index'
 import { addErrorProps } from '@local/styles/error'
+import { addSXProps } from '@local/styles/sx'
 import { TJeneseiThemeGenreTextArea, TJeneseiThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 

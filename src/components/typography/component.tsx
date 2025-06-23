@@ -10,12 +10,13 @@ const TypographyWithRef = (props: TypographyProps) => {
   const { screenActual } = useScreenWidth()
   const cssProps: TypographyCSSProps & Pick<TypographyProps, 'onClick' | 'className' | 'style'> = useMemo(
     () => ({
-      $sx: props.sx,
-      className: props.className,
+      $sxTypography: props.sx,
       style: props.style,
+      className: props.className,
+      $sx: props.sxStandard,
       onClick: props.onClick ? props.onClick : () => {}
     }),
-    [props.sx, props.className, props.style, props.onClick]
+    [props.sx, props.style, props.className, props.sxStandard, props.onClick]
   )
 
   const screenSX = useMemo(() => props.sx?.[screenActual] ?? props.sx?.default, [props.sx, screenActual])

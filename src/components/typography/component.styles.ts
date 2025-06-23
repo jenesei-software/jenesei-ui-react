@@ -1,5 +1,6 @@
 import styled, { css, keyframes } from 'styled-components'
 
+import { addSX as addSXStandard } from '@local/styles/sx'
 import { JeneseiPalette } from '@local/theme/theme'
 
 import { TypographyAllProps, TypographyCSSProps, addSXTypographyStyleProps } from '.'
@@ -233,44 +234,6 @@ function toStyledCSS(value: TypographyAllProps) {
       : null};
   `
 }
-const addSX = css<TypographyCSSProps>`
-  ${props => {
-    const rawSX = props.$sx
-    if (!rawSX) return null
-    return toStyledCSS(rawSX.default)
-  }}
-
-  ${props => {
-    const rawSX = props.$sx
-    if (!rawSX) return null
-
-    return Object.entries(rawSX)
-      .filter(([key]) => key !== 'default')
-      .map(([deviceKey, value]) => {
-        const screenWidth = props.theme.screens[deviceKey as keyof typeof props.theme.screens]?.width
-        if (!screenWidth) return null
-        return css`
-          @media (max-width: ${screenWidth}px) {
-            ${toStyledCSS(value)}
-          }
-        `
-      })
-  }}
-`
-
-const TypographyCSS = css<TypographyCSSProps>`
-  font-style: normal;
-  position: relative;
-  overflow: visible;
-  text-overflow: ellipsis;
-  overflow-wrap: anywhere;
-  line-height: ${props => props.theme.font.lineHeight};
-  ${addSX};
-`
-
-export const Title = styled.span<TypographyCSSProps>`
-  ${TypographyCSS}
-`
 
 export const addSXTypography = css<addSXTypographyStyleProps>`
   ${props => {
@@ -295,4 +258,19 @@ export const addSXTypography = css<addSXTypographyStyleProps>`
         `
       })
   }}
+`
+
+const TypographyCSS = css<TypographyCSSProps>`
+  font-style: normal;
+  position: relative;
+  overflow: visible;
+  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
+  line-height: ${props => props.theme.font.lineHeight};
+  ${addSXTypography};
+  ${addSXStandard}
+`
+
+export const Title = styled.span<TypographyCSSProps>`
+  ${TypographyCSS}
 `
