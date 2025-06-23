@@ -21,6 +21,7 @@ export const Popover: FC<PopoverProps> = props => {
           }}
         >
           <PopoverWrapper
+            className={props.className}
             tabIndex={0}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}

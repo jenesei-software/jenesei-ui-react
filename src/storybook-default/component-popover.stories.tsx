@@ -20,6 +20,8 @@ const PopoverWrapper: FC<PopoverProps> = props => {
   const { isOpen, reference, floating, floatingStyles } = usePopover({
     placement: 'bottom',
     offset: 8,
+    hoverOffset: 0,
+    hoverCloseDelay: 0,
     mode: 'click'
   })
   return (

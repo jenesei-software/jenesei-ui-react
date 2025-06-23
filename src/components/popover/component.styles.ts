@@ -13,6 +13,8 @@ export const PopoverWrapper = styled(motion.div)<StyledPopoverProps>`
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   padding: ${props => props.$padding || '16px'};
+  max-width: ${props => props.$maxWidth || '400px'};
+  max-height: ${props => props.$maxHeight || '400px'};
   ${addOutline};
   ${addSXTypography};
   ${addSX};

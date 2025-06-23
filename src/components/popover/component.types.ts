@@ -7,6 +7,7 @@ import { AddDollarSign } from '@local/types'
 import { addSXTypographyProps, addSXTypographyStyleProps } from '../typography'
 
 export type PopoverProps = PropsWithChildren & {
+  className?: string
   padding?: number
   maxWidth?: string
   maxHeight?: string

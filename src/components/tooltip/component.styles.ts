@@ -1,12 +1,14 @@
-import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { TooltipBoxProps } from '.'
+import { Popover } from '../popover'
 
 export const TooltipContainer = styled.div`
-  display: contents;
+  display: flex;
+  flex-grow: 1;
+  height: fit-content;
 `
 
 /****************************************** TooltipBox Size *************************************************/
@@ -30,19 +32,11 @@ export const addTooltipBoxSizeConstructor = (props: IJeneseiThemeSize) => css`
 `
 
 /****************************************** TooltipBox *************************************************/
-export const TooltipBox = styled(motion.div)<TooltipBoxProps>`
-  position: absolute;
-  z-index: 9999;
-  width: auto;
-  min-width: 0;
-
-  overflow-x: hidden;
-  overflow-y: auto;
+export const TooltipBox = styled(Popover)<TooltipBoxProps>`
   background-color: ${props => props.theme.palette.grayPatricia};
   color: ${props => props.theme.palette.whiteStandard};
   box-shadow: ${props => props.theme.effects.button};
   white-space: ${props => props.$whiteSpace ?? 'normal'};
-  max-width: ${props => props.$maxWidth ?? '300px'};
-  max-height: ${props => props.$maxHeight ?? '200px'};
+  overflow: auto;
   ${addTooltipBoxSize};
 `
