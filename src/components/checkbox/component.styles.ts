@@ -8,6 +8,7 @@ import { addSX } from '@local/styles/sx'
 import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledCheckboxProps, StyledIconProps } from '.'
+import { addRippleDefault } from '../ripple'
 
 /****************************************** Size *************************************************/
 export const CheckboxSize = css<StyledCheckboxProps>`
@@ -76,17 +77,11 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   align-items: center;
   justify-content: flex-start;
   border: 1px solid transparent;
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
   user-select: none;
-
-  & *:not(#Ripple):not(:has(a)):not(a) {
-    user-select: none;
-    pointer-events: none;
-  }
   cursor: pointer;
+  background-color: ${props => props.$isNotBackground && 'transparent'};
 
+  ${addRippleDefault};
   ${addTransition};
   ${CheckboxGenre};
   ${CheckboxDisabled}
@@ -96,7 +91,6 @@ export const CheckboxWrapper = styled.button<StyledCheckboxProps>`
   ${addError};
   ${addSXTypography};
   ${addSX};
-  background-color: ${props => props.$isNotBackground && 'transparent'};
 `
 
 /****************************************** Styled *************************************************/

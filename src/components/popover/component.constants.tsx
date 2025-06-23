@@ -1,0 +1,2 @@
+export const DEFAULT_POPOVER_OFFSET = 8
+export const DEFAULT_POPOVER_CLOSE_DELAY = 100

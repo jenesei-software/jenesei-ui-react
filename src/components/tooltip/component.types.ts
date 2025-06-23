@@ -23,9 +23,9 @@ export type TooltipProps = PropsWithChildren & {
   content: ReactNode
   placement?: Placement
   padding?: number
-  whiteSpace?: CSSProperties['whiteSpace']
   maxWidth?: string
   maxHeight?: string
+  whiteSpace?: CSSProperties['whiteSpace']
   isDisabled?: boolean
   size?: TJeneseiThemeSize
 } & addSXTypographyProps

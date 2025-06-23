@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, Ref } from 'react'
 
 import { IconItemProps } from '@local/components/icon'
 import { addSXProps, addSXStyleProps } from '@local/styles/sx'
@@ -14,6 +14,8 @@ type ButtonPropsDefault = PropsWithChildren & {
   genre: TButtonGenre
 
   id?: string
+
+  ref?: Ref<HTMLElement | null>
 
   className?: string
 

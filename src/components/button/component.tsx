@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react'
+import { FC, Ref, useMemo } from 'react'
 import { useTheme } from 'styled-components'
 
 import {
@@ -95,6 +95,7 @@ export const Button: FC<ButtonProps> = props => {
       type={props.type ?? 'button'}
       className={props.className}
       onClick={handleClick}
+      ref={props.ref as Ref<HTMLButtonElement>}
       $sx={props.sx}
     >
       <Ripple

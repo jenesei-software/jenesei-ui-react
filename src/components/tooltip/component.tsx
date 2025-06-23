@@ -245,7 +245,7 @@ export const TooltipContent: FC<TooltipProps> = props => {
                     }
                   }
                 >
-                  {props.content}
+                  {props.children}
                 </Typography>
               </TooltipBox>
             )}
