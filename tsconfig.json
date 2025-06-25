@@ -30,6 +30,6 @@
       "@local/*": ["src/*"],
     }
   },
-  "include": ["src"],
+  "include": ["src", ".storybook-stories/storybook-default", ".storybook-stories/storybook-realebail"],
   "exclude": ["node_modules"]
 }

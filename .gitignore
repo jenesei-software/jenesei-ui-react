@@ -15,8 +15,6 @@ dist-ssr
 *.local
 *.npmrc
 
-public/pictures/*
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

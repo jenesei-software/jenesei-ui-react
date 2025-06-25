@@ -1,10 +1,10 @@
-import { create } from '@storybook/theming/create'
+import { create } from 'storybook/theming';
 
 export default create({
   base: 'light',
   brandTitle: 'Jenesei',
   brandUrl: 'https://jenesei.ru/',
-  brandImage: 'https://id.jenesei.ru/icons/icon-512x512.png',
+  brandImage: '/icons/icon-180x180.png',
   brandTarget: '_blank',
 
   colorPrimary: '#395295',
