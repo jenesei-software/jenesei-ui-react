@@ -1,5 +1,7 @@
 import Cookies from 'js-cookie'
 
+import { CookieAttributes } from '.'
+
 export function getFromCookie<T>(key: string): T | null {
   const item = Cookies.get(key)
   if (item) {
@@ -13,7 +15,7 @@ export function getFromCookie<T>(key: string): T | null {
   return null
 }
 
-export function setToCookie<T>(key: string, value: T, options?: Cookies.CookieAttributes): void {
+export function setToCookie<T>(key: string, value: T, options?: CookieAttributes): void {
   try {
     const item = JSON.stringify(value)
     Cookies.set(key, item, options)
