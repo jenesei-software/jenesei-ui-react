@@ -1,0 +1,45 @@
+name: Deploy Frontend Wrapper
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: "Version bump"
+        required: false
+        default: "none"
+        type: choice
+        options:
+          - none
+          - major
+          - minor
+          - patch
+      package_manager:
+        description: "Package manager"
+        required: false
+        default: "npm"
+        type: choice
+        options:
+          - npm
+          - yarn
+          - bun
+          - pnpm
+      add_branch_name:
+        description: 'Add branch name to version'
+        required: false
+        type: boolean
+        default: true
+      add_build_number:
+        description: 'Add build number to version'
+        required: false
+        type: boolean
+        default: true
+jobs:
+  call-publisher:
+    uses: jenesei-software/.github/.github/workflows/deploy_frontend.yml@main
+    with:
+      version_type: ${{ inputs.version_type }}
+      package_manager: ${{ inputs.package_manager }}
+      add_branch_name: ${{ inputs.add_branch_name }}
+      add_build_number: ${{ inputs.add_build_number }}
+    secrets:
+      ACCESS_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}

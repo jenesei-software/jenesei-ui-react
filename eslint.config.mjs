@@ -8,8 +8,8 @@ import globals from 'globals'
 import pluginTypescript from 'typescript-eslint'
 
 export default [
-  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
   {
+    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     languageOptions: {
       parser: pluginTypescript.parser,
       globals: {
@@ -35,9 +35,9 @@ export default [
       'react/react-in-jsx-scope': 'off',
       'storybook/hierarchy-separator': 'error',
       'storybook/default-exports': 'off',
-      'prettier/prettier': 'error',
       'no-unused-vars': 'off',
-      '@typescript-eslint/no-unused-vars': 'warn'
+      '@typescript-eslint/no-unused-vars': 'warn',
+      'prettier/prettier': 'error'
     },
     settings: {
       react: {

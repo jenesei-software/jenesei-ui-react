@@ -1,9 +1,0 @@
-name: Library Storybook Wrapper
-
-on: workflow_dispatch
-
-jobs:
-  call-publisher:
-    uses: jenesei-software/.github/.github/workflows/library_storybook.yml@main
-    secrets:
-      ACCESS_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
