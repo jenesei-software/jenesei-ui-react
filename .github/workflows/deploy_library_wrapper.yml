@@ -6,13 +6,12 @@ on:
       registry_type:
         description: "Registry type"
         required: true
-        default: "npm"
+        default: "all"
         type: choice
         options:
           - npm
-          - yarn
-          - bun
-          - pnpm
+          - github
+          - all
       version_type:
         description: "Version bump"
         required: true
@@ -25,12 +24,13 @@ on:
       package_manager:
         description: "Package manager"
         required: false
-        default: "npm"
+        default: "pnpm"
         type: choice
         options:
           - npm
           - yarn
           - bun
+          - pnpm
 
 jobs:
   call-publisher:

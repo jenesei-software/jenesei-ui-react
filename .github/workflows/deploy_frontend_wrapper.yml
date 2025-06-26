@@ -10,13 +10,10 @@ on:
         type: choice
         options:
           - none
-          - major
-          - minor
-          - patch
       package_manager:
         description: "Package manager"
         required: false
-        default: "npm"
+        default: "pnpm"
         type: choice
         options:
           - npm
