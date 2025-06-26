@@ -30,6 +30,6 @@
       "@local/*": ["src/*"]
     }
   },
-  "include": ["src", ".storybook-stories"],
+  "include": ["src", ".storybook-stories", ".storybook"],
   "exclude": ["node_modules"]
 }

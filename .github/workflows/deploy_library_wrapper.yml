@@ -24,7 +24,7 @@ on:
       package_manager:
         description: "Package manager"
         required: false
-        default: "pnpm"
+        default: "yarn"
         type: choice
         options:
           - npm
