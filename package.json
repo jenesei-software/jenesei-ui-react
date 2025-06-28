@@ -266,7 +266,7 @@
     }
   },
   "scripts": {
-    "build:storybook": "cross-env NODE_ENV=storybook storybook build --quiet --disable-telemetry",
+    "build:storybook": "cross-env NODE_ENV=storybook storybook build --quiet --disable-telemetry -o build",
     "build:library": "tsc && vite build",
     "storybook": "storybook dev -p 3030",
     "eslint": "eslint \"src/**/*.{ts,tsx,js,jsx}\"",
