@@ -1,7 +1,7 @@
 {
   "author": "Cyril Strone",
   "name": "@jenesei-software/jenesei-ui-react",
-  "version": "1.1.15",
+  "version": "1.1.15-storybook.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jenesei-software/jenesei-ui-react.git"
@@ -266,7 +266,7 @@
     }
   },
   "scripts": {
-    "build:storybook": "cross-env NODE_ENV=storybook storybook build --quiet --disable-telemetry",
+    "build:storybook": "cross-env NODE_ENV=storybook storybook build --quiet --disable-telemetry -o build",
     "build:library": "tsc && vite build",
     "storybook": "storybook dev -p 3030",
     "eslint": "eslint \"src/**/*.{ts,tsx,js,jsx}\"",
