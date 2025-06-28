@@ -168,3 +168,6 @@ export const MapThemeList: MapTheme[] = [
 
 export const ImageSupportedFormats = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/avif'] as const
 export const ImageSupportedFormatsForInput = ['image/*', '.jpeg', '.jpg', '.png', '.webp', 'avif'].join(',')
+
+export const LoremIpsumText =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'

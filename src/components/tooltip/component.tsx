@@ -21,9 +21,12 @@ export const TooltipContent: FC<TooltipProps> = props => {
   const { isOpen, reference, floating, floatingStyles } = usePopover({
     placement: props.placement ?? DEFAULT_TOOLTIP_PLACEMENT_FALLBACK,
     offset: props.offset ?? DEFAULT_TOOLTIP_OFFSET_FALLBACK,
-    mode: 'hover',
-    isClickOutside: true,
-    isFloatingHover: true
+    mode: props.mode ?? 'hover',
+    isClickOutside: props.isClickOutside ?? true,
+    isFloatingHover: props.isFloatingHover ?? true,
+    isWidthAsContent: props.isWidthAsContent ?? false,
+    hoverCloseDelay: props.hoverCloseDelay ?? undefined,
+    hoverOffset: props.hoverOffset ?? undefined
   })
   return (
     <>

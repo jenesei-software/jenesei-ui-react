@@ -1,9 +1,9 @@
-import { Placement, autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/react'
+import { autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/react'
 import { AnimatePresence } from 'framer-motion'
-import { FC, Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { FC, Ref, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 
-import { DEFAULT_POPOVER_CLOSE_DELAY, DEFAULT_POPOVER_OFFSET, PopoverProps, PopoverWrapper } from '.'
+import { DEFAULT_POPOVER_CLOSE_DELAY, DEFAULT_POPOVER_OFFSET, PopoverProps, PopoverWrapper, UsePopoverProps } from '.'
 
 export const Popover: FC<PopoverProps> = props => {
   return ReactDOM.createPortal(
@@ -43,18 +43,9 @@ export const Popover: FC<PopoverProps> = props => {
   )
 }
 
-type UsePopoverProps = {
-  placement: Placement
-  offset?: number
-  isClickOutside?: boolean
-  isFloatingHover?: boolean
-  hoverCloseDelay?: number
-  hoverOffset?: number
-  mode?: 'click' | 'hover'
-}
-
 export const usePopover = (props: UsePopoverProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [minWidth, setMinWidth] = useState<number | undefined>(undefined)
 
   const {
     refs,
@@ -188,9 +179,23 @@ export const usePopover = (props: UsePopoverProps) => {
     }
   }, [isOpen, props.isFloatingHover, refs.reference, refs.floating, hoverOffset, hoverCloseDelay])
 
+  useLayoutEffect(() => {
+    if (!isOpen || !props.isWidthAsContent || !refs.reference.current) return
+    const rect = refs.reference.current.getBoundingClientRect()
+    setMinWidth(rect.width)
+  }, [isOpen, props.isWidthAsContent, refs.reference])
+
   const open = useCallback(() => setIsOpen(true), [])
   const close = useCallback(() => setIsOpen(false), [])
   const toggle = useCallback(() => setIsOpen(prev => !prev), [])
+
+  const combinedStyles = useMemo(() => {
+    return {
+      ...floatingStyles,
+      minWidth: props.isWidthAsContent && minWidth ? `${minWidth}px` : undefined,
+      maxWidth: props.isWidthAsContent && minWidth ? `${minWidth}px` : undefined
+    }
+  }, [floatingStyles, props.isWidthAsContent, minWidth])
 
   return {
     isOpen,
@@ -199,7 +204,7 @@ export const usePopover = (props: UsePopoverProps) => {
     toggle,
     reference: refs.setReference as Ref<HTMLElement | null>,
     floating: refs.setFloating as Ref<HTMLElement | null>,
-    floatingStyles,
+    floatingStyles: combinedStyles,
     placement: actualPlacement
   }
 }

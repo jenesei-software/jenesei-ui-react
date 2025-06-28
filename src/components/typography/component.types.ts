@@ -21,8 +21,6 @@ type TypographyDefaultProps = {
 
   decoration?: CSSProperties['textDecoration']
 
-  device?: TJeneseiDevice
-
   family?: TJeneseiFontFamily
 
   flex?: string
@@ -70,6 +68,7 @@ export type TypographyProps = PropsWithChildren & {
 
   isParagraph?: boolean
   isAnchor?: boolean
+  isSpan?: boolean
 
   ref?: Ref<HTMLElement | HTMLHeadingElement | HTMLAnchorElement | null>
 
