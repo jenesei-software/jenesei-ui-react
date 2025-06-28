@@ -1,4 +1,4 @@
-name: Deploy Library Wrapper
+name: deploy-library
 
 on:
   workflow_dispatch:
