@@ -27,7 +27,7 @@ const TypographyWithRef = (props: TypographyProps) => {
         <Title
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ref={props.ref as any}
-          as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : 'span'}
+          as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : 'span'}
           href={props.href}
           {...cssProps}
         >
@@ -39,7 +39,7 @@ const TypographyWithRef = (props: TypographyProps) => {
         <Title
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ref={props.ref as any}
-          as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : screenSX.variant}
+          as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : screenSX.variant}
           href={props.href}
           {...cssProps}
         >
@@ -53,7 +53,7 @@ const TypographyWithRef = (props: TypographyProps) => {
     <Title
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ref={props.ref as any}
-      as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : 'span'}
+      as={props.isAnchor ? 'a' : props.isParagraph ? 'p' : props.isSpan ? 'span' : 'span'}
       href={props.href}
       {...cssProps}
     >
