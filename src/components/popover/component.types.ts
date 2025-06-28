@@ -1,3 +1,4 @@
+import { Placement } from '@floating-ui/react'
 import { CSSProperties, PropsWithChildren, Ref } from 'react'
 
 import { addErrorStylesProps } from '@local/styles/error'
@@ -27,3 +28,21 @@ export type StyledPopoverProps = AddDollarSign<
   addSXStyleProps &
   addErrorStylesProps &
   addSXTypographyStyleProps
+
+export type UsePopoverProps = {
+  hoverCloseDelay?: number
+
+  hoverOffset?: number
+
+  isClickOutside?: boolean
+
+  isFloatingHover?: boolean
+
+  isWidthAsContent?: boolean
+
+  mode?: 'click' | 'hover'
+
+  offset?: number
+
+  placement: Placement
+}

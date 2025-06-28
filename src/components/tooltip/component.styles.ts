@@ -7,7 +7,7 @@ import { Stack } from '../stack'
 
 export const TooltipContainer = styled(Stack)`
   display: flex;
-  flex-grow: 1;
+  width: fit-content;
   height: fit-content;
 `
 
