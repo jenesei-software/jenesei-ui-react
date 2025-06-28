@@ -1,4 +1,4 @@
-name: Deploy Frontend Wrapper
+name: deploy-frontend
 
 on:
   workflow_dispatch:
@@ -32,7 +32,7 @@ on:
         default: true
 jobs:
   call-publisher:
-    uses: jenesei-software/.github/.github/workflows/deploy_frontend.yml@main
+    uses: jenesei-software/.github/.github/workflows/deploy-frontend.yml@main
     with:
       version_type: ${{ inputs.version_type }}
       package_manager: ${{ inputs.package_manager }}

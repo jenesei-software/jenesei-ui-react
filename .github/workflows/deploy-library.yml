@@ -34,7 +34,7 @@ on:
 
 jobs:
   call-publisher:
-    uses: jenesei-software/.github/.github/workflows/deploy_library.yml@main
+    uses: jenesei-software/.github/.github/workflows/deploy-library.yml@main
     with:
       registry_type: ${{ inputs.registry_type }}
       version_type: ${{ inputs.version_type }}
