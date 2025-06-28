@@ -44,6 +44,8 @@ export type DatePickerProps = addErrorProps &
 
     isDisabled?: boolean
 
+    isMinWidth?: boolean
+
     isInputEffect?: InputStandardProps['isInputEffect']
 
     isOnClickClose?: boolean
@@ -73,6 +75,7 @@ export type DateWrapperProps = AddDollarSign<
   Pick<InputStandardProps, 'genre' | 'isDisabled'> & {
     parentListHeight: number
     radius: number
+    isMinWidth?: boolean
   }
 > &
   StyledInputWrapperProps
@@ -129,6 +132,8 @@ export type WeekItem = {
 }
 export type InputItem = {
   day: string
+
   month: string
+
   year: string
 }
