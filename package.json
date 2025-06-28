@@ -268,6 +268,7 @@
   "scripts": {
     "build:storybook": "cross-env NODE_ENV=storybook storybook build --quiet --disable-telemetry -o build",
     "build:library": "tsc && vite build",
+    "build:main": "tsc && vite build",
     "storybook": "storybook dev -p 3030",
     "eslint": "eslint \"src/**/*.{ts,tsx,js,jsx}\"",
     "prettier": "prettier --write \"src/**/*.{ts,tsx}\""
