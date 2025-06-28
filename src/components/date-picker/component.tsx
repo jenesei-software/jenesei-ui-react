@@ -194,16 +194,22 @@ export const DatePicker = (props: DatePickerProps) => {
         return
       }
       if (e.key === 'Backspace' || e.key === 'Delete') {
-        if (activeSegment === 'day') {
-          setInputDay(null)
-        } else if (activeSegment === 'month') {
-          setInputMonth(null)
-        } else if (activeSegment === 'year') {
-          setInputYear(null)
+        if (
+          (activeSegment === 'day' && (!inputDay || inputDay === '')) ||
+          (activeSegment === 'month' && (!inputMonth || inputMonth === '')) ||
+          (activeSegment === 'year' && (!inputYear || inputYear === ''))
+        ) {
+          if (activeSegment === 'day') {
+            setInputDay(null)
+          } else if (activeSegment === 'month') {
+            setInputMonth(null)
+          } else if (activeSegment === 'year') {
+            setInputYear(null)
+          }
+          const nextSegment = activeSegment === 'day' ? 'day' : activeSegment === 'month' ? 'day' : 'month'
+          setActiveSegment(nextSegment)
+          e.preventDefault()
         }
-        const nextSegment = activeSegment === 'day' ? 'day' : activeSegment === 'month' ? 'day' : 'month'
-        setActiveSegment(nextSegment)
-        e.preventDefault()
       }
       if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
         const nextSegment = activeSegment === 'day' ? 'year' : activeSegment === 'month' ? 'day' : 'month'
@@ -216,7 +222,7 @@ export const DatePicker = (props: DatePickerProps) => {
         e.preventDefault()
       }
     },
-    [activeSegment]
+    [activeSegment, inputDay, inputMonth, inputYear]
   )
 
   const onChangeDate = useCallback(
@@ -288,8 +294,11 @@ export const DatePicker = (props: DatePickerProps) => {
   useEffect(() => {
     if (isOpen) {
       setActiveSegment('day')
+    } else {
+      setActiveSegment(null)
     }
   }, [isOpen])
+
   return (
     <Outside
       onOutsideClick={event => {
@@ -302,6 +311,7 @@ export const DatePicker = (props: DatePickerProps) => {
         $genre={props.genre}
         $sx={props.sx}
         $isDisabled={props?.isDisabled}
+        $isMinWidth={props?.isMinWidth}
         $radius={radius}
         $parentListHeight={height}
         onFocus={event => {

@@ -15,6 +15,11 @@ import { DateDropdownDayProps, DateDropdownListProps, DateInputProps, DateStyled
 export const DateWrapper = styled.div<DateWrapperProps>`
   width: 100%;
   position: relative;
+  ${props =>
+    props.$isMinWidth &&
+    css`
+      width: min-content;
+    `}
   ${addSX};
   ${addNiceNumber};
 `
@@ -23,7 +28,7 @@ export const DateDropdownListParent = styled(motion.div)<DateStyledListProps>`
   display: none;
 
   height: 0px;
-  width: 100%;
+  width: fit-content;
   max-width: 270px;
 
   position: absolute;
@@ -227,7 +232,6 @@ export const DateInputWrapper = styled.div<DateInputProps>`
 
   ${DateInputWrapperSize};
   ${DateInputWrapperGenre};
-  ${addOutline};
   ${addTransition};
   ${addError};
 `

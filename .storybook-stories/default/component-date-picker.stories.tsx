@@ -39,12 +39,8 @@ export const PastHundredYears: Story = {
       inputs: localeInput
     },
     size: 'medium',
-    genre: 'gray',
-    sx: {
-      default: {
-        width: '300px'
-      }
-    },
+    isMinWidth: true,
+    genre: 'blackBorder',
     startDate: PastHundredYearsStartDate,
     endDate: PastHundredYearsEndDate,
     value: null,
