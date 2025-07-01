@@ -11,7 +11,7 @@ import { NumberFormatValues, NumericFormatProps, PatternFormatProps } from 'reac
 
 import { addErrorProps } from '@local/styles/error'
 import { addSXProps } from '@local/styles/sx'
-import { TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
+import { IThemeGenreInput, IThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 type InputDefaultProps = addErrorProps &
@@ -34,7 +34,7 @@ type InputDefaultProps = addErrorProps &
 
     genre: TInputGenre
 
-    size: TJeneseiThemeSize
+    size: IThemeSize
 
     tabIndex?: number
 
@@ -127,7 +127,7 @@ export type StyledInputChildrenProps = AddDollarSign<
   Pick<InputProps, 'isDisabled'> & Pick<InputChildrenProps, 'left' | 'right' | 'width'>
 >
 
-export type TInputGenre = keyof TJeneseiThemeGenreInput
+export type TInputGenre = keyof IThemeGenreInput
 
 export type StyledInputProps = AddDollarSign<
   Pick<

@@ -4,7 +4,7 @@ import { getFontSizeStyles } from '@local/components/typography'
 import { addOutline, addTransitionWithoutSize } from '@local/styles/add'
 import { addError } from '@local/styles/error'
 import { addSX } from '@local/styles/sx'
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
+import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledTextAreaProps, StyledTextAreaWrapperProps } from '.'
 
@@ -64,7 +64,7 @@ const TextAreaGenre = css<StyledTextAreaProps>`
 export const TextAreaSize = css<StyledTextAreaProps>`
   ${props => TextAreaSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
-export const TextAreaSizeConstructor = (props: IJeneseiThemeSize) => css`
+export const TextAreaSizeConstructor = (props: IThemeSizePropertyDefault) => css`
   padding: ${props.padding - 4}px ${props.padding}px ${props.padding - 6}px ${props.padding}px;
   border-radius: ${props.radius}px;
 `
@@ -120,7 +120,7 @@ export const StyledTextArea = styled.textarea<StyledTextAreaProps>`
 // const TextAreaStyledLoadingSize = css<StyledTextAreaProps>`
 //   ${props => TextAreaStyledLoadingConstructor(KEY_SIZE_DATA[props.$size])};
 // `
-// const TextAreaStyledLoadingConstructor = (props: IJeneseiThemeSize) => css`
+// const TextAreaStyledLoadingConstructor = (props: IThemeSizePropertyDefault) => css`
 //   padding: ${props.padding - 6}px ${props.padding}px ${props.padding - 4}px ${props.padding}px;
 // `
 

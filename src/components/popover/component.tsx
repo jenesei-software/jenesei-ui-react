@@ -72,10 +72,15 @@ export const usePopover = (props: UsePopoverProps) => {
     const refEl = refs.reference.current
     if (!refEl) return
 
-    if (props.mode === 'click' && refEl instanceof HTMLElement) {
+    if ((props.mode === 'click' || props.mode === 'clickOpen') && refEl instanceof HTMLElement) {
       const handleClick = () => {
-        setIsOpen(prev => !prev)
+        if (props.mode === 'click') {
+          setIsOpen(prev => !prev)
+        } else if (props.mode === 'clickOpen') {
+          setIsOpen(true)
+        }
       }
+
       refEl.addEventListener('click', handleClick)
       return () => {
         refEl.removeEventListener('click', handleClick)
@@ -199,6 +204,7 @@ export const usePopover = (props: UsePopoverProps) => {
 
   return {
     isOpen,
+    setIsOpen,
     open,
     close,
     toggle,

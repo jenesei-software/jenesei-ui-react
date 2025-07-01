@@ -3,13 +3,13 @@ import { FocusEventHandler, ReactNode } from 'react'
 import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
 import { addErrorProps } from '@local/styles/error'
 import { addSXProps } from '@local/styles/sx'
-import { TJeneseiThemeGenreSelect, TJeneseiThemeSize } from '@local/theme'
+import { IThemeGenreSelect, IThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 import { MonthItem } from '../date-picker'
 import { MapTheme } from '../map'
 
-export type TInputSelect = keyof TJeneseiThemeGenreSelect
+export type TInputSelect = keyof IThemeGenreSelect
 
 export interface ISelectItem {
   [key: string]: unknown
@@ -24,7 +24,7 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     name?: string
     id?: string
 
-    size: TJeneseiThemeSize
+    size: IThemeSize
     genre: TInputSelect
     placeholder?: string
     isDisabled?: boolean
@@ -89,6 +89,7 @@ export type SelectDateProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' 
   startDate?: number
   endDate?: number
   value: number
+  isShortLabel?: boolean
   onChange: (timestamp: number) => void
   monthsLocale: MonthItem[]
 }
@@ -115,7 +116,7 @@ export type SelectStyledOptionProps = AddDollarSign<{
 export type DropdownOptionIconProps = AddDollarSign<{
   checked?: boolean
   genre: TInputSelect
-  size: TJeneseiThemeSize
+  size: IThemeSize
 }>
 
 export type SelectStyledListProps = AddDollarSign<

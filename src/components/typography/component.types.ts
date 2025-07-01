@@ -2,11 +2,11 @@ import { CSSProperties, PropsWithChildren, Ref } from 'react'
 
 import { SXProps } from '@local/styles/sx'
 import {
-  JeneseiPaletteKeys,
-  TJeneseiDevice,
-  TJeneseiFontFamily,
-  TJeneseiTypographyHeading,
-  TJeneseiTypographyWeight
+  IThemePaletteKeys,
+  IThemeDevice,
+  IThemeFontFamily,
+  IThemeTypographyHeading,
+  IThemeTypographyWeight
 } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
@@ -15,13 +15,13 @@ import { TooltipProps } from '../tooltip'
 type TypographyDefaultProps = {
   align?: CSSProperties['textAlign']
 
-  color?: JeneseiPaletteKeys
+  color?: IThemePaletteKeys
 
   cursor?: CSSProperties['cursor']
 
   decoration?: CSSProperties['textDecoration']
 
-  family?: TJeneseiFontFamily
+  family?: IThemeFontFamily
 
   flex?: string
 
@@ -39,7 +39,7 @@ type TypographyDefaultProps = {
 
   transform?: CSSProperties['textTransform']
 
-  weight?: TJeneseiTypographyWeight
+  weight?: IThemeTypographyWeight
 
   wrap?: CSSProperties['textWrap']
 }
@@ -49,7 +49,7 @@ export type TypographyDataProps = TypographyDefaultProps & {
 }
 
 type TypographyVariantProps = TypographyDefaultProps & {
-  variant: TJeneseiTypographyHeading
+  variant: IThemeTypographyHeading
 }
 
 export type TypographyAllProps = TypographyDataProps | TypographyVariantProps
@@ -57,7 +57,7 @@ export type TypographyAllProps = TypographyDataProps | TypographyVariantProps
 export type TypographySXProps = {
   default: TypographyAllProps
 } & {
-  [K in TJeneseiDevice]?: TypographyAllProps
+  [K in IThemeDevice]?: TypographyAllProps
 }
 
 export type TypographyProps = PropsWithChildren & {

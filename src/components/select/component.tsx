@@ -7,7 +7,7 @@ import { Button } from '@local/components/button'
 import { InputChildrenProps } from '@local/components/input'
 import { ListLanguage, MapThemeList } from '@local/consts'
 import { ErrorMessage, addErrorProps } from '@local/styles/error'
-import { KEY_SIZE_DATA, TJeneseiThemeGenreInput, TJeneseiThemeSize } from '@local/theme'
+import { IThemeGenreInput, IThemeSize, KEY_SIZE_DATA } from '@local/theme'
 
 import {
   DropdownErase,
@@ -420,8 +420,8 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
 
 const ContainerDropdownOptionComponent = (
   params: addErrorProps & {
-    genre: keyof TJeneseiThemeGenreInput
-    size: TJeneseiThemeSize
+    genre: keyof IThemeGenreInput
+    size: IThemeSize
     onClick: () => void
     isLoading?: boolean
     isNotShowHoverStyle?: boolean
@@ -545,7 +545,7 @@ export const SelectLanguage: FC<SelectLanguageProps> = props => {
 }
 
 export const SelectMonth: FC<SelectDateProps> = props => {
-  const { value, onChange, startDate, endDate, monthsLocale } = props
+  const { value, onChange, startDate, endDate, monthsLocale, isShortLabel } = props
 
   const year = moment(value).utc().year()
 
@@ -560,14 +560,14 @@ export const SelectMonth: FC<SelectDateProps> = props => {
 
       return {
         value: monthMoment.valueOf(),
-        label: monthItem.localeLong,
-        placeholder: monthItem.localeLong,
+        label: isShortLabel ? monthItem.localeShort : monthItem.localeLong,
+        placeholder: isShortLabel ? monthItem.localeShort : monthItem.localeLong,
         search: `${monthItem.localeLong.toLowerCase()}, ${monthIndex + 1}`,
         isDisabled,
         monthValue: monthItem.value
       }
     })
-  }, [year, startDate, endDate, monthsLocale])
+  }, [monthsLocale, year, startDate, endDate, isShortLabel])
 
   const handleSelectChange = (option: ISelectLanguageOption[]) => {
     const selectedValue = Number(option[0]?.value)
@@ -606,6 +606,7 @@ export const SelectMonth: FC<SelectDateProps> = props => {
       onChange={handleSelectChange}
       inputProps={{
         ...props.inputProps,
+        isCenter: true,
         variety: 'standard',
         value: selectedMonth?.placeholder ?? props.placeholder,
         isReadOnly: true

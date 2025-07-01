@@ -3,7 +3,7 @@ import { CSSProperties, PropsWithChildren, Ref } from 'react'
 
 import { addErrorStylesProps } from '@local/styles/error'
 import { addSXProps, addSXStyleProps } from '@local/styles/sx'
-import { TJeneseiThemeSize } from '@local/theme'
+import { IThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 import { TButtonGenre } from '../button'
@@ -17,7 +17,7 @@ export type PopoverProps = PropsWithChildren & {
   floatingStyles: CSSProperties
   onClose?: () => void
   ref?: Ref<HTMLElement | null>
-  size?: TJeneseiThemeSize
+  size?: IThemeSize
   genre?: TButtonGenre
 } & addSXProps &
   addSXTypographyProps
@@ -40,7 +40,7 @@ export type UsePopoverProps = {
 
   isWidthAsContent?: boolean
 
-  mode?: 'click' | 'hover'
+  mode?: 'click' | 'hover' | 'clickOpen'
 
   offset?: number
 

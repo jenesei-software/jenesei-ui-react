@@ -6,7 +6,7 @@ import { getFontSizeStyles } from '@local/components/typography'
 import { addNiceNumber, addOutline, addTransition } from '@local/styles/add'
 import { addError } from '@local/styles/error'
 import { addSX } from '@local/styles/sx'
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
+import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledInputChildrenProps, StyledInputProps, StyledInputWrapperProps } from '.'
 
@@ -93,7 +93,7 @@ const InputGenre = css<StyledInputProps>`
 export const InputSize = css<StyledInputProps>`
   ${props => InputSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
-export const InputSizeConstructor = (props: IJeneseiThemeSize) => css`
+export const InputSizeConstructor = (props: IThemeSizePropertyDefault) => css`
   padding: 0px ${props.padding}px;
   height: ${props.height}px;
   min-height: ${props.height}px;
@@ -105,7 +105,7 @@ export const InputSizeConstructor = (props: IJeneseiThemeSize) => css`
 const InputHidden = css<StyledInputProps>`
   opacity: ${props => (props.$isDisabled ? 0.5 : 1)};
 `
-/****************************************** is PlaystationEffect *************************************************/
+/****************************************** is isInputEffect *************************************************/
 export const InputIsInputEffect = css<Pick<StyledInputProps, '$isInputEffect'>>`
   ${props =>
     props.$isInputEffect &&

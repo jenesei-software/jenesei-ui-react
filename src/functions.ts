@@ -39,3 +39,16 @@ export function getContrastYIQ(hexcolor: string) {
   const yiq = (r * 299 + g * 587 + b * 114) / 1000
   return yiq >= 128 ? '#000000' : '#FFFFFF'
 }
+
+export function getScrollbarWidth() {
+  const div = document.createElement('div')
+  div.style.visibility = 'hidden'
+  div.style.overflow = 'scroll'
+  div.style.width = '100px'
+  div.style.position = 'absolute'
+  div.style.top = '-9999px'
+  document.body.appendChild(div)
+  const scrollBarWidth = div.offsetWidth - div.clientWidth
+  document.body.removeChild(div)
+  return scrollBarWidth
+}

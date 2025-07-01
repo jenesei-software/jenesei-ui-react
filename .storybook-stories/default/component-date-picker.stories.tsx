@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from 'react'
 import 'styled-components'
 
 import { DatePicker, DatePickerProps } from '@local/components/date-picker'
+import { Stack } from '@local/components/stack'
 import { localeInput, localeMonths, localeWeeks } from '@local/consts'
 
 const meta: Meta<typeof DatePicker> = {
@@ -24,7 +25,18 @@ const DatePickerWrapper: FC<DatePickerProps> = props => {
     setValue(props.value)
   }, [props.value])
 
-  return <DatePicker {...props} value={value} onChange={handleSelectChange} />
+  return (
+    <Stack
+      sx={{
+        default: {
+          width: '300px',
+          height: '500px'
+        }
+      }}
+    >
+      <DatePicker {...props} value={value} onChange={handleSelectChange} />
+    </Stack>
+  )
 }
 
 const PastHundredYearsStartDate = moment.utc().subtract(100, 'years').startOf('year').valueOf()

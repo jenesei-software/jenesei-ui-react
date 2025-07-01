@@ -2,15 +2,15 @@ import React, { PropsWithChildren, Ref } from 'react'
 
 import { IconItemProps } from '@local/components/icon'
 import { addSXProps, addSXStyleProps } from '@local/styles/sx'
-import { TJeneseiThemeGenre, TJeneseiThemeSize } from '@local/theme'
+import { IThemeGenre, IThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 import { addSXTypographyProps, addSXTypographyStyleProps } from '../typography'
 
-export type TButtonGenre = keyof TJeneseiThemeGenre
+export type TButtonGenre = keyof IThemeGenre
 
 type ButtonPropsDefault = PropsWithChildren & {
-  size: TJeneseiThemeSize
+  size: IThemeSize
   genre: TButtonGenre
 
   id?: string
@@ -29,11 +29,17 @@ type ButtonPropsDefault = PropsWithChildren & {
 
   isDisabled?: boolean
 
+  isDisabledRipple?: boolean
+
   isHidden?: boolean
 
   isOnlyIcon?: boolean
 
+  isWhileTapEffect?: boolean
+
   isWidthAsHeight?: boolean
+
+  isMinWidthAsContent?: boolean
 
   isRadius?: boolean
 
@@ -65,6 +71,7 @@ export type StyledDollarButtonProps = AddDollarSign<
     | 'isDisabled'
     | 'isHidden'
     | 'isWidthAsHeight'
+    | 'isMinWidthAsContent'
     | 'isRadius'
     | 'isHiddenBorder'
     | 'isPlaystationEffect'

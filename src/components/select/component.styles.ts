@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import { StyledInputCSS, StyledMotionInput } from '@local/components/input'
 import { addBorder, addRemoveOutline, addRemoveScrollbar, addTransition } from '@local/styles/add'
 import { addSX } from '@local/styles/sx'
-import { IJeneseiThemeSize } from '@local/theme'
+import { IThemeSizePropertyDefault } from '@local/theme'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 
 import {
@@ -52,7 +52,7 @@ export const SelectWrapper = styled(motion.div)<SelectWrapperProps>`
 export const DropdownListParentSize = css<SelectStyledListProps>`
   ${props => props.$size && DropdownListParentSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
-export const DropdownListParentSizeConstructor = (props: IJeneseiThemeSize) => css`
+export const DropdownListParentSizeConstructor = (props: IThemeSizePropertyDefault) => css`
   border-radius: 0px 0px ${props.radius}px ${props.radius}px;
 `
 
@@ -114,7 +114,7 @@ export const DropdownOption = styled.li<SelectStyledOptionProps>`
 export const DropdownOptionHoverAndCheckedSize = css<SelectStyledOptionProps>`
   ${props => DropdownOptionHoverAndCheckedSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
-export const DropdownOptionHoverAndCheckedSizeConstructor = (props: IJeneseiThemeSize) => css`
+export const DropdownOptionHoverAndCheckedSizeConstructor = (props: IThemeSizePropertyDefault) => css`
   width: calc(100% - ${props.padding - 6}px);
   height: calc(100% - ${props.padding - 4}px);
   border-radius: ${props.radius}px;
@@ -155,7 +155,7 @@ export const DropdownOptionLayout = styled.div<SelectStyledOptionProps>`
 const DropdownOptionIconSize = css<DropdownOptionIconProps>`
   ${props => DropdownOptionIconSizeConstructor(KEY_SIZE_DATA[props.$size])};
 `
-const DropdownOptionIconSizeConstructor = (props: IJeneseiThemeSize) => css`
+const DropdownOptionIconSizeConstructor = (props: IThemeSizePropertyDefault) => css`
   right: ${props.padding - 6}px;
   height: ${props.height}px;
 `

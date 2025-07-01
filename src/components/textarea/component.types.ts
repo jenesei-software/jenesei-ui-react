@@ -2,7 +2,7 @@ import { FocusEventHandler, KeyboardEventHandler } from 'react'
 
 import { addErrorProps } from '@local/styles/error'
 import { addSXProps } from '@local/styles/sx'
-import { TJeneseiThemeGenreTextArea, TJeneseiThemeSize } from '@local/theme'
+import { IThemeGenreTextArea, IThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 export type TextAreaProps = addErrorProps &
@@ -23,7 +23,7 @@ export type TextAreaProps = addErrorProps &
 
     maxRows?: number
 
-    size: TJeneseiThemeSize
+    size: IThemeSize
 
     isDisabled?: boolean
 
@@ -56,7 +56,7 @@ export type TextAreaProps = addErrorProps &
     value?: string | null
   }
 
-export type TTextAreaGenre = keyof TJeneseiThemeGenreTextArea
+export type TTextAreaGenre = keyof IThemeGenreTextArea
 
 export type StyledTextAreaProps = AddDollarSign<
   Pick<

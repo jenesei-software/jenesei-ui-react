@@ -79,12 +79,14 @@ export const Button: FC<ButtonProps> = props => {
 
   return (
     <StyledButton
+      whileTap={props.isWhileTapEffect ? { scale: 0.9, transition: { duration: 0.02 } } : {}}
       id={props.id}
       tabIndex={0}
       $isFullSize={props.isFullSize}
       $genre={props.genre}
       $size={props.size}
       $isDisabled={props.isDisabled}
+      $isMinWidthAsContent={props.isMinWidthAsContent}
       $isWidthAsHeight={props.isWidthAsHeight}
       $isRadius={props.isRadius}
       $isHidden={props.isHidden}
@@ -100,7 +102,7 @@ export const Button: FC<ButtonProps> = props => {
     >
       <Ripple
         color={theme.colors.checkbox[props.genre].color.rest}
-        isDisabled={props.isDisabled}
+        isDisabled={props.isDisabled ?? props.isDisabledRipple}
         isHidden={props.isHidden}
       />
       <>

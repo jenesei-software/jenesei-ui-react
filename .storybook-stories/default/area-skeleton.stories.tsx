@@ -20,6 +20,7 @@ const SkeletonWrapper: FC<SkeletonProps> = props => {
       {...props}
       sx={{
         default: {
+          overflow: 'auto',
           width: '300px',
           height: '300px',
           borderRadius: '12px'
@@ -61,6 +62,7 @@ const SkeletonManyWrapper: FC<SkeletonProps> = props => {
     <Stack
       sx={{
         default: {
+          overflow: 'auto',
           flexDirection: 'row',
           gap: '12px'
         }

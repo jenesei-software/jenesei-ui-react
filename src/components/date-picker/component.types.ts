@@ -3,32 +3,12 @@ import { FocusEvent } from 'react'
 import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
 import { addErrorProps } from '@local/styles/error'
 import { addSXProps } from '@local/styles/sx'
-import { TJeneseiThemeGenreDate, TJeneseiThemeSize } from '@local/theme'
+import { IThemeGenreDate, IThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
 import { SelectDateProps } from '../select'
 
-export type TDateGenre = keyof TJeneseiThemeGenreDate
-
-export interface DateDayProps {
-  dayOfWeek: number
-
-  isCurrentMonth: boolean
-
-  isDisabled: boolean
-
-  isToday: boolean
-
-  isWeekend: boolean
-
-  labelNumber: number
-
-  labelString: string
-
-  value: number
-
-  weekOfMonth: number
-}
+export type DatePickerMode = 'DD.MM.YYYY' | 'MM.DD.YYYY' | 'YYYY.MM.DD'
 export type DatePickerProps = addErrorProps &
   addSXProps & {
     endDate?: number
@@ -56,6 +36,8 @@ export type DatePickerProps = addErrorProps &
       inputs: InputItem
     }
 
+    mode?: DatePickerMode
+
     name?: string
 
     onBlur?: (event?: MouseEvent) => void
@@ -64,12 +46,34 @@ export type DatePickerProps = addErrorProps &
 
     onFocus?: (event: FocusEvent<HTMLDivElement, Element>) => void
 
-    size: TJeneseiThemeSize
+    size: IThemeSize
 
     startDate?: number
 
     value: number | null
   }
+
+export type TDateGenre = keyof IThemeGenreDate
+
+export interface DateDayProps {
+  dayOfWeek: number
+
+  isCurrentMonth: boolean
+
+  isDisabled: boolean
+
+  isToday: boolean
+
+  isWeekend: boolean
+
+  labelNumber: number
+
+  labelString: string
+
+  value: number
+
+  weekOfMonth: number
+}
 
 export type DateWrapperProps = AddDollarSign<
   Pick<InputStandardProps, 'genre' | 'isDisabled'> & {
@@ -80,7 +84,7 @@ export type DateWrapperProps = AddDollarSign<
 > &
   StyledInputWrapperProps
 
-export type DateInputProps = AddDollarSign<Pick<DatePickerProps, 'error' | 'genre' | 'size'>>
+export type DateInputProps = AddDollarSign<Pick<DatePickerProps, 'error' | 'genre' | 'size'> & { isOpen?: boolean }>
 
 export type DateStyledOptionProps = AddDollarSign<{
   isSelectedItem?: boolean

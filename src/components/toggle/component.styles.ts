@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { addTransition } from '@local/styles/add'
 import { addError } from '@local/styles/error'
-import { IJeneseiThemeSizeToggle, KEY_SIZE_DATA_TOGGLE } from '@local/theme'
+import { IThemeSizePropertyToggle, KEY_SIZE_DATA_TOGGLE } from '@local/theme'
 
 import { StyledToggleProps } from '.'
 
@@ -11,7 +11,7 @@ import { StyledToggleProps } from '.'
 const ToggleWrapperSize = css<StyledToggleProps>`
   ${props => ToggleWrapperSizeConstructor(KEY_SIZE_DATA_TOGGLE[props.$size])};
 `
-const ToggleWrapperSizeConstructor = (props: IJeneseiThemeSizeToggle) => css`
+const ToggleWrapperSizeConstructor = (props: IThemeSizePropertyToggle) => css`
   height: ${props.height}px;
   width: ${props.width}px;
   padding: ${props.padding}px;
@@ -21,7 +21,7 @@ const ToggleWrapperSizeConstructor = (props: IJeneseiThemeSizeToggle) => css`
 const ToggleCenterSize = css<StyledToggleProps>`
   ${props => ToggleCenterSizeConstructor(KEY_SIZE_DATA_TOGGLE[props.$size])};
 `
-const ToggleCenterSizeConstructor = (props: IJeneseiThemeSizeToggle) => css`
+const ToggleCenterSizeConstructor = (props: IThemeSizePropertyToggle) => css`
   height: ${props.thumb}px;
   width: ${props.thumb}px;
   border-radius: 100px;

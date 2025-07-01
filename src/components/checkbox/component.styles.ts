@@ -5,7 +5,7 @@ import { addSXTypography, getFontSizeStyles } from '@local/components/typography
 import { addOutline, addTransition } from '@local/styles/add'
 import { addError } from '@local/styles/error'
 import { addSX } from '@local/styles/sx'
-import { IJeneseiThemeSize, KEY_SIZE_DATA } from '@local/theme'
+import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme'
 
 import { StyledCheckboxProps, StyledIconProps } from '.'
 import { addRippleDefault } from '../ripple'
@@ -15,7 +15,7 @@ export const CheckboxSize = css<StyledCheckboxProps>`
   ${props => CheckboxSizeConstructor({ ...KEY_SIZE_DATA[props.$size], isWidthAsHeight: props.$isWidthAsHeight })};
 `
 export const CheckboxSizeConstructor = (
-  props: IJeneseiThemeSize & {
+  props: IThemeSizePropertyDefault & {
     isWidthAsHeight?: boolean
   }
 ) => css`

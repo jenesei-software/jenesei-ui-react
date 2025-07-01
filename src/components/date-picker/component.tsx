@@ -1,9 +1,7 @@
-import { AnimatePresence } from 'framer-motion'
 import moment, { Moment } from 'moment'
-import { KeyboardEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { Fragment, KeyboardEvent, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTheme } from 'styled-components'
 
-import { Outside } from '@local/areas/outside'
 import { Button } from '@local/components/button'
 import { Ripple } from '@local/components/ripple'
 import { SelectMonth, SelectYear } from '@local/components/select'
@@ -17,13 +15,14 @@ import {
   DateDropdownDayOfWeek,
   DateDropdownDays,
   DateDropdownList,
-  DateDropdownListParent,
   DateInput,
   DateInputWrapper,
+  DatePickerMode,
   DatePickerProps,
   DateWrapper,
   WeekItem
 } from '.'
+import { Popover, usePopover } from '../popover'
 
 function countSevens(number: number) {
   const divisor = 7
@@ -38,6 +37,7 @@ export const DatePicker = (props: DatePickerProps) => {
   const theme = useTheme()
 
   const [valueMoment, setValueMoment] = useState<null | Moment>(null)
+
   const [currentMonth, setCurrentMonth] = useState<null | number>(null)
   const [currentYear, setCurrentYear] = useState<null | number>(null)
   const [currentDay, setCurrentDay] = useState<null | number>(null)
@@ -50,9 +50,67 @@ export const DatePicker = (props: DatePickerProps) => {
   const refMonth = useRef<HTMLInputElement>(null)
   const refYear = useRef<HTMLInputElement>(null)
 
-  const [isOpen, setIsOpen] = useState(false)
-
   const [activeSegment, setActiveSegment] = useState<'day' | 'month' | 'year' | null>(null)
+  const [isError, setIsError] = useState(false)
+  const dataDate = useMemo(() => {
+    const mode: DatePickerMode = props.mode ?? 'DD.MM.YYYY'
+    const result = {
+      MM: {
+        type: 'MM',
+        width: '20px',
+        ref: refMonth,
+        value: inputMonth,
+        setValue: setInputMonth,
+        setActive: () => setActiveSegment('month'),
+        valueInput: inputMonth,
+        setValueInput: setInputMonth,
+        placeholder: props.locale.inputs.month
+      },
+      DD: {
+        type: 'DD',
+        width: '20px',
+        ref: refDay,
+        value: inputDay,
+        setValue: setInputDay,
+        setActive: () => setActiveSegment('day'),
+        valueInput: inputDay,
+        setValueInput: setInputDay,
+        placeholder: props.locale.inputs.day
+      },
+      YYYY: {
+        type: 'YYYY',
+        width: '40px',
+        ref: refYear,
+        value: inputYear,
+        setValue: setInputYear,
+        setActive: () => setActiveSegment('year'),
+        valueInput: inputYear,
+        setValueInput: setInputYear,
+        placeholder: props.locale.inputs.year
+      }
+    }
+    const resultSort = mode
+      .split('.')
+      .map(e => e.trim())
+      .map(e => {
+        if (e === 'DD') return result.DD
+        if (e === 'MM') return result.MM
+        if (e === 'YYYY') return result.YYYY
+        return null
+      })
+      .filter(e => e !== null)
+    return resultSort
+  }, [
+    inputDay,
+    inputMonth,
+    inputYear,
+    props.locale.inputs.day,
+    props.locale.inputs.month,
+    props.locale.inputs.year,
+    props.mode
+  ])
+
+  // const [isOpen, setIsOpen] = useState(false)
 
   const daysInWeek = useMemo(() => {
     const weekOrder: WeekItem['value'][] = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su']
@@ -169,18 +227,22 @@ export const DatePicker = (props: DatePickerProps) => {
     return isAfterStartDate
   }, [currentYear, currentMonth, currentDay, props.startDate])
 
-  const handleOnOpen = useCallback(() => {
-    setIsOpen(true)
-  }, [])
+  const { isOpen, close, reference, floating, floatingStyles } = usePopover({
+    placement: 'bottom-start',
+    offset: 8,
+    mode: 'clickOpen',
+    isClickOutside: true
+  })
+
   const handleOnClose = useCallback(
     (isCheck?: boolean) => {
-      setIsOpen(false)
+      close()
       if (isCheck)
         if (!inputDay || !inputMonth || !inputYear) {
           onChange(null)
         }
     },
-    [inputDay, inputMonth, inputYear, onChange]
+    [close, inputDay, inputMonth, inputYear, onChange]
   )
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
@@ -298,15 +360,10 @@ export const DatePicker = (props: DatePickerProps) => {
       setActiveSegment(null)
     }
   }, [isOpen])
-
   return (
-    <Outside
-      onOutsideClick={event => {
-        if (isOpen) props?.onBlur?.(event)
-        handleOnClose(true)
-      }}
-    >
+    <>
       <DateWrapper
+        ref={reference as RefObject<HTMLDivElement | null>}
         $size={props.size}
         $genre={props.genre}
         $sx={props.sx}
@@ -314,277 +371,245 @@ export const DatePicker = (props: DatePickerProps) => {
         $isMinWidth={props?.isMinWidth}
         $radius={radius}
         $parentListHeight={height}
-        onFocus={event => {
-          if (props?.isDisabled) return
-          if (props.onFocus) props.onFocus?.(event)
-          handleOnOpen()
-        }}
+        // onFocus={event => {
+        //   if (props?.isDisabled) return
+        //   if (props.onFocus) props.onFocus?.(event)
+        //   // handleOnOpen()
+        // }}
       >
-        <DateInputWrapper tabIndex={0} $genre={props.genre} $size={props.size} $error={props.error}>
-          <DateInput
-            $genre={props.genre}
-            $size={props.size}
-            onKeyDown={handleKeyDown}
-            value={inputDay ?? ''}
-            onValueChange={(values, sourceInfo) => {
-              if (sourceInfo.source !== 'event') return
-              const value = values.formattedValue
-              setInputMonth(null)
-              setInputYear(null)
+        <DateInputWrapper
+          tabIndex={0}
+          $genre={props.genre}
+          $size={props.size}
+          $error={isError ? { isError: true } : props.error}
+          $isOpen={isOpen}
+        >
+          {dataDate.map((date, index) => (
+            <Fragment key={date.type}>
+              <DateInput
+                onValueChange={(values, sourceInfo) => {
+                  if (date.type === 'DD') {
+                    if (sourceInfo.source !== 'event') return
+                    const value = values.formattedValue
+                    setInputMonth(null)
+                    setInputYear(null)
 
-              if (Number(value) && Number(value) > 31) {
-                setInputDay('31')
-              } else {
-                setInputDay(value)
-              }
-              if (value !== '' && !value.includes('_')) {
-                setActiveSegment('month')
-              }
-            }}
-            getInputRef={(ref: HTMLInputElement | null) => {
-              if (ref && !refDay.current) {
-                refDay.current = ref
-              }
-            }}
-            onFocus={e => {
-              setActiveSegment('day')
-              e.target.select()
-            }}
-            onBlur={() => {
-              if (inputDay && inputDay.includes('_')) setInputDay(fixUnderscoreToZero(inputDay))
-            }}
-            placeholder={props.locale.inputs.day}
-            type="text"
-            format="##"
-            mask="_"
-            style={{ width: '20px' }}
-          />
-          <span style={{ width: '4px', pointerEvents: 'none', textAlign: 'center' }}>.</span>
-          <DateInput
-            $genre={props.genre}
-            $size={props.size}
-            onKeyDown={handleKeyDown}
-            onBlur={() => {
-              if (inputMonth && inputMonth.includes('_')) setInputMonth(fixUnderscoreToZero(inputMonth))
-            }}
-            value={inputMonth ?? ''}
-            placeholder={props.locale.inputs.month}
-            onValueChange={(values, sourceInfo) => {
-              if (sourceInfo.source !== 'event') return
-              const value = values.formattedValue
-              setInputYear(null)
-              if (Number(value) > 12) {
-                setInputMonth('12')
-              } else {
-                setInputMonth(value)
-              }
-              if (value !== '' && !value.includes('_')) {
-                setActiveSegment('year')
-              }
-            }}
-            getInputRef={(ref: HTMLInputElement | null) => {
-              if (ref && !refMonth.current) {
-                refMonth.current = ref
-              }
-            }}
-            onFocus={e => {
-              setActiveSegment('month')
-              e.target.select()
-            }}
-            type="text"
-            format="##"
-            mask="_"
-            style={{ width: '20px' }}
-          />
-          <span style={{ width: '6px', pointerEvents: 'none', textAlign: 'center' }}>.</span>
-          <DateInput
-            placeholder={props.locale.inputs.year}
-            $genre={props.genre}
-            $size={props.size}
-            onKeyDown={handleKeyDown}
-            value={inputYear ?? ''}
-            onValueChange={(values, sourceInfo) => {
-              if (sourceInfo.source !== 'event') return
-              const value = values.formattedValue
-              setInputYear(value)
-
-              if (value !== '' && !value.includes('_')) {
-                const day = inputDay ? Number(inputDay) : NaN
-                const month = inputMonth ? Number(inputMonth) : NaN
-                const year = value ? Number(value) : NaN
-                if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
-                  const m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day')
-                  if (m.isValid()) {
-                    onChangeDate(m.valueOf(), false, true)
-                  }
-                }
-              }
-            }}
-            getInputRef={(ref: HTMLInputElement | null) => {
-              if (ref && !refYear.current) {
-                refYear.current = ref
-              }
-            }}
-            onFocus={e => {
-              setActiveSegment('year')
-              e.target.select()
-            }}
-            type="text"
-            format="####"
-            mask="_"
-            style={{ width: '44px' }}
-          />
-        </DateInputWrapper>
-
-        <AnimatePresence>
-          {isOpen ? (
-            <DateDropdownListParent
-              initial={{ opacity: 0, height: 0 }}
-              animate={{
-                height: `${height}px`,
-                display: 'flex',
-                opacity: 1,
-                zIndex: '1'
-              }}
-              exit={{
-                height: '0px',
-                display: 'none',
-                opacity: 0,
-                zIndex: 'auto'
-              }}
-              transition={{ duration: 0.2 }}
-              $genre={props.genre}
-              $size={props.size}
-              style={{
-                height: `${height}px`
-              }}
-            >
-              <DateDropdownList $isInputEffect={props.isInputEffect} $genre={props.genre} $size={props.size}>
-                <Stack
-                  sx={{
-                    default: {
-                      justifyContent: 'space-between',
-                      alignItems: 'center'
+                    if (Number(value) && Number(value) > 31) {
+                      setInputDay('31')
+                    } else {
+                      setInputDay(value)
                     }
-                  }}
-                >
-                  <Button
-                    type="button"
-                    isRadius
-                    icons={[
-                      {
-                        name: 'Arrow2',
-                        type: 'id',
-                        turn: 90
+                    if (value !== '' && !value.includes('_')) {
+                      setActiveSegment('month')
+                    }
+                  } else if (date.type === 'MM') {
+                    if (sourceInfo.source !== 'event') return
+                    const value = values.formattedValue
+                    setInputYear(null)
+                    if (Number(value) > 12) {
+                      setInputMonth('12')
+                    } else {
+                      setInputMonth(value)
+                    }
+                    if (value !== '' && !value.includes('_')) {
+                      setActiveSegment('year')
+                    }
+                  } else if (date.type === 'YYYY') {
+                    if (sourceInfo.source !== 'event') return
+                    const value = values.formattedValue
+                    setInputYear(value)
+
+                    if (value !== '' && !value.includes('_')) {
+                      const day = inputDay ? Number(inputDay) : NaN
+                      const month = inputMonth ? Number(inputMonth) : NaN
+                      const year = value ? Number(value) : NaN
+                      if (!isNaN(day) && !isNaN(month) && !isNaN(year)) {
+                        const m = moment.utc(`${day}.${month}.${year}`, 'D.M.YYYY', true).startOf('day')
+                        if (m.isValid()) {
+                          onChangeDate(m.valueOf(), false, true)
+                        } else {
+                          setIsError(true)
+                          setTimeout(() => {
+                            setIsError(false)
+                            setInputDay(null)
+                            setInputMonth(null)
+                            setInputYear(null)
+                            setActiveSegment('day')
+                          }, 1000)
+                        }
                       }
-                    ]}
-                    isWidthAsHeight
-                    genre={props.genre}
-                    size={'small'}
-                    onClick={() => !isBlockPrevMonth && onPrevMonth()}
-                    isHidden={isBlockPrevMonth}
-                  />
-                  {currentYear !== null && currentMonth !== null && currentDay !== null ? (
-                    <Stack sx={{ default: { gap: '8px' } }}>
-                      <SelectMonth
-                        monthsLocale={props.locale.months}
-                        genre={props.genre}
-                        size={'small'}
-                        value={moment
-                          .utc()
-                          .year(currentYear)
-                          .month(currentMonth)
-                          .date(currentDay)
-                          .startOf('day')
-                          .utc()
-                          .valueOf()}
-                        onChange={(timestamp: number) => {
-                          onChangeDate(timestamp, false, true)
-                        }}
-                        startDate={props.startDate}
-                        endDate={props.endDate}
-                        sx={{ default: { width: '90px' } }}
-                      />
-                      <SelectYear
-                        genre={props.genre}
-                        size={'small'}
-                        value={moment
-                          .utc()
-                          .year(currentYear)
-                          .month(currentMonth)
-                          .date(currentDay)
-                          .startOf('day')
-                          .utc()
-                          .valueOf()}
-                        onChange={(timestamp: number) => {
-                          onChangeDate(timestamp, false, true)
-                        }}
-                        startDate={props.startDate}
-                        endDate={props.endDate}
-                        sx={{ default: { width: '70px' } }}
-                      />
-                    </Stack>
-                  ) : null}
-                  <Button
-                    type="button"
-                    onClick={() => !isBlockNextMonth && onNextMonth()}
-                    isWidthAsHeight
-                    isRadius
-                    icons={[
-                      {
-                        name: 'Arrow2',
-                        type: 'id',
-                        turn: -90
-                      }
-                    ]}
-                    genre={props.genre}
-                    size={'small'}
-                    isHidden={isBlockNextMonth}
-                  />
-                </Stack>
-                <DateDropdownDays $rows={rows}>
-                  {daysInWeek.map((e, index) => (
-                    <DateDropdownDayOfWeek
-                      $isToday={false}
-                      $isWeekend={false}
-                      type="button"
-                      $genre={props.genre}
-                      $size={props.size}
-                      $row={daysInMonth[0].weekOfMonth - 1}
-                      $column={index + 1}
-                      key={index}
-                    >
-                      {e.label}
-                    </DateDropdownDayOfWeek>
-                  ))}
-                  {daysInMonth.map(day =>
-                    !day.isDisabled ? (
-                      <DateDropdownDay
-                        type="button"
-                        $genre={props.genre}
-                        $size={props.size}
-                        $row={day.weekOfMonth + 1}
-                        $column={day.dayOfWeek}
-                        key={day.value}
-                        onClick={() => onChangeDate(day.value, true, true)}
-                        $isToday={day.isToday}
-                        $isWeekend={day.isWeekend}
-                        $isChoice={day.value === valueMoment?.valueOf()}
-                        $isCurrentMonth={day.isCurrentMonth}
-                      >
-                        <Ripple color={theme.colors.date[props.genre].color.rest} />
-                        {day.labelNumber}
-                      </DateDropdownDay>
-                    ) : null
-                  )}
-                </DateDropdownDays>
-              </DateDropdownList>
-            </DateDropdownListParent>
-          ) : null}
-        </AnimatePresence>
+                    }
+                  }
+                }}
+                $genre={props.genre}
+                $size={props.size}
+                getInputRef={(ref: HTMLInputElement | null) => {
+                  if (ref && !date.ref.current) {
+                    date.ref.current = ref
+                  }
+                }}
+                onFocus={e => {
+                  date.setActive()
+                  e.target.select()
+                }}
+                onBlur={() => {
+                  if (index !== dataDate.length - 1)
+                    if (date.valueInput && date.valueInput.includes('_'))
+                      date.setValueInput(fixUnderscoreToZero(date.valueInput))
+                }}
+                onKeyDown={handleKeyDown}
+                value={date.valueInput ?? ''}
+                placeholder={date.placeholder}
+                format={'#'.repeat(date.type.length)}
+                style={{ width: date.width }}
+                readOnly={isError}
+                type="text"
+                mask="_"
+              />
+              {index !== dataDate.length - 1 && (
+                <span style={{ width: '4px', pointerEvents: 'none', textAlign: 'center' }}>.</span>
+              )}
+            </Fragment>
+          ))}
+        </DateInputWrapper>
       </DateWrapper>
+      <Popover
+        sx={theme => ({
+          default: {
+            background: theme.colors.input[props.genre].background.rest,
+            border: `solid 1px ${theme.colors.input[props.genre].border.rest}`
+          }
+        })}
+        size={props.size}
+        genre={props.genre}
+        isOpen={isOpen}
+        floatingStyles={floatingStyles}
+        ref={floating}
+      >
+        <DateDropdownList $isInputEffect={props.isInputEffect} $genre={props.genre} $size={props.size}>
+          <Stack
+            sx={{
+              default: {
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }
+            }}
+          >
+            <Button
+              type="button"
+              isRadius
+              icons={[
+                {
+                  name: 'Arrow2',
+                  type: 'id',
+                  turn: 90
+                }
+              ]}
+              isWidthAsHeight
+              genre={props.genre}
+              size={'small'}
+              onClick={() => !isBlockPrevMonth && onPrevMonth()}
+              isHidden={isBlockPrevMonth}
+            />
+            {currentYear !== null && currentMonth !== null && currentDay !== null ? (
+              <Stack sx={{ default: { gap: '8px' } }}>
+                <SelectMonth
+                  isShortLabel
+                  monthsLocale={props.locale.months}
+                  genre={props.genre}
+                  size={'small'}
+                  value={moment
+                    .utc()
+                    .year(currentYear)
+                    .month(currentMonth)
+                    .date(currentDay)
+                    .startOf('day')
+                    .utc()
+                    .valueOf()}
+                  onChange={(timestamp: number) => {
+                    onChangeDate(timestamp, false, true)
+                  }}
+                  startDate={props.startDate}
+                  endDate={props.endDate}
+                  sx={{ default: { width: '70px' } }}
+                />
+                <SelectYear
+                  genre={props.genre}
+                  size={'small'}
+                  value={moment
+                    .utc()
+                    .year(currentYear)
+                    .month(currentMonth)
+                    .date(currentDay)
+                    .startOf('day')
+                    .utc()
+                    .valueOf()}
+                  onChange={(timestamp: number) => {
+                    onChangeDate(timestamp, false, true)
+                  }}
+                  startDate={props.startDate}
+                  endDate={props.endDate}
+                  sx={{ default: { width: '70px' } }}
+                />
+              </Stack>
+            ) : null}
+            <Button
+              type="button"
+              onClick={() => !isBlockNextMonth && onNextMonth()}
+              isWidthAsHeight
+              isRadius
+              icons={[
+                {
+                  name: 'Arrow2',
+                  type: 'id',
+                  turn: -90
+                }
+              ]}
+              genre={props.genre}
+              size={'small'}
+              isHidden={isBlockNextMonth}
+            />
+          </Stack>
+          <DateDropdownDays $rows={rows}>
+            {daysInWeek.map((e, index) => (
+              <DateDropdownDayOfWeek
+                $isToday={false}
+                $isWeekend={false}
+                type="button"
+                $genre={props.genre}
+                $size={props.size}
+                $row={daysInMonth[0]?.weekOfMonth - 1}
+                $column={index + 1}
+                key={index}
+              >
+                {e.label}
+              </DateDropdownDayOfWeek>
+            ))}
+            {daysInMonth.map(day =>
+              !day.isDisabled ? (
+                <DateDropdownDay
+                  type="button"
+                  $genre={props.genre}
+                  $size={props.size}
+                  $row={day?.weekOfMonth + 1}
+                  $column={day.dayOfWeek}
+                  key={day.value}
+                  onClick={() => onChangeDate(day.value, true, true)}
+                  $isToday={day.isToday}
+                  $isWeekend={day.isWeekend}
+                  $isChoice={day.value === valueMoment?.valueOf()}
+                  $isCurrentMonth={day.isCurrentMonth}
+                >
+                  <Ripple color={theme.colors.date[props.genre].color.rest} />
+                  {day.labelNumber}
+                </DateDropdownDay>
+              ) : null
+            )}
+          </DateDropdownDays>
+        </DateDropdownList>
+      </Popover>
       {props?.error ? <ErrorMessage {...props?.error} size={props?.error.size ?? props.size} /> : null}
-    </Outside>
+    </>
   )
 }
 function fixUnderscoreToZero(str: string) {
