@@ -1,6 +1,6 @@
 # jenesei-kit-react
 
-This is a frontend library for React from Jenesei Software. Test.
+This is a frontend library for React from Jenesei Software.
 
 ## Customize the theme
 
