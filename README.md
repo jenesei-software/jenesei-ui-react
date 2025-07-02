@@ -1,4 +1,4 @@
-# jenesei-ui-react
+# jenesei-kit-react
 
 This is a frontend library for React from Jenesei Software. Test.
 
@@ -8,7 +8,7 @@ To use themes in your application, create a declaration themes file and extend `
 
 ```typescript
 // styled-components.d.ts
-import { ITheme } from '@jenesei-software/jenesei-ui-react/style-theme'
+import { ITheme } from '@jenesei-software/jenesei-kit-react/style-theme'
 import 'styled-components'
 
 declare module 'styled-components' {
@@ -21,7 +21,7 @@ Import `JeneseiTheme` and `JeneseiGlobalStyles` from our library and apply them 
 
 ```typescript
 // app.tsx
-import { JeneseiGlobalStyles, JeneseiTheme } from '@jenesei-software/jenesei-ui-react/style-theme'
+import { JeneseiGlobalStyles, JeneseiTheme } from '@jenesei-software/jenesei-kit-react/style-theme'
 
 
 import '@fontsource/inter/100.css'
@@ -58,17 +58,17 @@ function App() {
 ## Customize the cookie and local storage
 
 ```typescript
-//jenesei-ui-react.d.ts
-import '@jenesei-software/jenesei-ui-react/context-cookie'
-import '@jenesei-software/jenesei-ui-react/context-local-storage'
+//jenesei-kit-react.d.ts
+import '@jenesei-software/jenesei-kit-react/context-cookie'
+import '@jenesei-software/jenesei-kit-react/context-local-storage'
 
-declare module '@jenesei-software/jenesei-ui-react/context-cookie' {
+declare module '@jenesei-software/jenesei-kit-react/context-cookie' {
   export interface ValidCookieObject {
     access_token: string
     refresh_token: string
   }
 }
-declare module '@jenesei-software/jenesei-ui-react/context-local-storage' {
+declare module '@jenesei-software/jenesei-kit-react/context-local-storage' {
   export interface ValidLocalStorageObject {
     access_token: string
     refresh_token: string
