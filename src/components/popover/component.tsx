@@ -10,6 +10,7 @@ export const Popover: FC<PopoverProps> = props => {
     <AnimatePresence>
       {props.isOpen && (
         <div
+          tabIndex={-1}
           ref={props.ref as Ref<HTMLDivElement | null>}
           style={{
             position: 'absolute',
@@ -21,9 +22,9 @@ export const Popover: FC<PopoverProps> = props => {
           }}
         >
           <PopoverWrapper
+            tabIndex={-1}
             $genre={props.genre ?? 'black'}
             className={props.className}
-            tabIndex={0}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
@@ -69,6 +70,7 @@ export const usePopover = (props: UsePopoverProps) => {
   const hoverCloseDelay = useMemo(() => props.hoverCloseDelay ?? DEFAULT_POPOVER_CLOSE_DELAY, [props.hoverCloseDelay])
 
   useEffect(() => {
+    if (props.isDisabled) return
     const refEl = refs.reference.current
     if (!refEl) return
 
@@ -101,10 +103,10 @@ export const usePopover = (props: UsePopoverProps) => {
         if (hoverCloseTimeout.current) clearTimeout(hoverCloseTimeout.current)
       }
     }
-  }, [props.mode, refs.reference, hoverCloseDelay])
+  }, [props.mode, refs.reference, hoverCloseDelay, props.isDisabled])
 
   useEffect(() => {
-    if (!isOpen || !refs.reference.current || !refs.floating.current) return
+    if (!isOpen || !refs.reference.current || !refs.floating.current || props.isDisabled) return
 
     const cleanup = autoUpdate(refs.reference.current, refs.floating.current, update)
 
@@ -136,10 +138,11 @@ export const usePopover = (props: UsePopoverProps) => {
         clearTimeout(hoverCloseTimeout.current)
       }
     }
-  }, [isOpen, refs.reference, refs.floating, update, props.isClickOutside])
+  }, [isOpen, refs.reference, refs.floating, update, props.isClickOutside, props.isDisabled])
 
   useEffect(() => {
-    if (!isOpen || !props.isFloatingHover || !refs.reference.current || !refs.floating.current) return
+    if (!isOpen || !props.isFloatingHover || !refs.reference.current || !refs.floating.current || props.isDisabled)
+      return
 
     const refEl = refs.reference.current
     const floatingEl = refs.floating.current
@@ -182,17 +185,26 @@ export const usePopover = (props: UsePopoverProps) => {
         clearTimeout(hoverCloseTimeout.current)
       }
     }
-  }, [isOpen, props.isFloatingHover, refs.reference, refs.floating, hoverOffset, hoverCloseDelay])
+  }, [isOpen, props.isFloatingHover, refs.reference, refs.floating, hoverOffset, hoverCloseDelay, props.isDisabled])
 
   useLayoutEffect(() => {
-    if (!isOpen || !props.isWidthAsContent || !refs.reference.current) return
+    if (!props.isWidthAsContent || !refs.reference.current) return
     const rect = refs.reference.current.getBoundingClientRect()
     setMinWidth(rect.width)
-  }, [isOpen, props.isWidthAsContent, refs.reference])
+  }, [props.isWidthAsContent, refs.reference])
 
-  const open = useCallback(() => setIsOpen(true), [])
-  const close = useCallback(() => setIsOpen(false), [])
-  const toggle = useCallback(() => setIsOpen(prev => !prev), [])
+  const open = useCallback(() => {
+    if (props.isDisabled) return
+    setIsOpen(true)
+  }, [props.isDisabled])
+  const close = useCallback(() => {
+    if (props.isDisabled) return
+    setIsOpen(false)
+  }, [props.isDisabled])
+  const toggle = useCallback(() => {
+    if (props.isDisabled) return
+    setIsOpen(prev => !prev)
+  }, [props.isDisabled])
 
   const combinedStyles = useMemo(() => {
     return {

@@ -4,6 +4,7 @@ import { FC, useState } from 'react'
 import 'styled-components'
 
 import { SelectDateProps, SelectMonth } from '@local/components/select'
+import { Stack } from '@local/components/stack'
 import { localeMonths } from '@local/consts'
 
 const meta: Meta<typeof SelectMonth> = {
@@ -31,7 +32,18 @@ const SelectMonthWrapper: FC<SelectDateProps> = props => {
     setValue(value)
   }
 
-  return <SelectMonth {...props} placeholder="Month" value={value} onChange={handleSelectChange} />
+  return (
+    <Stack
+      sx={{
+        default: {
+          width: '300px',
+          height: '500px'
+        }
+      }}
+    >
+      <SelectMonth {...props} placeholder="Month" value={value} onChange={handleSelectChange} />
+    </Stack>
+  )
 }
 
 export const Month: Story = {

@@ -1,6 +1,5 @@
 import { FocusEventHandler, ReactNode } from 'react'
 
-import { InputStandardProps, StyledInputProps, StyledInputWrapperProps } from '@local/components/input'
 import { addErrorProps } from '@local/styles/error'
 import { addSXProps } from '@local/styles/sx'
 import { IThemeGenreSelect, IThemeSize } from '@local/theme'
@@ -13,6 +12,10 @@ export type TInputSelect = keyof IThemeGenreSelect
 
 export interface ISelectItem {
   [key: string]: unknown
+
+  isDisabled?: boolean
+
+  isLoading?: boolean
 
   label: string | number | ReactNode
 
@@ -31,15 +34,16 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     isShowDropdownOptionIcon?: boolean
     isShowSelectInputIcon?: boolean
     isOnClickOptionClose?: boolean
-
-    isEmptyOption?: boolean
+    isNotShowHoverStyle?: boolean
+    isCenter?: boolean
+    isStayValueAfterSelect?: boolean
+    isBold?: boolean
     labelEmptyOption?: string
 
-    inputProps?: Omit<
-      InputStandardProps,
-      'isDisabled' | 'error' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'
-    >
-    optionProps?: Omit<InputStandardProps, 'isDisabled' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'>
+    // inputProps?: Omit<
+    //   InputStandardProps,
+    //   'isDisabled' | 'error' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'
+    // >
     isMulti?: boolean
     option: T[]
     value: T[]
@@ -51,18 +55,6 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     fetchNextPage?: () => void
     getEstimateSize?: (index: number) => number
     isFetching?: boolean
-    footer?: {
-      erase?: {
-        label: string
-        onCLick?: () => void
-      }
-      selectAll?: {
-        defaultValue?: boolean
-        isPagination?: boolean
-        label: string
-        onCLick?: () => void
-      }
-    }
   }
 
 export interface ISelectLanguageOption extends ISelectItem {
@@ -101,33 +93,33 @@ export type SelectYearProps = Omit<SelectDateProps, 'monthsLocale'> & {
 }
 
 export type SelectWrapperProps = AddDollarSign<
-  Pick<InputStandardProps, 'genre'> & { parentListHeight: number; radius: number }
-> &
-  StyledInputWrapperProps
+  Pick<SelectProps<ISelectItem>, 'genre' | 'sx' | 'size' | 'isNotShowHoverStyle'> & { isOpen: boolean }
+>
 
-export type SelectStyledInputProps = StyledInputProps
-
-export type SelectStyledOptionProps = AddDollarSign<{
-  isSelectedItem?: boolean
-  checked?: boolean
-}> &
-  StyledInputProps
-
-export type DropdownOptionIconProps = AddDollarSign<{
-  checked?: boolean
-  genre: TInputSelect
-  size: IThemeSize
-}>
-
-export type SelectStyledListProps = AddDollarSign<
-  Pick<InputStandardProps, 'genre' | 'size'> & {
-    isShowScroll?: boolean
-    isFooter?: boolean
+export type DropdownListOptionProps = AddDollarSign<
+  Pick<SelectProps<ISelectItem>, 'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold'> & {
+    item: ISelectItem
+    isChecked?: boolean
   }
 >
 
-export type SelectStyledFooterProps = StyledInputProps &
-  AddDollarSign<{
-    isErase?: boolean
-    isSelectAll?: boolean
-  }>
+export type DropdownListOptionIconProps = AddDollarSign<
+  Pick<SelectProps<ISelectItem>, 'genre' | 'size'> & {
+    checked?: boolean
+  }
+>
+
+export type ContainerDropdownOptionProps<T extends ISelectItem> = Pick<
+  SelectProps<T>,
+  'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold' | 'isShowDropdownOptionIcon'
+> & {
+  item: T
+
+  isChecked?: boolean
+
+  onClick: () => void
+
+  virtualRowSize: number
+
+  virtualRowStart: number
+}

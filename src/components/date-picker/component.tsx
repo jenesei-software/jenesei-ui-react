@@ -110,8 +110,6 @@ export const DatePicker = (props: DatePickerProps) => {
     props.mode
   ])
 
-  // const [isOpen, setIsOpen] = useState(false)
-
   const daysInWeek = useMemo(() => {
     const weekOrder: WeekItem['value'][] = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su']
 

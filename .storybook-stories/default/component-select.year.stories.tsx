@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from 'react'
 import 'styled-components'
 
 import { SelectYear, SelectYearProps } from '@local/components/select'
+import { Stack } from '@local/components/stack'
 
 const meta: Meta<typeof SelectYear> = {
   component: SelectYear,
@@ -39,7 +40,18 @@ const SelectYearWrapper: FC<SelectYearProps> = props => {
   useEffect(() => {
     setValue(props.value)
   }, [props.value])
-  return <SelectYear {...props} placeholder="Year" value={value} onChange={handleSelectChange} />
+  return (
+    <Stack
+      sx={{
+        default: {
+          width: '300px',
+          height: '500px'
+        }
+      }}
+    >
+      <SelectYear {...props} placeholder="Year" value={value} onChange={handleSelectChange} />
+    </Stack>
+  )
 }
 
 export const Year: Story = {

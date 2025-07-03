@@ -36,11 +36,13 @@ export type UsePopoverProps = {
 
   isClickOutside?: boolean
 
+  isDisabled?: boolean
+
   isFloatingHover?: boolean
 
   isWidthAsContent?: boolean
 
-  mode?: 'click' | 'hover' | 'clickOpen'
+  mode?: 'click' | 'hover' | 'clickOpen' | 'independence'
 
   offset?: number
 

@@ -3,6 +3,7 @@ import { FC, useState } from 'react'
 import 'styled-components'
 
 import { SelectLanguage, SelectLanguageProps } from '@local/components/select'
+import { Stack } from '@local/components/stack'
 
 const meta: Meta<typeof SelectLanguage> = {
   component: SelectLanguage,
@@ -20,6 +21,7 @@ const defaultArgs: Partial<SelectLanguageProps> = {
       width: '300px'
     }
   },
+  isOnClickOptionClose: false,
   isShowDropdownOptionIcon: true,
   isShowSelectInputIcon: true,
   placeholder: 'Choice language...'
@@ -32,13 +34,23 @@ const SelectLanguageWrapper: FC<SelectLanguageProps> = props => {
   }
 
   return (
-    <SelectLanguage
-      {...props}
-      labelEmptyOption="No language options"
-      placeholder="Choice language..."
-      value={value}
-      onChange={handleSelectChange}
-    />
+    <Stack
+      sx={{
+        default: {
+          width: '300px',
+          height: '500px',
+          padding: '10px'
+        }
+      }}
+    >
+      <SelectLanguage
+        {...props}
+        labelEmptyOption="No language options"
+        placeholder="Choice language..."
+        value={value}
+        onChange={handleSelectChange}
+      />
+    </Stack>
   )
 }
 

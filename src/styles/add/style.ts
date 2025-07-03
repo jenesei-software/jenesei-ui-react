@@ -83,13 +83,6 @@ export const addOutline = css`
   }
 `
 
-export const addBorder = css`
-  border: 1px solid transparent;
-  &:focus-visible {
-    border-color: ${props => props.theme.states.focus};
-  }
-`
-
 export const addRemoveOutline = css`
   outline: 0px solid transparent;
   outline-offset: 0px;

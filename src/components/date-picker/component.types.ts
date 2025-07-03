@@ -40,11 +40,11 @@ export type DatePickerProps = addErrorProps &
 
     name?: string
 
-    onBlur?: (event?: MouseEvent) => void
+    onBlur?: () => void
 
     onChange: (timestamp: number | null) => void
 
-    onFocus?: (event: FocusEvent<HTMLDivElement, Element>) => void
+    onFocus?: () => void
 
     size: IThemeSize
 
