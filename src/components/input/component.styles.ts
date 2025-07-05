@@ -31,7 +31,7 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
 `
 
 /****************************************** Placeholder *************************************************/
-export const InputPlaceholder = css<StyledInputProps>`
+export const addInputPlaceholder = css<StyledInputProps>`
   &::placeholder,
   &::-webkit-input-placeholder {
     ${props => getFontSizeStyles(16, props.$isBold ? 500 : 400, props.theme.font.family, props.theme.font.lineHeight)};
@@ -128,7 +128,7 @@ export const StyledInputCSS = css<StyledInputProps>`
 
   ${InputSize};
   ${InputGenre};
-  ${InputPlaceholder};
+  ${addInputPlaceholder};
   ${InputHidden};
   ${InputIsInputEffect};
   ${addOutline};

@@ -35,6 +35,7 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     isShowIconToggle?: boolean
     isShowIconSearchClear?: boolean
     isShowIconFetching?: boolean
+    isShowSelectAll?: boolean
     isOnClickOptionClose?: boolean
     isNotShowHoverStyle?: boolean
     isSortValueAsOption?: boolean
@@ -46,8 +47,10 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     isFetching?: boolean
     isClearWhenClickSelectListOption?: boolean
     isStaySearchAfterSelect?: boolean
+
     labelPlaceholder?: string
     labelEmptyOption?: string
+    labelSelectAll?: string
     labelAndMore?: (count: number) => string
 
     isSearch?: boolean

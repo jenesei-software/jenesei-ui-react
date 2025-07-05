@@ -42,7 +42,6 @@ const SelectMonthWrapper: FC<SelectMonthsProps> = props => {
         isShowIconSearchClear
         isShowIconFetching
         isShowIconToggle
-        isFetching
         isSearch
         value={value}
         onChange={handleSelectChange}

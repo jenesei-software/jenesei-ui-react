@@ -16,6 +16,7 @@ import {
   SelectListProps,
   SelectWrapperProps
 } from '.'
+import { addInputPlaceholder } from '../input'
 
 const addSelectWrapperGenre = css<SelectWrapperProps>`
   ${props => css`
@@ -75,7 +76,10 @@ export const SelectWrapper = styled(motion.div)<SelectWrapperProps>`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: flex-start;
   align-items: center;
+  align-content: flex-start;
+  flex-wrap: wrap;
   ${addRemoveOutline};
   ${addSelectWrapperGenre};
   ${addSelectWrapperSize};
@@ -237,7 +241,12 @@ export const SelectListOption = styled(motion.li)<SelectListOptionProps>`
   ${addSelectListOptionSize};
   ${addRemoveOutline};
 `
-
+const addSelectInputSize = css<ButtonListProps>`
+  min-width: 100%;
+  flex: 1;
+  flex-shrink: 0;
+  padding: ${props => KEY_SIZE_DATA[props.$size].padding / 2.8}px 0px;
+`
 const addSelectInputGenre = css<SelectInputProps>`
   ${props => css`
     color: ${props.theme.colors.input[props.$genre].color.rest};
@@ -254,11 +263,12 @@ export const SelectInput = styled.input<SelectInputProps>`
   overflow: hidden;
   border: 0px solid;
   background: transparent;
-  padding: 0px !important;
   margin: 0px !important;
   white-space: nowrap;
   text-align: left;
   ${props => getFontSizeStyles(16, 400, props.theme.font.family, props.theme.font.lineHeight)};
   ${addSelectInputGenre};
+  ${addSelectInputSize};
+  ${addInputPlaceholder};
   ${addRemoveOutline};
 `

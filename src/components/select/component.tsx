@@ -48,6 +48,7 @@ import { Icon } from '../icon'
 import { Popover, usePopover } from '../popover'
 import { Typography } from '../typography'
 
+const DEFAULT_LABEL_SELECT_ALL = 'Select all option'
 const DEFAULT_LABEL_PLACEHOLDER = 'Select an option'
 const DEFAULT_LABEL_EMPTY_OPTION = 'No options available'
 const DEFAULT_LABEL_AND_MORE = (count: number) => `+${count} more`
@@ -69,6 +70,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const refInput = useRef<HTMLInputElement>(null)
   const refDropdownList = useRef<HTMLDivElement>(null)
 
+  const labelSelectAll = useMemo(() => props.labelSelectAll ?? DEFAULT_LABEL_SELECT_ALL, [props.labelSelectAll])
   const labelPlaceholder = useMemo(() => props.labelPlaceholder ?? DEFAULT_LABEL_PLACEHOLDER, [props.labelPlaceholder])
   const labelEmptyOption = useMemo(() => props.labelEmptyOption ?? DEFAULT_LABEL_EMPTY_OPTION, [props.labelEmptyOption])
   const labelAndMore = useMemo(() => props.labelAndMore ?? DEFAULT_LABEL_AND_MORE, [props.labelAndMore])
@@ -131,8 +133,10 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     (show: boolean) => {
       if (props.isSearch) {
         setIsShowSearch(show)
-        if (refInput.current) {
-          refInput.current.focus()
+        if (refInput.current && show) {
+          setTimeout(() => {
+            refInput.current?.focus()
+          }, 800)
         }
       }
     },
@@ -195,6 +199,11 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
       onChangeShowSearch(true)
     }
   }, [isHaveValue, onChangeShowSearch])
+  useEffect(() => {
+    if (!isOpen && isHaveValue) {
+      onChangeShowSearch(false)
+    }
+  }, [isHaveValue, isOpen, onChangeShowSearch])
   return (
     <>
       <SelectWrapper
@@ -211,7 +220,6 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         }}
         onFocus={() => {
           open()
-          onChangeShowSearch(true)
         }}
         animate={{
           '--after-height': isOpen ? `${heightPopover}px` : `0px`,
@@ -222,6 +230,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
       >
         {isShowSearch && (
           <SelectInput
+            ref={refInput}
             $genre={props.genre}
             $size={props.size}
             onChange={e => {
@@ -268,6 +277,11 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         {}
         {!isHaveValue && !props.isSearch ? (
           <Typography
+            sxStandard={theme => ({
+              default: {
+                color: theme.colors.input[props.genre].color.placeholder
+              }
+            })}
             sx={{
               default: {
                 size: 16,
@@ -630,7 +644,7 @@ export const SelectMonths: FC<SelectMonthsProps> = props => {
   }
   const valueLocal = useMemo(() => {
     if (!value || value.length === 0) return []
-    return option.filter(e => value.includes(e.value))
+    return value.map(val => option.find(opt => opt.value === val)).filter(Boolean) as ISelectLanguageOption[]
   }, [value, option])
 
   const [search, setSearch] = useState<string>('')
