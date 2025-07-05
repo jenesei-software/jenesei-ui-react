@@ -83,6 +83,7 @@ export const Button: FC<ButtonProps> = props => {
 
   return (
     <StyledButton
+      $isNotHoverEffect={props.isNotHoverEffect}
       whileTap={props.isWhileTapEffect ? { scale: 0.9, transition: { duration: 0.02 } } : {}}
       id={props.id}
       tabIndex={0}
@@ -101,6 +102,7 @@ export const Button: FC<ButtonProps> = props => {
       type={props.type ?? 'button'}
       className={props.className}
       onClick={handleClick}
+      onMouseDown={props.onMouseDown}
       ref={ref as Ref<HTMLButtonElement>}
       $sx={props.sx}
     >

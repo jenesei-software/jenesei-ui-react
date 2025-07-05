@@ -29,10 +29,12 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
 
     size: IThemeSize
     genre: TInputSelect
-    placeholder?: string
+
     isDisabled?: boolean
     isShowDropdownOptionIcon?: boolean
-    isShowSelectInputIcon?: boolean
+    isShowIconToggle?: boolean
+    isShowIconClear?: boolean
+    isShowIconFetching?: boolean
     isOnClickOptionClose?: boolean
     isNotShowHoverStyle?: boolean
     isSortValueAsOption?: boolean
@@ -40,24 +42,24 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     isStayValueAfterSelect?: boolean
     isBold?: boolean
     isWrapSelectOption?: boolean
-    labelEmptyOption?: string
-
-    // inputProps?: Omit<
-    //   InputStandardProps,
-    //   'isDisabled' | 'error' | 'name' | 'id' | 'genre' | 'size' | 'placeholder' | 'width'
-    // >
     isMulti?: boolean
+    isFetching?: boolean
+
+    labelPlaceholder?: string
+    labelEmptyOption?: string
+    labelAndMore?: string
+
     option: T[]
     value: (number | string)[]
-    onChange: (value: (number | string)[]) => void
-    onFocus?: FocusEventHandler<HTMLInputElement>
-    onBlur?: FocusEventHandler<HTMLInputElement>
     maxViewSelect?: number
     maxViewDropdown?: number
     minViewDropdown?: number
+
+    onChange: (value: (number | string)[]) => void
+    onFocus?: FocusEventHandler<HTMLInputElement>
+    onBlur?: FocusEventHandler<HTMLInputElement>
     fetchNextPage?: () => void
     getEstimateSize?: (index: number) => number
-    isFetching?: boolean
   }
 
 export interface ISelectLanguageOption extends ISelectItem {

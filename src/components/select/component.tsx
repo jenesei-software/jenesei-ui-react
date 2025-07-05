@@ -73,7 +73,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
       sizeHeight *
       (optionsLength < maxViewDropdown
         ? optionsLength < minViewDropdown
-          ? minViewDropdown
+          ? optionsLength
           : optionsLength
         : maxViewDropdown),
     [sizeHeight, optionsLength, maxViewDropdown, minViewDropdown]
@@ -100,7 +100,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     paddingEnd: 0
   })
 
-  const onClickOption = useCallback(
+  const onClick = useCallback(
     (option: T) => {
       if (props.isOnClickOptionClose) {
         close()
@@ -143,7 +143,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const onClear = useCallback(() => {
     props.onChange([])
   }, [props])
-  const onScrollNextPage = useCallback(
+  const onScroll = useCallback(
     (containerRefElement?: HTMLDivElement | null) => {
       if (containerRefElement) {
         const { scrollHeight, scrollTop, clientHeight } = containerRefElement
@@ -177,7 +177,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
       })
     }
   }, [isOverflowing, props.isWrapSelectOption, props.value.length])
-  console.log('isOpen', isOpen)
+
   return (
     <>
       <SelectWrapper
@@ -217,7 +217,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                 <ContainerSelectListOption
                   key={index}
                   isChecked={isChecked}
-                  onClick={() => onClickOption(item)}
+                  onClick={() => onClick(item)}
                   item={item}
                   genre={props.genre}
                   size={props.size}
@@ -230,35 +230,68 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
             })}
           </SelectList>
         ) : null}
-        <ButtonList $size={props.size}>
-          <Button
-            genre={props.genre}
-            size="small"
-            isWidthAsHeight
-            isFullSize
-            isRadius
-            onClick={e => {
-              e.preventDefault()
-              e.stopPropagation()
-              onClear()
-            }}
-          >
-            <Icon type={'id'} name={'Close'} size={props.size} />
-          </Button>
-          <Button
-            genre={props.genre}
-            size="small"
-            isWidthAsHeight
-            isFullSize
-            isRadius
-            onClick={e => {
-              e.preventDefault()
-              e.stopPropagation()
-              toggle()
-            }}
-          >
-            <Icon type={'id'} name={'Select'} size={props.size} />
-          </Button>
+        <ButtonList
+          $size={props.size}
+          onMouseDown={e => {
+            e.preventDefault()
+          }}
+        >
+          {isHaveValue && props.isShowIconClear && (
+            <Button
+              genre={props.genre}
+              size="small"
+              isWidthAsHeight
+              isFullSize
+              isRadius
+              isOnlyIcon
+              icons={[
+                {
+                  name: 'Close',
+                  type: 'id'
+                }
+              ]}
+              onClick={e => {
+                e.preventDefault()
+                e.stopPropagation()
+                onClear()
+              }}
+            />
+          )}
+          {props.isShowIconToggle && (
+            <Button
+              genre={props.genre}
+              size="small"
+              isWidthAsHeight
+              isFullSize
+              isRadius
+              isOnlyIcon
+              icons={[
+                {
+                  name: 'Select',
+                  type: 'id'
+                }
+              ]}
+              onClick={e => {
+                e.preventDefault()
+                e.stopPropagation()
+                toggle()
+              }}
+            />
+          )}
+          {props.isShowIconFetching && props.isFetching && (
+            <Button
+              genre={props.genre}
+              size="small"
+              isWidthAsHeight
+              isFullSize
+              isRadius
+              isHiddenBorder
+              isDisabledRipple
+              isNotHoverEffect
+            >
+              <Icon type={'loading'} name={'Circle'} size={props.size} />
+            </Button>
+          )}
         </ButtonList>
       </SelectWrapper>
       <Popover
@@ -276,11 +309,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         ref={refFloating}
         isOpen={isOpen}
       >
-        <DropdownListParent
-          tabIndex={-1}
-          ref={parentListRef}
-          onScroll={e => onScrollNextPage(e.target as HTMLDivElement)}
-        >
+        <DropdownListParent tabIndex={-1} ref={parentListRef} onScroll={e => onScroll(e.target)}>
           {isHaveOption ? (
             <DropdownList
               tabIndex={-1}
@@ -298,7 +327,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                     virtualRowSize={virtualRow.size}
                     virtualRowStart={virtualRow.start}
                     isChecked={isChecked}
-                    onClick={() => onClickOption(item)}
+                    onClick={() => onClick(item)}
                     item={item}
                     genre={props.genre}
                     size={props.size}

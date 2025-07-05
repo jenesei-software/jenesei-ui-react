@@ -47,10 +47,12 @@ type ButtonPropsDefault = PropsWithChildren & {
 
   isPlaystationEffect?: boolean
 
+  isNotHoverEffect?: boolean
+
   isFullSize?: boolean
 
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
-
+  onMouseDown?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   type?: 'button' | 'submit' | 'reset'
 } & addSXProps &
   addSXTypographyProps
@@ -77,6 +79,7 @@ export type StyledDollarButtonProps = AddDollarSign<
     | 'isPlaystationEffect'
     | 'size'
     | 'isFullSize'
+    | 'isNotHoverEffect'
   >
 > &
   addSXStyleProps &

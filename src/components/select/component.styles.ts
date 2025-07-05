@@ -3,9 +3,8 @@ import styled, { css } from 'styled-components'
 
 import { Icon } from '@local/components/icon'
 import { getFontSizeStyles } from '@local/components/typography'
-import { addRemoveOutline, addTransition } from '@local/styles/add'
+import { addRemoveOutline } from '@local/styles/add'
 import { addSX } from '@local/styles/sx'
-import { IThemeSizePropertyDefault } from '@local/theme'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 
 import {
@@ -45,7 +44,8 @@ const addSelectWrapperGenre = css<SelectWrapperProps>`
 const addSelectWrapperSize = css<SelectWrapperProps>`
   border: 1px solid;
   width: 100%;
-  padding: ${props => KEY_SIZE_DATA[props.$size].padding / 4}px ${props => KEY_SIZE_DATA[props.$size].padding}px;
+  padding: ${props => KEY_SIZE_DATA[props.$size].padding / 4}px
+    ${props => KEY_SIZE_DATA[props.$size].padding - KEY_SIZE_DATA[props.$size].padding / 2.8}px;
   height: fit-content;
   min-height: ${props => KEY_SIZE_DATA[props.$size].height}px;
   border-radius: ${props => KEY_SIZE_DATA[props.$size].radius}px;

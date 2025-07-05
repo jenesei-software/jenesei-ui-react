@@ -31,13 +31,22 @@ const SelectMonthWrapper: FC<SelectMonthsProps> = props => {
     <Stack
       sx={{
         default: {
-          width: '300px',
+          width: '400px',
           height: '500px',
           padding: '10px'
         }
       }}
     >
-      <SelectMonths {...props} placeholder="Month" value={value} onChange={handleSelectChange} />
+      <SelectMonths
+        {...props}
+        placeholder="Month"
+        isShowIconClear
+        isShowIconFetching
+        isShowIconToggle
+        isFetching
+        value={value}
+        onChange={handleSelectChange}
+      />
     </Stack>
   )
 }

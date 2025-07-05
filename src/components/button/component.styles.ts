@@ -16,7 +16,7 @@ const ButtonGenre = css<StyledDollarButtonProps>`
     border-color: ${props.theme.colors.button[props.$genre].border.rest};
     color: ${props.theme.colors.button[props.$genre].color.rest};
     &:hover {
-      ${!props.$isHidden &&
+      ${(!props.$isHidden || props.$isNotHoverEffect) &&
       css`
         background: ${props.theme.colors.button[props.$genre].background.hover};
         border-color: ${props.theme.colors.button[props.$genre].border.hover};
