@@ -3,27 +3,27 @@ import moment from 'moment'
 import { FC, useState } from 'react'
 import 'styled-components'
 
-import { SelectMonth, SelectMonthProps } from '@local/components/select'
+import { SelectMonths, SelectMonthsProps } from '@local/components/select'
 import { Stack } from '@local/components/stack'
 import { localeMonths } from '@local/consts'
 
-const meta: Meta<typeof SelectMonth> = {
-  component: SelectMonth,
+const meta: Meta<typeof SelectMonths> = {
+  component: SelectMonths,
   title: 'Component/Select'
 }
 
 export default meta
-type Story = StoryObj<typeof SelectMonth>
+type Story = StoryObj<typeof SelectMonths>
 
-const defaultArgs: Partial<SelectMonthProps> = {
+const defaultArgs: Partial<SelectMonthsProps> = {
   size: 'medium',
   genre: 'gray',
   monthsLocale: localeMonths
 }
 
-const SelectMonthWrapper: FC<SelectMonthProps> = props => {
-  const [value, setValue] = useState<number | null>(moment.utc().startOf('month').valueOf())
-  const handleSelectChange = (value: number | null) => {
+const SelectMonthWrapper: FC<SelectMonthsProps> = props => {
+  const [value, setValue] = useState<number[]>([moment.utc().startOf('month').valueOf()])
+  const handleSelectChange = (value: number[]) => {
     setValue(value)
   }
 
@@ -37,12 +37,12 @@ const SelectMonthWrapper: FC<SelectMonthProps> = props => {
         }
       }}
     >
-      <SelectMonth {...props} placeholder="Month" value={value} onChange={handleSelectChange} />
+      <SelectMonths {...props} placeholder="Month" value={value} onChange={handleSelectChange} />
     </Stack>
   )
 }
 
-export const Month: Story = {
+export const Months: Story = {
   render: args => <SelectMonthWrapper {...args} />,
   args: {
     ...defaultArgs

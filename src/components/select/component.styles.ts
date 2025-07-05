@@ -8,7 +8,13 @@ import { addSX } from '@local/styles/sx'
 import { IThemeSizePropertyDefault } from '@local/theme'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 
-import { DropdownListOptionIconProps, DropdownListOptionProps, SelectWrapperProps } from '.'
+import {
+  DropdownListOptionIconProps,
+  DropdownListOptionProps,
+  SelectListOptionProps,
+  SelectListProps,
+  SelectWrapperProps
+} from '.'
 
 const addSelectWrapperGenre = css<SelectWrapperProps>`
   ${props => css`
@@ -38,10 +44,9 @@ const addSelectWrapperGenre = css<SelectWrapperProps>`
 const addSelectWrapperSize = css<SelectWrapperProps>`
   border: 1px solid;
   width: 100%;
-  padding: 0px ${props => KEY_SIZE_DATA[props.$size].padding}px;
-  height: ${props => KEY_SIZE_DATA[props.$size].height}px;
+  padding: ${props => KEY_SIZE_DATA[props.$size].padding / 4}px ${props => KEY_SIZE_DATA[props.$size].padding}px;
+  height: fit-content;
   min-height: ${props => KEY_SIZE_DATA[props.$size].height}px;
-  max-height: ${props => KEY_SIZE_DATA[props.$size].height}px;
   border-radius: ${props => KEY_SIZE_DATA[props.$size].radius}px;
   ${props =>
     props.$isOpen &&
@@ -63,14 +68,17 @@ const addSelectWrapperSize = css<SelectWrapperProps>`
       }
     `}
 `
-
 export const SelectWrapper = styled(motion.div)<SelectWrapperProps>`
   position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   ${addRemoveOutline};
   ${addSelectWrapperGenre};
   ${addSelectWrapperSize};
   ${addSX};
 `
+
 export const DropdownListParent = styled(motion.div)`
   height: 100%;
   width: 100%;
@@ -119,8 +127,14 @@ const addDropdownListOptionSize = css<DropdownListOptionProps>`
   border: 1px solid;
   border-radius: 0;
   &:last-child {
-    border-radius: 0px 0px ${props => KEY_SIZE_DATA[props.$size].radius}px
-      ${props => KEY_SIZE_DATA[props.$size].radius}px;
+    ${props =>
+      props.$isShowScroll
+        ? css`
+            border-radius: 0px 0px 0px ${KEY_SIZE_DATA[props.$size].radius}px;
+          `
+        : css`
+            border-radius: 0px 0px ${KEY_SIZE_DATA[props.$size].radius}px ${KEY_SIZE_DATA[props.$size].radius}px;
+          `}
   }
 `
 export const DropdownListOption = styled.li<DropdownListOptionProps>`
@@ -141,15 +155,70 @@ const addDropdownOptionIconSize = css<DropdownListOptionIconProps>`
   right: ${props => KEY_SIZE_DATA[props.$size].padding - 6}px;
   height: ${props => KEY_SIZE_DATA[props.$size].height}px;
 `
-
 export const DropdownListOptionIcon = styled(Icon)<DropdownListOptionIconProps>`
   position: absolute;
   right: 0;
   height: 100%;
   align-items: center;
   ${addDropdownOptionIconSize};
+  ${addRemoveOutline};
   color: ${props =>
     props.$checked
       ? props.theme.colors.select[props.$genre].border.select
       : props.theme.colors.input[props.$genre].border.rest};
+`
+
+const addSelectListSize = css<SelectListProps>`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: ${props => (props.$isWrapSelectOption ? 'wrap' : 'nowrap')};
+  gap: ${props => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
+`
+export const SelectList = styled.ul<SelectListProps>`
+  list-style: none;
+  position: relative;
+  overflow: hidden;
+  ${addSelectListSize};
+`
+const addSelectListOptionGenre = css<SelectListOptionProps>`
+  ${props => css`
+    background: ${props.theme.colors.select[props.$genre].background.rest};
+    border-color: ${props.theme.colors.select[props.$genre].border.rest};
+    color: ${props.theme.colors.select[props.$genre].color.rest};
+    &:active {
+      background: ${props.theme.colors.select[props.$genre].background.rest};
+      border-color: ${props.theme.colors.select[props.$genre].border.rest};
+      color: ${props.theme.colors.select[props.$genre].color.rest};
+    }
+    ${!props.$isNotShowHoverStyle &&
+    css`
+      &:hover {
+        background: ${props.theme.colors.select[props.$genre].background.hover};
+        border-color: ${props.theme.colors.select[props.$genre].border.hover};
+        color: ${props.theme.colors.select[props.$genre].color.hover};
+      }
+    `}
+    &:focus-visible {
+      background: ${props.theme.colors.select[props.$genre].background.rest};
+      border-color: ${props.theme.colors.select[props.$genre].border.rest};
+      color: ${props.theme.colors.select[props.$genre].color.rest};
+    }
+  `};
+`
+const addSelectListOptionSize = css<SelectListOptionProps>`
+  padding: ${props => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
+  border: 1px solid;
+  border-radius: ${props => KEY_SIZE_DATA[props.$size].radius}px;
+  background: ${props => (props.$isOverflowing ? 'red' : 'blue')};
+`
+export const SelectListOption = styled(motion.li)<SelectListOptionProps>`
+  display: flex;
+  align-items: center;
+  opacity: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+  max-width: 100%;
+  ${addSelectListOptionGenre};
+  ${addSelectListOptionSize};
+  ${addRemoveOutline};
 `

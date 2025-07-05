@@ -1,13 +1,15 @@
 import { useVirtualizer } from '@tanstack/react-virtual'
 import moment from 'moment'
-import { FC, KeyboardEvent, RefObject, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { FC, KeyboardEvent, Ref, RefObject, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { ListLanguage, MapThemeList } from '@local/consts'
+import { useOverflowing } from '@local/hooks/use-overflowing'
 import { ErrorMessage } from '@local/styles/error'
 import { KEY_SIZE_DATA } from '@local/theme'
 
 import {
-  ContainerDropdownOptionProps,
+  ContainerDropdownListOptionProps,
+  ContainerSelectListOptionProps,
   DropdownList,
   DropdownListOption,
   DropdownListOptionIcon,
@@ -15,14 +17,18 @@ import {
   ISelectItem,
   ISelectLanguageOption,
   ISelectMapThemeOption,
-  SelectDateProps,
   SelectLanguageProps,
+  SelectList,
+  SelectListOption,
   SelectMapThemeProps,
+  SelectMonthProps,
+  SelectMonthsProps,
   SelectProps,
   SelectWrapper,
   SelectYearProps
 } from '.'
 import { Popover, usePopover } from '../popover'
+import { Typography } from '../typography'
 
 const DEFAULT_MAX_VIEW = 5
 const DEFAULT_MIN_VIEW = 5
@@ -41,8 +47,6 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const refInput = useRef<HTMLInputElement>(null)
   const parentListRef = useRef<HTMLDivElement>(null)
 
-  const isHaveOption = useMemo(() => !!props.option.length, [props.option.length])
-  const isAll = useMemo(() => props.value.length == props.option.length, [props.option.length, props.value.length])
   const maxViewLength = useMemo(() => props.maxView ?? DEFAULT_MAX_VIEW, [props.maxView])
   const minViewLength = useMemo(() => props.minView ?? DEFAULT_MIN_VIEW, [props.minView])
   const optionsLength = useMemo(() => props.option.length, [props.option.length])
@@ -55,45 +59,16 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   )
   const radius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size])
 
+  const isAll = useMemo(() => props.value.length == props.option.length, [props.option.length, props.value.length])
+  const isHaveOption = useMemo(() => !!props.option.length, [props.option.length])
+  const isHaveValue = useMemo(() => !!props.value.length, [props.value.length])
+
+  const isShowScroll = useMemo(() => optionsLength > maxViewLength, [maxViewLength, optionsLength])
   const isSelectedItem = useCallback(
     (option: T): boolean => {
-      return isAll || (props.value ?? []).includes(option)
+      return isAll || props.value.includes(option.value)
     },
     [isAll, props.value]
-  )
-
-  const handleOptionOnClick = useCallback(
-    (option: T) => {
-      if (props.isOnClickOptionClose) {
-        close()
-      }
-      let newValues: T[] = []
-
-      if (props.isMulti) {
-        const index = props.value.findIndex(selectedItems => selectedItems.value === option.value)
-        const isFind = index !== -1
-        if (isFind) {
-          newValues = [...props.value.slice(0, index), ...props.value.slice(index + 1)]
-        } else {
-          newValues = [...(props.value ?? []), option]
-        }
-        props.onChange(newValues)
-      } else {
-        const index = props.value.findIndex(selectedItems => selectedItems.value === option.value)
-        const isFind = index !== -1
-        if (isFind && !props.isStayValueAfterSelect) {
-          newValues = [...props.value.slice(0, index), ...props.value.slice(index + 1)]
-        } else {
-          newValues = [option]
-        }
-        props.onChange(newValues)
-      }
-
-      if (props.isOnClickOptionClose) {
-        close()
-      }
-    },
-    [close, props]
   )
 
   const listVirtualizer = useVirtualizer({
@@ -104,7 +79,48 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     paddingEnd: 0
   })
 
-  const handleFetchNextPage = useCallback(
+  const onClickOption = useCallback(
+    (option: T) => {
+      if (props.isOnClickOptionClose) {
+        close()
+      }
+
+      let newValues: (string | number)[] = []
+
+      const optionValue = option.value
+
+      if (props.isMulti) {
+        const index = props.value.findIndex(val => val === optionValue)
+        const isFind = index !== -1
+
+        if (isFind) {
+          newValues = [...props.value.slice(0, index), ...props.value.slice(index + 1)]
+        } else {
+          newValues = props.isSortValueAsOption ? [...props.value, optionValue] : [...props.value, optionValue]
+        }
+
+        props.onChange(newValues)
+      } else {
+        const index = props.value.findIndex(val => val === optionValue)
+        const isFind = index !== -1
+
+        if (isFind && !props.isStayValueAfterSelect) {
+          newValues = [...props.value.slice(0, index), ...props.value.slice(index + 1)]
+        } else {
+          newValues = [optionValue]
+        }
+
+        props.onChange(newValues)
+      }
+
+      if (props.isOnClickOptionClose) {
+        close()
+      }
+    },
+    [close, props]
+  )
+
+  const onScrollNextPage = useCallback(
     (containerRefElement?: HTMLDivElement | null) => {
       if (containerRefElement) {
         const { scrollHeight, scrollTop, clientHeight } = containerRefElement
@@ -115,6 +131,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     },
     [height, props]
   )
+  const { isOverflowing, ref } = useOverflowing({ isCheckSize: !props.isWrapSelectOption })
   return (
     <>
       <SelectWrapper
@@ -137,7 +154,37 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           borderBottomRightRadius: isOpen ? `0px` : `${radius}px`
         }}
         transition={{ duration: 0.2 }}
-      ></SelectWrapper>
+      >
+        {isHaveValue ? (
+          <SelectList
+            $isOverflowing={isOverflowing}
+            ref={ref as Ref<HTMLUListElement> | undefined}
+            $size={props.size}
+            tabIndex={-1}
+            $isWrapSelectOption={props.isWrapSelectOption}
+          >
+            {props.value.map((value, index) => {
+              const item = props.option.find(option => option.value === value)
+              if (!item) return null
+              const isChecked = isSelectedItem(item)
+              return (
+                <ContainerSelectListOption
+                  key={index}
+                  isChecked={isChecked}
+                  onClick={() => onClickOption(item)}
+                  item={item}
+                  genre={props.genre}
+                  size={props.size}
+                  isBold={props.isBold}
+                  isWrapSelectOption={props.isWrapSelectOption}
+                  isNotShowHoverStyle={props.isNotShowHoverStyle}
+                  isCenter={props.isCenter}
+                />
+              )
+            })}
+          </SelectList>
+        ) : null}
+      </SelectWrapper>
       <Popover
         sx={theme => ({
           default: {
@@ -156,38 +203,39 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         <DropdownListParent
           tabIndex={-1}
           ref={parentListRef}
-          onScroll={e => handleFetchNextPage(e.target as HTMLDivElement)}
+          onScroll={e => onScrollNextPage(e.target as HTMLDivElement)}
         >
-          <DropdownList
-            tabIndex={-1}
-            style={{
-              height: `${listVirtualizer.getTotalSize()}px`,
-              minHeight: `${height}px`
-            }}
-          >
-            {isHaveOption
-              ? listVirtualizer.getVirtualItems().map(virtualRow => {
-                  const item = props.option[virtualRow.index]
-                  const isChecked = isSelectedItem(item)
-                  return (
-                    <ContainerDropdownOption
-                      key={virtualRow.index}
-                      virtualRowSize={virtualRow.size}
-                      virtualRowStart={virtualRow.start}
-                      isChecked={isChecked}
-                      onClick={() => handleOptionOnClick(item)}
-                      item={item}
-                      genre={props.genre}
-                      size={props.size}
-                      isBold={props.isBold}
-                      isNotShowHoverStyle={props.isNotShowHoverStyle}
-                      isCenter={props.isCenter}
-                      isShowDropdownOptionIcon={props.isShowDropdownOptionIcon}
-                    />
-                  )
-                })
-              : null}
-          </DropdownList>
+          {isHaveOption ? (
+            <DropdownList
+              tabIndex={-1}
+              style={{
+                height: `${listVirtualizer.getTotalSize()}px`,
+                minHeight: `${height}px`
+              }}
+            >
+              {listVirtualizer.getVirtualItems().map(virtualRow => {
+                const item = props.option[virtualRow.index]
+                const isChecked = isSelectedItem(item)
+                return (
+                  <ContainerDropdownListOption
+                    key={virtualRow.index}
+                    virtualRowSize={virtualRow.size}
+                    virtualRowStart={virtualRow.start}
+                    isChecked={isChecked}
+                    onClick={() => onClickOption(item)}
+                    item={item}
+                    genre={props.genre}
+                    size={props.size}
+                    isBold={props.isBold}
+                    isNotShowHoverStyle={props.isNotShowHoverStyle}
+                    isCenter={props.isCenter}
+                    isShowScroll={isShowScroll}
+                    isShowDropdownOptionIcon={props.isShowDropdownOptionIcon}
+                  />
+                )
+              })}
+            </DropdownList>
+          ) : null}
         </DropdownListParent>
       </Popover>
       {props?.error ? <ErrorMessage {...props.error} size={props?.error.size ?? props.size} /> : null}
@@ -195,7 +243,9 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   )
 }
 
-const ContainerDropdownOptionComponent = <T extends object & ISelectItem>(props: ContainerDropdownOptionProps<T>) => {
+const ContainerDropdownListOptionComponent = <T extends object & ISelectItem>(
+  props: ContainerDropdownListOptionProps<T>
+) => {
   const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>) => {
     if (event.key === 'Enter') {
       props.onClick()
@@ -206,6 +256,10 @@ const ContainerDropdownOptionComponent = <T extends object & ISelectItem>(props:
       tabIndex={0}
       onClick={props.onClick}
       onKeyDown={handleKeyDown}
+      style={{
+        height: `${props.virtualRowSize}px`,
+        transform: `translateY(${props.virtualRowStart}px)`
+      }}
       $isCenter={props.isCenter}
       $isNotShowHoverStyle={props.isNotShowHoverStyle}
       $item={props.item}
@@ -213,10 +267,7 @@ const ContainerDropdownOptionComponent = <T extends object & ISelectItem>(props:
       $size={props.size}
       $isBold={props.isBold}
       $isChecked={props.isChecked}
-      style={{
-        height: `${props.virtualRowSize}px`,
-        transform: `translateY(${props.virtualRowStart}px)`
-      }}
+      $isShowScroll={props.isShowScroll}
     >
       {props.item.label}
       {props.isShowDropdownOptionIcon && (
@@ -234,70 +285,101 @@ const ContainerDropdownOptionComponent = <T extends object & ISelectItem>(props:
   )
 }
 
-export const ContainerDropdownOption = memo(ContainerDropdownOptionComponent)
+const ContainerSelectListOptionComponent = <T extends object & ISelectItem>(
+  props: ContainerSelectListOptionProps<T>
+) => {
+  const { isOverflowing, ref } = useOverflowing({ isCheckSize: !props.isWrapSelectOption, mode: 'parent' })
+
+  return (
+    <SelectListOption
+      tabIndex={-1}
+      ref={ref as RefObject<HTMLLIElement | null>}
+      onClick={props.onClick}
+      $isOverflowing={isOverflowing}
+      $isWrapSelectOption={props.isWrapSelectOption}
+      $isCenter={props.isCenter}
+      $isNotShowHoverStyle={props.isNotShowHoverStyle}
+      $item={props.item}
+      $genre={props.genre}
+      $size={props.size}
+      $isBold={props.isBold}
+      $isChecked={props.isChecked}
+    >
+      <Typography
+        sx={{
+          default: {
+            size: 16,
+            line: 1
+          }
+        }}
+      >
+        {props.item.label}
+      </Typography>
+    </SelectListOption>
+  )
+}
+
+export const ContainerDropdownListOption = memo(ContainerDropdownListOptionComponent)
+export const ContainerSelectListOption = memo(ContainerSelectListOptionComponent)
 
 export const SelectLanguage: FC<SelectLanguageProps> = props => {
+  const { value, onChange } = props
+
   const option = ListLanguage
 
   const [viewOption, setViewOption] = useState<ISelectLanguageOption[]>(option)
-  const [query, setQuery] = useState<string>('')
-  const [isEmptyOption, setIsEmptyOption] = useState<boolean>(false)
+  // const [query, setQuery] = useState<string>('')
+  // const [isEmptyOption, setIsEmptyOption] = useState<boolean>(false)
 
-  const handleSelectChange = (option: ISelectLanguageOption[]) => {
-    props.onChange(option[0]?.value.toString())
-    setQuery('')
+  // const handleSelectChange = (value: (number | string)[]) => {
+  //   props.onChange(option[0]?.value.toString())
+  //   setQuery('')
+  // }
+  // const handleQueryChange = useCallback(
+  //   (value: string) => {
+  //     setQuery(value)
+  //     props.onChange('')
+  //     if (value === '') {
+  //       setIsEmptyOption(option.length === 0)
+  //       setViewOption(option)
+  //     } else {
+  //       const filteredOptions = option.filter(option =>
+  //         Object.values(option).some(field => field?.toString().toLowerCase().includes(value.toLowerCase()))
+  //       )
+  //       setViewOption(filteredOptions)
+  //       setIsEmptyOption(filteredOptions.length === 0)
+  //     }
+  //   },
+  //   [option, props]
+  // )
+
+  const handleSelectChange = (value: (number | string)[]) => {
+    if (value.length === 0) onChange(null)
+    onChange(value[0].toString())
   }
-  const handleQueryChange = useCallback(
-    (value: string) => {
-      setQuery(value)
-      props.onChange('')
-      if (value === '') {
-        setIsEmptyOption(option.length === 0)
-        setViewOption(option)
-      } else {
-        const filteredOptions = option.filter(option =>
-          Object.values(option).some(field => field?.toString().toLowerCase().includes(value.toLowerCase()))
-        )
-        setViewOption(filteredOptions)
-        setIsEmptyOption(filteredOptions.length === 0)
-      }
-    },
-    [option, props]
-  )
-
-  const [value, setValue] = useState<ISelectLanguageOption | undefined>(option.find(e => e.value === props.value))
-  useEffect(() => {
-    if (value?.value !== props.value) setValue(option.find(e => e.value === props.value))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [option, props.value])
+  const valueLocal = useMemo(() => {
+    if (!value) return []
+    return [value]
+  }, [value])
 
   return (
     <Select<ISelectLanguageOption>
       {...props}
       option={viewOption}
-      // isEmptyOption={isEmptyOption}
       minView={1}
       maxView={8}
-      // isOnClickOptionClose
-      value={value ? [value] : []}
+      value={valueLocal}
       onChange={handleSelectChange}
-      // inputProps={{
-      //   ...props.inputProps,
-      //   variety: 'standard',
-      //   isReadOnly: true,
-      //   value: (value?.placeholder as string) ?? query,
-      //   onChange: handleQueryChange
-      // }}
     />
   )
 }
 
-export const SelectMonth: FC<SelectDateProps> = props => {
+export const SelectMonth: FC<SelectMonthProps> = props => {
   const { value, onChange, startDate, endDate, monthsLocale, isShortLabel } = props
 
   const year = moment(value).utc().year()
 
-  const months = useMemo(() => {
+  const option = useMemo(() => {
     return monthsLocale.map(monthItem => {
       const monthIndex = moment().month(monthItem.value).month()
 
@@ -311,54 +393,73 @@ export const SelectMonth: FC<SelectDateProps> = props => {
         label: isShortLabel ? monthItem.localeShort : monthItem.localeLong,
         placeholder: isShortLabel ? monthItem.localeShort : monthItem.localeLong,
         search: `${monthItem.localeLong.toLowerCase()}, ${monthIndex + 1}`,
-        isDisabled,
+        isDisabled: !!isDisabled,
         monthValue: monthItem.value
       }
     })
   }, [monthsLocale, year, startDate, endDate, isShortLabel])
 
-  const handleSelectChange = (option: ISelectLanguageOption[]) => {
-    const selectedValue = Number(option[0]?.value)
-
-    const selectedMonthValue = moment(option[0]?.value).utc().month()
-
-    const currentMoment = moment(value).utc()
-    const currentYear = currentMoment.year()
-    const currentDay = currentMoment.date()
-
-    const newValue = moment().utc().year(currentYear).month(selectedMonthValue).date(currentDay).startOf('day')
-
-    if (newValue.isValid()) {
-      onChange(newValue.valueOf())
-    } else {
-      onChange(selectedValue)
-    }
+  const handleSelectChange = (value: (number | string)[]) => {
+    if (value.length === 0) onChange(null)
+    onChange(+value[0])
   }
-
-  const selectedMonth = useMemo(() => {
-    return months.find(
-      month =>
-        moment(value).utc().isSameOrAfter(moment(month.value).startOf('month')) &&
-        moment(value).utc().isBefore(moment(month.value).endOf('month'))
-    )
-  }, [months, value])
+  const valueLocal = useMemo(() => {
+    if (!value) return []
+    return [value]
+  }, [value])
 
   return (
     <Select<ISelectLanguageOption>
       {...props}
-      option={months.filter(e => !e.isDisabled)}
+      option={option}
       minView={1}
       maxView={5}
-      isOnClickOptionClose
-      value={selectedMonth ? [selectedMonth] : []}
+      isShowDropdownOptionIcon
+      value={valueLocal}
       onChange={handleSelectChange}
-      // inputProps={{
-      //   ...props.inputProps,
-      //   isCenter: true,
-      //   variety: 'standard',
-      //   value: selectedMonth?.placeholder ?? props.placeholder,
-      //   isReadOnly: true
-      // }}
+    />
+  )
+}
+export const SelectMonths: FC<SelectMonthsProps> = props => {
+  const { value, onChange, startDate, endDate, monthsLocale, isShortLabel } = props
+
+  const year = moment(value).utc().year()
+
+  const option = useMemo(() => {
+    return monthsLocale.map(monthItem => {
+      const monthIndex = moment().month(monthItem.value).month()
+
+      const monthMoment = moment.utc().year(year).month(monthIndex).startOf('month')
+      const isDisabled =
+        (startDate && monthMoment.isBefore(moment.utc(startDate), 'month')) ||
+        (endDate && monthMoment.isAfter(moment.utc(endDate), 'month'))
+
+      return {
+        value: monthMoment.valueOf(),
+        label: isShortLabel ? monthItem.localeShort : monthItem.localeLong,
+        placeholder: isShortLabel ? monthItem.localeShort : monthItem.localeLong,
+        search: `${monthItem.localeLong.toLowerCase()}, ${monthIndex + 1}`,
+        isDisabled: !!isDisabled,
+        monthValue: monthItem.value
+      }
+    })
+  }, [monthsLocale, year, startDate, endDate, isShortLabel])
+
+  const handleSelectChange = (value: (number | string)[]) => {
+    if (value.length === 0) onChange([])
+    onChange(value.map(e => +e))
+  }
+
+  return (
+    <Select<ISelectLanguageOption>
+      {...props}
+      option={option}
+      minView={1}
+      maxView={5}
+      isMulti
+      isShowDropdownOptionIcon
+      value={value}
+      onChange={handleSelectChange}
     />
   )
 }
@@ -369,7 +470,7 @@ export const SelectYear: FC<SelectYearProps> = props => {
   const startYear = moment(startDate).utc().year()
   const endYear = moment(endDate).utc().year()
 
-  const years = useMemo(() => {
+  const option = useMemo(() => {
     const yearArray = Array.from({ length: endYear - startYear + 1 }, (_, index) => {
       const year = startYear + index
       return {
@@ -385,53 +486,26 @@ export const SelectYear: FC<SelectYearProps> = props => {
       : yearArray.sort((a, b) => b.value - a.value)
   }, [endYear, startYear, sortOrder])
 
-  const handleSelectChange = (option: ISelectLanguageOption[]) => {
-    const selectedValue = Number(option[0]?.value)
-
-    const selectedYearValue = moment(option[0]?.value).utc().year()
-
-    const currentMoment = moment(value).utc()
-    const currentMonth = currentMoment.month()
-    const currentDay = currentMoment.date()
-
-    const newValue = moment().utc().year(selectedYearValue).month(currentMonth).date(currentDay).startOf('day')
-
-    if (newValue.isValid()) {
-      onChange(newValue.valueOf())
-    } else {
-      onChange(selectedValue)
-    }
+  const handleSelectChange = (value: (number | string)[]) => {
+    if (value.length === 0) onChange(null)
+    onChange(+value[0])
   }
 
-  const selectedYear = useMemo(() => {
-    return years.find(
-      year =>
-        moment(value).utc().isSameOrAfter(moment(year.value)) &&
-        moment(value).utc().isBefore(moment(year.value).endOf('year'))
-    )
-  }, [years, value])
+  const valueLocal = useMemo(() => {
+    if (!value) return []
+    return [value]
+  }, [value])
+
   return (
     <Select<ISelectLanguageOption>
       {...props}
-      option={years}
+      option={option}
       minView={1}
       maxView={5}
       isOnClickOptionClose
-      value={selectedYear ? [selectedYear] : []}
+      isShowDropdownOptionIcon
+      value={valueLocal}
       onChange={handleSelectChange}
-      // optionProps={{
-      //   isCenter: true,
-      //   variety: 'standard',
-      //   ...props.optionProps
-      // }}
-      // inputProps={{
-      //   ...props.inputProps,
-      //   isCenter: true,
-      //   isNiceNumber: true,
-      //   variety: 'standard',
-      //   value: selectedYear?.placeholder ?? props.placeholder,
-      //   isReadOnly: true
-      // }}
     />
   )
 }

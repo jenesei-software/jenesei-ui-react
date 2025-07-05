@@ -35,9 +35,11 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     isShowSelectInputIcon?: boolean
     isOnClickOptionClose?: boolean
     isNotShowHoverStyle?: boolean
+    isSortValueAsOption?: boolean
     isCenter?: boolean
     isStayValueAfterSelect?: boolean
     isBold?: boolean
+    isWrapSelectOption?: boolean
     labelEmptyOption?: string
 
     // inputProps?: Omit<
@@ -46,8 +48,8 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     // >
     isMulti?: boolean
     option: T[]
-    value: T[]
-    onChange: (option: T[]) => void
+    value: (number | string)[]
+    onChange: (value: (number | string)[]) => void
     onFocus?: FocusEventHandler<HTMLInputElement>
     onBlur?: FocusEventHandler<HTMLInputElement>
     maxView?: number
@@ -65,7 +67,7 @@ export interface ISelectLanguageOption extends ISelectItem {
 
 export type SelectLanguageProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
   value: string
-  onChange: (language: string) => void
+  onChange: (language: string | null) => void
 }
 
 export interface ISelectMapThemeOption extends ISelectItem {
@@ -77,16 +79,23 @@ export type SelectMapThemeProps = Omit<SelectProps<ISelectItem>, 'option' | 'val
   value: MapTheme
   onChange: (theme: MapTheme | null) => void
 }
-export type SelectDateProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
+export type SelectMonthProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
   startDate?: number
   endDate?: number
-  value: number
+  value: number | null
   isShortLabel?: boolean
-  onChange: (timestamp: number) => void
+  onChange: (value: number | null) => void
   monthsLocale: MonthItem[]
 }
-
-export type SelectYearProps = Omit<SelectDateProps, 'monthsLocale'> & {
+export type SelectMonthsProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
+  startDate?: number
+  endDate?: number
+  value: number[]
+  isShortLabel?: boolean
+  onChange: (value: number[]) => void
+  monthsLocale: MonthItem[]
+}
+export type SelectYearProps = Omit<SelectMonthProps, 'monthsLocale'> & {
   startDate?: number
   endDate?: number
   sortOrder?: 'asc' | 'desc'
@@ -100,6 +109,7 @@ export type DropdownListOptionProps = AddDollarSign<
   Pick<SelectProps<ISelectItem>, 'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold'> & {
     item: ISelectItem
     isChecked?: boolean
+    isShowScroll?: boolean
   }
 >
 
@@ -109,7 +119,7 @@ export type DropdownListOptionIconProps = AddDollarSign<
   }
 >
 
-export type ContainerDropdownOptionProps<T extends ISelectItem> = Pick<
+export type ContainerDropdownListOptionProps<T extends ISelectItem> = Pick<
   SelectProps<T>,
   'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold' | 'isShowDropdownOptionIcon'
 > & {
@@ -117,9 +127,34 @@ export type ContainerDropdownOptionProps<T extends ISelectItem> = Pick<
 
   isChecked?: boolean
 
+  isShowScroll?: boolean
+
   onClick: () => void
 
   virtualRowSize: number
 
   virtualRowStart: number
 }
+export type ContainerSelectListOptionProps<T extends ISelectItem> = Pick<
+  SelectProps<T>,
+  'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold' | 'isWrapSelectOption'
+> & {
+  item: T
+
+  isChecked?: boolean
+
+  onClick: () => void
+}
+export type SelectListOptionProps = AddDollarSign<
+  Pick<
+    SelectProps<ISelectItem>,
+    'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold' | 'isWrapSelectOption'
+  > & {
+    item: ISelectItem
+    isChecked?: boolean
+    isOverflowing?: boolean
+  }
+>
+export type SelectListProps = AddDollarSign<
+  Pick<SelectProps<ISelectItem>, 'size' | 'isWrapSelectOption'> & { isOverflowing?: boolean }
+>

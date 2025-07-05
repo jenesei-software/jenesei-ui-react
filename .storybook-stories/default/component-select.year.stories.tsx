@@ -32,20 +32,17 @@ const defaultArgs: Partial<SelectYearProps> = {
 }
 
 const SelectYearWrapper: FC<SelectYearProps> = props => {
-  const [value, setValue] = useState<number>(props.value)
-  const handleSelectChange = (value: number) => {
+  const [value, setValue] = useState<number | null>(moment.utc().startOf('year').valueOf())
+  const handleSelectChange = (value: number | null) => {
     setValue(value)
   }
-
-  useEffect(() => {
-    setValue(props.value)
-  }, [props.value])
   return (
     <Stack
       sx={{
         default: {
           width: '300px',
-          height: '500px'
+          height: '500px',
+          padding: '10px'
         }
       }}
     >

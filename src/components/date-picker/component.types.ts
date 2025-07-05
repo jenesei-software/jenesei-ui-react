@@ -6,7 +6,7 @@ import { addSXProps } from '@local/styles/sx'
 import { IThemeGenreDate, IThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
-import { SelectDateProps } from '../select'
+import { SelectMonthProps } from '../select'
 
 export type DatePickerMode = 'DD.MM.YYYY' | 'MM.DD.YYYY' | 'YYYY.MM.DD'
 export type DatePickerProps = addErrorProps &
@@ -31,7 +31,7 @@ export type DatePickerProps = addErrorProps &
     isOnClickClose?: boolean
 
     locale: {
-      months: SelectDateProps['monthsLocale']
+      months: SelectMonthProps['monthsLocale']
       weeks: WeekItem[]
       inputs: InputItem
     }
