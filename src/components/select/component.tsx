@@ -1,9 +1,22 @@
 import { useVirtualizer } from '@tanstack/react-virtual'
 import moment from 'moment'
-import { FC, KeyboardEvent, Ref, RefObject, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  FC,
+  KeyboardEvent,
+  Ref,
+  RefObject,
+  memo,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react'
 
 import { ListLanguage, MapThemeList } from '@local/consts'
 import { useOverflowing } from '@local/hooks/use-overflowing'
+import { useOverflowingInContainer } from '@local/hooks/use-overflowing-in-container'
 import { ErrorMessage } from '@local/styles/error'
 import { KEY_SIZE_DATA } from '@local/theme'
 
@@ -36,7 +49,7 @@ const DEFAULT_OVERSCAN = 1
 const DEFAULT_LABEL_EMPTY_OPTION = 'No options'
 
 export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) => {
-  const { isOpen, close, open, reference, floating, floatingStyles } = usePopover({
+  const { isOpen, close, open, refReference, refFloating, floatingStyles } = usePopover({
     placement: 'bottom-start',
     offset: 0,
     mode: 'independence',
@@ -131,7 +144,29 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     },
     [height, props]
   )
-  const { isOverflowing, ref } = useOverflowing({ isCheckSize: !props.isWrapSelectOption })
+  const { isOverflowing, ref } = useOverflowing({
+    isCheckSize: !props.isWrapSelectOption,
+    dependencies: [props.value.length]
+  })
+  const [notOverflowingLength, setNotOverflowingLength] = useState<number | null>(null)
+  useLayoutEffect(() => {
+    if (props.isWrapSelectOption) return
+    if (isOverflowing) {
+      setNotOverflowingLength(prevValue => {
+        if (prevValue !== null && prevValue <= props.value.length) {
+          return prevValue
+        }
+        return props.value.length - 1
+      })
+    } else {
+      setNotOverflowingLength(prevValue => {
+        if (prevValue && prevValue >= props.value.length) {
+          return null
+        }
+        return prevValue
+      })
+    }
+  }, [isOverflowing, props.isWrapSelectOption, props.value.length])
   return (
     <>
       <SelectWrapper
@@ -141,7 +176,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         $genre={props.genre}
         $sx={props.sx}
         $isOpen={isOpen}
-        ref={reference as RefObject<HTMLDivElement | null>}
+        ref={refReference as RefObject<HTMLDivElement | null>}
         onClick={() => {
           open()
         }}
@@ -163,8 +198,10 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
             tabIndex={-1}
             $isWrapSelectOption={props.isWrapSelectOption}
           >
+            {notOverflowingLength}
             {props.value.map((value, index) => {
               const item = props.option.find(option => option.value === value)
+              if (notOverflowingLength !== null && notOverflowingLength < index + 1) return null
               if (!item) return null
               const isChecked = isSelectedItem(item)
               return (
@@ -197,7 +234,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         size={props.size}
         genre={props.genre}
         floatingStyles={floatingStyles}
-        ref={floating}
+        ref={refFloating}
         isOpen={isOpen}
       >
         <DropdownListParent
@@ -288,14 +325,10 @@ const ContainerDropdownListOptionComponent = <T extends object & ISelectItem>(
 const ContainerSelectListOptionComponent = <T extends object & ISelectItem>(
   props: ContainerSelectListOptionProps<T>
 ) => {
-  const { isOverflowing, ref } = useOverflowing({ isCheckSize: !props.isWrapSelectOption, mode: 'parent' })
-
   return (
     <SelectListOption
       tabIndex={-1}
-      ref={ref as RefObject<HTMLLIElement | null>}
       onClick={props.onClick}
-      $isOverflowing={isOverflowing}
       $isWrapSelectOption={props.isWrapSelectOption}
       $isCenter={props.isCenter}
       $isNotShowHoverStyle={props.isNotShowHoverStyle}

@@ -1,4 +1,5 @@
-import { FC, Ref, useMemo } from 'react'
+import { useMergeRefs } from '@floating-ui/react'
+import { FC, Ref, useMemo, useRef } from 'react'
 import { useTheme } from 'styled-components'
 
 import {
@@ -76,6 +77,9 @@ export const Button: FC<ButtonProps> = props => {
       props.onClick(event)
     }
   }
+  const refDefault = useRef<HTMLButtonElement>(null)
+
+  const ref = useMergeRefs([refDefault, props.ref])
 
   return (
     <StyledButton
@@ -97,7 +101,7 @@ export const Button: FC<ButtonProps> = props => {
       type={props.type ?? 'button'}
       className={props.className}
       onClick={handleClick}
-      ref={props.ref as Ref<HTMLButtonElement>}
+      ref={ref as Ref<HTMLButtonElement>}
       $sx={props.sx}
     >
       <Ripple

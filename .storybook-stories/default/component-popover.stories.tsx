@@ -18,15 +18,15 @@ export default meta
 type Story = StoryObj<typeof PopoverComponent>
 
 const PopoverWrapper: FC<PopoverProps> = props => {
-  const { isOpen, reference, floating, floatingStyles } = usePopover({
+  const { isOpen, refReference, refFloating, floatingStyles } = usePopover({
     placement: 'bottom-start',
     offset: 8,
     mode: 'click'
   })
   const {
     isOpen: isOpenTop,
-    reference: referenceTop,
-    floating: floatingTop,
+    refReference: refReferenceTop,
+    refFloating: refFloatingTop,
     floatingStyles: floatingStylesTop
   } = usePopover({
     placement: 'top-start',
@@ -34,14 +34,20 @@ const PopoverWrapper: FC<PopoverProps> = props => {
     mode: 'hover',
     isFloatingHover: false
   })
-  const ref = useMergeRefs([reference, referenceTop])
+  const ref = useMergeRefs([refReference, refReferenceTop])
 
   return (
     <Stack sx={{ default: { gap: '8px', padding: '100px' } }}>
       <Button genre={'black'} size={'medium'} ref={ref}>
         Popover
       </Button>
-      <PopoverComponent {...props} size="small" isOpen={isOpenTop} floatingStyles={floatingStylesTop} ref={floatingTop}>
+      <PopoverComponent
+        {...props}
+        size="small"
+        isOpen={isOpenTop}
+        floatingStyles={floatingStylesTop}
+        ref={refFloatingTop}
+      >
         Popover
       </PopoverComponent>
       <PopoverComponent
@@ -50,7 +56,7 @@ const PopoverWrapper: FC<PopoverProps> = props => {
         size="medium"
         isOpen={isOpen}
         floatingStyles={floatingStyles}
-        ref={floating}
+        ref={refFloating}
         sx={{
           default: {
             padding: '0px',

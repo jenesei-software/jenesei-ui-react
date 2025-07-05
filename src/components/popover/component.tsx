@@ -220,8 +220,8 @@ export const usePopover = (props: UsePopoverProps) => {
     open,
     close,
     toggle,
-    reference: refs.setReference as Ref<HTMLElement | null>,
-    floating: refs.setFloating as Ref<HTMLElement | null>,
+    refReference: refs.setReference as Ref<HTMLElement | null>,
+    refFloating: refs.setFloating as Ref<HTMLElement | null>,
     floatingStyles: combinedStyles,
     placement: actualPlacement
   }

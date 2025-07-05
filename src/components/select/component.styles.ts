@@ -210,14 +210,15 @@ const addSelectListOptionSize = css<SelectListOptionProps>`
   border: 1px solid;
   border-radius: ${props => KEY_SIZE_DATA[props.$size].radius}px;
   background: ${props => (props.$isOverflowing ? 'red' : 'blue')};
+  min-width: ${props => (props.$isOverflowing ? 'auto' : 'max-content')};
 `
 export const SelectListOption = styled(motion.li)<SelectListOptionProps>`
   display: flex;
   align-items: center;
   opacity: 1;
   cursor: pointer;
-  flex-shrink: 0;
-  max-width: 100%;
+  /* flex-shrink: 0; */
+  overflow: hidden;
   ${addSelectListOptionGenre};
   ${addSelectListOptionSize};
   ${addRemoveOutline};

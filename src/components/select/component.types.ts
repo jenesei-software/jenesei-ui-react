@@ -1,4 +1,4 @@
-import { FocusEventHandler, ReactNode } from 'react'
+import { FocusEventHandler, MutableRefObject, ReactNode, RefObject } from 'react'
 
 import { addErrorProps } from '@local/styles/error'
 import { addSXProps } from '@local/styles/sx'
