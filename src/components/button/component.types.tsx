@@ -15,6 +15,8 @@ type ButtonPropsDefault = PropsWithChildren & {
 
   id?: string
 
+  tabIndex?: number
+
   ref?: Ref<HTMLElement | null>
 
   className?: string

@@ -23,7 +23,6 @@ const defaultArgs: Partial<SelectLanguageProps> = {
   },
   isOnClickOptionClose: false,
   isShowDropdownOptionIcon: true,
-  isShowSelectInputIcon: true,
   placeholder: 'Choice language...'
 }
 

@@ -1,4 +1,4 @@
-import { FocusEventHandler, MutableRefObject, ReactNode, RefObject } from 'react'
+import { FocusEventHandler, ReactNode } from 'react'
 
 import { addErrorProps } from '@local/styles/error'
 import { addSXProps } from '@local/styles/sx'
@@ -33,7 +33,7 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     isDisabled?: boolean
     isShowDropdownOptionIcon?: boolean
     isShowIconToggle?: boolean
-    isShowIconClear?: boolean
+    isShowIconSearchClear?: boolean
     isShowIconFetching?: boolean
     isOnClickOptionClose?: boolean
     isNotShowHoverStyle?: boolean
@@ -44,18 +44,23 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     isWrapSelectOption?: boolean
     isMulti?: boolean
     isFetching?: boolean
-
+    isClearWhenClickSelectListOption?: boolean
+    isStaySearchAfterSelect?: boolean
     labelPlaceholder?: string
     labelEmptyOption?: string
-    labelAndMore?: string
+    labelAndMore?: (count: number) => string
+
+    isSearch?: boolean
+    valueSearch?: string
+    onChangeSearch?: (value: string) => void
 
     option: T[]
-    value: (number | string)[]
+    value: T[]
     maxViewSelect?: number
     maxViewDropdown?: number
     minViewDropdown?: number
 
-    onChange: (value: (number | string)[]) => void
+    onChange: (value: T[]) => void
     onFocus?: FocusEventHandler<HTMLInputElement>
     onBlur?: FocusEventHandler<HTMLInputElement>
     fetchNextPage?: () => void
@@ -140,7 +145,13 @@ export type ContainerDropdownListOptionProps<T extends ISelectItem> = Pick<
 }
 export type ContainerSelectListOptionProps<T extends ISelectItem> = Pick<
   SelectProps<T>,
-  'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold' | 'isWrapSelectOption'
+  | 'genre'
+  | 'size'
+  | 'isCenter'
+  | 'isNotShowHoverStyle'
+  | 'isBold'
+  | 'isWrapSelectOption'
+  | 'isClearWhenClickSelectListOption'
 > & {
   item: T
 
@@ -151,14 +162,18 @@ export type ContainerSelectListOptionProps<T extends ISelectItem> = Pick<
 export type SelectListOptionProps = AddDollarSign<
   Pick<
     SelectProps<ISelectItem>,
-    'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold' | 'isWrapSelectOption'
+    | 'genre'
+    | 'size'
+    | 'isCenter'
+    | 'isNotShowHoverStyle'
+    | 'isBold'
+    | 'isWrapSelectOption'
+    | 'isClearWhenClickSelectListOption'
   > & {
-    item: ISelectItem
+    item?: ISelectItem
     isChecked?: boolean
-    isOverflowing?: boolean
   }
 >
-export type SelectListProps = AddDollarSign<
-  Pick<SelectProps<ISelectItem>, 'size' | 'isWrapSelectOption'> & { isOverflowing?: boolean }
->
+export type SelectListProps = AddDollarSign<Pick<SelectProps<ISelectItem>, 'size' | 'isWrapSelectOption'>>
 export type ButtonListProps = AddDollarSign<Pick<SelectProps<ISelectItem>, 'size'>>
+export type SelectInputProps = AddDollarSign<Pick<SelectProps<ISelectItem>, 'size' | 'genre'>>

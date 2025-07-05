@@ -2,9 +2,9 @@ import { CSSProperties, PropsWithChildren, Ref } from 'react'
 
 import { SXProps } from '@local/styles/sx'
 import {
-  IThemePaletteKeys,
   IThemeDevice,
   IThemeFontFamily,
+  IThemePaletteKeys,
   IThemeTypographyHeading,
   IThemeTypographyWeight
 } from '@local/theme'
@@ -42,6 +42,8 @@ type TypographyDefaultProps = {
   weight?: IThemeTypographyWeight
 
   wrap?: CSSProperties['textWrap']
+
+  isNoUserSelect?: boolean
 }
 
 export type TypographyDataProps = TypographyDefaultProps & {

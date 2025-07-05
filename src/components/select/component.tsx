@@ -32,6 +32,7 @@ import {
   ISelectItem,
   ISelectLanguageOption,
   ISelectMapThemeOption,
+  SelectInput,
   SelectLanguageProps,
   SelectList,
   SelectListOption,
@@ -47,10 +48,14 @@ import { Icon } from '../icon'
 import { Popover, usePopover } from '../popover'
 import { Typography } from '../typography'
 
+const DEFAULT_LABEL_PLACEHOLDER = 'Select an option'
+const DEFAULT_LABEL_EMPTY_OPTION = 'No options available'
+const DEFAULT_LABEL_AND_MORE = (count: number) => `+${count} more`
+
+const DEFAULT_MAX_VIEW_SELECT = 2
 const DEFAULT_MAX_VIEW_DROPDOWN = 5
 const DEFAULT_MIN_VIEW_DROPDOWN = 5
 const DEFAULT_OVERSCAN = 1
-const DEFAULT_LABEL_EMPTY_OPTION = 'No options'
 
 export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) => {
   const { isOpen, close, open, refReference, refFloating, floatingStyles, toggle } = usePopover({
@@ -62,13 +67,29 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     isDisabled: props?.isDisabled
   })
   const refInput = useRef<HTMLInputElement>(null)
-  const parentListRef = useRef<HTMLDivElement>(null)
+  const refDropdownList = useRef<HTMLDivElement>(null)
 
+  const labelPlaceholder = useMemo(() => props.labelPlaceholder ?? DEFAULT_LABEL_PLACEHOLDER, [props.labelPlaceholder])
+  const labelEmptyOption = useMemo(() => props.labelEmptyOption ?? DEFAULT_LABEL_EMPTY_OPTION, [props.labelEmptyOption])
+  const labelAndMore = useMemo(() => props.labelAndMore ?? DEFAULT_LABEL_AND_MORE, [props.labelAndMore])
+
+  const maxViewSelect = useMemo(() => props.maxViewSelect ?? DEFAULT_MAX_VIEW_SELECT, [props.maxViewSelect])
   const maxViewDropdown = useMemo(() => props.maxViewDropdown ?? DEFAULT_MAX_VIEW_DROPDOWN, [props.maxViewDropdown])
   const minViewDropdown = useMemo(() => props.minViewDropdown ?? DEFAULT_MIN_VIEW_DROPDOWN, [props.minViewDropdown])
+
+  const isAll = useMemo(() => props.value.length == props.option.length, [props.option.length, props.value.length])
+  const isHaveOption = useMemo(() => !!props.option.length, [props.option.length])
+  const isHaveValue = useMemo(() => !!props.value.length, [props.value.length])
+
+  const [isShowSearch, setIsShowSearch] = useState<boolean>(false)
+
   const optionsLength = useMemo(() => props.option.length, [props.option.length])
+
   const sizeHeight = useMemo(() => KEY_SIZE_DATA[props.size].height, [props.size])
-  const height = useMemo(
+  const sizePadding = useMemo(() => KEY_SIZE_DATA[props.size].padding, [props.size])
+  const sizeRadius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size])
+
+  const heightDropdownList = useMemo(
     () =>
       sizeHeight *
       (optionsLength < maxViewDropdown
@@ -78,16 +99,22 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         : maxViewDropdown),
     [sizeHeight, optionsLength, maxViewDropdown, minViewDropdown]
   )
-  const radius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size])
-
-  const isAll = useMemo(() => props.value.length == props.option.length, [props.option.length, props.value.length])
-  const isHaveOption = useMemo(() => !!props.option.length, [props.option.length])
-  const isHaveValue = useMemo(() => !!props.value.length, [props.value.length])
-
+  const heightPopover = useMemo(
+    () => (isHaveOption ? heightDropdownList : sizeHeight),
+    [isHaveOption, heightDropdownList, sizeHeight]
+  )
+  const isValueMoreMaxViewSelect = useMemo(
+    () => props.value.length > maxViewSelect,
+    [maxViewSelect, props.value.length]
+  )
+  const isShowIconSearchClear = useMemo(
+    () => props.isShowIconSearchClear && props.valueSearch,
+    [props.isShowIconSearchClear, props.valueSearch]
+  )
   const isShowScroll = useMemo(() => optionsLength > maxViewDropdown, [maxViewDropdown, optionsLength])
   const isSelectedItem = useCallback(
     (option: T): boolean => {
-      return isAll || props.value.includes(option.value)
+      return isAll || props.value.some(val => val.value === option.value)
     },
     [isAll, props.value]
   )
@@ -95,89 +122,79 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const listVirtualizer = useVirtualizer({
     count: optionsLength,
     estimateSize: props.getEstimateSize ? props.getEstimateSize : () => sizeHeight,
-    getScrollElement: () => parentListRef.current,
+    getScrollElement: () => refDropdownList.current,
     overscan: DEFAULT_OVERSCAN,
     paddingEnd: 0
   })
 
+  const onChangeShowSearch = useCallback(
+    (show: boolean) => {
+      if (props.isSearch) {
+        setIsShowSearch(show)
+        if (refInput.current) {
+          refInput.current.focus()
+        }
+      }
+    },
+    [props.isSearch]
+  )
   const onClick = useCallback(
     (option: T) => {
       if (props.isOnClickOptionClose) {
         close()
       }
 
-      let newValues: (string | number)[] = []
-
+      let newValues: T[] = []
       const optionValue = option.value
 
-      if (props.isMulti) {
-        const index = props.value.findIndex(val => val === optionValue)
-        const isFind = index !== -1
+      const findIndex = (val: T) => val.value === optionValue
+      const index = props.value.findIndex(findIndex)
+      const isFind = index !== -1
 
+      if (props.isMulti) {
         if (isFind) {
           newValues = [...props.value.slice(0, index), ...props.value.slice(index + 1)]
         } else {
-          newValues = props.isSortValueAsOption ? [...props.value, optionValue] : [...props.value, optionValue]
+          newValues = [...props.value, option]
         }
-
-        props.onChange(newValues)
       } else {
-        const index = props.value.findIndex(val => val === optionValue)
-        const isFind = index !== -1
-
         if (isFind && !props.isStayValueAfterSelect) {
           newValues = [...props.value.slice(0, index), ...props.value.slice(index + 1)]
         } else {
-          newValues = [optionValue]
+          newValues = [option]
         }
-
-        props.onChange(newValues)
       }
-
+      props.onChange(newValues)
+      onChangeShowSearch(!!props.isStaySearchAfterSelect)
       if (props.isOnClickOptionClose) {
         close()
       }
     },
-    [close, props]
+    [close, onChangeShowSearch, props]
   )
   const onClear = useCallback(() => {
     props.onChange([])
+  }, [props])
+  const onClearSearch = useCallback(() => {
+    props.onChangeSearch?.('')
   }, [props])
   const onScroll = useCallback(
     (containerRefElement?: HTMLDivElement | null) => {
       if (containerRefElement) {
         const { scrollHeight, scrollTop, clientHeight } = containerRefElement
-        if (scrollHeight - scrollTop - clientHeight < height && !props.isFetching && props.fetchNextPage) {
+        if (scrollHeight - scrollTop - clientHeight < heightDropdownList && !props.isFetching && props.fetchNextPage) {
           props.fetchNextPage()
         }
       }
     },
-    [height, props]
+    [heightDropdownList, props]
   )
-  const { isOverflowing, ref } = useOverflowing({
-    isCheckSize: !props.isWrapSelectOption,
-    dependencies: [props.value.length]
-  })
-  const [notOverflowingLength, setNotOverflowingLength] = useState<number | null>(null)
-  useLayoutEffect(() => {
-    if (props.isWrapSelectOption) return
-    if (isOverflowing) {
-      setNotOverflowingLength(prevValue => {
-        if (prevValue !== null && prevValue <= props.value.length) {
-          return prevValue
-        }
-        return props.value.length - 1
-      })
-    } else {
-      setNotOverflowingLength(prevValue => {
-        if (prevValue && prevValue >= props.value.length) {
-          return null
-        }
-        return prevValue
-      })
-    }
-  }, [isOverflowing, props.isWrapSelectOption, props.value.length])
 
+  useEffect(() => {
+    if (!isHaveValue) {
+      onChangeShowSearch(true)
+    }
+  }, [isHaveValue, onChangeShowSearch])
   return (
     <>
       <SelectWrapper
@@ -190,38 +207,56 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         ref={refReference as RefObject<HTMLDivElement | null>}
         onClick={() => {
           open()
+          onChangeShowSearch(true)
         }}
         onFocus={() => {
           open()
+          onChangeShowSearch(true)
         }}
         animate={{
-          '--after-height': isOpen ? `${height}px` : `0px`,
-          borderBottomLeftRadius: isOpen ? `0px` : `${radius}px`,
-          borderBottomRightRadius: isOpen ? `0px` : `${radius}px`
+          '--after-height': isOpen ? `${heightPopover}px` : `0px`,
+          borderBottomLeftRadius: isOpen ? `0px` : `${sizeRadius}px`,
+          borderBottomRightRadius: isOpen ? `0px` : `${sizeRadius}px`
         }}
         transition={{ duration: 0.2 }}
       >
+        {isShowSearch && (
+          <SelectInput
+            $genre={props.genre}
+            $size={props.size}
+            onChange={e => {
+              props?.onChangeSearch?.(e.target.value)
+            }}
+            value={props.valueSearch}
+            placeholder={labelPlaceholder}
+          />
+        )}
         {isHaveValue ? (
           <SelectList
-            $isOverflowing={isOverflowing}
-            ref={ref as Ref<HTMLUListElement> | undefined}
             $size={props.size}
             tabIndex={-1}
             $isWrapSelectOption={props.isWrapSelectOption}
+            onMouseDown={e => {
+              e.preventDefault()
+            }}
+            onClick={e => {
+              e.preventDefault()
+            }}
           >
             {props.value.map((value, index) => {
-              const item = props.option.find(option => option.value === value)
-              if (!item) return null
-              const isChecked = isSelectedItem(item)
+              if (index >= maxViewSelect) return null
+
+              const isChecked = isSelectedItem(value)
               return (
                 <ContainerSelectListOption
                   key={index}
                   isChecked={isChecked}
-                  onClick={() => onClick(item)}
-                  item={item}
+                  onClick={() => props.isClearWhenClickSelectListOption && onClick(value)}
+                  item={value}
                   genre={props.genre}
                   size={props.size}
                   isBold={props.isBold}
+                  isClearWhenClickSelectListOption={props.isClearWhenClickSelectListOption}
                   isWrapSelectOption={props.isWrapSelectOption}
                   isNotShowHoverStyle={props.isNotShowHoverStyle}
                   isCenter={props.isCenter}
@@ -230,13 +265,46 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
             })}
           </SelectList>
         ) : null}
+        {}
+        {!isHaveValue && !props.isSearch ? (
+          <Typography
+            sx={{
+              default: {
+                size: 16,
+                line: 1,
+                isNoUserSelect: true
+              }
+            }}
+          >
+            {labelPlaceholder}
+          </Typography>
+        ) : null}
+
+        {isValueMoreMaxViewSelect && isHaveValue ? (
+          <Typography
+            sxStandard={{
+              default: {
+                paddingLeft: `${sizePadding - sizePadding / 2.8}px`
+              }
+            }}
+            sx={{
+              default: {
+                size: 16,
+                line: 1,
+                isNoUserSelect: true
+              }
+            }}
+          >
+            {labelAndMore(props.value.length - maxViewSelect)}
+          </Typography>
+        ) : null}
         <ButtonList
           $size={props.size}
           onMouseDown={e => {
             e.preventDefault()
           }}
         >
-          {isHaveValue && props.isShowIconClear && (
+          {isShowIconSearchClear && (
             <Button
               genre={props.genre}
               size="small"
@@ -253,7 +321,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
               onClick={e => {
                 e.preventDefault()
                 e.stopPropagation()
-                onClear()
+                onClearSearch()
               }}
             />
           )}
@@ -280,6 +348,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           )}
           {props.isShowIconFetching && props.isFetching && (
             <Button
+              tabIndex={-1}
               genre={props.genre}
               size="small"
               isWidthAsHeight
@@ -298,9 +367,9 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         sx={theme => ({
           default: {
             background: theme.colors.input[props.genre].background.rest,
-            borderRadius: `0px 0px ${radius}px ${radius}px`,
+            borderRadius: `0px 0px ${sizeRadius}px ${sizeRadius}px`,
             padding: '0px',
-            maxHeight: `${height}px`
+            maxHeight: `${heightPopover}px`
           }
         })}
         size={props.size}
@@ -309,13 +378,13 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         ref={refFloating}
         isOpen={isOpen}
       >
-        <DropdownListParent tabIndex={-1} ref={parentListRef} onScroll={e => onScroll(e.target)}>
+        <DropdownListParent tabIndex={-1} ref={refDropdownList} onScroll={e => onScroll(e.target as HTMLDivElement)}>
           {isHaveOption ? (
             <DropdownList
               tabIndex={-1}
               style={{
                 height: `${listVirtualizer.getTotalSize()}px`,
-                minHeight: `${height}px`
+                minHeight: `${heightDropdownList}px`
               }}
             >
               {listVirtualizer.getVirtualItems().map(virtualRow => {
@@ -340,6 +409,34 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                 )
               })}
             </DropdownList>
+          ) : null}
+          {!isHaveOption ? (
+            <SelectListOption
+              tabIndex={-1}
+              $isClearWhenClickSelectListOption={props.isClearWhenClickSelectListOption}
+              $isWrapSelectOption={props.isWrapSelectOption}
+              $isCenter={props.isCenter}
+              $isNotShowHoverStyle={props.isNotShowHoverStyle}
+              $genre={props.genre}
+              $size={props.size}
+              $isBold={props.isBold}
+              style={{
+                width: '100%',
+                height: `${sizeHeight}px`,
+                borderRadius: `0px 0px ${sizeRadius}px ${sizeRadius}px`
+              }}
+            >
+              <Typography
+                sx={{
+                  default: {
+                    size: 16,
+                    line: 1
+                  }
+                }}
+              >
+                {labelEmptyOption}
+              </Typography>
+            </SelectListOption>
           ) : null}
         </DropdownListParent>
       </Popover>
@@ -393,12 +490,11 @@ const ContainerDropdownListOptionComponent = <T extends object & ISelectItem>(
 const ContainerSelectListOptionComponent = <T extends object & ISelectItem>(
   props: ContainerSelectListOptionProps<T>
 ) => {
-  const { ref, isOverflowing } = useOverflowingAdvanced({ isCheckSize: !props.isWrapSelectOption })
   return (
     <SelectListOption
       tabIndex={-1}
       onClick={props.onClick}
-      $isOverflowing={isOverflowing}
+      $isClearWhenClickSelectListOption={props.isClearWhenClickSelectListOption}
       $isWrapSelectOption={props.isWrapSelectOption}
       $isCenter={props.isCenter}
       $isNotShowHoverStyle={props.isNotShowHoverStyle}
@@ -409,7 +505,6 @@ const ContainerSelectListOptionComponent = <T extends object & ISelectItem>(
       $isChecked={props.isChecked}
     >
       <Typography
-        ref={ref as Ref<HTMLElement>}
         sx={{
           default: {
             size: 16,
@@ -432,48 +527,24 @@ export const SelectLanguage: FC<SelectLanguageProps> = props => {
   const option = ListLanguage
 
   const [viewOption, setViewOption] = useState<ISelectLanguageOption[]>(option)
-  // const [query, setQuery] = useState<string>('')
-  // const [isEmptyOption, setIsEmptyOption] = useState<boolean>(false)
 
-  // const handleSelectChange = (value: (number | string)[]) => {
-  //   props.onChange(option[0]?.value.toString())
-  //   setQuery('')
-  // }
-  // const handleQueryChange = useCallback(
-  //   (value: string) => {
-  //     setQuery(value)
-  //     props.onChange('')
-  //     if (value === '') {
-  //       setIsEmptyOption(option.length === 0)
-  //       setViewOption(option)
-  //     } else {
-  //       const filteredOptions = option.filter(option =>
-  //         Object.values(option).some(field => field?.toString().toLowerCase().includes(value.toLowerCase()))
-  //       )
-  //       setViewOption(filteredOptions)
-  //       setIsEmptyOption(filteredOptions.length === 0)
-  //     }
-  //   },
-  //   [option, props]
-  // )
-
-  const handleSelectChange = (value: (number | string)[]) => {
+  const handleSelectChange = (value: ISelectLanguageOption[]) => {
     if (value.length === 0) onChange(null)
     onChange(value[0].toString())
   }
   const valueLocal = useMemo(() => {
-    if (!value) return []
-    return [value]
-  }, [value])
+    const findOption = option.find(e => e.value === value)
+    if (!findOption) return []
+    return [findOption]
+  }, [option, value])
 
   return (
     <Select<ISelectLanguageOption>
       {...props}
       option={viewOption}
-      minView={1}
-      maxView={8}
       value={valueLocal}
       onChange={handleSelectChange}
+      minViewDropdown={1}
     />
   )
 }
@@ -503,21 +574,21 @@ export const SelectMonth: FC<SelectMonthProps> = props => {
     })
   }, [monthsLocale, year, startDate, endDate, isShortLabel])
 
-  const handleSelectChange = (value: (number | string)[]) => {
+  const handleSelectChange = (value: ISelectLanguageOption[]) => {
     if (value.length === 0) onChange(null)
     onChange(+value[0])
   }
   const valueLocal = useMemo(() => {
-    if (!value) return []
-    return [value]
-  }, [value])
+    const findOption = option.find(e => e.value === value)
+    if (!findOption) return []
+    return [findOption]
+  }, [value, option])
 
   return (
     <Select<ISelectLanguageOption>
       {...props}
       option={option}
-      minView={1}
-      maxView={5}
+      minViewDropdown={1}
       isShowDropdownOptionIcon
       value={valueLocal}
       onChange={handleSelectChange}
@@ -548,21 +619,46 @@ export const SelectMonths: FC<SelectMonthsProps> = props => {
       }
     })
   }, [monthsLocale, year, startDate, endDate, isShortLabel])
+  const [viewOption, setViewOption] = useState<ISelectLanguageOption[]>(option)
 
-  const handleSelectChange = (value: (number | string)[]) => {
+  useEffect(() => {
+    setViewOption(option)
+  }, [option])
+  const handleSelectChange = (value: ISelectLanguageOption[]) => {
     if (value.length === 0) onChange([])
-    onChange(value.map(e => +e))
+    onChange(value.map(e => +e.value))
   }
+  const valueLocal = useMemo(() => {
+    if (!value || value.length === 0) return []
+    return option.filter(e => value.includes(e.value))
+  }, [value, option])
 
+  const [search, setSearch] = useState<string>('')
+  const handleSearchChange = useCallback(
+    (value: string) => {
+      setSearch(value)
+
+      if (value === '') {
+        setViewOption(option)
+      } else {
+        const filteredOptions = option.filter(option =>
+          Object.values(option).some(field => field?.toString().toLowerCase().includes(value.toLowerCase()))
+        )
+        setViewOption(filteredOptions)
+      }
+    },
+    [option]
+  )
   return (
     <Select<ISelectLanguageOption>
       {...props}
-      option={option}
-      minView={1}
-      maxView={5}
+      valueSearch={search}
+      onChangeSearch={handleSearchChange}
+      option={viewOption}
+      minViewDropdown={1}
       isMulti
       isShowDropdownOptionIcon
-      value={value}
+      value={valueLocal}
       onChange={handleSelectChange}
     />
   )
@@ -590,22 +686,21 @@ export const SelectYear: FC<SelectYearProps> = props => {
       : yearArray.sort((a, b) => b.value - a.value)
   }, [endYear, startYear, sortOrder])
 
-  const handleSelectChange = (value: (number | string)[]) => {
+  const handleSelectChange = (value: ISelectLanguageOption[]) => {
     if (value.length === 0) onChange(null)
     onChange(+value[0])
   }
-
   const valueLocal = useMemo(() => {
-    if (!value) return []
-    return [value]
-  }, [value])
+    const findOption = option.find(e => e.value === value)
+    if (!findOption) return []
+    return [findOption]
+  }, [value, option])
 
   return (
     <Select<ISelectLanguageOption>
       {...props}
       option={option}
-      minView={1}
-      maxView={5}
+      minViewDropdown={1}
       isOnClickOptionClose
       isShowDropdownOptionIcon
       value={valueLocal}

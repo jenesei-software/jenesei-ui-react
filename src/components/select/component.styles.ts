@@ -11,6 +11,7 @@ import {
   ButtonListProps,
   DropdownListOptionIconProps,
   DropdownListOptionProps,
+  SelectInputProps,
   SelectListOptionProps,
   SelectListProps,
   SelectWrapperProps
@@ -222,17 +223,42 @@ const addSelectListOptionSize = css<SelectListOptionProps>`
   padding: ${props => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
   border: 1px solid;
   border-radius: ${props => KEY_SIZE_DATA[props.$size].radius}px;
-  background: ${props => (props.$isOverflowing ? 'red' : '')};
+  text-align: ${props => (props.$isCenter ? 'center' : 'left')};
 `
 export const SelectListOption = styled(motion.li)<SelectListOptionProps>`
   display: flex;
   align-items: center;
   opacity: 1;
-  cursor: pointer;
+  cursor: ${props => (props.$isClearWhenClickSelectListOption ? 'pointer' : 'default')};
   flex-shrink: 0;
   overflow: hidden;
   width: fit-content;
   ${addSelectListOptionGenre};
   ${addSelectListOptionSize};
+  ${addRemoveOutline};
+`
+
+const addSelectInputGenre = css<SelectInputProps>`
+  ${props => css`
+    color: ${props.theme.colors.input[props.$genre].color.rest};
+    &:active {
+      color: ${props.theme.colors.input[props.$genre].color.rest};
+    }
+    &:focus-visible {
+      color: ${props.theme.colors.input[props.$genre].color.rest};
+    }
+  `};
+`
+export const SelectInput = styled.input<SelectInputProps>`
+  resize: none;
+  overflow: hidden;
+  border: 0px solid;
+  background: transparent;
+  padding: 0px !important;
+  margin: 0px !important;
+  white-space: nowrap;
+  text-align: left;
+  ${props => getFontSizeStyles(16, 400, props.theme.font.family, props.theme.font.lineHeight)};
+  ${addSelectInputGenre};
   ${addRemoveOutline};
 `

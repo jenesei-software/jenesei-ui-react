@@ -99,6 +99,13 @@ function toStyledCSS(value: TypographyAllProps) {
         text-decoration: underline;
       }
     `};
+    ${value.isNoUserSelect &&
+    css`
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    `};
     ${'size' in value &&
     value.size &&
     css`

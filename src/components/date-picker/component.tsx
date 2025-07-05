@@ -225,7 +225,7 @@ export const DatePicker = (props: DatePickerProps) => {
     return isAfterStartDate
   }, [currentYear, currentMonth, currentDay, props.startDate])
 
-  const { isOpen, close, reference, floating, floatingStyles } = usePopover({
+  const { isOpen, close, refReference, refFloating, floatingStyles } = usePopover({
     placement: 'bottom-start',
     offset: 8,
     mode: 'clickOpen',
@@ -361,7 +361,7 @@ export const DatePicker = (props: DatePickerProps) => {
   return (
     <>
       <DateWrapper
-        ref={reference as RefObject<HTMLDivElement | null>}
+        ref={refReference as RefObject<HTMLDivElement | null>}
         $size={props.size}
         $genre={props.genre}
         $sx={props.sx}
@@ -482,7 +482,7 @@ export const DatePicker = (props: DatePickerProps) => {
         genre={props.genre}
         isOpen={isOpen}
         floatingStyles={floatingStyles}
-        ref={floating}
+        ref={refFloating}
       >
         <DateDropdownList $isInputEffect={props.isInputEffect} $genre={props.genre} $size={props.size}>
           <Stack

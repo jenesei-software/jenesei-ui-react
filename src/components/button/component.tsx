@@ -86,7 +86,7 @@ export const Button: FC<ButtonProps> = props => {
       $isNotHoverEffect={props.isNotHoverEffect}
       whileTap={props.isWhileTapEffect ? { scale: 0.9, transition: { duration: 0.02 } } : {}}
       id={props.id}
-      tabIndex={0}
+      tabIndex={props.tabIndex ?? 0}
       $isFullSize={props.isFullSize}
       $genre={props.genre}
       $size={props.size}
