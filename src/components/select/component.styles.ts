@@ -9,6 +9,7 @@ import { IThemeSizePropertyDefault } from '@local/theme'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 
 import {
+  ButtonListProps,
   DropdownListOptionIconProps,
   DropdownListOptionProps,
   SelectListOptionProps,
@@ -73,6 +74,7 @@ export const SelectWrapper = styled(motion.div)<SelectWrapperProps>`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
   ${addRemoveOutline};
   ${addSelectWrapperGenre};
   ${addSelectWrapperSize};
@@ -180,6 +182,17 @@ export const SelectList = styled.ul<SelectListProps>`
   overflow: hidden;
   ${addSelectListSize};
 `
+const addButtonListSize = css<ButtonListProps>`
+  display: flex;
+  flex-direction: row;
+  gap: ${props => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
+  padding: ${props => KEY_SIZE_DATA[props.$size].padding / 2.8}px ${props => KEY_SIZE_DATA[props.$size].padding}px;
+`
+export const ButtonList = styled.div<ButtonListProps>`
+  position: absolute;
+  right: 0;
+  ${addButtonListSize};
+`
 const addSelectListOptionGenre = css<SelectListOptionProps>`
   ${props => css`
     background: ${props.theme.colors.select[props.$genre].background.rest};
@@ -209,16 +222,16 @@ const addSelectListOptionSize = css<SelectListOptionProps>`
   padding: ${props => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
   border: 1px solid;
   border-radius: ${props => KEY_SIZE_DATA[props.$size].radius}px;
-  background: ${props => (props.$isOverflowing ? 'red' : 'blue')};
-  min-width: ${props => (props.$isOverflowing ? 'auto' : 'max-content')};
+  background: ${props => (props.$isOverflowing ? 'red' : '')};
 `
 export const SelectListOption = styled(motion.li)<SelectListOptionProps>`
   display: flex;
   align-items: center;
   opacity: 1;
   cursor: pointer;
-  /* flex-shrink: 0; */
+  flex-shrink: 0;
   overflow: hidden;
+  width: fit-content;
   ${addSelectListOptionGenre};
   ${addSelectListOptionSize};
   ${addRemoveOutline};

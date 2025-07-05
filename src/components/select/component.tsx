@@ -16,11 +16,13 @@ import {
 
 import { ListLanguage, MapThemeList } from '@local/consts'
 import { useOverflowing } from '@local/hooks/use-overflowing'
+import { useOverflowingAdvanced } from '@local/hooks/use-overflowing-advanced'
 import { useOverflowingInContainer } from '@local/hooks/use-overflowing-in-container'
 import { ErrorMessage } from '@local/styles/error'
 import { KEY_SIZE_DATA } from '@local/theme'
 
 import {
+  ButtonList,
   ContainerDropdownListOptionProps,
   ContainerSelectListOptionProps,
   DropdownList,
@@ -40,16 +42,18 @@ import {
   SelectWrapper,
   SelectYearProps
 } from '.'
+import { Button } from '../button'
+import { Icon } from '../icon'
 import { Popover, usePopover } from '../popover'
 import { Typography } from '../typography'
 
-const DEFAULT_MAX_VIEW = 5
-const DEFAULT_MIN_VIEW = 5
+const DEFAULT_MAX_VIEW_DROPDOWN = 5
+const DEFAULT_MIN_VIEW_DROPDOWN = 5
 const DEFAULT_OVERSCAN = 1
 const DEFAULT_LABEL_EMPTY_OPTION = 'No options'
 
 export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) => {
-  const { isOpen, close, open, refReference, refFloating, floatingStyles } = usePopover({
+  const { isOpen, close, open, refReference, refFloating, floatingStyles, toggle } = usePopover({
     placement: 'bottom-start',
     offset: 0,
     mode: 'independence',
@@ -60,15 +64,19 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const refInput = useRef<HTMLInputElement>(null)
   const parentListRef = useRef<HTMLDivElement>(null)
 
-  const maxViewLength = useMemo(() => props.maxView ?? DEFAULT_MAX_VIEW, [props.maxView])
-  const minViewLength = useMemo(() => props.minView ?? DEFAULT_MIN_VIEW, [props.minView])
+  const maxViewDropdown = useMemo(() => props.maxViewDropdown ?? DEFAULT_MAX_VIEW_DROPDOWN, [props.maxViewDropdown])
+  const minViewDropdown = useMemo(() => props.minViewDropdown ?? DEFAULT_MIN_VIEW_DROPDOWN, [props.minViewDropdown])
   const optionsLength = useMemo(() => props.option.length, [props.option.length])
   const sizeHeight = useMemo(() => KEY_SIZE_DATA[props.size].height, [props.size])
   const height = useMemo(
     () =>
       sizeHeight *
-      (optionsLength < maxViewLength ? (optionsLength < minViewLength ? minViewLength : optionsLength) : maxViewLength),
-    [sizeHeight, optionsLength, maxViewLength, minViewLength]
+      (optionsLength < maxViewDropdown
+        ? optionsLength < minViewDropdown
+          ? minViewDropdown
+          : optionsLength
+        : maxViewDropdown),
+    [sizeHeight, optionsLength, maxViewDropdown, minViewDropdown]
   )
   const radius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size])
 
@@ -76,7 +84,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const isHaveOption = useMemo(() => !!props.option.length, [props.option.length])
   const isHaveValue = useMemo(() => !!props.value.length, [props.value.length])
 
-  const isShowScroll = useMemo(() => optionsLength > maxViewLength, [maxViewLength, optionsLength])
+  const isShowScroll = useMemo(() => optionsLength > maxViewDropdown, [maxViewDropdown, optionsLength])
   const isSelectedItem = useCallback(
     (option: T): boolean => {
       return isAll || props.value.includes(option.value)
@@ -132,7 +140,9 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     },
     [close, props]
   )
-
+  const onClear = useCallback(() => {
+    props.onChange([])
+  }, [props])
   const onScrollNextPage = useCallback(
     (containerRefElement?: HTMLDivElement | null) => {
       if (containerRefElement) {
@@ -167,6 +177,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
       })
     }
   }, [isOverflowing, props.isWrapSelectOption, props.value.length])
+  console.log('isOpen', isOpen)
   return (
     <>
       <SelectWrapper
@@ -198,10 +209,8 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
             tabIndex={-1}
             $isWrapSelectOption={props.isWrapSelectOption}
           >
-            {notOverflowingLength}
             {props.value.map((value, index) => {
               const item = props.option.find(option => option.value === value)
-              if (notOverflowingLength !== null && notOverflowingLength < index + 1) return null
               if (!item) return null
               const isChecked = isSelectedItem(item)
               return (
@@ -221,6 +230,36 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
             })}
           </SelectList>
         ) : null}
+        <ButtonList $size={props.size}>
+          <Button
+            genre={props.genre}
+            size="small"
+            isWidthAsHeight
+            isFullSize
+            isRadius
+            onClick={e => {
+              e.preventDefault()
+              e.stopPropagation()
+              onClear()
+            }}
+          >
+            <Icon type={'id'} name={'Close'} size={props.size} />
+          </Button>
+          <Button
+            genre={props.genre}
+            size="small"
+            isWidthAsHeight
+            isFullSize
+            isRadius
+            onClick={e => {
+              e.preventDefault()
+              e.stopPropagation()
+              toggle()
+            }}
+          >
+            <Icon type={'id'} name={'Select'} size={props.size} />
+          </Button>
+        </ButtonList>
       </SelectWrapper>
       <Popover
         sx={theme => ({
@@ -325,10 +364,12 @@ const ContainerDropdownListOptionComponent = <T extends object & ISelectItem>(
 const ContainerSelectListOptionComponent = <T extends object & ISelectItem>(
   props: ContainerSelectListOptionProps<T>
 ) => {
+  const { ref, isOverflowing } = useOverflowingAdvanced({ isCheckSize: !props.isWrapSelectOption })
   return (
     <SelectListOption
       tabIndex={-1}
       onClick={props.onClick}
+      $isOverflowing={isOverflowing}
       $isWrapSelectOption={props.isWrapSelectOption}
       $isCenter={props.isCenter}
       $isNotShowHoverStyle={props.isNotShowHoverStyle}
@@ -339,6 +380,7 @@ const ContainerSelectListOptionComponent = <T extends object & ISelectItem>(
       $isChecked={props.isChecked}
     >
       <Typography
+        ref={ref as Ref<HTMLElement>}
         sx={{
           default: {
             size: 16,

@@ -52,8 +52,9 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     onChange: (value: (number | string)[]) => void
     onFocus?: FocusEventHandler<HTMLInputElement>
     onBlur?: FocusEventHandler<HTMLInputElement>
-    maxView?: number
-    minView?: number
+    maxViewSelect?: number
+    maxViewDropdown?: number
+    minViewDropdown?: number
     fetchNextPage?: () => void
     getEstimateSize?: (index: number) => number
     isFetching?: boolean
@@ -158,3 +159,4 @@ export type SelectListOptionProps = AddDollarSign<
 export type SelectListProps = AddDollarSign<
   Pick<SelectProps<ISelectItem>, 'size' | 'isWrapSelectOption'> & { isOverflowing?: boolean }
 >
+export type ButtonListProps = AddDollarSign<Pick<SelectProps<ISelectItem>, 'size'>>
