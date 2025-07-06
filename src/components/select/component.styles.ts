@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import { Icon } from '@local/components/icon'
 import { getFontSizeStyles } from '@local/components/typography'
 import { addRemoveOutline } from '@local/styles/add'
+import { addError } from '@local/styles/error'
 import { addSX } from '@local/styles/sx'
 import { KEY_SIZE_DATA } from '@local/theme/theme'
 
@@ -11,6 +12,7 @@ import {
   ButtonListProps,
   DropdownListOptionIconProps,
   DropdownListOptionProps,
+  DropdownListParentProps,
   SelectInputProps,
   SelectListOptionProps,
   SelectListProps,
@@ -48,6 +50,7 @@ const addSelectWrapperSize = css<SelectWrapperProps>`
   width: 100%;
   padding: ${props => KEY_SIZE_DATA[props.$size].padding / 4}px
     ${props => KEY_SIZE_DATA[props.$size].padding - KEY_SIZE_DATA[props.$size].padding / 2.8}px;
+  gap: ${props => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
   height: fit-content;
   min-height: ${props => KEY_SIZE_DATA[props.$size].height}px;
   border-radius: ${props => KEY_SIZE_DATA[props.$size].radius}px;
@@ -78,21 +81,27 @@ export const SelectWrapper = styled(motion.div)<SelectWrapperProps>`
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
-  align-content: flex-start;
+  align-content: center;
   flex-wrap: wrap;
   ${addRemoveOutline};
   ${addSelectWrapperGenre};
   ${addSelectWrapperSize};
+  ${addError};
   ${addSX};
 `
-
-export const DropdownListParent = styled(motion.div)`
+const addDropdownListParentSize = css<DropdownListParentProps>`
+  gap: ${props => KEY_SIZE_DATA[props.$size].padding / 2.8}px;
+`
+export const DropdownListParent = styled(motion.div)<DropdownListParentProps>`
   height: 100%;
   width: 100%;
   overflow: hidden;
   overflow-y: auto;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  ${addDropdownListParentSize};
 `
 export const DropdownList = styled.ul`
   list-style: none;
@@ -101,6 +110,7 @@ export const DropdownList = styled.ul`
   flex-direction: column;
   width: 100%;
   transform: translateZ(0);
+  flex-shrink: 0;
 `
 
 const addDropdownListOptionGenre = css<DropdownListOptionProps>`
@@ -150,9 +160,10 @@ export const DropdownListOption = styled.li<DropdownListOptionProps>`
   align-items: center;
   opacity: 1;
   cursor: pointer;
-  position: absolute;
   top: 0;
   left: 0;
+  user-select: none;
+  flex-shrink: 0;
   ${addDropdownListOptionGenre};
   ${addDropdownListOptionSize};
   ${addRemoveOutline};

@@ -22,14 +22,13 @@ const defaultArgs: Partial<SelectLanguageProps> = {
     }
   },
   isOnClickOptionClose: false,
-  isShowDropdownOptionIcon: true,
-  placeholder: 'Choice language...'
+  isShowDropdownOptionIcon: true
 }
 
 const SelectLanguageWrapper: FC<SelectLanguageProps> = props => {
-  const [value, setValue] = useState<string>('')
-  const handleSelectChange = (value: string) => {
-    setValue(value)
+  const [value, setValue] = useState<string | null>(null)
+  const handleSelectChange = (language: string | null) => {
+    setValue(language)
   }
 
   return (
@@ -42,13 +41,7 @@ const SelectLanguageWrapper: FC<SelectLanguageProps> = props => {
         }
       }}
     >
-      <SelectLanguage
-        {...props}
-        labelEmptyOption="No language options"
-        placeholder="Choice language..."
-        value={value}
-        onChange={handleSelectChange}
-      />
+      <SelectLanguage {...props} value={value} onChange={handleSelectChange} />
     </Stack>
   )
 }

@@ -33,7 +33,9 @@ const SelectMonthWrapper: FC<SelectMonthsProps> = props => {
         default: {
           width: '400px',
           height: '500px',
-          padding: '10px'
+          padding: '10px',
+          flexDirection: 'column',
+          gap: '10px'
         }
       }}
     >
@@ -42,7 +44,11 @@ const SelectMonthWrapper: FC<SelectMonthsProps> = props => {
         isShowIconSearchClear
         isShowIconFetching
         isShowIconToggle
+        isShowSelectAllLabel
+        isShowSelectAll
+        isShowAddOption
         isSearch
+        labelPlaceholder="Select or search months"
         value={value}
         onChange={handleSelectChange}
       />

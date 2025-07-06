@@ -36,6 +36,8 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     isShowIconSearchClear?: boolean
     isShowIconFetching?: boolean
     isShowSelectAll?: boolean
+    isShowSelectAllLabel?: boolean
+    isShowAddOption?: boolean
     isOnClickOptionClose?: boolean
     isNotShowHoverStyle?: boolean
     isSortValueAsOption?: boolean
@@ -52,10 +54,13 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     labelEmptyOption?: string
     labelSelectAll?: string
     labelAndMore?: (count: number) => string
+    labelAddOption?: (value: string) => string
 
     isSearch?: boolean
     valueSearch?: string
     onChangeSearch?: (value: string) => void
+
+    optionAllLength?: number
 
     option: T[]
     value: T[]
@@ -63,7 +68,9 @@ export type SelectProps<T extends ISelectItem> = addErrorProps &
     maxViewDropdown?: number
     minViewDropdown?: number
 
+    onAddOption?: (value: string) => void
     onChange: (value: T[]) => void
+    onChangeAll?: (value: T[], isAll: boolean) => void
     onFocus?: FocusEventHandler<HTMLInputElement>
     onBlur?: FocusEventHandler<HTMLInputElement>
     fetchNextPage?: () => void
@@ -77,7 +84,7 @@ export interface ISelectLanguageOption extends ISelectItem {
 }
 
 export type SelectLanguageProps = Omit<SelectProps<ISelectItem>, 'option' | 'value' | 'onChange'> & {
-  value: string
+  value: string | null
   onChange: (language: string | null) => void
 }
 
@@ -113,12 +120,12 @@ export type SelectYearProps = Omit<SelectMonthProps, 'monthsLocale'> & {
 }
 
 export type SelectWrapperProps = AddDollarSign<
-  Pick<SelectProps<ISelectItem>, 'genre' | 'sx' | 'size' | 'isNotShowHoverStyle'> & { isOpen: boolean }
+  Pick<SelectProps<ISelectItem>, 'genre' | 'sx' | 'size' | 'isNotShowHoverStyle' | 'error'> & { isOpen: boolean }
 >
 
 export type DropdownListOptionProps = AddDollarSign<
   Pick<SelectProps<ISelectItem>, 'genre' | 'size' | 'isCenter' | 'isNotShowHoverStyle' | 'isBold'> & {
-    item: ISelectItem
+    item?: ISelectItem
     isChecked?: boolean
     isShowScroll?: boolean
   }
@@ -180,3 +187,4 @@ export type SelectListOptionProps = AddDollarSign<
 export type SelectListProps = AddDollarSign<Pick<SelectProps<ISelectItem>, 'size' | 'isWrapSelectOption'>>
 export type ButtonListProps = AddDollarSign<Pick<SelectProps<ISelectItem>, 'size'>>
 export type SelectInputProps = AddDollarSign<Pick<SelectProps<ISelectItem>, 'size' | 'genre'>>
+export type DropdownListParentProps = AddDollarSign<Pick<SelectProps<ISelectItem>, 'size'>>
