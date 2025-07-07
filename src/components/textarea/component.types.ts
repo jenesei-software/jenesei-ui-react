@@ -5,62 +5,46 @@ import { addSXProps } from '@local/styles/sx'
 import { IThemeGenreTextArea, IThemeSize } from '@local/theme'
 import { AddDollarSign } from '@local/types'
 
-export type TextAreaProps = addErrorProps &
+type BaseTextAreaProps = addErrorProps &
   addSXProps & {
     name?: string
-
     id?: string
-
     ref?: RefObject<HTMLTextAreaElement | null>
-
     className?: string
-
     defaultValue?: string
-
     isAllowEmptyFormatting?: boolean
-
     genre: TTextAreaGenre
-
-    height?: number
-
+    minRows: number
     sizeHeight?: number
-
     sizePadding?: number
-
-    maxRows?: number
-
     size: IThemeSize
-
     isDisabled?: boolean
-
     isResize?: boolean
-
-    isAutoHeight?: boolean
-
     isLoading?: boolean
-
     isReadOnly?: boolean
-
     isTextAreaEffect?: boolean
-
     isRequired?: boolean
-
     isNoSpaces?: boolean
-
     onBlur?: FocusEventHandler<HTMLTextAreaElement>
-
     onChange?: (value: string) => void
-
     onFocus?: FocusEventHandler<HTMLTextAreaElement>
-
     onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>
-
     placeholder?: string
-
     isBold?: boolean
-
     value?: string | null
   }
+
+type AutoHeightTextAreaProps = BaseTextAreaProps & {
+  isAutoHeight: true
+  maxRows?: number
+}
+
+type FixedHeightTextAreaProps = BaseTextAreaProps & {
+  isAutoHeight?: false | undefined
+  maxRows?: never
+}
+
+export type TextAreaProps = AutoHeightTextAreaProps | FixedHeightTextAreaProps
 
 export type TTextAreaGenre = keyof IThemeGenreTextArea
 

@@ -23,66 +23,49 @@ export const TextArea = (props: TextAreaProps) => {
 
   const refLocal = useRef<HTMLTextAreaElement>(null)
   const ref = useMergeRefs([refLocal, props.ref])
+  // const sizeHeight = useMemo(() => props.sizeHeight ?? KEY_SIZE_DATA[props.size].height, [props.size, props.sizeHeight])
 
-  const sizeHeight = useMemo(() => props.sizeHeight ?? KEY_SIZE_DATA[props.size].height, [props.size, props.sizeHeight])
+  const lineHeight = useMemo(
+    () => theme.font.sizeDefault.default * theme.font.lineHeight,
+    [theme.font.lineHeight, theme.font.sizeDefault.default]
+  )
   const sizePadding = useMemo(
     () => props.sizePadding ?? KEY_SIZE_DATA[props.size].padding,
     [props.size, props.sizePadding]
   )
-
-  const handleHeight = useCallback(
-    (contentHeight: number) => {
-      if (refLocal.current) {
-        const minHeight = sizeHeight
-        const maxHeight = Math.max(sizeHeight, contentHeight)
-
-        refLocal.current.style.height = `${minHeight}px`
-        const scrollHeight = refLocal.current.scrollHeight
-        let newHeight = contentHeight
-        if (props.isAutoHeight && !props.height) {
-          newHeight = Math.max(minHeight, Math.min(scrollHeight, maxHeight))
-        } else {
-          newHeight = Math.max(minHeight, contentHeight)
-        }
-
-        refLocal.current.style.height = `${newHeight}px`
-        refLocal.current.style.minHeight = `${minHeight}px`
-        refLocal.current.style.maxHeight = `${maxHeight}px`
-
-        if (refLocal.current.scrollHeight > maxHeight) {
-          refLocal.current.style.overflowY = 'auto'
-        } else {
-          refLocal.current.style.overflowY = 'hidden'
-        }
-      }
-    },
-    [props.height, props.isAutoHeight, sizeHeight]
+  const sizeRows = useCallback(
+    (rows: number) => (rows ? lineHeight * rows : lineHeight) + (sizePadding - 4 + sizePadding - 2),
+    [lineHeight, sizePadding]
   )
-  const checkHeight = useCallback(() => {
-    if (props.height) {
-      handleHeight(props.height)
+  const handleHeight = useCallback(() => {
+    const el = refLocal.current
+    if (!el) return
+    const minHeight = sizeRows(props.minRows ?? 1)
+    const maxHeight = props.maxRows ? sizeRows(props.maxRows) : Infinity
+    // console.log(sizePadding + 4 + 6, minHeight, maxHeight)
+
+    el.style.height = 'auto'
+    const scrollHeight = el.scrollHeight
+    let newHeight = scrollHeight
+    // console.log('scrollHeight', scrollHeight, 'minHeight', minHeight, 'maxHeight', maxHeight)
+    if (props.isAutoHeight) {
+      newHeight = Math.max(minHeight, Math.min(scrollHeight, maxHeight))
     } else {
-      if (props.maxRows) {
-        const lineHeight = theme.font.sizeDefault.default * theme.font.lineHeight
-        const initialHeight = props.maxRows ? lineHeight * props.maxRows : lineHeight
-        handleHeight(initialHeight + sizePadding - 8)
-      } else {
-        handleHeight(sizeHeight)
-      }
+      newHeight = Math.max(minHeight, lineHeight)
     }
-  }, [
-    handleHeight,
-    props.height,
-    props.maxRows,
-    sizeHeight,
-    sizePadding,
-    theme.font.lineHeight,
-    theme.font.sizeDefault.default
-  ])
+
+    // Устанавливаем финальные стили
+    // el.style.height = `${newHeight}px`
+    el.style.minHeight = `${minHeight}px`
+    el.style.maxHeight = isFinite(maxHeight) ? `${maxHeight}px` : ''
+
+    // Управление скроллом
+    el.style.overflowY = 'auto'
+  }, [sizeRows, props.minRows, props.maxRows, props.isAutoHeight, lineHeight])
 
   useEffect(() => {
-    checkHeight()
-  }, [checkHeight, props.isAutoHeight, props.value])
+    handleHeight()
+  }, [handleHeight, props.value])
 
   return (
     <>
@@ -109,6 +92,10 @@ export const TextArea = (props: TextAreaProps) => {
           onFocus={props.onFocus}
           name={props.name}
           id={props.id}
+          style={{
+            ['field-sizing']: 'content',
+            minHeight: lineHeight
+          }}
         />
         {/* {props.isLoading && (
           <TextAreaStyledLoading

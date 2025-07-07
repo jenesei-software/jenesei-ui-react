@@ -65,7 +65,7 @@ export const TextAreaSize = css<StyledTextAreaProps>`
   ${props => TextAreaSizeConstructor({ ...KEY_SIZE_DATA[props.$size] })};
 `
 export const TextAreaSizeConstructor = (props: IThemeSizePropertyDefault) => css`
-  padding: ${props.padding - 8}px ${props.padding}px 0px ${props.padding}px;
+  padding: ${props.padding - 4}px ${props.padding}px ${props.padding - 2}px ${props.padding}px;
   border-radius: ${props.radius}px;
 `
 

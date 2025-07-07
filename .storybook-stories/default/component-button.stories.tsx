@@ -3,7 +3,8 @@ import { FC } from 'react'
 import 'styled-components'
 
 import { Button } from '@local/components/button'
-import { Stack } from '@local/components/stack'
+
+import { WrapperBig, WrapperMin } from './untils'
 
 const meta: Meta<typeof Button> = {
   component: Button,
@@ -41,36 +42,8 @@ export const Icon: Story = {
 
 const ButtonWrapper: FC = () => {
   return (
-    <Stack
-      sx={theme => ({
-        default: {
-          borderRadius: '8px',
-          padding: '16px',
-          border: '1px dashed',
-          height: 'fit-content',
-          color: theme.palette.whiteStandard,
-          borderColor: theme.palette.blueHover,
-          flexDirection: 'column',
-          flexWrap: 'wrap',
-          gap: '6px'
-        }
-      })}
-    >
-      <Stack
-        sx={theme => ({
-          default: {
-            borderRadius: '8px',
-            padding: '16px',
-            border: '1px dashed',
-            height: 'fit-content',
-            color: theme.palette.whiteStandard,
-            borderColor: theme.palette.blueHover,
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            gap: '6px'
-          }
-        })}
-      >
+    <WrapperBig>
+      <WrapperMin>
         <Button size="medium" genre="black" isDisabledRipple isWhileTapEffect>
           black
         </Button>
@@ -110,22 +83,8 @@ const ButtonWrapper: FC = () => {
         <Button size="medium" genre="yellowTransparent">
           yellowTransparent
         </Button>
-      </Stack>
-      <Stack
-        sx={theme => ({
-          default: {
-            borderRadius: '8px',
-            padding: '16px',
-            border: '1px dashed',
-            height: 'fit-content',
-            color: theme.palette.whiteStandard,
-            borderColor: theme.palette.blueHover,
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            gap: '6px'
-          }
-        })}
-      >
+      </WrapperMin>
+      <WrapperMin>
         <Button size="large" genre="black">
           large
         </Button>
@@ -141,8 +100,8 @@ const ButtonWrapper: FC = () => {
         <Button size="small" genre="black">
           small
         </Button>
-      </Stack>
-    </Stack>
+      </WrapperMin>
+    </WrapperBig>
   )
 }
 

@@ -2,7 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { FC, useState } from 'react'
 import 'styled-components'
 
+import { Input } from '@local/components/input'
 import { TextArea, TextAreaProps } from '@local/components/textarea'
+import { Typography } from '@local/components/typography'
+
+import { WrapperBig, WrapperMin } from './untils'
 
 const meta: Meta<typeof TextArea> = {
   component: TextArea,
@@ -45,4 +49,115 @@ export const Default: Story = {
     ...defaultArgs,
     placeholder: 'Default'
   }
+}
+
+const AllWrapper: FC = () => {
+  const [value, setValue] = useState<string>('')
+
+  return (
+    <WrapperBig>
+      <WrapperMin>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h5',
+              color: 'black100'
+            }
+          }}
+        >
+          Input
+        </Typography>
+        <Input
+          variety="standard"
+          genre="blackBorder"
+          size="medium"
+          value={value}
+          onChange={newValue => setValue(newValue)}
+        />
+      </WrapperMin>
+      <WrapperMin>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h5',
+              color: 'black100'
+            }
+          }}
+        >
+          Fix Size, minRows = 1
+        </Typography>
+        <TextArea
+          minRows={1}
+          genre="blackBorder"
+          size="medium"
+          value={value}
+          onChange={newValue => setValue(newValue)}
+        />
+      </WrapperMin>
+      <WrapperMin>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h5',
+              color: 'black100'
+            }
+          }}
+        >
+          Fix Size, minRows = 4
+        </Typography>
+        <TextArea
+          minRows={4}
+          genre="blackBorder"
+          size="medium"
+          value={value}
+          onChange={newValue => setValue(newValue)}
+        />
+      </WrapperMin>
+      <WrapperMin>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h5',
+              color: 'black100'
+            }
+          }}
+        >
+          Auto Size, minRows = 1, maxRows = 4
+        </Typography>
+        <TextArea
+          minRows={1}
+          maxRows={4}
+          isAutoHeight
+          genre="blackBorder"
+          size="medium"
+          value={value}
+          onChange={newValue => setValue(newValue)}
+        />
+      </WrapperMin>
+      <WrapperMin>
+        <Typography
+          sx={{
+            default: {
+              variant: 'h5',
+              color: 'black100'
+            }
+          }}
+        >
+          Auto Size, minRows = 2, maxRows = undefined
+        </Typography>
+        <TextArea
+          minRows={2}
+          isAutoHeight
+          genre="blackBorder"
+          size="medium"
+          value={value}
+          onChange={newValue => setValue(newValue)}
+        />
+      </WrapperMin>
+    </WrapperBig>
+  )
+}
+
+export const All = {
+  render: () => <AllWrapper />
 }

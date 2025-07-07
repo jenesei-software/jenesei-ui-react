@@ -8,6 +8,8 @@ import { Tooltip } from '@local/components/tooltip'
 import { Typography } from '@local/components/typography'
 import { LoremIpsumText } from '@local/consts'
 
+import { WrapperBig, WrapperMin } from './untils'
+
 const meta: Meta<typeof Tooltip> = {
   component: Tooltip,
   title: 'Component/Tooltip'
@@ -40,51 +42,9 @@ export const Default: Story = {
 
 const TooltipWrapper: FC = () => {
   return (
-    <Stack
-      sx={theme => ({
-        default: {
-          borderRadius: '8px',
-          padding: '16px',
-          border: '1px dashed',
-          height: 'fit-content',
-          color: theme.palette.whiteStandard,
-          borderColor: theme.palette.blueHover,
-          flexDirection: 'column',
-          flexWrap: 'wrap',
-          gap: '6px'
-        }
-      })}
-    >
-      <Stack
-        sx={theme => ({
-          default: {
-            borderRadius: '8px',
-            padding: '16px',
-            border: '1px dashed',
-            height: 'fit-content',
-            color: theme.palette.whiteStandard,
-            borderColor: theme.palette.blueHover,
-            flexDirection: 'column',
-            flexWrap: 'wrap',
-            gap: '6px'
-          }
-        })}
-      >
-        <Stack
-          sx={theme => ({
-            default: {
-              borderRadius: '8px',
-              padding: '8px',
-              border: '1px dashed',
-              height: 'fit-content',
-              color: theme.palette.whiteStandard,
-              borderColor: theme.palette.blueHover,
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              gap: '6px'
-            }
-          })}
-        >
+    <WrapperBig>
+      <WrapperBig>
+        <WrapperMin>
           <Tooltip placement="bottom" size="medium" genre="black" content={'Tooltip'}>
             <Button genre="black" size={'medium'}>
               bottom
@@ -100,22 +60,8 @@ const TooltipWrapper: FC = () => {
               bottom-start
             </Button>
           </Tooltip>
-        </Stack>
-        <Stack
-          sx={theme => ({
-            default: {
-              borderRadius: '8px',
-              padding: '8px',
-              border: '1px dashed',
-              height: 'fit-content',
-              color: theme.palette.whiteStandard,
-              borderColor: theme.palette.blueHover,
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              gap: '6px'
-            }
-          })}
-        >
+        </WrapperMin>
+        <WrapperMin>
           <Tooltip placement="left" size="medium" genre="black" content={'Tooltip'}>
             <Button genre="black" size={'medium'}>
               left
@@ -131,22 +77,8 @@ const TooltipWrapper: FC = () => {
               left-start
             </Button>
           </Tooltip>
-        </Stack>
-        <Stack
-          sx={theme => ({
-            default: {
-              borderRadius: '8px',
-              padding: '8px',
-              border: '1px dashed',
-              height: 'fit-content',
-              color: theme.palette.whiteStandard,
-              borderColor: theme.palette.blueHover,
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              gap: '6px'
-            }
-          })}
-        >
+        </WrapperMin>
+        <WrapperMin>
           <Tooltip placement="right" size="medium" genre="black" content={'Tooltip'}>
             <Button genre="black" size={'medium'}>
               right
@@ -162,22 +94,8 @@ const TooltipWrapper: FC = () => {
               right-start
             </Button>
           </Tooltip>
-        </Stack>
-        <Stack
-          sx={theme => ({
-            default: {
-              borderRadius: '8px',
-              padding: '8px',
-              border: '1px dashed',
-              height: 'fit-content',
-              color: theme.palette.whiteStandard,
-              borderColor: theme.palette.blueHover,
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              gap: '6px'
-            }
-          })}
-        >
+        </WrapperMin>
+        <WrapperMin>
           <Tooltip placement="top" size="medium" genre="black" content={'Tooltip'}>
             <Button genre="black" size={'medium'}>
               top
@@ -193,23 +111,9 @@ const TooltipWrapper: FC = () => {
               top-start
             </Button>
           </Tooltip>
-        </Stack>
-      </Stack>
-      <Stack
-        sx={theme => ({
-          default: {
-            borderRadius: '8px',
-            padding: '16px',
-            border: '1px dashed',
-            height: 'fit-content',
-            color: theme.palette.whiteStandard,
-            borderColor: theme.palette.blueHover,
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            gap: '6px'
-          }
-        })}
-      >
+        </WrapperMin>
+      </WrapperBig>
+      <WrapperBig>
         <Tooltip placement="bottom" size="medium" genre="black" content={'Tooltip'}>
           <Button genre="black" size={'medium'}>
             black
@@ -260,22 +164,8 @@ const TooltipWrapper: FC = () => {
             yellowTransparent
           </Button>
         </Tooltip>
-      </Stack>
-      <Stack
-        sx={theme => ({
-          default: {
-            borderRadius: '8px',
-            padding: '16px',
-            border: '1px dashed',
-            height: 'fit-content',
-            color: theme.palette.whiteStandard,
-            borderColor: theme.palette.blueHover,
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            gap: '6px'
-          }
-        })}
-      >
+      </WrapperBig>
+      <WrapperBig>
         <Tooltip placement="bottom" size="large" genre="black" content={'Tooltip'}>
           <Button genre="black" size={'large'}>
             large
@@ -301,22 +191,8 @@ const TooltipWrapper: FC = () => {
             small
           </Button>
         </Tooltip>
-      </Stack>
-      <Stack
-        sx={theme => ({
-          default: {
-            borderRadius: '8px',
-            padding: '16px',
-            border: '1px dashed',
-            height: 'fit-content',
-            color: theme.palette.whiteStandard,
-            borderColor: theme.palette.blueHover,
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            gap: '6px'
-          }
-        })}
-      >
+      </WrapperBig>
+      <WrapperBig>
         <Tooltip placement="bottom" size="medium" genre="black" content={'Tooltip'}>
           <Stack
             sx={theme => ({
@@ -367,8 +243,8 @@ const TooltipWrapper: FC = () => {
             Tooltip with long text
           </Button>
         </Tooltip>
-      </Stack>
-    </Stack>
+      </WrapperBig>
+    </WrapperBig>
   )
 }
 
