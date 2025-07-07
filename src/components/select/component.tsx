@@ -17,7 +17,7 @@ import {
   ISelectItem,
   ISelectLanguageOption,
   ISelectMapThemeOption,
-  SelectInput,
+  SelectTextArea,
   SelectLanguageProps,
   SelectList,
   SelectListOption,
@@ -45,15 +45,19 @@ const DEFAULT_MIN_VIEW_DROPDOWN = 5
 const DEFAULT_OVERSCAN = 1
 
 export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) => {
+  const sizeHeight = useMemo(() => KEY_SIZE_DATA[props.size].height, [props.size])
+  const sizePadding = useMemo(() => KEY_SIZE_DATA[props.size].padding, [props.size])
+  const sizeRadius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size])
+
   const { isOpen, close, open, refReference, refFloating, floatingStyles, toggle } = usePopover({
     placement: 'bottom-start',
-    offset: 0,
+    offset: sizePadding,
     mode: 'independence',
     isClickOutside: true,
     isWidthAsContent: true,
     isDisabled: props?.isDisabled
   })
-  const refInput = useRef<HTMLInputElement>(null)
+  const refTextArea = useRef<HTMLTextAreaElement >(null)
   const refDropdownList = useRef<HTMLDivElement>(null)
 
   const labelSelectAll = useMemo(() => props.labelSelectAll ?? DEFAULT_LABEL_SELECT_ALL, [props.labelSelectAll])
@@ -79,10 +83,6 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
   const [isShowSearch, setIsShowSearch] = useState<boolean>(false)
 
   const optionsLength = useMemo(() => props.option.length, [props.option.length])
-
-  const sizeHeight = useMemo(() => KEY_SIZE_DATA[props.size].height, [props.size])
-  const sizePadding = useMemo(() => KEY_SIZE_DATA[props.size].padding, [props.size])
-  const sizeRadius = useMemo(() => KEY_SIZE_DATA[props.size].radius, [props.size])
 
   const heightDropdownList = useMemo(
     () =>
@@ -127,7 +127,10 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
     },
     [isAll, props.value]
   )
-
+  const isShowDropdownSettingsList = useMemo(
+    () => isShowAddOption || (props.isShowSelectAll && isHaveOption) || !isHaveOption,
+    [isHaveOption, isShowAddOption, props.isShowSelectAll]
+  )
   const listVirtualizer = useVirtualizer({
     count: optionsLength,
     estimateSize: props.getEstimateSize ? props.getEstimateSize : () => sizeHeight,
@@ -239,20 +242,17 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         onFocus={() => {
           open()
         }}
-        animate={{
-          '--after-height': isOpen ? `${heightPopover}px` : `0px`,
-          borderBottomLeftRadius: isOpen ? `0px` : `${sizeRadius}px`,
-          borderBottomRightRadius: isOpen ? `0px` : `${sizeRadius}px`
-        }}
-        transition={{ duration: 0.2 }}
       >
         {isShowSearch && (
-          <SelectInput
-            ref={refInput}
-            $genre={props.genre}
-            $size={props.size}
-            onChange={e => {
-              props?.onChangeSearch?.(e.target.value)
+          <SelectTextArea
+            ref={refTextArea}
+            genre={props.genre}
+            size={props.size}
+            maxRows={5}
+            sizeHeight={sizeHeight - (sizePadding / 2.8) * 2 - 2}
+            isAutoHeight
+            onChange={value => {
+              props?.onChangeSearch?.(value)
             }}
             value={props.valueSearch}
             placeholder={labelPlaceholder}
@@ -294,18 +294,8 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         ) : null}
         {isHaveValue && (props.isShowSelectAllLabel ? isAll : false) ? (
           <Typography
-            sxStandard={{
-              default: {
-                padding: `${sizePadding / 2.8}px 0px`
-              }
-            }}
-            sx={{
-              default: {
-                size: 16,
-                line: 1,
-                isNoUserSelect: true
-              }
-            }}
+            sxStandard={{ default: { padding: `${sizePadding / 2.8}px 0px` } }}
+            sx={{ default: { size: 16, line: 1, isNoUserSelect: true } }}
           >
             {labelSelectAll}
           </Typography>
@@ -318,13 +308,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                 padding: `${sizePadding / 2.8}px 0px`
               }
             })}
-            sx={{
-              default: {
-                size: 16,
-                line: 1,
-                isNoUserSelect: true
-              }
-            }}
+            sx={{ default: { size: 16, line: 1, isNoUserSelect: true } }}
           >
             {labelPlaceholder}
           </Typography>
@@ -332,18 +316,8 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
 
         {isValueMoreMaxViewSelect && isHaveValue && (props.isShowSelectAllLabel ? !isAll : true) ? (
           <Typography
-            sxStandard={{
-              default: {
-                padding: `${sizePadding / 2.8}px 0px`
-              }
-            }}
-            sx={{
-              default: {
-                size: 16,
-                line: 1,
-                isNoUserSelect: true
-              }
-            }}
+            sxStandard={{ default: { padding: `${sizePadding / 2.8}px 0px` } }}
+            sx={{ default: { size: 16, line: 1, isNoUserSelect: true } }}
           >
             {labelAndMore(props.value.length - maxViewSelect)}
           </Typography>
@@ -363,12 +337,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                 isFullSize
                 isRadius
                 isOnlyIcon
-                icons={[
-                  {
-                    name: 'Close',
-                    type: 'id'
-                  }
-                ]}
+                icons={[{ name: 'Close', type: 'id' }]}
                 onClick={e => {
                   e.preventDefault()
                   e.stopPropagation()
@@ -384,12 +353,7 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                 isFullSize
                 isRadius
                 isOnlyIcon
-                icons={[
-                  {
-                    name: 'Select',
-                    type: 'id'
-                  }
-                ]}
+                icons={[{ name: 'Select', type: 'id' }]}
                 onClick={e => {
                   e.preventDefault()
                   e.stopPropagation()
@@ -419,11 +383,12 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
         sx={theme => ({
           default: {
             background: theme.colors.input[props.genre].background.rest,
-            borderRadius: `0px 0px ${sizeRadius}px ${sizeRadius}px`,
+            borderRadius: `${sizeRadius}px`,
             padding: '0px',
             maxHeight: `${heightPopover}px`
           }
         })}
+        isShowAlwaysOutline
         size={props.size}
         genre={props.genre}
         floatingStyles={floatingStyles}
@@ -436,68 +401,78 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
           $size={props.size}
           onScroll={e => onScroll(e.target as HTMLDivElement)}
         >
-          {isShowAddOption ? (
-            <DropdownListOption
-              tabIndex={0}
-              onClick={() => props.valueSearch && onAddOption(props.valueSearch)}
-              onKeyDown={e => {
-                if (e.key === 'Enter' && props.valueSearch) onAddOption(props.valueSearch)
-              }}
-              $isCenter={props.isCenter}
-              $isNotShowHoverStyle={props.isNotShowHoverStyle}
-              $genre={props.genre}
-              $size={props.size}
-              $isBold={props.isBold}
-              $isChecked={isAll}
-              style={{
-                position: 'relative',
-                borderRadius: `0px`,
-                height: `${sizeHeight}px`
-              }}
-            >
-              {props.valueSearch && labelAddOption(props.valueSearch)}
-            </DropdownListOption>
-          ) : null}
-          {props.isShowSelectAll && isHaveOption ? (
-            <DropdownListOption
-              tabIndex={0}
-              onClick={() => onClickAll()}
-              onKeyDown={e => {
-                if (e.key === 'Enter') onClickAll()
-              }}
-              $isCenter={props.isCenter}
-              $isNotShowHoverStyle={props.isNotShowHoverStyle}
-              $genre={props.genre}
-              $size={props.size}
-              $isBold={props.isBold}
-              $isChecked={isAll}
-              style={{
-                position: 'relative',
-                borderRadius: `0px`,
-                height: `${sizeHeight}px`
-              }}
-            >
-              {labelSelectAll}
-              {props.isShowDropdownOptionIcon && (
-                <DropdownListOptionIcon
-                  tabIndex={-1}
-                  size={props.size}
-                  type="checkbox"
-                  name="Arrow"
+          {isShowDropdownSettingsList && (
+            <DropdownList style={{ position: 'sticky', top: 0, zIndex: 1 }}>
+              {isShowAddOption ? (
+                <DropdownListOption
+                  tabIndex={0}
+                  onClick={() => props.valueSearch && onAddOption(props.valueSearch)}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter' && props.valueSearch) onAddOption(props.valueSearch)
+                  }}
+                  $isCenter={props.isCenter}
+                  $isNotShowHoverStyle={props.isNotShowHoverStyle}
                   $genre={props.genre}
-                  $checked={isAll}
                   $size={props.size}
-                />
-              )}
-            </DropdownListOption>
-          ) : null}
+                  $isBold={props.isBold}
+                  $isChecked={isAll}
+                  style={{ position: 'relative', minHeight: `${sizeHeight}px` }}
+                >
+                  {props.valueSearch && labelAddOption(props.valueSearch)}
+                </DropdownListOption>
+              ) : null}
+              {props.isShowSelectAll && isHaveOption ? (
+                <DropdownListOption
+                  tabIndex={0}
+                  onClick={() => onClickAll()}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') onClickAll()
+                  }}
+                  $isCenter={props.isCenter}
+                  $isNotShowHoverStyle={props.isNotShowHoverStyle}
+                  $genre={props.genre}
+                  $size={props.size}
+                  $isBold={props.isBold}
+                  $isChecked={isAll}
+                  $isShowScroll={isShowScroll}
+                  style={{ position: 'relative', minHeight: `${sizeHeight}px` }}
+                >
+                  {labelSelectAll}
+                  {props.isShowDropdownOptionIcon && (
+                    <DropdownListOptionIcon
+                      tabIndex={-1}
+                      size={props.size}
+                      type="checkbox"
+                      name="Arrow"
+                      $genre={props.genre}
+                      $checked={isAll}
+                      $size={props.size}
+                    />
+                  )}
+                </DropdownListOption>
+              ) : null}
+              {!isHaveOption ? (
+                <DropdownListOption
+                  tabIndex={-1}
+                  $isCenter={props.isCenter}
+                  $isNotShowHoverStyle={props.isNotShowHoverStyle}
+                  $genre={props.genre}
+                  $size={props.size}
+                  $isBold={props.isBold}
+                  $isChecked={isAll}
+                  $isShowScroll={isShowScroll}
+                  style={{ position: 'relative', minHeight: `${sizeHeight}px` }}
+                >
+                  <Typography sx={{ default: { size: 16, line: 1 } }}>{labelEmptyOption}</Typography>
+                </DropdownListOption>
+              ) : null}
+            </DropdownList>
+          )}
+
           {isHaveOption ? (
             <DropdownList
               tabIndex={-1}
-              style={{
-                height: `${listVirtualizer.getTotalSize()}px`,
-                minHeight: `${heightDropdownList}px`
-              }}
+              style={{ height: `${listVirtualizer.getTotalSize()}px`, minHeight: `${heightDropdownList}px` }}
             >
               {listVirtualizer.getVirtualItems().map(virtualRow => {
                 const item = props.option[virtualRow.index]
@@ -521,33 +496,6 @@ export const Select = <T extends object & ISelectItem>(props: SelectProps<T>) =>
                 )
               })}
             </DropdownList>
-          ) : null}
-          {!isHaveOption ? (
-            <DropdownListOption
-              tabIndex={-1}
-              $isCenter={props.isCenter}
-              $isNotShowHoverStyle={props.isNotShowHoverStyle}
-              $genre={props.genre}
-              $size={props.size}
-              $isBold={props.isBold}
-              $isChecked={isAll}
-              style={{
-                position: 'relative',
-                borderRadius: `0px 0px ${sizeRadius}px ${sizeRadius}px`,
-                height: `${sizeHeight}px`
-              }}
-            >
-              <Typography
-                sx={{
-                  default: {
-                    size: 16,
-                    line: 1
-                  }
-                }}
-              >
-                {labelEmptyOption}
-              </Typography>
-            </DropdownListOption>
           ) : null}
         </DropdownListParent>
       </Popover>
@@ -616,16 +564,7 @@ const ContainerSelectListOptionComponent = <T extends object & ISelectItem>(
       $isBold={props.isBold}
       $isChecked={props.isChecked}
     >
-      <Typography
-        sx={{
-          default: {
-            size: 16,
-            line: 1
-          }
-        }}
-      >
-        {props.item.label}
-      </Typography>
+      <Typography sx={{ default: { size: 16, line: 1 } }}>{props.item.label}</Typography>
     </SelectListOption>
   )
 }

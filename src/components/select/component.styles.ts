@@ -13,12 +13,11 @@ import {
   DropdownListOptionIconProps,
   DropdownListOptionProps,
   DropdownListParentProps,
-  SelectInputProps,
   SelectListOptionProps,
   SelectListProps,
   SelectWrapperProps
 } from '.'
-import { addInputPlaceholder } from '../input'
+import { TextArea } from '../textarea'
 
 const addSelectWrapperGenre = css<SelectWrapperProps>`
   ${props => css`
@@ -143,6 +142,16 @@ const addDropdownListOptionSize = css<DropdownListOptionProps>`
   width: 100%;
   border: 1px solid;
   border-radius: 0;
+  &:first-child {
+    ${props =>
+      props.$isShowScroll
+        ? css`
+            border-radius: ${KEY_SIZE_DATA[props.$size].radius}px 0px 0px 0px;
+          `
+        : css`
+            border-radius: ${KEY_SIZE_DATA[props.$size].radius}px ${KEY_SIZE_DATA[props.$size].radius}px 0px 0px;
+          `}
+  }
   &:last-child {
     ${props =>
       props.$isShowScroll
@@ -151,6 +160,19 @@ const addDropdownListOptionSize = css<DropdownListOptionProps>`
           `
         : css`
             border-radius: 0px 0px ${KEY_SIZE_DATA[props.$size].radius}px ${KEY_SIZE_DATA[props.$size].radius}px;
+          `}
+  }
+  &:not(:first-child):not(:last-child) {
+    border-radius: 0px;
+  }
+  &:first-child:last-child {
+    ${props =>
+      props.$isShowScroll
+        ? css`
+            border-radius: ${KEY_SIZE_DATA[props.$size].radius}px 0px 0px ${KEY_SIZE_DATA[props.$size].radius}px;
+          `
+        : css`
+            border-radius: ${KEY_SIZE_DATA[props.$size].radius}px;
           `}
   }
 `
@@ -252,34 +274,11 @@ export const SelectListOption = styled(motion.li)<SelectListOptionProps>`
   ${addSelectListOptionSize};
   ${addRemoveOutline};
 `
-const addSelectInputSize = css<ButtonListProps>`
-  min-width: 100%;
-  flex: 1;
-  flex-shrink: 0;
-  padding: ${props => KEY_SIZE_DATA[props.$size].padding / 2.8}px 0px;
-`
-const addSelectInputGenre = css<SelectInputProps>`
-  ${props => css`
-    color: ${props.theme.colors.input[props.$genre].color.rest};
-    &:active {
-      color: ${props.theme.colors.input[props.$genre].color.rest};
-    }
-    &:focus-visible {
-      color: ${props.theme.colors.input[props.$genre].color.rest};
-    }
-  `};
-`
-export const SelectInput = styled.input<SelectInputProps>`
-  resize: none;
-  overflow: hidden;
-  border: 0px solid;
-  background: transparent;
-  margin: 0px !important;
-  white-space: nowrap;
-  text-align: left;
-  ${props => getFontSizeStyles(16, 400, props.theme.font.family, props.theme.font.lineHeight)};
-  ${addSelectInputGenre};
-  ${addSelectInputSize};
-  ${addInputPlaceholder};
+
+export const SelectTextArea = styled(TextArea)`
+  border: 0px solid !important;
+  background-color: transparent !important;
+  padding-left: 0px;
+  padding-right: 0px;
   ${addRemoveOutline};
 `

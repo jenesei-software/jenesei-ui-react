@@ -82,7 +82,14 @@ export const addOutline = css`
     outline: 2px solid ${props => props.theme.states.focus};
   }
 `
-
+export const addAlwaysOutline = css<{ $isShowAlwaysOutline?: boolean }>`
+  ${props =>
+    props.$isShowAlwaysOutline &&
+    css`
+      outline: 2px solid ${props => props.theme.states.focus};
+      outline-offset: 1px;
+    `}
+`
 export const addRemoveOutline = css`
   outline: 0px solid transparent;
   outline-offset: 0px;

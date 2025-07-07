@@ -23,6 +23,7 @@ export const Popover: FC<PopoverProps> = props => {
         >
           <PopoverWrapper
             tabIndex={-1}
+            $isShowAlwaysOutline={props.isShowAlwaysOutline}
             $genre={props.genre ?? 'black'}
             className={props.className}
             initial={{ opacity: 0, scale: 0.95 }}

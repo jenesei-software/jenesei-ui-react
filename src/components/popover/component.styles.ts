@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
 import { addSXTypography, getFontSizeStyles } from '@local/components/typography'
-import { addOutline } from '@local/styles/add'
+import { addAlwaysOutline } from '@local/styles/add'
 import { addSX } from '@local/styles/sx'
 import { IThemeSizePropertyDefault, KEY_SIZE_DATA } from '@local/theme'
 
@@ -40,7 +40,7 @@ export const PopoverWrapper = styled(motion.div)<StyledPopoverProps>`
   overflow: auto;
   flex-direction: column;
   ${addPopoverSize};
-  ${addOutline};
+  ${addAlwaysOutline};
   ${addSXTypography};
   ${addPopoverGenre};
   ${addSX};

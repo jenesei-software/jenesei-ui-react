@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useMergeRefs } from '@floating-ui/react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useTheme } from 'styled-components'
 
 import { ErrorMessage } from '@local/styles/error'
@@ -20,17 +21,23 @@ export const TextArea = (props: TextAreaProps) => {
     [props]
   )
 
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const refLocal = useRef<HTMLTextAreaElement>(null)
+  const ref = useMergeRefs([refLocal, props.ref])
+
+  const sizeHeight = useMemo(() => props.sizeHeight ?? KEY_SIZE_DATA[props.size].height, [props.size, props.sizeHeight])
+  const sizePadding = useMemo(
+    () => props.sizePadding ?? KEY_SIZE_DATA[props.size].padding,
+    [props.size, props.sizePadding]
+  )
 
   const handleHeight = useCallback(
     (contentHeight: number) => {
-      if (textareaRef.current) {
-        const minHeight = KEY_SIZE_DATA[props.size].height
-        const maxHeight = Math.max(KEY_SIZE_DATA[props.size].height, contentHeight)
+      if (refLocal.current) {
+        const minHeight = sizeHeight
+        const maxHeight = Math.max(sizeHeight, contentHeight)
 
-        textareaRef.current.style.height = `${minHeight}px`
-        const scrollHeight = textareaRef.current.scrollHeight
-
+        refLocal.current.style.height = `${minHeight}px`
+        const scrollHeight = refLocal.current.scrollHeight
         let newHeight = contentHeight
         if (props.isAutoHeight && !props.height) {
           newHeight = Math.max(minHeight, Math.min(scrollHeight, maxHeight))
@@ -38,18 +45,18 @@ export const TextArea = (props: TextAreaProps) => {
           newHeight = Math.max(minHeight, contentHeight)
         }
 
-        textareaRef.current.style.height = `${newHeight}px`
-        textareaRef.current.style.minHeight = `${minHeight}px`
-        textareaRef.current.style.maxHeight = `${maxHeight}px`
+        refLocal.current.style.height = `${newHeight}px`
+        refLocal.current.style.minHeight = `${minHeight}px`
+        refLocal.current.style.maxHeight = `${maxHeight}px`
 
-        if (textareaRef.current.scrollHeight > maxHeight) {
-          textareaRef.current.style.overflowY = 'auto'
+        if (refLocal.current.scrollHeight > maxHeight) {
+          refLocal.current.style.overflowY = 'auto'
         } else {
-          textareaRef.current.style.overflowY = 'hidden'
+          refLocal.current.style.overflowY = 'hidden'
         }
       }
     },
-    [props.height, props.isAutoHeight, props.size]
+    [props.height, props.isAutoHeight, sizeHeight]
   )
   const checkHeight = useCallback(() => {
     if (props.height) {
@@ -58,12 +65,20 @@ export const TextArea = (props: TextAreaProps) => {
       if (props.maxRows) {
         const lineHeight = theme.font.sizeDefault.default * theme.font.lineHeight
         const initialHeight = props.maxRows ? lineHeight * props.maxRows : lineHeight
-        handleHeight(initialHeight + KEY_SIZE_DATA[props.size].padding * 2 - 8)
+        handleHeight(initialHeight + sizePadding - 8)
       } else {
-        handleHeight(KEY_SIZE_DATA[props.size].height)
+        handleHeight(sizeHeight)
       }
     }
-  }, [handleHeight, props.height, props.maxRows, props.size, theme.font.lineHeight, theme.font.sizeDefault.default])
+  }, [
+    handleHeight,
+    props.height,
+    props.maxRows,
+    sizeHeight,
+    sizePadding,
+    theme.font.lineHeight,
+    theme.font.sizeDefault.default
+  ])
 
   useEffect(() => {
     checkHeight()
@@ -71,14 +86,10 @@ export const TextArea = (props: TextAreaProps) => {
 
   return (
     <>
-      <StyledTextAreaWrapper
-        $isTextAreaEffect={props.isTextAreaEffect}
-        className={props.className}
-        $isDisabled={props.isDisabled}
-        $sx={props.sx}
-      >
+      <StyledTextAreaWrapper $isTextAreaEffect={props.isTextAreaEffect} $isDisabled={props.isDisabled} $sx={props.sx}>
         <StyledTextArea
-          ref={textareaRef}
+          className={props.className}
+          ref={ref}
           $isResize={props.isResize}
           $error={props.error}
           $isTextAreaEffect={props.isTextAreaEffect}

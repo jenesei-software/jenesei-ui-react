@@ -14,6 +14,7 @@ export type PopoverProps = PropsWithChildren & {
   maxWidth?: string
   maxHeight?: string
   isOpen: boolean
+  isShowAlwaysOutline?: boolean
   floatingStyles: CSSProperties
   onClose?: () => void
   ref?: Ref<HTMLElement | null>
@@ -23,7 +24,7 @@ export type PopoverProps = PropsWithChildren & {
   addSXTypographyProps
 
 export type StyledPopoverProps = AddDollarSign<
-  Pick<PopoverProps, 'maxWidth' | 'maxHeight' | 'size'> & Required<Pick<PopoverProps, 'genre'>>
+  Pick<PopoverProps, 'maxWidth' | 'maxHeight' | 'size' | 'isShowAlwaysOutline'> & Required<Pick<PopoverProps, 'genre'>>
 > &
   addSXStyleProps &
   addErrorStylesProps &

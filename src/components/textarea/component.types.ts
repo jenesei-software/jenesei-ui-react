@@ -1,4 +1,4 @@
-import { FocusEventHandler, KeyboardEventHandler } from 'react'
+import { FocusEventHandler, KeyboardEventHandler, RefObject } from 'react'
 
 import { addErrorProps } from '@local/styles/error'
 import { addSXProps } from '@local/styles/sx'
@@ -11,6 +11,8 @@ export type TextAreaProps = addErrorProps &
 
     id?: string
 
+    ref?: RefObject<HTMLTextAreaElement | null>
+
     className?: string
 
     defaultValue?: string
@@ -20,6 +22,10 @@ export type TextAreaProps = addErrorProps &
     genre: TTextAreaGenre
 
     height?: number
+
+    sizeHeight?: number
+
+    sizePadding?: number
 
     maxRows?: number
 
